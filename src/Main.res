@@ -1,45 +1,33 @@
-module Main exposing (main)
 
-import Browser
-import Html exposing (Html, a, div, text)
-import Html.Attributes exposing (class, href)
-import Model exposing (..)
+/** ****************************************************************************
+ * Main
+ *
+ * React               : Bindings to React
+ * ReactDOM            : Bindings to the ReactDOM
+ * ReactDOMServer      : Bindings to the ReactDOMServer
+ * ReactEvent          : Bindings to React's synthetic events
+ * ReactDOMStyle       : Bindings to the inline style API
+ * RescriptReactRouter : A simple, yet fully featured router with minimal memory allocations
+ */
 
+open Types
 
-init : String -> ( Model, Cmd Msg )
-init flags =
-    ( { currentPage = Title
-      , currentPlayers = []
-      }
-    , Cmd.none
-    )
+let init = (): state => {
+    {
+        currentPage: Title,
+        currentLang: NL,
+        currentPlayers: []
+    }
+}
 
-
-view : Model -> Html Msg
-view model =
-    case model.currentPage of
-        Title ->
-            div [] [ text "Title Page" ]
-
-        _ ->
-            div [] [ text "Other Page" ]
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    ( model, Cmd.none )
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
-
-
-main : Program String Model Msg
-main =
-    Browser.element
-        { init = init
-        , view = view
-        , update = update
-        , subscriptions = subscriptions
-        }
+let render = (~state: state) => {
+    <div>
+    {React.string("Hello, World!")}
+    </div>
+    /*
+    switch (ReactDOM.querySelector("#root")) {
+        | Some(root) => ReactDOM.render(<TitlePage name="John" />, root)
+        | None => ()
+    }
+    */
+}
