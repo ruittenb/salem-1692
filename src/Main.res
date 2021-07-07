@@ -20,14 +20,21 @@ let init = (): state => {
     }
 }
 
-let render = (~state: state) => {
-    <div>
-    {React.string("Hello, World!")}
-    </div>
-    /*
+let render = (~state: state): state => {
     switch (ReactDOM.querySelector("#root")) {
-        | Some(root) => ReactDOM.render(<TitlePage name="John" />, root)
+        | Some(root) => ReactDOM.render(
+            <div> {React.string("Hello, World!")} </div>,
+            root
+        )
         | None => ()
     }
-    */
+    state
 }
+
+//let getCurrentPage = (~state: state) => {
+//    switch (star
+//        | Some(root) => <div> {React.string("Hello, World!")} </div>,
+////        | Some(root) => ReactDOM.render(<TitlePage name="John" />, root)
+//        | None => React.null
+//    }
+//}

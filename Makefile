@@ -29,6 +29,14 @@ build: ## Compile res files to js and bundle the js files
 	$(MAKE) compile && \
 	$(MAKE) browserify
 
+.PHONY: serve
+serve: ## Serve the page over http
+	serve dist &
+
+.PHONY: serve-stop
+serve-stop: ## Stop serving the page
+	ps -fu `whoami` | awk '/[s]erve dist/ { print $$2 }' | xargs kill
+
 .PHONY: watch
 watch: ## Compile res files to js and bundle the js files; watch for changes
 	fswatch $(SRC_JS) | while read f; do \
@@ -43,4 +51,5 @@ watch: ## Compile res files to js and bundle the js files; watch for changes
 .PHONY: watch-stop
 watch-stop: ## Stop watching for changes
 	ps -fu `whoami` | awk '/[f]swatch/ { print $$2 }' | xargs kill
+
 

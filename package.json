@@ -5,16 +5,17 @@
   "author": "René Uittenbogaard <ruittenb@gmail.com>",
   "homepage": "https://github.com/ruittenb/salem-1692",
   "license": "GNU GPLv3",
-  "main": "src/index.html",
+  "main": "dist/index.html",
   "scripts": {
-    "re:build": "npx rescript",
-    "re:watch": "bsb -make-world -clean-world -w"
+    "re:build": "rescript",
+    "re:watch": "rescript build -w"
   },
   "devDependencies": {
     "browserify": "^17.0.0",
     "esmify": "^2.1.1",
     "fswatch": "^0.1.4",
-    "rescript": "^9.1.4"
+    "rescript": "^9.1.4",
+    "serve": "^12.0.0"
   },
   "dependencies": {
     "@rescript/react": "^0.10.3",

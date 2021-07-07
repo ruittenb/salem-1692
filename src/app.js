@@ -13,9 +13,10 @@ class App {
     }
 
     run() {
-        Main.render({ state: this.state })
+        this.state = Main.render({ state: this.state });
+        console.log(this.state);
     }
 }
 
-window.App = App
+window.App = App;
 
