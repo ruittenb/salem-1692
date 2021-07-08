@@ -1,3 +1,8 @@
-node_modules
+.DS_Store
+/node_modules/
+/lib/
+/.bsb.lock
+/.merlin
 *.swp
 *.swo
+*.bs.js

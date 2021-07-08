@@ -1,0 +1,21 @@
+{
+  "name": "salem-1692",
+  "version": "0.0.1",
+  "namespace": true,
+  "reason": { "react-jsx": 3 },
+  "bsc-flags": [ "-bs-super-errors" ],
+  "sources": [{
+    "dir": "src",
+    "subdirs": true
+  }],
+  "package-specs": [{
+    "module": "es6",
+    "in-source": true
+  }],
+  "suffix": ".bs.js",
+  "bs-dependencies": [
+    "@rescript/react"
+  ],
+  "ppx-flags": [],
+  "refmt": 3
+}
