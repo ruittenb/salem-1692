@@ -35,7 +35,7 @@ serve: ## Serve the page over http
 
 .PHONY: serve-stop
 serve-stop: ## Stop serving the page
-	ps -fu `whoami` | awk '/[s]erve dist/ { print $$2 }' | xargs kill
+	ps -fu `whoami` | awk '/[s]erve dist/ { print $$2 }' | tee /dev/tty | xargs kill
 
 .PHONY: watch
 watch: ## Compile res files to js and bundle the js files; watch for changes
@@ -50,6 +50,6 @@ watch: ## Compile res files to js and bundle the js files; watch for changes
 
 .PHONY: watch-stop
 watch-stop: ## Stop watching for changes
-	ps -fu `whoami` | awk '/[f]swatch/ { print $$2 }' | xargs kill
+	ps -fu `whoami` | awk '/[f]swatch/ { print $$2 }' | tee /dev/tty | xargs kill
 
 

@@ -12,6 +12,24 @@
 
 open Types
 
+let getCurrentPage = (state: state): React.element => {
+    switch state.currentPage {
+        | Title          => <TitlePage />
+        | Players        => <div> {React.string("Players")}           </div>
+        | Turn           => <div> {React.string("Turn")}              </div>
+        | NightWitch     => <div> {React.string("Night - Witch")}     </div>
+        | NightConstable => <div> {React.string("Night - Constable")} </div>
+    }
+}
+
+let render = (~state: state): state => {
+    switch (ReactDOM.querySelector("#root")) {
+        | Some(root) => ReactDOM.render(getCurrentPage(state), root)
+        | None => ()
+    }
+    state
+}
+
 let init = (): state => {
     {
         currentPage: Title,
@@ -20,21 +38,7 @@ let init = (): state => {
     }
 }
 
-let render = (~state: state): state => {
-    switch (ReactDOM.querySelector("#root")) {
-        | Some(root) => ReactDOM.render(
-            <div> {React.string("Hello, World!")} </div>,
-            root
-        )
-        | None => ()
-    }
-    state
+let run = (): state => {
+    render(~state=init())
 }
 
-//let getCurrentPage = (~state: state) => {
-//    switch (star
-//        | Some(root) => <div> {React.string("Hello, World!")} </div>,
-////        | Some(root) => ReactDOM.render(<TitlePage name="John" />, root)
-//        | None => React.null
-//    }
-//}

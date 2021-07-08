@@ -9,12 +9,10 @@ import * as Main from './Main.bs';
 
 class App {
     constructor() {
-        this.state = Main.init();
     }
 
     run() {
-        this.state = Main.render({ state: this.state });
-        console.log(this.state);
+        Main.run()
     }
 }
 

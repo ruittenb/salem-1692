@@ -18,6 +18,10 @@ type page =
     | NightWitch
     | NightConstable
 
+type buttonType =
+    | RegularFirst
+    | RegularSecond
+    | RegularThird
 
 type player = {
     name: string
@@ -28,11 +32,6 @@ type state = {
     currentLang    : language,
     currentPlayers : array<player>
 }
-
-
-//type msg =
-//    | Nop
-//    | Exit
 
 // vim: set ts=4 sw=4 et list nu fdm=marker:
 
