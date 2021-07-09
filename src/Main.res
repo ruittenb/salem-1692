@@ -14,25 +14,29 @@ open Types
 
 let getCurrentPage = (state: state): React.element => {
     switch state.currentPage {
-        | Title          => <TitlePage t={state.translator} />
-        | Setup          => <div> {React.string("Players")}           </div>
-        | SetupPlayers   => <div> {React.string("Players")}           </div>
-        | Turn           => <div> {React.string("Turn")}              </div>
+        | Title          => <TitlePage />
+        | Setup          => <div> {React.string("Players")} </div>
+        | SetupPlayers   => <div> {React.string("Players")} </div>
+        | Turn           => <div> {React.string("Turn")}    </div>
         | NightWitch     => <NightPage phase={state.currentPage} />
         | NightConstable => <NightPage phase={state.currentPage} />
     }
 }
 
 let render = (~state: state): state => {
+    let currentPageInContext =
+        <Context.Locale.Provider value=state.currentLang>
+            {getCurrentPage(state)}
+        </Context.Locale.Provider>
     switch (ReactDOM.querySelector("#root")) {
-        | Some(root) => ReactDOM.render(getCurrentPage(state), root)
+        | Some(root) => ReactDOM.render(currentPageInContext, root)
         | None => ()
     }
     state
 }
 
 let init = (): state => {
-    let currentLang = NL_NL
+    let currentLang = ES_ES
     {
         currentPage: Title,
         currentPlayers: [],

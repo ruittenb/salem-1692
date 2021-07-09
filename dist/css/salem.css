@@ -34,7 +34,7 @@ body {
 }
 
 #title-page {
-    background: center / contain no-repeat url(../images/mary-warren-with-game-title.png);
+    background: center / contain no-repeat url(../images/overlay-title.png);
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -59,7 +59,7 @@ body {
 }
 
 #night-subpage {
-    background: top / contain no-repeat url(../images/night-eyes.png);
+    background: top / contain no-repeat url(../images/overlay-night.png);
     display: flex;
     justify-content: flex-start;
     align-items: center;

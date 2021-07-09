@@ -6,7 +6,7 @@
 let table = Js.Dict.fromArray([
     // TitlePage
     ("New Game", "Nuevo juego"),
-    ("Setup", "Instellingen"), // TODO
+    ("Setup", "Configuración"),
     ("Exit", "Cerrar"),
     // Setup
     ("Players", "Jugadores"),
@@ -16,17 +16,17 @@ let table = Js.Dict.fromArray([
     ("Nederlands", "Nederlands"),
     ("Español", "Español"),
     ("Back", "Regresar"),
-    ("Credits", "Credits"),
+    ("Credits", "Créditos"),
     // Night
     ("The witches", "Las brujas"),
     ("Choose a victim:", "Elige una víctima:"),
-    ("The constable", "De constable"), // TODO
-    ("Choose someone to protect:", "Kies wie beschermd moet worden:"), // TODO
+    ("The constable", "El agente jefe"),
+    ("Choose someone to protect:", "Elige a quién quieres proteger:"),
     ("Are you sure?", "Estas seguro?"),
     ("Yes", "Sí"),
     ("No", "No"),
     // Dawn
-    ("Decide whether you want to confess", "Beslis of je wilt bekennen"), // TODO
-    ("Reveal victim", "Revelar víctima"), // TODO
+    ("Decide whether you want to confess", "Decide si quieres confesar"),
+    ("Reveal victim", "Revelar víctima"),
 ])
 

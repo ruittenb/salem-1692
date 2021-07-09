@@ -15,6 +15,7 @@ let make = (
     let directory = "audio/" ++ switch language {
         | NL_NL => "nl_NL/"
         | EN_US => "en_US/"
+        | ES_ES => "es_ES/"
     }
     let src = directory ++ switch track {
         | TownGoToSleep       => "town-go-to-sleep.mp3"

@@ -10,6 +10,7 @@ type either<'t, 'v> =
 type language =
     | NL_NL
     | EN_US
+    | ES_ES
 
 type page =
     | Title

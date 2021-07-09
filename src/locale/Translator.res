@@ -16,6 +16,7 @@ let getTranslator = (language: language, message: string): string => {
     switch language {
         | EN_US => message
         | NL_NL => lookup(NL_NL.table, message)
+        | ES_ES => lookup(ES_ES.table, message)
     }
 }
 
