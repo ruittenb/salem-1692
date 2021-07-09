@@ -1,0 +1,49 @@
+/* Stylesheet for Salem 1692 app */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px;
+}
+
+#root {
+    background-image: url(images/background.png);
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.page {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#title-page {
+    background: center / contain no-repeat url(images/mary-warren-with-game-title.png);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+}
+
+#title-page button {
+    width: 50%;
+    height: 40px;
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+#title-page button.last {
+    margin-bottom: 125px;
+}
+

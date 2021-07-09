@@ -4569,7 +4569,7 @@ if(/^(https?|file):$/.test(protocol)){// eslint-disable-next-line react-internal
 console.info('%cDownload the React DevTools '+'for a better development experience: '+'https://reactjs.org/link/react-devtools'+(protocol==='file:'?'\nYou might need to use a local HTTP server (instead of file://): '+'https://reactjs.org/link/react-devtools-faq':''),'font-weight:bold');}}}}exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED=Internals;exports.createPortal=createPortal$1;exports.findDOMNode=findDOMNode;exports.flushSync=flushSync;exports.hydrate=hydrate;exports.render=render;exports.unmountComponentAtNode=unmountComponentAtNode;exports.unstable_batchedUpdates=batchedUpdates$1;exports.unstable_createPortal=unstable_createPortal;exports.unstable_renderSubtreeIntoContainer=renderSubtreeIntoContainer;exports.version=ReactVersion;})();}
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":2,"object-assign":1,"react":8,"scheduler":15,"scheduler/tracing":16}],4:[function(require,module,exports){
+},{"_process":2,"object-assign":1,"react":8,"scheduler":17,"scheduler/tracing":18}],4:[function(require,module,exports){
 /** @license React v17.0.2
  * react-dom.production.min.js
  *
@@ -4868,7 +4868,7 @@ exports.findDOMNode=function(a){if(null==a)return null;if(1===a.nodeType)return 
 exports.render=function(a,b,c){if(!rk(b))throw Error(y(200));return tk(null,a,b,!1,c)};exports.unmountComponentAtNode=function(a){if(!rk(a))throw Error(y(40));return a._reactRootContainer?(Xj(function(){tk(null,null,a,!1,function(){a._reactRootContainer=null;a[ff]=null})}),!0):!1};exports.unstable_batchedUpdates=Wj;exports.unstable_createPortal=function(a,b){return uk(a,b,2<arguments.length&&void 0!==arguments[2]?arguments[2]:null)};
 exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!rk(c))throw Error(y(200));if(null==a||void 0===a._reactInternals)throw Error(y(38));return tk(a,b,c,!1,d)};exports.version="17.0.2";
 
-},{"object-assign":1,"react":8,"scheduler":15}],5:[function(require,module,exports){
+},{"object-assign":1,"react":8,"scheduler":17}],5:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -7239,6 +7239,152 @@ if (process.env.NODE_ENV === 'production') {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.dup = dup;
+exports.sub = sub;
+exports.concat = concat;
+exports.make = make;
+exports.make_float = make_float;
+exports.blit = blit;
+exports.get = get;
+exports.set = set;
+
+function sub(x, offset, len) {
+  var result = new Array(len);
+  var j = 0;
+  var i = offset;
+
+  while (j < len) {
+    result[j] = x[i];
+    j = j + 1 | 0;
+    i = i + 1 | 0;
+  }
+
+  ;
+  return result;
+}
+
+function len(_acc, _l) {
+  while (true) {
+    var l = _l;
+    var acc = _acc;
+
+    if (!l) {
+      return acc;
+    }
+
+    _l = l.tl;
+    _acc = l.hd.length + acc | 0;
+    continue;
+  }
+
+  ;
+}
+
+function fill(arr, _i, _l) {
+  while (true) {
+    var l = _l;
+    var i = _i;
+
+    if (!l) {
+      return;
+    }
+
+    var x = l.hd;
+    var l$1 = x.length;
+    var k = i;
+    var j = 0;
+
+    while (j < l$1) {
+      arr[k] = x[j];
+      k = k + 1 | 0;
+      j = j + 1 | 0;
+    }
+
+    ;
+    _l = l.tl;
+    _i = k;
+    continue;
+  }
+
+  ;
+}
+
+function concat(l) {
+  var v = len(0, l);
+  var result = new Array(v);
+  fill(result, 0, l);
+  return result;
+}
+
+function set(xs, index, newval) {
+  if (index < 0 || index >= xs.length) {
+    throw {
+      RE_EXN_ID: "Invalid_argument",
+      _1: "index out of bounds",
+      Error: new Error()
+    };
+  }
+
+  xs[index] = newval;
+}
+
+function get(xs, index) {
+  if (index < 0 || index >= xs.length) {
+    throw {
+      RE_EXN_ID: "Invalid_argument",
+      _1: "index out of bounds",
+      Error: new Error()
+    };
+  }
+
+  return xs[index];
+}
+
+function make(len, init) {
+  var b = new Array(len);
+
+  for (var i = 0; i < len; ++i) {
+    b[i] = init;
+  }
+
+  return b;
+}
+
+function make_float(len) {
+  var b = new Array(len);
+
+  for (var i = 0; i < len; ++i) {
+    b[i] = 0;
+  }
+
+  return b;
+}
+
+function blit(a1, i1, a2, i2, len) {
+  if (i2 <= i1) {
+    for (var j = 0; j < len; ++j) {
+      a2[j + i2 | 0] = a1[j + i1 | 0];
+    }
+
+    return;
+  }
+
+  for (var j$1 = len - 1 | 0; j$1 >= 0; --j$1) {
+    a2[j$1 + i2 | 0] = a1[j$1 + i1 | 0];
+  }
+}
+
+function dup(prim) {
+  return prim.slice(0);
+}
+/* No side effect */
+
+},{}],10:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.nullable_to_opt = nullable_to_opt;
 exports.undefined_to_opt = undefined_to_opt;
 exports.null_to_opt = null_to_opt;
@@ -7323,7 +7469,477 @@ function option_unwrap(x) {
 }
 /* No side effect */
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.app = app;
+exports._1 = _1;
+exports.__1 = __1;
+exports._2 = _2;
+exports.__2 = __2;
+exports._3 = _3;
+exports.__3 = __3;
+exports._4 = _4;
+exports.__4 = __4;
+exports._5 = _5;
+exports.__5 = __5;
+exports._6 = _6;
+exports.__6 = __6;
+exports._7 = _7;
+exports.__7 = __7;
+exports._8 = _8;
+exports.__8 = __8;
+
+var Caml_array = _interopRequireWildcard(require("./caml_array.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function app(_f, _args) {
+  while (true) {
+    var args = _args;
+    var f = _f;
+    var init_arity = f.length;
+    var arity = init_arity === 0 ? 1 : init_arity;
+    var len = args.length;
+    var d = arity - len | 0;
+
+    if (d === 0) {
+      return f.apply(null, args);
+    }
+
+    if (d >= 0) {
+      return function (f, args) {
+        return function (x) {
+          return app(f, args.concat([x]));
+        };
+      }(f, args);
+    }
+
+    _args = Caml_array.sub(args, arity, -d | 0);
+    _f = f.apply(null, Caml_array.sub(args, 0, arity));
+    continue;
+  }
+
+  ;
+}
+
+function _1(o, a0) {
+  var arity = o.length;
+
+  if (arity === 1) {
+    return o(a0);
+  } else {
+    switch (arity) {
+      case 1:
+        return o(a0);
+
+      case 2:
+        return function (param) {
+          return o(a0, param);
+        };
+
+      case 3:
+        return function (param, param$1) {
+          return o(a0, param, param$1);
+        };
+
+      case 4:
+        return function (param, param$1, param$2) {
+          return o(a0, param, param$1, param$2);
+        };
+
+      case 5:
+        return function (param, param$1, param$2, param$3) {
+          return o(a0, param, param$1, param$2, param$3);
+        };
+
+      case 6:
+        return function (param, param$1, param$2, param$3, param$4) {
+          return o(a0, param, param$1, param$2, param$3, param$4);
+        };
+
+      case 7:
+        return function (param, param$1, param$2, param$3, param$4, param$5) {
+          return o(a0, param, param$1, param$2, param$3, param$4, param$5);
+        };
+
+      default:
+        return app(o, [a0]);
+    }
+  }
+}
+
+function __1(o) {
+  var arity = o.length;
+
+  if (arity === 1) {
+    return o;
+  } else {
+    return function (a0) {
+      return _1(o, a0);
+    };
+  }
+}
+
+function _2(o, a0, a1) {
+  var arity = o.length;
+
+  if (arity === 2) {
+    return o(a0, a1);
+  } else {
+    switch (arity) {
+      case 1:
+        return app(o(a0), [a1]);
+
+      case 2:
+        return o(a0, a1);
+
+      case 3:
+        return function (param) {
+          return o(a0, a1, param);
+        };
+
+      case 4:
+        return function (param, param$1) {
+          return o(a0, a1, param, param$1);
+        };
+
+      case 5:
+        return function (param, param$1, param$2) {
+          return o(a0, a1, param, param$1, param$2);
+        };
+
+      case 6:
+        return function (param, param$1, param$2, param$3) {
+          return o(a0, a1, param, param$1, param$2, param$3);
+        };
+
+      case 7:
+        return function (param, param$1, param$2, param$3, param$4) {
+          return o(a0, a1, param, param$1, param$2, param$3, param$4);
+        };
+
+      default:
+        return app(o, [a0, a1]);
+    }
+  }
+}
+
+function __2(o) {
+  var arity = o.length;
+
+  if (arity === 2) {
+    return o;
+  } else {
+    return function (a0, a1) {
+      return _2(o, a0, a1);
+    };
+  }
+}
+
+function _3(o, a0, a1, a2) {
+  var arity = o.length;
+
+  if (arity === 3) {
+    return o(a0, a1, a2);
+  } else {
+    switch (arity) {
+      case 1:
+        return app(o(a0), [a1, a2]);
+
+      case 2:
+        return app(o(a0, a1), [a2]);
+
+      case 3:
+        return o(a0, a1, a2);
+
+      case 4:
+        return function (param) {
+          return o(a0, a1, a2, param);
+        };
+
+      case 5:
+        return function (param, param$1) {
+          return o(a0, a1, a2, param, param$1);
+        };
+
+      case 6:
+        return function (param, param$1, param$2) {
+          return o(a0, a1, a2, param, param$1, param$2);
+        };
+
+      case 7:
+        return function (param, param$1, param$2, param$3) {
+          return o(a0, a1, a2, param, param$1, param$2, param$3);
+        };
+
+      default:
+        return app(o, [a0, a1, a2]);
+    }
+  }
+}
+
+function __3(o) {
+  var arity = o.length;
+
+  if (arity === 3) {
+    return o;
+  } else {
+    return function (a0, a1, a2) {
+      return _3(o, a0, a1, a2);
+    };
+  }
+}
+
+function _4(o, a0, a1, a2, a3) {
+  var arity = o.length;
+
+  if (arity === 4) {
+    return o(a0, a1, a2, a3);
+  } else {
+    switch (arity) {
+      case 1:
+        return app(o(a0), [a1, a2, a3]);
+
+      case 2:
+        return app(o(a0, a1), [a2, a3]);
+
+      case 3:
+        return app(o(a0, a1, a2), [a3]);
+
+      case 4:
+        return o(a0, a1, a2, a3);
+
+      case 5:
+        return function (param) {
+          return o(a0, a1, a2, a3, param);
+        };
+
+      case 6:
+        return function (param, param$1) {
+          return o(a0, a1, a2, a3, param, param$1);
+        };
+
+      case 7:
+        return function (param, param$1, param$2) {
+          return o(a0, a1, a2, a3, param, param$1, param$2);
+        };
+
+      default:
+        return app(o, [a0, a1, a2, a3]);
+    }
+  }
+}
+
+function __4(o) {
+  var arity = o.length;
+
+  if (arity === 4) {
+    return o;
+  } else {
+    return function (a0, a1, a2, a3) {
+      return _4(o, a0, a1, a2, a3);
+    };
+  }
+}
+
+function _5(o, a0, a1, a2, a3, a4) {
+  var arity = o.length;
+
+  if (arity === 5) {
+    return o(a0, a1, a2, a3, a4);
+  } else {
+    switch (arity) {
+      case 1:
+        return app(o(a0), [a1, a2, a3, a4]);
+
+      case 2:
+        return app(o(a0, a1), [a2, a3, a4]);
+
+      case 3:
+        return app(o(a0, a1, a2), [a3, a4]);
+
+      case 4:
+        return app(o(a0, a1, a2, a3), [a4]);
+
+      case 5:
+        return o(a0, a1, a2, a3, a4);
+
+      case 6:
+        return function (param) {
+          return o(a0, a1, a2, a3, a4, param);
+        };
+
+      case 7:
+        return function (param, param$1) {
+          return o(a0, a1, a2, a3, a4, param, param$1);
+        };
+
+      default:
+        return app(o, [a0, a1, a2, a3, a4]);
+    }
+  }
+}
+
+function __5(o) {
+  var arity = o.length;
+
+  if (arity === 5) {
+    return o;
+  } else {
+    return function (a0, a1, a2, a3, a4) {
+      return _5(o, a0, a1, a2, a3, a4);
+    };
+  }
+}
+
+function _6(o, a0, a1, a2, a3, a4, a5) {
+  var arity = o.length;
+
+  if (arity === 6) {
+    return o(a0, a1, a2, a3, a4, a5);
+  } else {
+    switch (arity) {
+      case 1:
+        return app(o(a0), [a1, a2, a3, a4, a5]);
+
+      case 2:
+        return app(o(a0, a1), [a2, a3, a4, a5]);
+
+      case 3:
+        return app(o(a0, a1, a2), [a3, a4, a5]);
+
+      case 4:
+        return app(o(a0, a1, a2, a3), [a4, a5]);
+
+      case 5:
+        return app(o(a0, a1, a2, a3, a4), [a5]);
+
+      case 6:
+        return o(a0, a1, a2, a3, a4, a5);
+
+      case 7:
+        return function (param) {
+          return o(a0, a1, a2, a3, a4, a5, param);
+        };
+
+      default:
+        return app(o, [a0, a1, a2, a3, a4, a5]);
+    }
+  }
+}
+
+function __6(o) {
+  var arity = o.length;
+
+  if (arity === 6) {
+    return o;
+  } else {
+    return function (a0, a1, a2, a3, a4, a5) {
+      return _6(o, a0, a1, a2, a3, a4, a5);
+    };
+  }
+}
+
+function _7(o, a0, a1, a2, a3, a4, a5, a6) {
+  var arity = o.length;
+
+  if (arity === 7) {
+    return o(a0, a1, a2, a3, a4, a5, a6);
+  } else {
+    switch (arity) {
+      case 1:
+        return app(o(a0), [a1, a2, a3, a4, a5, a6]);
+
+      case 2:
+        return app(o(a0, a1), [a2, a3, a4, a5, a6]);
+
+      case 3:
+        return app(o(a0, a1, a2), [a3, a4, a5, a6]);
+
+      case 4:
+        return app(o(a0, a1, a2, a3), [a4, a5, a6]);
+
+      case 5:
+        return app(o(a0, a1, a2, a3, a4), [a5, a6]);
+
+      case 6:
+        return app(o(a0, a1, a2, a3, a4, a5), [a6]);
+
+      case 7:
+        return o(a0, a1, a2, a3, a4, a5, a6);
+
+      default:
+        return app(o, [a0, a1, a2, a3, a4, a5, a6]);
+    }
+  }
+}
+
+function __7(o) {
+  var arity = o.length;
+
+  if (arity === 7) {
+    return o;
+  } else {
+    return function (a0, a1, a2, a3, a4, a5, a6) {
+      return _7(o, a0, a1, a2, a3, a4, a5, a6);
+    };
+  }
+}
+
+function _8(o, a0, a1, a2, a3, a4, a5, a6, a7) {
+  var arity = o.length;
+
+  if (arity === 8) {
+    return o(a0, a1, a2, a3, a4, a5, a6, a7);
+  } else {
+    switch (arity) {
+      case 1:
+        return app(o(a0), [a1, a2, a3, a4, a5, a6, a7]);
+
+      case 2:
+        return app(o(a0, a1), [a2, a3, a4, a5, a6, a7]);
+
+      case 3:
+        return app(o(a0, a1, a2), [a3, a4, a5, a6, a7]);
+
+      case 4:
+        return app(o(a0, a1, a2, a3), [a4, a5, a6, a7]);
+
+      case 5:
+        return app(o(a0, a1, a2, a3, a4), [a5, a6, a7]);
+
+      case 6:
+        return app(o(a0, a1, a2, a3, a4, a5), [a6, a7]);
+
+      case 7:
+        return app(o(a0, a1, a2, a3, a4, a5, a6), [a7]);
+
+      default:
+        return app(o, [a0, a1, a2, a3, a4, a5, a6, a7]);
+    }
+  }
+}
+
+function __8(o) {
+  var arity = o.length;
+
+  if (arity === 8) {
+    return o;
+  } else {
+    return function (a0, a1, a2, a3, a4, a5, a6, a7) {
+      return _8(o, a0, a1, a2, a3, a4, a5, a6, a7);
+    };
+  }
+}
+/* No side effect */
+
+},{"./caml_array.js":9}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7426,7 +8042,7 @@ function map(f, source) {
 }
 /* No side effect */
 
-},{"./caml_option.js":9}],11:[function(require,module,exports){
+},{"./caml_option.js":10}],13:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler-tracing.development.js
@@ -7777,7 +8393,7 @@ exports.unstable_wrap = unstable_wrap;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":2}],12:[function(require,module,exports){
+},{"_process":2}],14:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler-tracing.production.min.js
  *
@@ -7788,7 +8404,7 @@ exports.unstable_wrap = unstable_wrap;
  */
 'use strict';var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_subscribe=function(){};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_unsubscribe=function(){};exports.unstable_wrap=function(a){return a};
 
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler.development.js
@@ -8438,7 +9054,7 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":2}],14:[function(require,module,exports){
+},{"_process":2}],16:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler.production.min.js
  *
@@ -8460,7 +9076,7 @@ exports.unstable_next=function(a){switch(P){case 1:case 2:case 3:var b=3;break;d
 exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();"object"===typeof c&&null!==c?(c=c.delay,c="number"===typeof c&&0<c?d+c:d):c=d;switch(a){case 1:var e=-1;break;case 2:e=250;break;case 5:e=1073741823;break;case 4:e=1E4;break;default:e=5E3}e=c+e;a={id:N++,callback:b,priorityLevel:a,startTime:c,expirationTime:e,sortIndex:-1};c>d?(a.sortIndex=c,H(M,a),null===J(L)&&a===J(M)&&(S?h():S=!0,g(U,c-d))):(a.sortIndex=e,H(L,a),R||Q||(R=!0,f(V)));return a};
 exports.unstable_wrapCallback=function(a){var b=P;return function(){var c=P;P=b;try{return a.apply(this,arguments)}finally{P=c}}};
 
-},{}],15:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -8471,7 +9087,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":13,"./cjs/scheduler.production.min.js":14,"_process":2}],16:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":15,"./cjs/scheduler.production.min.js":16,"_process":2}],18:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -8482,7 +9098,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":11,"./cjs/scheduler-tracing.production.min.js":12,"_process":2}],17:[function(require,module,exports){
+},{"./cjs/scheduler-tracing.development.js":13,"./cjs/scheduler-tracing.production.min.js":14,"_process":2}],19:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8499,6 +9115,8 @@ var ReactDom = _interopRequireWildcard(require("react-dom"));
 
 var TitlePage$Salem1692 = _interopRequireWildcard(require("./components/TitlePage.bs.js"));
 
+var Translator$Salem1692 = _interopRequireWildcard(require("./locale/Translator.bs.js"));
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -8511,26 +9129,31 @@ function getCurrentPage(state) {
     case
     /* Title */
     0:
-      return React.createElement(TitlePage$Salem1692.make, {});
+      return React.createElement(TitlePage$Salem1692.make, {
+        t: state.translator
+      });
 
     case
-    /* Players */
+    /* Setup */
     1:
+    case
+    /* SetupPlayers */
+    2:
       return React.createElement("div", undefined, "Players");
 
     case
     /* Turn */
-    2:
+    3:
       return React.createElement("div", undefined, "Turn");
 
     case
     /* NightWitch */
-    3:
+    4:
       return React.createElement("div", undefined, "Night - Witch");
 
     case
     /* NightConstable */
-    4:
+    5:
       return React.createElement("div", undefined, "Night - Constable");
   }
 }
@@ -8550,10 +9173,15 @@ function init(param) {
     currentPage:
     /* Title */
     0,
+    currentPlayers: [],
     currentLang:
     /* NL */
     0,
-    currentPlayers: []
+    translator: function (param) {
+      return Translator$Salem1692.getTranslator(
+      /* NL */
+      0, param);
+    }
   };
 }
 
@@ -8562,19 +9190,24 @@ function run(param) {
     currentPage:
     /* Title */
     0,
+    currentPlayers: [],
     currentLang:
     /* NL */
     0,
-    currentPlayers: []
+    translator: function (param) {
+      return Translator$Salem1692.getTranslator(
+      /* NL */
+      0, param);
+    }
   });
 }
 /* react Not a pure module */
 
-},{"./components/TitlePage.bs.js":21,"react":8,"react-dom":5}],18:[function(require,module,exports){
+},{"./components/TitlePage.bs.js":24,"./locale/Translator.bs.js":26,"react":8,"react-dom":5}],20:[function(require,module,exports){
 // Generated by ReScript, PLEASE EDIT WITH CARE
 /* This output is empty. Its source's type definitions, externals and/or unused code got optimized away. */
 
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 "use strict";
 
 var Main = _interopRequireWildcard(require("./Main.bs"));
@@ -8599,7 +9232,86 @@ class App {
 
 window.App = App;
 
-},{"./Main.bs":17}],20:[function(require,module,exports){
+},{"./Main.bs":19}],22:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.make = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+// Generated by ReScript, PLEASE EDIT WITH CARE
+function $$Audio(Props) {
+  var track = Props.track;
+  var src;
+
+  switch (track) {
+    case
+    /* A_TownGoSleep */
+    0:
+      src = "tracks/a.mp3";
+      break;
+
+    case
+    /* B_WitchWakeUp */
+    1:
+      src = "tracks/b.mp3";
+      break;
+
+    case
+    /* E_WitchGoSleep */
+    2:
+      src = "tracks/e.mp3";
+      break;
+
+    case
+    /* G_WitchesWakeUp */
+    3:
+      src = "tracks/g.mp3";
+      break;
+
+    case
+    /* J_WitchesGoSleep */
+    4:
+      src = "tracks/j.mp3";
+      break;
+
+    case
+    /* M_ConstableWakeUp */
+    5:
+      src = "tracks/m.mp3";
+      break;
+
+    case
+    /* N_ConstableGoSleep */
+    6:
+      src = "tracks/n.mp3";
+      break;
+
+    case
+    /* Z_TownWakeUp */
+    7:
+      src = "tracks/z.mp3";
+      break;
+  }
+
+  return React.createElement("audio", {
+    src: src
+  });
+}
+
+var make = $$Audio;
+/* react Not a pure module */
+
+exports.make = make;
+
+},{"react":8}],23:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8615,30 +9327,9 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
 function Button(Props) {
-  var buttonType = Props.buttonType;
   var label = Props.label;
-  var className;
-
-  switch (buttonType) {
-    case
-    /* RegularFirst */
-    0:
-      className = "button-first";
-      break;
-
-    case
-    /* RegularSecond */
-    1:
-      className = "button-second";
-      break;
-
-    case
-    /* RegularThird */
-    2:
-      className = "button-third";
-      break;
-  }
-
+  var classNameOpt = Props.className;
+  var className = classNameOpt !== undefined ? classNameOpt : "";
   return React.createElement("button", {
     className: className
   }, label);
@@ -8649,13 +9340,15 @@ var make = Button;
 
 exports.make = make;
 
-},{"react":8}],21:[function(require,module,exports){
+},{"react":8}],24:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.make = void 0;
+
+var Curry = _interopRequireWildcard(require("rescript/lib/es6/curry.js"));
 
 var React = _interopRequireWildcard(require("react"));
 
@@ -8667,23 +9360,17 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
 function TitlePage(Props) {
+  var t = Props.t;
   return React.createElement("div", {
+    className: "page",
     id: "title-page"
   }, React.createElement(Button$Salem1692.make, {
-    buttonType:
-    /* RegularFirst */
-    0,
-    label: "New Game"
+    label: Curry._1(t, "New Game")
   }), React.createElement(Button$Salem1692.make, {
-    buttonType:
-    /* RegularSecond */
-    1,
-    label: "Setup"
+    label: Curry._1(t, "Setup")
   }), React.createElement(Button$Salem1692.make, {
-    buttonType:
-    /* RegularThird */
-    2,
-    label: "Exit"
+    label: Curry._1(t, "Exit"),
+    className: "last"
   }));
 }
 
@@ -8692,7 +9379,7 @@ var make = TitlePage;
 
 exports.make = make;
 
-},{"./Button.bs.js":20,"react":8}],22:[function(require,module,exports){
+},{"./Button.bs.js":23,"react":8,"rescript/lib/es6/curry.js":11}],25:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8707,12 +9394,12 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-var table = Js_dict.fromArray([["Start Game", "Spel starten"], ["Exit", "Afsluiten"]]);
+var table = Js_dict.fromArray([["New Game", "Nieuw spel"], ["Setup", "Instellingen"], ["Exit", "Afsluiten"]]);
 /* table Not a pure module */
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":10}],23:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":12}],26:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8749,4 +9436,4 @@ function getTranslator(language, message) {
 }
 /* NL_NL-Salem1692 Not a pure module */
 
-},{"./NL_NL.bs.js":22,"rescript/lib/es6/js_dict.js":10}]},{},[23,22,18,20,21,17,19]);
+},{"./NL_NL.bs.js":25,"rescript/lib/es6/js_dict.js":12}]},{},[26,25,20,23,24,22,19,21]);
