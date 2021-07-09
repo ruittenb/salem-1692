@@ -14,7 +14,7 @@ body {
 }
 
 #root {
-    background-image: url(images/background.png);
+    background-image: url(../images/background.png);
     background-size: 100% 100%;
     width: 100%;
     height: 100%;
@@ -29,7 +29,7 @@ body {
 }
 
 #title-page {
-    background: center / contain no-repeat url(images/mary-warren-with-game-title.png);
+    background: center / contain no-repeat url(../images/mary-warren-with-game-title.png);
     display: flex;
     justify-content: flex-end;
     align-items: center;
