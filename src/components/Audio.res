@@ -9,9 +9,12 @@ open Types
 let make = (
     ~track: track,
 ): React.element => {
-    let directory = "audio/nl/"
+    let language = NL_NL
+    let directory = "audio/" ++ switch language {
+        | NL_NL => "nl_NL/"
+        | EN_US => "en_US/"
+    }
     let src = directory ++ switch track {
-        // do something with language FIXME
         | TownGoToSleep       => "town-go-to-sleep.mp3"
         | WitchWakeUp         => "witch-wake-up.mp3"
         | WitchesWakeUp       => "witches-wake-up.mp3"
@@ -27,6 +30,4 @@ let make = (
     <audio src>
     </audio>
 }
-
-// vim: set ts=4 sw=4 et list nu fdm=marker:
 

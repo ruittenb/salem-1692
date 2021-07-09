@@ -14,10 +14,8 @@ let lookup = (table: Js.Dict.t<string>, message: string) => {
 
 let getTranslator = (language: language, message: string): string => {
     switch language {
-        | EN => message
-        | NL => lookup(NL_NL.table, message)
+        | EN_US => message
+        | NL_NL => lookup(NL_NL.table, message)
     }
 }
-
-// vim: set ts=4 sw=4 et list nu fdm=marker:
 

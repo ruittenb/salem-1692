@@ -1,0 +1,52 @@
+[ first night ]
+A. The night is falling. The town goes to sleep; everybody please close your eyes.
+...
+B. Once all eyes are closed, the witch wakes up.
+E. The witch opens her eyes and without making a sound, she decides which
+   player will receive the black cat. She may choose herself.
+===
+D. Once all eyes are closed, the witches wake up.
+   The witches open their eyes and make eye contact to acknowledge each other.
+F. With gestures only and without making a sound, they decide which
+   player will receive the black cat. They may choose one of themselves.
+---
+[ choice ]
+[ confirm ]
+---
+H. The witch has made her choice and closes her eyes.
+===
+J. The witches have made their choice and close their eyes.
+...
+Z. The dawn is breaking. A rooster crows; the town wakes up and everybody opens their eyes.
+[ reveal ]
+
+============================================================================
+
+[ other nights ]
+A. The night is falling. The town goes to sleep; everybody please close your eyes.
+...
+D. Once all eyes are closed, the witches wake up.
+   The witches open their eyes and make eye contact to acknowledge each other.
+G. With gestures only and without making a sound, they decide which
+   player will be killed. They may choose one of themselves.
+---
+[ choice ]
+[ confirm ]
+---
+J. The witches have made their choice and close their eyes.
+...
+M. Once the witches have closed their eyes, the constable wakes up.
+   The constable decides which player will be protected this night.
+   He may NOT choose himself.
+---
+[ choice ]
+[ confirm ]
+---
+N. The constable has made his choice and closes his eyes.
+...
+Z. The dawn is breaking. A rooster crows; the town wakes up, everybody please open your eyes.
+[ reveal ]
+
+
+
+

@@ -8,8 +8,8 @@ type either<'t, 'v> =
     | Right('v)
 
 type language =
-    | NL
-    | EN
+    | NL_NL
+    | EN_US
 
 type page =
     | Title
@@ -42,6 +42,4 @@ type state = {
     currentLang    : language,
     translator     : string => string,
 }
-
-// vim: set ts=4 sw=4 et list nu fdm=marker:
 

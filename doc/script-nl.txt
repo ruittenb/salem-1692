@@ -1,14 +1,14 @@
 [ first night ]
-A. De nacht valt. Iedereen gaat slapen en doet de ogen dicht.
+A. De nacht valt. Het dorp gaat slapen; iedereen doet de ogen dicht.
 ...
 B. Als iedereen de ogen dicht heeft, wordt de heks wakker.
-E. De heks opent de ogen en zonder geluid te maken beslist ze welke speler de zwarte kat krijgt.
-   Dit mag ook de heks zelf zijn.
+E. De heks opent de ogen en zonder geluid te maken beslist ze welke speler de zwarte kat
+   krijgt.  Ze mag zichzelf kiezen.
 ===
 D. Als iedereen de ogen dicht heeft, worden de heksen wakker.
    De heksen openen de ogen en maken oogcontact zodat ze weten wie ze zijn.
 F. Met alleen geluidloze gebaren komen ze overeen welke speler de zwarte kat krijgt.
-   Dit mag ook een van de heksen zijn.
+   Ze mogen een van henzelf kiezen.
 ---
 [ choice ]
 [ confirm ]
@@ -17,7 +17,7 @@ H. De heks heeft haar keuze gemaakt en doet de ogen weer dicht.
 ===
 J. De heksen hebben hun keuze gemaakt en doen de ogen weer dicht.
 ...
-Z. Het wordt ochtend. De haan kraait, iedereen wordt wakker en doet de ogen open.
+Z. Het wordt ochtend. Een haan kraait, iedereen wordt wakker en doet de ogen open.
 [ reveal ]
 
 ============================================================================
@@ -27,8 +27,8 @@ A. De nacht valt. Iedereen gaat slapen en doet de ogen dicht.
 ...
 D. Als iedereen de ogen dicht heeft, worden de heksen wakker.
    De heksen openen de ogen en maken oogcontact zodat ze weten wie ze zijn.
-G. Zonder geluid te maken komen de heksen overeen welke speler wordt vermoord.
-   Dit mag ook een van de heksen zijn.
+G. Met alleen geluidloze gebaren komen de heksen overeen welke speler wordt vermoord.
+   Ze mogen een van henzelf kiezen.
 ---
 [ choice ]
 [ confirm ]
@@ -37,7 +37,7 @@ J. De heksen hebben hun keuze gemaakt en doen de ogen weer dicht.
 ...
 M. Als de heksen de ogen weer dicht hebben, wordt de constable wakker.
    De constable beslist welke speler beschermd gaat worden deze nacht.
-   Dit mag niet de constable zelf zijn.
+   Hij mag NIET zichzelf kiezen.
 ---
 [ choice ]
 [ confirm ]
