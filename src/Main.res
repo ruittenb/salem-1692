@@ -15,11 +15,11 @@ open Types
 let getCurrentPage = (state: state): React.element => {
     switch state.currentPage {
         | Title          => <TitlePage />
-        | Setup          => <div> {React.string("Players")} </div>
+        | Setup          => <SetupPage />
         | SetupPlayers   => <div> {React.string("Players")} </div>
         | Turn           => <div> {React.string("Turn")}    </div>
-        | NightWitch     => <NightPage phase={state.currentPage} />
-        | NightConstable => <NightPage phase={state.currentPage} />
+        | NightWitch     => <NightPage state={state} />
+        | NightConstable => <NightPage state={state} />
     }
 }
 
@@ -36,10 +36,17 @@ let render = (~state: state): state => {
 }
 
 let init = (): state => {
-    let currentLang = ES_ES
+    let currentLang = NL_NL
     {
-        currentPage: Title,
-        currentPlayers: [],
+        currentPage: NightWitch,
+        currentPlayers: [
+            { name: "Helmi" },
+            { name: "Marco" },
+            { name: "Richella" },
+            { name: "Anja" },
+            { name: "René" },
+            { name: "Erwin" },
+        ],
         currentLang,
         translator: Translator.getTranslator(currentLang)
     }

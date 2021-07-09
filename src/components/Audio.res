@@ -11,8 +11,8 @@ open Types
 let make = (
     ~track: track,
 ): React.element => {
-    let language = NL_NL
-    let directory = "audio/" ++ switch language {
+    let locale = React.useContext(Context.Locale.context)
+    let directory = "audio/" ++ switch locale {
         | NL_NL => "nl_NL/"
         | EN_US => "en_US/"
         | ES_ES => "es_ES/"

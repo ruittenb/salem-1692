@@ -14,7 +14,7 @@ type language =
 
 type page =
     | Title
-    | Setup // language, player names, nr. witches
+    | Setup // language, player names, nr. witches, credits
     | SetupPlayers
     | Turn
     | NightWitch
