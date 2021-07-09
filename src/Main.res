@@ -14,8 +14,9 @@ open Types
 
 let getCurrentPage = (state: state): React.element => {
     switch state.currentPage {
-        | Title          => <TitlePage />
-        | Players        => <div> {React.string("Players")}           </div>
+        | Title          => <TitlePage t={state.translator} />
+        | Setup          => <div> {React.string("Players")}           </div>
+        | SetupPlayers   => <div> {React.string("Players")}           </div>
         | Turn           => <div> {React.string("Turn")}              </div>
         | NightWitch     => <div> {React.string("Night - Witch")}     </div>
         | NightConstable => <div> {React.string("Night - Constable")} </div>
@@ -31,10 +32,12 @@ let render = (~state: state): state => {
 }
 
 let init = (): state => {
+    let currentLang = NL
     {
         currentPage: Title,
-        currentLang: NL,
-        currentPlayers: []
+        currentPlayers: [],
+        currentLang,
+        translator: Translator.getTranslator(currentLang)
     }
 }
 

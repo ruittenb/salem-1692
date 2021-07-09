@@ -3,19 +3,12 @@
  * Button
  */
 
-open Types
-
 @react.component
 let make = (
-    ~buttonType: buttonType,
     ~label: string,
+    ~className: string="",
 ): React.element => {
-    let className = "button " ++ switch buttonType {
-        | RegularFirst  => "button-first"
-        | RegularSecond => "button-second"
-        | RegularThird  => "button-third"
-    }
-    <button className={className}>
+    <button className>
         {React.string(label)}
     </button>
 }

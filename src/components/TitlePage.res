@@ -4,11 +4,13 @@
  */
 
 @react.component
-let make = (): React.element => {
-    <div id="title-page">
-        <Button buttonType=RegularFirst  label="New Game" />
-        <Button buttonType=RegularSecond label="Setup"    />
-        <Button buttonType=RegularThird  label="Exit"     />
+let make = (
+    ~t: string => string
+): React.element => {
+    <div id="title-page" className="page">
+        <Button label={t("New Game")} />
+        <Button label={t("Setup"   )} />
+        <Button label={t("Exit"    )} className="last" />
     </div>
 }
 

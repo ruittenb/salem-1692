@@ -16,18 +16,34 @@ mark: # Put asterisk in corner of terminal, to signal "done"
 	@printf "*"
 	@tput cuu1 && tput cuu1 && echo
 
-.PHONY: browserify
-browserify: ## Bundle the js files
-	browserify $(SRC_JS) -p esmify -o $(BUNDLE)
-
 .PHONY: compile
 compile: ## Compile the res files
 	npm run re:build
 
+.PHONY: bundle
+bundle: ## Bundle the js files
+	browserify $(SRC_JS) -p esmify -o $(BUNDLE)
+
 .PHONY: build
-build: ## Compile res files to js and bundle the js files
+build: ## Compile the res files to js and bundle them
 	$(MAKE) compile && \
-	$(MAKE) browserify
+	$(MAKE) bundle
+
+.PHONY: watch
+watch: ## Compile the res files to js and bundle them; watch for changes
+	fswatch $(SRC_JS) | while read f; do \
+		tput setaf $(COLOR);             \
+		echo '>>>> Bundling';            \
+		tput sgr0;                       \
+		sleep 1;                         \
+		$(MAKE) bundle mark;             \
+	done &
+	npm run re:watch
+
+.PHONY: watch-stop
+watch-stop: ## Stop watching for changes
+	ps -fu `whoami` | awk '/[f]swatch/ { print $$2 }' | tee /dev/tty | xargs kill
+	rm .bsb.lock 2>/dev/null || true
 
 .PHONY: serve
 serve: ## Serve the page over http
@@ -36,20 +52,4 @@ serve: ## Serve the page over http
 .PHONY: serve-stop
 serve-stop: ## Stop serving the page
 	ps -fu `whoami` | awk '/[s]erve dist/ { print $$2 }' | tee /dev/tty | xargs kill
-
-.PHONY: watch
-watch: ## Compile res files to js and bundle the js files; watch for changes
-	fswatch $(SRC_JS) | while read f; do \
-		tput setaf $(COLOR);             \
-		echo '>>>> Browserifying';       \
-		tput sgr0;                       \
-		sleep 1;                         \
-		$(MAKE) browserify mark;         \
-	done &
-	npm run re:watch
-
-.PHONY: watch-stop
-watch-stop: ## Stop watching for changes
-	ps -fu `whoami` | awk '/[f]swatch/ { print $$2 }' | tee /dev/tty | xargs kill
-
 
