@@ -18,8 +18,8 @@ let getCurrentPage = (state: state): React.element => {
         | Setup          => <div> {React.string("Players")}           </div>
         | SetupPlayers   => <div> {React.string("Players")}           </div>
         | Turn           => <div> {React.string("Turn")}              </div>
-        | NightWitch     => <div> {React.string("Night - Witch")}     </div>
-        | NightConstable => <div> {React.string("Night - Constable")} </div>
+        | NightWitch     => <NightPage phase={state.currentPage} />
+        | NightConstable => <NightPage phase={state.currentPage} />
     }
 }
 
@@ -32,7 +32,7 @@ let render = (~state: state): state => {
 }
 
 let init = (): state => {
-    let currentLang = NL
+    let currentLang = NL_NL
     {
         currentPage: Title,
         currentPlayers: [],
