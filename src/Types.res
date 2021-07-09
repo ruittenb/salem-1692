@@ -20,14 +20,17 @@ type page =
     | NightConstable
 
 type track =
-    | A_TownGoSleep
-    | B_WitchWakeUp
-    | E_WitchGoSleep
-    | G_WitchesWakeUp
-    | J_WitchesGoSleep
-    | M_ConstableWakeUp
-    | N_ConstableGoSleep
-    | Z_TownWakeUp
+    | TownGoToSleep
+    | WitchWakeUp
+    | WitchesWakeUp
+    | WitchDecideCat
+    | WitchesDecideCat
+    | WitchesDecideMurder
+    | WitchGoToSleep
+    | WitchesGoToSleep
+    | ConstableWakeUp
+    | ConstableGoToSleep
+    | TownWakeUp
 
 type player = {
     name: string

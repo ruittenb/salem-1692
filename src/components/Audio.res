@@ -9,16 +9,20 @@ open Types
 let make = (
     ~track: track,
 ): React.element => {
-    let src = switch track {
+    let directory = "audio/nl/"
+    let src = directory ++ switch track {
         // do something with language FIXME
-        | A_TownGoSleep      => "tracks/a.mp3"
-        | B_WitchWakeUp      => "tracks/b.mp3"
-        | E_WitchGoSleep     => "tracks/e.mp3"
-        | G_WitchesWakeUp    => "tracks/g.mp3"
-        | J_WitchesGoSleep   => "tracks/j.mp3"
-        | M_ConstableWakeUp  => "tracks/m.mp3"
-        | N_ConstableGoSleep => "tracks/n.mp3"
-        | Z_TownWakeUp       => "tracks/z.mp3"
+        | TownGoToSleep       => "town-go-to-sleep.mp3"
+        | WitchWakeUp         => "witch-wake-up.mp3"
+        | WitchesWakeUp       => "witches-wake-up.mp3"
+        | WitchDecideCat      => "witch-decide-cat.mp3"
+        | WitchesDecideCat    => "witches-decide-cat.mp3"
+        | WitchesDecideMurder => "witches-decide-murder.mp3"
+        | WitchGoToSleep      => "witch-go-to-sleep.mp3"
+        | WitchesGoToSleep    => "witches-go-to-sleep.mp3"
+        | ConstableWakeUp     => "constable-wake-up.mp3"
+        | ConstableGoToSleep  => "constable-go-to-sleep.mp3"
+        | TownWakeUp          => "town-wake-up.mp3"
     }
     <audio src>
     </audio>

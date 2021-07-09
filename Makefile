@@ -1,6 +1,6 @@
 
 COLOR=10 # bold green
-BUNDLE=dist/bundle.js
+BUNDLE=dist/js/bundle.js
 SRC_JS=$(shell find src -name *.js)
 
 .DEFAULT_GOAL:=help
