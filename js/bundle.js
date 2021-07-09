@@ -4569,7 +4569,7 @@ if(/^(https?|file):$/.test(protocol)){// eslint-disable-next-line react-internal
 console.info('%cDownload the React DevTools '+'for a better development experience: '+'https://reactjs.org/link/react-devtools'+(protocol==='file:'?'\nYou might need to use a local HTTP server (instead of file://): '+'https://reactjs.org/link/react-devtools-faq':''),'font-weight:bold');}}}}exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED=Internals;exports.createPortal=createPortal$1;exports.findDOMNode=findDOMNode;exports.flushSync=flushSync;exports.hydrate=hydrate;exports.render=render;exports.unmountComponentAtNode=unmountComponentAtNode;exports.unstable_batchedUpdates=batchedUpdates$1;exports.unstable_createPortal=unstable_createPortal;exports.unstable_renderSubtreeIntoContainer=renderSubtreeIntoContainer;exports.version=ReactVersion;})();}
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":2,"object-assign":1,"react":8,"scheduler":15,"scheduler/tracing":16}],4:[function(require,module,exports){
+},{"_process":2,"object-assign":1,"react":8,"scheduler":21,"scheduler/tracing":22}],4:[function(require,module,exports){
 /** @license React v17.0.2
  * react-dom.production.min.js
  *
@@ -4868,7 +4868,7 @@ exports.findDOMNode=function(a){if(null==a)return null;if(1===a.nodeType)return 
 exports.render=function(a,b,c){if(!rk(b))throw Error(y(200));return tk(null,a,b,!1,c)};exports.unmountComponentAtNode=function(a){if(!rk(a))throw Error(y(40));return a._reactRootContainer?(Xj(function(){tk(null,null,a,!1,function(){a._reactRootContainer=null;a[ff]=null})}),!0):!1};exports.unstable_batchedUpdates=Wj;exports.unstable_createPortal=function(a,b){return uk(a,b,2<arguments.length&&void 0!==arguments[2]?arguments[2]:null)};
 exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!rk(c))throw Error(y(200));if(null==a||void 0===a._reactInternals)throw Error(y(38));return tk(a,b,c,!1,d)};exports.version="17.0.2";
 
-},{"object-assign":1,"react":8,"scheduler":15}],5:[function(require,module,exports){
+},{"object-assign":1,"react":8,"scheduler":21}],5:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -7239,6 +7239,1220 @@ if (process.env.NODE_ENV === 'production') {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.get = get;
+exports.getExn = getExn;
+exports.set = set;
+exports.setExn = setExn;
+exports.shuffleInPlace = shuffleInPlace;
+exports.shuffle = shuffle;
+exports.reverseInPlace = reverseInPlace;
+exports.reverse = reverse;
+exports.make = make;
+exports.range = range;
+exports.rangeBy = rangeBy;
+exports.makeByU = makeByU;
+exports.makeBy = makeBy;
+exports.makeByAndShuffleU = makeByAndShuffleU;
+exports.makeByAndShuffle = makeByAndShuffle;
+exports.zip = zip;
+exports.zipByU = zipByU;
+exports.zipBy = zipBy;
+exports.unzip = unzip;
+exports.concat = concat;
+exports.concatMany = concatMany;
+exports.slice = slice;
+exports.sliceToEnd = sliceToEnd;
+exports.fill = fill;
+exports.blit = blit;
+exports.blitUnsafe = blitUnsafe;
+exports.forEachU = forEachU;
+exports.forEach = forEach;
+exports.mapU = mapU;
+exports.map = map;
+exports.getByU = getByU;
+exports.getBy = getBy;
+exports.getIndexByU = getIndexByU;
+exports.getIndexBy = getIndexBy;
+exports.keepU = keepU;
+exports.keep = keep;
+exports.keepWithIndexU = keepWithIndexU;
+exports.keepWithIndex = keepWithIndex;
+exports.keepMapU = keepMapU;
+exports.keepMap = keepMap;
+exports.forEachWithIndexU = forEachWithIndexU;
+exports.forEachWithIndex = forEachWithIndex;
+exports.mapWithIndexU = mapWithIndexU;
+exports.mapWithIndex = mapWithIndex;
+exports.partitionU = partitionU;
+exports.partition = partition;
+exports.reduceU = reduceU;
+exports.reduce = reduce;
+exports.reduceReverseU = reduceReverseU;
+exports.reduceReverse = reduceReverse;
+exports.reduceReverse2U = reduceReverse2U;
+exports.reduceReverse2 = reduceReverse2;
+exports.reduceWithIndexU = reduceWithIndexU;
+exports.reduceWithIndex = reduceWithIndex;
+exports.joinWithU = joinWithU;
+exports.joinWith = joinWith;
+exports.someU = someU;
+exports.some = some;
+exports.everyU = everyU;
+exports.every = every;
+exports.every2U = every2U;
+exports.every2 = every2;
+exports.some2U = some2U;
+exports.some2 = some2;
+exports.cmpU = cmpU;
+exports.cmp = cmp;
+exports.eqU = eqU;
+exports.eq = eq;
+
+var Caml = _interopRequireWildcard(require("./caml.js"));
+
+var Curry = _interopRequireWildcard(require("./curry.js"));
+
+var Js_math = _interopRequireWildcard(require("./js_math.js"));
+
+var Caml_option = _interopRequireWildcard(require("./caml_option.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function get(arr, i) {
+  if (i >= 0 && i < arr.length) {
+    return Caml_option.some(arr[i]);
+  }
+}
+
+function getExn(arr, i) {
+  if (!(i >= 0 && i < arr.length)) {
+    throw {
+      RE_EXN_ID: "Assert_failure",
+      _1: ["belt_Array.ml", 27, 4],
+      Error: new Error()
+    };
+  }
+
+  return arr[i];
+}
+
+function set(arr, i, v) {
+  if (i >= 0 && i < arr.length) {
+    arr[i] = v;
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function setExn(arr, i, v) {
+  if (!(i >= 0 && i < arr.length)) {
+    throw {
+      RE_EXN_ID: "Assert_failure",
+      _1: ["belt_Array.ml", 33, 2],
+      Error: new Error()
+    };
+  }
+
+  arr[i] = v;
+}
+
+function swapUnsafe(xs, i, j) {
+  var tmp = xs[i];
+  xs[i] = xs[j];
+  xs[j] = tmp;
+}
+
+function shuffleInPlace(xs) {
+  var len = xs.length;
+
+  for (var i = 0; i < len; ++i) {
+    swapUnsafe(xs, i, Js_math.random_int(i, len));
+  }
+}
+
+function shuffle(xs) {
+  var result = xs.slice(0);
+  shuffleInPlace(result);
+  return result;
+}
+
+function reverseInPlace(xs) {
+  var len = xs.length;
+  var ofs = 0;
+
+  for (var i = 0, i_finish = len / 2 | 0; i < i_finish; ++i) {
+    swapUnsafe(xs, ofs + i | 0, ((ofs + len | 0) - i | 0) - 1 | 0);
+  }
+}
+
+function reverse(xs) {
+  var len = xs.length;
+  var result = new Array(len);
+
+  for (var i = 0; i < len; ++i) {
+    result[i] = xs[(len - 1 | 0) - i | 0];
+  }
+
+  return result;
+}
+
+function make(l, f) {
+  if (l <= 0) {
+    return [];
+  }
+
+  var res = new Array(l);
+
+  for (var i = 0; i < l; ++i) {
+    res[i] = f;
+  }
+
+  return res;
+}
+
+function makeByU(l, f) {
+  if (l <= 0) {
+    return [];
+  }
+
+  var res = new Array(l);
+
+  for (var i = 0; i < l; ++i) {
+    res[i] = f(i);
+  }
+
+  return res;
+}
+
+function makeBy(l, f) {
+  return makeByU(l, Curry.__1(f));
+}
+
+function makeByAndShuffleU(l, f) {
+  var u = makeByU(l, f);
+  shuffleInPlace(u);
+  return u;
+}
+
+function makeByAndShuffle(l, f) {
+  return makeByAndShuffleU(l, Curry.__1(f));
+}
+
+function range(start, finish) {
+  var cut = finish - start | 0;
+
+  if (cut < 0) {
+    return [];
+  }
+
+  var arr = new Array(cut + 1 | 0);
+
+  for (var i = 0; i <= cut; ++i) {
+    arr[i] = start + i | 0;
+  }
+
+  return arr;
+}
+
+function rangeBy(start, finish, step) {
+  var cut = finish - start | 0;
+
+  if (cut < 0 || step <= 0) {
+    return [];
+  }
+
+  var nb = (cut / step | 0) + 1 | 0;
+  var arr = new Array(nb);
+  var cur = start;
+
+  for (var i = 0; i < nb; ++i) {
+    arr[i] = cur;
+    cur = cur + step | 0;
+  }
+
+  return arr;
+}
+
+function zip(xs, ys) {
+  var lenx = xs.length;
+  var leny = ys.length;
+  var len = lenx < leny ? lenx : leny;
+  var s = new Array(len);
+
+  for (var i = 0; i < len; ++i) {
+    s[i] = [xs[i], ys[i]];
+  }
+
+  return s;
+}
+
+function zipByU(xs, ys, f) {
+  var lenx = xs.length;
+  var leny = ys.length;
+  var len = lenx < leny ? lenx : leny;
+  var s = new Array(len);
+
+  for (var i = 0; i < len; ++i) {
+    s[i] = f(xs[i], ys[i]);
+  }
+
+  return s;
+}
+
+function zipBy(xs, ys, f) {
+  return zipByU(xs, ys, Curry.__2(f));
+}
+
+function concat(a1, a2) {
+  var l1 = a1.length;
+  var l2 = a2.length;
+  var a1a2 = new Array(l1 + l2 | 0);
+
+  for (var i = 0; i < l1; ++i) {
+    a1a2[i] = a1[i];
+  }
+
+  for (var i$1 = 0; i$1 < l2; ++i$1) {
+    a1a2[l1 + i$1 | 0] = a2[i$1];
+  }
+
+  return a1a2;
+}
+
+function concatMany(arrs) {
+  var lenArrs = arrs.length;
+  var totalLen = 0;
+
+  for (var i = 0; i < lenArrs; ++i) {
+    totalLen = totalLen + arrs[i].length | 0;
+  }
+
+  var result = new Array(totalLen);
+  totalLen = 0;
+
+  for (var j = 0; j < lenArrs; ++j) {
+    var cur = arrs[j];
+
+    for (var k = 0, k_finish = cur.length; k < k_finish; ++k) {
+      result[totalLen] = cur[k];
+      totalLen = totalLen + 1 | 0;
+    }
+  }
+
+  return result;
+}
+
+function slice(a, offset, len) {
+  if (len <= 0) {
+    return [];
+  }
+
+  var lena = a.length;
+  var ofs = offset < 0 ? Caml.caml_int_max(lena + offset | 0, 0) : offset;
+  var hasLen = lena - ofs | 0;
+  var copyLength = hasLen < len ? hasLen : len;
+
+  if (copyLength <= 0) {
+    return [];
+  }
+
+  var result = new Array(copyLength);
+
+  for (var i = 0; i < copyLength; ++i) {
+    result[i] = a[ofs + i | 0];
+  }
+
+  return result;
+}
+
+function sliceToEnd(a, offset) {
+  var lena = a.length;
+  var ofs = offset < 0 ? Caml.caml_int_max(lena + offset | 0, 0) : offset;
+  var len = lena - ofs | 0;
+  var result = new Array(len);
+
+  for (var i = 0; i < len; ++i) {
+    result[i] = a[ofs + i | 0];
+  }
+
+  return result;
+}
+
+function fill(a, offset, len, v) {
+  if (len <= 0) {
+    return;
+  }
+
+  var lena = a.length;
+  var ofs = offset < 0 ? Caml.caml_int_max(lena + offset | 0, 0) : offset;
+  var hasLen = lena - ofs | 0;
+  var fillLength = hasLen < len ? hasLen : len;
+
+  if (fillLength <= 0) {
+    return;
+  }
+
+  for (var i = ofs, i_finish = ofs + fillLength | 0; i < i_finish; ++i) {
+    a[i] = v;
+  }
+}
+
+function blitUnsafe(a1, srcofs1, a2, srcofs2, blitLength) {
+  if (srcofs2 <= srcofs1) {
+    for (var j = 0; j < blitLength; ++j) {
+      a2[j + srcofs2 | 0] = a1[j + srcofs1 | 0];
+    }
+
+    return;
+  }
+
+  for (var j$1 = blitLength - 1 | 0; j$1 >= 0; --j$1) {
+    a2[j$1 + srcofs2 | 0] = a1[j$1 + srcofs1 | 0];
+  }
+}
+
+function blit(a1, ofs1, a2, ofs2, len) {
+  var lena1 = a1.length;
+  var lena2 = a2.length;
+  var srcofs1 = ofs1 < 0 ? Caml.caml_int_max(lena1 + ofs1 | 0, 0) : ofs1;
+  var srcofs2 = ofs2 < 0 ? Caml.caml_int_max(lena2 + ofs2 | 0, 0) : ofs2;
+  var blitLength = Caml.caml_int_min(len, Caml.caml_int_min(lena1 - srcofs1 | 0, lena2 - srcofs2 | 0));
+
+  if (srcofs2 <= srcofs1) {
+    for (var j = 0; j < blitLength; ++j) {
+      a2[j + srcofs2 | 0] = a1[j + srcofs1 | 0];
+    }
+
+    return;
+  }
+
+  for (var j$1 = blitLength - 1 | 0; j$1 >= 0; --j$1) {
+    a2[j$1 + srcofs2 | 0] = a1[j$1 + srcofs1 | 0];
+  }
+}
+
+function forEachU(a, f) {
+  for (var i = 0, i_finish = a.length; i < i_finish; ++i) {
+    f(a[i]);
+  }
+}
+
+function forEach(a, f) {
+  return forEachU(a, Curry.__1(f));
+}
+
+function mapU(a, f) {
+  var l = a.length;
+  var r = new Array(l);
+
+  for (var i = 0; i < l; ++i) {
+    r[i] = f(a[i]);
+  }
+
+  return r;
+}
+
+function map(a, f) {
+  return mapU(a, Curry.__1(f));
+}
+
+function getByU(a, p) {
+  var l = a.length;
+  var i = 0;
+  var r;
+
+  while (r === undefined && i < l) {
+    var v = a[i];
+
+    if (p(v)) {
+      r = Caml_option.some(v);
+    }
+
+    i = i + 1 | 0;
+  }
+
+  ;
+  return r;
+}
+
+function getBy(a, p) {
+  return getByU(a, Curry.__1(p));
+}
+
+function getIndexByU(a, p) {
+  var l = a.length;
+  var i = 0;
+  var r;
+
+  while (r === undefined && i < l) {
+    var v = a[i];
+
+    if (p(v)) {
+      r = i;
+    }
+
+    i = i + 1 | 0;
+  }
+
+  ;
+  return r;
+}
+
+function getIndexBy(a, p) {
+  return getIndexByU(a, Curry.__1(p));
+}
+
+function keepU(a, f) {
+  var l = a.length;
+  var r = new Array(l);
+  var j = 0;
+
+  for (var i = 0; i < l; ++i) {
+    var v = a[i];
+
+    if (f(v)) {
+      r[j] = v;
+      j = j + 1 | 0;
+    }
+  }
+
+  r.length = j;
+  return r;
+}
+
+function keep(a, f) {
+  return keepU(a, Curry.__1(f));
+}
+
+function keepWithIndexU(a, f) {
+  var l = a.length;
+  var r = new Array(l);
+  var j = 0;
+
+  for (var i = 0; i < l; ++i) {
+    var v = a[i];
+
+    if (f(v, i)) {
+      r[j] = v;
+      j = j + 1 | 0;
+    }
+  }
+
+  r.length = j;
+  return r;
+}
+
+function keepWithIndex(a, f) {
+  return keepWithIndexU(a, Curry.__2(f));
+}
+
+function keepMapU(a, f) {
+  var l = a.length;
+  var r = new Array(l);
+  var j = 0;
+
+  for (var i = 0; i < l; ++i) {
+    var v = a[i];
+    var v$1 = f(v);
+
+    if (v$1 !== undefined) {
+      r[j] = Caml_option.valFromOption(v$1);
+      j = j + 1 | 0;
+    }
+  }
+
+  r.length = j;
+  return r;
+}
+
+function keepMap(a, f) {
+  return keepMapU(a, Curry.__1(f));
+}
+
+function forEachWithIndexU(a, f) {
+  for (var i = 0, i_finish = a.length; i < i_finish; ++i) {
+    f(i, a[i]);
+  }
+}
+
+function forEachWithIndex(a, f) {
+  return forEachWithIndexU(a, Curry.__2(f));
+}
+
+function mapWithIndexU(a, f) {
+  var l = a.length;
+  var r = new Array(l);
+
+  for (var i = 0; i < l; ++i) {
+    r[i] = f(i, a[i]);
+  }
+
+  return r;
+}
+
+function mapWithIndex(a, f) {
+  return mapWithIndexU(a, Curry.__2(f));
+}
+
+function reduceU(a, x, f) {
+  var r = x;
+
+  for (var i = 0, i_finish = a.length; i < i_finish; ++i) {
+    r = f(r, a[i]);
+  }
+
+  return r;
+}
+
+function reduce(a, x, f) {
+  return reduceU(a, x, Curry.__2(f));
+}
+
+function reduceReverseU(a, x, f) {
+  var r = x;
+
+  for (var i = a.length - 1 | 0; i >= 0; --i) {
+    r = f(r, a[i]);
+  }
+
+  return r;
+}
+
+function reduceReverse(a, x, f) {
+  return reduceReverseU(a, x, Curry.__2(f));
+}
+
+function reduceReverse2U(a, b, x, f) {
+  var r = x;
+  var len = Caml.caml_int_min(a.length, b.length);
+
+  for (var i = len - 1 | 0; i >= 0; --i) {
+    r = f(r, a[i], b[i]);
+  }
+
+  return r;
+}
+
+function reduceReverse2(a, b, x, f) {
+  return reduceReverse2U(a, b, x, Curry.__3(f));
+}
+
+function reduceWithIndexU(a, x, f) {
+  var r = x;
+
+  for (var i = 0, i_finish = a.length; i < i_finish; ++i) {
+    r = f(r, a[i], i);
+  }
+
+  return r;
+}
+
+function reduceWithIndex(a, x, f) {
+  return reduceWithIndexU(a, x, Curry.__3(f));
+}
+
+function everyU(arr, b) {
+  var len = arr.length;
+  var _i = 0;
+
+  while (true) {
+    var i = _i;
+
+    if (i === len) {
+      return true;
+    }
+
+    if (!b(arr[i])) {
+      return false;
+    }
+
+    _i = i + 1 | 0;
+    continue;
+  }
+
+  ;
+}
+
+function every(arr, f) {
+  return everyU(arr, Curry.__1(f));
+}
+
+function someU(arr, b) {
+  var len = arr.length;
+  var _i = 0;
+
+  while (true) {
+    var i = _i;
+
+    if (i === len) {
+      return false;
+    }
+
+    if (b(arr[i])) {
+      return true;
+    }
+
+    _i = i + 1 | 0;
+    continue;
+  }
+
+  ;
+}
+
+function some(arr, f) {
+  return someU(arr, Curry.__1(f));
+}
+
+function everyAux2(arr1, arr2, _i, b, len) {
+  while (true) {
+    var i = _i;
+
+    if (i === len) {
+      return true;
+    }
+
+    if (!b(arr1[i], arr2[i])) {
+      return false;
+    }
+
+    _i = i + 1 | 0;
+    continue;
+  }
+
+  ;
+}
+
+function every2U(a, b, p) {
+  return everyAux2(a, b, 0, p, Caml.caml_int_min(a.length, b.length));
+}
+
+function every2(a, b, p) {
+  return every2U(a, b, Curry.__2(p));
+}
+
+function some2U(a, b, p) {
+  var _i = 0;
+  var len = Caml.caml_int_min(a.length, b.length);
+
+  while (true) {
+    var i = _i;
+
+    if (i === len) {
+      return false;
+    }
+
+    if (p(a[i], b[i])) {
+      return true;
+    }
+
+    _i = i + 1 | 0;
+    continue;
+  }
+
+  ;
+}
+
+function some2(a, b, p) {
+  return some2U(a, b, Curry.__2(p));
+}
+
+function eqU(a, b, p) {
+  var lena = a.length;
+  var lenb = b.length;
+
+  if (lena === lenb) {
+    return everyAux2(a, b, 0, p, lena);
+  } else {
+    return false;
+  }
+}
+
+function eq(a, b, p) {
+  return eqU(a, b, Curry.__2(p));
+}
+
+function cmpU(a, b, p) {
+  var lena = a.length;
+  var lenb = b.length;
+
+  if (lena > lenb) {
+    return 1;
+  } else if (lena < lenb) {
+    return -1;
+  } else {
+    var _i = 0;
+
+    while (true) {
+      var i = _i;
+
+      if (i === lena) {
+        return 0;
+      }
+
+      var c = p(a[i], b[i]);
+
+      if (c !== 0) {
+        return c;
+      }
+
+      _i = i + 1 | 0;
+      continue;
+    }
+
+    ;
+  }
+}
+
+function cmp(a, b, p) {
+  return cmpU(a, b, Curry.__2(p));
+}
+
+function partitionU(a, f) {
+  var l = a.length;
+  var i = 0;
+  var j = 0;
+  var a1 = new Array(l);
+  var a2 = new Array(l);
+
+  for (var ii = 0; ii < l; ++ii) {
+    var v = a[ii];
+
+    if (f(v)) {
+      a1[i] = v;
+      i = i + 1 | 0;
+    } else {
+      a2[j] = v;
+      j = j + 1 | 0;
+    }
+  }
+
+  a1.length = i;
+  a2.length = j;
+  return [a1, a2];
+}
+
+function partition(a, f) {
+  return partitionU(a, Curry.__1(f));
+}
+
+function unzip(a) {
+  var l = a.length;
+  var a1 = new Array(l);
+  var a2 = new Array(l);
+
+  for (var i = 0; i < l; ++i) {
+    var match = a[i];
+    a1[i] = match[0];
+    a2[i] = match[1];
+  }
+
+  return [a1, a2];
+}
+
+function joinWithU(a, sep, toString) {
+  var l = a.length;
+
+  if (l === 0) {
+    return "";
+  }
+
+  var lastIndex = l - 1 | 0;
+  var _i = 0;
+  var _res = "";
+
+  while (true) {
+    var res = _res;
+    var i = _i;
+
+    if (i === lastIndex) {
+      return res + toString(a[i]);
+    }
+
+    _res = res + (toString(a[i]) + sep);
+    _i = i + 1 | 0;
+    continue;
+  }
+
+  ;
+}
+
+function joinWith(a, sep, toString) {
+  return joinWithU(a, sep, Curry.__1(toString));
+}
+/* No side effect */
+
+},{"./caml.js":10,"./caml_option.js":12,"./curry.js":13,"./js_math.js":16}],10:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.caml_int_compare = caml_int_compare;
+exports.caml_bool_compare = caml_bool_compare;
+exports.caml_float_compare = caml_float_compare;
+exports.caml_string_compare = caml_string_compare;
+exports.caml_bool_min = caml_bool_min;
+exports.caml_int_min = caml_int_min;
+exports.caml_float_min = caml_float_min;
+exports.caml_string_min = caml_string_min;
+exports.caml_int32_min = caml_int32_min;
+exports.caml_bool_max = caml_bool_max;
+exports.caml_int_max = caml_int_max;
+exports.caml_float_max = caml_float_max;
+exports.caml_string_max = caml_string_max;
+exports.caml_int32_max = caml_int32_max;
+exports.i64_eq = i64_eq;
+exports.i64_neq = i64_neq;
+exports.i64_lt = i64_lt;
+exports.i64_gt = i64_gt;
+exports.i64_le = i64_le;
+exports.i64_ge = i64_ge;
+exports.i64_min = i64_min;
+exports.i64_max = i64_max;
+
+function caml_int_compare(x, y) {
+  if (x < y) {
+    return -1;
+  } else if (x === y) {
+    return 0;
+  } else {
+    return 1;
+  }
+}
+
+function caml_bool_compare(x, y) {
+  if (x) {
+    if (y) {
+      return 0;
+    } else {
+      return 1;
+    }
+  } else if (y) {
+    return -1;
+  } else {
+    return 0;
+  }
+}
+
+function caml_float_compare(x, y) {
+  if (x === y) {
+    return 0;
+  } else if (x < y) {
+    return -1;
+  } else if (x > y || x === x) {
+    return 1;
+  } else if (y === y) {
+    return -1;
+  } else {
+    return 0;
+  }
+}
+
+function caml_string_compare(s1, s2) {
+  if (s1 === s2) {
+    return 0;
+  } else if (s1 < s2) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function caml_bool_min(x, y) {
+  if (x) {
+    return y;
+  } else {
+    return x;
+  }
+}
+
+function caml_int_min(x, y) {
+  if (x < y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_float_min(x, y) {
+  if (x < y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_string_min(x, y) {
+  if (x < y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_int32_min(x, y) {
+  if (x < y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_bool_max(x, y) {
+  if (x) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_int_max(x, y) {
+  if (x > y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_float_max(x, y) {
+  if (x > y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_string_max(x, y) {
+  if (x > y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function caml_int32_max(x, y) {
+  if (x > y) {
+    return x;
+  } else {
+    return y;
+  }
+}
+
+function i64_eq(x, y) {
+  if (x[1] === y[1]) {
+    return x[0] === y[0];
+  } else {
+    return false;
+  }
+}
+
+function i64_ge(param, param$1) {
+  var other_hi = param$1[0];
+  var hi = param[0];
+
+  if (hi > other_hi) {
+    return true;
+  } else if (hi < other_hi) {
+    return false;
+  } else {
+    return param[1] >= param$1[1];
+  }
+}
+
+function i64_neq(x, y) {
+  return !i64_eq(x, y);
+}
+
+function i64_lt(x, y) {
+  return !i64_ge(x, y);
+}
+
+function i64_gt(x, y) {
+  if (x[0] > y[0]) {
+    return true;
+  } else if (x[0] < y[0]) {
+    return false;
+  } else {
+    return x[1] > y[1];
+  }
+}
+
+function i64_le(x, y) {
+  return !i64_gt(x, y);
+}
+
+function i64_min(x, y) {
+  if (i64_ge(x, y)) {
+    return y;
+  } else {
+    return x;
+  }
+}
+
+function i64_max(x, y) {
+  if (i64_gt(x, y)) {
+    return x;
+  } else {
+    return y;
+  }
+}
+/* No side effect */
+
+},{}],11:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.dup = dup;
+exports.sub = sub;
+exports.concat = concat;
+exports.make = make;
+exports.make_float = make_float;
+exports.blit = blit;
+exports.get = get;
+exports.set = set;
+
+function sub(x, offset, len) {
+  var result = new Array(len);
+  var j = 0;
+  var i = offset;
+
+  while (j < len) {
+    result[j] = x[i];
+    j = j + 1 | 0;
+    i = i + 1 | 0;
+  }
+
+  ;
+  return result;
+}
+
+function len(_acc, _l) {
+  while (true) {
+    var l = _l;
+    var acc = _acc;
+
+    if (!l) {
+      return acc;
+    }
+
+    _l = l.tl;
+    _acc = l.hd.length + acc | 0;
+    continue;
+  }
+
+  ;
+}
+
+function fill(arr, _i, _l) {
+  while (true) {
+    var l = _l;
+    var i = _i;
+
+    if (!l) {
+      return;
+    }
+
+    var x = l.hd;
+    var l$1 = x.length;
+    var k = i;
+    var j = 0;
+
+    while (j < l$1) {
+      arr[k] = x[j];
+      k = k + 1 | 0;
+      j = j + 1 | 0;
+    }
+
+    ;
+    _l = l.tl;
+    _i = k;
+    continue;
+  }
+
+  ;
+}
+
+function concat(l) {
+  var v = len(0, l);
+  var result = new Array(v);
+  fill(result, 0, l);
+  return result;
+}
+
+function set(xs, index, newval) {
+  if (index < 0 || index >= xs.length) {
+    throw {
+      RE_EXN_ID: "Invalid_argument",
+      _1: "index out of bounds",
+      Error: new Error()
+    };
+  }
+
+  xs[index] = newval;
+}
+
+function get(xs, index) {
+  if (index < 0 || index >= xs.length) {
+    throw {
+      RE_EXN_ID: "Invalid_argument",
+      _1: "index out of bounds",
+      Error: new Error()
+    };
+  }
+
+  return xs[index];
+}
+
+function make(len, init) {
+  var b = new Array(len);
+
+  for (var i = 0; i < len; ++i) {
+    b[i] = init;
+  }
+
+  return b;
+}
+
+function make_float(len) {
+  var b = new Array(len);
+
+  for (var i = 0; i < len; ++i) {
+    b[i] = 0;
+  }
+
+  return b;
+}
+
+function blit(a1, i1, a2, i2, len) {
+  if (i2 <= i1) {
+    for (var j = 0; j < len; ++j) {
+      a2[j + i2 | 0] = a1[j + i1 | 0];
+    }
+
+    return;
+  }
+
+  for (var j$1 = len - 1 | 0; j$1 >= 0; --j$1) {
+    a2[j$1 + i2 | 0] = a1[j$1 + i1 | 0];
+  }
+}
+
+function dup(prim) {
+  return prim.slice(0);
+}
+/* No side effect */
+
+},{}],12:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.nullable_to_opt = nullable_to_opt;
 exports.undefined_to_opt = undefined_to_opt;
 exports.null_to_opt = null_to_opt;
@@ -7323,7 +8537,477 @@ function option_unwrap(x) {
 }
 /* No side effect */
 
-},{}],10:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.app = app;
+exports._1 = _1;
+exports.__1 = __1;
+exports._2 = _2;
+exports.__2 = __2;
+exports._3 = _3;
+exports.__3 = __3;
+exports._4 = _4;
+exports.__4 = __4;
+exports._5 = _5;
+exports.__5 = __5;
+exports._6 = _6;
+exports.__6 = __6;
+exports._7 = _7;
+exports.__7 = __7;
+exports._8 = _8;
+exports.__8 = __8;
+
+var Caml_array = _interopRequireWildcard(require("./caml_array.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function app(_f, _args) {
+  while (true) {
+    var args = _args;
+    var f = _f;
+    var init_arity = f.length;
+    var arity = init_arity === 0 ? 1 : init_arity;
+    var len = args.length;
+    var d = arity - len | 0;
+
+    if (d === 0) {
+      return f.apply(null, args);
+    }
+
+    if (d >= 0) {
+      return function (f, args) {
+        return function (x) {
+          return app(f, args.concat([x]));
+        };
+      }(f, args);
+    }
+
+    _args = Caml_array.sub(args, arity, -d | 0);
+    _f = f.apply(null, Caml_array.sub(args, 0, arity));
+    continue;
+  }
+
+  ;
+}
+
+function _1(o, a0) {
+  var arity = o.length;
+
+  if (arity === 1) {
+    return o(a0);
+  } else {
+    switch (arity) {
+      case 1:
+        return o(a0);
+
+      case 2:
+        return function (param) {
+          return o(a0, param);
+        };
+
+      case 3:
+        return function (param, param$1) {
+          return o(a0, param, param$1);
+        };
+
+      case 4:
+        return function (param, param$1, param$2) {
+          return o(a0, param, param$1, param$2);
+        };
+
+      case 5:
+        return function (param, param$1, param$2, param$3) {
+          return o(a0, param, param$1, param$2, param$3);
+        };
+
+      case 6:
+        return function (param, param$1, param$2, param$3, param$4) {
+          return o(a0, param, param$1, param$2, param$3, param$4);
+        };
+
+      case 7:
+        return function (param, param$1, param$2, param$3, param$4, param$5) {
+          return o(a0, param, param$1, param$2, param$3, param$4, param$5);
+        };
+
+      default:
+        return app(o, [a0]);
+    }
+  }
+}
+
+function __1(o) {
+  var arity = o.length;
+
+  if (arity === 1) {
+    return o;
+  } else {
+    return function (a0) {
+      return _1(o, a0);
+    };
+  }
+}
+
+function _2(o, a0, a1) {
+  var arity = o.length;
+
+  if (arity === 2) {
+    return o(a0, a1);
+  } else {
+    switch (arity) {
+      case 1:
+        return app(o(a0), [a1]);
+
+      case 2:
+        return o(a0, a1);
+
+      case 3:
+        return function (param) {
+          return o(a0, a1, param);
+        };
+
+      case 4:
+        return function (param, param$1) {
+          return o(a0, a1, param, param$1);
+        };
+
+      case 5:
+        return function (param, param$1, param$2) {
+          return o(a0, a1, param, param$1, param$2);
+        };
+
+      case 6:
+        return function (param, param$1, param$2, param$3) {
+          return o(a0, a1, param, param$1, param$2, param$3);
+        };
+
+      case 7:
+        return function (param, param$1, param$2, param$3, param$4) {
+          return o(a0, a1, param, param$1, param$2, param$3, param$4);
+        };
+
+      default:
+        return app(o, [a0, a1]);
+    }
+  }
+}
+
+function __2(o) {
+  var arity = o.length;
+
+  if (arity === 2) {
+    return o;
+  } else {
+    return function (a0, a1) {
+      return _2(o, a0, a1);
+    };
+  }
+}
+
+function _3(o, a0, a1, a2) {
+  var arity = o.length;
+
+  if (arity === 3) {
+    return o(a0, a1, a2);
+  } else {
+    switch (arity) {
+      case 1:
+        return app(o(a0), [a1, a2]);
+
+      case 2:
+        return app(o(a0, a1), [a2]);
+
+      case 3:
+        return o(a0, a1, a2);
+
+      case 4:
+        return function (param) {
+          return o(a0, a1, a2, param);
+        };
+
+      case 5:
+        return function (param, param$1) {
+          return o(a0, a1, a2, param, param$1);
+        };
+
+      case 6:
+        return function (param, param$1, param$2) {
+          return o(a0, a1, a2, param, param$1, param$2);
+        };
+
+      case 7:
+        return function (param, param$1, param$2, param$3) {
+          return o(a0, a1, a2, param, param$1, param$2, param$3);
+        };
+
+      default:
+        return app(o, [a0, a1, a2]);
+    }
+  }
+}
+
+function __3(o) {
+  var arity = o.length;
+
+  if (arity === 3) {
+    return o;
+  } else {
+    return function (a0, a1, a2) {
+      return _3(o, a0, a1, a2);
+    };
+  }
+}
+
+function _4(o, a0, a1, a2, a3) {
+  var arity = o.length;
+
+  if (arity === 4) {
+    return o(a0, a1, a2, a3);
+  } else {
+    switch (arity) {
+      case 1:
+        return app(o(a0), [a1, a2, a3]);
+
+      case 2:
+        return app(o(a0, a1), [a2, a3]);
+
+      case 3:
+        return app(o(a0, a1, a2), [a3]);
+
+      case 4:
+        return o(a0, a1, a2, a3);
+
+      case 5:
+        return function (param) {
+          return o(a0, a1, a2, a3, param);
+        };
+
+      case 6:
+        return function (param, param$1) {
+          return o(a0, a1, a2, a3, param, param$1);
+        };
+
+      case 7:
+        return function (param, param$1, param$2) {
+          return o(a0, a1, a2, a3, param, param$1, param$2);
+        };
+
+      default:
+        return app(o, [a0, a1, a2, a3]);
+    }
+  }
+}
+
+function __4(o) {
+  var arity = o.length;
+
+  if (arity === 4) {
+    return o;
+  } else {
+    return function (a0, a1, a2, a3) {
+      return _4(o, a0, a1, a2, a3);
+    };
+  }
+}
+
+function _5(o, a0, a1, a2, a3, a4) {
+  var arity = o.length;
+
+  if (arity === 5) {
+    return o(a0, a1, a2, a3, a4);
+  } else {
+    switch (arity) {
+      case 1:
+        return app(o(a0), [a1, a2, a3, a4]);
+
+      case 2:
+        return app(o(a0, a1), [a2, a3, a4]);
+
+      case 3:
+        return app(o(a0, a1, a2), [a3, a4]);
+
+      case 4:
+        return app(o(a0, a1, a2, a3), [a4]);
+
+      case 5:
+        return o(a0, a1, a2, a3, a4);
+
+      case 6:
+        return function (param) {
+          return o(a0, a1, a2, a3, a4, param);
+        };
+
+      case 7:
+        return function (param, param$1) {
+          return o(a0, a1, a2, a3, a4, param, param$1);
+        };
+
+      default:
+        return app(o, [a0, a1, a2, a3, a4]);
+    }
+  }
+}
+
+function __5(o) {
+  var arity = o.length;
+
+  if (arity === 5) {
+    return o;
+  } else {
+    return function (a0, a1, a2, a3, a4) {
+      return _5(o, a0, a1, a2, a3, a4);
+    };
+  }
+}
+
+function _6(o, a0, a1, a2, a3, a4, a5) {
+  var arity = o.length;
+
+  if (arity === 6) {
+    return o(a0, a1, a2, a3, a4, a5);
+  } else {
+    switch (arity) {
+      case 1:
+        return app(o(a0), [a1, a2, a3, a4, a5]);
+
+      case 2:
+        return app(o(a0, a1), [a2, a3, a4, a5]);
+
+      case 3:
+        return app(o(a0, a1, a2), [a3, a4, a5]);
+
+      case 4:
+        return app(o(a0, a1, a2, a3), [a4, a5]);
+
+      case 5:
+        return app(o(a0, a1, a2, a3, a4), [a5]);
+
+      case 6:
+        return o(a0, a1, a2, a3, a4, a5);
+
+      case 7:
+        return function (param) {
+          return o(a0, a1, a2, a3, a4, a5, param);
+        };
+
+      default:
+        return app(o, [a0, a1, a2, a3, a4, a5]);
+    }
+  }
+}
+
+function __6(o) {
+  var arity = o.length;
+
+  if (arity === 6) {
+    return o;
+  } else {
+    return function (a0, a1, a2, a3, a4, a5) {
+      return _6(o, a0, a1, a2, a3, a4, a5);
+    };
+  }
+}
+
+function _7(o, a0, a1, a2, a3, a4, a5, a6) {
+  var arity = o.length;
+
+  if (arity === 7) {
+    return o(a0, a1, a2, a3, a4, a5, a6);
+  } else {
+    switch (arity) {
+      case 1:
+        return app(o(a0), [a1, a2, a3, a4, a5, a6]);
+
+      case 2:
+        return app(o(a0, a1), [a2, a3, a4, a5, a6]);
+
+      case 3:
+        return app(o(a0, a1, a2), [a3, a4, a5, a6]);
+
+      case 4:
+        return app(o(a0, a1, a2, a3), [a4, a5, a6]);
+
+      case 5:
+        return app(o(a0, a1, a2, a3, a4), [a5, a6]);
+
+      case 6:
+        return app(o(a0, a1, a2, a3, a4, a5), [a6]);
+
+      case 7:
+        return o(a0, a1, a2, a3, a4, a5, a6);
+
+      default:
+        return app(o, [a0, a1, a2, a3, a4, a5, a6]);
+    }
+  }
+}
+
+function __7(o) {
+  var arity = o.length;
+
+  if (arity === 7) {
+    return o;
+  } else {
+    return function (a0, a1, a2, a3, a4, a5, a6) {
+      return _7(o, a0, a1, a2, a3, a4, a5, a6);
+    };
+  }
+}
+
+function _8(o, a0, a1, a2, a3, a4, a5, a6, a7) {
+  var arity = o.length;
+
+  if (arity === 8) {
+    return o(a0, a1, a2, a3, a4, a5, a6, a7);
+  } else {
+    switch (arity) {
+      case 1:
+        return app(o(a0), [a1, a2, a3, a4, a5, a6, a7]);
+
+      case 2:
+        return app(o(a0, a1), [a2, a3, a4, a5, a6, a7]);
+
+      case 3:
+        return app(o(a0, a1, a2), [a3, a4, a5, a6, a7]);
+
+      case 4:
+        return app(o(a0, a1, a2, a3), [a4, a5, a6, a7]);
+
+      case 5:
+        return app(o(a0, a1, a2, a3, a4), [a5, a6, a7]);
+
+      case 6:
+        return app(o(a0, a1, a2, a3, a4, a5), [a6, a7]);
+
+      case 7:
+        return app(o(a0, a1, a2, a3, a4, a5, a6), [a7]);
+
+      default:
+        return app(o, [a0, a1, a2, a3, a4, a5, a6, a7]);
+    }
+  }
+}
+
+function __8(o) {
+  var arity = o.length;
+
+  if (arity === 8) {
+    return o;
+  } else {
+    return function (a0, a1, a2, a3, a4, a5, a6, a7) {
+      return _8(o, a0, a1, a2, a3, a4, a5, a6, a7);
+    };
+  }
+}
+/* No side effect */
+
+},{"./caml_array.js":11}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7426,7 +9110,85 @@ function map(f, source) {
 }
 /* No side effect */
 
-},{"./caml_option.js":9}],11:[function(require,module,exports){
+},{"./caml_option.js":12}],15:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.equal = equal;
+exports.min = exports.max = void 0;
+
+function equal(x, y) {
+  return x === y;
+}
+
+var max = 2147483647;
+exports.max = max;
+var min = -2147483648;
+/* No side effect */
+
+exports.min = min;
+
+},{}],16:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.unsafe_ceil = unsafe_ceil;
+exports.ceil_int = ceil_int;
+exports.unsafe_floor = unsafe_floor;
+exports.floor_int = floor_int;
+exports.random_int = random_int;
+exports.floor = exports.ceil = void 0;
+
+var Js_int = _interopRequireWildcard(require("./js_int.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function unsafe_ceil(prim) {
+  return Math.ceil(prim);
+}
+
+function ceil_int(f) {
+  if (f > Js_int.max) {
+    return Js_int.max;
+  } else if (f < Js_int.min) {
+    return Js_int.min;
+  } else {
+    return Math.ceil(f);
+  }
+}
+
+function unsafe_floor(prim) {
+  return Math.floor(prim);
+}
+
+function floor_int(f) {
+  if (f > Js_int.max) {
+    return Js_int.max;
+  } else if (f < Js_int.min) {
+    return Js_int.min;
+  } else {
+    return Math.floor(f);
+  }
+}
+
+function random_int(min, max) {
+  return floor_int(Math.random() * (max - min | 0)) + min | 0;
+}
+
+var ceil = ceil_int;
+exports.ceil = ceil;
+var floor = floor_int;
+/* No side effect */
+
+exports.floor = floor;
+
+},{"./js_int.js":15}],17:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler-tracing.development.js
@@ -7777,7 +9539,7 @@ exports.unstable_wrap = unstable_wrap;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":2}],12:[function(require,module,exports){
+},{"_process":2}],18:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler-tracing.production.min.js
  *
@@ -7788,7 +9550,7 @@ exports.unstable_wrap = unstable_wrap;
  */
 'use strict';var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_subscribe=function(){};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_unsubscribe=function(){};exports.unstable_wrap=function(a){return a};
 
-},{}],13:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler.development.js
@@ -8438,7 +10200,7 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":2}],14:[function(require,module,exports){
+},{"_process":2}],20:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler.production.min.js
  *
@@ -8460,7 +10222,7 @@ exports.unstable_next=function(a){switch(P){case 1:case 2:case 3:var b=3;break;d
 exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();"object"===typeof c&&null!==c?(c=c.delay,c="number"===typeof c&&0<c?d+c:d):c=d;switch(a){case 1:var e=-1;break;case 2:e=250;break;case 5:e=1073741823;break;case 4:e=1E4;break;default:e=5E3}e=c+e;a={id:N++,callback:b,priorityLevel:a,startTime:c,expirationTime:e,sortIndex:-1};c>d?(a.sortIndex=c,H(M,a),null===J(L)&&a===J(M)&&(S?h():S=!0,g(U,c-d))):(a.sortIndex=e,H(L,a),R||Q||(R=!0,f(V)));return a};
 exports.unstable_wrapCallback=function(a){var b=P;return function(){var c=P;P=b;try{return a.apply(this,arguments)}finally{P=c}}};
 
-},{}],15:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -8471,7 +10233,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":13,"./cjs/scheduler.production.min.js":14,"_process":2}],16:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":19,"./cjs/scheduler.production.min.js":20,"_process":2}],22:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -8482,7 +10244,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":11,"./cjs/scheduler-tracing.production.min.js":12,"_process":2}],17:[function(require,module,exports){
+},{"./cjs/scheduler-tracing.development.js":17,"./cjs/scheduler-tracing.production.min.js":18,"_process":2}],23:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8523,7 +10285,7 @@ var Locale = {
 
 exports.Locale = Locale;
 
-},{"react":8}],18:[function(require,module,exports){
+},{"react":8}],24:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8541,6 +10303,8 @@ var ReactDom = _interopRequireWildcard(require("react-dom"));
 var Context$Salem1692 = _interopRequireWildcard(require("./Context.bs.js"));
 
 var NightPage$Salem1692 = _interopRequireWildcard(require("./components/NightPage.bs.js"));
+
+var SetupPage$Salem1692 = _interopRequireWildcard(require("./components/SetupPage.bs.js"));
 
 var TitlePage$Salem1692 = _interopRequireWildcard(require("./components/TitlePage.bs.js"));
 
@@ -8563,6 +10327,8 @@ function getCurrentPage(state) {
     case
     /* Setup */
     1:
+      return React.createElement(SetupPage$Salem1692.make, {});
+
     case
     /* SetupPlayers */
     2:
@@ -8579,12 +10345,10 @@ function getCurrentPage(state) {
     case
     /* NightConstable */
     5:
-      break;
+      return React.createElement(NightPage$Salem1692.make, {
+        state: state
+      });
   }
-
-  return React.createElement(NightPage$Salem1692.make, {
-    phase: state.currentPage
-  });
 }
 
 function render(state) {
@@ -8604,43 +10368,42 @@ function render(state) {
 function init(param) {
   return {
     currentPage:
-    /* Title */
-    0,
-    currentPlayers: [],
+    /* NightWitch */
+    4,
+    currentPlayers: [{
+      name: "Helmi"
+    }, {
+      name: "Marco"
+    }, {
+      name: "Richella"
+    }, {
+      name: "Anja"
+    }, {
+      name: "Ren\xc3\xa9"
+    }, {
+      name: "Erwin"
+    }],
     currentLang:
-    /* ES_ES */
-    2,
+    /* NL_NL */
+    0,
     translator: function (param) {
       return Translator$Salem1692.getTranslator(
-      /* ES_ES */
-      2, param);
+      /* NL_NL */
+      0, param);
     }
   };
 }
 
 function run(param) {
-  return render({
-    currentPage:
-    /* Title */
-    0,
-    currentPlayers: [],
-    currentLang:
-    /* ES_ES */
-    2,
-    translator: function (param) {
-      return Translator$Salem1692.getTranslator(
-      /* ES_ES */
-      2, param);
-    }
-  });
+  return render(init(undefined));
 }
 /* react Not a pure module */
 
-},{"./Context.bs.js":17,"./components/NightPage.bs.js":23,"./components/TitlePage.bs.js":24,"./locale/Translator.bs.js":27,"react":8,"react-dom":5}],19:[function(require,module,exports){
+},{"./Context.bs.js":23,"./components/NightPage.bs.js":29,"./components/SetupPage.bs.js":31,"./components/TitlePage.bs.js":32,"./locale/Translator.bs.js":35,"react":8,"react-dom":5}],25:[function(require,module,exports){
 // Generated by ReScript, PLEASE EDIT WITH CARE
 /* This output is empty. Its source's type definitions, externals and/or unused code got optimized away. */
 
-},{}],20:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 "use strict";
 
 var Main = _interopRequireWildcard(require("./Main.bs"));
@@ -8665,7 +10428,7 @@ class App {
 
 window.App = App;
 
-},{"./Main.bs":18}],21:[function(require,module,exports){
+},{"./Main.bs":24}],27:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8675,6 +10438,8 @@ exports.make = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
+var Context$Salem1692 = _interopRequireWildcard(require("../Context.bs.js"));
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -8682,78 +10447,101 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 // Generated by ReScript, PLEASE EDIT WITH CARE
 function $$Audio(Props) {
   var track = Props.track;
-  var directory = "audio/nl_NL/";
+  var locale = React.useContext(Context$Salem1692.Locale.context);
   var tmp;
+
+  switch (locale) {
+    case
+    /* NL_NL */
+    0:
+      tmp = "nl_NL/";
+      break;
+
+    case
+    /* EN_US */
+    1:
+      tmp = "en_US/";
+      break;
+
+    case
+    /* ES_ES */
+    2:
+      tmp = "es_ES/";
+      break;
+  }
+
+  var directory = "audio/" + tmp;
+  var tmp$1;
 
   switch (track) {
     case
     /* TownGoToSleep */
     0:
-      tmp = "town-go-to-sleep.mp3";
+      tmp$1 = "town-go-to-sleep.mp3";
       break;
 
     case
     /* WitchWakeUp */
     1:
-      tmp = "witch-wake-up.mp3";
+      tmp$1 = "witch-wake-up.mp3";
       break;
 
     case
     /* WitchesWakeUp */
     2:
-      tmp = "witches-wake-up.mp3";
+      tmp$1 = "witches-wake-up.mp3";
       break;
 
     case
     /* WitchDecideCat */
     3:
-      tmp = "witch-decide-cat.mp3";
+      tmp$1 = "witch-decide-cat.mp3";
       break;
 
     case
     /* WitchesDecideCat */
     4:
-      tmp = "witches-decide-cat.mp3";
+      tmp$1 = "witches-decide-cat.mp3";
       break;
 
     case
     /* WitchesDecideMurder */
     5:
-      tmp = "witches-decide-murder.mp3";
+      tmp$1 = "witches-decide-murder.mp3";
       break;
 
     case
     /* WitchGoToSleep */
     6:
-      tmp = "witch-go-to-sleep.mp3";
+      tmp$1 = "witch-go-to-sleep.mp3";
       break;
 
     case
     /* WitchesGoToSleep */
     7:
-      tmp = "witches-go-to-sleep.mp3";
+      tmp$1 = "witches-go-to-sleep.mp3";
       break;
 
     case
     /* ConstableWakeUp */
     8:
-      tmp = "constable-wake-up.mp3";
+      tmp$1 = "constable-wake-up.mp3";
       break;
 
     case
     /* ConstableGoToSleep */
     9:
-      tmp = "constable-go-to-sleep.mp3";
+      tmp$1 = "constable-go-to-sleep.mp3";
       break;
 
     case
     /* TownWakeUp */
     10:
-      tmp = "town-wake-up.mp3";
+      tmp$1 = "town-wake-up.mp3";
       break;
   }
 
-  var src = directory + tmp;
+  var src = directory + tmp$1;
   return React.createElement("audio", {
     src: src
   });
@@ -8764,7 +10552,7 @@ var make = $$Audio;
 
 exports.make = make;
 
-},{"react":8}],22:[function(require,module,exports){
+},{"../Context.bs.js":23,"react":8}],28:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8793,7 +10581,7 @@ var make = Button;
 
 exports.make = make;
 
-},{"react":8}],23:[function(require,module,exports){
+},{"react":8}],29:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8803,21 +10591,31 @@ exports.make = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
+var Context$Salem1692 = _interopRequireWildcard(require("../Context.bs.js"));
+
+var PlayerList$Salem1692 = _interopRequireWildcard(require("./PlayerList.bs.js"));
+
+var Translator$Salem1692 = _interopRequireWildcard(require("../locale/Translator.bs.js"));
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
 function NightPage(Props) {
-  var phase = Props.phase;
-  var title = phase !== 4 ? phase >= 5 ? "The constable" : "Night" : "The witches";
+  var state = Props.state;
+  var locale = React.useContext(Context$Salem1692.Locale.context);
+  var match = state.currentPage;
+  var title = match !== 4 ? match >= 5 ? Translator$Salem1692.getTranslator(locale, "The constable") : "" : Translator$Salem1692.getTranslator(locale, "The witches");
   return React.createElement("div", {
     className: "page",
     id: "night-page"
   }, React.createElement("div", {
-    className: "page",
+    className: "page flex-vertical",
     id: "night-subpage"
-  }, title));
+  }, React.createElement("h1", undefined, Translator$Salem1692.getTranslator(locale, "Night")), React.createElement("div", undefined, Translator$Salem1692.getTranslator(locale, title)), React.createElement(PlayerList$Salem1692.make, {
+    state: state
+  })));
 }
 
 var make = NightPage;
@@ -8825,7 +10623,82 @@ var make = NightPage;
 
 exports.make = make;
 
-},{"react":8}],24:[function(require,module,exports){
+},{"../Context.bs.js":23,"../locale/Translator.bs.js":35,"./PlayerList.bs.js":30,"react":8}],30:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.make = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+var Belt_Array = _interopRequireWildcard(require("rescript/lib/es6/belt_Array.js"));
+
+var Button$Salem1692 = _interopRequireWildcard(require("./Button.bs.js"));
+
+var Context$Salem1692 = _interopRequireWildcard(require("../Context.bs.js"));
+
+var Translator$Salem1692 = _interopRequireWildcard(require("../locale/Translator.bs.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+// Generated by ReScript, PLEASE EDIT WITH CARE
+function PlayerList(Props) {
+  var state = Props.state;
+  var buttons = Belt_Array.map(state.currentPlayers, function (player) {
+    return React.createElement(Button$Salem1692.make, {
+      label: player.name,
+      key: player.name
+    });
+  });
+  var locale = React.useContext(Context$Salem1692.Locale.context);
+  return React.createElement("div", {
+    className: "flex-vertical",
+    id: "player-list"
+  }, Translator$Salem1692.getTranslator(locale, "Players"), buttons);
+}
+
+var make = PlayerList;
+/* react Not a pure module */
+
+exports.make = make;
+
+},{"../Context.bs.js":23,"../locale/Translator.bs.js":35,"./Button.bs.js":28,"react":8,"rescript/lib/es6/belt_Array.js":9}],31:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.make = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+var Context$Salem1692 = _interopRequireWildcard(require("../Context.bs.js"));
+
+var Translator$Salem1692 = _interopRequireWildcard(require("../locale/Translator.bs.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+// Generated by ReScript, PLEASE EDIT WITH CARE
+function SetupPage(Props) {
+  var locale = React.useContext(Context$Salem1692.Locale.context);
+  return React.createElement("div", {
+    className: "page flex-vertical",
+    id: "setup-page"
+  }, React.createElement("div", undefined, Translator$Salem1692.getTranslator(locale, "Setup")), React.createElement("div", undefined, "   "), React.createElement("div", undefined, Translator$Salem1692.getTranslator(locale, "Language")));
+}
+
+var make = SetupPage;
+/* react Not a pure module */
+
+exports.make = make;
+
+},{"../Context.bs.js":23,"../locale/Translator.bs.js":35,"react":8}],32:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8849,7 +10722,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function TitlePage(Props) {
   var locale = React.useContext(Context$Salem1692.Locale.context);
   return React.createElement("div", {
-    className: "page",
+    className: "page flex-vertical",
     id: "title-page"
   }, React.createElement(Button$Salem1692.make, {
     label: Translator$Salem1692.getTranslator(locale, "New Game")
@@ -8866,7 +10739,7 @@ var make = TitlePage;
 
 exports.make = make;
 
-},{"../Context.bs.js":17,"../locale/Translator.bs.js":27,"./Button.bs.js":22,"react":8}],25:[function(require,module,exports){
+},{"../Context.bs.js":23,"../locale/Translator.bs.js":35,"./Button.bs.js":28,"react":8}],33:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8881,12 +10754,12 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-var table = Js_dict.fromArray([["New Game", "Nuevo juego"], ["Setup", "Configuraci\xc3\xb3n"], ["Exit", "Cerrar"], ["Players", "Jugadores"], ["How many witches?", "\xc2\xbfCuantas brujas?"], ["Language", "Idioma"], ["English", "English"], ["Nederlands", "Nederlands"], ["Espa\xc3\xb1ol", "Espa\xc3\xb1ol"], ["Back", "Regresar"], ["Credits", "Cr\xc3\xa9ditos"], ["The witches", "Las brujas"], ["Choose a victim:", "Elige una v\xc3\xadctima:"], ["The constable", "El agente jefe"], ["Choose someone to protect:", "Elige a qui\xc3\xa9n quieres proteger:"], ["Are you sure?", "Estas seguro?"], ["Yes", "S\xc3\xad"], ["No", "No"], ["Decide whether you want to confess", "Decide si quieres confesar"], ["Reveal victim", "Revelar v\xc3\xadctima"]]);
+var table = Js_dict.fromArray([["New Game", "Nuevo juego"], ["Setup", "Configuraci\xc3\xb3n"], ["Exit", "Cerrar"], ["Players", "Jugadores"], ["How many witches?", "\xc2\xbfCuantas brujas?"], ["Language", "Idioma"], ["English", "English"], ["Nederlands", "Nederlands"], ["Espa\xc3\xb1ol", "Espa\xc3\xb1ol"], ["Back", "Regresar"], ["Credits", "Cr\xc3\xa9ditos"], ["Night", "La noche"], ["The witches", "Las brujas"], ["Choose a victim:", "Elige una v\xc3\xadctima:"], ["The constable", "El agente jefe"], ["Choose someone to protect:", "Elige a qui\xc3\xa9n quieres proteger:"], ["Are you sure?", "Estas seguro?"], ["Yes", "S\xc3\xad"], ["No", "No"], ["Decide whether you want to confess", "Decide si quieres confesar"], ["Reveal victim", "Revelar v\xc3\xadctima"]]);
 /* table Not a pure module */
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":10}],26:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":14}],34:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8901,12 +10774,12 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-var table = Js_dict.fromArray([["New Game", "Nieuw spel"], ["Setup", "Instellingen"], ["Exit", "Afsluiten"], ["Players", "Spelers"], ["How many witches?", "Hoeveel heksen?"], ["Language", "Taal"], ["English", "English"], ["Nederlands", "Nederlands"], ["Back", "Terug"], ["Credits", "Credits"], ["The witches", "De heksen"], ["Choose a victim:", "Kies een slachtoffer:"], ["The constable", "De constable"], ["Choose someone to protect:", "Kies wie beschermd moet worden:"], ["Are you sure?", "Weet je het zeker?"], ["Yes", "Ja"], ["No", "Nee"], ["Decide whether you want to confess", "Beslis of je wilt bekennen"], ["Reveal victim", "Slachtoffer onthullen"]]);
+var table = Js_dict.fromArray([["New Game", "Nieuw spel"], ["Setup", "Instellingen"], ["Exit", "Afsluiten"], ["Players", "Spelers"], ["How many witches?", "Hoeveel heksen?"], ["Language", "Taal"], ["English", "English"], ["Nederlands", "Nederlands"], ["Back", "Terug"], ["Credits", "Credits"], ["Night", "De nacht"], ["The witches", "De heksen"], ["Choose a victim:", "Kies een slachtoffer:"], ["The constable", "De constable"], ["Choose someone to protect:", "Kies wie beschermd moet worden:"], ["Are you sure?", "Weet je het zeker?"], ["Yes", "Ja"], ["No", "Nee"], ["Decide whether you want to confess", "Beslis of je wilt bekennen"], ["Reveal victim", "Slachtoffer onthullen"]]);
 /* table Not a pure module */
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":10}],27:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":14}],35:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8956,4 +10829,4 @@ function getTranslator(language, message) {
 }
 /* ES_ES-Salem1692 Not a pure module */
 
-},{"./ES_ES.bs.js":25,"./NL_NL.bs.js":26,"rescript/lib/es6/js_dict.js":10}]},{},[27,25,26,19,23,22,24,21,18,20,17]);
+},{"./ES_ES.bs.js":33,"./NL_NL.bs.js":34,"rescript/lib/es6/js_dict.js":14}]},{},[35,33,34,25,29,30,31,28,32,27,24,26,23]);
