@@ -10328,8 +10328,8 @@ function render(state) {
 function init(param) {
   return {
     currentPage:
-    /* Setup */
-    1,
+    /* NightWitch */
+    4,
     currentPlayers: [{
       name: "Helmi"
     }, {
@@ -10349,8 +10349,8 @@ function init(param) {
 function run(param) {
   return render({
     currentPage:
-    /* Setup */
-    1,
+    /* NightWitch */
+    4,
     currentPlayers: [{
       name: "Helmi"
     }, {
@@ -10778,7 +10778,7 @@ function SetupPage(Props) {
   return React.createElement("div", {
     className: "page flex-vertical",
     id: "setup-page"
-  }, React.createElement("div", undefined, Translator$Salem1692.getTranslator(language, "Setup")), React.createElement(LanguageList$Salem1692.make, {}));
+  }, React.createElement("h1", undefined, Translator$Salem1692.getTranslator(language, "Setup")), React.createElement(LanguageList$Salem1692.make, {}));
 }
 
 var make = SetupPage;
