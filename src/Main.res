@@ -39,7 +39,7 @@ let render = (~state: state): state => {
 
 let init = (): state => {
     {
-        currentPage: Setup,
+        currentPage: NightWitch,
         currentPlayers: [
             { name: "Helmi" },
             { name: "Marco" },
