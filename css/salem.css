@@ -48,6 +48,8 @@ body {
     margin-bottom: 20px;
     font-family: inherit;
     font-size: 26px;
+    background-color: #eac672;
+    background-repeat: no-repeat;
 }
 
 .flex-vertical {
@@ -85,6 +87,21 @@ body {
 #setup-page {
     background: url(../images/overlay-cog.png) -290px 80px no-repeat;
     padding-top: 20px;
+}
+
+#setup-page button.flag {
+    padding-left: 24px;
+    background-position: 20px center;
+}
+
+#setup-page button.flag_nl {
+    background-image: url(../images/flag_nl.gif);
+}
+#setup-page button.flag_us {
+    background-image: url(../images/flag_us.gif);
+}
+#setup-page button.flag_es {
+    background-image: url(../images/flag_es.gif);
 }
 
 /** ****************************************************************************
