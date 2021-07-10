@@ -2,6 +2,10 @@
 /** ****************************************************************************
  * Main
  *
+ * ReScript            : https://rescript-lang.org/docs/manual/latest/overview
+ * ReScript-React      : https://rescript-lang.org/docs/react/latest/introduction
+ * ReactJS             : https://reactjs.org/docs/getting-started.html
+ *
  * React               : Bindings to React
  * ReactDOM            : Bindings to the ReactDOM
  * ReactDOMServer      : Bindings to the ReactDOMServer
@@ -14,6 +18,18 @@ open Types
 
 let initialLanguage = NL_NL
 
+let initialState = {
+    currentPage: NightWitch,
+    currentPlayers: [
+        { name: "Helmi" },
+        { name: "Marco" },
+        { name: "Richella" },
+        { name: "Anja" },
+        { name: `René` },
+        { name: "Erwin" },
+    ],
+}
+
 let getCurrentPage = (state: state): React.element => {
     switch state.currentPage {
         | Title          => <TitlePage />
@@ -25,33 +41,16 @@ let getCurrentPage = (state: state): React.element => {
     }
 }
 
-let render = (~state: state): state => {
-    let currentPageInContext =
-        <LanguageContext.Provider value=initialLanguage>
-            {getCurrentPage(state)}
-        </LanguageContext.Provider>
+let getMain = (~state: state) => {
+    <LanguageContext.Provider value=initialLanguage>
+        {getCurrentPage(state)}
+    </LanguageContext.Provider>
+}
+
+let run = () => {
     switch (ReactDOM.querySelector("#root")) {
-        | Some(root) => ReactDOM.render(currentPageInContext, root)
+        | Some(root) => ReactDOM.render(getMain(~state=initialState), root)
         | None => ()
     }
-    state
-}
-
-let init = (): state => {
-    {
-        currentPage: NightWitch,
-        currentPlayers: [
-            { name: "Helmi" },
-            { name: "Marco" },
-            { name: "Richella" },
-            { name: "Anja" },
-            { name: `René` },
-            { name: "Erwin" },
-        ],
-    }
-}
-
-let run = (): state => {
-    render(~state=init())
 }
 
