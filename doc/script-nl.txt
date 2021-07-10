@@ -23,7 +23,7 @@ Z. Het wordt ochtend. Een haan kraait, iedereen wordt wakker en doet de ogen ope
 ============================================================================
 
 [ other nights ]
-A. De nacht valt. Iedereen gaat slapen en doet de ogen dicht.
+A. De nacht valt. Het dorp gaat slapen; iedereen doet de ogen dicht.
 ...
 D. Als iedereen de ogen dicht heeft, worden de heksen wakker.
    De heksen openen de ogen en maken oogcontact zodat ze weten wie ze zijn.
@@ -50,7 +50,7 @@ Z. Het wordt ochtend. De haan kraait, iedereen wordt wakker en doet de ogen open
 ============================================================================
 
 [ night without constable ]
-A. De nacht valt. Iedereen gaat slapen en doet de ogen dicht.
+A. De nacht valt. Het dorp gaat slapen; iedereen doet de ogen dicht.
 ...
 D. Als iedereen de ogen dicht heeft, worden de heksen wakker.
    De heksen openen de ogen en maken oogcontact zodat ze weten wie ze zijn.

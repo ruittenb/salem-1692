@@ -17,7 +17,7 @@ H. The witch has made her choice and closes her eyes.
 ===
 J. The witches have made their choice and close their eyes.
 ...
-Z. The dawn is breaking. A rooster crows; the town wakes up and everybody opens their eyes.
+Z. The dawn is breaking. A rooster crows; the town wakes up, everybody please open your eyes.
 [ reveal ]
 
 ============================================================================
