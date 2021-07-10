@@ -1,20 +1,11 @@
 
-/**
- * ReScript      : https://rescript-lang.org/docs/manual/latest/overview
- * ReScript-React: https://rescript-lang.org/docs/react/latest/introduction
- * ReactJS       : https://reactjs.org/docs/getting-started.html
+/** ****************************************************************************
+ * App
+ *
+ * Bridges ReScript to JavaScript
  */
 
 import * as Main from './Main.bs';
 
-class App {
-    constructor() {
-    }
-
-    run() {
-        Main.run()
-    }
-}
-
-window.App = App;
+window.Main = Main;
 

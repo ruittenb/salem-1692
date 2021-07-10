@@ -2,6 +2,10 @@
 /** ****************************************************************************
  * Main
  *
+ * ReScript            : https://rescript-lang.org/docs/manual/latest/overview
+ * ReScript-React      : https://rescript-lang.org/docs/react/latest/introduction
+ * ReactJS             : https://reactjs.org/docs/getting-started.html
+ *
  * React               : Bindings to React
  * ReactDOM            : Bindings to the ReactDOM
  * ReactDOMServer      : Bindings to the ReactDOMServer
@@ -12,46 +16,24 @@
 
 open Types
 
-let initialLanguage = NL_NL
-
-let getCurrentPage = (state: state): React.element => {
-    switch state.currentPage {
-        | Title          => <TitlePage />
-        | Setup          => <SetupPage />
-        | SetupPlayers   => <div> {React.string("Players")} </div>
-        | Turn           => <div> {React.string("Turn")}    </div>
-        | NightWitch     => <NightPage state={state} />
-        | NightConstable => <NightPage state={state} />
-    }
+let initialState: state = {
+    currentPage: Setup,
+    currentPlayers: [
+        { name: "Helmi" },
+        { name: "Marco" },
+        { name: "Richella" },
+        { name: "Anja" },
+        { name: `René` },
+        { name: "Erwin" },
+    ],
 }
 
-let render = (~state: state): state => {
-    let currentPageInContext =
-        <LanguageContext.Provider value=initialLanguage>
-            {getCurrentPage(state)}
-        </LanguageContext.Provider>
-    switch (ReactDOM.querySelector("#root")) {
-        | Some(root) => ReactDOM.render(currentPageInContext, root)
+let run = (elementId: string) => {
+    switch (ReactDOM.querySelector("#" ++ elementId)) {
+        | Some(rootElement) => ReactDOM.render(
+            <MainPage state=initialState />,
+            rootElement)
         | None => ()
     }
-    state
-}
-
-let init = (): state => {
-    {
-        currentPage: NightWitch,
-        currentPlayers: [
-            { name: "Helmi" },
-            { name: "Marco" },
-            { name: "Richella" },
-            { name: "Anja" },
-            { name: `René` },
-            { name: "Erwin" },
-        ],
-    }
-}
-
-let run = (): state => {
-    render(~state=init())
 }
 
