@@ -17,8 +17,8 @@ open Types
 let make = (
     ~state: state
 ): React.element => {
-    let locale = React.useContext(LocaleContext.context)
-    let t = Translator.getTranslator(locale)
+    let language = React.useContext(LanguageContext.context)
+    let t = Translator.getTranslator(language)
     let title: string = switch state.currentPage {
         | NightWitch     => t("The witches")
         | NightConstable => t("The constable")

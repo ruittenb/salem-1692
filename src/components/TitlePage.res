@@ -5,8 +5,8 @@
 
 @react.component
 let make = (): React.element => {
-    let locale = React.useContext(LocaleContext.context)
-    let t = Translator.getTranslator(locale)
+    let language = React.useContext(LanguageContext.context)
+    let t = Translator.getTranslator(language)
     <div id="title-page" className="page flex-vertical">
         <Button label={t("New Game")} />
         <Button label={t("Setup"   )} />

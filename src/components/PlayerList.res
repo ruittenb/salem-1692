@@ -11,11 +11,11 @@ let make = (~state: state): React.element => {
         ->Belt.Array.map((player) => {
             <Button key={player.name} label={player.name} />
         })
-    let locale = React.useContext(LocaleContext.context)
-    let t = Translator.getTranslator(locale)
-    <div id="player-list" className="flex-vertical">
+    let language = React.useContext(LanguageContext.context)
+    let t = Translator.getTranslator(language)
+    <>
         {React.string(t("Players"))}
         {React.array(buttons)}
-    </div>
+    </>
 }
 
