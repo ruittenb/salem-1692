@@ -29,7 +29,7 @@ body {
 }
 
 #root {
-    background: center / cover no-repeat url(../images/background.png);
+    background: url(../images/background.png) center / cover no-repeat;
     width: 100%;
     height: 100%;
 }
@@ -64,7 +64,7 @@ body {
  */
 
 #title-page {
-    background: center / contain no-repeat url(../images/overlay-title.png);
+    background: url(../images/overlay-title.png) center / contain no-repeat;
     justify-content: flex-end; /* prio over flex-vertical */
 }
 
@@ -85,7 +85,7 @@ body {
  */
 
 #setup-page {
-    background: url(../images/overlay-cog.png) -290px 80px no-repeat;
+    background: url(../images/overlay-gear.png) -190px 120px no-repeat;
     padding-top: 20px;
 }
 
