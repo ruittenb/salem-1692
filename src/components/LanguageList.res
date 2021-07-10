@@ -14,7 +14,7 @@ let make = (~state: state): React.element => {
             let label = switch lang {
                 | NL_NL => t("Nederlands")
                 | EN_US => t("English")
-                | ES_ES => t("Español")
+                | ES_ES => t(`Español`)
             }
             <Button key={label} label={label} />
         })

@@ -38,13 +38,13 @@ let render = (~state: state): state => {
 let init = (): state => {
     {
         currentLang: EN_US,
-        currentPage: NightWitch,
+        currentPage: Setup,
         currentPlayers: [
             { name: "Helmi" },
             { name: "Marco" },
             { name: "Richella" },
             { name: "Anja" },
-            { name: "René" },
+            { name: `René` },
             { name: "Erwin" },
         ],
     }
