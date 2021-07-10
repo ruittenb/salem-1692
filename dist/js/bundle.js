@@ -10279,8 +10279,8 @@ var initialState_currentPlayers = [{
 }];
 var initialState = {
   currentPage:
-  /* Setup */
-  1,
+  /* Title */
+  0,
   currentPlayers: initialState_currentPlayers
 };
 exports.initialState = initialState;
