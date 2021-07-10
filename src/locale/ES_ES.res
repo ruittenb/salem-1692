@@ -19,6 +19,9 @@ let table = Js.Dict.fromArray([
     ("Credits", "Créditos"),
     // Night
     ("Night", "La noche"),
+    ("First night", "Primera noche"),
+    ("Night with constable", "Noche con agente jefe"),
+    ("Night without constable", "Noche sin agente jefe"),
     ("The witches", "Las brujas"),
     ("Choose a victim:", "Elige una víctima:"),
     ("The constable", "El agente jefe"),

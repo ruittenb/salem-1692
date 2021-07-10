@@ -41,6 +41,5 @@ type state = {
     currentPage    : page,
     currentPlayers : array<player>,
     currentLang    : language,
-    translator     : string => string,
 }
 

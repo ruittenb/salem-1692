@@ -47,6 +47,22 @@ N. The constable has made his choice and closes his eyes.
 Z. The dawn is breaking. A rooster crows; the town wakes up, everybody please open your eyes.
 [ reveal ]
 
+============================================================================
 
+[ night without constable ]
+A. The night is falling. The town goes to sleep; everybody please close your eyes.
+...
+D. Once all eyes are closed, the witches wake up.
+   The witches open their eyes and make eye contact to acknowledge each other.
+G. With gestures only and without making a sound, they decide which
+   player will be killed. They may choose one of themselves.
+---
+[ choice ]
+[ confirm ]
+---
+J. The witches have made their choice and close their eyes.
+...
+Z. The dawn is breaking. A rooster crows; the town wakes up, everybody please open your eyes.
+[ reveal ]
 
 

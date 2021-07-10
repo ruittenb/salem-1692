@@ -25,9 +25,9 @@ let getCurrentPage = (state: state): React.element => {
 
 let render = (~state: state): state => {
     let currentPageInContext =
-        <Context.Locale.Provider value=state.currentLang>
+        <LocaleContext.Provider value=state.currentLang>
             {getCurrentPage(state)}
-        </Context.Locale.Provider>
+        </LocaleContext.Provider>
     switch (ReactDOM.querySelector("#root")) {
         | Some(root) => ReactDOM.render(currentPageInContext, root)
         | None => ()
@@ -36,9 +36,9 @@ let render = (~state: state): state => {
 }
 
 let init = (): state => {
-    let currentLang = NL_NL
     {
-        currentPage: NightWitch,
+        currentLang: EN_US,
+        currentPage: Title,
         currentPlayers: [
             { name: "Helmi" },
             { name: "Marco" },
@@ -47,8 +47,6 @@ let init = (): state => {
             { name: "René" },
             { name: "Erwin" },
         ],
-        currentLang,
-        translator: Translator.getTranslator(currentLang)
     }
 }
 

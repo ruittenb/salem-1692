@@ -11,7 +11,7 @@ open Types
 let make = (
     ~track: track,
 ): React.element => {
-    let locale = React.useContext(Context.Locale.context)
+    let locale = React.useContext(LocaleContext.context)
     let directory = "audio/" ++ switch locale {
         | NL_NL => "nl_NL/"
         | EN_US => "en_US/"
@@ -30,7 +30,7 @@ let make = (
         | ConstableGoToSleep  => "constable-go-to-sleep.mp3"
         | TownWakeUp          => "town-wake-up.mp3"
     }
-    <audio src>
+    <audio src autoPlay=true>
     </audio>
 }
 
