@@ -6,20 +6,20 @@
 open Types
 
 @react.component
-let make = (~state: state): React.element => {
-    let language = React.useContext(LanguageContext.context)
-    let t = Translator.getTranslator(language)
+let make = (): React.element => {
+    let currentLanguage = React.useContext(LanguageContext.context)
+    let t = Translator.getTranslator(currentLanguage)
     let buttons = [ NL_NL, EN_US, ES_ES ]
         ->Belt.Array.map((lang) => {
-            let label = switch lang {
-                | NL_NL => t("Nederlands")
-                | EN_US => t("English")
-                | ES_ES => t(`Español`)
+            let (className, label) = switch lang {
+                | NL_NL => ("flag flag_nl", t("Nederlands"))
+                | EN_US => ("flag flag_us", t("English"))
+                | ES_ES => ("flag flag_es", t(`Español`))
             }
-            <Button key={label} label={label} />
+            <Button key={label} label className />
         })
     <>
-        {React.string(t("Choose language"))}
+        <div> {React.string(t("Language"))} </div>
         {React.array(buttons)}
     </>
 }

@@ -12,10 +12,12 @@
 
 open Types
 
+let initialLanguage = NL_NL
+
 let getCurrentPage = (state: state): React.element => {
     switch state.currentPage {
         | Title          => <TitlePage />
-        | Setup          => <SetupPage state={state} />
+        | Setup          => <SetupPage />
         | SetupPlayers   => <div> {React.string("Players")} </div>
         | Turn           => <div> {React.string("Turn")}    </div>
         | NightWitch     => <NightPage state={state} />
@@ -25,7 +27,7 @@ let getCurrentPage = (state: state): React.element => {
 
 let render = (~state: state): state => {
     let currentPageInContext =
-        <LanguageContext.Provider value=state.currentLang>
+        <LanguageContext.Provider value=initialLanguage>
             {getCurrentPage(state)}
         </LanguageContext.Provider>
     switch (ReactDOM.querySelector("#root")) {
@@ -37,7 +39,6 @@ let render = (~state: state): state => {
 
 let init = (): state => {
     {
-        currentLang: EN_US,
         currentPage: Setup,
         currentPlayers: [
             { name: "Helmi" },

@@ -5,7 +5,7 @@
 
 open Types
 
-let context = React.createContext(NL_NL)
+let context = React.createContext(EN_US) // default value
 
 module Provider = {
     let provider = React.Context.provider(context)
