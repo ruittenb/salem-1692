@@ -95,13 +95,22 @@ body {
 }
 
 #setup-page button.flag_nl {
-    background-image: url(../images/flag_nl.gif);
+    background-image: url(../images/flag_nl.png);
+}
+#setup-page button.flag_de {
+    background-image: url(../images/flag_de.png);
 }
 #setup-page button.flag_us {
-    background-image: url(../images/flag_us.gif);
+    background-image: url(../images/flag_us.png);
+}
+#setup-page button.flag_fr {
+    background-image: url(../images/flag_fr.png);
 }
 #setup-page button.flag_es {
-    background-image: url(../images/flag_es.gif);
+    background-image: url(../images/flag_es.png);
+}
+#setup-page button.flag_it {
+    background-image: url(../images/flag_it.png);
 }
 
 /** ****************************************************************************

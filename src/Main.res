@@ -16,10 +16,8 @@
 
 open Types
 
-let initialLanguage = NL_NL
-
-let initialState = {
-    currentPage: NightWitch,
+let initialState: state = {
+    currentPage: Setup,
     currentPlayers: [
         { name: "Helmi" },
         { name: "Marco" },
@@ -30,26 +28,11 @@ let initialState = {
     ],
 }
 
-let getCurrentPage = (state: state): React.element => {
-    switch state.currentPage {
-        | Title          => <TitlePage />
-        | Setup          => <SetupPage />
-        | SetupPlayers   => <div> {React.string("Players")} </div>
-        | Turn           => <div> {React.string("Turn")}    </div>
-        | NightWitch     => <NightPage state={state} />
-        | NightConstable => <NightPage state={state} />
-    }
-}
-
-let getMain = (~state: state) => {
-    <LanguageContext.Provider value=initialLanguage>
-        {getCurrentPage(state)}
-    </LanguageContext.Provider>
-}
-
-let run = () => {
-    switch (ReactDOM.querySelector("#root")) {
-        | Some(root) => ReactDOM.render(getMain(~state=initialState), root)
+let run = (elementId: string) => {
+    switch (ReactDOM.querySelector("#" ++ elementId)) {
+        | Some(rootElement) => ReactDOM.render(
+            <MainPage state=initialState />,
+            rootElement)
         | None => ()
     }
 }
