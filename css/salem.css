@@ -42,6 +42,14 @@ body {
     height: 100%;
 }
 
+.page button {
+    width: 50%;
+    height: 40px;
+    margin-bottom: 20px;
+    font-family: inherit;
+    font-size: 26px;
+}
+
 .flex-vertical {
     display: flex;
     justify-content: flex-start;
@@ -96,18 +104,5 @@ body {
 #night-subpage {
     background: top / contain no-repeat url(../images/overlay-night.png);
     padding-top: 20px;
-}
-
-#night-page button {
-    width: 50%;
-    height: 40px;
-    margin-bottom: 20px;
-    font-family: inherit;
-    font-size: 26px;
-}
-
-#player-list {
-    width: 100%;
-    height: 100%;
 }
 
