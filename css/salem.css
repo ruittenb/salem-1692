@@ -25,7 +25,7 @@ body {
     width: 100vw;
     overflow: hidden;
     font-family: CaslonAntique, 'Times New Roman', Times, serif;
-    font-size: 32px;
+    font-size: 28px;
 }
 
 h1 {
@@ -33,10 +33,11 @@ h1 {
     font-weight: bold;
 }
 
-#root {
-    background: url(../images/background.png) center / cover no-repeat;
-    width: 100%;
-    height: 100%;
+dt {
+    font-weight: bold;
+}
+dd {
+    margin-left: 20px;
 }
 
 .flex-vertical {
@@ -50,6 +51,18 @@ h1 {
     height: 25px;
 }
 
+#root {
+    background: url(../images/background.png) center / cover no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+div.text-padding {
+    padding: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+}
+
 .page {
     position: absolute;
     left: 0;
@@ -61,7 +74,7 @@ h1 {
 .page button {
     width: 50%;
     height: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 32px;
     font-family: inherit;
     font-size: 26px;
     background-color: #eac672;
@@ -73,39 +86,18 @@ h1 {
     background-position: 20px center;
 }
 
-.page button.flag_nl {
-    background-image: url(../images/flag_nl.png);
-}
-.page button.flag_de {
-    background-image: url(../images/flag_de.png);
-}
-.page button.flag_us {
-    background-image: url(../images/flag_us.png);
-}
-.page button.flag_fr {
-    background-image: url(../images/flag_fr.png);
-}
-.page button.flag_es {
-    background-image: url(../images/flag_es.png);
-}
-.page button.flag_it {
-    background-image: url(../images/flag_it.png);
-}
-.page button.icon_pawn {
-    background-image: url(../images/icon_pawn.png);
-}
-.page button.icon_gear {
-    background-image: url(../images/icon_gear.png);
-}
-.page button.icon_lang {
-    background-image: url(../images/icon_lang.png);
-}
-.page button.icon_back {
-    background-image: url(../images/icon_back.png);
-}
-.page button.icon_exit {
-    background-image: url(../images/icon_exit.png);
-}
+.page button.flag_nl { background-image: url(../images/flag_nl.png); }
+.page button.flag_de { background-image: url(../images/flag_de.png); }
+.page button.flag_us { background-image: url(../images/flag_us.png); }
+.page button.flag_fr { background-image: url(../images/flag_fr.png); }
+.page button.flag_es { background-image: url(../images/flag_es.png); }
+.page button.flag_it { background-image: url(../images/flag_it.png); }
+
+.page button.icon_pawn { background-image: url(../images/icon_pawn.png); }
+.page button.icon_gear { background-image: url(../images/icon_gear.png); }
+.page button.icon_lang { background-image: url(../images/icon_lang.png); }
+.page button.icon_back { background-image: url(../images/icon_back.png); }
+.page button.icon_exit { background-image: url(../images/icon_exit.png); }
 
 /** ****************************************************************************
  * Title Page
