@@ -16,7 +16,8 @@ let rec getCurrentPage = (
 ): React.element => {
     switch currentPage {
         | Title          => <TitlePage goToPage />
-        | Setup          => <SetupPage goToPage setLanguage />
+        | Setup          => <SetupPage goToPage />
+        | SetupLanguage  => <SetupLanguagePage goToPage setLanguage />
         | SetupPlayers   => <div> {React.string("Players Placeholder")} </div>
         | DayTime        => <div> {React.string("DayTime Placeholder")} </div>
         | NightWitch     => <NightPage state={state} />

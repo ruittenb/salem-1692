@@ -16,7 +16,7 @@ let table = Js.Dict.fromArray([
     ("Nederlands", "Nederlands"),
     (`Español`, `Español`),
     ("Back", "Terug"),
-    ("Credits", "Credits"), // Auteur van spel, auteur van app, geluiden(Daniel Simon), voice actors; <a href="https://www.vecteezy.com/free-vector/cog">Cog Vectors by Vecteezy</a>
+    ("Credits", "Credits"), // Auteur van spel, auteur van app, geluiden(Daniel Simon), voice actors; <a href="https://www.vecteezy.com/free-vector/cog">Cog Vectors by Vecteezy</a> famfamfam http://www.famfamfam.com/lab/icons/silk/ <a target="_blank" href="https://icons8.com/icon/65520/pawn">Pawn</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
     // Night
     ("Night", "De nacht"),
     ("First night", "Eerste nacht"),

@@ -7,6 +7,7 @@ open Types
 
 @react.component
 let make = (
+    ~setLanguage,
     ~goToPage,
 ): React.element => {
     let language = React.useContext(LanguageContext.context)
@@ -14,16 +15,7 @@ let make = (
     <div id="setup-page" className="page flex-vertical">
         <h1> {React.string(t("Setup"))} </h1>
         <Spacer />
-        <Button
-            label={t("Language")}
-            onClick={ _event => goToPage(_prev => SetupLanguage) }
-        />
-        <Spacer />
-        <Button
-            label={t("Back")}
-            onClick={ _event => goToPage(_prev => Title) }
-            className="icon icon_back"
-        />
+        <LanguageList setLanguage goToPage />
     </div>
 }
 

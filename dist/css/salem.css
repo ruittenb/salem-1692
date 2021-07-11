@@ -39,6 +39,17 @@ h1 {
     height: 100%;
 }
 
+.flex-vertical {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.spacer {
+    height: 25px;
+}
+
 .page {
     position: absolute;
     left: 0;
@@ -57,15 +68,43 @@ h1 {
     background-repeat: no-repeat;
 }
 
-.flex-vertical {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
+.page button.icon {
+    padding-left: 24px;
+    background-position: 20px center;
 }
 
-.spacer {
-    height: 25px;
+.page button.flag_nl {
+    background-image: url(../images/flag_nl.png);
+}
+.page button.flag_de {
+    background-image: url(../images/flag_de.png);
+}
+.page button.flag_us {
+    background-image: url(../images/flag_us.png);
+}
+.page button.flag_fr {
+    background-image: url(../images/flag_fr.png);
+}
+.page button.flag_es {
+    background-image: url(../images/flag_es.png);
+}
+.page button.flag_it {
+    background-image: url(../images/flag_it.png);
+}
+.page button.icon_pawn {
+    background-image: url(../images/icon_pawn.png);
+}
+.page button.icon_gear {
+    background-image: url(../images/icon_gear.png);
+}
+.page button.icon_lang {
+    background-image: url(../images/icon_lang.png);
+}
+.page button.icon_back {
+    background-image: url(../images/icon_back.png);
+}
+.page button.icon_exit {
+    background-image: url(../images/icon_exit.png);
 }
 
 /** ****************************************************************************
@@ -92,30 +131,6 @@ h1 {
 #setup-page {
     background: url(../images/overlay-gear.png) -190px 120px no-repeat;
     padding-top: 20px;
-}
-
-#setup-page button.flag {
-    padding-left: 24px;
-    background-position: 20px center;
-}
-
-#setup-page button.flag_nl {
-    background-image: url(../images/flag_nl.png);
-}
-#setup-page button.flag_de {
-    background-image: url(../images/flag_de.png);
-}
-#setup-page button.flag_us {
-    background-image: url(../images/flag_us.png);
-}
-#setup-page button.flag_fr {
-    background-image: url(../images/flag_fr.png);
-}
-#setup-page button.flag_es {
-    background-image: url(../images/flag_es.png);
-}
-#setup-page button.flag_it {
-    background-image: url(../images/flag_it.png);
 }
 
 /** ****************************************************************************
