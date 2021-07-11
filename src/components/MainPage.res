@@ -3,17 +3,16 @@
  * MainPage
  */
 
-open Types
+// open Types
 
-let initialLanguage: language = NL_NL
-let initialPage: page = Title
+let initialLanguage: Types.language = NL_NL
+let initialPage: Types.page = Title
 
 let rec getCurrentPage = (
-    state: state,
-    language: language,
-    setLanguage,
-    currentPage: page,
+    state: Types.state,
+    currentPage: Types.page,
     goToPage,
+    setLanguage,
 ): React.element => {
     switch currentPage {
         | Title          => <TitlePage goToPage />
@@ -27,11 +26,11 @@ let rec getCurrentPage = (
 }
 
 @react.component
-and make = (~state: state): React.element => {
+and make = (~state: Types.state): React.element => {
     let (language, setLanguage) = React.useState(_ => initialLanguage);
     let (currentPage, goToPage) = React.useState(_ => initialPage);
     <LanguageContext.Provider value=language>
-        {getCurrentPage(state, language, setLanguage, currentPage, goToPage)}
+        {getCurrentPage(state, currentPage, goToPage, setLanguage)}
     </LanguageContext.Provider>
 }
 
