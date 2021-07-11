@@ -17,7 +17,6 @@
 open Types
 
 let initialState: state = {
-    currentPage: Title,
     currentPlayers: [
         { name: "Helmi" },
         { name: "Marco" },

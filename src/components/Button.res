@@ -7,7 +7,7 @@
 let make = (
     ~label: string,
     ~className: string = "",
-    ~onClick: _ => unit = _ => ()
+    ~onClick: ReactEvent.Mouse.t => unit
 ): React.element => {
     <button className onClick>
         {React.string(label)}

@@ -16,9 +16,10 @@ type page =
     | Title
     | Setup // language, player names, nr. witches, credits
     | SetupPlayers
-    | Turn
+    | DayTime
     | NightWitch
     | NightConstable
+    | Exit
 
 type track =
     | TownGoToSleep
@@ -38,7 +39,6 @@ type player = {
 }
 
 type state = {
-    currentPage    : page,
     currentPlayers : array<player>,
 }
 
