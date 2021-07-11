@@ -28,6 +28,11 @@ body {
     font-size: 32px;
 }
 
+h1 {
+    font-size: 64px;
+    font-weight: bold;
+}
+
 #root {
     background: url(../images/background.png) center / cover no-repeat;
     width: 100%;
@@ -59,6 +64,10 @@ body {
     flex-direction: column;
 }
 
+.spacer {
+    height: 25px;
+}
+
 /** ****************************************************************************
  * Title Page
  */
@@ -69,11 +78,7 @@ body {
 }
 
 #title-page button {
-    width: 50%;
-    height: 40px;
     margin-bottom: 25px;
-    font-family: inherit;
-    font-size: 26px;
 }
 
 #title-page button.last {
@@ -118,17 +123,12 @@ body {
  */
 
 #night-page {
-    background: center / cover no-repeat url(../images/background-night.png);
+    background: url(../images/background-night.png) center / cover no-repeat;
     color: #eee;
 }
 
-#night-page h1 {
-    font-size: 64px;
-    font-weight: bold;
-}
-
 #night-subpage {
-    background: top / contain no-repeat url(../images/overlay-night.png);
+    background: url(../images/overlay-night.png) top / contain no-repeat;
     padding-top: 20px;
 }
 

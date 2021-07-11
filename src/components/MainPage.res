@@ -6,26 +6,32 @@
 open Types
 
 let initialLanguage: language = NL_NL
+let initialPage: page = Title
 
 let rec getCurrentPage = (
     state: state,
-    setLanguage
+    language: language,
+    setLanguage,
+    currentPage: page,
+    goToPage,
 ): React.element => {
-    switch state.currentPage {
-        | Title          => <TitlePage />
-        | Setup          => <SetupPage setLanguage />
+    switch currentPage {
+        | Title          => <TitlePage goToPage />
+        | Setup          => <SetupPage goToPage setLanguage />
         | SetupPlayers   => <div> {React.string("Players Placeholder")} </div>
-        | Turn           => <div> {React.string("Turn Placeholder")}    </div>
+        | DayTime        => <div> {React.string("DayTime Placeholder")} </div>
         | NightWitch     => <NightPage state={state} />
         | NightConstable => <NightPage state={state} />
+        | Exit           => <ExitPage />
     }
 }
 
 @react.component
 and make = (~state: state): React.element => {
     let (language, setLanguage) = React.useState(_ => initialLanguage);
+    let (currentPage, goToPage) = React.useState(_ => initialPage);
     <LanguageContext.Provider value=language>
-        {getCurrentPage(state, setLanguage)}
+        {getCurrentPage(state, language, setLanguage, currentPage, goToPage)}
     </LanguageContext.Provider>
 }
 

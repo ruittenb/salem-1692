@@ -9,7 +9,8 @@ open Types
 
 @react.component
 let make = (
-    ~setLanguage
+    ~setLanguage,
+    ~goToPage,
 ): React.element => {
     let currentLanguage = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(currentLanguage)
@@ -25,7 +26,10 @@ let make = (
         })
     <>
         <div> {React.string(t("Language"))} </div>
+        <Spacer />
         {React.array(buttons)}
+        <Spacer />
+        <Button label={t("Back")} onClick={ goToPage(_ => Setup) } />
     </>
 }
 
