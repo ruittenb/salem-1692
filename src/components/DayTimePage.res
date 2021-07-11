@@ -18,10 +18,7 @@ let make = (
             label={t("Language")}
             onClick={ _event => goToPage(_prev => SetupLanguage) }
         />
-        <Button
-            label={t("Credits")}
-            onClick={ _event => goToPage(_prev => Credits) }
-        />
+        <Spacer />
         <Button
             label={t("Back")}
             onClick={ _event => goToPage(_prev => Title) }

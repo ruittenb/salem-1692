@@ -17,6 +17,7 @@ type page =
     | Setup // language, player names, nr. witches, credits
     | SetupLanguage
     | SetupPlayers
+    | Credits
     | DayTime
     | NightWitch
     | NightConstable

@@ -14,9 +14,18 @@ let table = Js.Dict.fromArray([
     ("Language", "Taal"),
     ("English", "English"),
     ("Nederlands", "Nederlands"),
+    ("Deutsch", "Deutsch"),
+    (`Français`, `Français`),
     (`Español`, `Español`),
+    ("Italiano", "Italiano"),
     ("Back", "Terug"),
+    // Credits
     ("Credits", "Credits"), // Auteur van spel, auteur van app, geluiden(Daniel Simon), voice actors; <a href="https://www.vecteezy.com/free-vector/cog">Cog Vectors by Vecteezy</a> famfamfam http://www.famfamfam.com/lab/icons/silk/ <a target="_blank" href="https://icons8.com/icon/65520/pawn">Pawn</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+    ("Game:", "Spel:"),
+    ("App:", "App:"),
+    ("Sound effects:", "Geluidseffecten:"),
+    ("Voice actors:", "Stemacteurs:"),
+    ("Images:", "Afbeeldingen:"),
     // Night
     ("Night", "De nacht"),
     ("First night", "Eerste nacht"),
