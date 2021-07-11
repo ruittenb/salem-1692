@@ -10565,8 +10565,15 @@ function LanguageList(Props) {
   /* ES_ES */
   2], function (lang) {
     var onClick = function (_event) {
-      return Curry._1(setLanguage, function (_prev) {
+      Curry._1(setLanguage, function (_prev) {
         return lang;
+      });
+
+      return Curry._1(goToPage, function (_prev) {
+        return (
+          /* Setup */
+          1
+        );
       });
     };
 
@@ -10576,19 +10583,19 @@ function LanguageList(Props) {
       case
       /* NL_NL */
       0:
-        match = ["flag flag_nl", Translator$Salem1692.getTranslator(currentLanguage, "Nederlands")];
+        match = ["icon flag_nl", Translator$Salem1692.getTranslator(currentLanguage, "Nederlands")];
         break;
 
       case
       /* EN_US */
       1:
-        match = ["flag flag_us", Translator$Salem1692.getTranslator(currentLanguage, "English")];
+        match = ["icon flag_us", Translator$Salem1692.getTranslator(currentLanguage, "English")];
         break;
 
       case
       /* ES_ES */
       2:
-        match = ["flag flag_es", Translator$Salem1692.getTranslator(currentLanguage, "Español")];
+        match = ["icon flag_es", Translator$Salem1692.getTranslator(currentLanguage, "Español")];
         break;
     }
 
@@ -10600,17 +10607,7 @@ function LanguageList(Props) {
       key: label
     });
   });
-  return React.createElement(React.Fragment, undefined, React.createElement("div", undefined, Translator$Salem1692.getTranslator(currentLanguage, "Language")), React.createElement(Spacer$Salem1692.make, {}), buttons, React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
-    label: Translator$Salem1692.getTranslator(currentLanguage, "Back"),
-    onClick: function (_event) {
-      return Curry._1(goToPage, function (_prev) {
-        return (
-          /* Setup */
-          1
-        );
-      });
-    }
-  }));
+  return React.createElement(React.Fragment, undefined, React.createElement("div", undefined, Translator$Salem1692.getTranslator(currentLanguage, "Language")), React.createElement(Spacer$Salem1692.make, {}), buttons);
 }
 
 var make = LanguageList;
@@ -10618,7 +10615,7 @@ var make = LanguageList;
 
 exports.make = make;
 
-},{"../locale/Translator.bs.js":39,"./Button.bs.js":27,"./LanguageContext.bs.js":29,"./Spacer.bs.js":35,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":13}],31:[function(require,module,exports){
+},{"../locale/Translator.bs.js":40,"./Button.bs.js":27,"./LanguageContext.bs.js":29,"./Spacer.bs.js":36,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":13}],31:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10639,6 +10636,8 @@ var TitlePage$Salem1692 = _interopRequireWildcard(require("./TitlePage.bs.js"));
 
 var LanguageContext$Salem1692 = _interopRequireWildcard(require("./LanguageContext.bs.js"));
 
+var SetupLanguagePage$Salem1692 = _interopRequireWildcard(require("./SetupLanguagePage.bs.js"));
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -10657,33 +10656,40 @@ function getCurrentPage(state, currentPage, goToPage, setLanguage) {
     /* Setup */
     1:
       return React.createElement(SetupPage$Salem1692.make, {
+        goToPage: goToPage
+      });
+
+    case
+    /* SetupLanguage */
+    2:
+      return React.createElement(SetupLanguagePage$Salem1692.make, {
         setLanguage: setLanguage,
         goToPage: goToPage
       });
 
     case
     /* SetupPlayers */
-    2:
+    3:
       return React.createElement("div", undefined, "Players Placeholder");
 
     case
     /* DayTime */
-    3:
+    4:
       return React.createElement("div", undefined, "DayTime Placeholder");
 
     case
     /* NightWitch */
-    4:
+    5:
     case
     /* NightConstable */
-    5:
+    6:
       return React.createElement(NightPage$Salem1692.make, {
         state: state
       });
 
     case
     /* Exit */
-    6:
+    7:
       return React.createElement(ExitPage$Salem1692.make, {});
   }
 }
@@ -10721,7 +10727,7 @@ var make = MainPage;
 
 exports.make = make;
 
-},{"./ExitPage.bs.js":28,"./LanguageContext.bs.js":29,"./NightPage.bs.js":32,"./SetupPage.bs.js":34,"./TitlePage.bs.js":36,"react":8}],32:[function(require,module,exports){
+},{"./ExitPage.bs.js":28,"./LanguageContext.bs.js":29,"./NightPage.bs.js":32,"./SetupLanguagePage.bs.js":34,"./SetupPage.bs.js":35,"./TitlePage.bs.js":37,"react":8}],32:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10768,7 +10774,7 @@ var make = NightPage;
 
 exports.make = make;
 
-},{"../locale/Translator.bs.js":39,"./Audio.bs.js":26,"./LanguageContext.bs.js":29,"./PlayerList.bs.js":33,"react":8}],33:[function(require,module,exports){
+},{"../locale/Translator.bs.js":40,"./Audio.bs.js":26,"./LanguageContext.bs.js":29,"./PlayerList.bs.js":33,"react":8}],33:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10812,7 +10818,7 @@ var make = PlayerList;
 
 exports.make = make;
 
-},{"../locale/Translator.bs.js":39,"./Button.bs.js":27,"./LanguageContext.bs.js":29,"react":8,"rescript/lib/es6/belt_Array.js":9}],34:[function(require,module,exports){
+},{"../locale/Translator.bs.js":40,"./Button.bs.js":27,"./LanguageContext.bs.js":29,"react":8,"rescript/lib/es6/belt_Array.js":9}],34:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10835,7 +10841,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-function SetupPage(Props) {
+function SetupLanguagePage(Props) {
   var setLanguage = Props.setLanguage;
   var goToPage = Props.goToPage;
   var language = React.useContext(LanguageContext$Salem1692.context);
@@ -10848,12 +10854,72 @@ function SetupPage(Props) {
   }));
 }
 
+var make = SetupLanguagePage;
+/* react Not a pure module */
+
+exports.make = make;
+
+},{"../locale/Translator.bs.js":40,"./LanguageContext.bs.js":29,"./LanguageList.bs.js":30,"./Spacer.bs.js":36,"react":8}],35:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.make = void 0;
+
+var Curry = _interopRequireWildcard(require("rescript/lib/es6/curry.js"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var Button$Salem1692 = _interopRequireWildcard(require("./Button.bs.js"));
+
+var Spacer$Salem1692 = _interopRequireWildcard(require("./Spacer.bs.js"));
+
+var Translator$Salem1692 = _interopRequireWildcard(require("../locale/Translator.bs.js"));
+
+var LanguageContext$Salem1692 = _interopRequireWildcard(require("./LanguageContext.bs.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+// Generated by ReScript, PLEASE EDIT WITH CARE
+function SetupPage(Props) {
+  var goToPage = Props.goToPage;
+  var language = React.useContext(LanguageContext$Salem1692.context);
+  return React.createElement("div", {
+    className: "page flex-vertical",
+    id: "setup-page"
+  }, React.createElement("h1", undefined, Translator$Salem1692.getTranslator(language, "Setup")), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
+    label: Translator$Salem1692.getTranslator(language, "Language"),
+    onClick: function (_event) {
+      return Curry._1(goToPage, function (_prev) {
+        return (
+          /* SetupLanguage */
+          2
+        );
+      });
+    }
+  }), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
+    label: Translator$Salem1692.getTranslator(language, "Back"),
+    className: "icon icon_back",
+    onClick: function (_event) {
+      return Curry._1(goToPage, function (_prev) {
+        return (
+          /* Title */
+          0
+        );
+      });
+    }
+  }));
+}
+
 var make = SetupPage;
 /* react Not a pure module */
 
 exports.make = make;
 
-},{"../locale/Translator.bs.js":39,"./LanguageContext.bs.js":29,"./LanguageList.bs.js":30,"./Spacer.bs.js":35,"react":8}],35:[function(require,module,exports){
+},{"../locale/Translator.bs.js":40,"./Button.bs.js":27,"./LanguageContext.bs.js":29,"./Spacer.bs.js":36,"react":8,"rescript/lib/es6/curry.js":13}],36:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10879,7 +10945,7 @@ var make = Spacer;
 
 exports.make = make;
 
-},{"react":8}],36:[function(require,module,exports){
+},{"react":8}],37:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10914,7 +10980,7 @@ function TitlePage(Props) {
       return Curry._1(goToPage, function (_prev) {
         return (
           /* DayTime */
-          3
+          4
         );
       });
     }
@@ -10935,7 +11001,7 @@ function TitlePage(Props) {
       return Curry._1(goToPage, function (_prev) {
         return (
           /* Exit */
-          6
+          7
         );
       });
     }
@@ -10947,7 +11013,7 @@ var make = TitlePage;
 
 exports.make = make;
 
-},{"../locale/Translator.bs.js":39,"./Button.bs.js":27,"./LanguageContext.bs.js":29,"react":8,"rescript/lib/es6/curry.js":13}],37:[function(require,module,exports){
+},{"../locale/Translator.bs.js":40,"./Button.bs.js":27,"./LanguageContext.bs.js":29,"react":8,"rescript/lib/es6/curry.js":13}],38:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10967,7 +11033,7 @@ var table = Js_dict.fromArray([["New Game", "Nuevo juego"], ["Setup", "Configura
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":14}],38:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":14}],39:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10987,7 +11053,7 @@ var table = Js_dict.fromArray([["New Game", "Nieuw spel"], ["Setup", "Instelling
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":14}],39:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":14}],40:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11037,4 +11103,4 @@ function getTranslator(language, message) {
 }
 /* ES_ES-Salem1692 Not a pure module */
 
-},{"./ES_ES.bs.js":37,"./NL_NL.bs.js":38,"rescript/lib/es6/js_dict.js":14}]},{},[39,37,38,24,28,32,30,33,31,35,34,27,36,26,29,23,25]);
+},{"./ES_ES.bs.js":38,"./NL_NL.bs.js":39,"rescript/lib/es6/js_dict.js":14}]},{},[40,38,39,24,28,32,30,33,31,36,35,27,37,34,26,29,23,25]);
