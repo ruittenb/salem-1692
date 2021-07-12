@@ -19,8 +19,10 @@ type page =
     | SetupPlayers
     | Credits
     | DayTime
+    | FirstNight
+    | OtherNightWithConstable
+    | OtherNightNoConstable
     | NightWitch
-    | NightConstable
     | Exit
 
 type track =

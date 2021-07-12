@@ -1,6 +1,6 @@
 
 /** ****************************************************************************
- * SetupPage
+ * DayTimePage
  */
 
 open Types
@@ -12,17 +12,22 @@ let make = (
     let language = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(language)
     <div id="setup-page" className="page flex-vertical">
-        <h1> {React.string(t("Setup"))} </h1>
+        <h1> {React.string(t("Daytime"))} </h1>
         <Spacer />
-        <Button
-            label={t("Language")}
-            onClick={ _event => goToPage(_prev => SetupLanguage) }
-        />
+        <LargeButton onClick={ _event => goToPage(_prev => FirstNight) } >
+            {React.string(t("First night"))}
+        </LargeButton>
+        <LargeButton onClick={ _event => goToPage(_prev => OtherNightWithConstable) } >
+            {React.string(t("Other nights, with constable"))}
+        </LargeButton>
+        <LargeButton onClick={ _event => goToPage(_prev => OtherNightNoConstable) } >
+            {React.string(t("Other nights, without constable"))}
+        </LargeButton>
         <Spacer />
         <Button
             label={t("Back")}
-            onClick={ _event => goToPage(_prev => Title) }
             className="icon icon_back"
+            onClick={ _event => goToPage(_prev => Title) }
         />
     </div>
 }

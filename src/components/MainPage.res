@@ -15,15 +15,17 @@ let rec getCurrentPage = (
     setLanguage,
 ): React.element => {
     switch currentPage {
-        | Title          => <TitlePage goToPage />
-        | Setup          => <SetupPage goToPage />
-        | SetupPlayers   => <div> {React.string("Players Placeholder")} </div>
-        | SetupLanguage  => <SetupLanguagePage goToPage setLanguage />
-        | Credits        => <CreditsPage goToPage />
-        | DayTime        => <div> {React.string("DayTime Placeholder")} </div>
-        | NightWitch     => <NightPage state={state} />
-        | NightConstable => <NightPage state={state} />
-        | Exit           => <ExitPage />
+        | Title                   => <TitlePage goToPage />
+        | Setup                   => <SetupPage goToPage />
+        | SetupPlayers            => <div> {React.string("Players Placeholder")} </div>
+        | SetupLanguage           => <SetupLanguagePage goToPage setLanguage />
+        | Credits                 => <CreditsPage goToPage />
+        | DayTime                 => <DayTimePage goToPage />
+        | FirstNight              => <NightPage state />
+        | OtherNightNoConstable   => <NightPage state />
+        | OtherNightWithConstable => <NightPage state />
+        | NightWitch              => <NightPage state />
+        | Exit                    => <ExitPage />
     }
 }
 

@@ -20,9 +20,11 @@ let make = (
     let language = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(language)
     let title: string = switch NightWitch { // TODO
-        | NightWitch     => t("The witches")
-        | NightConstable => t("The constable")
-        | _              => ""
+        | FirstNight              => t("The constable")
+        | OtherNightWithConstable => t("The constable")
+        | OtherNightNoConstable   => t("The constable")
+        | NightWitch              => t("The witches")
+        | _                       => ""
     }
     <div id="night-page" className="page">
         <div id="night-subpage" className="page flex-vertical">

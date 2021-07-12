@@ -27,8 +27,8 @@ let make = (
             </dd>
             <dt> {React.string(t("Voice actors:"))} </dt>
             <dd> {React.string(`René Uittenbogaard`)} </dd>
-            <dd> {React.string("Paul Scholey")} </dd>
-            <dd> {React.string("Mario Ruiz")} </dd>
+            // <dd> {React.string("Paul Scholey")} </dd>
+            // <dd> {React.string("Mario Ruiz")} </dd>
             <dt> {React.string(t("Images:"))} </dt>
             <dd>
                 <a href="https://www.vecteezy.com/free-vector/cog"> {React.string("Vecteezy")} </a> <br />
