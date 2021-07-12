@@ -19,15 +19,21 @@ let table = Js.Dict.fromArray([
     (`Español`, `Español`),
     ("Italiano", "Italiano"),
     ("Back", "Regresar"),
+    // Credits
     ("Credits", `Créditos`),
     ("Game:", "Juego:"),
-    ("App:", `Aplicación:`), // TODO
-    ("Sound effects:", "Efectos de sonido:"), // TODO
-    ("Voice actors:", "Actores de voz:"), // TODO
+    ("App:", `Aplicación:`),
+    ("Sound effects:", "Efectos de sonido:"),
+    ("Voice actors:", "Actores de voz:"),
     ("Images:", `Imágenes:`),
+    // Day
+    ("Daytime", `El día`),
+    ("First night", "Primera noche"),
+    ("Other nights,", "Otras noches,"),
+    ("with constable", "con agente jefe"),
+    ("without constable", "sin agente jefe"),
     // Night
     ("Night", "La noche"),
-    ("First night", "Primera noche"),
     ("Night with constable", "Noche con agente jefe"),
     ("Night without constable", "Noche sin agente jefe"),
     ("The witches", "Las brujas"),

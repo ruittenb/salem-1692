@@ -11,7 +11,7 @@ let make = (
 ): React.element => {
     let language = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(language)
-    <div id="setup-page" className="page flex-vertical">
+    <div id="daytime-page" className="page flex-vertical">
         <h1> {React.string(t("Daytime"))} </h1>
         <Spacer />
         <LargeButton onClick={ _event => goToPage(_prev => FirstNight) } >

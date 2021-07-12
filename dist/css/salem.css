@@ -31,6 +31,7 @@ body {
 h1 {
     font-size: 64px;
     font-weight: bold;
+    margin-top: 20px;
 }
 
 dt {
@@ -136,6 +137,5 @@ div.text-padding {
 
 #night-subpage {
     background: url(../images/overlay-night.png) top / contain no-repeat;
-    padding-top: 20px;
 }
 
