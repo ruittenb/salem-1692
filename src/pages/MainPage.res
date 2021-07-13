@@ -25,7 +25,6 @@ let rec getCurrentPage = (
         | FirstNight              => <NightPage subPage=currentPage goToPage players />
         | OtherNightNoConstable   => <NightPage subPage=currentPage goToPage players />
         | OtherNightWithConstable => <NightPage subPage=currentPage goToPage players />
-        | NightWitch              => <NightPage subPage=currentPage goToPage players />
         | Exit                    => <ExitPage />
     }
 }

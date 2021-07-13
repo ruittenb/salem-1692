@@ -27,7 +27,6 @@ type page =
     | FirstNight
     | OtherNightWithConstable
     | OtherNightNoConstable
-    | NightWitch
     | Exit
 
 type audioSpeech =
