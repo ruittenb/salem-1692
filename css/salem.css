@@ -25,7 +25,7 @@ body {
     width: 100vw;
     overflow: hidden;
     font-family: CaslonAntique, 'Times New Roman', Times, serif;
-    font-size: 28px;
+    font-size: 26px;
 }
 
 h1 {
@@ -72,14 +72,23 @@ div.text-padding {
     height: 100%;
 }
 
-.page button {
-    width: 50%;
-    height: 40px;
+.page button,
+.page button.largebutton {
     margin-bottom: 32px;
     font-family: inherit;
     font-size: 26px;
     background-color: #eac672;
     background-repeat: no-repeat;
+}
+
+.page button {
+    width: 50%;
+    height: 40px;
+}
+
+.page button.largebutton {
+    width: 80%;
+    height: 100px;
 }
 
 .page button.icon {
@@ -124,6 +133,14 @@ div.text-padding {
 #setup-page {
     background: url(../images/overlay-gear.png) -190px 120px no-repeat;
     padding-top: 20px;
+}
+
+/** ****************************************************************************
+ * Credits Page
+ */
+
+#credits-page {
+    background: url(../images/overlay-scroll.png) -290px 120px no-repeat;
 }
 
 /** ****************************************************************************
