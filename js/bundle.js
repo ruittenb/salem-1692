@@ -11058,14 +11058,11 @@ function getCurrentPage(currentPage, goToPage, setLanguage) {
     case
     /* OtherNightNoConstable */
     8:
-    case
-    /* NightWitch */
-    9:
       break;
 
     case
     /* Exit */
-    10:
+    9:
       return React.createElement(ExitPage$Salem1692.make, {});
   }
 
@@ -11423,11 +11420,8 @@ function getScenario(subPage) {
     /* Daytime */
     5:
     case
-    /* NightWitch */
-    9:
-    case
     /* Exit */
-    10:
+    9:
       return [];
   }
 }
@@ -11642,7 +11636,7 @@ function TitlePage(Props) {
       return Curry._1(goToPage, function (_prev) {
         return (
           /* Exit */
-          10
+          9
         );
       });
     }
