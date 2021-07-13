@@ -1,6 +1,8 @@
 
 /** ****************************************************************************
  * SetupPage
+ *
+ * Language, player names, nr. witches, credits
  */
 
 open Types

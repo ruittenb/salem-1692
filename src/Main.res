@@ -14,23 +14,10 @@
  * RescriptReactRouter : A simple, yet fully featured router with minimal memory allocations
  */
 
-open Types
-
-let initialState: state = {
-    currentPlayers: [
-        { name: "Helmi" },
-        { name: "Marco" },
-        { name: "Richella" },
-        { name: "Anja" },
-        { name: `René` },
-        { name: "Erwin" },
-    ],
-}
-
 let run = (elementId: string) => {
     switch (ReactDOM.querySelector("#" ++ elementId)) {
         | Some(rootElement) => ReactDOM.render(
-            <MainPage state=initialState />,
+            <MainPage />,
             rootElement)
         | None => ()
     }

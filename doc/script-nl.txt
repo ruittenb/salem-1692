@@ -1,10 +1,6 @@
 [ first night ]
 A. De nacht valt. Het dorp gaat slapen; iedereen doet de ogen dicht.
 ...
-B. Als iedereen de ogen dicht heeft, wordt de heks wakker.
-E. De heks opent de ogen en zonder geluid te maken beslist ze welke speler de zwarte kat
-   krijgt.  Ze mag zichzelf kiezen.
-===
 D. Als iedereen de ogen dicht heeft, worden de heksen wakker.
    De heksen openen de ogen en maken oogcontact zodat ze weten wie ze zijn.
 F. Met alleen geluidloze gebaren komen ze overeen welke speler de zwarte kat krijgt.
@@ -13,8 +9,6 @@ F. Met alleen geluidloze gebaren komen ze overeen welke speler de zwarte kat kri
 [ choice ]
 [ confirm ]
 ---
-H. De heks heeft haar keuze gemaakt en doet de ogen weer dicht.
-===
 J. De heksen hebben hun keuze gemaakt en doen de ogen weer dicht.
 ...
 Z. Het wordt ochtend. Een haan kraait, iedereen wordt wakker en doet de ogen open.

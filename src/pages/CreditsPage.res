@@ -11,7 +11,8 @@ let make = (
 ): React.element => {
     let language = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(language)
-    <div id="setup-page" className="page flex-vertical text-padding">
+    let spacedComma = React.string(",  ")
+    <div id="credits-page" className="page flex-vertical text-padding">
         <h1> {React.string(t("Credits"))} </h1>
         <Spacer />
         <dl>
@@ -31,9 +32,10 @@ let make = (
             // <dd> {React.string("Mario Ruiz")} </dd>
             <dt> {React.string(t("Images:"))} </dt>
             <dd>
-                <a href="https://www.vecteezy.com/free-vector/cog"> {React.string("Vecteezy")} </a> <br />
-                <a href="http://www.famfamfam.com/lab/icons/silk/"> {React.string("FamFamFam")} </a> <br />
-                <a href="https://icons8.com"> {React.string("Icons8")} </a>
+                <a href="https://www.vecteezy.com/free-vector/cog"> {React.string("Vecteezy")} </a> spacedComma
+                <a href="http://www.famfamfam.com/lab/icons/silk/"> {React.string("FamFamFam")} </a> spacedComma
+                <a href="https://icons8.com"> {React.string("Icons8")} </a> spacedComma
+                <a href="https://clipartmag.com/download-clipart-image#paper-scrolls-clipart-38.jpg"> {React.string("ClipArtMag")} </a>
             </dd>
         </dl>
         <Spacer />

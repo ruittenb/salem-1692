@@ -3,6 +3,8 @@
  * Types: Type declarations
  */
 
+type clickHandler = ReactEvent.Mouse.t => unit
+
 type either<'t, 'v> =
     | Left('t)
     | Right('v)
@@ -12,20 +14,23 @@ type language =
     | EN_US
     | ES_ES
 
+type player = string
+type players = array<player>
+
 type page =
     | Title
-    | Setup // language, player names, nr. witches, credits
+    | Setup
     | SetupLanguage
     | SetupPlayers
     | Credits
-    | DayTime
+    | Daytime
     | FirstNight
     | OtherNightWithConstable
     | OtherNightNoConstable
     | NightWitch
     | Exit
 
-type track =
+type audioSpeech =
     | TownGoToSleep
     | WitchWakeUp
     | WitchesWakeUp
@@ -38,11 +43,18 @@ type track =
     | ConstableGoToSleep
     | TownWakeUp
 
-type player = {
-    name: string
-}
+type audioEffect =
+    | ChurchBell
+    | Rooster
+    | Silence
 
-type state = {
-    currentPlayers : array<player>,
-}
+type scenarioStep =
+    | Speech(audioSpeech)
+    | Effect(audioEffect)
+    | ChooseWitch
+    | ConfirmWitch
+    | ChooseConstable
+    | ConfirmConstable
+
+type scenario = array<scenarioStep>
 

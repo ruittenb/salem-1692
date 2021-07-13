@@ -7,30 +7,45 @@
 
 open Types
 
-@react.component
-let make = (
-    ~track: track,
-): React.element => {
-    let language = React.useContext(LanguageContext.context)
-    let directory = "audio/" ++ switch language {
+let getLanguageDirectory = (language: language): string => {
+    switch language {
         | NL_NL => "nl_NL/"
         | EN_US => "en_US/"
         | ES_ES => "es_ES/"
     }
-    let src = directory ++ switch track {
-        | TownGoToSleep       => "town-go-to-sleep.mp3"
-        | WitchWakeUp         => "witch-wake-up.mp3"
-        | WitchesWakeUp       => "witches-wake-up.mp3"
-        | WitchDecideCat      => "witch-decide-cat.mp3"
-        | WitchesDecideCat    => "witches-decide-cat.mp3"
-        | WitchesDecideMurder => "witches-decide-murder.mp3"
-        | WitchGoToSleep      => "witch-go-to-sleep.mp3"
-        | WitchesGoToSleep    => "witches-go-to-sleep.mp3"
-        | ConstableWakeUp     => "constable-wake-up.mp3"
-        | ConstableGoToSleep  => "constable-go-to-sleep.mp3"
-        | TownWakeUp          => "town-wake-up.mp3"
+}
+
+@react.component
+let make = (
+    ~track: scenarioStep,
+    ~goToPage,
+): React.element => {
+
+    let language = React.useContext(LanguageContext.context)
+    let effectDirectory = "audio/"
+    let speechDirectory = "audio/" ++ getLanguageDirectory(language)
+
+    let src = switch track {
+        | Effect(Silence)             => effectDirectory ++ "silence.mp3"
+        | Effect(Rooster)             => effectDirectory ++ "rooster.mp3"
+        | Effect(ChurchBell)          => effectDirectory ++ "tolling-bell-once.mp3"
+
+        | Speech(TownGoToSleep)       => speechDirectory ++ "town-go-to-sleep.mp3"
+        | Speech(WitchWakeUp)         => speechDirectory ++ "witch-wake-up.mp3"
+        | Speech(WitchesWakeUp)       => speechDirectory ++ "witches-wake-up.mp3"
+        | Speech(WitchDecideCat)      => speechDirectory ++ "witch-decide-cat.mp3"
+        | Speech(WitchesDecideCat)    => speechDirectory ++ "witches-decide-cat.mp3"
+        | Speech(WitchesDecideMurder) => speechDirectory ++ "witches-decide-murder.mp3"
+        | Speech(WitchGoToSleep)      => speechDirectory ++ "witch-go-to-sleep.mp3"
+        | Speech(WitchesGoToSleep)    => speechDirectory ++ "witches-go-to-sleep.mp3"
+        | Speech(ConstableWakeUp)     => speechDirectory ++ "constable-wake-up.mp3"
+        | Speech(ConstableGoToSleep)  => speechDirectory ++ "constable-go-to-sleep.mp3"
+        | Speech(TownWakeUp)          => speechDirectory ++ "town-wake-up.mp3"
+        | _                           => effectDirectory ++ "silence.mp3"
     }
-    <audio src autoPlay=true>
-    </audio>
+    <audio src
+        autoPlay=true
+        onEnded={ (_event) => goToPage(_prev => Daytime) }
+    />
 }
 

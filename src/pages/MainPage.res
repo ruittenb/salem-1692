@@ -7,11 +7,12 @@
 
 let initialLanguage: Types.language = NL_NL
 let initialPage: Types.page = Title
+let players: Types.players = // []
+    [ "Helmi", "Marco", "Richella", "Anja", `René`, "Erwin" ]
 
 let rec getCurrentPage = (
-    state: Types.state,
     currentPage: Types.page,
-    goToPage,
+    goToPage: (Types.page => Types.page) => unit,
     setLanguage,
 ): React.element => {
     switch currentPage {
@@ -20,21 +21,21 @@ let rec getCurrentPage = (
         | SetupPlayers            => <div> {React.string("Players Placeholder")} </div>
         | SetupLanguage           => <SetupLanguagePage goToPage setLanguage />
         | Credits                 => <CreditsPage goToPage />
-        | DayTime                 => <DayTimePage goToPage />
-        | FirstNight              => <NightPage state />
-        | OtherNightNoConstable   => <NightPage state />
-        | OtherNightWithConstable => <NightPage state />
-        | NightWitch              => <NightPage state />
+        | Daytime                 => <DaytimePage goToPage />
+        | FirstNight              => <NightPage subPage=currentPage goToPage players />
+        | OtherNightNoConstable   => <NightPage subPage=currentPage goToPage players />
+        | OtherNightWithConstable => <NightPage subPage=currentPage goToPage players />
+        | NightWitch              => <NightPage subPage=currentPage goToPage players />
         | Exit                    => <ExitPage />
     }
 }
 
 @react.component
-and make = (~state: Types.state): React.element => {
+and make = (): React.element => {
     let (language, setLanguage) = React.useState(_ => initialLanguage);
     let (currentPage, goToPage) = React.useState(_ => initialPage);
     <LanguageContext.Provider value=language>
-        {getCurrentPage(state, currentPage, goToPage, setLanguage)}
+        {getCurrentPage(currentPage, goToPage, setLanguage)}
     </LanguageContext.Provider>
 }
 

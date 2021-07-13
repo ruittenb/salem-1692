@@ -1,6 +1,6 @@
 
 /** ****************************************************************************
- * DayTimePage
+ * DaytimePage
  */
 
 open Types
@@ -18,10 +18,12 @@ let make = (
             {React.string(t("First night"))}
         </LargeButton>
         <LargeButton onClick={ _event => goToPage(_prev => OtherNightWithConstable) } >
-            {React.string(t("Other nights, with constable"))}
+            {React.string(t("Other nights,"))} <br />
+            {React.string(t("with constable"))}
         </LargeButton>
         <LargeButton onClick={ _event => goToPage(_prev => OtherNightNoConstable) } >
-            {React.string(t("Other nights, without constable"))}
+            {React.string(t("Other nights,"))} <br />
+            {React.string(t("without constable"))}
         </LargeButton>
         <Spacer />
         <Button
