@@ -18,7 +18,7 @@ let make = (
         <dl>
             <dt> {React.string(t("Game:"))} </dt>
             <dd> {React.string(`Salem 1692 © Travis Hancock, `)}
-                <a href="https://facadegames.com/"> {React.string("Facade Games")} </a>
+                <a href="https://facadegames.com/"> {React.string(`Façade Games`)} </a>
             </dd>
             <dt> {React.string(t("App:"))} </dt>
             <dd> {React.string(`René Uittenbogaard © 2021`)} </dd>

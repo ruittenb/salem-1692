@@ -14,7 +14,7 @@ let make = (
     <div id="title-page" className="page flex-vertical">
         <Button label={t("New Game")} onClick={ _event => goToPage(_prev => Daytime) } />
         <Button label={t("Setup"   )} onClick={ _event => goToPage(_prev => Setup  ) } />
-        <Button label={t("Exit"    )} onClick={ _event => goToPage(_prev => Exit   ) } className="last" />
+        <Button label={t("Exit"    )} onClick={ _event => goToPage(_prev => Close  ) } className="last" />
     </div>
 }
 

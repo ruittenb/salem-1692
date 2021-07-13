@@ -16,7 +16,7 @@ let make = (
     let t = Translator.getTranslator(currentLanguage)
     let buttons = [ NL_NL, EN_US, ES_ES ] // is there no way to retrieve these dynamically?
         ->Belt.Array.map(lang => {
-            let onClick: (ReactEvent.Mouse.t => unit) = _event => {
+            let onClick: clickHandler = _event => {
                 setLanguage(_prev => lang)
                 goToPage(_prev => Setup)
             }

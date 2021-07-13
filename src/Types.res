@@ -4,6 +4,7 @@
  */
 
 type clickHandler = ReactEvent.Mouse.t => unit
+type mediaHandler = ReactEvent.Media.t => unit
 
 type either<'t, 'v> =
     | Left('t)
@@ -27,7 +28,8 @@ type page =
     | FirstNight
     | OtherNightWithConstable
     | OtherNightNoConstable
-    | Exit
+    | DaytimeReveal
+    | Close
 
 type audioSpeech =
     | TownGoToSleep

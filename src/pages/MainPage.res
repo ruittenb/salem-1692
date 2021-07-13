@@ -3,7 +3,7 @@
  * MainPage
  */
 
-// open Types
+open Types
 
 let initialLanguage: Types.language = NL_NL
 let initialPage: Types.page = Title
@@ -25,14 +25,15 @@ let rec getCurrentPage = (
         | FirstNight              => <NightPage subPage=currentPage goToPage players />
         | OtherNightNoConstable   => <NightPage subPage=currentPage goToPage players />
         | OtherNightWithConstable => <NightPage subPage=currentPage goToPage players />
-        | Exit                    => <ExitPage />
+        | DaytimeReveal           => <div>{React.string("Daytime Reveal")} </div>
+        | Close                   => <ClosePage />
     }
 }
 
 @react.component
 and make = (): React.element => {
-    let (language, setLanguage) = React.useState(_ => initialLanguage);
-    let (currentPage, goToPage) = React.useState(_ => initialPage);
+    let (language, setLanguage) = React.useState(_ => initialLanguage)
+    let (currentPage, goToPage) = React.useState(_ => initialPage)
     <LanguageContext.Provider value=language>
         {getCurrentPage(currentPage, goToPage, setLanguage)}
     </LanguageContext.Provider>

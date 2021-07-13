@@ -18,7 +18,7 @@ let getLanguageDirectory = (language: language): string => {
 @react.component
 let make = (
     ~track: scenarioStep,
-    ~goToPage,
+    ~proceed: mediaHandler,
 ): React.element => {
 
     let language = React.useContext(LanguageContext.context)
@@ -45,7 +45,7 @@ let make = (
     }
     <audio src
         autoPlay=true
-        onEnded={ (_event) => goToPage(_prev => Daytime) }
+        onEnded={ proceed }
     />
 }
 

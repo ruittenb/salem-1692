@@ -3,15 +3,9 @@
  * NightPage
  */
 
-/*
- * var audioElement = new Audio('car_horn.wav');
- * audioElement.addEventListener('loadeddata', () => {
- *   let duration = audioElement.duration;
- *   // The duration variable now holds the duration (in seconds) of the audio clip
- * })
-*/
-
 open Types
+
+let elementify = (_) => React.null
 
 let getScenario = (subPage: page): scenario => {
     switch subPage {
@@ -69,7 +63,6 @@ let getScenario = (subPage: page): scenario => {
 @react.component
 let make = (
     ~subPage: page,
-    ~scenarioIndex = 0,
     ~players: players,
     ~goToPage,
 ): React.element => {
@@ -77,31 +70,42 @@ let make = (
     let language = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(language)
 
-    let scenarioStep: scenarioStep = getScenario(subPage)[scenarioIndex]
+    let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
+    let scenario: scenario = getScenario(subPage)
 
-    let pageCoreElement = switch scenarioStep {
-        | ConfirmWitch
-        | ConfirmConstable
-        | ChooseWitch     => <PlayerList title={t("Witches")} players />
-        | ChooseConstable => <PlayerList title={t("Constable")} players />
-        | Effect(_)       => <Audio track=scenarioStep goToPage />
-        | Speech(_)       => <Audio track=scenarioStep goToPage />
-    }
+    if scenarioIndex >= scenario->Js.Array2.length {
 
-    <div id="night-page" className="page">
-        <div id="night-subpage" className="page flex-vertical">
-            <h1> {React.string(t("Night"))} </h1>
-            {pageCoreElement}
-            <Spacer />
-            <Spacer />
-            <Spacer />
-            <Spacer />
-            <Button
-                label={t("Back")}
-                className="icon icon_back"
-                onClick={ _event => goToPage(_prev => Daytime) }
-            />
+        goToPage(_prev => DaytimeReveal)->elementify
+
+    } else {
+
+        let scenarioStep: scenarioStep = scenario[scenarioIndex]
+        let goToNextStep = (_event): unit => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+
+        let pageCoreElement = switch scenarioStep {
+            | ConfirmWitch     => <></> // TODO
+            | ConfirmConstable => <></> // TODO
+            | ChooseWitch      => <PlayerList title={t("Witches")} players />
+            | ChooseConstable  => <PlayerList title={t("Constable")} players />
+            | Effect(_)        => <Audio track=scenarioStep proceed=goToNextStep />
+            | Speech(_)        => <Audio track=scenarioStep proceed=goToNextStep />
+        }
+
+        <div id="night-page" className="page">
+            <div id="night-subpage" className="page flex-vertical">
+                <h1> {React.string(t("Night"))} </h1>
+                <Spacer />
+                <Spacer />
+                {pageCoreElement}
+                <Spacer />
+                <Spacer />
+                <Button
+                    label={t("Back")}
+                    className="icon icon_back"
+                    onClick={ _event => goToPage(_prev => Daytime) }
+                />
+            </div>
         </div>
-    </div>
+    }
 }
 

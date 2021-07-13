@@ -5,7 +5,6 @@
  * Bridges ReScript to JavaScript
  */
 
-import * as Main from './Main.bs';
+import * as Main from './Main.bs'
 
-window.Main = Main;
-
+Main.run('root')
