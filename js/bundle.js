@@ -11109,13 +11109,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.elementify = elementify;
 exports.getScenario = getScenario;
+exports.getPage = getPage;
 exports.make = void 0;
 
 var Curry = _interopRequireWildcard(require("rescript/lib/es6/curry.js"));
 
 var React = _interopRequireWildcard(require("react"));
 
-var Caml_array = _interopRequireWildcard(require("rescript/lib/es6/caml_array.js"));
+var Belt_Array = _interopRequireWildcard(require("rescript/lib/es6/belt_Array.js"));
 
 var Audio$Salem1692 = _interopRequireWildcard(require("../components/Audio.bs.js"));
 
@@ -11430,37 +11431,7 @@ function getScenario(subPage) {
   }
 }
 
-function NightPage(Props) {
-  var subPage = Props.subPage;
-  var players = Props.players;
-  var goToPage = Props.goToPage;
-  var language = React.useContext(LanguageContext$Salem1692.context);
-  var match = React.useState(function () {
-    return 0;
-  });
-  var goToScenarioIndex = match[1];
-  var scenarioIndex = match[0];
-  var scenario = getScenario(subPage);
-
-  if (scenarioIndex >= scenario.length) {
-    Curry._1(goToPage, function (_prev) {
-      return (
-        /* DaytimeReveal */
-        9
-      );
-    });
-
-    return null;
-  }
-
-  var scenarioStep = Caml_array.get(scenario, scenarioIndex);
-
-  var goToNextStep = function (_event) {
-    return Curry._1(goToScenarioIndex, function (scenarioIndex) {
-      return scenarioIndex + 1 | 0;
-    });
-  };
-
+function getPage(goToPage, goToNextStep, scenarioStep, players, language) {
   var pageCoreElement;
 
   if (typeof scenarioStep === "number") {
@@ -11520,12 +11491,44 @@ function NightPage(Props) {
   })));
 }
 
+function NightPage(Props) {
+  var subPage = Props.subPage;
+  var players = Props.players;
+  var goToPage = Props.goToPage;
+  var language = React.useContext(LanguageContext$Salem1692.context);
+  var match = React.useState(function () {
+    return 0;
+  });
+  var goToScenarioIndex = match[1];
+  var scenario = getScenario(subPage);
+  var maybeScenarioStep = Belt_Array.get(scenario, match[0]);
+
+  var goToNextStep = function (_event) {
+    return Curry._1(goToScenarioIndex, function (scenarioIndex) {
+      return scenarioIndex + 1 | 0;
+    });
+  };
+
+  if (maybeScenarioStep !== undefined) {
+    return getPage(goToPage, goToNextStep, maybeScenarioStep, players, language);
+  } else {
+    Curry._1(goToPage, function (_prev) {
+      return (
+        /* DaytimeReveal */
+        9
+      );
+    });
+
+    return null;
+  }
+}
+
 var make = NightPage;
 /* react Not a pure module */
 
 exports.make = make;
 
-},{"../components/Audio.bs.js":26,"../components/Button.bs.js":27,"../components/LanguageContext.bs.js":28,"../components/PlayerList.bs.js":31,"../components/Spacer.bs.js":32,"../locale/Translator.bs.js":35,"react":8,"rescript/lib/es6/caml_array.js":11,"rescript/lib/es6/curry.js":13}],41:[function(require,module,exports){
+},{"../components/Audio.bs.js":26,"../components/Button.bs.js":27,"../components/LanguageContext.bs.js":28,"../components/PlayerList.bs.js":31,"../components/Spacer.bs.js":32,"../locale/Translator.bs.js":35,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":13}],41:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
