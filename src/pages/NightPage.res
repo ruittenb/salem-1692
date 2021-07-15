@@ -12,47 +12,50 @@ let getScenario = (subPage: page): scenario => {
         | FirstNight              => [
             Effect(ChurchBell),
             Speech(TownGoToSleep),
-            Effect(Silence),
+            Effect(Silence1s),
+            Effect(Silence2s),
             Speech(WitchesWakeUp),
             Speech(WitchesDecideCat),
             ChooseWitch,
             ConfirmWitch,
-            Effect(Silence),
+            Effect(Silence2s),
             Speech(WitchesGoToSleep),
-            Effect(Silence),
+            Effect(Silence2s),
             Effect(Rooster),
             Speech(TownWakeUp),
         ]
         | OtherNightWithConstable => [
             Effect(ChurchBell),
             Speech(TownGoToSleep),
-            Effect(Silence),
+            Effect(Silence1s),
+            Effect(Silence2s),
             Speech(WitchesWakeUp),
             Speech(WitchesDecideMurder),
             ChooseWitch,
             ConfirmWitch,
-            Effect(Silence),
+            Effect(Silence2s),
             Speech(WitchesGoToSleep),
             Speech(ConstableWakeUp),
             ChooseConstable,
             ConfirmConstable,
-            Effect(Silence),
+            Effect(Silence2s),
             Speech(ConstableGoToSleep),
-            Effect(Silence),
+            Effect(Silence2s),
             Effect(Rooster),
             Speech(TownWakeUp),
         ]
         | OtherNightNoConstable   => [
             Effect(ChurchBell),
             Speech(TownGoToSleep),
-            Effect(Silence),
+            Effect(Silence1s),
+            Effect(Silence2s),
             Speech(WitchesWakeUp),
             Speech(WitchesDecideMurder),
             ChooseWitch,
             ConfirmWitch,
-            Effect(Silence),
+            Effect(Silence2s),
             Speech(WitchesGoToSleep),
-            Effect(Silence),
+            Effect(Silence2s),
             Effect(Rooster),
             Speech(TownWakeUp),
         ]
@@ -62,15 +65,16 @@ let getScenario = (subPage: page): scenario => {
 
 let getPage = (
     goToPage: (page => page) => unit,
-    goToNextStep: mediaHandler,
+    goToNextStep,
+    goToPrevStep,
     scenarioStep: scenarioStep,
     players: players,
     language: language
 ): React.element => {
     let t = Translator.getTranslator(language)
     let pageCoreElement = switch scenarioStep {
-        | ConfirmWitch     => <></> // TODO
-        | ConfirmConstable => <></> // TODO
+        | ConfirmWitch     => <ConfirmDialog choice=`René` goToPage />
+        | ConfirmConstable => <ConfirmDialog choice="Paul" goToPage />
         | ChooseWitch      => <PlayerList title={t("Witches")} players />
         | ChooseConstable  => <PlayerList title={t("Constable")} players />
         | Effect(_)        => <Audio track=scenarioStep proceed=goToNextStep />
@@ -81,8 +85,8 @@ let getPage = (
             <h1> {React.string(t("Night"))} </h1>
             <Spacer />
             <Spacer />
-            {pageCoreElement}
             <Spacer />
+            {pageCoreElement}
             <Spacer />
             <Button
                 label={t("Back")}
@@ -106,10 +110,11 @@ let make = (
     let scenario: scenario = getScenario(subPage)
     let maybeScenarioStep: option<scenarioStep> = Belt.Array.get(scenario, scenarioIndex)
     let goToNextStep = (_event): unit => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+    let goToPrevStep = (_event): unit => goToScenarioIndex(scenarioIndex => scenarioIndex - 1)
 
     switch maybeScenarioStep {
         | None               => goToPage(_prev => DaytimeReveal)->elementify
-        | Some(scenarioStep) => getPage(goToPage, goToNextStep, scenarioStep, players, language)
+        | Some(scenarioStep) => getPage(goToPage, goToNextStep, goToPrevStep, scenarioStep, players, language)
     }
 }
 

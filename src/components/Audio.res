@@ -26,7 +26,8 @@ let make = (
     let speechDirectory = "audio/" ++ getLanguageDirectory(language)
 
     let src = switch track {
-        | Effect(Silence)             => effectDirectory ++ "silence.mp3"
+        | Effect(Silence1s)           => effectDirectory ++ "silence-1s.mp3"
+        | Effect(Silence2s)           => effectDirectory ++ "silence-2s.mp3"
         | Effect(Rooster)             => effectDirectory ++ "rooster.mp3"
         | Effect(ChurchBell)          => effectDirectory ++ "tolling-bell-once.mp3"
 

@@ -1,6 +1,6 @@
 
 /** ****************************************************************************
- * SetupPage
+ * SetupLanguagePage
  */
 
 @@warning("-33") // Unused 'open Types'

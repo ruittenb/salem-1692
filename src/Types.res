@@ -1,6 +1,6 @@
 
 /** ****************************************************************************
- * Types: Type declarations
+ * Types
  */
 
 type clickHandler = ReactEvent.Mouse.t => unit
@@ -47,7 +47,8 @@ type audioSpeech =
 type audioEffect =
     | ChurchBell
     | Rooster
-    | Silence
+    | Silence1s
+    | Silence2s
 
 type scenarioStep =
     | Speech(audioSpeech)

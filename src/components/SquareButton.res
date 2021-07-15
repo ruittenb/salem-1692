@@ -1,6 +1,6 @@
 
 /** ****************************************************************************
- * LargeButton
+ * SquareButton
  */
 
 open Types
@@ -12,7 +12,7 @@ let make = (
     ~children: React.element = React.null,
     ~onClick: clickHandler,
 ): React.element => {
-    <Button label className={className ++ " largebutton"} onClick>
+    <Button label className={className ++ " squarebutton"} onClick>
         {children}
     </Button>
 }

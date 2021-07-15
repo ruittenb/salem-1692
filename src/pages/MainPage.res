@@ -5,7 +5,7 @@
 
 open Types
 
-let initialLanguage: Types.language = NL_NL
+let initialLanguage: Types.language = EN_US
 let initialPage: Types.page = Title
 let players: Types.players = // []
     [ "Helmi", "Marco", "Richella", "Anja", `René`, "Erwin" ]
