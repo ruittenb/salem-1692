@@ -7,6 +7,7 @@ open Types
 
 @react.component
 let make = (
+    ~address: string,
     ~choice: string,
     ~goToPage,
 ): React.element => {
@@ -19,6 +20,8 @@ let make = (
             <Spacer />
             <Spacer />
             <Spacer />
+            { React.string(address ++ t("are you sure?")) }
+            <div />
             { React.string(choice) }
             <Spacer />
             <Spacer />

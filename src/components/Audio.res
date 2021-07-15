@@ -42,7 +42,7 @@ let make = (
         | Speech(ConstableWakeUp)     => speechDirectory ++ "constable-wake-up.mp3"
         | Speech(ConstableGoToSleep)  => speechDirectory ++ "constable-go-to-sleep.mp3"
         | Speech(TownWakeUp)          => speechDirectory ++ "town-wake-up.mp3"
-        | _                           => effectDirectory ++ "silence.mp3"
+        | _                           => effectDirectory ++ "silence-1s.mp3"
     }
     <audio src
         autoPlay=true
