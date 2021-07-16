@@ -6,6 +6,8 @@
 type clickHandler = ReactEvent.Mouse.t => unit
 type mediaHandler = ReactEvent.Media.t => unit
 
+type chosenPlayerSetter = (string => string) => unit
+
 type either<'t, 'v> =
     | Left('t)
     | Right('v)

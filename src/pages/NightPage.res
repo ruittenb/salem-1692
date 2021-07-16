@@ -11,10 +11,10 @@ let getScenario = (subPage: page): scenario => {
     switch subPage {
         | FirstNight              => [
             Effect(ChurchBell),
-            //Speech(TownGoToSleep),
+            //TODO Speech(TownGoToSleep),
             Effect(Silence1s),
             Effect(Silence2s),
-            //Speech(WitchesWakeUp),
+            //TODO Speech(WitchesWakeUp),
             Speech(WitchesDecideCat),
             ChooseWitch,
             ConfirmWitch,
@@ -68,14 +68,25 @@ let getPage = (
     goToPage: (page => page) => unit,
     goToPrevStep,
     goToNextStep,
-    goFromWitchChoiceToNextStep,
-    goFromConstableChoiceToNextStep,
-    witchVictimPlayer,
-    constableSavePlayer,
+    goToScenarioIndex,
     players: players,
-    language: language
 ): React.element => {
+
+    let language = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(language)
+
+    let (witchVictimPlayer, setWitchVictimPlayer): (string, chosenPlayerSetter) = React.useContext(ChosenPlayerContext.context1)
+    let (constableSavePlayer, setConstableSavePlayer): (string, chosenPlayerSetter) = React.useContext(ChosenPlayerContext.context2)
+
+    let goFromWitchChoiceToNextStep = (player: player, _event): unit => {
+        setWitchVictimPlayer(_prev => player)
+        goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+    }
+    let goFromConstableChoiceToNextStep = (player: player, _event): unit => {
+        setConstableSavePlayer(_prev => player)
+        goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+    }
+
     let pageCoreElement = switch scenarioStep {
         | Effect(_)        => <Audio track=scenarioStep proceed=goToNextStep />
         | Speech(_)        => <Audio track=scenarioStep proceed=goToNextStep />
@@ -126,26 +137,13 @@ let make = (
     ~goToPage,
 ): React.element => {
 
-    let language = React.useContext(LanguageContext.context)
-
-    let (witchVictimPlayer,   setWitchVictimPlayer)   = React.useState(_ => "")
-    let (constableSavePlayer, setConstableSavePlayer) = React.useState(_ => "")
-    let (scenarioIndex,       goToScenarioIndex)      = React.useState(_ => 0)
-
-    let scenario: scenario = getScenario(subPage)
-    let maybeScenarioStep: option<scenarioStep> = Belt.Array.get(scenario, scenarioIndex)
+    let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
 
     let goToPrevStep = (_event): unit => goToScenarioIndex(scenarioIndex => scenarioIndex - 1)
     let goToNextStep = (_event): unit => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
 
-    let goFromWitchChoiceToNextStep = (player: player, _event): unit => {
-        setWitchVictimPlayer(_prev => player)
-        goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
-    }
-    let goFromConstableChoiceToNextStep = (player: player, _event): unit => {
-        setConstableSavePlayer(_prev => player)
-        goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
-    }
+    let scenario: scenario = getScenario(subPage)
+    let maybeScenarioStep: option<scenarioStep> = Belt.Array.get(scenario, scenarioIndex)
 
     switch maybeScenarioStep {
         | None               => goToPage(_prev => DaytimeReveal)->elementify
@@ -154,12 +152,8 @@ let make = (
             goToPage,
             goToPrevStep,
             goToNextStep,
-            goFromWitchChoiceToNextStep,
-            goFromConstableChoiceToNextStep,
-            witchVictimPlayer,
-            constableSavePlayer,
-            players,
-            language)
+            goToScenarioIndex,
+            players)
     }
 }
 

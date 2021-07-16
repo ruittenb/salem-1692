@@ -32,10 +32,18 @@ let rec getCurrentPage = (
 
 @react.component
 and make = (): React.element => {
+
     let (language, setLanguage) = React.useState(_ => initialLanguage)
     let (currentPage, goToPage) = React.useState(_ => initialPage)
+    let chosenPlayerContext1: (string, chosenPlayerSetter) = React.useState(_ => "")
+    let chosenPlayerContext2: (string, chosenPlayerSetter) = React.useState(_ => "")
+
     <LanguageContext.Provider value=language>
-        {getCurrentPage(currentPage, goToPage, setLanguage)}
+        <ChosenPlayerContext.Provider1 value=chosenPlayerContext1>
+        <ChosenPlayerContext.Provider2 value=chosenPlayerContext2>
+            {getCurrentPage(currentPage, goToPage, setLanguage)}
+        </ChosenPlayerContext.Provider2>
+        </ChosenPlayerContext.Provider1>
     </LanguageContext.Provider>
 }
 
