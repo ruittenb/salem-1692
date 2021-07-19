@@ -51,6 +51,7 @@ let table = Js.Dict.fromArray([
     ("No", "Nee"),
     (`✔`, `✔`),
     (`✘`, `✘`),
+    ("Error", "Fout"),
     ("Unable to load audio", "Kan audio niet laden"),
     ("Index out of bounds", "Index buiten bereik"),
     // Dawn
