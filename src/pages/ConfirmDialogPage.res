@@ -29,13 +29,9 @@ let make = (
             { React.string(choice) }
             <Spacer />
             <Spacer />
-            <LargeButton className="confirm_yes" onClick=goToNextStep >
-                {React.string(t(`✔`))}
-            </LargeButton>
+            <LargeButton className="confirm_yes" onClick=goToNextStep ></LargeButton>
             <Spacer />
-            <LargeButton className="confirm_no" onClick=goToPrevStep >
-                {React.string(t(`✘`))}
-            </LargeButton>
+            <LargeButton className="confirm_no" onClick=goToPrevStep ></LargeButton>
             <Spacer />
         </div>
     </div>

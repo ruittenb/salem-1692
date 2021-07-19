@@ -8,11 +8,11 @@ open Types
 let defaultPlayerSetter: chosenPlayerSetter = (_: string => string) => ()
 
 let default: (string, chosenPlayerSetter) = ("", defaultPlayerSetter)
-let context1 = React.createContext(default)
-let context2 = React.createContext(default)
+let contextWitch     = React.createContext(default)
+let contextConstable = React.createContext(default)
 
-module Provider1 = {
-    let provider = React.Context.provider(context1)
+module ProviderWitch = {
+    let provider = React.Context.provider(contextWitch)
 
     @react.component
     let make = (~value, ~children) => {
@@ -20,8 +20,8 @@ module Provider1 = {
     }
 }
 
-module Provider2 = {
-    let provider = React.Context.provider(context2)
+module ProviderConstable = {
+    let provider = React.Context.provider(contextConstable)
 
     @react.component
     let make = (~value, ~children) => {

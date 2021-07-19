@@ -49,13 +49,13 @@ let table = Js.Dict.fromArray([
     ("are you sure?", "are you sure?"),
     ("Yes", "Yes"),
     ("No", "No"),
-    (`✔`, `✔`),
-    (`✘`, `✘`),
     ("Error", "Error"),
     ("Unable to load audio", "Unable to load audio"),
     ("Index out of bounds", "Index out of bounds"),
     // Dawn
-    ("Decide whether you want to confess", "Decide whether you want to confess"),
-    ("Reveal victim", "Reveal victim"),
+    ("Everyone,", "Everyone,"),
+    ("decide whether you want to confess", "decide whether you want to confess"),
+    ("Reveal witches' victim", "Reveal witches' victim"),
+    ("Reveal constable's protection", "Reveal constable's protection"),
 ])
 

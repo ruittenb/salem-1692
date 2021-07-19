@@ -56,8 +56,8 @@ type audioEffect =
 type scenarioStep =
     | Speech(audioSpeech)
     | Effect(audioEffect)
-    | ChooseWitch
-    | ConfirmWitch
+    | ChooseWitches
+    | ConfirmWitches
     | ChooseConstable
     | ConfirmConstable
 

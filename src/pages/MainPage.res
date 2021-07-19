@@ -26,7 +26,7 @@ let rec getCurrentPage = (
         | FirstNightMoreWitches   => <NightScenarioPage subPage=currentPage goToPage players />
         | OtherNightNoConstable   => <NightScenarioPage subPage=currentPage goToPage players />
         | OtherNightWithConstable => <NightScenarioPage subPage=currentPage goToPage players />
-        | DaytimeReveal           => <div>{React.string("Daytime Reveal")} </div>
+        | DaytimeReveal           => <DaytimeRevealPage goToPage />
         | Close                   => <ClosePage />
     }
 }
@@ -36,15 +36,15 @@ and make = (): React.element => {
 
     let (language, setLanguage) = React.useState(_ => initialLanguage)
     let (currentPage, goToPage) = React.useState(_ => initialPage)
-    let chosenPlayerContext1: (string, chosenPlayerSetter) = React.useState(_ => "")
-    let chosenPlayerContext2: (string, chosenPlayerSetter) = React.useState(_ => "")
+    let chosenPlayerContextWitch:     (string, chosenPlayerSetter) = React.useState(_ => "")
+    let chosenPlayerContextConstable: (string, chosenPlayerSetter) = React.useState(_ => "")
 
     <LanguageContext.Provider value=language>
-        <ChosenPlayerContext.Provider1 value=chosenPlayerContext1>
-        <ChosenPlayerContext.Provider2 value=chosenPlayerContext2>
+        <ChosenPlayerContext.ProviderWitch value=chosenPlayerContextWitch>
+        <ChosenPlayerContext.ProviderConstable value=chosenPlayerContextConstable>
             {getCurrentPage(currentPage, goToPage, setLanguage)}
-        </ChosenPlayerContext.Provider2>
-        </ChosenPlayerContext.Provider1>
+        </ChosenPlayerContext.ProviderConstable>
+        </ChosenPlayerContext.ProviderWitch>
     </LanguageContext.Provider>
 }
 

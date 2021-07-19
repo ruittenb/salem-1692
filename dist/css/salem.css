@@ -41,6 +41,10 @@ dd {
     margin-left: 20px;
 }
 
+img.sound-image {
+    margin: 50px 0 30px 0;
+}
+
 .flex-vertical {
     display: flex;
     justify-content: flex-start;
@@ -102,12 +106,20 @@ div.text-padding {
     height: 80px;
 }
 
-.page button.largebutton.confirm_no,
 .page button.largebutton.confirm_yes {
     font-size: 80px;
+    color: #172;
+    background-image: url(../images/confirm-yes.png);
+    background-repeat: no-repeat;
+    background-position: center center;
 }
-.page button.largebutton.confirm_no  { color: #a24; }
-.page button.largebutton.confirm_yes { color: #172; }
+.page button.largebutton.confirm_no  {
+    font-size: 80px;
+    color: #a24;
+    background-image: url(../images/confirm-no.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
 
 .page button.icon {
     padding-left: 24px;
