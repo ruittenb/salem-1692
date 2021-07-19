@@ -3,6 +3,8 @@
   "short_name": "Salem 1692",
   "description": "Moderator app for the cardgame Salem 1692",
   "start_url": "index.html?utm_source=pwa",
+  "manifest_version": 2,
+  "version": "1.0",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#BF9986",
