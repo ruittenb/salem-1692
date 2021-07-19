@@ -12,6 +12,7 @@ let make = (
     let language = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(language)
     let spacedComma = React.string(",  ")
+    let closeParen = React.string(")")
     <div id="credits-page" className="page flex-vertical text-padding">
         <h1> {React.string(t("Credits"))} </h1>
         <Spacer />
@@ -23,8 +24,8 @@ let make = (
             <dt> {React.string(t("App:"))} </dt>
             <dd> {React.string(`René Uittenbogaard © 2021`)} </dd>
             <dt> {React.string(t("Sound effects:"))} </dt>
-            <dd> {React.string("Daniel Simon @ ")}
-                <a href="https://soundbible.com/"> {React.string("soundbible.com")} </a> spacedComma
+            <dd> {React.string("Daniel Simon (")}
+                <a href="https://soundbible.com/"> {React.string("soundbible.com")} </a> closeParen spacedComma
                 <a href="https://mixkit.co/free-sound-effects/buzzer/"> {React.string("mixkit.co")} </a>
             </dd>
             <dt> {React.string(t("Voice actors:"))} </dt>
