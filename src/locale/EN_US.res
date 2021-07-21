@@ -40,6 +40,7 @@ let table = Js.Dict.fromArray([
     ("Night with constable", "Night with constable"),
     ("Night without constable", "Night without constable"),
     ("The witches", "The witches"),
+    ("The witch's turn", "The witch's turn"),
     ("The witches' turn", "The witches' turn"),
     ("Choose-SG a victim:", "Choose a victim:"),
     ("Choose-PL a victim:", "Choose a victim:"),

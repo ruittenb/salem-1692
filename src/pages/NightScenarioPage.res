@@ -52,24 +52,16 @@ let make = (
     // Construct the page
     switch (hasError, maybeScenarioStep) {
         | (true, _)                       => <NightErrorPage message=t("Unable to load audio") goToPage></NightErrorPage>
-        | (false, None)                   => <NightErrorPage message=t("Index out of bounds") goToPage></NightErrorPage>
+        | (false, None)                   => <NightErrorPage message=t("Index out of bounds")  goToPage></NightErrorPage>
         | (false, Some(Effect(effect)))   => <NightPage goToPage>{soundImage}<Audio track=Effect(effect) proceed=goToNextStep onError /></NightPage>
         | (false, Some(Speech(speech)))   => <NightPage goToPage>{soundImage}<Audio track=Speech(speech) proceed=goToNextStep onError /></NightPage>
         | (false, Some(ConfirmWitches))   => <NightConfirmPage goToPrevStep goToNextStep addressed=witchOrWitches  choice=witchVictimPlayer   />
         | (false, Some(ConfirmConstable)) => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable       choice=constableSavePlayer />
         | (false, Some(ChooseWitches))    => <NightPage goToPage>
-                                                <PlayerList players
-                                                    choiceHandler=goFromWitchChoiceToNextStep
-                                                    title=t("The witches' turn")
-                                                    subtitle=t("Choose a victim:")
-                                                />
+                                                <PlayerList players addressed=witchOrWitches choiceHandler=goFromWitchChoiceToNextStep />
                                             </NightPage>
         | (false, Some(ChooseConstable))  => <NightPage goToPage>
-                                                <PlayerList players
-                                                    choiceHandler=goFromConstableChoiceToNextStep
-                                                    title=t("The constable's turn")
-                                                    subtitle=t("Choose someone to protect:")
-                                                />
+                                                <PlayerList players addressed=Constable  choiceHandler=goFromConstableChoiceToNextStep />
                                             </NightPage>
     }
 }
