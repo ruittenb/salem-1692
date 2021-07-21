@@ -19,6 +19,7 @@ let table = Js.Dict.fromArray([
     (`Español`, `Español`),
     ("Italiano", "Italiano"),
     ("Back", "Regresar"),
+    ("Next", "Avanzar"),
     // Credits
     ("Credits", `Créditos`),
     ("Game:", "Juego:"),
@@ -40,21 +41,30 @@ let table = Js.Dict.fromArray([
     ("Night without constable", "Noche sin alguacil"),
     ("The witches", "Las brujas"),
     ("The witches' turn", "Turno de las brujas"),
-    ("Choose a victim:", `Elige una víctima:`),
+    ("Choose-SG a victim:", `Elige una víctima:`),
+    ("Choose-PL a victim:", `Eligen una víctima:`),
     ("The constable", "El alguacil"),
     ("The constable's turn", "Turno del alguacil"),
     ("Choose someone to protect:", `Elige a quién quieres proteger:`),
+    // Confirm
+    ("Witch, ", "Bruja, "),
     ("Witches, ", "Brujas, "),
     ("Constable, ", "Alguacil, "),
-    ("are you sure?", "¿estas seguro?"),
+    ("are you-SG sure?", `¿estas segura?`),
+    ("are you-PL sure?", `¿estáis seguras?`),
+    ("Confirm", "Confirmar"),
     ("Yes", `Sí`),
     ("No", "No"),
+    // Error
     ("Error", "Error"),
     ("Unable to load audio", "No se puede cargar el audio"),
     ("Index out of bounds", `Índice fuera de los límites`),
-    // Dawn
-    ("Everyone,", "Todos,"),
+    // Confess
+    ("Confess", "Confesar"),
+    ("Everyone,", "Cada persona,"),
     ("decide whether you want to confess", "decide si quieres confesar"),
+    // Reveal
+    ("The Reveal", `La revelación`),
     ("Reveal witches' victim", `Revelar víctima de las brujas`),
     ("Reveal constable's protection", `Revelar protección del alguacil`),
 ])

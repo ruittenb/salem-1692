@@ -19,6 +19,7 @@ let table = Js.Dict.fromArray([
     (`Español`, `Español`),
     ("Italiano", "Italiano"),
     ("Back", "Back"),
+    ("Next", "Next"),
     // Credits
     ("Credits", "Credits"),
     ("Game:", "Game:"),
@@ -40,21 +41,30 @@ let table = Js.Dict.fromArray([
     ("Night without constable", "Night without constable"),
     ("The witches", "The witches"),
     ("The witches' turn", "The witches' turn"),
-    ("Choose a victim:", "Choose a victim:"),
+    ("Choose-SG a victim:", "Choose a victim:"),
+    ("Choose-PL a victim:", "Choose a victim:"),
     ("The constable", "The constable"),
     ("The constable's turn", "The constable's turn"),
     ("Choose someone to protect:", "Choose someone to protect:"),
+    // Confirm
+    ("Witch, ", "Witch, "),
     ("Witches, ", "Witches, "),
     ("Constable, ", "Constable, "),
-    ("are you sure?", "are you sure?"),
+    ("are you-SG sure?", "are you sure?"),
+    ("are you-PL sure?", "are you sure?"),
+    ("Confirm", "Confirm"),
     ("Yes", "Yes"),
     ("No", "No"),
+    // Error
     ("Error", "Error"),
     ("Unable to load audio", "Unable to load audio"),
     ("Index out of bounds", "Index out of bounds"),
-    // Dawn
+    // Confess
+    ("Confess", "Confess"),
     ("Everyone,", "Everyone,"),
     ("decide whether you want to confess", "decide whether you want to confess"),
+    // Reveal
+    ("The Reveal", "Reveal"),
     ("Reveal witches' victim", "Reveal witches' victim"),
     ("Reveal constable's protection", "Reveal constable's protection"),
 ])

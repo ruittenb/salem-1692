@@ -44,7 +44,7 @@ let make = (
         <Button
             label={t("Back")}
             onClick={ _event => goToPage(_prev => Setup) }
-            className="icon icon_back"
+            className="icon_left icon_back"
         />
     </div>
 }

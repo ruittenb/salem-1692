@@ -121,9 +121,13 @@ div.text-padding {
     background-position: center center;
 }
 
-.page button.icon {
+.page button.icon_left {
     padding-left: 24px;
     background-position: 20px center;
+}
+.page button.icon_right {
+    padding-right: 24px;
+    background-position: calc(100% - 20px) center;
 }
 
 .page button.flag_nl { background-image: url(../images/flag_nl.png); }
@@ -137,7 +141,17 @@ div.text-padding {
 .page button.icon_gear { background-image: url(../images/icon_gear.png); }
 .page button.icon_lang { background-image: url(../images/icon_lang.png); }
 .page button.icon_back { background-image: url(../images/icon_back.png); }
+.page button.icon_forw { background-image: url(../images/icon_forw.png); }
 .page button.icon_exit { background-image: url(../images/icon_exit.png); }
+
+.buttonpair {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+.buttonpair button {
+    width: 46%;
+}
 
 /** ****************************************************************************
  * Title Page

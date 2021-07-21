@@ -26,6 +26,7 @@ let rec getCurrentPage = (
         | FirstNightMoreWitches   => <NightScenarioPage subPage=currentPage goToPage players />
         | OtherNightNoConstable   => <NightScenarioPage subPage=currentPage goToPage players />
         | OtherNightWithConstable => <NightScenarioPage subPage=currentPage goToPage players />
+        | DaytimeConfess          => <DaytimeConfessPage goToPage />
         | DaytimeReveal           => <DaytimeRevealPage goToPage />
         | Close                   => <ClosePage />
     }

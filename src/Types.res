@@ -20,6 +20,22 @@ type language =
 type player = string
 type players = array<player>
 
+/**
+ * How are the players seated around the table?
+ *
+ *          o   o          o                  o               o   o
+ *          o   o        o   o              o   o             o   o
+ *          o   o        o   o              o   o             o   o
+ *          o   o          o                o   o               o
+ *
+ *        TwoLines   TwoLinesTwoHeads   OneHeadTwoLines   TwoLinesOneHead
+ */
+type tableLayout =
+    | TwoLines
+    | TwoLinesTwoHeads
+    | TwoLinesOneHead
+    | OneHeadTwoLines
+
 type page =
     | Title
     | Setup
@@ -31,6 +47,7 @@ type page =
     | FirstNightMoreWitches
     | OtherNightWithConstable
     | OtherNightNoConstable
+    | DaytimeConfess
     | DaytimeReveal
     | Close
 
@@ -62,4 +79,9 @@ type scenarioStep =
     | ConfirmConstable
 
 type scenario = array<scenarioStep>
+
+type addressed =
+    | Witch
+    | Witches
+    | Constable
 

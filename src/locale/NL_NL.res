@@ -19,6 +19,7 @@ let table = Js.Dict.fromArray([
     (`Español`, `Español`),
     ("Italiano", "Italiano"),
     ("Back", "Terug"),
+    ("Next", "Volgende"),
     // Credits
     ("Credits", "Credits"),
     ("Game:", "Spel:"),
@@ -40,21 +41,30 @@ let table = Js.Dict.fromArray([
     ("Night without constable", "Nacht zonder constable"),
     ("The witches", "De heksen"),
     ("The witches' turn", "Heksen aan de beurt"),
-    ("Choose a victim:", "Kies een slachtoffer:"),
+    ("Choose-SG a victim:", "Kies een slachtoffer:"),
+    ("Choose-PL a victim:", "Kies een slachtoffer:"),
     ("The constable", "De constable"),
     ("The constable's turn", "Constable aan de beurt"),
     ("Choose someone to protect:", "Kies wie beschermd moet worden:"),
+    // Confirm
+    ("Witch, ", "Heks, "),
     ("Witches, ", "Heksen, "),
     ("Constable, ", "Constable, "),
-    ("are you sure?", "weet je het zeker?"),
+    ("are you-SG sure?", "weet je het zeker?"),
+    ("are you-PL sure?", "weten jullie het zeker?"),
+    ("Confirm", "Bevestigen"),
     ("Yes", "Ja"),
     ("No", "Nee"),
+    // Error
     ("Error", "Fout"),
     ("Unable to load audio", "Kan audio niet laden"),
     ("Index out of bounds", "Index buiten bereik"),
-    // Dawn
+    // Confess
+    ("Confess", "Opbiechten"),
     ("Everyone,", "Spelers,"),
-    ("decide whether you want to confess", "beslis of je wilt bekennen"),
+    ("decide whether you want to confess", "beslis of je wilt opbiechten"),
+    // Reveal
+    ("The Reveal", "De onthulling"),
     ("Reveal witches' victim", "Slachtoffer van de heksen onthullen"),
     ("Reveal constable's protection", "Beschermeling van de constable onthullen"),
 ])

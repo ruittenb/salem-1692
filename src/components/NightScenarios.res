@@ -8,8 +8,6 @@ open Types
 let getScenario = (subPage: page): scenario => {
     switch subPage {
         | FirstNightOneWitch      => [
-            /*
-            */
             Effect(ChurchBell),
             Speech(TownGoToSleep),
             Effect(Silence1s),
@@ -25,19 +23,23 @@ let getScenario = (subPage: page): scenario => {
             Speech(TownWakeUp),
         ]
         | FirstNightMoreWitches   => [
+            /*
             Effect(ChurchBell),
             Speech(TownGoToSleep),
             Effect(Silence1s),
             Effect(Silence2s),
             Speech(WitchesWakeUp),
             Speech(WitchesDecideCat),
+            */
             ChooseWitches,
             ConfirmWitches,
+            /*
             Effect(Silence2s),
             Speech(WitchesGoToSleep),
             Effect(Silence2s),
             Effect(Rooster),
             Speech(TownWakeUp),
+            */
         ]
         | OtherNightWithConstable => [
             Effect(ChurchBell),

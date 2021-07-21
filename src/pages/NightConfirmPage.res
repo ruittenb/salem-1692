@@ -1,21 +1,27 @@
 
 /** ****************************************************************************
- * ConfirmDialogPage
+ * NightConfirmPage
  */
 
-@@warning("-33") // Unused 'open Types'
+// @@warning("-33") // Unused 'open Types'
 
 open Types
 
 @react.component
 let make = (
-    ~address: string,
+    ~addressed: addressed,
     ~choice: string,
     ~goToPrevStep,
     ~goToNextStep,
 ): React.element => {
     let language = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(language)
+
+    let question = switch addressed {
+        | Witch     => t("Witch, ")     ++ t("are you-SG sure?")
+        | Witches   => t("Witches, ")   ++ t("are you-PL sure?")
+        | Constable => t("Constable, ") ++ t("are you-SG sure?")
+    }
 
     // This dialog hides the encompassing page in the background
     <div id="night-page" className="page">
@@ -24,7 +30,7 @@ let make = (
             <Spacer />
             <Spacer />
             <Spacer />
-            { React.string(address ++ t("are you sure?")) }
+            { React.string(question) }
             <div />
             { React.string(choice) }
             <Spacer />
