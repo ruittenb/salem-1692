@@ -18,12 +18,16 @@ let make = (
     <div id="daytime-page" className="page flex-vertical">
         <h1> {React.string(t("The Reveal"))} </h1>
         <Spacer />
-        <LargeButton onClick={ _event => goToPage(_prev => Daytime) } >
-            {React.string(t("Reveal witches' victim"))}
-        </LargeButton>
-        <LargeButton onClick={ _event => goToPage(_prev => FirstNightMoreWitches) } >
-            {React.string(t("Reveal constable's protection"))}
-        </LargeButton>
+        <LargeRevealButton /* TODO: only if the constable acted */
+            revealPrompt=t("Reveal witches' victim")
+            revelationPrompt=t("The witches attacked")
+            secret=witchVictimPlayer
+        />
+        <LargeRevealButton /* TODO: only if the constable acted */
+            revealPrompt=t("Reveal constable's protection")
+            revelationPrompt=t("The constable protected")
+            secret=constableSavePlayer
+        />
         <Spacer />
         <ButtonPair>
             <Button

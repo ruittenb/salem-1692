@@ -8,7 +8,7 @@ open Types
 let initialLanguage: Types.language = EN_US
 let initialPage: Types.page = Title
 let players: Types.players = // []
-    [ "Helmi", "Marco", "Richella", "Anja", `René`, "Erwin" ]
+    [ "Helmi", "Marco", "Anja", "Kees", "Joyce", `René` ]
 
 let rec getCurrentPage = (
     currentPage: Types.page,
@@ -39,6 +39,8 @@ and make = (): React.element => {
     let (currentPage, goToPage) = React.useState(_ => initialPage)
     let chosenPlayerContextWitch:     (string, chosenPlayerSetter) = React.useState(_ => "")
     let chosenPlayerContextConstable: (string, chosenPlayerSetter) = React.useState(_ => "")
+    let (_, _) = React.useContext(ChosenPlayerContext.contextWitch)
+    let (_, _) = React.useContext(ChosenPlayerContext.contextConstable)
 
     <LanguageContext.Provider value=language>
         <ChosenPlayerContext.ProviderWitch value=chosenPlayerContextWitch>

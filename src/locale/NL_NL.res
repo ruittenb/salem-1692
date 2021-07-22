@@ -67,6 +67,8 @@ let table = Js.Dict.fromArray([
     // Reveal
     ("The Reveal", "De onthulling"),
     ("Reveal witches' victim", "Slachtoffer van de heksen onthullen"),
+    ("The witches attacked", "De heksen kozen"),
     ("Reveal constable's protection", "Beschermeling van de constable onthullen"),
+    ("The constable protected", "De constable heeft beschermd"),
 ])
 
