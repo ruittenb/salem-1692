@@ -7,6 +7,7 @@ A PWA for representing the moderator in the Salem 1692 card game
 
 - [ReScript](https://rescript-lang.org/docs/manual/latest/overview). For transpiling ReScript code to JavaScript.
 - [Rescript Forum](https://www.reddit.com/r/rescript/)
+- [React](https://reactjs.org/docs/getting-started.html)
 
 ## Building
 
