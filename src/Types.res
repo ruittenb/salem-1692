@@ -6,8 +6,6 @@
 type clickHandler = ReactEvent.Mouse.t => unit
 type mediaHandler = ReactEvent.Media.t => unit
 
-type chosenPlayerSetter = (string => string) => unit
-
 type either<'t, 'v> =
     | Left('t)
     | Right('v)
@@ -23,18 +21,34 @@ type players = array<player>
 /**
  * How are the players seated around the table?
  *
- *          o   o          o                  o               o   o
- *          o   o        o   o              o   o             o   o
- *          o   o        o   o              o   o             o   o
- *          o   o          o                o   o               o
- *
- *        TwoLines   TwoLinesTwoHeads   OneHeadTwoLines   TwoLinesOneHead
+ *           even nr. players          odd nr. players
+ *        ----------------------    ----------------------
+ *        TwoAtHead    OneAtHead    OneAtHead    TwoAtHead
+ *        ---------    ---------    ---------    ---------
+ *          o   o          o            o          o   o
+ *          o   o        o   o        o   o        o   o
+ *          o   o        o   o        o   o        o   o
+ *          o   o          o          o   o          o
  */
 type tableLayout =
-    | TwoLines
-    | TwoLinesTwoHeads
-    | TwoLinesOneHead
-    | OneHeadTwoLines
+    | OneAtHead
+    | TwoAtHead
+
+type gameState = {
+    players: players,
+    tableLayout: tableLayout,
+    doPlayEffects: bool,
+    doPlaySpeech: bool,
+}
+type gameStateSetter = (gameState => gameState) => unit
+
+type turnState = {
+    nrWitches: int,
+    hasConstable: bool,
+    choiceWitches: string,
+    choiceConstable: string,
+}
+type turnStateSetter = (turnState => turnState) => unit
 
 type page =
     | Title
@@ -84,13 +98,4 @@ type addressed =
     | Witch
     | Witches
     | Constable
-
-type turnState = {
-    nrWitches: int,
-    hasConstable: bool,
-    choiceWitches: string,
-    choiceConstable: string,
-}
-
-type turnStateSetter = (turnState => turnState) => unit
 

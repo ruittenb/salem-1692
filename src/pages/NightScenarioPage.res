@@ -8,13 +8,15 @@ open Types
 @react.component
 let make = (
     ~subPage: page,
-    ~players: players,
     ~goToPage,
 ): React.element => {
 
     // Language and translator
     let language = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(language)
+
+    // game state
+    let (gameState, _) = React.useContext(GameStateContext.context)
 
     // Audio error handler
     let (hasError, setError) = React.useState(_ => false)
@@ -52,15 +54,20 @@ let make = (
     switch (hasError, maybeScenarioStep) {
         | (true, _)                       => <NightErrorPage message=t("Unable to load audio") goToPage></NightErrorPage>
         | (false, None)                   => <NightErrorPage message=t("Index out of bounds")  goToPage></NightErrorPage>
-        | (false, Some(Effect(effect)))   => <NightPage goToPage>{soundImage}<Audio track=Effect(effect) proceed=goToNextStep onError /></NightPage>
-        | (false, Some(Speech(speech)))   => <NightPage goToPage>{soundImage}<Audio track=Speech(speech) proceed=goToNextStep onError /></NightPage>
+        | (false, Some(Effect(effect)))
+               if gameState.doPlayEffects => <NightPage goToPage>{soundImage}<Audio track=Effect(effect) proceed=goToNextStep onError /></NightPage>
+        | (false, Some(Speech(speech)))
+               if gameState.doPlaySpeech  => <NightPage goToPage>{soundImage}<Audio track=Speech(speech) proceed=goToNextStep onError /></NightPage>
+        | (false, Some(Effect(_)))
+        | (false, Some(Speech(_)))        => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+                                             React.null
         | (false, Some(ConfirmWitches))   => <NightConfirmPage goToPrevStep goToNextStep addressed=witchOrWitches />
         | (false, Some(ConfirmConstable)) => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable      />
         | (false, Some(ChooseWitches))    => <NightPage goToPage>
-                                                <PlayerList players addressed=witchOrWitches choiceHandler=goFromWitchChoiceToNextStep />
+                                                <PlayerList addressed=witchOrWitches choiceHandler=goFromWitchChoiceToNextStep />
                                             </NightPage>
         | (false, Some(ChooseConstable))  => <NightPage goToPage>
-                                                <PlayerList players addressed=Constable  choiceHandler=goFromConstableChoiceToNextStep />
+                                                <PlayerList addressed=Constable  choiceHandler=goFromConstableChoiceToNextStep />
                                             </NightPage>
     }
 }

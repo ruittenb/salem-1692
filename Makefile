@@ -51,11 +51,11 @@ build: ## Compile the res files to js and bundle them
 
 .PHONY: watch
 watch: ## Compile the res files to js and bundle them; watch for changes
-	fswatch $(SRC_JS) | while read f; do \
-		tput setaf $(JS_COLOR);          \
-		echo '>>>> Bundling';            \
-		tput sgr0;                       \
-		$(MAKE) bundle mark;             \
+	fswatch -o $(SRC_JS) | while read f; do \
+		tput setaf $(JS_COLOR);             \
+		echo '>>>> Bundling';               \
+		tput sgr0;                          \
+		$(MAKE) bundle mark;                \
 	done &
 	npm run re:watch
 
