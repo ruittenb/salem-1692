@@ -35,10 +35,13 @@ h1 {
     margin-bottom: 10px;
 }
 h2 {
-    font-size: 40px;
-    font-weight: bold;
     margin-top: 10px;
     margin-bottom: 0;
+}
+h2,
+div.h2-no-margin {
+    font-size: 40px;
+    font-weight: bold;
 }
 
 dt {
