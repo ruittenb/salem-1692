@@ -39,7 +39,7 @@ h2 {
     margin-bottom: 0;
 }
 h2,
-div.h2-no-margin {
+.h2-no-margin {
     font-size: 40px;
     font-weight: bold;
 }

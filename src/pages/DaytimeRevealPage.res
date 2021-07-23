@@ -12,23 +12,50 @@ let make = (
     let language = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(language)
 
-    let (witchVictimPlayer,   _): (string, chosenPlayerSetter) = React.useContext(ChosenPlayerContext.contextWitch)
-    let (constableSavePlayer, _): (string, chosenPlayerSetter) = React.useContext(ChosenPlayerContext.contextConstable)
+    let (turnState, _) = React.useContext(TurnStateContext.context)
+
+    let (
+        witchesRevealPrompt,
+        witchesRevelationPromptPre,
+        witchesRevelationPromptPost
+    ) = if turnState.nrWitches === 1 {
+        (
+            t("Reveal witch's victim"),
+            t("The witch attacked-PRE"),
+            t("The witch attacked-POST"),
+        )
+    } else {
+        (
+            t("Reveal witches' victim"),
+            t("The witches attacked-PRE"),
+            t("The witches attacked-POST"),
+        )
+    }
 
     <div id="daytime-page" className="page flex-vertical">
         <h1> {React.string(t("The Reveal"))} </h1>
         <Spacer />
-        <LargeRevealButton /* TODO: only if the constable acted */
-            revealPrompt=t("Reveal witches' victim")
-            revelationPrompt=t("The witches attacked")
-            secret=witchVictimPlayer
+        <LargeRevealButton
+            revealPrompt=witchesRevealPrompt
+            revelationPromptPre=witchesRevelationPromptPre
+            revelationPromptPost=witchesRevelationPromptPost
+            secret=turnState.choiceWitches
         />
-        <LargeRevealButton /* TODO: only if the constable acted */
-            revealPrompt=t("Reveal constable's protection")
-            revelationPrompt=t("The constable protected")
-            secret=constableSavePlayer
-        />
-        <Spacer />
+        {
+            if turnState.hasConstable {
+                <>
+                    <LargeRevealButton
+                        revealPrompt=t("Reveal constable's protection")
+                        revelationPromptPre=t("The constable protected-PRE")
+                        revelationPromptPost=t("The constable protected-POST")
+                        secret=turnState.choiceConstable
+                    />
+                    <Spacer />
+                </>
+            } else {
+                React.null
+            }
+        }
         <ButtonPair>
             <Button
                 label={t("Back")}
