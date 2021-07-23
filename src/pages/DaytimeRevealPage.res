@@ -12,23 +12,41 @@ let make = (
     let language = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(language)
 
-    let (witchVictimPlayer,   _): (string, chosenPlayerSetter) = React.useContext(ChosenPlayerContext.contextWitch)
-    let (constableSavePlayer, _): (string, chosenPlayerSetter) = React.useContext(ChosenPlayerContext.contextConstable)
+    let (turnState, _) = React.useContext(TurnStateContext.context)
+
+    let witchesRevealPrompt = if turnState.nrWitches === 1 {
+        t("Reveal witch's victim")
+    } else {
+        t("Reveal witches' victim")
+    }
+    let witchesRevelationPrompt = if turnState.nrWitches === 1 {
+        t("The witch attacked")
+    } else {
+        t("The witches attacked")
+    }
 
     <div id="daytime-page" className="page flex-vertical">
         <h1> {React.string(t("The Reveal"))} </h1>
         <Spacer />
-        <LargeRevealButton /* TODO: only if the constable acted */
-            revealPrompt=t("Reveal witches' victim")
-            revelationPrompt=t("The witches attacked")
-            secret=witchVictimPlayer
+        <LargeRevealButton
+            revealPrompt=witchesRevealPrompt
+            revelationPrompt=witchesRevelationPrompt
+            secret=turnState.choiceWitches
         />
-        <LargeRevealButton /* TODO: only if the constable acted */
-            revealPrompt=t("Reveal constable's protection")
-            revelationPrompt=t("The constable protected")
-            secret=constableSavePlayer
-        />
-        <Spacer />
+        {
+            if turnState.hasConstable {
+                <>
+                    <LargeRevealButton
+                        revealPrompt=t("Reveal constable's protection")
+                        revelationPrompt=t("The constable protected")
+                        secret=turnState.choiceConstable
+                    />
+                    <Spacer />
+                </>
+            } else {
+                React.null
+            }
+        }
         <ButtonPair>
             <Button
                 label={t("Back")}

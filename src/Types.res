@@ -85,3 +85,12 @@ type addressed =
     | Witches
     | Constable
 
+type turnState = {
+    nrWitches: int,
+    hasConstable: bool,
+    choiceWitches: string,
+    choiceConstable: string,
+}
+
+type turnStateSetter = (turnState => turnState) => unit
+

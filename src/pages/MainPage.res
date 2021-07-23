@@ -6,9 +6,16 @@
 open Types
 
 let initialLanguage: Types.language = EN_US
-let initialPage: Types.page = Title
-let players: Types.players = // []
+let initialPage: Types.page = Title //  GameState
+let players: Types.players = // [] // GameState
     [ "Helmi", "Marco", "Anja", "Kees", "Joyce", `René` ]
+
+let initialTurnState = {
+    nrWitches: 1,
+    hasConstable: false,
+    choiceWitches: "",
+    choiceConstable: "",
+}
 
 let rec getCurrentPage = (
     currentPage: Types.page,
@@ -35,17 +42,14 @@ let rec getCurrentPage = (
 @react.component
 and make = (): React.element => {
 
-    let (language, setLanguage) = React.useState(_ => initialLanguage)
-    let (currentPage, goToPage) = React.useState(_ => initialPage)
-    let chosenPlayerContextWitch:     (string, chosenPlayerSetter) = React.useState(_ => "")
-    let chosenPlayerContextConstable: (string, chosenPlayerSetter) = React.useState(_ => "")
+    let (language, setLanguage)   = React.useState(_ => initialLanguage)
+    let (currentPage, goToPage)   = React.useState(_ => initialPage)
+    let (turnState, setTurnState) = React.useState(_ => initialTurnState)
 
     <LanguageContext.Provider value=language>
-        <ChosenPlayerContext.ProviderWitch value=chosenPlayerContextWitch>
-        <ChosenPlayerContext.ProviderConstable value=chosenPlayerContextConstable>
+        <TurnStateContext.Provider value=(turnState, setTurnState)>
             {getCurrentPage(currentPage, goToPage, setLanguage)}
-        </ChosenPlayerContext.ProviderConstable>
-        </ChosenPlayerContext.ProviderWitch>
+        </TurnStateContext.Provider>
     </LanguageContext.Provider>
 }
 
