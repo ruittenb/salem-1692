@@ -39,8 +39,6 @@ and make = (): React.element => {
     let (currentPage, goToPage) = React.useState(_ => initialPage)
     let chosenPlayerContextWitch:     (string, chosenPlayerSetter) = React.useState(_ => "")
     let chosenPlayerContextConstable: (string, chosenPlayerSetter) = React.useState(_ => "")
-    let (_, _) = React.useContext(ChosenPlayerContext.contextWitch)
-    let (_, _) = React.useContext(ChosenPlayerContext.contextConstable)
 
     <LanguageContext.Provider value=language>
         <ChosenPlayerContext.ProviderWitch value=chosenPlayerContextWitch>

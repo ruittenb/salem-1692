@@ -28,7 +28,7 @@ let make = (
             <Button key={label} label className onClick />
         })
     <>
-        <div> {React.string(t("Language"))} </div>
+        <h2>{ React.string(t("Language")) }</h2>
         <Spacer />
         {React.array(buttons)}
     </>

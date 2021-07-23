@@ -2,6 +2,7 @@
 COLOR=10 # bold green
 BUNDLE=dist/js/bundle.js
 SRC_JS=$(shell find src -name *.js)
+CSS_FILES=dist/css/salem.min.css dist/css/normalize.min.css
 
 .DEFAULT_GOAL:=help
 
@@ -15,6 +16,13 @@ mark: # Put asterisk in corner of terminal, to signal "done"
 	@tput cup $$((`tput lines` - 1)) $$((`tput cols` - 1))
 	@printf "*"
 	@tput cuu1 && tput cuu1 && echo
+
+.PHONY: minify-css
+minify-css: $(CSS_FILES) ## Minify the css files
+
+%.min.css: %.css
+	@# descend into the directory in order to prevent corrupting URLs in CSS
+	cd $(<D); cleancss $(<F) > $(@F)
 
 .PHONY: compile
 compile: ## Compile the res files

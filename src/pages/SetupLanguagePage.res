@@ -16,7 +16,6 @@ let make = (
     let t = Translator.getTranslator(language)
     <div id="setup-page" className="page flex-vertical">
         <h1> {React.string(t("Setup"))} </h1>
-        <Spacer />
         <LanguageList setLanguage goToPage />
     </div>
 }
