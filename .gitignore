@@ -7,3 +7,4 @@
 *.swp
 *.swo
 *.bs.js
+bundle.js.tmp-browserify-*
