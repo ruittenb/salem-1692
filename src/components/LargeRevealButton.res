@@ -21,7 +21,7 @@ let make = (
             if revealed {
                 <>
                     <div> {React.string(revelationPrompt)} </div>
-                    <h2> {React.string(secret)} </h2>
+                    <div className="h2-no-margin"> {React.string(secret)} </div>
                 </>
             } else {
                 React.string(revealPrompt)

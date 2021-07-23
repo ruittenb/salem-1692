@@ -18,7 +18,6 @@ let make = (
         <h1> {React.string(t("Confess"))} </h1>
         <h2> {React.string(t("Everyone,"))} </h2>
         <p> {React.string(t("decide whether you want to confess"))} </p>
-        <Spacer />
         <LargeRevealButton /* TODO: only if the constable acted */
             revealPrompt=t("Reveal constable's protection")
             revelationPrompt=t("The constable protected")

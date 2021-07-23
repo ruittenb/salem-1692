@@ -1,4 +1,6 @@
 
+export PATH:=$(PATH):$(shell npm bin)
+
 COLOR=10 # bold green
 BUNDLE=dist/js/bundle.js
 SRC_JS=$(shell find src -name *.js)

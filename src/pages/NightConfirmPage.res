@@ -18,9 +18,9 @@ let make = (
     let t = Translator.getTranslator(language)
 
     let question = switch addressed {
-        | Witch     => t("Witch, ")     ++ t("are you-SG sure?")
+        | Witch     => t("Witch, ")     ++ t("are you-FEM-SG sure?")
         | Witches   => t("Witches, ")   ++ t("are you-PL sure?")
-        | Constable => t("Constable, ") ++ t("are you-SG sure?")
+        | Constable => t("Constable, ") ++ t("are you-MASC-SG sure?")
     }
 
     // This dialog hides the encompassing page in the background
