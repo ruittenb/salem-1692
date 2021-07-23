@@ -1,10 +1,12 @@
 
 export PATH:=$(PATH):$(shell npm bin)
 
-COLOR=10 # bold green
+JS_COLOR=10 # bold green
+CSS_COLOR=15 # bold yellow
 BUNDLE=dist/js/bundle.js
 SRC_JS=$(shell find src -name *.js)
-CSS_FILES=dist/css/salem.min.css dist/css/normalize.min.css
+CSS_FILES=dist/css/salem.css dist/css/normalize.css
+CSS_MIN_FILES=dist/css/salem.min.css dist/css/normalize.min.css
 
 .DEFAULT_GOAL:=help
 
@@ -19,15 +21,24 @@ mark: # Put asterisk in corner of terminal, to signal "done"
 	@printf "*"
 	@tput cuu1 && tput cuu1 && echo
 
-.PHONY: minify-css
-minify-css: $(CSS_FILES) ## Minify the css files
+.PHONY: build-css
+build-css: $(CSS_MIN_FILES) ## Minify the css files
+
+.PHONY: watch-css
+watch-css: ## Minify the css files; watch for changes
+	fswatch $(CSS_FILES) | while read f; do \
+		tput setaf $(CSS_COLOR);            \
+		echo '>>>> Minifying';              \
+		tput sgr0;                          \
+		$(MAKE) build-css mark;             \
+	done &
 
 %.min.css: %.css
 	@# descend into the directory in order to prevent corrupting URLs in CSS
 	cd $(<D); cleancss $(<F) > $(@F)
 
-.PHONY: compile
-compile: ## Compile the res files
+.PHONY: build-res
+build-res: ## Compile the res files
 	npm run re:build
 
 .PHONY: bundle
@@ -36,16 +47,14 @@ bundle: ## Bundle the js files
 
 .PHONY: build
 build: ## Compile the res files to js and bundle them
-	$(MAKE) compile && \
-	$(MAKE) bundle
+	$(MAKE) build-res bundle
 
 .PHONY: watch
 watch: ## Compile the res files to js and bundle them; watch for changes
 	fswatch $(SRC_JS) | while read f; do \
-		tput setaf $(COLOR);             \
+		tput setaf $(JS_COLOR);          \
 		echo '>>>> Bundling';            \
 		tput sgr0;                       \
-		sleep 1;                         \
 		$(MAKE) bundle mark;             \
 	done &
 	npm run re:watch
