@@ -23,7 +23,8 @@ let make = (
                 <>
                     <LargeRevealButton
                         revealPrompt=t("Reveal constable's protection")
-                        revelationPrompt=t("The constable protected")
+                        revelationPromptPre=t("The constable protected-PRE")
+                        revelationPromptPost=t("The constable protected-POST")
                         secret=turnState.choiceConstable
                     />
                     <Spacer />

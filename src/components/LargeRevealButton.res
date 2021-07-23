@@ -10,7 +10,8 @@ open Types
 @react.component
 let make = (
     ~revealPrompt: string,
-    ~revelationPrompt: string,
+    ~revelationPromptPre: string,
+    ~revelationPromptPost: string,
     ~secret: string,
 ): React.element => {
 
@@ -20,8 +21,11 @@ let make = (
         {
             if revealed {
                 <>
-                    <div> {React.string(revelationPrompt)} </div>
-                    <div className="h2-no-margin"> {React.string(secret)} </div>
+                    <div> {React.string(revelationPromptPre)} </div>
+                    <div>
+                        <span className="h2-no-margin"> {React.string(secret)} </span>
+                        <span> {React.string(revelationPromptPost)} </span>
+                    </div>
                 </>
             } else {
                 React.string(revealPrompt)

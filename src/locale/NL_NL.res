@@ -70,9 +70,12 @@ let table = Js.Dict.fromArray([
     ("The Reveal", "De onthulling"),
     ("Reveal witch's victim", "Slachtoffer van de heks onthullen"),
     ("Reveal witches' victim", "Slachtoffer van de heksen onthullen"),
-    ("The witch attacked", "De heks koos"),
-    ("The witches attacked", "De heksen kozen"),
+    ("The witch attacked-PRE", "De heks heeft"),
+    ("The witch attacked-POST", " aangevallen"),
+    ("The witches attacked-PRE", "De heksen hebben"),
+    ("The witches attacked-POST", " aangevallen"),
     ("Reveal constable's protection", "Beschermeling van de constable onthullen"),
-    ("The constable protected", "De constable koos"),
+    ("The constable protected-PRE", "De constable heeft"),
+    ("The constable protected-POST", " beschermd"),
 ])
 

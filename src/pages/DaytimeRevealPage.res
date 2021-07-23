@@ -14,15 +14,22 @@ let make = (
 
     let (turnState, _) = React.useContext(TurnStateContext.context)
 
-    let witchesRevealPrompt = if turnState.nrWitches === 1 {
-        t("Reveal witch's victim")
+    let (
+        witchesRevealPrompt,
+        witchesRevelationPromptPre,
+        witchesRevelationPromptPost
+    ) = if turnState.nrWitches === 1 {
+        (
+            t("Reveal witch's victim"),
+            t("The witch attacked-PRE"),
+            t("The witch attacked-POST"),
+        )
     } else {
-        t("Reveal witches' victim")
-    }
-    let witchesRevelationPrompt = if turnState.nrWitches === 1 {
-        t("The witch attacked")
-    } else {
-        t("The witches attacked")
+        (
+            t("Reveal witches' victim"),
+            t("The witches attacked-PRE"),
+            t("The witches attacked-POST"),
+        )
     }
 
     <div id="daytime-page" className="page flex-vertical">
@@ -30,7 +37,8 @@ let make = (
         <Spacer />
         <LargeRevealButton
             revealPrompt=witchesRevealPrompt
-            revelationPrompt=witchesRevelationPrompt
+            revelationPromptPre=witchesRevelationPromptPre
+            revelationPromptPost=witchesRevelationPromptPost
             secret=turnState.choiceWitches
         />
         {
@@ -38,7 +46,8 @@ let make = (
                 <>
                     <LargeRevealButton
                         revealPrompt=t("Reveal constable's protection")
-                        revelationPrompt=t("The constable protected")
+                        revelationPromptPre=t("The constable protected-PRE")
+                        revelationPromptPost=t("The constable protected-POST")
                         secret=turnState.choiceConstable
                     />
                     <Spacer />
