@@ -25,7 +25,7 @@ let rec getCurrentPage = (
     switch currentPage {
         | Title                   => <TitlePage goToPage />
         | Setup                   => <SetupPage goToPage />
-        | SetupPlayers            => <div> {React.string("Players Placeholder")} </div>
+        | SetupPlayers            => <SetupPlayersPage goToPage />
         | SetupLanguage           => <SetupLanguagePage goToPage setLanguage />
         | Credits                 => <CreditsPage goToPage />
         | Daytime                 => <DaytimePage goToPage />

@@ -17,6 +17,10 @@ let make = (
         <h1> {React.string(t("Setup"))} </h1>
         <Spacer />
         <Button
+            label={t("Players")}
+            onClick={ _event => goToPage(_prev => SetupPlayers) }
+        />
+        <Button
             label={t("Language")}
             onClick={ _event => goToPage(_prev => SetupLanguage) }
         />
