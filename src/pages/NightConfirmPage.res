@@ -41,9 +41,9 @@ let make = (
             { React.string(choice) }
             <Spacer />
             <Spacer />
-            <LargeButton className="confirm_yes" onClick=goToNextStep ></LargeButton>
+            <LargeButton className="confirm-yes" onClick=goToNextStep ></LargeButton>
             <Spacer />
-            <LargeButton className="confirm_no" onClick=goToPrevStep ></LargeButton>
+            <LargeButton className="confirm-no" onClick=goToPrevStep ></LargeButton>
             <Spacer />
         </div>
     </div>

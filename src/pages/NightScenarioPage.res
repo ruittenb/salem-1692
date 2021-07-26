@@ -26,16 +26,11 @@ let make = (
     let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
     let scenario: scenario = NightScenarios.getScenario(subPage)
     let maybeScenarioStep: option<scenarioStep> = Belt.Array.get(scenario, scenarioIndex)
-    let isLastStep: bool = scenarioIndex + 1 >= scenario->Belt.Array.length
     let witchOrWitches: addressed = if subPage === FirstNightOneWitch { Witch } else { Witches }
 
     // Event handlers for stepping through scenario
     let goToPrevStep = (_event): unit => goToScenarioIndex(scenarioIndex => scenarioIndex - 1)
-    let goToNextStep = (_event): unit => if isLastStep {
-        goToPage(_page => DaytimeConfess)
-    } else {
-        goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
-    }
+    let goToNextStep = (_event): unit => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
 
     // Store chosen players (killed and saved) in context
     let (_, setTurnState) = React.useContext(TurnStateContext.context)
@@ -53,7 +48,8 @@ let make = (
     // Construct the page
     switch (hasError, maybeScenarioStep) {
         | (true, _)                       => <NightErrorPage message=t("Unable to load audio") goToPage></NightErrorPage>
-        | (false, None)                   => <NightErrorPage message=t("Index out of bounds")  goToPage></NightErrorPage>
+        | (false, None)                   => goToPage(_page => DaytimeConfess) // Stepped past last step.
+                                             React.null
         | (false, Some(Effect(effect)))
                if gameState.doPlayEffects => <NightPage goToPage>{soundImage}<Audio track=Effect(effect) proceed=goToNextStep onError /></NightPage>
         | (false, Some(Speech(speech)))

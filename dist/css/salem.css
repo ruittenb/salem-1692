@@ -116,14 +116,14 @@ div.text-padding {
     height: 80px;
 }
 
-.page button.largebutton.confirm_yes {
+.page button.largebutton.confirm-yes {
     font-size: 80px;
     color: #172;
     background-image: url(../images/confirm-yes.png);
     background-repeat: no-repeat;
     background-position: center center;
 }
-.page button.largebutton.confirm_no  {
+.page button.largebutton.confirm-no  {
     font-size: 80px;
     color: #a24;
     background-image: url(../images/confirm-no.png);
@@ -131,28 +131,31 @@ div.text-padding {
     background-position: center center;
 }
 
-.page button.icon_left {
+.page button.icon-left {
     padding-left: 24px;
     background-position: 20px center;
 }
-.page button.icon_right {
+.page button.icon-right {
     padding-right: 24px;
     background-position: calc(100% - 20px) center;
 }
 
-.page button.flag_nl { background-image: url(../images/flag_nl.png); }
-.page button.flag_de { background-image: url(../images/flag_de.png); }
-.page button.flag_us { background-image: url(../images/flag_us.png); }
-.page button.flag_fr { background-image: url(../images/flag_fr.png); }
-.page button.flag_es { background-image: url(../images/flag_es.png); }
-.page button.flag_it { background-image: url(../images/flag_it.png); }
+.page button.flag-nl { background-image: url(../images/flag-nl.png); }
+.page button.flag-de { background-image: url(../images/flag-de.png); }
+.page button.flag-us { background-image: url(../images/flag-us.png); }
+.page button.flag-fr { background-image: url(../images/flag-fr.png); }
+.page button.flag-es { background-image: url(../images/flag-es.png); }
+.page button.flag-it { background-image: url(../images/flag-it.png); }
 
-.page button.icon_pawn { background-image: url(../images/icon_pawn.png); }
-.page button.icon_gear { background-image: url(../images/icon_gear.png); }
-.page button.icon_lang { background-image: url(../images/icon_lang.png); }
-.page button.icon_back { background-image: url(../images/icon_back.png); }
-.page button.icon_forw { background-image: url(../images/icon_forw.png); }
-.page button.icon_exit { background-image: url(../images/icon_exit.png); }
+.page button.icon-pawn { background-image: url(../images/icon-pawn.png); }
+.page button.icon-gear { background-image: url(../images/icon-gear.png); }
+.page button.icon-lang { background-image: url(../images/icon-lang.png); }
+.page button.icon-back { background-image: url(../images/icon-back.png); }
+.page button.icon-forw { background-image: url(../images/icon-forw.png); }
+.page button.icon-exit { background-image: url(../images/icon-exit.png); }
+
+.page button.icon-checked   { background-image: url(../images/icon-checked.png); }
+.page button.icon-unchecked { background-image: url(../images/icon-unchecked.png); }
 
 .buttonpair {
     width: 80%;

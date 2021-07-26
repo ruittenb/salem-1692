@@ -59,12 +59,12 @@ let make = (
         <ButtonPair>
             <Button
                 label={t("Back")}
-                className="icon_left icon_back"
+                className="icon-left icon-back"
                 onClick={ _event => goToPage(_prev => DaytimeConfess) }
             />
             <Button
                 label={t("Next")}
-                className="icon_right icon_forw"
+                className="icon-right icon-forw"
                 onClick={ _event => goToPage(_prev => Daytime) }
             />
         </ButtonPair>

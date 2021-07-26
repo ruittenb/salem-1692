@@ -31,7 +31,7 @@ let make = (
             { if showBackButton {
                 <Button
                     label={t("Back")}
-                    className="icon_left icon_back"
+                    className="icon-left icon-back"
                     onClick={ (_event) => goToPage(_prev => Daytime) }
                 />
             } else {

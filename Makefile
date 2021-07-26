@@ -26,11 +26,11 @@ build-css: $(CSS_MIN_FILES) ## Minify the css files
 
 .PHONY: watch-css
 watch-css: ## Minify the css files; watch for changes
-	fswatch $(CSS_FILES) | while read f; do \
-		tput setaf $(CSS_COLOR);            \
-		echo '>>>> Minifying';              \
-		tput sgr0;                          \
-		$(MAKE) build-css mark;             \
+	fswatch -o $(CSS_FILES) | while read f; do \
+		tput setaf $(CSS_COLOR);               \
+		echo '>>>> Minifying';                 \
+		tput sgr0;                             \
+		$(MAKE) build-css;                     \
 	done &
 
 %.min.css: %.css

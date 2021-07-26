@@ -54,7 +54,7 @@ let make = (
         <Spacer />
         <Button
             label={t("Back")}
-            className="icon_left icon_back"
+            className="icon-left icon-back"
             onClick={ _event => goToPage(_prev => Title) }
         />
     </div>

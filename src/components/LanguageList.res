@@ -21,9 +21,9 @@ let make = (
                 goToPage(_prev => Setup)
             }
             let (className, label) = switch lang {
-                | NL_NL => ("icon_left flag_nl", t("Nederlands"))
-                | EN_US => ("icon_left flag_us", t("English"))
-                | ES_ES => ("icon_left flag_es", t(`Español`))
+                | NL_NL => ("icon-left flag-nl", t("Nederlands"))
+                | EN_US => ("icon-left flag-us", t("English"))
+                | ES_ES => ("icon-left flag-es", t(`Español`))
             }
             <Button key={label} label className onClick />
         })

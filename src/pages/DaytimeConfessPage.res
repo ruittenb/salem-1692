@@ -35,7 +35,7 @@ let make = (
         }
         <Button
             label={t("Next")}
-            className="icon_right icon_forw"
+            className="icon-right icon-forw"
             onClick={ _event => goToPage(_prev => DaytimeReveal) }
         />
     </div>
