@@ -16,9 +16,7 @@
 
 let run = (elementId: string) => {
     switch (ReactDOM.querySelector("#" ++ elementId)) {
-        | Some(rootElement) => ReactDOM.render(
-            <MainPage />,
-            rootElement)
+        | Some(rootElement) => ReactDOM.render(<MainPage />, rootElement)
         | None => ()
     }
 }

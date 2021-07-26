@@ -1,8 +1,9 @@
 
 /** ****************************************************************************
- * NightPage
+ * NightStepPage
  *
- * Inherited by NightScenarioPage and NightErrorPage
+ * One step in a Night Scenario.
+ * Used by NightScenarioPage and NightErrorPage
  */
 
 open Types
