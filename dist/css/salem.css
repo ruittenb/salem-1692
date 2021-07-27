@@ -189,6 +189,23 @@ div.text-padding {
     padding-top: 20px;
 }
 
+#layout-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#layout-list button.squarebutton {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 0;
+}
+
+#layout-list button.squarebutton.layout-1222::after { content: url(../images/tablelayout-1222.png); }
+#layout-list button.squarebutton.layout-2221::after { content: url(../images/tablelayout-2221.png); }
+#layout-list button.squarebutton.layout-1221::after { content: url(../images/tablelayout-1221.png); }
+#layout-list button.squarebutton.layout-2222::after { content: url(../images/tablelayout-2222.png); }
+
 /** ****************************************************************************
  * Credits Page
  */

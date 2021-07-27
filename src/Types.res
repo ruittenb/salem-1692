@@ -18,6 +18,10 @@ type language =
 type player = string
 type players = array<player>
 
+type evenOdd =
+    | Even
+    | Odd
+
 /**
  * How are the players seated around the table?
  *
@@ -30,13 +34,13 @@ type players = array<player>
  *          o   o        o   o        o   o        o   o
  *          o   o          o          o   o          o
  */
-type tableLayout =
+type seatingLayout =
     | OneAtHead
     | TwoAtHead
 
 type gameState = {
     players: players,
-    tableLayout: tableLayout,
+    seatingLayout: seatingLayout,
     doPlayEffects: bool,
     doPlaySpeech: bool,
 }

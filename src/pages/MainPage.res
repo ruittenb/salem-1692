@@ -10,7 +10,7 @@ let initialPage: Types.page = Title //  GameState
 
 let initialGameState = {
     players: [ "Helmi", "Marco", "Anja", "Kees", "Joyce", `René` ],
-    tableLayout: TwoAtHead,
+    seatingLayout: TwoAtHead,
     doPlayEffects: true,
     doPlaySpeech: true,
 }
