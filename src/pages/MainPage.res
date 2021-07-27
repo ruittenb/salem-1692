@@ -21,6 +21,14 @@ let initialTurnState = {
     choiceConstable: "",
 }
 
+let getLanguageClassName = (language: language): string => {
+    switch language {
+        | EN_US => "en_US"
+        | NL_NL => "nl_NL"
+        | ES_ES => "es_ES"
+    }
+}
+
 @react.component
 let make = (): React.element => {
 
@@ -46,11 +54,13 @@ let make = (): React.element => {
     }
 
     <LanguageContext.Provider value=language>
+        <div className=getLanguageClassName(language)>
         <GameStateContext.Provider value=(gameState, setGameState)>
             <TurnStateContext.Provider value=(turnState, setTurnState)>
                 {currentPage}
             </TurnStateContext.Provider>
         </GameStateContext.Provider>
+        </div>
     </LanguageContext.Provider>
 }
 

@@ -37,12 +37,12 @@ let make = (
         />
         <Button
             label={t("Sound effects")}
-            className={if gameState.doPlayEffects { "icon-left icon-checked" } else { "icon-left icon-unchecked" }}
+            className={"condensed_nl icon-left " ++ if gameState.doPlayEffects { "icon-checked" } else { "icon-unchecked" }}
             onClick={ _event => togglePlayEffects() }
         />
         <Button
             label={t("Speech")}
-            className={if gameState.doPlaySpeech { "icon-left icon-checked" } else { "icon-left icon-unchecked" }}
+            className={"icon-left " ++ if gameState.doPlaySpeech { "icon-checked" } else { "icon-unchecked" }}
             onClick={ _event => togglePlaySpeech() }
         />
         <Button

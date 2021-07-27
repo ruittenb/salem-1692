@@ -11920,6 +11920,7 @@ exports.make = make;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.getLanguageClassName = getLanguageClassName;
 exports.make = exports.initialTurnState = exports.initialGameState = exports.initialPage = exports.initialLanguage = void 0;
 
 var React = _interopRequireWildcard(require("react"));
@@ -11973,6 +11974,25 @@ var initialTurnState = {
 };
 exports.initialTurnState = initialTurnState;
 
+function getLanguageClassName(language) {
+  switch (language) {
+    case
+    /* NL_NL */
+    0:
+      return "nl_NL";
+
+    case
+    /* EN_US */
+    1:
+      return "en_US";
+
+    case
+    /* ES_ES */
+    2:
+      return "es_ES";
+  }
+}
+
 function MainPage(Props) {
   var match = React.useState(function () {
     return (
@@ -11980,6 +12000,7 @@ function MainPage(Props) {
       1
     );
   });
+  var language = match[0];
   var match$1 = React.useState(function () {
     return (
       /* Title */
@@ -12093,14 +12114,16 @@ function MainPage(Props) {
   }
 
   return React.createElement(LanguageContext$Salem1692.Provider.make, {
-    value: match[0],
-    children: React.createElement(GameStateContext$Salem1692.Provider.make, {
+    value: language,
+    children: React.createElement("div", {
+      className: getLanguageClassName(language)
+    }, React.createElement(GameStateContext$Salem1692.Provider.make, {
       value: [match$2[0], match$2[1]],
       children: React.createElement(TurnStateContext$Salem1692.Provider.make, {
         value: [match$3[0], match$3[1]],
         children: currentPage$1
       })
-    })
+    }))
   });
 }
 
@@ -12622,7 +12645,7 @@ function SetupPage(Props) {
     }
   }), React.createElement(Button$Salem1692.make, {
     label: Translator$Salem1692.getTranslator(language, "Sound effects"),
-    className: gameState.doPlayEffects ? "icon-left icon-checked" : "icon-left icon-unchecked",
+    className: "condensed_nl icon-left " + (gameState.doPlayEffects ? "icon-checked" : "icon-unchecked"),
     onClick: function (_event) {
       return Curry._1(setGameState, function (prev) {
         return {
@@ -12635,7 +12658,7 @@ function SetupPage(Props) {
     }
   }), React.createElement(Button$Salem1692.make, {
     label: Translator$Salem1692.getTranslator(language, "Speech"),
-    className: gameState.doPlaySpeech ? "icon-left icon-checked" : "icon-left icon-unchecked",
+    className: "icon-left " + (gameState.doPlaySpeech ? "icon-checked" : "icon-unchecked"),
     onClick: function (_event) {
       return Curry._1(setGameState, function (prev) {
         return {
