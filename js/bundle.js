@@ -10813,20 +10813,29 @@ function LargeRevealButton(Props) {
   var revelationPromptPre = Props.revelationPromptPre;
   var revelationPromptPost = Props.revelationPromptPost;
   var secret = Props.secret;
+  var onRevealOpt = Props.onReveal;
+  var onReveal = onRevealOpt !== undefined ? onRevealOpt : function (param) {};
   var match = React.useState(function () {
     return false;
   });
   var setRevealed = match[1];
+
+  var onClick = function (_event) {
+    Curry._1(onReveal, function (prev) {
+      return !prev;
+    });
+
+    return Curry._1(setRevealed, function (prev) {
+      return !prev;
+    });
+  };
+
   return React.createElement(LargeButton$Salem1692.make, {
     label: "",
     children: match[0] ? React.createElement(React.Fragment, undefined, React.createElement("div", undefined, revelationPromptPre), React.createElement("div", undefined, React.createElement("span", {
       className: "h2-no-margin"
     }, secret), React.createElement("span", undefined, revelationPromptPost))) : revealPrompt,
-    onClick: function (_event) {
-      return Curry._1(setRevealed, function (prev) {
-        return !prev;
-      });
-    }
+    onClick: onClick
   });
 }
 
@@ -11868,21 +11877,25 @@ function DaytimeRevealPage(Props) {
   var language = React.useContext(LanguageContext$Salem1692.context);
   var match = React.useContext(TurnStateContext$Salem1692.context);
   var turnState = match[0];
-  var match$1 = turnState.nrWitches === 1 ? [Translator$Salem1692.getTranslator(language, "Reveal witch's victim"), Translator$Salem1692.getTranslator(language, "The witch attacked-PRE"), Translator$Salem1692.getTranslator(language, "The witch attacked-POST")] : [Translator$Salem1692.getTranslator(language, "Reveal witches' victim"), Translator$Salem1692.getTranslator(language, "The witches attacked-PRE"), Translator$Salem1692.getTranslator(language, "The witches attacked-POST")];
+  var match$1 = React.useState(function () {
+    return false;
+  });
+  var match$2 = turnState.nrWitches === 1 ? [Translator$Salem1692.getTranslator(language, "Reveal witch's victim"), Translator$Salem1692.getTranslator(language, "The witch attacked-PRE"), Translator$Salem1692.getTranslator(language, "The witch attacked-POST")] : [Translator$Salem1692.getTranslator(language, "Reveal witches' victim"), Translator$Salem1692.getTranslator(language, "The witches attacked-PRE"), Translator$Salem1692.getTranslator(language, "The witches attacked-POST")];
   return React.createElement("div", {
     className: "page flex-vertical",
     id: "daytime-page"
   }, React.createElement("h1", undefined, Translator$Salem1692.getTranslator(language, "The Reveal")), React.createElement(Spacer$Salem1692.make, {}), React.createElement(LargeRevealButton$Salem1692.make, {
-    revealPrompt: match$1[0],
-    revelationPromptPre: match$1[1],
-    revelationPromptPost: match$1[2],
-    secret: turnState.choiceWitches
+    revealPrompt: match$2[0],
+    revelationPromptPre: match$2[1],
+    revelationPromptPost: match$2[2],
+    secret: turnState.choiceWitches,
+    onReveal: match$1[1]
   }), turnState.hasConstable ? React.createElement(React.Fragment, undefined, React.createElement(LargeRevealButton$Salem1692.make, {
     revealPrompt: Translator$Salem1692.getTranslator(language, "Reveal constable's protection"),
     revelationPromptPre: Translator$Salem1692.getTranslator(language, "The constable protected-PRE"),
     revelationPromptPost: Translator$Salem1692.getTranslator(language, "The constable protected-POST"),
     secret: turnState.choiceConstable
-  }), React.createElement(Spacer$Salem1692.make, {})) : null, React.createElement(ButtonPair$Salem1692.make, {
+  }), React.createElement(Spacer$Salem1692.make, {})) : null, match$1[0] ? React.createElement(ButtonPair$Salem1692.make, {
     children: null
   }, React.createElement(Button$Salem1692.make, {
     label: Translator$Salem1692.getTranslator(language, "Back"),
@@ -11906,7 +11919,18 @@ function DaytimeRevealPage(Props) {
         );
       });
     }
-  })));
+  })) : React.createElement(Button$Salem1692.make, {
+    label: Translator$Salem1692.getTranslator(language, "Back"),
+    className: "icon-left icon-back",
+    onClick: function (_event) {
+      return Curry._1(goToPage, function (_prev) {
+        return (
+          /* DaytimeConfess */
+          10
+        );
+      });
+    }
+  }));
 }
 
 var make = DaytimeRevealPage;
