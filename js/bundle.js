@@ -10312,8 +10312,13 @@ if ('serviceWorker' in navigator) {
 */
 
 /** **********************************************************************
+ * Make version number available for
+ */
+window.salemAppVersion = "0.9.0";
+/** **********************************************************************
  * Run the game. Specify the game's DOM node.
  */
+
 Main.run('root');
 
 },{"./Main.bs":23}],26:[function(require,module,exports){
