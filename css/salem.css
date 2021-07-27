@@ -78,6 +78,10 @@ div.text-padding {
     height: calc(100% - 40px);
 }
 
+.nl_NL .page .condensed_nl {
+    font-size: 24px;
+}
+
 .page {
     position: absolute;
     left: 0;
