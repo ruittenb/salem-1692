@@ -25,6 +25,7 @@ let table = Js.Dict.fromArray([
     // Credits
     ("Credits", "Credits"),
     ("Game:", "Spel:"),
+    ("version", "versie"),
     ("For use with the game:", "Voor gebruik bij het spel:"),
     ("App:", "App:"),
     ("Sound effects:", "Geluidseffecten:"),
