@@ -27,11 +27,6 @@ let make = (
     let speechDirectory = "audio/" ++ getLanguageDirectory(language)
 
     let src = switch track {
-        | Effect(Silence1s)           => effectDirectory ++ "silence-1s.mp3"
-        | Effect(Silence2s)           => effectDirectory ++ "silence-2s.mp3"
-        | Effect(Rooster)             => effectDirectory ++ "rooster.mp3"
-        | Effect(ChurchBell)          => effectDirectory ++ "church-bell-once.mp3"
-
         | Speech(TownGoToSleep)       => speechDirectory ++ "town-go-to-sleep.mp3"
         | Speech(WitchWakeUp)         => speechDirectory ++ "witch-wake-up.mp3"
         | Speech(WitchesWakeUp)       => speechDirectory ++ "witches-wake-up.mp3"
@@ -43,6 +38,11 @@ let make = (
         | Speech(ConstableWakeUp)     => speechDirectory ++ "constable-wake-up.mp3"
         | Speech(ConstableGoToSleep)  => speechDirectory ++ "constable-go-to-sleep.mp3"
         | Speech(TownWakeUp)          => speechDirectory ++ "town-wake-up.mp3"
+
+        | Effect(Silence1s)           => effectDirectory ++ "silence-1s.mp3"
+        | Effect(Silence2s)           => effectDirectory ++ "silence-2s.mp3"
+        | Effect(Rooster)             => effectDirectory ++ "rooster.mp3"
+        | Effect(ChurchBell)          => effectDirectory ++ "church-bell-once.mp3"
         | _                           => effectDirectory ++ "silence-1s.mp3"
     }
     <audio src

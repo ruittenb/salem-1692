@@ -1,8 +1,6 @@
 
 /** ****************************************************************************
  * SetupPage
- *
- * Language, player names, nr. witches, credits, TODO: reveal constable immediately
  */
 
 open Types
@@ -13,6 +11,19 @@ let make = (
 ): React.element => {
     let language = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(language)
+
+    let (gameState, setGameState) = React.useContext(GameStateContext.context)
+
+    let togglePlayEffects = () => setGameState(prev => {
+        ...prev,
+        doPlayEffects: !prev.doPlayEffects
+    })
+
+    let togglePlaySpeech = () => setGameState(prev => {
+        ...prev,
+        doPlaySpeech: !prev.doPlaySpeech
+    })
+
     <div id="setup-page" className="page flex-vertical">
         <h1> {React.string(t("Setup"))} </h1>
         <Spacer />
@@ -25,13 +36,23 @@ let make = (
             onClick={ _event => goToPage(_prev => SetupLanguage) }
         />
         <Button
+            label={t("Sound effects")}
+            className={if gameState.doPlayEffects { "icon-left icon-checked" } else { "icon-left icon-unchecked" }}
+            onClick={ _event => togglePlayEffects() }
+        />
+        <Button
+            label={t("Speech")}
+            className={if gameState.doPlaySpeech { "icon-left icon-checked" } else { "icon-left icon-unchecked" }}
+            onClick={ _event => togglePlaySpeech() }
+        />
+        <Button
             label={t("Credits")}
             onClick={ _event => goToPage(_prev => Credits) }
         />
         <Button
             label={t("Back")}
             onClick={ _event => goToPage(_prev => Title) }
-            className="icon_left icon_back"
+            className="icon-left icon-back"
         />
     </div>
 }

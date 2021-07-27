@@ -7,9 +7,13 @@ open Types
 
 let initialLanguage: Types.language = EN_US
 let initialPage: Types.page = Title //  GameState
-let players: Types.players = // [] // GameState
-    [ "Helmi", "Marco", "Anja", "Kees", "Joyce", `René` ]
 
+let initialGameState = {
+    players: [ "Helmi", "Marco", "Anja", "Kees", "Joyce", `René` ],
+    tableLayout: TwoAtHead,
+    doPlayEffects: true,
+    doPlaySpeech: true,
+}
 let initialTurnState = {
     nrWitches: 1,
     hasConstable: false,
@@ -17,39 +21,36 @@ let initialTurnState = {
     choiceConstable: "",
 }
 
-let rec getCurrentPage = (
-    currentPage: Types.page,
-    goToPage: (Types.page => Types.page) => unit,
-    setLanguage,
-): React.element => {
-    switch currentPage {
+@react.component
+let make = (): React.element => {
+
+    let (language, setLanguage)   = React.useState(_ => initialLanguage)
+    let (currentPage, goToPage)   = React.useState(_ => initialPage)
+    let (gameState, setGameState) = React.useState(_ => initialGameState)
+    let (turnState, setTurnState) = React.useState(_ => initialTurnState)
+
+    let currentPage = switch currentPage {
         | Title                   => <TitlePage goToPage />
         | Setup                   => <SetupPage goToPage />
         | SetupPlayers            => <SetupPlayersPage goToPage />
         | SetupLanguage           => <SetupLanguagePage goToPage setLanguage />
         | Credits                 => <CreditsPage goToPage />
         | Daytime                 => <DaytimePage goToPage />
-        | FirstNightOneWitch      => <NightScenarioPage subPage=currentPage goToPage players />
-        | FirstNightMoreWitches   => <NightScenarioPage subPage=currentPage goToPage players />
-        | OtherNightNoConstable   => <NightScenarioPage subPage=currentPage goToPage players />
-        | OtherNightWithConstable => <NightScenarioPage subPage=currentPage goToPage players />
+        | FirstNightOneWitch      => <NightScenarioPage goToPage subPage=currentPage />
+        | FirstNightMoreWitches   => <NightScenarioPage goToPage subPage=currentPage />
+        | OtherNightNoConstable   => <NightScenarioPage goToPage subPage=currentPage />
+        | OtherNightWithConstable => <NightScenarioPage goToPage subPage=currentPage />
         | DaytimeConfess          => <DaytimeConfessPage goToPage />
         | DaytimeReveal           => <DaytimeRevealPage goToPage />
         | Close                   => <ClosePage />
     }
-}
-
-@react.component
-and make = (): React.element => {
-
-    let (language, setLanguage)   = React.useState(_ => initialLanguage)
-    let (currentPage, goToPage)   = React.useState(_ => initialPage)
-    let (turnState, setTurnState) = React.useState(_ => initialTurnState)
 
     <LanguageContext.Provider value=language>
-        <TurnStateContext.Provider value=(turnState, setTurnState)>
-            {getCurrentPage(currentPage, goToPage, setLanguage)}
-        </TurnStateContext.Provider>
+        <GameStateContext.Provider value=(gameState, setGameState)>
+            <TurnStateContext.Provider value=(turnState, setTurnState)>
+                {currentPage}
+            </TurnStateContext.Provider>
+        </GameStateContext.Provider>
     </LanguageContext.Provider>
 }
 

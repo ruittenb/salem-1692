@@ -34,6 +34,7 @@ let make = (
             // <dd> {React.string("Mario Ruiz")} </dd>
             <dt> {React.string(t("Images:"))} </dt>
             <dd>
+                <a href="https://www.freepik.com/free-vector/cross-icons-collection_806517.htm#page=1&query=cross&position=16"> {React.string("Freepik")} </a> spacedComma
                 <a href="https://www.vecteezy.com/free-vector/cog"> {React.string("Vecteezy")} </a> spacedComma
                 <a href="http://www.famfamfam.com/lab/icons/silk/"> {React.string("FamFamFam")} </a> spacedComma
                 <a href="https://icons8.com"> {React.string("Icons8")} </a> spacedComma
@@ -45,7 +46,7 @@ let make = (
         <Button
             label={t("Back")}
             onClick={ _event => goToPage(_prev => Setup) }
-            className="icon_left icon_back"
+            className="icon-left icon-back"
         />
     </div>
 }

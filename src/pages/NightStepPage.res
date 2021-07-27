@@ -1,8 +1,9 @@
 
 /** ****************************************************************************
- * NightPage
+ * NightStepPage
  *
- * Inherited by NightScenarioPage and NightErrorPage
+ * One step in a Night Scenario.
+ * Used by NightScenarioPage and NightErrorPage
  */
 
 open Types
@@ -31,7 +32,7 @@ let make = (
             { if showBackButton {
                 <Button
                     label={t("Back")}
-                    className="icon_left icon_back"
+                    className="icon-left icon-back"
                     onClick={ (_event) => goToPage(_prev => Daytime) }
                 />
             } else {

@@ -26,11 +26,11 @@ build-css: $(CSS_MIN_FILES) ## Minify the css files
 
 .PHONY: watch-css
 watch-css: ## Minify the css files; watch for changes
-	fswatch $(CSS_FILES) | while read f; do \
-		tput setaf $(CSS_COLOR);            \
-		echo '>>>> Minifying';              \
-		tput sgr0;                          \
-		$(MAKE) build-css mark;             \
+	fswatch -o $(CSS_FILES) | while read f; do \
+		tput setaf $(CSS_COLOR);               \
+		echo '>>>> Minifying';                 \
+		tput sgr0;                             \
+		$(MAKE) build-css;                     \
 	done &
 
 %.min.css: %.css
@@ -51,11 +51,11 @@ build: ## Compile the res files to js and bundle them
 
 .PHONY: watch
 watch: ## Compile the res files to js and bundle them; watch for changes
-	fswatch $(SRC_JS) | while read f; do \
-		tput setaf $(JS_COLOR);          \
-		echo '>>>> Bundling';            \
-		tput sgr0;                       \
-		$(MAKE) bundle mark;             \
+	fswatch -o $(SRC_JS) | while read f; do \
+		tput setaf $(JS_COLOR);             \
+		echo '>>>> Bundling';               \
+		tput sgr0;                          \
+		$(MAKE) bundle mark;                \
 	done &
 	npm run re:watch
 

@@ -1,0 +1,9 @@
+ - make more use of <p> instead of <div>
+ - move currentPage to gameState
+ - move scenarioIndex to turnState
+ - make page for entering players
+ - display playerlist in correct table layout
+ - make hasConstable superfluous: use optional<string> anyway, with <ErrorPage>
+ - make doPlayEffects configurable in setup
+ - store (language, t) in context
+

@@ -10,6 +10,8 @@ let table = Js.Dict.fromArray([
     ("Exit", "Cerrar"),
     // Setup
     ("Players", "Jugadores"),
+    ("Sound effects", "FX sonido"),
+    ("Speech", "Discurso"),
     ("How many witches?", `¿Cuantas brujas?`),
     ("Language", "Idioma"),
     ("English", "English"),

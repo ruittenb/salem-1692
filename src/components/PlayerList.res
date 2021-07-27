@@ -8,7 +8,6 @@ open Types
 @react.component
 let make = (
     ~addressed: addressed,
-    ~players: players,
     ~choiceHandler: (player, _) => unit,
 ): React.element => {
 
@@ -21,7 +20,8 @@ let make = (
         | Constable => (t("The constable's turn"), t("Choose someone to protect:"))
     }
 
-    let buttons = players
+    let (gameState, _) = React.useContext(GameStateContext.context)
+    let buttons = gameState.players
         ->Belt.Array.map(player => {
             <SquareButton key={player} label={player} onClick=choiceHandler(player) />
         })
