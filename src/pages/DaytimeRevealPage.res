@@ -14,6 +14,8 @@ let make = (
 
     let (turnState, _) = React.useContext(TurnStateContext.context)
 
+    let (freeToProceed, setFreeToProceed) = React.useState(_ => false)
+
     let (
         witchesRevealPrompt,
         witchesRevelationPromptPre,
@@ -35,12 +37,15 @@ let make = (
     <div id="daytime-page" className="page flex-vertical">
         <h1> {React.string(t("The Reveal"))} </h1>
         <Spacer />
+        // Witches reveal button
         <LargeRevealButton
             revealPrompt=witchesRevealPrompt
             revelationPromptPre=witchesRevelationPromptPre
             revelationPromptPost=witchesRevelationPromptPost
             secret=turnState.choiceWitches
+            onReveal=setFreeToProceed
         />
+        // Constable reveal button
         {
             if turnState.hasConstable {
                 <>
@@ -56,18 +61,29 @@ let make = (
                 React.null
             }
         }
-        <ButtonPair>
-            <Button
-                label={t("Back")}
-                className="icon-left icon-back"
-                onClick={ _event => goToPage(_prev => DaytimeConfess) }
-            />
-            <Button
-                label={t("Next")}
-                className="icon-right icon-forw"
-                onClick={ _event => goToPage(_prev => Daytime) }
-            />
-        </ButtonPair>
+        // Back/Forward buttons
+        {
+            if freeToProceed {
+                <ButtonPair>
+                    <Button
+                        label={t("Back")}
+                        className="icon-left icon-back"
+                        onClick={ _event => goToPage(_prev => DaytimeConfess) }
+                    />
+                    <Button
+                        label={t("Next")}
+                        className="icon-right icon-forw"
+                        onClick={ _event => goToPage(_prev => Daytime) }
+                    />
+                </ButtonPair>
+            } else {
+                <Button
+                    label={t("Back")}
+                    className="icon-left icon-back"
+                    onClick={ _event => goToPage(_prev => DaytimeConfess) }
+                />
+            }
+        }
     </div>
 }
 

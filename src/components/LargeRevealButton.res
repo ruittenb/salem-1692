@@ -13,11 +13,17 @@ let make = (
     ~revelationPromptPre: string,
     ~revelationPromptPost: string,
     ~secret: string,
+    ~onReveal = (_) => (),
 ): React.element => {
 
     let (revealed, setRevealed) = React.useState(_ => false)
 
-    <LargeButton label="" onClick={ _event => setRevealed(prev => !prev) }>
+    let onClick = _event => {
+        onReveal(prev => !prev)
+        setRevealed(prev => !prev)
+    }
+
+    <LargeButton label="" onClick>
         {
             if revealed {
                 <>
