@@ -11317,14 +11317,19 @@ function PlayerList(Props) {
   }
 
   var match$1 = React.useContext(GameStateContext$Salem1692.context);
-  var buttons = Belt_Array.map(match$1[0].players, function (player) {
+  var gameState = match$1[0];
+  var buttons = Belt_Array.map(gameState.players, function (player) {
     return React.createElement(SquareButton$Salem1692.make, {
       label: player,
       onClick: Curry._1(choiceHandler, player),
       key: player
     });
   });
+  var evenOddClass = gameState.players.length % 2 === 0 ? "even" : "odd";
+  var match$2 = gameState.seatingLayout;
+  var headClass = match$2 ? "two-at-head" : "one-at-head";
   return React.createElement(React.Fragment, undefined, React.createElement("h2", undefined, match[0]), React.createElement("div", undefined, match[1]), React.createElement("div", {
+    className: headClass + " " + evenOddClass,
     id: "player-list"
   }, buttons));
 }

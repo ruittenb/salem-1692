@@ -251,6 +251,14 @@ div.text-padding {
     grid-template-columns: 1fr 1fr;
 }
 
+#player-list.one-at-head :first-child,
+#player-list.two-at-head.odd :last-child,
+#player-list.one-at-head.even :last-child {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: 40%;
+}
+
 /** ****************************************************************************
  * Daytime Confess Page
  */
