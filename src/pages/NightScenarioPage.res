@@ -58,22 +58,31 @@ let make = (
     switch (hasError, maybeScenarioStep) {
         | (true, _)                       => <NightErrorPage message=t("Unable to load audio") goToPage></NightErrorPage>
         | (false, None)                   => React.null // catch this situation in useEffect above
-        | (false, Some(Effect(effect))) if gameState.doPlayEffects
-                                          => <NightStepPage goToPage>{soundImage}<Audio track=Effect(effect) proceed=goToNextStep onError /></NightStepPage>
-        | (false, Some(Speech(speech))) if gameState.doPlaySpeech
-                                          => <NightStepPage goToPage>{soundImage}<Audio track=Speech(speech) proceed=goToNextStep onError /></NightStepPage>
+        | (false, Some(Effect(effect)))
+               if gameState.doPlayEffects => <NightStepPage goToPage>
+                                                 {soundImage}
+                                                 <Audio track=Effect(effect) proceed=goToNextStep onError />
+                                             </NightStepPage>
+        | (false, Some(Speech(speech)))
+                if gameState.doPlaySpeech => <NightStepPage goToPage>
+                                                 {soundImage}
+                                                 <Audio track=Speech(speech) proceed=goToNextStep onError />
+                                             </NightStepPage>
+
         | (false, Some(Effect(_)))        => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
                                              React.null
         | (false, Some(Speech(_)))        => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
                                              React.null
-        | (false, Some(ConfirmWitches))   => <NightConfirmPage goToPrevStep goToNextStep addressed=witchOrWitches />
-        | (false, Some(ConfirmConstable)) => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable      />
-        | (false, Some(ChooseWitches))    => <NightStepPage goToPage>
+
+        | (false, Some(ChooseWitches))    => <NightStepPage goToPage showBackButton=false>
                                                  <PlayerList addressed=witchOrWitches choiceHandler=goFromWitchChoiceToNextStep />
                                              </NightStepPage>
-        | (false, Some(ChooseConstable))  => <NightStepPage goToPage>
+        | (false, Some(ChooseConstable))  => <NightStepPage goToPage showBackButton=false>
                                                  <PlayerList addressed=Constable  choiceHandler=goFromConstableChoiceToNextStep />
                                              </NightStepPage>
+
+        | (false, Some(ConfirmWitches))   => <NightConfirmPage goToPrevStep goToNextStep addressed=witchOrWitches />
+        | (false, Some(ConfirmConstable)) => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable      />
     }
 }
 

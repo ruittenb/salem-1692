@@ -11277,6 +11277,10 @@ var React = _interopRequireWildcard(require("react"));
 
 var Belt_Array = _interopRequireWildcard(require("rescript/lib/es6/belt_Array.js"));
 
+var Button$Salem1692 = _interopRequireWildcard(require("./Button.bs.js"));
+
+var Spacer$Salem1692 = _interopRequireWildcard(require("./Spacer.bs.js"));
+
 var Translator$Salem1692 = _interopRequireWildcard(require("./Translator.bs.js"));
 
 var SquareButton$Salem1692 = _interopRequireWildcard(require("./SquareButton.bs.js"));
@@ -11294,44 +11298,58 @@ function PlayerList(Props) {
   var addressed = Props.addressed;
   var choiceHandler = Props.choiceHandler;
   var language = React.useContext(LanguageContext$Salem1692.context);
-  var match;
+  var match = React.useState(function () {
+    return false;
+  });
+  var setRotate = match[1];
+  var rotatedClass = match[0] ? "rotated" : "";
+  var match$1;
 
   switch (addressed) {
     case
     /* Witch */
     0:
-      match = [Translator$Salem1692.getTranslator(language, "The witch's turn"), Translator$Salem1692.getTranslator(language, "Choose-SG a victim:")];
+      match$1 = [Translator$Salem1692.getTranslator(language, "The witch's turn"), Translator$Salem1692.getTranslator(language, "Choose-SG a victim:")];
       break;
 
     case
     /* Witches */
     1:
-      match = [Translator$Salem1692.getTranslator(language, "The witches' turn"), Translator$Salem1692.getTranslator(language, "Choose-PL a victim:")];
+      match$1 = [Translator$Salem1692.getTranslator(language, "The witches' turn"), Translator$Salem1692.getTranslator(language, "Choose-PL a victim:")];
       break;
 
     case
     /* Constable */
     2:
-      match = [Translator$Salem1692.getTranslator(language, "The constable's turn"), Translator$Salem1692.getTranslator(language, "Choose someone to protect:")];
+      match$1 = [Translator$Salem1692.getTranslator(language, "The constable's turn"), Translator$Salem1692.getTranslator(language, "Choose someone to protect:")];
       break;
   }
 
-  var match$1 = React.useContext(GameStateContext$Salem1692.context);
-  var gameState = match$1[0];
+  var match$2 = React.useContext(GameStateContext$Salem1692.context);
+  var gameState = match$2[0];
   var buttons = Belt_Array.map(gameState.players, function (player) {
     return React.createElement(SquareButton$Salem1692.make, {
       label: player,
+      className: rotatedClass,
       onClick: Curry._1(choiceHandler, player),
       key: player
     });
   });
   var evenOddClass = gameState.players.length % 2 === 0 ? "even" : "odd";
-  var match$2 = gameState.seatingLayout;
-  var headClass = match$2 ? "two-at-head" : "one-at-head";
-  return React.createElement(React.Fragment, undefined, React.createElement("h2", undefined, match[0]), React.createElement("div", undefined, match[1]), React.createElement("div", {
+  var match$3 = gameState.seatingLayout;
+  var headClass = match$3 ? "two-at-head" : "one-at-head";
+  return React.createElement(React.Fragment, undefined, React.createElement("h2", undefined, match$1[0]), React.createElement("div", undefined, match$1[1]), React.createElement("div", {
     className: headClass + " " + evenOddClass,
     id: "player-list"
-  }, buttons));
+  }, buttons), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
+    label: Translator$Salem1692.getTranslator(language, "Rotate"),
+    className: "icon-left icon-rot",
+    onClick: function (_event) {
+      return Curry._1(setRotate, function (prev) {
+        return !prev;
+      });
+    }
+  }));
 }
 
 var make = PlayerList;
@@ -11339,7 +11357,7 @@ var make = PlayerList;
 
 exports.make = make;
 
-},{"./GameStateContext.bs.js":30,"./LanguageContext.bs.js":31,"./SquareButton.bs.js":39,"./Translator.bs.js":40,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":13}],37:[function(require,module,exports){
+},{"./Button.bs.js":28,"./GameStateContext.bs.js":30,"./LanguageContext.bs.js":31,"./Spacer.bs.js":38,"./SquareButton.bs.js":39,"./Translator.bs.js":40,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":13}],37:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11633,7 +11651,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-var table = Js_dict.fromArray([["New Game", "New Game"], ["Setup", "Setup"], ["Exit", "Exit"], ["Players", "Players"], ["Sound effects", "Sound FX"], ["Speech", "Speech"], ["How many witches?", "How many witches?"], ["Language", "Language"], ["Seating layout", "Seating layout"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Italiano", "Italiano"], ["Back", "Back"], ["Next", "Next"], ["Credits", "Credits"], ["Game:", "Game:"], ["version", "version"], ["For use with the game:", "For use with the game:"], ["App:", "App:"], ["Sound effects:", "Sound effects:"], ["Voice actors:", "Voice actors:"], ["Images:", "Images:"], ["Daytime", "Daytime"], ["First night,", "First night,"], ["one witch", "one witch"], ["more witches", "more witches"], ["Other nights,", "Other nights,"], ["with constable", "with constable"], ["without constable", "without constable"], ["Night", "Night"], ["Night with constable", "Night with constable"], ["Night without constable", "Night without constable"], ["The witches", "The witches"], ["The witch's turn", "The witch's turn"], ["The witches' turn", "The witches' turn"], ["Choose-SG a victim:", "Choose a victim:"], ["Choose-PL a victim:", "Choose a victim:"], ["The constable", "The constable"], ["The constable's turn", "The constable's turn"], ["Choose someone to protect:", "Choose someone to protect:"], ["Witch, ", "Witch, "], ["Witches, ", "Witches, "], ["Constable, ", "Constable, "], ["are you-MASC-SG sure?", "are you sure?"], ["are you-FEM-SG sure?", "are you sure?"], ["are you-PL sure?", "are you sure?"], ["Confirm", "Confirm"], ["Yes", "Yes"], ["No", "No"], ["Error", "Error"], ["Unable to load audio", "Unable to load audio"], ["Index out of bounds", "Index out of bounds"], ["Confess", "Confess"], ["Everyone,", "Everyone,"], ["decide whether you want to confess", "decide whether you want to confess"], ["The Reveal", "Reveal"], ["Reveal witch's victim", "Reveal witch's victim"], ["Reveal witches' victim", "Reveal witches' victim"], ["The witch attacked-PRE", "The witch attacked"], ["The witch attacked-POST", ""], ["The witches attacked-PRE", "The witches attacked"], ["The witches attacked-POST", ""], ["Reveal constable's protection", "Reveal constable's protection"], ["The constable protected-PRE", "The constable protected"], ["The constable protected-POST", ""]]);
+var table = Js_dict.fromArray([["New Game", "New Game"], ["Setup", "Setup"], ["Exit", "Exit"], ["Players", "Players"], ["Sound effects", "Sound FX"], ["Speech", "Speech"], ["How many witches?", "How many witches?"], ["Language", "Language"], ["Seating layout", "Seating layout"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Italiano", "Italiano"], ["Back", "Back"], ["Next", "Next"], ["Credits", "Credits"], ["Game:", "Game:"], ["version", "version"], ["For use with the game:", "For use with the game:"], ["App:", "App:"], ["Sound effects:", "Sound effects:"], ["Voice actors:", "Voice actors:"], ["Images:", "Images:"], ["Daytime", "Daytime"], ["First night,", "First night,"], ["one witch", "one witch"], ["more witches", "more witches"], ["Other nights,", "Other nights,"], ["with constable", "with constable"], ["without constable", "without constable"], ["Night", "Night"], ["Night with constable", "Night with constable"], ["Night without constable", "Night without constable"], ["The witches", "The witches"], ["The witch's turn", "The witch's turn"], ["The witches' turn", "The witches' turn"], ["Choose-SG a victim:", "Choose a victim:"], ["Choose-PL a victim:", "Choose a victim:"], ["The constable", "The constable"], ["The constable's turn", "The constable's turn"], ["Choose someone to protect:", "Choose someone to protect:"], ["Rotate", "Rotate"], ["Witch, ", "Witch, "], ["Witches, ", "Witches, "], ["Constable, ", "Constable, "], ["are you-MASC-SG sure?", "are you sure?"], ["are you-FEM-SG sure?", "are you sure?"], ["are you-PL sure?", "are you sure?"], ["Confirm", "Confirm"], ["Yes", "Yes"], ["No", "No"], ["Error", "Error"], ["Unable to load audio", "Unable to load audio"], ["Index out of bounds", "Index out of bounds"], ["Confess", "Confess"], ["Everyone,", "Everyone,"], ["decide whether you want to confess", "decide whether you want to confess"], ["The Reveal", "Reveal"], ["Reveal witch's victim", "Reveal witch's victim"], ["Reveal witches' victim", "Reveal witches' victim"], ["The witch attacked-PRE", "The witch attacked"], ["The witch attacked-POST", ""], ["The witches attacked-PRE", "The witches attacked"], ["The witches attacked-POST", ""], ["Reveal constable's protection", "Reveal constable's protection"], ["The constable protected-PRE", "The constable protected"], ["The constable protected-POST", ""]]);
 /* table Not a pure module */
 
 exports.table = table;
@@ -11653,7 +11671,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-var table = Js_dict.fromArray([["New Game", "Nuevo juego"], ["Setup", "Configuración"], ["Exit", "Cerrar"], ["Players", "Jugadores"], ["Sound effects", "FX sonido"], ["Speech", "Discurso"], ["How many witches?", "¿Cuantas brujas?"], ["Language", "Idioma"], ["Seating layout", "Plan de mesa"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Italiano", "Italiano"], ["Back", "Regresar"], ["Next", "Avanzar"], ["Credits", "Créditos"], ["Game:", "Juego:"], ["version", "versión"], ["For use with the game:", "Para usar con el juego:"], ["App:", "Aplicación:"], ["Sound effects:", "Efectos de sonido:"], ["Voice actors:", "Actores de voz:"], ["Images:", "Imágenes:"], ["Daytime", "El día"], ["First night,", "Primera noche,"], ["one witch", "una bruja"], ["more witches", "más brujas"], ["Other nights,", "Otras noches,"], ["with constable", "con alguacil"], ["without constable", "sin alguacil"], ["Night", "La noche"], ["Night with constable", "Noche con alguacil"], ["Night without constable", "Noche sin alguacil"], ["The witches", "Las brujas"], ["The witch's turn", "Turno de la bruja"], ["The witches' turn", "Turno de las brujas"], ["Choose-SG a victim:", "Elige una víctima:"], ["Choose-PL a victim:", "Eligen una víctima:"], ["The constable", "El alguacil"], ["The constable's turn", "Turno del alguacil"], ["Choose someone to protect:", "Elige a quién quieres proteger:"], ["Witch, ", "Bruja, "], ["Witches, ", "Brujas, "], ["Constable, ", "Alguacil, "], ["are you-MASC-SG sure?", "¿estás seguro?"], ["are you-FEM-SG sure?", "¿estás segura?"], ["are you-PL sure?", "¿estáis seguras?"], ["Confirm", "Confirmar"], ["Yes", "Sí"], ["No", "No"], ["Error", "Error"], ["Unable to load audio", "No se puede cargar el audio"], ["Index out of bounds", "Índice fuera de los límites"], ["Confess", "Confesar"], ["Everyone,", "Cada persona,"], ["decide whether you want to confess", "decide si quieres confesar"], ["The Reveal", "La revelación"], ["Reveal witch's victim", "Revelar víctima de la bruja"], ["Reveal witches' victim", "Revelar víctima de las brujas"], ["The witch attacked-PRE", "La bruja atacó a"], ["The witch attacked-POST", ""], ["The witches attacked-PRE", "Las brujas atacaron a"], ["The witches attacked-POST", ""], ["Reveal constable's protection", "Revelar protección del alguacil"], ["The constable protected-PRE", "El alguacil protegió a"], ["The constable protected-POST", ""]]);
+var table = Js_dict.fromArray([["New Game", "Nuevo juego"], ["Setup", "Configuración"], ["Exit", "Cerrar"], ["Players", "Jugadores"], ["Sound effects", "FX sonido"], ["Speech", "Discurso"], ["How many witches?", "¿Cuantas brujas?"], ["Language", "Idioma"], ["Seating layout", "Plan de mesa"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Italiano", "Italiano"], ["Back", "Regresar"], ["Next", "Avanzar"], ["Credits", "Créditos"], ["Game:", "Juego:"], ["version", "versión"], ["For use with the game:", "Para usar con el juego:"], ["App:", "Aplicación:"], ["Sound effects:", "Efectos de sonido:"], ["Voice actors:", "Actores de voz:"], ["Images:", "Imágenes:"], ["Daytime", "El día"], ["First night,", "Primera noche,"], ["one witch", "una bruja"], ["more witches", "más brujas"], ["Other nights,", "Otras noches,"], ["with constable", "con alguacil"], ["without constable", "sin alguacil"], ["Night", "La noche"], ["Night with constable", "Noche con alguacil"], ["Night without constable", "Noche sin alguacil"], ["The witches", "Las brujas"], ["The witch's turn", "Turno de la bruja"], ["The witches' turn", "Turno de las brujas"], ["Choose-SG a victim:", "Elige una víctima:"], ["Choose-PL a victim:", "Eligen una víctima:"], ["The constable", "El alguacil"], ["The constable's turn", "Turno del alguacil"], ["Choose someone to protect:", "Elige a quién quieres proteger:"], ["Rotate", "Girar"], ["Witch, ", "Bruja, "], ["Witches, ", "Brujas, "], ["Constable, ", "Alguacil, "], ["are you-MASC-SG sure?", "¿estás seguro?"], ["are you-FEM-SG sure?", "¿estás segura?"], ["are you-PL sure?", "¿estáis seguras?"], ["Confirm", "Confirmar"], ["Yes", "Sí"], ["No", "No"], ["Error", "Error"], ["Unable to load audio", "No se puede cargar el audio"], ["Index out of bounds", "Índice fuera de los límites"], ["Confess", "Confesar"], ["Everyone,", "Cada persona,"], ["decide whether you want to confess", "decide si quieres confesar"], ["The Reveal", "La revelación"], ["Reveal witch's victim", "Revelar víctima de la bruja"], ["Reveal witches' victim", "Revelar víctima de las brujas"], ["The witch attacked-PRE", "La bruja atacó a"], ["The witch attacked-POST", ""], ["The witches attacked-PRE", "Las brujas atacaron a"], ["The witches attacked-POST", ""], ["Reveal constable's protection", "Revelar protección del alguacil"], ["The constable protected-PRE", "El alguacil protegió a"], ["The constable protected-POST", ""]]);
 /* table Not a pure module */
 
 exports.table = table;
@@ -11673,7 +11691,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-var table = Js_dict.fromArray([["New Game", "Nieuw spel"], ["Setup", "Instellingen"], ["Exit", "Afsluiten"], ["Players", "Spelers"], ["Sound effects", "Geluidseffecten"], ["Speech", "Spraak"], ["How many witches?", "Hoeveel heksen?"], ["Language", "Taal"], ["Seating layout", "Layout zitplaatsen"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Italiano", "Italiano"], ["Back", "Terug"], ["Next", "Volgende"], ["Credits", "Credits"], ["Game:", "Spel:"], ["version", "versie"], ["For use with the game:", "Voor gebruik bij het spel:"], ["App:", "App:"], ["Sound effects:", "Geluidseffecten:"], ["Voice actors:", "Stemacteurs:"], ["Images:", "Afbeeldingen:"], ["Daytime", "De dag"], ["First night,", "Eerste nacht,"], ["one witch", "één heks"], ["more witches", "meer heksen"], ["Other nights,", "Overige nachten,"], ["with constable", "met constable"], ["without constable", "zonder constable"], ["Night", "De nacht"], ["Night with constable", "Nacht met constable"], ["Night without constable", "Nacht zonder constable"], ["The witches", "De heksen"], ["The witch's turn", "De heks aan de beurt"], ["The witches' turn", "De heksen aan de beurt"], ["Choose-SG a victim:", "Kies een slachtoffer:"], ["Choose-PL a victim:", "Kies een slachtoffer:"], ["The constable", "De constable"], ["The constable's turn", "De constable aan de beurt"], ["Choose someone to protect:", "Kies wie beschermd moet worden:"], ["Witch, ", "Heks, "], ["Witches, ", "Heksen, "], ["Constable, ", "Constable, "], ["are you-MASC-SG sure?", "weet je het zeker?"], ["are you-FEM-SG sure?", "weet je het zeker?"], ["are you-PL sure?", "weten jullie het zeker?"], ["Confirm", "Bevestigen"], ["Yes", "Ja"], ["No", "Nee"], ["Error", "Fout"], ["Unable to load audio", "Kan audio niet laden"], ["Index out of bounds", "Index buiten bereik"], ["Confess", "Opbiechten"], ["Everyone,", "Spelers,"], ["decide whether you want to confess", "beslis of je wilt opbiechten"], ["The Reveal", "De onthulling"], ["Reveal witch's victim", "Slachtoffer van de heks onthullen"], ["Reveal witches' victim", "Slachtoffer van de heksen onthullen"], ["The witch attacked-PRE", "De heks heeft"], ["The witch attacked-POST", " aangevallen"], ["The witches attacked-PRE", "De heksen hebben"], ["The witches attacked-POST", " aangevallen"], ["Reveal constable's protection", "Beschermeling van de constable onthullen"], ["The constable protected-PRE", "De constable heeft"], ["The constable protected-POST", " beschermd"]]);
+var table = Js_dict.fromArray([["New Game", "Nieuw spel"], ["Setup", "Instellingen"], ["Exit", "Afsluiten"], ["Players", "Spelers"], ["Sound effects", "Geluidseffecten"], ["Speech", "Spraak"], ["How many witches?", "Hoeveel heksen?"], ["Language", "Taal"], ["Seating layout", "Layout zitplaatsen"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Italiano", "Italiano"], ["Back", "Terug"], ["Next", "Volgende"], ["Credits", "Credits"], ["Game:", "Spel:"], ["version", "versie"], ["For use with the game:", "Voor gebruik bij het spel:"], ["App:", "App:"], ["Sound effects:", "Geluidseffecten:"], ["Voice actors:", "Stemacteurs:"], ["Images:", "Afbeeldingen:"], ["Daytime", "De dag"], ["First night,", "Eerste nacht,"], ["one witch", "één heks"], ["more witches", "meer heksen"], ["Other nights,", "Overige nachten,"], ["with constable", "met constable"], ["without constable", "zonder constable"], ["Night", "De nacht"], ["Night with constable", "Nacht met constable"], ["Night without constable", "Nacht zonder constable"], ["The witches", "De heksen"], ["The witch's turn", "De heks aan de beurt"], ["The witches' turn", "De heksen aan de beurt"], ["Choose-SG a victim:", "Kies een slachtoffer:"], ["Choose-PL a victim:", "Kies een slachtoffer:"], ["The constable", "De constable"], ["The constable's turn", "De constable aan de beurt"], ["Choose someone to protect:", "Kies wie beschermd moet worden:"], ["Rotate", "Draaien"], ["Witch, ", "Heks, "], ["Witches, ", "Heksen, "], ["Constable, ", "Constable, "], ["are you-MASC-SG sure?", "weet je het zeker?"], ["are you-FEM-SG sure?", "weet je het zeker?"], ["are you-PL sure?", "weten jullie het zeker?"], ["Confirm", "Bevestigen"], ["Yes", "Ja"], ["No", "Nee"], ["Error", "Fout"], ["Unable to load audio", "Kan audio niet laden"], ["Index out of bounds", "Index buiten bereik"], ["Confess", "Opbiechten"], ["Everyone,", "Spelers,"], ["decide whether you want to confess", "beslis of je wilt opbiechten"], ["The Reveal", "De onthulling"], ["Reveal witch's victim", "Slachtoffer van de heks onthullen"], ["Reveal witches' victim", "Slachtoffer van de heksen onthullen"], ["The witch attacked-PRE", "De heks heeft"], ["The witch attacked-POST", " aangevallen"], ["The witches attacked-PRE", "De heksen hebben"], ["The witches attacked-POST", " aangevallen"], ["Reveal constable's protection", "Beschermeling van de constable onthullen"], ["The constable protected-PRE", "De constable heeft"], ["The constable protected-POST", " beschermd"]]);
 /* table Not a pure module */
 
 exports.table = table;
@@ -12099,7 +12117,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-var initialGameState_players = ["Helmi", "Marco", "Anja", "Kees", "Joyce", "René"];
+var initialGameState_players = ["Helmi", "Marco", "Anja", "Kees", "Joyce", "René", "Rodney", "Erwin", "Wendy", "Paul", "Laurent"];
 var initialGameState = {
   players: initialGameState_players,
   seatingLayout:
@@ -12590,6 +12608,7 @@ function NightScenarioPage(Props) {
           addressed: witchOrWitches,
           choiceHandler: goFromWitchChoiceToNextStep
         }),
+        showBackButton: false,
         goToPage: goToPage
       });
 
@@ -12612,6 +12631,7 @@ function NightScenarioPage(Props) {
           2,
           choiceHandler: goFromConstableChoiceToNextStep
         }),
+        showBackButton: false,
         goToPage: goToPage
       });
 
