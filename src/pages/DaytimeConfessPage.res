@@ -14,7 +14,7 @@ let make = (
 
     let (turnState, _) = React.useContext(TurnStateContext.context)
 
-    <div id="daytime-page" className="page flex-vertical">
+    <div id="daytime-confess-page" className="page flex-vertical">
         <h1> {React.string(t("Confess"))} </h1>
         <h2> {React.string(t("Everyone,"))} </h2>
         <p> {React.string(t("decide whether you want to confess"))} </p>

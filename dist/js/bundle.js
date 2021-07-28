@@ -11802,7 +11802,7 @@ function DaytimeConfessPage(Props) {
   var turnState = match[0];
   return React.createElement("div", {
     className: "page flex-vertical",
-    id: "daytime-page"
+    id: "daytime-confess-page"
   }, React.createElement("h1", undefined, Translator$Salem1692.getTranslator(language, "Confess")), React.createElement("h2", undefined, Translator$Salem1692.getTranslator(language, "Everyone,")), React.createElement("p", undefined, Translator$Salem1692.getTranslator(language, "decide whether you want to confess")), turnState.hasConstable ? React.createElement(React.Fragment, undefined, React.createElement(LargeRevealButton$Salem1692.make, {
     revealPrompt: Translator$Salem1692.getTranslator(language, "Reveal constable's protection"),
     revelationPromptPre: Translator$Salem1692.getTranslator(language, "The constable protected-PRE"),
@@ -11997,7 +11997,7 @@ function DaytimeRevealPage(Props) {
   var match$2 = turnState.nrWitches === 1 ? [Translator$Salem1692.getTranslator(language, "Reveal witch's victim"), Translator$Salem1692.getTranslator(language, "The witch attacked-PRE"), Translator$Salem1692.getTranslator(language, "The witch attacked-POST")] : [Translator$Salem1692.getTranslator(language, "Reveal witches' victim"), Translator$Salem1692.getTranslator(language, "The witches attacked-PRE"), Translator$Salem1692.getTranslator(language, "The witches attacked-POST")];
   return React.createElement("div", {
     className: "page flex-vertical",
-    id: "daytime-page"
+    id: "daytime-reveal-page"
   }, React.createElement("h1", undefined, Translator$Salem1692.getTranslator(language, "The Reveal")), React.createElement(Spacer$Salem1692.make, {}), React.createElement(LargeRevealButton$Salem1692.make, {
     revealPrompt: match$2[0],
     revelationPromptPre: match$2[1],

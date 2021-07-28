@@ -249,3 +249,11 @@ div.text-padding {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+
+/** ****************************************************************************
+ * Daytime Confess Page
+ */
+
+#daytime-confess-page {
+    background: url(../images/overlay-hourglass.png) -20vw / 70vw no-repeat;
+}

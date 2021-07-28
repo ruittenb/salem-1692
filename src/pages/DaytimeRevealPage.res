@@ -34,7 +34,7 @@ let make = (
         )
     }
 
-    <div id="daytime-page" className="page flex-vertical">
+    <div id="daytime-reveal-page" className="page flex-vertical">
         <h1> {React.string(t("The Reveal"))} </h1>
         <Spacer />
         // Witches reveal button
