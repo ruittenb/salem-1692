@@ -91,6 +91,7 @@ div.text-padding {
     background-color: #eac672;
     border-width: 2px;
     border-color: #361807;
+    box-shadow: 0px 10px 20px #00000030, 0px 6px 6px #0000003b;
 }
 
 .page button,
