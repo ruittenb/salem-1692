@@ -91,6 +91,7 @@ div.text-padding {
     background-color: #eac672;
     border-width: 2px;
     border-color: #361807;
+    box-shadow: 0px 10px 20px #00000030, 0px 6px 6px #0000003b;
 }
 
 .page button,
@@ -189,6 +190,23 @@ div.text-padding {
     padding-top: 20px;
 }
 
+#layout-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#layout-list button.squarebutton {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 0;
+}
+
+#layout-list button.squarebutton.layout-1222::after { content: url(../images/tablelayout-1222.png); }
+#layout-list button.squarebutton.layout-2221::after { content: url(../images/tablelayout-2221.png); }
+#layout-list button.squarebutton.layout-1221::after { content: url(../images/tablelayout-1221.png); }
+#layout-list button.squarebutton.layout-2222::after { content: url(../images/tablelayout-2222.png); }
+
 /** ****************************************************************************
  * Credits Page
  */
@@ -231,4 +249,20 @@ div.text-padding {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+#player-list.one-at-head :first-child,
+#player-list.two-at-head.odd :last-child,
+#player-list.one-at-head.even :last-child {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: 40%;
+}
+
+/** ****************************************************************************
+ * Daytime Confess Page
+ */
+
+#daytime-confess-page {
+    background: url(../images/overlay-hourglass.png) -20vw / 70vw no-repeat;
 }

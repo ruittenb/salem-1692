@@ -14,6 +14,7 @@ let table = Js.Dict.fromArray([
     ("Speech", "Discurso"),
     ("How many witches?", `¿Cuantas brujas?`),
     ("Language", "Idioma"),
+    ("Seating layout", "Plan de mesa"),
     ("English", "English"),
     ("Nederlands", "Nederlands"),
     ("Deutsch", "Deutsch"),

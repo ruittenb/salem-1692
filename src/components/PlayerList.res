@@ -26,10 +26,16 @@ let make = (
             <SquareButton key={player} label={player} onClick=choiceHandler(player) />
         })
 
+    let evenOddClass = if gameState.players->Belt.Array.length->mod(2) === 0 { "even" } else { "odd" }
+    let headClass    = switch gameState.seatingLayout {
+        | OneAtHead => "one-at-head"
+        | TwoAtHead => "two-at-head"
+    }
+
     <>
         <h2> {React.string(title)} </h2>
         <div> {React.string(subtitle)} </div>
-        <div id="player-list">
+        <div id="player-list" className={ headClass ++ " " ++ evenOddClass }>
             {React.array(buttons)}
         </div>
     </>
