@@ -102,6 +102,10 @@ div.text-padding {
     background-repeat: no-repeat;
 }
 
+.page button.rotated {
+    transform: rotate(180deg);
+}
+
 .page button.largebutton {
     width: 80%;
     height: 100px;
@@ -150,6 +154,7 @@ div.text-padding {
 .page button.icon-lang { background-image: url(../images/icon-lang.png); }
 .page button.icon-back { background-image: url(../images/icon-back.png); }
 .page button.icon-forw { background-image: url(../images/icon-forw.png); }
+.page button.icon-rot  { background-image: url(../images/icon-rot.png); }
 .page button.icon-exit { background-image: url(../images/icon-exit.png); }
 
 .page button.icon-checked   { background-image: url(../images/icon-checked.png); }
