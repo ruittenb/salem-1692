@@ -4569,7 +4569,7 @@ if(/^(https?|file):$/.test(protocol)){// eslint-disable-next-line react-internal
 console.info('%cDownload the React DevTools '+'for a better development experience: '+'https://reactjs.org/link/react-devtools'+(protocol==='file:'?'\nYou might need to use a local HTTP server (instead of file://): '+'https://reactjs.org/link/react-devtools-faq':''),'font-weight:bold');}}}}exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED=Internals;exports.createPortal=createPortal$1;exports.findDOMNode=findDOMNode;exports.flushSync=flushSync;exports.hydrate=hydrate;exports.render=render;exports.unmountComponentAtNode=unmountComponentAtNode;exports.unstable_batchedUpdates=batchedUpdates$1;exports.unstable_createPortal=unstable_createPortal;exports.unstable_renderSubtreeIntoContainer=renderSubtreeIntoContainer;exports.version=ReactVersion;})();}
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":2,"object-assign":1,"react":8,"scheduler":21,"scheduler/tracing":22}],4:[function(require,module,exports){
+},{"_process":2,"object-assign":1,"react":8,"scheduler":27,"scheduler/tracing":28}],4:[function(require,module,exports){
 /** @license React v17.0.2
  * react-dom.production.min.js
  *
@@ -4868,7 +4868,7 @@ exports.findDOMNode=function(a){if(null==a)return null;if(1===a.nodeType)return 
 exports.render=function(a,b,c){if(!rk(b))throw Error(y(200));return tk(null,a,b,!1,c)};exports.unmountComponentAtNode=function(a){if(!rk(a))throw Error(y(40));return a._reactRootContainer?(Xj(function(){tk(null,null,a,!1,function(){a._reactRootContainer=null;a[ff]=null})}),!0):!1};exports.unstable_batchedUpdates=Wj;exports.unstable_createPortal=function(a,b){return uk(a,b,2<arguments.length&&void 0!==arguments[2]?arguments[2]:null)};
 exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!rk(c))throw Error(y(200));if(null==a||void 0===a._reactInternals)throw Error(y(38));return tk(a,b,c,!1,d)};exports.version="17.0.2";
 
-},{"object-assign":1,"react":8,"scheduler":21}],5:[function(require,module,exports){
+},{"object-assign":1,"react":8,"scheduler":27}],5:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -8084,7 +8084,2671 @@ function joinWith(a, sep, toString) {
 }
 /* No side effect */
 
-},{"./caml.js":10,"./caml_option.js":12,"./curry.js":13,"./js_math.js":16}],10:[function(require,module,exports){
+},{"./caml.js":15,"./caml_option.js":17,"./curry.js":18,"./js_math.js":21}],10:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.add = add;
+exports.mergeMany = mergeMany;
+exports.remove = remove;
+exports.removeMany = removeMany;
+exports.union = union;
+exports.intersect = intersect;
+exports.diff = diff;
+exports.split = split;
+exports.checkInvariantInternal = exports.getExn = exports.getUndefined = exports.get = exports.maxUndefined = exports.maximum = exports.minUndefined = exports.minimum = exports.toArray = exports.toList = exports.size = exports.partition = exports.partitionU = exports.keep = exports.keepU = exports.some = exports.someU = exports.every = exports.everyU = exports.reduce = exports.reduceU = exports.forEach = exports.forEachU = exports.eq = exports.cmp = exports.subset = exports.has = exports.isEmpty = exports.fromSortedArrayUnsafe = exports.fromArray = exports.empty = void 0;
+
+var Belt_internalAVLset = _interopRequireWildcard(require("./belt_internalAVLset.js"));
+
+var Belt_internalSetInt = _interopRequireWildcard(require("./belt_internalSetInt.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function add(t, x) {
+  if (t === undefined) {
+    return Belt_internalAVLset.singleton(x);
+  }
+
+  var v = t.v;
+
+  if (x === v) {
+    return t;
+  }
+
+  var l = t.l;
+  var r = t.r;
+
+  if (x < v) {
+    var ll = add(l, x);
+
+    if (ll === l) {
+      return t;
+    } else {
+      return Belt_internalAVLset.bal(ll, v, r);
+    }
+  }
+
+  var rr = add(r, x);
+
+  if (rr === r) {
+    return t;
+  } else {
+    return Belt_internalAVLset.bal(l, v, rr);
+  }
+}
+
+function mergeMany(h, arr) {
+  var len = arr.length;
+  var v = h;
+
+  for (var i = 0; i < len; ++i) {
+    var key = arr[i];
+    v = add(v, key);
+  }
+
+  return v;
+}
+
+function remove(t, x) {
+  if (t === undefined) {
+    return t;
+  }
+
+  var v = t.v;
+  var l = t.l;
+  var r = t.r;
+
+  if (x === v) {
+    if (l === undefined) {
+      return r;
+    }
+
+    if (r === undefined) {
+      return l;
+    }
+
+    var v$1 = {
+      contents: r.v
+    };
+    var r$1 = Belt_internalAVLset.removeMinAuxWithRef(r, v$1);
+    return Belt_internalAVLset.bal(l, v$1.contents, r$1);
+  }
+
+  if (x < v) {
+    var ll = remove(l, x);
+
+    if (ll === l) {
+      return t;
+    } else {
+      return Belt_internalAVLset.bal(ll, v, r);
+    }
+  }
+
+  var rr = remove(r, x);
+
+  if (rr === r) {
+    return t;
+  } else {
+    return Belt_internalAVLset.bal(l, v, rr);
+  }
+}
+
+function removeMany(h, arr) {
+  var len = arr.length;
+  var v = h;
+
+  for (var i = 0; i < len; ++i) {
+    var key = arr[i];
+    v = remove(v, key);
+  }
+
+  return v;
+}
+
+function splitAuxNoPivot(n, x) {
+  var v = n.v;
+  var l = n.l;
+  var r = n.r;
+
+  if (x === v) {
+    return [l, r];
+  }
+
+  if (x < v) {
+    if (l === undefined) {
+      return [undefined, n];
+    }
+
+    var match = splitAuxNoPivot(l, x);
+    return [match[0], Belt_internalAVLset.joinShared(match[1], v, r)];
+  }
+
+  if (r === undefined) {
+    return [n, undefined];
+  }
+
+  var match$1 = splitAuxNoPivot(r, x);
+  return [Belt_internalAVLset.joinShared(l, v, match$1[0]), match$1[1]];
+}
+
+function splitAuxPivot(n, x, pres) {
+  var v = n.v;
+  var l = n.l;
+  var r = n.r;
+
+  if (x === v) {
+    pres.contents = true;
+    return [l, r];
+  }
+
+  if (x < v) {
+    if (l === undefined) {
+      return [undefined, n];
+    }
+
+    var match = splitAuxPivot(l, x, pres);
+    return [match[0], Belt_internalAVLset.joinShared(match[1], v, r)];
+  }
+
+  if (r === undefined) {
+    return [n, undefined];
+  }
+
+  var match$1 = splitAuxPivot(r, x, pres);
+  return [Belt_internalAVLset.joinShared(l, v, match$1[0]), match$1[1]];
+}
+
+function split(t, x) {
+  if (t === undefined) {
+    return [[undefined, undefined], false];
+  }
+
+  var pres = {
+    contents: false
+  };
+  var v = splitAuxPivot(t, x, pres);
+  return [v, pres.contents];
+}
+
+function union(s1, s2) {
+  if (s1 === undefined) {
+    return s2;
+  }
+
+  if (s2 === undefined) {
+    return s1;
+  }
+
+  var h1 = s1.h;
+  var h2 = s2.h;
+
+  if (h1 >= h2) {
+    if (h2 === 1) {
+      return add(s1, s2.v);
+    }
+
+    var v1 = s1.v;
+    var l1 = s1.l;
+    var r1 = s1.r;
+    var match = splitAuxNoPivot(s2, v1);
+    return Belt_internalAVLset.joinShared(union(l1, match[0]), v1, union(r1, match[1]));
+  }
+
+  if (h1 === 1) {
+    return add(s2, s1.v);
+  }
+
+  var v2 = s2.v;
+  var l2 = s2.l;
+  var r2 = s2.r;
+  var match$1 = splitAuxNoPivot(s1, v2);
+  return Belt_internalAVLset.joinShared(union(match$1[0], l2), v2, union(match$1[1], r2));
+}
+
+function intersect(s1, s2) {
+  if (s1 === undefined) {
+    return;
+  }
+
+  if (s2 === undefined) {
+    return;
+  }
+
+  var v1 = s1.v;
+  var l1 = s1.l;
+  var r1 = s1.r;
+  var pres = {
+    contents: false
+  };
+  var match = splitAuxPivot(s2, v1, pres);
+  var ll = intersect(l1, match[0]);
+  var rr = intersect(r1, match[1]);
+
+  if (pres.contents) {
+    return Belt_internalAVLset.joinShared(ll, v1, rr);
+  } else {
+    return Belt_internalAVLset.concatShared(ll, rr);
+  }
+}
+
+function diff(s1, s2) {
+  if (s1 === undefined) {
+    return s1;
+  }
+
+  if (s2 === undefined) {
+    return s1;
+  }
+
+  var v1 = s1.v;
+  var l1 = s1.l;
+  var r1 = s1.r;
+  var pres = {
+    contents: false
+  };
+  var match = splitAuxPivot(s2, v1, pres);
+  var ll = diff(l1, match[0]);
+  var rr = diff(r1, match[1]);
+
+  if (pres.contents) {
+    return Belt_internalAVLset.concatShared(ll, rr);
+  } else {
+    return Belt_internalAVLset.joinShared(ll, v1, rr);
+  }
+}
+
+var empty;
+exports.empty = empty;
+var fromArray = Belt_internalSetInt.fromArray;
+exports.fromArray = fromArray;
+var fromSortedArrayUnsafe = Belt_internalAVLset.fromSortedArrayUnsafe;
+exports.fromSortedArrayUnsafe = fromSortedArrayUnsafe;
+var isEmpty = Belt_internalAVLset.isEmpty;
+exports.isEmpty = isEmpty;
+var has = Belt_internalSetInt.has;
+exports.has = has;
+var subset = Belt_internalSetInt.subset;
+exports.subset = subset;
+var cmp = Belt_internalSetInt.cmp;
+exports.cmp = cmp;
+var eq = Belt_internalSetInt.eq;
+exports.eq = eq;
+var forEachU = Belt_internalAVLset.forEachU;
+exports.forEachU = forEachU;
+var forEach = Belt_internalAVLset.forEach;
+exports.forEach = forEach;
+var reduceU = Belt_internalAVLset.reduceU;
+exports.reduceU = reduceU;
+var reduce = Belt_internalAVLset.reduce;
+exports.reduce = reduce;
+var everyU = Belt_internalAVLset.everyU;
+exports.everyU = everyU;
+var every = Belt_internalAVLset.every;
+exports.every = every;
+var someU = Belt_internalAVLset.someU;
+exports.someU = someU;
+var some = Belt_internalAVLset.some;
+exports.some = some;
+var keepU = Belt_internalAVLset.keepSharedU;
+exports.keepU = keepU;
+var keep = Belt_internalAVLset.keepShared;
+exports.keep = keep;
+var partitionU = Belt_internalAVLset.partitionSharedU;
+exports.partitionU = partitionU;
+var partition = Belt_internalAVLset.partitionShared;
+exports.partition = partition;
+var size = Belt_internalAVLset.size;
+exports.size = size;
+var toList = Belt_internalAVLset.toList;
+exports.toList = toList;
+var toArray = Belt_internalAVLset.toArray;
+exports.toArray = toArray;
+var minimum = Belt_internalAVLset.minimum;
+exports.minimum = minimum;
+var minUndefined = Belt_internalAVLset.minUndefined;
+exports.minUndefined = minUndefined;
+var maximum = Belt_internalAVLset.maximum;
+exports.maximum = maximum;
+var maxUndefined = Belt_internalAVLset.maxUndefined;
+exports.maxUndefined = maxUndefined;
+var get = Belt_internalSetInt.get;
+exports.get = get;
+var getUndefined = Belt_internalSetInt.getUndefined;
+exports.getUndefined = getUndefined;
+var getExn = Belt_internalSetInt.getExn;
+exports.getExn = getExn;
+var checkInvariantInternal = Belt_internalAVLset.checkInvariantInternal;
+/* No side effect */
+
+exports.checkInvariantInternal = checkInvariantInternal;
+
+},{"./belt_internalAVLset.js":13,"./belt_internalSetInt.js":14}],11:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.strictlySortedLengthU = strictlySortedLengthU;
+exports.strictlySortedLength = strictlySortedLength;
+exports.isSortedU = isSortedU;
+exports.isSorted = isSorted;
+exports.stableSortInPlaceByU = stableSortInPlaceByU;
+exports.stableSortInPlaceBy = stableSortInPlaceBy;
+exports.stableSortByU = stableSortByU;
+exports.stableSortBy = stableSortBy;
+exports.binarySearchByU = binarySearchByU;
+exports.binarySearchBy = binarySearchBy;
+exports.unionU = unionU;
+exports.union = union;
+exports.intersectU = intersectU;
+exports.intersect = intersect;
+exports.diffU = diffU;
+exports.diff = diff;
+exports.$$String = exports.Int = void 0;
+
+var Curry = _interopRequireWildcard(require("./curry.js"));
+
+var Belt_Array = _interopRequireWildcard(require("./belt_Array.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function sortedLengthAuxMore(xs, _prec, _acc, len, lt) {
+  while (true) {
+    var acc = _acc;
+    var prec = _prec;
+
+    if (acc >= len) {
+      return acc;
+    }
+
+    var v = xs[acc];
+
+    if (!lt(v, prec)) {
+      return acc;
+    }
+
+    _acc = acc + 1 | 0;
+    _prec = v;
+    continue;
+  }
+
+  ;
+}
+
+function strictlySortedLengthU(xs, lt) {
+  var len = xs.length;
+
+  if (len === 0 || len === 1) {
+    return len;
+  }
+
+  var x0 = xs[0];
+  var x1 = xs[1];
+
+  if (lt(x0, x1)) {
+    var _prec = x1;
+    var _acc = 2;
+
+    while (true) {
+      var acc = _acc;
+      var prec = _prec;
+
+      if (acc >= len) {
+        return acc;
+      }
+
+      var v = xs[acc];
+
+      if (!lt(prec, v)) {
+        return acc;
+      }
+
+      _acc = acc + 1 | 0;
+      _prec = v;
+      continue;
+    }
+
+    ;
+  } else if (lt(x1, x0)) {
+    return -sortedLengthAuxMore(xs, x1, 2, len, lt) | 0;
+  } else {
+    return 1;
+  }
+}
+
+function strictlySortedLength(xs, lt) {
+  return strictlySortedLengthU(xs, Curry.__2(lt));
+}
+
+function isSortedU(a, cmp) {
+  var len = a.length;
+
+  if (len === 0) {
+    return true;
+  } else {
+    var _i = 0;
+    var last_bound = len - 1 | 0;
+
+    while (true) {
+      var i = _i;
+
+      if (i === last_bound) {
+        return true;
+      }
+
+      if (cmp(a[i], a[i + 1 | 0]) > 0) {
+        return false;
+      }
+
+      _i = i + 1 | 0;
+      continue;
+    }
+
+    ;
+  }
+}
+
+function isSorted(a, cmp) {
+  return isSortedU(a, Curry.__2(cmp));
+}
+
+function merge(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, cmp) {
+  var src1r = src1ofs + src1len | 0;
+  var src2r = src2ofs + src2len | 0;
+  var _i1 = src1ofs;
+  var _s1 = src[src1ofs];
+  var _i2 = src2ofs;
+  var _s2 = src2[src2ofs];
+  var _d = dstofs;
+
+  while (true) {
+    var d = _d;
+    var s2 = _s2;
+    var i2 = _i2;
+    var s1 = _s1;
+    var i1 = _i1;
+
+    if (cmp(s1, s2) <= 0) {
+      dst[d] = s1;
+      var i1$1 = i1 + 1 | 0;
+
+      if (i1$1 >= src1r) {
+        return Belt_Array.blitUnsafe(src2, i2, dst, d + 1 | 0, src2r - i2 | 0);
+      }
+
+      _d = d + 1 | 0;
+      _s1 = src[i1$1];
+      _i1 = i1$1;
+      continue;
+    }
+
+    dst[d] = s2;
+    var i2$1 = i2 + 1 | 0;
+
+    if (i2$1 >= src2r) {
+      return Belt_Array.blitUnsafe(src, i1, dst, d + 1 | 0, src1r - i1 | 0);
+    }
+
+    _d = d + 1 | 0;
+    _s2 = src2[i2$1];
+    _i2 = i2$1;
+    continue;
+  }
+
+  ;
+}
+
+function unionU(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, cmp) {
+  var src1r = src1ofs + src1len | 0;
+  var src2r = src2ofs + src2len | 0;
+  var _i1 = src1ofs;
+  var _s1 = src[src1ofs];
+  var _i2 = src2ofs;
+  var _s2 = src2[src2ofs];
+  var _d = dstofs;
+
+  while (true) {
+    var d = _d;
+    var s2 = _s2;
+    var i2 = _i2;
+    var s1 = _s1;
+    var i1 = _i1;
+    var c = cmp(s1, s2);
+
+    if (c < 0) {
+      dst[d] = s1;
+      var i1$1 = i1 + 1 | 0;
+      var d$1 = d + 1 | 0;
+
+      if (i1$1 < src1r) {
+        _d = d$1;
+        _s1 = src[i1$1];
+        _i1 = i1$1;
+        continue;
+      }
+
+      Belt_Array.blitUnsafe(src2, i2, dst, d$1, src2r - i2 | 0);
+      return (d$1 + src2r | 0) - i2 | 0;
+    }
+
+    if (c === 0) {
+      dst[d] = s1;
+      var i1$2 = i1 + 1 | 0;
+      var i2$1 = i2 + 1 | 0;
+      var d$2 = d + 1 | 0;
+
+      if (!(i1$2 < src1r && i2$1 < src2r)) {
+        if (i1$2 === src1r) {
+          Belt_Array.blitUnsafe(src2, i2$1, dst, d$2, src2r - i2$1 | 0);
+          return (d$2 + src2r | 0) - i2$1 | 0;
+        } else {
+          Belt_Array.blitUnsafe(src, i1$2, dst, d$2, src1r - i1$2 | 0);
+          return (d$2 + src1r | 0) - i1$2 | 0;
+        }
+      }
+
+      _d = d$2;
+      _s2 = src2[i2$1];
+      _i2 = i2$1;
+      _s1 = src[i1$2];
+      _i1 = i1$2;
+      continue;
+    }
+
+    dst[d] = s2;
+    var i2$2 = i2 + 1 | 0;
+    var d$3 = d + 1 | 0;
+
+    if (i2$2 < src2r) {
+      _d = d$3;
+      _s2 = src2[i2$2];
+      _i2 = i2$2;
+      continue;
+    }
+
+    Belt_Array.blitUnsafe(src, i1, dst, d$3, src1r - i1 | 0);
+    return (d$3 + src1r | 0) - i1 | 0;
+  }
+
+  ;
+}
+
+function union(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, cmp) {
+  return unionU(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, Curry.__2(cmp));
+}
+
+function intersectU(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, cmp) {
+  var src1r = src1ofs + src1len | 0;
+  var src2r = src2ofs + src2len | 0;
+  var _i1 = src1ofs;
+  var _s1 = src[src1ofs];
+  var _i2 = src2ofs;
+  var _s2 = src2[src2ofs];
+  var _d = dstofs;
+
+  while (true) {
+    var d = _d;
+    var s2 = _s2;
+    var i2 = _i2;
+    var s1 = _s1;
+    var i1 = _i1;
+    var c = cmp(s1, s2);
+
+    if (c < 0) {
+      var i1$1 = i1 + 1 | 0;
+
+      if (i1$1 >= src1r) {
+        return d;
+      }
+
+      _s1 = src[i1$1];
+      _i1 = i1$1;
+      continue;
+    }
+
+    if (c === 0) {
+      dst[d] = s1;
+      var i1$2 = i1 + 1 | 0;
+      var i2$1 = i2 + 1 | 0;
+      var d$1 = d + 1 | 0;
+
+      if (!(i1$2 < src1r && i2$1 < src2r)) {
+        return d$1;
+      }
+
+      _d = d$1;
+      _s2 = src2[i2$1];
+      _i2 = i2$1;
+      _s1 = src[i1$2];
+      _i1 = i1$2;
+      continue;
+    }
+
+    var i2$2 = i2 + 1 | 0;
+
+    if (i2$2 >= src2r) {
+      return d;
+    }
+
+    _s2 = src2[i2$2];
+    _i2 = i2$2;
+    continue;
+  }
+
+  ;
+}
+
+function intersect(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, cmp) {
+  return intersectU(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, Curry.__2(cmp));
+}
+
+function diffU(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, cmp) {
+  var src1r = src1ofs + src1len | 0;
+  var src2r = src2ofs + src2len | 0;
+  var _i1 = src1ofs;
+  var _s1 = src[src1ofs];
+  var _i2 = src2ofs;
+  var _s2 = src2[src2ofs];
+  var _d = dstofs;
+
+  while (true) {
+    var d = _d;
+    var s2 = _s2;
+    var i2 = _i2;
+    var s1 = _s1;
+    var i1 = _i1;
+    var c = cmp(s1, s2);
+
+    if (c < 0) {
+      dst[d] = s1;
+      var d$1 = d + 1 | 0;
+      var i1$1 = i1 + 1 | 0;
+
+      if (i1$1 >= src1r) {
+        return d$1;
+      }
+
+      _d = d$1;
+      _s1 = src[i1$1];
+      _i1 = i1$1;
+      continue;
+    }
+
+    if (c === 0) {
+      var i1$2 = i1 + 1 | 0;
+      var i2$1 = i2 + 1 | 0;
+
+      if (!(i1$2 < src1r && i2$1 < src2r)) {
+        if (i1$2 === src1r) {
+          return d;
+        } else {
+          Belt_Array.blitUnsafe(src, i1$2, dst, d, src1r - i1$2 | 0);
+          return (d + src1r | 0) - i1$2 | 0;
+        }
+      }
+
+      _s2 = src2[i2$1];
+      _i2 = i2$1;
+      _s1 = src[i1$2];
+      _i1 = i1$2;
+      continue;
+    }
+
+    var i2$2 = i2 + 1 | 0;
+
+    if (i2$2 < src2r) {
+      _s2 = src2[i2$2];
+      _i2 = i2$2;
+      continue;
+    }
+
+    Belt_Array.blitUnsafe(src, i1, dst, d, src1r - i1 | 0);
+    return (d + src1r | 0) - i1 | 0;
+  }
+
+  ;
+}
+
+function diff(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, cmp) {
+  return diffU(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, Curry.__2(cmp));
+}
+
+function insertionSort(src, srcofs, dst, dstofs, len, cmp) {
+  for (var i = 0; i < len; ++i) {
+    var e = src[srcofs + i | 0];
+    var j = (dstofs + i | 0) - 1 | 0;
+
+    while (j >= dstofs && cmp(dst[j], e) > 0) {
+      dst[j + 1 | 0] = dst[j];
+      j = j - 1 | 0;
+    }
+
+    ;
+    dst[j + 1 | 0] = e;
+  }
+}
+
+function sortTo(src, srcofs, dst, dstofs, len, cmp) {
+  if (len <= 5) {
+    return insertionSort(src, srcofs, dst, dstofs, len, cmp);
+  }
+
+  var l1 = len / 2 | 0;
+  var l2 = len - l1 | 0;
+  sortTo(src, srcofs + l1 | 0, dst, dstofs + l1 | 0, l2, cmp);
+  sortTo(src, srcofs, src, srcofs + l2 | 0, l1, cmp);
+  return merge(src, srcofs + l2 | 0, l1, dst, dstofs + l1 | 0, l2, dst, dstofs, cmp);
+}
+
+function stableSortInPlaceByU(a, cmp) {
+  var l = a.length;
+
+  if (l <= 5) {
+    return insertionSort(a, 0, a, 0, l, cmp);
+  }
+
+  var l1 = l / 2 | 0;
+  var l2 = l - l1 | 0;
+  var t = new Array(l2);
+  sortTo(a, l1, t, 0, l2, cmp);
+  sortTo(a, 0, a, l2, l1, cmp);
+  return merge(a, l2, l1, t, 0, l2, a, 0, cmp);
+}
+
+function stableSortInPlaceBy(a, cmp) {
+  return stableSortInPlaceByU(a, Curry.__2(cmp));
+}
+
+function stableSortByU(a, cmp) {
+  var b = a.slice(0);
+  stableSortInPlaceByU(b, cmp);
+  return b;
+}
+
+function stableSortBy(a, cmp) {
+  return stableSortByU(a, Curry.__2(cmp));
+}
+
+function binarySearchByU(sorted, key, cmp) {
+  var len = sorted.length;
+
+  if (len === 0) {
+    return -1;
+  }
+
+  var lo = sorted[0];
+  var c = cmp(key, lo);
+
+  if (c < 0) {
+    return -1;
+  }
+
+  var hi = sorted[len - 1 | 0];
+  var c2 = cmp(key, hi);
+
+  if (c2 > 0) {
+    return -(len + 1 | 0) | 0;
+  } else {
+    var _lo = 0;
+
+    var _hi = len - 1 | 0;
+
+    while (true) {
+      var hi$1 = _hi;
+      var lo$1 = _lo;
+      var mid = (lo$1 + hi$1 | 0) / 2 | 0;
+      var midVal = sorted[mid];
+      var c$1 = cmp(key, midVal);
+
+      if (c$1 === 0) {
+        return mid;
+      }
+
+      if (c$1 < 0) {
+        if (hi$1 === mid) {
+          if (cmp(sorted[lo$1], key) === 0) {
+            return lo$1;
+          } else {
+            return -(hi$1 + 1 | 0) | 0;
+          }
+        }
+
+        _hi = mid;
+        continue;
+      }
+
+      if (lo$1 === mid) {
+        if (cmp(sorted[hi$1], key) === 0) {
+          return hi$1;
+        } else {
+          return -(hi$1 + 1 | 0) | 0;
+        }
+      }
+
+      _lo = mid;
+      continue;
+    }
+
+    ;
+  }
+}
+
+function binarySearchBy(sorted, key, cmp) {
+  return binarySearchByU(sorted, key, Curry.__2(cmp));
+}
+
+var Int;
+exports.Int = Int;
+var $$String;
+/* No side effect */
+
+exports.$$String = $$String;
+
+},{"./belt_Array.js":9,"./curry.js":18}],12:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.strictlySortedLength = strictlySortedLength;
+exports.isSorted = isSorted;
+exports.stableSortInPlace = stableSortInPlace;
+exports.stableSort = stableSort;
+exports.binarySearch = binarySearch;
+exports.union = union;
+exports.intersect = intersect;
+exports.diff = diff;
+
+var Belt_Array = _interopRequireWildcard(require("./belt_Array.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function sortedLengthAuxMore(xs, _prec, _acc, len) {
+  while (true) {
+    var acc = _acc;
+    var prec = _prec;
+
+    if (acc >= len) {
+      return acc;
+    }
+
+    var v = xs[acc];
+
+    if (prec <= v) {
+      return acc;
+    }
+
+    _acc = acc + 1 | 0;
+    _prec = v;
+    continue;
+  }
+
+  ;
+}
+
+function strictlySortedLength(xs) {
+  var len = xs.length;
+
+  if (len === 0 || len === 1) {
+    return len;
+  }
+
+  var x0 = xs[0];
+  var x1 = xs[1];
+
+  if (x0 < x1) {
+    var _prec = x1;
+    var _acc = 2;
+
+    while (true) {
+      var acc = _acc;
+      var prec = _prec;
+
+      if (acc >= len) {
+        return acc;
+      }
+
+      var v = xs[acc];
+
+      if (prec >= v) {
+        return acc;
+      }
+
+      _acc = acc + 1 | 0;
+      _prec = v;
+      continue;
+    }
+
+    ;
+  } else if (x0 > x1) {
+    return -sortedLengthAuxMore(xs, x1, 2, len) | 0;
+  } else {
+    return 1;
+  }
+}
+
+function isSorted(a) {
+  var len = a.length;
+
+  if (len === 0) {
+    return true;
+  } else {
+    var _i = 0;
+    var last_bound = len - 1 | 0;
+
+    while (true) {
+      var i = _i;
+
+      if (i === last_bound) {
+        return true;
+      }
+
+      if (a[i] > a[i + 1 | 0]) {
+        return false;
+      }
+
+      _i = i + 1 | 0;
+      continue;
+    }
+
+    ;
+  }
+}
+
+function merge(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs) {
+  var src1r = src1ofs + src1len | 0;
+  var src2r = src2ofs + src2len | 0;
+  var _i1 = src1ofs;
+  var _s1 = src[src1ofs];
+  var _i2 = src2ofs;
+  var _s2 = src2[src2ofs];
+  var _d = dstofs;
+
+  while (true) {
+    var d = _d;
+    var s2 = _s2;
+    var i2 = _i2;
+    var s1 = _s1;
+    var i1 = _i1;
+
+    if (s1 <= s2) {
+      dst[d] = s1;
+      var i1$1 = i1 + 1 | 0;
+
+      if (i1$1 >= src1r) {
+        return Belt_Array.blitUnsafe(src2, i2, dst, d + 1 | 0, src2r - i2 | 0);
+      }
+
+      _d = d + 1 | 0;
+      _s1 = src[i1$1];
+      _i1 = i1$1;
+      continue;
+    }
+
+    dst[d] = s2;
+    var i2$1 = i2 + 1 | 0;
+
+    if (i2$1 >= src2r) {
+      return Belt_Array.blitUnsafe(src, i1, dst, d + 1 | 0, src1r - i1 | 0);
+    }
+
+    _d = d + 1 | 0;
+    _s2 = src2[i2$1];
+    _i2 = i2$1;
+    continue;
+  }
+
+  ;
+}
+
+function union(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs) {
+  var src1r = src1ofs + src1len | 0;
+  var src2r = src2ofs + src2len | 0;
+  var _i1 = src1ofs;
+  var _s1 = src[src1ofs];
+  var _i2 = src2ofs;
+  var _s2 = src2[src2ofs];
+  var _d = dstofs;
+
+  while (true) {
+    var d = _d;
+    var s2 = _s2;
+    var i2 = _i2;
+    var s1 = _s1;
+    var i1 = _i1;
+
+    if (s1 < s2) {
+      dst[d] = s1;
+      var i1$1 = i1 + 1 | 0;
+      var d$1 = d + 1 | 0;
+
+      if (i1$1 < src1r) {
+        _d = d$1;
+        _s1 = src[i1$1];
+        _i1 = i1$1;
+        continue;
+      }
+
+      Belt_Array.blitUnsafe(src2, i2, dst, d$1, src2r - i2 | 0);
+      return (d$1 + src2r | 0) - i2 | 0;
+    }
+
+    if (s1 === s2) {
+      dst[d] = s1;
+      var i1$2 = i1 + 1 | 0;
+      var i2$1 = i2 + 1 | 0;
+      var d$2 = d + 1 | 0;
+
+      if (!(i1$2 < src1r && i2$1 < src2r)) {
+        if (i1$2 === src1r) {
+          Belt_Array.blitUnsafe(src2, i2$1, dst, d$2, src2r - i2$1 | 0);
+          return (d$2 + src2r | 0) - i2$1 | 0;
+        } else {
+          Belt_Array.blitUnsafe(src, i1$2, dst, d$2, src1r - i1$2 | 0);
+          return (d$2 + src1r | 0) - i1$2 | 0;
+        }
+      }
+
+      _d = d$2;
+      _s2 = src2[i2$1];
+      _i2 = i2$1;
+      _s1 = src[i1$2];
+      _i1 = i1$2;
+      continue;
+    }
+
+    dst[d] = s2;
+    var i2$2 = i2 + 1 | 0;
+    var d$3 = d + 1 | 0;
+
+    if (i2$2 < src2r) {
+      _d = d$3;
+      _s2 = src2[i2$2];
+      _i2 = i2$2;
+      continue;
+    }
+
+    Belt_Array.blitUnsafe(src, i1, dst, d$3, src1r - i1 | 0);
+    return (d$3 + src1r | 0) - i1 | 0;
+  }
+
+  ;
+}
+
+function intersect(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs) {
+  var src1r = src1ofs + src1len | 0;
+  var src2r = src2ofs + src2len | 0;
+  var _i1 = src1ofs;
+  var _s1 = src[src1ofs];
+  var _i2 = src2ofs;
+  var _s2 = src2[src2ofs];
+  var _d = dstofs;
+
+  while (true) {
+    var d = _d;
+    var s2 = _s2;
+    var i2 = _i2;
+    var s1 = _s1;
+    var i1 = _i1;
+
+    if (s1 < s2) {
+      var i1$1 = i1 + 1 | 0;
+
+      if (i1$1 >= src1r) {
+        return d;
+      }
+
+      _s1 = src[i1$1];
+      _i1 = i1$1;
+      continue;
+    }
+
+    if (s1 === s2) {
+      dst[d] = s1;
+      var i1$2 = i1 + 1 | 0;
+      var i2$1 = i2 + 1 | 0;
+      var d$1 = d + 1 | 0;
+
+      if (!(i1$2 < src1r && i2$1 < src2r)) {
+        return d$1;
+      }
+
+      _d = d$1;
+      _s2 = src2[i2$1];
+      _i2 = i2$1;
+      _s1 = src[i1$2];
+      _i1 = i1$2;
+      continue;
+    }
+
+    var i2$2 = i2 + 1 | 0;
+
+    if (i2$2 >= src2r) {
+      return d;
+    }
+
+    _s2 = src2[i2$2];
+    _i2 = i2$2;
+    continue;
+  }
+
+  ;
+}
+
+function diff(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs) {
+  var src1r = src1ofs + src1len | 0;
+  var src2r = src2ofs + src2len | 0;
+  var _i1 = src1ofs;
+  var _s1 = src[src1ofs];
+  var _i2 = src2ofs;
+  var _s2 = src2[src2ofs];
+  var _d = dstofs;
+
+  while (true) {
+    var d = _d;
+    var s2 = _s2;
+    var i2 = _i2;
+    var s1 = _s1;
+    var i1 = _i1;
+
+    if (s1 < s2) {
+      dst[d] = s1;
+      var d$1 = d + 1 | 0;
+      var i1$1 = i1 + 1 | 0;
+
+      if (i1$1 >= src1r) {
+        return d$1;
+      }
+
+      _d = d$1;
+      _s1 = src[i1$1];
+      _i1 = i1$1;
+      continue;
+    }
+
+    if (s1 === s2) {
+      var i1$2 = i1 + 1 | 0;
+      var i2$1 = i2 + 1 | 0;
+
+      if (!(i1$2 < src1r && i2$1 < src2r)) {
+        if (i1$2 === src1r) {
+          return d;
+        } else {
+          Belt_Array.blitUnsafe(src, i1$2, dst, d, src1r - i1$2 | 0);
+          return (d + src1r | 0) - i1$2 | 0;
+        }
+      }
+
+      _s2 = src2[i2$1];
+      _i2 = i2$1;
+      _s1 = src[i1$2];
+      _i1 = i1$2;
+      continue;
+    }
+
+    var i2$2 = i2 + 1 | 0;
+
+    if (i2$2 < src2r) {
+      _s2 = src2[i2$2];
+      _i2 = i2$2;
+      continue;
+    }
+
+    Belt_Array.blitUnsafe(src, i1, dst, d, src1r - i1 | 0);
+    return (d + src1r | 0) - i1 | 0;
+  }
+
+  ;
+}
+
+function insertionSort(src, srcofs, dst, dstofs, len) {
+  for (var i = 0; i < len; ++i) {
+    var e = src[srcofs + i | 0];
+    var j = (dstofs + i | 0) - 1 | 0;
+
+    while (j >= dstofs && dst[j] > e) {
+      dst[j + 1 | 0] = dst[j];
+      j = j - 1 | 0;
+    }
+
+    ;
+    dst[j + 1 | 0] = e;
+  }
+}
+
+function sortTo(src, srcofs, dst, dstofs, len) {
+  if (len <= 5) {
+    return insertionSort(src, srcofs, dst, dstofs, len);
+  }
+
+  var l1 = len / 2 | 0;
+  var l2 = len - l1 | 0;
+  sortTo(src, srcofs + l1 | 0, dst, dstofs + l1 | 0, l2);
+  sortTo(src, srcofs, src, srcofs + l2 | 0, l1);
+  return merge(src, srcofs + l2 | 0, l1, dst, dstofs + l1 | 0, l2, dst, dstofs);
+}
+
+function stableSortInPlace(a) {
+  var l = a.length;
+
+  if (l <= 5) {
+    return insertionSort(a, 0, a, 0, l);
+  }
+
+  var l1 = l / 2 | 0;
+  var l2 = l - l1 | 0;
+  var t = new Array(l2);
+  sortTo(a, l1, t, 0, l2);
+  sortTo(a, 0, a, l2, l1);
+  return merge(a, l2, l1, t, 0, l2, a, 0);
+}
+
+function stableSort(a) {
+  var b = a.slice(0);
+  stableSortInPlace(b);
+  return b;
+}
+
+function binarySearch(sorted, key) {
+  var len = sorted.length;
+
+  if (len === 0) {
+    return -1;
+  }
+
+  var lo = sorted[0];
+
+  if (key < lo) {
+    return -1;
+  }
+
+  var hi = sorted[len - 1 | 0];
+
+  if (key > hi) {
+    return -(len + 1 | 0) | 0;
+  } else {
+    var _lo = 0;
+
+    var _hi = len - 1 | 0;
+
+    while (true) {
+      var hi$1 = _hi;
+      var lo$1 = _lo;
+      var mid = (lo$1 + hi$1 | 0) / 2 | 0;
+      var midVal = sorted[mid];
+
+      if (key === midVal) {
+        return mid;
+      }
+
+      if (key < midVal) {
+        if (hi$1 === mid) {
+          if (sorted[lo$1] === key) {
+            return lo$1;
+          } else {
+            return -(hi$1 + 1 | 0) | 0;
+          }
+        }
+
+        _hi = mid;
+        continue;
+      }
+
+      if (lo$1 === mid) {
+        if (sorted[hi$1] === key) {
+          return hi$1;
+        } else {
+          return -(hi$1 + 1 | 0) | 0;
+        }
+      }
+
+      _lo = mid;
+      continue;
+    }
+
+    ;
+  }
+}
+/* No side effect */
+
+},{"./belt_Array.js":9}],13:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.copy = copy;
+exports.create = create;
+exports.bal = bal;
+exports.singleton = singleton;
+exports.minimum = minimum;
+exports.minUndefined = minUndefined;
+exports.maximum = maximum;
+exports.maxUndefined = maxUndefined;
+exports.removeMinAuxWithRef = removeMinAuxWithRef;
+exports.isEmpty = isEmpty;
+exports.stackAllLeft = stackAllLeft;
+exports.forEachU = forEachU;
+exports.forEach = forEach;
+exports.reduceU = reduceU;
+exports.reduce = reduce;
+exports.everyU = everyU;
+exports.every = every;
+exports.someU = someU;
+exports.some = some;
+exports.joinShared = joinShared;
+exports.concatShared = concatShared;
+exports.keepSharedU = keepSharedU;
+exports.keepShared = keepShared;
+exports.keepCopyU = keepCopyU;
+exports.keepCopy = keepCopy;
+exports.partitionSharedU = partitionSharedU;
+exports.partitionShared = partitionShared;
+exports.partitionCopyU = partitionCopyU;
+exports.partitionCopy = partitionCopy;
+exports.lengthNode = lengthNode;
+exports.size = size;
+exports.toList = toList;
+exports.checkInvariantInternal = checkInvariantInternal;
+exports.fillArray = fillArray;
+exports.toArray = toArray;
+exports.fromSortedArrayAux = fromSortedArrayAux;
+exports.fromSortedArrayRevAux = fromSortedArrayRevAux;
+exports.fromSortedArrayUnsafe = fromSortedArrayUnsafe;
+exports.has = has;
+exports.cmp = cmp;
+exports.eq = eq;
+exports.subset = subset;
+exports.get = get;
+exports.getUndefined = getUndefined;
+exports.getExn = getExn;
+exports.fromArray = fromArray;
+exports.addMutate = addMutate;
+exports.balMutate = balMutate;
+exports.removeMinAuxWithRootMutate = removeMinAuxWithRootMutate;
+
+var Curry = _interopRequireWildcard(require("./curry.js"));
+
+var Caml_option = _interopRequireWildcard(require("./caml_option.js"));
+
+var Belt_SortArray = _interopRequireWildcard(require("./belt_SortArray.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function copy(n) {
+  if (n !== undefined) {
+    return {
+      v: n.v,
+      h: n.h,
+      l: copy(n.l),
+      r: copy(n.r)
+    };
+  } else {
+    return n;
+  }
+}
+
+function create(l, v, r) {
+  var hl = l !== undefined ? l.h : 0;
+  var hr = r !== undefined ? r.h : 0;
+  return {
+    v: v,
+    h: (hl >= hr ? hl : hr) + 1 | 0,
+    l: l,
+    r: r
+  };
+}
+
+function singleton(x) {
+  return {
+    v: x,
+    h: 1,
+    l: undefined,
+    r: undefined
+  };
+}
+
+function heightGe(l, r) {
+  if (r !== undefined) {
+    if (l !== undefined) {
+      return l.h >= r.h;
+    } else {
+      return false;
+    }
+  } else {
+    return true;
+  }
+}
+
+function bal(l, v, r) {
+  var hl = l !== undefined ? l.h : 0;
+  var hr = r !== undefined ? r.h : 0;
+
+  if (hl > (hr + 2 | 0)) {
+    var ll = l.l;
+    var lr = l.r;
+
+    if (heightGe(ll, lr)) {
+      return create(ll, l.v, create(lr, v, r));
+    } else {
+      return create(create(ll, l.v, lr.l), lr.v, create(lr.r, v, r));
+    }
+  }
+
+  if (hr <= (hl + 2 | 0)) {
+    return {
+      v: v,
+      h: (hl >= hr ? hl : hr) + 1 | 0,
+      l: l,
+      r: r
+    };
+  }
+
+  var rl = r.l;
+  var rr = r.r;
+
+  if (heightGe(rr, rl)) {
+    return create(create(l, v, rl), r.v, rr);
+  } else {
+    return create(create(l, v, rl.l), rl.v, create(rl.r, r.v, rr));
+  }
+}
+
+function min0Aux(_n) {
+  while (true) {
+    var n = _n;
+    var n$1 = n.l;
+
+    if (n$1 === undefined) {
+      return n.v;
+    }
+
+    _n = n$1;
+    continue;
+  }
+
+  ;
+}
+
+function minimum(n) {
+  if (n !== undefined) {
+    return Caml_option.some(min0Aux(n));
+  }
+}
+
+function minUndefined(n) {
+  if (n !== undefined) {
+    return min0Aux(n);
+  }
+}
+
+function max0Aux(_n) {
+  while (true) {
+    var n = _n;
+    var n$1 = n.r;
+
+    if (n$1 === undefined) {
+      return n.v;
+    }
+
+    _n = n$1;
+    continue;
+  }
+
+  ;
+}
+
+function maximum(n) {
+  if (n !== undefined) {
+    return Caml_option.some(max0Aux(n));
+  }
+}
+
+function maxUndefined(n) {
+  if (n !== undefined) {
+    return max0Aux(n);
+  }
+}
+
+function removeMinAuxWithRef(n, v) {
+  var ln = n.l;
+
+  if (ln !== undefined) {
+    return bal(removeMinAuxWithRef(ln, v), n.v, n.r);
+  } else {
+    v.contents = n.v;
+    return n.r;
+  }
+}
+
+function isEmpty(n) {
+  return n === undefined;
+}
+
+function stackAllLeft(_v, _s) {
+  while (true) {
+    var s = _s;
+    var v = _v;
+
+    if (v === undefined) {
+      return s;
+    }
+
+    _s = {
+      hd: v,
+      tl: s
+    };
+    _v = v.l;
+    continue;
+  }
+
+  ;
+}
+
+function forEachU(_n, f) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return;
+    }
+
+    forEachU(n.l, f);
+    f(n.v);
+    _n = n.r;
+    continue;
+  }
+
+  ;
+}
+
+function forEach(n, f) {
+  return forEachU(n, Curry.__1(f));
+}
+
+function reduceU(_s, _accu, f) {
+  while (true) {
+    var accu = _accu;
+    var s = _s;
+
+    if (s === undefined) {
+      return accu;
+    }
+
+    _accu = f(reduceU(s.l, accu, f), s.v);
+    _s = s.r;
+    continue;
+  }
+
+  ;
+}
+
+function reduce(s, accu, f) {
+  return reduceU(s, accu, Curry.__2(f));
+}
+
+function everyU(_n, p) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return true;
+    }
+
+    if (!p(n.v)) {
+      return false;
+    }
+
+    if (!everyU(n.l, p)) {
+      return false;
+    }
+
+    _n = n.r;
+    continue;
+  }
+
+  ;
+}
+
+function every(n, p) {
+  return everyU(n, Curry.__1(p));
+}
+
+function someU(_n, p) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return false;
+    }
+
+    if (p(n.v)) {
+      return true;
+    }
+
+    if (someU(n.l, p)) {
+      return true;
+    }
+
+    _n = n.r;
+    continue;
+  }
+
+  ;
+}
+
+function some(n, p) {
+  return someU(n, Curry.__1(p));
+}
+
+function addMinElement(n, v) {
+  if (n !== undefined) {
+    return bal(addMinElement(n.l, v), n.v, n.r);
+  } else {
+    return singleton(v);
+  }
+}
+
+function addMaxElement(n, v) {
+  if (n !== undefined) {
+    return bal(n.l, n.v, addMaxElement(n.r, v));
+  } else {
+    return singleton(v);
+  }
+}
+
+function joinShared(ln, v, rn) {
+  if (ln === undefined) {
+    return addMinElement(rn, v);
+  }
+
+  if (rn === undefined) {
+    return addMaxElement(ln, v);
+  }
+
+  var lh = ln.h;
+  var rh = rn.h;
+
+  if (lh > (rh + 2 | 0)) {
+    return bal(ln.l, ln.v, joinShared(ln.r, v, rn));
+  } else if (rh > (lh + 2 | 0)) {
+    return bal(joinShared(ln, v, rn.l), rn.v, rn.r);
+  } else {
+    return create(ln, v, rn);
+  }
+}
+
+function concatShared(t1, t2) {
+  if (t1 === undefined) {
+    return t2;
+  }
+
+  if (t2 === undefined) {
+    return t1;
+  }
+
+  var v = {
+    contents: t2.v
+  };
+  var t2r = removeMinAuxWithRef(t2, v);
+  return joinShared(t1, v.contents, t2r);
+}
+
+function partitionSharedU(n, p) {
+  if (n === undefined) {
+    return [undefined, undefined];
+  }
+
+  var value = n.v;
+  var match = partitionSharedU(n.l, p);
+  var lf = match[1];
+  var lt = match[0];
+  var pv = p(value);
+  var match$1 = partitionSharedU(n.r, p);
+  var rf = match$1[1];
+  var rt = match$1[0];
+
+  if (pv) {
+    return [joinShared(lt, value, rt), concatShared(lf, rf)];
+  } else {
+    return [concatShared(lt, rt), joinShared(lf, value, rf)];
+  }
+}
+
+function partitionShared(n, p) {
+  return partitionSharedU(n, Curry.__1(p));
+}
+
+function lengthNode(n) {
+  var l = n.l;
+  var r = n.r;
+  var sizeL = l !== undefined ? lengthNode(l) : 0;
+  var sizeR = r !== undefined ? lengthNode(r) : 0;
+  return (1 + sizeL | 0) + sizeR | 0;
+}
+
+function size(n) {
+  if (n !== undefined) {
+    return lengthNode(n);
+  } else {
+    return 0;
+  }
+}
+
+function toListAux(_n, _accu) {
+  while (true) {
+    var accu = _accu;
+    var n = _n;
+
+    if (n === undefined) {
+      return accu;
+    }
+
+    _accu = {
+      hd: n.v,
+      tl: toListAux(n.r, accu)
+    };
+    _n = n.l;
+    continue;
+  }
+
+  ;
+}
+
+function toList(s) {
+  return toListAux(s,
+  /* [] */
+  0);
+}
+
+function checkInvariantInternal(_v) {
+  while (true) {
+    var v = _v;
+
+    if (v === undefined) {
+      return;
+    }
+
+    var l = v.l;
+    var r = v.r;
+    var diff = (l !== undefined ? l.h : 0) - (r !== undefined ? r.h : 0) | 0;
+
+    if (!(diff <= 2 && diff >= -2)) {
+      throw {
+        RE_EXN_ID: "Assert_failure",
+        _1: ["belt_internalAVLset.ml", 290, 4],
+        Error: new Error()
+      };
+    }
+
+    checkInvariantInternal(l);
+    _v = r;
+    continue;
+  }
+
+  ;
+}
+
+function fillArray(_n, _i, arr) {
+  while (true) {
+    var i = _i;
+    var n = _n;
+    var v = n.v;
+    var l = n.l;
+    var r = n.r;
+    var next = l !== undefined ? fillArray(l, i, arr) : i;
+    arr[next] = v;
+    var rnext = next + 1 | 0;
+
+    if (r === undefined) {
+      return rnext;
+    }
+
+    _i = rnext;
+    _n = r;
+    continue;
+  }
+
+  ;
+}
+
+function fillArrayWithPartition(_n, cursor, arr, p) {
+  while (true) {
+    var n = _n;
+    var v = n.v;
+    var l = n.l;
+    var r = n.r;
+
+    if (l !== undefined) {
+      fillArrayWithPartition(l, cursor, arr, p);
+    }
+
+    if (p(v)) {
+      var c = cursor.forward;
+      arr[c] = v;
+      cursor.forward = c + 1 | 0;
+    } else {
+      var c$1 = cursor.backward;
+      arr[c$1] = v;
+      cursor.backward = c$1 - 1 | 0;
+    }
+
+    if (r === undefined) {
+      return;
+    }
+
+    _n = r;
+    continue;
+  }
+
+  ;
+}
+
+function fillArrayWithFilter(_n, _i, arr, p) {
+  while (true) {
+    var i = _i;
+    var n = _n;
+    var v = n.v;
+    var l = n.l;
+    var r = n.r;
+    var next = l !== undefined ? fillArrayWithFilter(l, i, arr, p) : i;
+    var rnext = p(v) ? (arr[next] = v, next + 1 | 0) : next;
+
+    if (r === undefined) {
+      return rnext;
+    }
+
+    _i = rnext;
+    _n = r;
+    continue;
+  }
+
+  ;
+}
+
+function toArray(n) {
+  if (n === undefined) {
+    return [];
+  }
+
+  var size = lengthNode(n);
+  var v = new Array(size);
+  fillArray(n, 0, v);
+  return v;
+}
+
+function fromSortedArrayRevAux(arr, off, len) {
+  switch (len) {
+    case 0:
+      return;
+
+    case 1:
+      return singleton(arr[off]);
+
+    case 2:
+      var x0 = arr[off];
+      var x1 = arr[off - 1 | 0];
+      return {
+        v: x1,
+        h: 2,
+        l: singleton(x0),
+        r: undefined
+      };
+
+    case 3:
+      var x0$1 = arr[off];
+      var x1$1 = arr[off - 1 | 0];
+      var x2 = arr[off - 2 | 0];
+      return {
+        v: x1$1,
+        h: 2,
+        l: singleton(x0$1),
+        r: singleton(x2)
+      };
+
+    default:
+      var nl = len / 2 | 0;
+      var left = fromSortedArrayRevAux(arr, off, nl);
+      var mid = arr[off - nl | 0];
+      var right = fromSortedArrayRevAux(arr, (off - nl | 0) - 1 | 0, (len - nl | 0) - 1 | 0);
+      return create(left, mid, right);
+  }
+}
+
+function fromSortedArrayAux(arr, off, len) {
+  switch (len) {
+    case 0:
+      return;
+
+    case 1:
+      return singleton(arr[off]);
+
+    case 2:
+      var x0 = arr[off];
+      var x1 = arr[off + 1 | 0];
+      return {
+        v: x1,
+        h: 2,
+        l: singleton(x0),
+        r: undefined
+      };
+
+    case 3:
+      var x0$1 = arr[off];
+      var x1$1 = arr[off + 1 | 0];
+      var x2 = arr[off + 2 | 0];
+      return {
+        v: x1$1,
+        h: 2,
+        l: singleton(x0$1),
+        r: singleton(x2)
+      };
+
+    default:
+      var nl = len / 2 | 0;
+      var left = fromSortedArrayAux(arr, off, nl);
+      var mid = arr[off + nl | 0];
+      var right = fromSortedArrayAux(arr, (off + nl | 0) + 1 | 0, (len - nl | 0) - 1 | 0);
+      return create(left, mid, right);
+  }
+}
+
+function fromSortedArrayUnsafe(arr) {
+  return fromSortedArrayAux(arr, 0, arr.length);
+}
+
+function keepSharedU(n, p) {
+  if (n === undefined) {
+    return;
+  }
+
+  var v = n.v;
+  var l = n.l;
+  var r = n.r;
+  var newL = keepSharedU(l, p);
+  var pv = p(v);
+  var newR = keepSharedU(r, p);
+
+  if (pv) {
+    if (l === newL && r === newR) {
+      return n;
+    } else {
+      return joinShared(newL, v, newR);
+    }
+  } else {
+    return concatShared(newL, newR);
+  }
+}
+
+function keepShared(n, p) {
+  return keepSharedU(n, Curry.__1(p));
+}
+
+function keepCopyU(n, p) {
+  if (n === undefined) {
+    return;
+  }
+
+  var size = lengthNode(n);
+  var v = new Array(size);
+  var last = fillArrayWithFilter(n, 0, v, p);
+  return fromSortedArrayAux(v, 0, last);
+}
+
+function keepCopy(n, p) {
+  return keepCopyU(n, Curry.__1(p));
+}
+
+function partitionCopyU(n, p) {
+  if (n === undefined) {
+    return [undefined, undefined];
+  }
+
+  var size = lengthNode(n);
+  var v = new Array(size);
+  var backward = size - 1 | 0;
+  var cursor = {
+    forward: 0,
+    backward: backward
+  };
+  fillArrayWithPartition(n, cursor, v, p);
+  var forwardLen = cursor.forward;
+  return [fromSortedArrayAux(v, 0, forwardLen), fromSortedArrayRevAux(v, backward, size - forwardLen | 0)];
+}
+
+function partitionCopy(n, p) {
+  return partitionCopyU(n, Curry.__1(p));
+}
+
+function has(_t, x, cmp) {
+  while (true) {
+    var t = _t;
+
+    if (t === undefined) {
+      return false;
+    }
+
+    var v = t.v;
+    var c = cmp(x, v);
+
+    if (c === 0) {
+      return true;
+    }
+
+    _t = c < 0 ? t.l : t.r;
+    continue;
+  }
+
+  ;
+}
+
+function cmp(s1, s2, cmp$1) {
+  var len1 = size(s1);
+  var len2 = size(s2);
+
+  if (len1 === len2) {
+    var _e1 = stackAllLeft(s1,
+    /* [] */
+    0);
+
+    var _e2 = stackAllLeft(s2,
+    /* [] */
+    0);
+
+    while (true) {
+      var e2 = _e2;
+      var e1 = _e1;
+
+      if (!e1) {
+        return 0;
+      }
+
+      if (!e2) {
+        return 0;
+      }
+
+      var h2 = e2.hd;
+      var h1 = e1.hd;
+      var c = cmp$1(h1.v, h2.v);
+
+      if (c !== 0) {
+        return c;
+      }
+
+      _e2 = stackAllLeft(h2.r, e2.tl);
+      _e1 = stackAllLeft(h1.r, e1.tl);
+      continue;
+    }
+
+    ;
+  } else if (len1 < len2) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function eq(s1, s2, c) {
+  return cmp(s1, s2, c) === 0;
+}
+
+function subset(_s1, _s2, cmp) {
+  while (true) {
+    var s2 = _s2;
+    var s1 = _s1;
+
+    if (s1 === undefined) {
+      return true;
+    }
+
+    if (s2 === undefined) {
+      return false;
+    }
+
+    var v1 = s1.v;
+    var l1 = s1.l;
+    var r1 = s1.r;
+    var v2 = s2.v;
+    var l2 = s2.l;
+    var r2 = s2.r;
+    var c = cmp(v1, v2);
+
+    if (c === 0) {
+      if (!subset(l1, l2, cmp)) {
+        return false;
+      }
+
+      _s2 = r2;
+      _s1 = r1;
+      continue;
+    }
+
+    if (c < 0) {
+      if (!subset(create(l1, v1, undefined), l2, cmp)) {
+        return false;
+      }
+
+      _s1 = r1;
+      continue;
+    }
+
+    if (!subset(create(undefined, v1, r1), r2, cmp)) {
+      return false;
+    }
+
+    _s1 = l1;
+    continue;
+  }
+
+  ;
+}
+
+function get(_n, x, cmp) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return;
+    }
+
+    var v = n.v;
+    var c = cmp(x, v);
+
+    if (c === 0) {
+      return Caml_option.some(v);
+    }
+
+    _n = c < 0 ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function getUndefined(_n, x, cmp) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return;
+    }
+
+    var v = n.v;
+    var c = cmp(x, v);
+
+    if (c === 0) {
+      return v;
+    }
+
+    _n = c < 0 ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function getExn(_n, x, cmp) {
+  while (true) {
+    var n = _n;
+
+    if (n !== undefined) {
+      var v = n.v;
+      var c = cmp(x, v);
+
+      if (c === 0) {
+        return v;
+      }
+
+      _n = c < 0 ? n.l : n.r;
+      continue;
+    }
+
+    throw {
+      RE_EXN_ID: "Not_found",
+      Error: new Error()
+    };
+  }
+
+  ;
+}
+
+function rotateWithLeftChild(k2) {
+  var k1 = k2.l;
+  k2.l = k1.r;
+  k1.r = k2;
+  var n = k2.l;
+  var hlk2 = n !== undefined ? n.h : 0;
+  var n$1 = k2.r;
+  var hrk2 = n$1 !== undefined ? n$1.h : 0;
+  k2.h = (hlk2 > hrk2 ? hlk2 : hrk2) + 1 | 0;
+  var n$2 = k1.l;
+  var hlk1 = n$2 !== undefined ? n$2.h : 0;
+  var hk2 = k2.h;
+  k1.h = (hlk1 > hk2 ? hlk1 : hk2) + 1 | 0;
+  return k1;
+}
+
+function rotateWithRightChild(k1) {
+  var k2 = k1.r;
+  k1.r = k2.l;
+  k2.l = k1;
+  var n = k1.l;
+  var hlk1 = n !== undefined ? n.h : 0;
+  var n$1 = k1.r;
+  var hrk1 = n$1 !== undefined ? n$1.h : 0;
+  k1.h = (hlk1 > hrk1 ? hlk1 : hrk1) + 1 | 0;
+  var n$2 = k2.r;
+  var hrk2 = n$2 !== undefined ? n$2.h : 0;
+  var hk1 = k1.h;
+  k2.h = (hrk2 > hk1 ? hrk2 : hk1) + 1 | 0;
+  return k2;
+}
+
+function doubleWithLeftChild(k3) {
+  var k3l = k3.l;
+  var v = rotateWithRightChild(k3l);
+  k3.l = v;
+  return rotateWithLeftChild(k3);
+}
+
+function doubleWithRightChild(k2) {
+  var k2r = k2.r;
+  var v = rotateWithLeftChild(k2r);
+  k2.r = v;
+  return rotateWithRightChild(k2);
+}
+
+function heightUpdateMutate(t) {
+  var n = t.l;
+  var hlt = n !== undefined ? n.h : 0;
+  var n$1 = t.r;
+  var hrt = n$1 !== undefined ? n$1.h : 0;
+  t.h = (hlt > hrt ? hlt : hrt) + 1 | 0;
+  return t;
+}
+
+function balMutate(nt) {
+  var l = nt.l;
+  var r = nt.r;
+  var hl = l !== undefined ? l.h : 0;
+  var hr = r !== undefined ? r.h : 0;
+
+  if (hl > (2 + hr | 0)) {
+    var ll = l.l;
+    var lr = l.r;
+
+    if (heightGe(ll, lr)) {
+      return heightUpdateMutate(rotateWithLeftChild(nt));
+    } else {
+      return heightUpdateMutate(doubleWithLeftChild(nt));
+    }
+  }
+
+  if (hr > (2 + hl | 0)) {
+    var rl = r.l;
+    var rr = r.r;
+
+    if (heightGe(rr, rl)) {
+      return heightUpdateMutate(rotateWithRightChild(nt));
+    } else {
+      return heightUpdateMutate(doubleWithRightChild(nt));
+    }
+  }
+
+  nt.h = (hl > hr ? hl : hr) + 1 | 0;
+  return nt;
+}
+
+function addMutate(cmp, t, x) {
+  if (t === undefined) {
+    return singleton(x);
+  }
+
+  var k = t.v;
+  var c = cmp(x, k);
+
+  if (c === 0) {
+    return t;
+  }
+
+  var l = t.l;
+  var r = t.r;
+
+  if (c < 0) {
+    var ll = addMutate(cmp, l, x);
+    t.l = ll;
+  } else {
+    t.r = addMutate(cmp, r, x);
+  }
+
+  return balMutate(t);
+}
+
+function fromArray(xs, cmp) {
+  var len = xs.length;
+
+  if (len === 0) {
+    return;
+  }
+
+  var next = Belt_SortArray.strictlySortedLengthU(xs, function (x, y) {
+    return cmp(x, y) < 0;
+  });
+  var result;
+
+  if (next >= 0) {
+    result = fromSortedArrayAux(xs, 0, next);
+  } else {
+    next = -next | 0;
+    result = fromSortedArrayRevAux(xs, next - 1 | 0, next);
+  }
+
+  for (var i = next; i < len; ++i) {
+    result = addMutate(cmp, result, xs[i]);
+  }
+
+  return result;
+}
+
+function removeMinAuxWithRootMutate(nt, n) {
+  var ln = n.l;
+  var rn = n.r;
+
+  if (ln !== undefined) {
+    n.l = removeMinAuxWithRootMutate(nt, ln);
+    return balMutate(n);
+  } else {
+    nt.v = n.v;
+    return rn;
+  }
+}
+/* No side effect */
+
+},{"./belt_SortArray.js":11,"./caml_option.js":17,"./curry.js":18}],14:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.has = has;
+exports.compareAux = compareAux;
+exports.cmp = cmp;
+exports.eq = eq;
+exports.subset = subset;
+exports.get = get;
+exports.getUndefined = getUndefined;
+exports.getExn = getExn;
+exports.addMutate = addMutate;
+exports.fromArray = fromArray;
+exports.A = exports.N = exports.S = void 0;
+
+var Belt_SortArrayInt = _interopRequireWildcard(require("./belt_SortArrayInt.js"));
+
+var Belt_internalAVLset = _interopRequireWildcard(require("./belt_internalAVLset.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function has(_t, x) {
+  while (true) {
+    var t = _t;
+
+    if (t === undefined) {
+      return false;
+    }
+
+    var v = t.v;
+
+    if (x === v) {
+      return true;
+    }
+
+    _t = x < v ? t.l : t.r;
+    continue;
+  }
+
+  ;
+}
+
+function compareAux(_e1, _e2) {
+  while (true) {
+    var e2 = _e2;
+    var e1 = _e1;
+
+    if (!e1) {
+      return 0;
+    }
+
+    if (!e2) {
+      return 0;
+    }
+
+    var h2 = e2.hd;
+    var h1 = e1.hd;
+    var k1 = h1.v;
+    var k2 = h2.v;
+
+    if (k1 !== k2) {
+      if (k1 < k2) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }
+
+    _e2 = Belt_internalAVLset.stackAllLeft(h2.r, e2.tl);
+    _e1 = Belt_internalAVLset.stackAllLeft(h1.r, e1.tl);
+    continue;
+  }
+
+  ;
+}
+
+function cmp(s1, s2) {
+  var len1 = Belt_internalAVLset.size(s1);
+  var len2 = Belt_internalAVLset.size(s2);
+
+  if (len1 === len2) {
+    return compareAux(Belt_internalAVLset.stackAllLeft(s1,
+    /* [] */
+    0), Belt_internalAVLset.stackAllLeft(s2,
+    /* [] */
+    0));
+  } else if (len1 < len2) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function eq(s1, s2) {
+  return cmp(s1, s2) === 0;
+}
+
+function subset(_s1, _s2) {
+  while (true) {
+    var s2 = _s2;
+    var s1 = _s1;
+
+    if (s1 === undefined) {
+      return true;
+    }
+
+    if (s2 === undefined) {
+      return false;
+    }
+
+    var v1 = s1.v;
+    var l1 = s1.l;
+    var r1 = s1.r;
+    var v2 = s2.v;
+    var l2 = s2.l;
+    var r2 = s2.r;
+
+    if (v1 === v2) {
+      if (!subset(l1, l2)) {
+        return false;
+      }
+
+      _s2 = r2;
+      _s1 = r1;
+      continue;
+    }
+
+    if (v1 < v2) {
+      if (!subset(Belt_internalAVLset.create(l1, v1, undefined), l2)) {
+        return false;
+      }
+
+      _s1 = r1;
+      continue;
+    }
+
+    if (!subset(Belt_internalAVLset.create(undefined, v1, r1), r2)) {
+      return false;
+    }
+
+    _s1 = l1;
+    continue;
+  }
+
+  ;
+}
+
+function get(_n, x) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return;
+    }
+
+    var v = n.v;
+
+    if (x === v) {
+      return v;
+    }
+
+    _n = x < v ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function getUndefined(_n, x) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return;
+    }
+
+    var v = n.v;
+
+    if (x === v) {
+      return v;
+    }
+
+    _n = x < v ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function getExn(_n, x) {
+  while (true) {
+    var n = _n;
+
+    if (n !== undefined) {
+      var v = n.v;
+
+      if (x === v) {
+        return v;
+      }
+
+      _n = x < v ? n.l : n.r;
+      continue;
+    }
+
+    throw {
+      RE_EXN_ID: "Not_found",
+      Error: new Error()
+    };
+  }
+
+  ;
+}
+
+function addMutate(t, x) {
+  if (t === undefined) {
+    return Belt_internalAVLset.singleton(x);
+  }
+
+  var k = t.v;
+
+  if (x === k) {
+    return t;
+  }
+
+  var l = t.l;
+  var r = t.r;
+
+  if (x < k) {
+    t.l = addMutate(l, x);
+  } else {
+    t.r = addMutate(r, x);
+  }
+
+  return Belt_internalAVLset.balMutate(t);
+}
+
+function fromArray(xs) {
+  var len = xs.length;
+
+  if (len === 0) {
+    return;
+  }
+
+  var next = Belt_SortArrayInt.strictlySortedLength(xs);
+  var result;
+
+  if (next >= 0) {
+    result = Belt_internalAVLset.fromSortedArrayAux(xs, 0, next);
+  } else {
+    next = -next | 0;
+    result = Belt_internalAVLset.fromSortedArrayRevAux(xs, next - 1 | 0, next);
+  }
+
+  for (var i = next; i < len; ++i) {
+    result = addMutate(result, xs[i]);
+  }
+
+  return result;
+}
+
+var S;
+exports.S = S;
+var N;
+exports.N = N;
+var A;
+/* No side effect */
+
+exports.A = A;
+
+},{"./belt_SortArrayInt.js":12,"./belt_internalAVLset.js":13}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8301,7 +10965,7 @@ function i64_max(x, y) {
 }
 /* No side effect */
 
-},{}],11:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8447,7 +11111,7 @@ function dup(prim) {
 }
 /* No side effect */
 
-},{}],12:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8537,7 +11201,7 @@ function option_unwrap(x) {
 }
 /* No side effect */
 
-},{}],13:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9007,7 +11671,7 @@ function __8(o) {
 }
 /* No side effect */
 
-},{"./caml_array.js":11}],14:[function(require,module,exports){
+},{"./caml_array.js":16}],19:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9110,7 +11774,7 @@ function map(f, source) {
 }
 /* No side effect */
 
-},{"./caml_option.js":12}],15:[function(require,module,exports){
+},{"./caml_option.js":17}],20:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9130,7 +11794,7 @@ var min = -2147483648;
 
 exports.min = min;
 
-},{}],16:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9188,7 +11852,119 @@ var floor = floor_int;
 
 exports.floor = floor;
 
-},{"./js_int.js":15}],17:[function(require,module,exports){
+},{"./js_int.js":20}],22:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.some = some;
+exports.isSome = isSome;
+exports.isSomeValue = isSomeValue;
+exports.isNone = isNone;
+exports.getExn = getExn;
+exports.equal = equal;
+exports.andThen = andThen;
+exports.map = map;
+exports.getWithDefault = getWithDefault;
+exports.filter = filter;
+exports.firstSome = firstSome;
+exports.default = exports.$$default = void 0;
+
+var Caml_option = _interopRequireWildcard(require("./caml_option.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function some(x) {
+  return Caml_option.some(x);
+}
+
+function isSome(param) {
+  return param !== undefined;
+}
+
+function isSomeValue(eq, v, x) {
+  if (x !== undefined) {
+    return eq(v, Caml_option.valFromOption(x));
+  } else {
+    return false;
+  }
+}
+
+function isNone(param) {
+  return param === undefined;
+}
+
+function getExn(x) {
+  if (x !== undefined) {
+    return Caml_option.valFromOption(x);
+  }
+
+  throw new Error("getExn");
+}
+
+function equal(eq, a, b) {
+  if (a !== undefined) {
+    if (b !== undefined) {
+      return eq(Caml_option.valFromOption(a), Caml_option.valFromOption(b));
+    } else {
+      return false;
+    }
+  } else {
+    return b === undefined;
+  }
+}
+
+function andThen(f, x) {
+  if (x !== undefined) {
+    return f(Caml_option.valFromOption(x));
+  }
+}
+
+function map(f, x) {
+  if (x !== undefined) {
+    return Caml_option.some(f(Caml_option.valFromOption(x)));
+  }
+}
+
+function getWithDefault(a, x) {
+  if (x !== undefined) {
+    return Caml_option.valFromOption(x);
+  } else {
+    return a;
+  }
+}
+
+function filter(f, x) {
+  if (x === undefined) {
+    return;
+  }
+
+  var x$1 = Caml_option.valFromOption(x);
+
+  if (f(x$1)) {
+    return Caml_option.some(x$1);
+  }
+}
+
+function firstSome(a, b) {
+  if (a !== undefined) {
+    return a;
+  } else if (b !== undefined) {
+    return b;
+  } else {
+    return;
+  }
+}
+
+var $$default = getWithDefault;
+/* No side effect */
+
+exports.default = exports.$$default = $$default;
+
+},{"./caml_option.js":17}],23:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler-tracing.development.js
@@ -9539,7 +12315,7 @@ exports.unstable_wrap = unstable_wrap;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":2}],18:[function(require,module,exports){
+},{"_process":2}],24:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler-tracing.production.min.js
  *
@@ -9550,7 +12326,7 @@ exports.unstable_wrap = unstable_wrap;
  */
 'use strict';var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_subscribe=function(){};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_unsubscribe=function(){};exports.unstable_wrap=function(a){return a};
 
-},{}],19:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler.development.js
@@ -10200,7 +12976,7 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":2}],20:[function(require,module,exports){
+},{"_process":2}],26:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler.production.min.js
  *
@@ -10222,7 +12998,7 @@ exports.unstable_next=function(a){switch(P){case 1:case 2:case 3:var b=3;break;d
 exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();"object"===typeof c&&null!==c?(c=c.delay,c="number"===typeof c&&0<c?d+c:d):c=d;switch(a){case 1:var e=-1;break;case 2:e=250;break;case 5:e=1073741823;break;case 4:e=1E4;break;default:e=5E3}e=c+e;a={id:N++,callback:b,priorityLevel:a,startTime:c,expirationTime:e,sortIndex:-1};c>d?(a.sortIndex=c,H(M,a),null===J(L)&&a===J(M)&&(S?h():S=!0,g(U,c-d))):(a.sortIndex=e,H(L,a),R||Q||(R=!0,f(V)));return a};
 exports.unstable_wrapCallback=function(a){var b=P;return function(){var c=P;P=b;try{return a.apply(this,arguments)}finally{P=c}}};
 
-},{}],21:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -10233,7 +13009,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":19,"./cjs/scheduler.production.min.js":20,"_process":2}],22:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":25,"./cjs/scheduler.production.min.js":26,"_process":2}],28:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -10244,7 +13020,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":17,"./cjs/scheduler-tracing.production.min.js":18,"_process":2}],23:[function(require,module,exports){
+},{"./cjs/scheduler-tracing.development.js":23,"./cjs/scheduler-tracing.production.min.js":24,"_process":2}],29:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10273,11 +13049,11 @@ function run(elementId) {
 }
 /* react Not a pure module */
 
-},{"./pages/MainPage.bs.js":50,"react":8,"react-dom":5}],24:[function(require,module,exports){
+},{"./pages/MainPage.bs.js":58,"react":8,"react-dom":5}],30:[function(require,module,exports){
 // Generated by ReScript, PLEASE EDIT WITH CARE
 /* This output is empty. Its source's type definitions, externals and/or unused code got optimized away. */
 
-},{}],25:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 "use strict";
 
 var Main = _interopRequireWildcard(require("./Main.bs"));
@@ -10321,7 +13097,7 @@ window.salemAppVersion = "0.9.1";
 
 Main.run('root');
 
-},{"./Main.bs":23}],26:[function(require,module,exports){
+},{"./Main.bs":29}],32:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10479,7 +13255,7 @@ var make = $$Audio;
 
 exports.make = make;
 
-},{"./LanguageContext.bs.js":31,"react":8}],27:[function(require,module,exports){
+},{"./LanguageContext.bs.js":37,"react":8}],33:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10507,7 +13283,7 @@ var make = AudioError;
 
 exports.make = make;
 
-},{"react":8}],28:[function(require,module,exports){
+},{"react":8}],34:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10527,13 +13303,16 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function Button(Props) {
   var labelOpt = Props.label;
   var classNameOpt = Props.className;
-  var childrenOpt = Props.children;
+  var styleOpt = Props.style;
   var onClick = Props.onClick;
+  var childrenOpt = Props.children;
   var label = labelOpt !== undefined ? labelOpt : "";
   var className = classNameOpt !== undefined ? classNameOpt : "";
+  var style = styleOpt !== undefined ? Caml_option.valFromOption(styleOpt) : {};
   var children = childrenOpt !== undefined ? Caml_option.valFromOption(childrenOpt) : null;
   return React.createElement("button", {
     className: className,
+    style: style,
     onClick: onClick
   }, label !== "" ? label : children);
 }
@@ -10543,7 +13322,7 @@ var make = Button;
 
 exports.make = make;
 
-},{"react":8,"rescript/lib/es6/caml_option.js":12}],29:[function(require,module,exports){
+},{"react":8,"rescript/lib/es6/caml_option.js":17}],35:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10573,7 +13352,7 @@ var make = ButtonPair;
 
 exports.make = make;
 
-},{"react":8,"rescript/lib/es6/caml_option.js":12}],30:[function(require,module,exports){
+},{"react":8,"rescript/lib/es6/caml_option.js":17}],36:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10622,7 +13401,7 @@ var Provider = {
 
 exports.Provider = Provider;
 
-},{"react":8}],31:[function(require,module,exports){
+},{"react":8}],37:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10660,7 +13439,7 @@ var Provider = {
 
 exports.Provider = Provider;
 
-},{"react":8}],32:[function(require,module,exports){
+},{"react":8}],38:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10749,7 +13528,7 @@ var make = LanguageList;
 
 exports.make = make;
 
-},{"./Button.bs.js":28,"./LanguageContext.bs.js":31,"./Spacer.bs.js":38,"./Translator.bs.js":40,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":13}],33:[function(require,module,exports){
+},{"./Button.bs.js":34,"./LanguageContext.bs.js":37,"./Spacer.bs.js":46,"./Translator.bs.js":48,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":18}],39:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10779,8 +13558,8 @@ function LargeButton(Props) {
   return React.createElement(Button$Salem1692.make, {
     label: label,
     className: className + " largebutton",
-    children: children,
-    onClick: onClick
+    onClick: onClick,
+    children: children
   });
 }
 
@@ -10789,7 +13568,7 @@ var make = LargeButton;
 
 exports.make = make;
 
-},{"./Button.bs.js":28,"react":8,"rescript/lib/es6/caml_option.js":12}],34:[function(require,module,exports){
+},{"./Button.bs.js":34,"react":8,"rescript/lib/es6/caml_option.js":17}],40:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10844,7 +13623,7 @@ var make = LargeRevealButton;
 
 exports.make = make;
 
-},{"./LargeButton.bs.js":33,"react":8,"rescript/lib/es6/curry.js":13}],35:[function(require,module,exports){
+},{"./LargeButton.bs.js":39,"react":8,"rescript/lib/es6/curry.js":18}],41:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11263,7 +14042,48 @@ function getScenario(subPage) {
 }
 /* No side effect */
 
-},{}],36:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.make = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+var Button$Salem1692 = _interopRequireWildcard(require("./Button.bs.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+// Generated by ReScript, PLEASE EDIT WITH CARE
+function PlayerEntryItem(Props) {
+  var value = Props.value;
+  var onClick = Props.onClick;
+  var readOnly = value !== "";
+  return React.createElement("div", {
+    className: "player-entry-item"
+  }, React.createElement(Button$Salem1692.make, {
+    className: "icon-only icon-left icon-move",
+    onClick: onClick
+  }), React.createElement("input", {
+    readOnly: readOnly,
+    type: "text",
+    value: value
+  }), React.createElement(Button$Salem1692.make, {
+    className: "icon-only icon-right icon-trash",
+    onClick: onClick
+  }));
+}
+
+var make = PlayerEntryItem;
+/* react Not a pure module */
+
+exports.make = make;
+
+},{"./Button.bs.js":34,"react":8}],43:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11275,7 +14095,70 @@ var Curry = _interopRequireWildcard(require("rescript/lib/es6/curry.js"));
 
 var React = _interopRequireWildcard(require("react"));
 
+var Translator$Salem1692 = _interopRequireWildcard(require("./Translator.bs.js"));
+
+var LanguageContext$Salem1692 = _interopRequireWildcard(require("./LanguageContext.bs.js"));
+
+var PlayerEntryItem$Salem1692 = _interopRequireWildcard(require("./PlayerEntryItem.bs.js"));
+
+var GameStateContext$Salem1692 = _interopRequireWildcard(require("./GameStateContext.bs.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+// Generated by ReScript, PLEASE EDIT WITH CARE
+function PlayerEntryList(Props) {
+  var language = React.useContext(LanguageContext$Salem1692.context);
+  var match = React.useContext(GameStateContext$Salem1692.context);
+  var setGameState = match[1];
+  var gameState = match[0];
+
+  var onClick = function (_event) {
+    return Curry._1(setGameState, function (prevGameState) {
+      return {
+        players: gameState.players,
+        seatingLayout: prevGameState.seatingLayout,
+        doPlayEffects: prevGameState.doPlayEffects,
+        doPlaySpeech: prevGameState.doPlaySpeech
+      };
+    });
+  };
+
+  var playerItems = gameState.players.map(function (player) {
+    return React.createElement(PlayerEntryItem$Salem1692.make, {
+      value: player,
+      onClick: onClick,
+      key: player
+    });
+  });
+  return React.createElement(React.Fragment, undefined, React.createElement("h2", undefined, Translator$Salem1692.getTranslator(language, "Names")), playerItems);
+}
+
+var make = PlayerEntryList;
+/* react Not a pure module */
+
+exports.make = make;
+
+},{"./GameStateContext.bs.js":36,"./LanguageContext.bs.js":37,"./PlayerEntryItem.bs.js":42,"./Translator.bs.js":48,"react":8,"rescript/lib/es6/curry.js":18}],44:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.assemble = assemble;
+exports.getSortIndexes = getSortIndexes;
+exports.make = void 0;
+
+var Curry = _interopRequireWildcard(require("rescript/lib/es6/curry.js"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var Js_option = _interopRequireWildcard(require("rescript/lib/es6/js_option.js"));
+
 var Belt_Array = _interopRequireWildcard(require("rescript/lib/es6/belt_Array.js"));
+
+var Belt_SetInt = _interopRequireWildcard(require("rescript/lib/es6/belt_SetInt.js"));
 
 var Button$Salem1692 = _interopRequireWildcard(require("./Button.bs.js"));
 
@@ -11294,6 +14177,28 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
+function assemble(leftElements, rightElements, assemblyFn, defaultRight) {
+  return leftElements.reduce(function (acc, leftElement, index) {
+    var maybeRightElement = Belt_Array.get(rightElements, index);
+    var rightElement = Js_option.getWithDefault(defaultRight, maybeRightElement);
+    return Belt_Array.concat(acc, [Curry._2(assemblyFn, leftElement, rightElement)]);
+  }, []);
+}
+
+function getSortIndexes(seatingLayout, numPlayers, evenOdd) {
+  if (evenOdd) {
+    if (seatingLayout) {
+      return Belt_Array.concat(Belt_Array.reverse(Belt_Array.rangeBy(0, numPlayers, 2)), Belt_Array.rangeBy(1, numPlayers - 1 | 0, 2));
+    } else {
+      return Belt_Array.concat(Belt_Array.rangeBy(1, numPlayers, 2), Belt_Array.reverse(Belt_Array.rangeBy(2, numPlayers, 2)));
+    }
+  } else if (seatingLayout) {
+    return Belt_Array.concat(Belt_Array.rangeBy(1, numPlayers, 2), Belt_Array.reverse(Belt_Array.rangeBy(0, numPlayers - 1 | 0, 2)));
+  } else {
+    return Belt_Array.concat(Belt_Array.rangeBy(1, numPlayers, 2), Belt_Array.reverse(Belt_Array.rangeBy(2, numPlayers, 2)));
+  }
+}
+
 function PlayerList(Props) {
   var addressed = Props.addressed;
   var choiceHandler = Props.choiceHandler;
@@ -11327,23 +14232,32 @@ function PlayerList(Props) {
 
   var match$2 = React.useContext(GameStateContext$Salem1692.context);
   var gameState = match$2[0];
-  var buttons = Belt_Array.map(gameState.players, function (player) {
+  var numPlayers = gameState.players.length;
+  var evenOdd = numPlayers % 2 === 0 ?
+  /* Even */
+  0 :
+  /* Odd */
+  1;
+  var sortIndexes = getSortIndexes(gameState.seatingLayout, numPlayers, evenOdd);
+  var match$3 = gameState.seatingLayout;
+  var headPositions = evenOdd ? match$3 ? Belt_SetInt.fromArray([numPlayers - 1 | 0]) : Belt_SetInt.fromArray([1]) : match$3 ? Belt_SetInt.fromArray([]) : Belt_SetInt.fromArray([1, numPlayers]);
+  var buttons = assemble(gameState.players, sortIndexes, function (player, sortIndex) {
+    var wideClass = Belt_SetInt.has(headPositions, sortIndex) ? " grid-wide" : "";
     return React.createElement(SquareButton$Salem1692.make, {
       label: player,
-      className: rotatedClass,
+      className: rotatedClass + wideClass,
+      style: {
+        order: String(sortIndex)
+      },
       onClick: Curry._1(choiceHandler, player),
       key: player
     });
-  });
-  var evenOddClass = gameState.players.length % 2 === 0 ? "even" : "odd";
-  var match$3 = gameState.seatingLayout;
-  var headClass = match$3 ? "two-at-head" : "one-at-head";
+  }, 0);
   return React.createElement(React.Fragment, undefined, React.createElement("h2", undefined, match$1[0]), React.createElement("div", undefined, match$1[1]), React.createElement("div", {
-    className: headClass + " " + evenOddClass,
     id: "player-list"
   }, buttons), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
     label: Translator$Salem1692.getTranslator(language, "Rotate"),
-    className: "icon-left icon-rot",
+    className: "icon-left icon-rot spacer-top",
     onClick: function (_event) {
       return Curry._1(setRotate, function (prev) {
         return !prev;
@@ -11357,7 +14271,7 @@ var make = PlayerList;
 
 exports.make = make;
 
-},{"./Button.bs.js":28,"./GameStateContext.bs.js":30,"./LanguageContext.bs.js":31,"./Spacer.bs.js":38,"./SquareButton.bs.js":39,"./Translator.bs.js":40,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":13}],37:[function(require,module,exports){
+},{"./Button.bs.js":34,"./GameStateContext.bs.js":36,"./LanguageContext.bs.js":37,"./Spacer.bs.js":46,"./SquareButton.bs.js":47,"./Translator.bs.js":48,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/belt_SetInt.js":10,"rescript/lib/es6/curry.js":18,"rescript/lib/es6/js_option.js":22}],45:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11471,7 +14385,7 @@ var make = SeatingLayoutList;
 
 exports.make = make;
 
-},{"./GameStateContext.bs.js":30,"./LanguageContext.bs.js":31,"./SquareButton.bs.js":39,"./Translator.bs.js":40,"react":8,"rescript/lib/es6/curry.js":13}],38:[function(require,module,exports){
+},{"./GameStateContext.bs.js":36,"./LanguageContext.bs.js":37,"./SquareButton.bs.js":47,"./Translator.bs.js":48,"react":8,"rescript/lib/es6/curry.js":18}],46:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11497,7 +14411,7 @@ var make = Spacer;
 
 exports.make = make;
 
-},{"react":8}],39:[function(require,module,exports){
+},{"react":8}],47:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11519,16 +14433,19 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function SquareButton(Props) {
   var labelOpt = Props.label;
   var classNameOpt = Props.className;
-  var childrenOpt = Props.children;
+  var styleOpt = Props.style;
   var onClick = Props.onClick;
+  var childrenOpt = Props.children;
   var label = labelOpt !== undefined ? labelOpt : "";
   var className = classNameOpt !== undefined ? classNameOpt : "";
+  var style = styleOpt !== undefined ? Caml_option.valFromOption(styleOpt) : {};
   var children = childrenOpt !== undefined ? Caml_option.valFromOption(childrenOpt) : null;
   return React.createElement(Button$Salem1692.make, {
     label: label,
     className: className + " squarebutton",
-    children: children,
-    onClick: onClick
+    style: style,
+    onClick: onClick,
+    children: children
   });
 }
 
@@ -11537,7 +14454,7 @@ var make = SquareButton;
 
 exports.make = make;
 
-},{"./Button.bs.js":28,"react":8,"rescript/lib/es6/caml_option.js":12}],40:[function(require,module,exports){
+},{"./Button.bs.js":34,"react":8,"rescript/lib/es6/caml_option.js":17}],48:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11590,7 +14507,7 @@ function getTranslator(language, message) {
 }
 /* EN_US-Salem1692 Not a pure module */
 
-},{"../locale/EN_US.bs.js":42,"../locale/ES_ES.bs.js":43,"../locale/NL_NL.bs.js":44,"rescript/lib/es6/js_dict.js":14}],41:[function(require,module,exports){
+},{"../locale/EN_US.bs.js":50,"../locale/ES_ES.bs.js":51,"../locale/NL_NL.bs.js":52,"rescript/lib/es6/js_dict.js":19}],49:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11636,7 +14553,7 @@ var Provider = {
 
 exports.Provider = Provider;
 
-},{"react":8}],42:[function(require,module,exports){
+},{"react":8}],50:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11651,12 +14568,12 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-var table = Js_dict.fromArray([["New Game", "New Game"], ["Setup", "Setup"], ["Exit", "Exit"], ["Players", "Players"], ["Sound effects", "Sound FX"], ["Speech", "Speech"], ["How many witches?", "How many witches?"], ["Language", "Language"], ["Seating layout", "Seating layout"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Italiano", "Italiano"], ["Back", "Back"], ["Next", "Next"], ["Credits", "Credits"], ["Game:", "Game:"], ["version", "version"], ["For use with the game:", "For use with the game:"], ["App:", "App:"], ["Sound effects:", "Sound effects:"], ["Voice actors:", "Voice actors:"], ["Images:", "Images:"], ["Daytime", "Daytime"], ["First night,", "First night,"], ["one witch", "one witch"], ["more witches", "more witches"], ["Other nights,", "Other nights,"], ["with constable", "with constable"], ["without constable", "without constable"], ["Night", "Night"], ["Night with constable", "Night with constable"], ["Night without constable", "Night without constable"], ["The witches", "The witches"], ["The witch's turn", "The witch's turn"], ["The witches' turn", "The witches' turn"], ["Choose-SG a victim:", "Choose a victim:"], ["Choose-PL a victim:", "Choose a victim:"], ["The constable", "The constable"], ["The constable's turn", "The constable's turn"], ["Choose someone to protect:", "Choose someone to protect:"], ["Rotate", "Rotate"], ["Witch, ", "Witch, "], ["Witches, ", "Witches, "], ["Constable, ", "Constable, "], ["are you-MASC-SG sure?", "are you sure?"], ["are you-FEM-SG sure?", "are you sure?"], ["are you-PL sure?", "are you sure?"], ["Confirm", "Confirm"], ["Yes", "Yes"], ["No", "No"], ["Error", "Error"], ["Unable to load audio", "Unable to load audio"], ["Index out of bounds", "Index out of bounds"], ["Confess", "Confess"], ["Everyone,", "Everyone,"], ["decide whether you want to confess", "decide whether you want to confess"], ["The Reveal", "Reveal"], ["Reveal witch's victim", "Reveal witch's victim"], ["Reveal witches' victim", "Reveal witches' victim"], ["The witch attacked-PRE", "The witch attacked"], ["The witch attacked-POST", ""], ["The witches attacked-PRE", "The witches attacked"], ["The witches attacked-POST", ""], ["Reveal constable's protection", "Reveal constable's protection"], ["The constable protected-PRE", "The constable protected"], ["The constable protected-POST", ""]]);
+var table = Js_dict.fromArray([["New Game", "New Game"], ["Setup", "Setup"], ["Exit", "Exit"], ["Players", "Players"], ["Names", "Names"], ["Sound effects", "Sound FX"], ["Speech", "Speech"], ["How many witches?", "How many witches?"], ["Language", "Language"], ["Seating layout", "Seating layout"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Italiano", "Italiano"], ["Back", "Back"], ["Next", "Next"], ["Credits", "Credits"], ["Game:", "Game:"], ["version", "version"], ["For use with the game:", "For use with the game:"], ["App:", "App:"], ["Sound effects:", "Sound effects:"], ["Voice actors:", "Voice actors:"], ["Images:", "Images:"], ["Daytime", "Daytime"], ["First night,", "First night,"], ["one witch", "one witch"], ["more witches", "more witches"], ["Other nights,", "Other nights,"], ["with constable", "with constable"], ["without constable", "without constable"], ["Night", "Night"], ["Night with constable", "Night with constable"], ["Night without constable", "Night without constable"], ["The witches", "The witches"], ["The witch's turn", "The witch's turn"], ["The witches' turn", "The witches' turn"], ["Choose-SG a victim:", "Choose a victim:"], ["Choose-PL a victim:", "Choose a victim:"], ["The constable", "The constable"], ["The constable's turn", "The constable's turn"], ["Choose someone to protect:", "Choose someone to protect:"], ["Rotate", "Rotate"], ["Witch, ", "Witch, "], ["Witches, ", "Witches, "], ["Constable, ", "Constable, "], ["are you-MASC-SG sure?", "are you sure?"], ["are you-FEM-SG sure?", "are you sure?"], ["are you-PL sure?", "are you sure?"], ["Confirm", "Confirm"], ["Yes", "Yes"], ["No", "No"], ["Error", "Error"], ["Unable to load audio", "Unable to load audio"], ["Index out of bounds", "Index out of bounds"], ["Confess", "Confess"], ["Everyone,", "Everyone,"], ["decide whether you want to confess", "decide whether you want to confess"], ["The Reveal", "Reveal"], ["Reveal witch's victim", "Reveal witch's victim"], ["Reveal witches' victim", "Reveal witches' victim"], ["The witch attacked-PRE", "The witch attacked"], ["The witch attacked-POST", ""], ["The witches attacked-PRE", "The witches attacked"], ["The witches attacked-POST", ""], ["Reveal constable's protection", "Reveal constable's protection"], ["The constable protected-PRE", "The constable protected"], ["The constable protected-POST", ""]]);
 /* table Not a pure module */
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":14}],43:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":19}],51:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11671,12 +14588,12 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-var table = Js_dict.fromArray([["New Game", "Nuevo juego"], ["Setup", "Configuración"], ["Exit", "Cerrar"], ["Players", "Jugadores"], ["Sound effects", "FX sonido"], ["Speech", "Discurso"], ["How many witches?", "¿Cuantas brujas?"], ["Language", "Idioma"], ["Seating layout", "Plan de mesa"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Italiano", "Italiano"], ["Back", "Regresar"], ["Next", "Avanzar"], ["Credits", "Créditos"], ["Game:", "Juego:"], ["version", "versión"], ["For use with the game:", "Para usar con el juego:"], ["App:", "Aplicación:"], ["Sound effects:", "Efectos de sonido:"], ["Voice actors:", "Actores de voz:"], ["Images:", "Imágenes:"], ["Daytime", "El día"], ["First night,", "Primera noche,"], ["one witch", "una bruja"], ["more witches", "más brujas"], ["Other nights,", "Otras noches,"], ["with constable", "con alguacil"], ["without constable", "sin alguacil"], ["Night", "La noche"], ["Night with constable", "Noche con alguacil"], ["Night without constable", "Noche sin alguacil"], ["The witches", "Las brujas"], ["The witch's turn", "Turno de la bruja"], ["The witches' turn", "Turno de las brujas"], ["Choose-SG a victim:", "Elige una víctima:"], ["Choose-PL a victim:", "Eligen una víctima:"], ["The constable", "El alguacil"], ["The constable's turn", "Turno del alguacil"], ["Choose someone to protect:", "Elige a quién quieres proteger:"], ["Rotate", "Girar"], ["Witch, ", "Bruja, "], ["Witches, ", "Brujas, "], ["Constable, ", "Alguacil, "], ["are you-MASC-SG sure?", "¿estás seguro?"], ["are you-FEM-SG sure?", "¿estás segura?"], ["are you-PL sure?", "¿estáis seguras?"], ["Confirm", "Confirmar"], ["Yes", "Sí"], ["No", "No"], ["Error", "Error"], ["Unable to load audio", "No se puede cargar el audio"], ["Index out of bounds", "Índice fuera de los límites"], ["Confess", "Confesar"], ["Everyone,", "Cada persona,"], ["decide whether you want to confess", "decide si quieres confesar"], ["The Reveal", "La revelación"], ["Reveal witch's victim", "Revelar víctima de la bruja"], ["Reveal witches' victim", "Revelar víctima de las brujas"], ["The witch attacked-PRE", "La bruja atacó a"], ["The witch attacked-POST", ""], ["The witches attacked-PRE", "Las brujas atacaron a"], ["The witches attacked-POST", ""], ["Reveal constable's protection", "Revelar protección del alguacil"], ["The constable protected-PRE", "El alguacil protegió a"], ["The constable protected-POST", ""]]);
+var table = Js_dict.fromArray([["New Game", "Nuevo juego"], ["Setup", "Configuración"], ["Exit", "Cerrar"], ["Players", "Jugadores"], ["Names", "Nombres"], ["Sound effects", "FX sonido"], ["Speech", "Discurso"], ["How many witches?", "¿Cuantas brujas?"], ["Language", "Idioma"], ["Seating layout", "Plan de mesa"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Italiano", "Italiano"], ["Back", "Regresar"], ["Next", "Avanzar"], ["Credits", "Créditos"], ["Game:", "Juego:"], ["version", "versión"], ["For use with the game:", "Para usar con el juego:"], ["App:", "Aplicación:"], ["Sound effects:", "Efectos de sonido:"], ["Voice actors:", "Actores de voz:"], ["Images:", "Imágenes:"], ["Daytime", "El día"], ["First night,", "Primera noche,"], ["one witch", "una bruja"], ["more witches", "más brujas"], ["Other nights,", "Otras noches,"], ["with constable", "con alguacil"], ["without constable", "sin alguacil"], ["Night", "La noche"], ["Night with constable", "Noche con alguacil"], ["Night without constable", "Noche sin alguacil"], ["The witches", "Las brujas"], ["The witch's turn", "Turno de la bruja"], ["The witches' turn", "Turno de las brujas"], ["Choose-SG a victim:", "Elige una víctima:"], ["Choose-PL a victim:", "Eligen una víctima:"], ["The constable", "El alguacil"], ["The constable's turn", "Turno del alguacil"], ["Choose someone to protect:", "Elige a quién quieres proteger:"], ["Rotate", "Girar"], ["Witch, ", "Bruja, "], ["Witches, ", "Brujas, "], ["Constable, ", "Alguacil, "], ["are you-MASC-SG sure?", "¿estás seguro?"], ["are you-FEM-SG sure?", "¿estás segura?"], ["are you-PL sure?", "¿estáis seguras?"], ["Confirm", "Confirmar"], ["Yes", "Sí"], ["No", "No"], ["Error", "Error"], ["Unable to load audio", "No se puede cargar el audio"], ["Index out of bounds", "Índice fuera de los límites"], ["Confess", "Confesar"], ["Everyone,", "Cada persona,"], ["decide whether you want to confess", "decide si quieres confesar"], ["The Reveal", "La revelación"], ["Reveal witch's victim", "Revelar víctima de la bruja"], ["Reveal witches' victim", "Revelar víctima de las brujas"], ["The witch attacked-PRE", "La bruja atacó a"], ["The witch attacked-POST", ""], ["The witches attacked-PRE", "Las brujas atacaron a"], ["The witches attacked-POST", ""], ["Reveal constable's protection", "Revelar protección del alguacil"], ["The constable protected-PRE", "El alguacil protegió a"], ["The constable protected-POST", ""]]);
 /* table Not a pure module */
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":14}],44:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":19}],52:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11691,12 +14608,12 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-var table = Js_dict.fromArray([["New Game", "Nieuw spel"], ["Setup", "Instellingen"], ["Exit", "Afsluiten"], ["Players", "Spelers"], ["Sound effects", "Geluidseffecten"], ["Speech", "Spraak"], ["How many witches?", "Hoeveel heksen?"], ["Language", "Taal"], ["Seating layout", "Layout zitplaatsen"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Italiano", "Italiano"], ["Back", "Terug"], ["Next", "Volgende"], ["Credits", "Credits"], ["Game:", "Spel:"], ["version", "versie"], ["For use with the game:", "Voor gebruik bij het spel:"], ["App:", "App:"], ["Sound effects:", "Geluidseffecten:"], ["Voice actors:", "Stemacteurs:"], ["Images:", "Afbeeldingen:"], ["Daytime", "De dag"], ["First night,", "Eerste nacht,"], ["one witch", "één heks"], ["more witches", "meer heksen"], ["Other nights,", "Overige nachten,"], ["with constable", "met constable"], ["without constable", "zonder constable"], ["Night", "De nacht"], ["Night with constable", "Nacht met constable"], ["Night without constable", "Nacht zonder constable"], ["The witches", "De heksen"], ["The witch's turn", "De heks aan de beurt"], ["The witches' turn", "De heksen aan de beurt"], ["Choose-SG a victim:", "Kies een slachtoffer:"], ["Choose-PL a victim:", "Kies een slachtoffer:"], ["The constable", "De constable"], ["The constable's turn", "De constable aan de beurt"], ["Choose someone to protect:", "Kies wie beschermd moet worden:"], ["Rotate", "Draaien"], ["Witch, ", "Heks, "], ["Witches, ", "Heksen, "], ["Constable, ", "Constable, "], ["are you-MASC-SG sure?", "weet je het zeker?"], ["are you-FEM-SG sure?", "weet je het zeker?"], ["are you-PL sure?", "weten jullie het zeker?"], ["Confirm", "Bevestigen"], ["Yes", "Ja"], ["No", "Nee"], ["Error", "Fout"], ["Unable to load audio", "Kan audio niet laden"], ["Index out of bounds", "Index buiten bereik"], ["Confess", "Opbiechten"], ["Everyone,", "Spelers,"], ["decide whether you want to confess", "beslis of je wilt opbiechten"], ["The Reveal", "De onthulling"], ["Reveal witch's victim", "Slachtoffer van de heks onthullen"], ["Reveal witches' victim", "Slachtoffer van de heksen onthullen"], ["The witch attacked-PRE", "De heks heeft"], ["The witch attacked-POST", " aangevallen"], ["The witches attacked-PRE", "De heksen hebben"], ["The witches attacked-POST", " aangevallen"], ["Reveal constable's protection", "Beschermeling van de constable onthullen"], ["The constable protected-PRE", "De constable heeft"], ["The constable protected-POST", " beschermd"]]);
+var table = Js_dict.fromArray([["New Game", "Nieuw spel"], ["Setup", "Instellingen"], ["Exit", "Afsluiten"], ["Players", "Spelers"], ["Names", "Namen"], ["Sound effects", "Geluidseffecten"], ["Speech", "Spraak"], ["How many witches?", "Hoeveel heksen?"], ["Language", "Taal"], ["Seating layout", "Layout zitplaatsen"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Italiano", "Italiano"], ["Back", "Terug"], ["Next", "Volgende"], ["Credits", "Credits"], ["Game:", "Spel:"], ["version", "versie"], ["For use with the game:", "Voor gebruik bij het spel:"], ["App:", "App:"], ["Sound effects:", "Geluidseffecten:"], ["Voice actors:", "Stemacteurs:"], ["Images:", "Afbeeldingen:"], ["Daytime", "De dag"], ["First night,", "Eerste nacht,"], ["one witch", "één heks"], ["more witches", "meer heksen"], ["Other nights,", "Overige nachten,"], ["with constable", "met constable"], ["without constable", "zonder constable"], ["Night", "De nacht"], ["Night with constable", "Nacht met constable"], ["Night without constable", "Nacht zonder constable"], ["The witches", "De heksen"], ["The witch's turn", "De heks aan de beurt"], ["The witches' turn", "De heksen aan de beurt"], ["Choose-SG a victim:", "Kies een slachtoffer:"], ["Choose-PL a victim:", "Kies een slachtoffer:"], ["The constable", "De constable"], ["The constable's turn", "De constable aan de beurt"], ["Choose someone to protect:", "Kies wie beschermd moet worden:"], ["Rotate", "Draaien"], ["Witch, ", "Heks, "], ["Witches, ", "Heksen, "], ["Constable, ", "Constable, "], ["are you-MASC-SG sure?", "weet je het zeker?"], ["are you-FEM-SG sure?", "weet je het zeker?"], ["are you-PL sure?", "weten jullie het zeker?"], ["Confirm", "Bevestigen"], ["Yes", "Ja"], ["No", "Nee"], ["Error", "Fout"], ["Unable to load audio", "Kan audio niet laden"], ["Index out of bounds", "Index buiten bereik"], ["Confess", "Opbiechten"], ["Everyone,", "Spelers,"], ["decide whether you want to confess", "beslis of je wilt opbiechten"], ["The Reveal", "De onthulling"], ["Reveal witch's victim", "Slachtoffer van de heks onthullen"], ["Reveal witches' victim", "Slachtoffer van de heksen onthullen"], ["The witch attacked-PRE", "De heks heeft"], ["The witch attacked-POST", " aangevallen"], ["The witches attacked-PRE", "De heksen hebben"], ["The witches attacked-POST", " aangevallen"], ["Reveal constable's protection", "Beschermeling van de constable onthullen"], ["The constable protected-PRE", "De constable heeft"], ["The constable protected-POST", " beschermd"]]);
 /* table Not a pure module */
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":14}],45:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":19}],53:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11720,7 +14637,7 @@ var make = ClosePage;
 
 exports.make = make;
 
-},{"react":8}],46:[function(require,module,exports){
+},{"react":8}],54:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11789,7 +14706,7 @@ var make = CreditsPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":28,"../components/LanguageContext.bs.js":31,"../components/Spacer.bs.js":38,"../components/Translator.bs.js":40,"react":8,"rescript/lib/es6/curry.js":13}],47:[function(require,module,exports){
+},{"../components/Button.bs.js":34,"../components/LanguageContext.bs.js":37,"../components/Spacer.bs.js":46,"../components/Translator.bs.js":48,"react":8,"rescript/lib/es6/curry.js":18}],55:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11850,7 +14767,7 @@ var make = DaytimeConfessPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":28,"../components/LanguageContext.bs.js":31,"../components/LargeRevealButton.bs.js":34,"../components/Spacer.bs.js":38,"../components/Translator.bs.js":40,"../components/TurnStateContext.bs.js":41,"react":8,"rescript/lib/es6/curry.js":13}],48:[function(require,module,exports){
+},{"../components/Button.bs.js":34,"../components/LanguageContext.bs.js":37,"../components/LargeRevealButton.bs.js":40,"../components/Spacer.bs.js":46,"../components/Translator.bs.js":48,"../components/TurnStateContext.bs.js":49,"react":8,"rescript/lib/es6/curry.js":18}],56:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11978,7 +14895,7 @@ var make = DaytimePage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":28,"../components/LanguageContext.bs.js":31,"../components/LargeButton.bs.js":33,"../components/Spacer.bs.js":38,"../components/Translator.bs.js":40,"../components/TurnStateContext.bs.js":41,"react":8,"rescript/lib/es6/curry.js":13}],49:[function(require,module,exports){
+},{"../components/Button.bs.js":34,"../components/LanguageContext.bs.js":37,"../components/LargeButton.bs.js":39,"../components/Spacer.bs.js":46,"../components/Translator.bs.js":48,"../components/TurnStateContext.bs.js":49,"react":8,"rescript/lib/es6/curry.js":18}],57:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12075,7 +14992,7 @@ var make = DaytimeRevealPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":28,"../components/ButtonPair.bs.js":29,"../components/LanguageContext.bs.js":31,"../components/LargeRevealButton.bs.js":34,"../components/Spacer.bs.js":38,"../components/Translator.bs.js":40,"../components/TurnStateContext.bs.js":41,"react":8,"rescript/lib/es6/curry.js":13}],50:[function(require,module,exports){
+},{"../components/Button.bs.js":34,"../components/ButtonPair.bs.js":35,"../components/LanguageContext.bs.js":37,"../components/LargeRevealButton.bs.js":40,"../components/Spacer.bs.js":46,"../components/Translator.bs.js":48,"../components/TurnStateContext.bs.js":49,"react":8,"rescript/lib/es6/curry.js":18}],58:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12117,7 +15034,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-var initialGameState_players = ["Helmi", "Marco", "Anja", "Kees", "Joyce", "René", "Rodney", "Erwin", "Wendy", "Paul", "Laurent"];
+var initialGameState_players = ["Anja", "Erwin", "Helmi", "Joyce", "Kees", "Laurent", "Marco", "Paul", "René", "Rodney"];
 var initialGameState = {
   players: initialGameState_players,
   seatingLayout:
@@ -12301,7 +15218,7 @@ var make = MainPage;
 
 exports.make = make;
 
-},{"../components/GameStateContext.bs.js":30,"../components/LanguageContext.bs.js":31,"../components/TurnStateContext.bs.js":41,"./ClosePage.bs.js":45,"./CreditsPage.bs.js":46,"./DaytimeConfessPage.bs.js":47,"./DaytimePage.bs.js":48,"./DaytimeRevealPage.bs.js":49,"./NightScenarioPage.bs.js":53,"./SetupLanguagePage.bs.js":55,"./SetupPage.bs.js":56,"./SetupPlayersPage.bs.js":57,"./TitlePage.bs.js":58,"react":8}],51:[function(require,module,exports){
+},{"../components/GameStateContext.bs.js":36,"../components/LanguageContext.bs.js":37,"../components/TurnStateContext.bs.js":49,"./ClosePage.bs.js":53,"./CreditsPage.bs.js":54,"./DaytimeConfessPage.bs.js":55,"./DaytimePage.bs.js":56,"./DaytimeRevealPage.bs.js":57,"./NightScenarioPage.bs.js":61,"./SetupLanguagePage.bs.js":63,"./SetupPage.bs.js":64,"./SetupPlayersPage.bs.js":65,"./TitlePage.bs.js":66,"react":8}],59:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12376,7 +15293,7 @@ var make = NightConfirmPage;
 
 exports.make = make;
 
-},{"../components/LanguageContext.bs.js":31,"../components/LargeButton.bs.js":33,"../components/Spacer.bs.js":38,"../components/Translator.bs.js":40,"../components/TurnStateContext.bs.js":41,"react":8}],52:[function(require,module,exports){
+},{"../components/LanguageContext.bs.js":37,"../components/LargeButton.bs.js":39,"../components/Spacer.bs.js":46,"../components/Translator.bs.js":48,"../components/TurnStateContext.bs.js":49,"react":8}],60:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12410,7 +15327,7 @@ var make = NightErrorPage;
 
 exports.make = make;
 
-},{"../components/AudioError.bs.js":27,"./NightStepPage.bs.js":54,"react":8}],53:[function(require,module,exports){
+},{"../components/AudioError.bs.js":33,"./NightStepPage.bs.js":62,"react":8}],61:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12653,7 +15570,7 @@ var make = NightScenarioPage;
 
 exports.make = make;
 
-},{"../components/Audio.bs.js":26,"../components/GameStateContext.bs.js":30,"../components/LanguageContext.bs.js":31,"../components/NightScenarios.bs.js":35,"../components/PlayerList.bs.js":36,"../components/Translator.bs.js":40,"../components/TurnStateContext.bs.js":41,"./NightConfirmPage.bs.js":51,"./NightErrorPage.bs.js":52,"./NightStepPage.bs.js":54,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":13}],54:[function(require,module,exports){
+},{"../components/Audio.bs.js":32,"../components/GameStateContext.bs.js":36,"../components/LanguageContext.bs.js":37,"../components/NightScenarios.bs.js":41,"../components/PlayerList.bs.js":44,"../components/Translator.bs.js":48,"../components/TurnStateContext.bs.js":49,"./NightConfirmPage.bs.js":59,"./NightErrorPage.bs.js":60,"./NightStepPage.bs.js":62,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":18}],62:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12711,7 +15628,7 @@ var make = NightStepPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":28,"../components/LanguageContext.bs.js":31,"../components/Spacer.bs.js":38,"../components/Translator.bs.js":40,"react":8,"rescript/lib/es6/curry.js":13}],55:[function(require,module,exports){
+},{"../components/Button.bs.js":34,"../components/LanguageContext.bs.js":37,"../components/Spacer.bs.js":46,"../components/Translator.bs.js":48,"react":8,"rescript/lib/es6/curry.js":18}],63:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12750,7 +15667,7 @@ var make = SetupLanguagePage;
 
 exports.make = make;
 
-},{"../components/LanguageContext.bs.js":31,"../components/LanguageList.bs.js":32,"../components/Translator.bs.js":40,"react":8}],56:[function(require,module,exports){
+},{"../components/LanguageContext.bs.js":37,"../components/LanguageList.bs.js":38,"../components/Translator.bs.js":48,"react":8}],64:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12861,7 +15778,7 @@ var make = SetupPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":28,"../components/GameStateContext.bs.js":30,"../components/LanguageContext.bs.js":31,"../components/Spacer.bs.js":38,"../components/Translator.bs.js":40,"react":8,"rescript/lib/es6/curry.js":13}],57:[function(require,module,exports){
+},{"../components/Button.bs.js":34,"../components/GameStateContext.bs.js":36,"../components/LanguageContext.bs.js":37,"../components/Spacer.bs.js":46,"../components/Translator.bs.js":48,"react":8,"rescript/lib/es6/curry.js":18}],65:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12881,6 +15798,8 @@ var Translator$Salem1692 = _interopRequireWildcard(require("../components/Transl
 
 var LanguageContext$Salem1692 = _interopRequireWildcard(require("../components/LanguageContext.bs.js"));
 
+var PlayerEntryList$Salem1692 = _interopRequireWildcard(require("../components/PlayerEntryList.bs.js"));
+
 var SeatingLayoutList$Salem1692 = _interopRequireWildcard(require("../components/SeatingLayoutList.bs.js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -12893,10 +15812,10 @@ function SetupPlayersPage(Props) {
   var language = React.useContext(LanguageContext$Salem1692.context);
   return React.createElement("div", {
     className: "page flex-vertical",
-    id: "setup-page"
-  }, React.createElement("h1", undefined, Translator$Salem1692.getTranslator(language, "Players")), React.createElement(Spacer$Salem1692.make, {}), React.createElement(SeatingLayoutList$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
+    id: "setup-players-page"
+  }, React.createElement("h1", undefined, Translator$Salem1692.getTranslator(language, "Players")), React.createElement(PlayerEntryList$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}), React.createElement(SeatingLayoutList$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
     label: Translator$Salem1692.getTranslator(language, "Back"),
-    className: "icon-left icon-back",
+    className: "icon-left icon-back spacer-top",
     onClick: function (_event) {
       return Curry._1(goToPage, function (_prev) {
         return (
@@ -12913,7 +15832,7 @@ var make = SetupPlayersPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":28,"../components/LanguageContext.bs.js":31,"../components/SeatingLayoutList.bs.js":37,"../components/Spacer.bs.js":38,"../components/Translator.bs.js":40,"react":8,"rescript/lib/es6/curry.js":13}],58:[function(require,module,exports){
+},{"../components/Button.bs.js":34,"../components/LanguageContext.bs.js":37,"../components/PlayerEntryList.bs.js":43,"../components/SeatingLayoutList.bs.js":45,"../components/Spacer.bs.js":46,"../components/Translator.bs.js":48,"react":8,"rescript/lib/es6/curry.js":18}],66:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12981,4 +15900,4 @@ var make = TitlePage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":28,"../components/LanguageContext.bs.js":31,"../components/Translator.bs.js":40,"react":8,"rescript/lib/es6/curry.js":13}]},{},[43,44,42,24,40,32,36,38,33,28,37,26,30,29,34,27,41,35,31,39,23,52,50,51,47,46,49,56,53,58,57,45,55,48,54,25]);
+},{"../components/Button.bs.js":34,"../components/LanguageContext.bs.js":37,"../components/Translator.bs.js":48,"react":8,"rescript/lib/es6/curry.js":18}]},{},[51,52,50,30,48,38,44,46,43,39,34,45,42,32,36,35,40,33,49,41,37,47,29,60,58,59,55,54,57,64,61,66,65,53,63,56,62,31]);

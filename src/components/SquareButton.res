@@ -9,10 +9,11 @@ open Types
 let make = (
     ~label: string = "",
     ~className: string = "",
-    ~children: React.element = React.null,
+    ~style: ReactDOM.Style.t = ReactDOM.Style.make(()),
     ~onClick: clickHandler,
+    ~children: React.element = React.null,
 ): React.element => {
-    <Button label className={className ++ " squarebutton"} onClick>
+    <Button label className={className ++ " squarebutton"} style onClick>
         {children}
     </Button>
 }

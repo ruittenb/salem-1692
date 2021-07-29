@@ -9,7 +9,7 @@ let initialLanguage: Types.language = EN_US
 let initialPage: Types.page = Title //  GameState
 
 let initialGameState = {
-    players: [ "Helmi", "Marco", "Anja", "Kees", "Joyce", `René`, "Rodney", "Erwin", "Wendy", "Paul", "Laurent" ],
+    players: [ "Anja", "Erwin", "Helmi", "Joyce", "Kees", "Laurent", "Marco", "Paul", `René`, "Rodney" /* , "Wendy" */ ],
     seatingLayout: TwoAtHead,
     doPlayEffects: true,
     doPlaySpeech: true,
