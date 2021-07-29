@@ -48,6 +48,15 @@ img.sound-image {
     margin: 50px 0 30px 0;
 }
 
+input[type=text] {
+    background-color: #faf8ea;
+    border: 2px solid black;
+    padding-left: 5px;
+    font-family: inherit;
+    font-size: 28px;
+    width: 50%;
+}
+
 .flex-vertical {
     display: flex;
     justify-content: flex-start;
@@ -102,6 +111,10 @@ div.text-padding {
     background-repeat: no-repeat;
 }
 
+.page button.spacer-top {
+    margin-top: 25px;
+}
+
 .page button.rotated {
     transform: rotate(180deg);
 }
@@ -141,6 +154,13 @@ div.text-padding {
     padding-right: 24px;
     background-position: calc(100% - 20px) center;
 }
+.page button.icon-only {
+    background-position: center center;
+    width: 42px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 0;
+}
 
 .page button.flag-nl { background-image: url(../images/flag-nl.png); }
 .page button.flag-de { background-image: url(../images/flag-de.png); }
@@ -149,13 +169,15 @@ div.text-padding {
 .page button.flag-es { background-image: url(../images/flag-es.png); }
 .page button.flag-it { background-image: url(../images/flag-it.png); }
 
-.page button.icon-pawn { background-image: url(../images/icon-pawn.png); }
-.page button.icon-gear { background-image: url(../images/icon-gear.png); }
-.page button.icon-lang { background-image: url(../images/icon-lang.png); }
-.page button.icon-back { background-image: url(../images/icon-back.png); }
-.page button.icon-forw { background-image: url(../images/icon-forw.png); }
-.page button.icon-rot  { background-image: url(../images/icon-rot.png); }
-.page button.icon-exit { background-image: url(../images/icon-exit.png); }
+.page button.icon-pawn  { background-image: url(../images/icon-pawn.png); }
+.page button.icon-gear  { background-image: url(../images/icon-gear.png); }
+.page button.icon-lang  { background-image: url(../images/icon-lang.png); }
+.page button.icon-back  { background-image: url(../images/icon-back.png); }
+.page button.icon-forw  { background-image: url(../images/icon-forw.png); }
+.page button.icon-move  { background-image: url(../images/icon-move.png); }
+.page button.icon-exit  { background-image: url(../images/icon-exit.png); }
+.page button.icon-rot   { background-image: url(../images/icon-rot.png); }
+.page button.icon-trash { background-image: url(../images/icon-trash.png); }
 
 .page button.icon-checked   { background-image: url(../images/icon-checked.png); }
 .page button.icon-unchecked { background-image: url(../images/icon-unchecked.png); }
@@ -193,6 +215,17 @@ div.text-padding {
 #setup-page {
     background: url(../images/overlay-gear.png) -190px 120px no-repeat;
     padding-top: 20px;
+}
+
+#setup-players-page {
+    overflow-y: scroll;
+}
+
+div.player-entry-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 80%;
 }
 
 #layout-list {
@@ -256,9 +289,7 @@ div.text-padding {
     grid-template-columns: 1fr 1fr;
 }
 
-#player-list.one-at-head :first-child,
-#player-list.two-at-head.odd :last-child,
-#player-list.one-at-head.even :last-child {
+#player-list .grid-wide {
     grid-column-start: 1;
     grid-column-end: 3;
     width: 40%;
