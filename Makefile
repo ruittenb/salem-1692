@@ -81,7 +81,7 @@ tag-%: ## Update the %:major:minor:patch:% version number and create git tag
 	which rpl 2>/dev/null
 	which jq
 	VERSION_FROM=$$(jq .version package.json) && \
-	npm version patch && \
+	npm version $* && \
 	VERSION_TO=$$(jq .version package.json) && \
 	rpl $$VERSION_FROM $$VERSION_TO $(VERSION_FILES)
 
