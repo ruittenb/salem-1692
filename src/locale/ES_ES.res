@@ -6,6 +6,8 @@
 let table = Js.Dict.fromArray([
     // TitlePage
     ("New Game", "Nuevo juego"),
+    ("Start Game", "Comenzar juego"),
+    ("Play Game", "Jugar"),
     ("Setup", `Configuración`),
     ("Exit", "Cerrar"),
     // Setup

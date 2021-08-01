@@ -177,7 +177,7 @@ div.text-padding {
 .page button.icon-move  { background-image: url(../images/icon-move.png); }
 .page button.icon-exit  { background-image: url(../images/icon-exit.png); }
 .page button.icon-rot   { background-image: url(../images/icon-rot.png); }
-.page button.icon-trash { background-image: url(../images/icon-trash.png); }
+.page button.icon-trash { background-image: url(../images/icon-cross.png); }
 
 .page button.icon-checked   { background-image: url(../images/icon-checked.png); }
 .page button.icon-unchecked { background-image: url(../images/icon-unchecked.png); }

@@ -9,7 +9,7 @@ let initialLanguage: Types.language = EN_US
 let initialPage: Types.page = Title //  GameState
 
 let initialGameState = {
-    players: [ "Anja", "Erwin", "Helmi", "Joyce", "Kees", "Laurent", "Marco", "Paul", `René`, "Rodney" /* , "Wendy" */ ],
+    players: [ "Anja", "Erwin", "Helmi", "Joyce", "Kees" /* , "Laurent", "Marco", "Paul", `René`, "Rodney", "Wendy" */ ],
     seatingLayout: TwoAtHead,
     doPlayEffects: true,
     doPlaySpeech: true,
@@ -41,6 +41,7 @@ let make = (): React.element => {
         | Title                   => <TitlePage goToPage />
         | Setup                   => <SetupPage goToPage />
         | SetupPlayers            => <SetupPlayersPage goToPage />
+        | SetupPlayersForGame     => <SetupPlayersPage goToPage contineToGame=true />
         | SetupLanguage           => <SetupLanguagePage goToPage setLanguage />
         | Credits                 => <CreditsPage goToPage />
         | Daytime                 => <DaytimePage goToPage />

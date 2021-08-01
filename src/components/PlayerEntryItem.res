@@ -8,15 +8,15 @@ open Types
 @react.component
 let make = (
     ~value: string,
-    ~onClick: clickHandler,
+    ~onChange: changeHandler,
+    ~onRemove: clickHandler,
+    ~onMove: clickHandler,
 ): React.element => {
 
-    let readOnly = (value !== "")
-
     <div className="player-entry-item">
-        <Button className="icon-only icon-left icon-move" onClick />
-        <input type_="text" value readOnly />
-        <Button className="icon-only icon-right icon-trash" onClick />
+        <Button className="icon-only icon-left icon-move" onClick=onMove />
+        <input type_="text" value onChange />
+        <Button className="icon-only icon-right icon-trash" onClick=onRemove />
     </div>
 }
 
