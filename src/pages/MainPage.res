@@ -6,11 +6,11 @@
 open Types
 
 let initialLanguage: Types.language = EN_US
-let initialPage: Types.page = Title //  GameState
+let initialPage: Types.page = Title
 
 let initialGameState = {
     players: [],
-    seatingLayout: TwoAtHead,
+    seatingLayout: OneAtHead,
     doPlayEffects: true,
     doPlaySpeech: true,
 }

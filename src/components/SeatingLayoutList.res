@@ -40,14 +40,14 @@ let make = (): React.element => {
                     }
                     | (Even, OneAtHead) => {
                         <>
-                            <SquareButton className="layout-2222 icon-left icon-unchecked" onClick=onClick(TwoAtHead) />
                             <SquareButton className="layout-1221 icon-left icon-checked"   onClick=onClick(OneAtHead) />
+                            <SquareButton className="layout-2222 icon-left icon-unchecked" onClick=onClick(TwoAtHead) />
                         </>
                     }
                     | (Even, TwoAtHead) => {
                         <>
-                            <SquareButton className="layout-2222 icon-left icon-checked"   onClick=onClick(TwoAtHead) />
                             <SquareButton className="layout-1221 icon-left icon-unchecked" onClick=onClick(OneAtHead) />
+                            <SquareButton className="layout-2222 icon-left icon-checked"   onClick=onClick(TwoAtHead) />
                         </>
                     }
                 }

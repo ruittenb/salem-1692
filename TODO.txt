@@ -2,7 +2,6 @@
  - store language and effects/speech flags in appState?
  - move currentPage to gameState
  - move scenarioIndex to turnState
- - make page for entering players
  - make hasConstable superfluous: use optional<string> anyway, with <ErrorPage>
  - store (language, t) in context
 

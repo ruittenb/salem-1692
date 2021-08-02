@@ -15,13 +15,16 @@ let make = (
     let language = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(language)
 
+    let (gameState, _) = React.useContext(GameStateContext.context)
+    let hasGoodNrPlayers = gameState.players->Js.Array.length > 1 // need > 2 players
+
     <div id="setup-players-page" className="page flex-vertical">
         <h1> {React.string(t("Players"))} </h1>
         <PlayerEntryList />
         <Spacer />
         <SeatingLayoutList />
         {
-            if contineToGame {
+            if contineToGame && hasGoodNrPlayers {
                 <ButtonPair>
                     <Button
                         label={t("Back")}
