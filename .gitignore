@@ -1,6 +1,7 @@
 .DS_Store
 /node_modules/
 /_fabriek/famfamfam/
+/_fabriek/audio/raw/
 /lib/
 /.bsb.lock
 /.merlin
