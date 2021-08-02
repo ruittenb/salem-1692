@@ -72,7 +72,7 @@ let make = (
                     />
                     <Button
                         label={t("Next")}
-                        className="icon-right icon-forw"
+                        className="condensed_nl icon-right icon-forw"
                         onClick={ _event => goToPage(_prev => Daytime) }
                     />
                 </ButtonPair>

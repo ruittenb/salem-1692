@@ -14,7 +14,6 @@ let getScenario = (subPage: page): scenario => {
         | FirstNightOneWitch      => [
             Effect(ChurchBell),
             Speech(TownGoToSleep),
-            Effect(Silence1s),
             Effect(Silence2s),
             Speech(WitchWakeUp),
             Speech(WitchDecideCat),
@@ -29,7 +28,6 @@ let getScenario = (subPage: page): scenario => {
         | FirstNightMoreWitches   => [
             Effect(ChurchBell),
             Speech(TownGoToSleep),
-            Effect(Silence1s),
             Effect(Silence2s),
             Speech(WitchesWakeUp),
             Speech(WitchesDecideCat),
@@ -44,7 +42,6 @@ let getScenario = (subPage: page): scenario => {
         | OtherNightWithConstable => [
             Effect(ChurchBell),
             Speech(TownGoToSleep),
-            Effect(Silence1s),
             Effect(Silence2s),
             Speech(WitchesWakeUp),
             Speech(WitchesDecideMurder),
@@ -65,7 +62,6 @@ let getScenario = (subPage: page): scenario => {
         | OtherNightNoConstable   => [
             Effect(ChurchBell),
             Speech(TownGoToSleep),
-            Effect(Silence1s),
             Effect(Silence2s),
             Speech(WitchesWakeUp),
             Speech(WitchesDecideMurder),
