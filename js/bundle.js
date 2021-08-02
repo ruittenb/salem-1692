@@ -14399,32 +14399,32 @@ function SeatingLayoutList(Props) {
       1, param);
     }
   })) : match$1 ? React.createElement(React.Fragment, undefined, React.createElement(SquareButton$Salem1692.make, {
-    className: "layout-2222 icon-left icon-checked",
-    onClick: function (param) {
-      return onClick(
-      /* TwoAtHead */
-      1, param);
-    }
-  }), React.createElement(SquareButton$Salem1692.make, {
     className: "layout-1221 icon-left icon-unchecked",
     onClick: function (param) {
       return onClick(
       /* OneAtHead */
       0, param);
     }
-  })) : React.createElement(React.Fragment, undefined, React.createElement(SquareButton$Salem1692.make, {
-    className: "layout-2222 icon-left icon-unchecked",
+  }), React.createElement(SquareButton$Salem1692.make, {
+    className: "layout-2222 icon-left icon-checked",
     onClick: function (param) {
       return onClick(
       /* TwoAtHead */
       1, param);
     }
-  }), React.createElement(SquareButton$Salem1692.make, {
+  })) : React.createElement(React.Fragment, undefined, React.createElement(SquareButton$Salem1692.make, {
     className: "layout-1221 icon-left icon-checked",
     onClick: function (param) {
       return onClick(
       /* OneAtHead */
       0, param);
+    }
+  }), React.createElement(SquareButton$Salem1692.make, {
+    className: "layout-2222 icon-left icon-unchecked",
+    onClick: function (param) {
+      return onClick(
+      /* TwoAtHead */
+      1, param);
     }
   }))));
 }
@@ -15087,8 +15087,8 @@ var initialGameState_players = [];
 var initialGameState = {
   players: initialGameState_players,
   seatingLayout:
-  /* TwoAtHead */
-  1,
+  /* OneAtHead */
+  0,
   doPlayEffects: true,
   doPlaySpeech: true
 };
@@ -15860,6 +15860,8 @@ var LanguageContext$Salem1692 = _interopRequireWildcard(require("../components/L
 
 var PlayerEntryList$Salem1692 = _interopRequireWildcard(require("../components/PlayerEntryList.bs.js"));
 
+var GameStateContext$Salem1692 = _interopRequireWildcard(require("../components/GameStateContext.bs.js"));
+
 var SeatingLayoutList$Salem1692 = _interopRequireWildcard(require("../components/SeatingLayoutList.bs.js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -15872,10 +15874,12 @@ function SetupPlayersPage(Props) {
   var contineToGameOpt = Props.contineToGame;
   var contineToGame = contineToGameOpt !== undefined ? contineToGameOpt : false;
   var language = React.useContext(LanguageContext$Salem1692.context);
+  var match = React.useContext(GameStateContext$Salem1692.context);
+  var hasGoodNrPlayers = match[0].players.length > 1;
   return React.createElement("div", {
     className: "page flex-vertical",
     id: "setup-players-page"
-  }, React.createElement("h1", undefined, Translator$Salem1692.getTranslator(language, "Players")), React.createElement(PlayerEntryList$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}), React.createElement(SeatingLayoutList$Salem1692.make, {}), contineToGame ? React.createElement(ButtonPair$Salem1692.make, {
+  }, React.createElement("h1", undefined, Translator$Salem1692.getTranslator(language, "Players")), React.createElement(PlayerEntryList$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}), React.createElement(SeatingLayoutList$Salem1692.make, {}), contineToGame && hasGoodNrPlayers ? React.createElement(ButtonPair$Salem1692.make, {
     children: null
   }, React.createElement(Button$Salem1692.make, {
     label: Translator$Salem1692.getTranslator(language, "Back"),
@@ -15918,7 +15922,7 @@ var make = SetupPlayersPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":34,"../components/ButtonPair.bs.js":35,"../components/LanguageContext.bs.js":37,"../components/PlayerEntryList.bs.js":43,"../components/SeatingLayoutList.bs.js":45,"../components/Spacer.bs.js":46,"../components/Translator.bs.js":48,"react":8,"rescript/lib/es6/curry.js":18}],66:[function(require,module,exports){
+},{"../components/Button.bs.js":34,"../components/ButtonPair.bs.js":35,"../components/GameStateContext.bs.js":36,"../components/LanguageContext.bs.js":37,"../components/PlayerEntryList.bs.js":43,"../components/SeatingLayoutList.bs.js":45,"../components/Spacer.bs.js":46,"../components/Translator.bs.js":48,"react":8,"rescript/lib/es6/curry.js":18}],66:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
