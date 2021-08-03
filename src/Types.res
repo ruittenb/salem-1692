@@ -8,10 +8,6 @@ type mediaHandler  = ReactEvent.Media.t => unit
 type changeHandler = ReactEvent.Form.t  => unit
 type blurHandler   = ReactEvent.Focus.t => unit
 
-type either<'t, 'v> =
-    | Left('t)
-    | Right('v)
-
 type language =
     | NL_NL
     | EN_US

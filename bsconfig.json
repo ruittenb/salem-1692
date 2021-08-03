@@ -14,7 +14,8 @@
   }],
   "suffix": ".bs.js",
   "bs-dependencies": [
-    "@rescript/react"
+    "@rescript/react",
+    "@seamonster-studios/rescript-localstorage"
   ],
   "ppx-flags": [],
   "refmt": 3

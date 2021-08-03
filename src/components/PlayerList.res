@@ -106,13 +106,13 @@ let make = (
     let buttons = assemble(
         gameState.players,
         sortIndexes,
-        (player, sortIndex) => {
-            let wideClass = if headPositions->Belt.Set.Int.has(sortIndex) { " grid-wide" } else { "" }
+        (player, index) => {
+            let wideClass = if headPositions->Belt.Set.Int.has(index) { " grid-wide" } else { "" }
             <SquareButton
-                key=player
+                key={Belt.Int.toString(index) ++ "/" ++ player} // make key unique
                 label=player
                 className={rotatedClass ++ wideClass}
-                style=ReactDOM.Style.make(~order=Belt.Int.toString(sortIndex), ())
+                style=ReactDOM.Style.make(~order=Belt.Int.toString(index), ())
                 onClick=choiceHandler(player)
             />
         },

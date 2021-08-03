@@ -4,6 +4,8 @@
  */
 
 open Types
+open Utils
+open Constants
 
 let initialLanguage: Types.language = EN_US
 let initialPage: Types.page = Title
@@ -29,6 +31,27 @@ let getLanguageClassName = (language: language): string => {
     }
 }
 
+let loadPlayersFromLocalStorage = (setGameState): unit => {
+    let storageKey = localStoragePrefix ++ localStoragePlayersKey
+    let _ = LocalStorage.getItem(storageKey)            // this yields an option<string>
+        ->option2AndThen(
+            playersString => safeExec(
+                () => Js.Json.parseExn(playersString),
+            )
+        )                                               // this yields an option<Js.Json.t>
+        ->option2AndThen(
+            json => Js.Json.decodeArray(json),
+        )                                               // this yields an option<array<Js.Json.t>>
+        ->option2Map(
+            jsonString => jsonString
+                ->Js.Array2.map(Js.Json.decodeString)   // this yields an array<option<string>>
+                ->arrayFilterSome                       // this yields an array<string>
+        )                                               // this yields an option<array<string>>
+        ->option2Map(
+            players => setGameState(prevState => { ...prevState, players })
+        )
+}
+
 @react.component
 let make = (): React.element => {
 
@@ -37,6 +60,12 @@ let make = (): React.element => {
     let (turnState, setTurnState) = React.useState(_ => initialTurnState)
     let (language, setLanguage)   = React.useState(_ => initialLanguage)
     let translator                = Translator.getTranslator(language)
+
+    // run once after mounting
+    React.useEffect0(() => {
+        loadPlayersFromLocalStorage(setGameState)
+        None // cleanup function
+    })
 
     let currentPage = switch currentPage {
         | Title                   => <TitlePage goToPage />
@@ -57,11 +86,11 @@ let make = (): React.element => {
 
     <LanguageContext.Provider value=(language, translator)>
         <div className=getLanguageClassName(language)>
-        <GameStateContext.Provider value=(gameState, setGameState)>
-            <TurnStateContext.Provider value=(turnState, setTurnState)>
-                {currentPage}
-            </TurnStateContext.Provider>
-        </GameStateContext.Provider>
+            <GameStateContext.Provider value=(gameState, setGameState)>
+                <TurnStateContext.Provider value=(turnState, setTurnState)>
+                    {currentPage}
+                </TurnStateContext.Provider>
+            </GameStateContext.Provider>
         </div>
     </LanguageContext.Provider>
 }

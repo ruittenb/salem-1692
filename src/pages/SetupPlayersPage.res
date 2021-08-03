@@ -6,6 +6,15 @@
 @@warning("-33") // Unused 'open Types'
 
 open Types
+open Constants
+
+let savePlayersToLocalStorage = (players: array<player>): unit => {
+    let storageKey = localStoragePrefix ++ localStoragePlayersKey
+    switch Js.Json.stringifyAny(players) {
+        | Some(jsonString) => LocalStorage.setItem(storageKey, jsonString)
+        | None             => ()
+    }
+}
 
 @react.component
 let make = (
@@ -13,9 +22,14 @@ let make = (
     ~contineToGame: bool = false,
 ): React.element => {
     let (_language, t) = React.useContext(LanguageContext.context)
-
     let (gameState, _) = React.useContext(GameStateContext.context)
-    let hasGoodNrPlayers = gameState.players->Js.Array.length > 1 // need > 2 players
+    let hasEnoughPlayers = gameState.players->Js.Array.length > 1 // need > 2 players
+
+    React.useEffect(() => {
+        Some(
+            () => savePlayersToLocalStorage(gameState.players)
+        )
+    })
 
     <div id="setup-players-page" className="page flex-vertical">
         <h1> {React.string(t("Players"))} </h1>
@@ -23,7 +37,7 @@ let make = (
         <Spacer />
         <SeatingLayoutList />
         {
-            if contineToGame && hasGoodNrPlayers {
+            if contineToGame && hasEnoughPlayers {
                 <ButtonPair>
                     <Button
                         label={t("Back")}

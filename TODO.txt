@@ -1,5 +1,5 @@
  - make more use of <p> instead of <div>
- - store language and effects/speech flags in appState?
+ - store language and effects/speech flags in localStorage
  - move currentPage to gameState
  - move scenarioIndex to turnState
  - make hasConstable superfluous: use optional<string> anyway, with <ErrorPage>

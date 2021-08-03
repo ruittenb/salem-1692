@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@rescript/react": "^0.10.3",
+    "@seamonster-studios/rescript-localstorage": "^1.0.1",
     "react": "^17.0.2"
   }
 }

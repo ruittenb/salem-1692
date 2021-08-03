@@ -23,7 +23,7 @@ let sliceLast = (items, index) => {
 /**
  * concatenate three arrays
  */
-let concat3 = (items1, items2, items3) => {
+let arrayConcat3 = (items1, items2, items3) => {
     items1->Js.Array2.concatMany([ items2, items3 ])
 }
 
@@ -38,7 +38,7 @@ let make = (): React.element => {
     let blurHandler: (int => blurHandler) = (playerIndex, event) => {
         let newValue: player = ReactEvent.Focus.currentTarget(event)["value"]
         setGameState(prevGameState => {
-            let players = concat3(
+            let players = arrayConcat3(
                 prevGameState.players->sliceFirst(playerIndex - 1),
                 [ newValue ],
                 prevGameState.players->sliceLast(playerIndex + 1)
@@ -62,7 +62,7 @@ let make = (): React.element => {
 
             let players = switch (firstSwapPlayer, secondSwapPlayer) {
                 | (Some(first), Some(second)) => {
-                    concat3(
+                    arrayConcat3(
                         prevGameState.players->sliceFirst(playerIndex - 1),
                         [ second, first ],
                         prevGameState.players->sliceLast(playerIndex + 2),
