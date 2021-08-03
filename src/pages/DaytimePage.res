@@ -9,8 +9,7 @@ open Types
 let make = (
     ~goToPage,
 ): React.element => {
-    let language = React.useContext(LanguageContext.context)
-    let t = Translator.getTranslator(language)
+    let (_language, t) = React.useContext(LanguageContext.context)
 
     let (_, setTurnState) = React.useContext(TurnStateContext.context)
     let defaultNextState = {

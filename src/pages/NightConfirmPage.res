@@ -13,9 +13,8 @@ let make = (
     ~goToPrevStep,
     ~goToNextStep,
 ): React.element => {
-    let language = React.useContext(LanguageContext.context)
-    let t = Translator.getTranslator(language)
 
+    let (_language, t) = React.useContext(LanguageContext.context)
     let (turnState, _) = React.useContext(TurnStateContext.context)
 
     let question = switch addressed {

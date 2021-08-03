@@ -32,10 +32,11 @@ let getLanguageClassName = (language: language): string => {
 @react.component
 let make = (): React.element => {
 
-    let (language, setLanguage)   = React.useState(_ => initialLanguage)
     let (currentPage, goToPage)   = React.useState(_ => initialPage)
     let (gameState, setGameState) = React.useState(_ => initialGameState)
     let (turnState, setTurnState) = React.useState(_ => initialTurnState)
+    let (language, setLanguage)   = React.useState(_ => initialLanguage)
+    let translator                = Translator.getTranslator(language)
 
     let currentPage = switch currentPage {
         | Title                   => <TitlePage goToPage />
@@ -54,7 +55,7 @@ let make = (): React.element => {
         | Close                   => <ClosePage />
     }
 
-    <LanguageContext.Provider value=language>
+    <LanguageContext.Provider value=(language, translator)>
         <div className=getLanguageClassName(language)>
         <GameStateContext.Provider value=(gameState, setGameState)>
             <TurnStateContext.Provider value=(turnState, setTurnState)>

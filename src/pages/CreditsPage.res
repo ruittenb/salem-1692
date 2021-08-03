@@ -11,8 +11,7 @@ open Types
 let make = (
     ~goToPage,
 ): React.element => {
-    let language = React.useContext(LanguageContext.context)
-    let t = Translator.getTranslator(language)
+    let (_language, t) = React.useContext(LanguageContext.context)
     let spacedComma = React.string(",  ")
     let closeParen = React.string(")")
     <div id="credits-page" className="page flex-vertical text-padding">

@@ -5,7 +5,12 @@
 
 open Types
 
-let context = React.createContext(EN_US) // default value (not initial!)
+let defaultLanguage = EN_US
+let defaultTranslator = Translator.getTranslator(defaultLanguage)
+
+let context = React.createContext(
+    (defaultLanguage, defaultTranslator)
+)
 
 module Provider = {
     let provider = React.Context.provider(context)

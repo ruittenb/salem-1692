@@ -9,9 +9,7 @@ open Types
 let make = (
     ~goToPage,
 ): React.element => {
-    let language = React.useContext(LanguageContext.context)
-    let t = Translator.getTranslator(language)
-
+    let (_language, t) = React.useContext(LanguageContext.context)
     let (turnState, _) = React.useContext(TurnStateContext.context)
 
     <div id="daytime-confess-page" className="page flex-vertical">

@@ -3,6 +3,11 @@
 
 A PWA for representing the moderator in the Salem 1692 card game
 
+## Websites
+
+- [Project on github](https://github.com/ruittenb/salem-1692)
+- [Active website](https://ruittenb.github.io/salem-1692/dist/) Click here to see the website in action.
+
 ## Modules
 
 - [ReScript](https://rescript-lang.org/docs/manual/latest/overview). For transpiling ReScript code to JavaScript.

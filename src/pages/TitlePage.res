@@ -9,9 +9,8 @@ open Types
 let make = (
     ~goToPage
 ): React.element => {
-    let language = React.useContext(LanguageContext.context)
-    let t = Translator.getTranslator(language)
 
+    let (_language, t) = React.useContext(LanguageContext.context)
     let (gameState, _) = React.useContext(GameStateContext.context)
 
     let firstGamePage = if gameState.players->Belt.Array.length > 0 { Daytime } else { SetupPlayersForGame }

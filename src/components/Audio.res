@@ -22,7 +22,8 @@ let make = (
     ~onError: mediaHandler,
 ): React.element => {
 
-    let language = React.useContext(LanguageContext.context)
+    let (language, _translator) = React.useContext(LanguageContext.context)
+
     let effectDirectory = "audio/"
     let speechDirectory = "audio/" ++ getLanguageDirectory(language)
 

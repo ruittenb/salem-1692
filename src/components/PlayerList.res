@@ -79,8 +79,7 @@ let make = (
     ~choiceHandler: (player, _) => unit,
 ): React.element => {
 
-    let language = React.useContext(LanguageContext.context)
-    let t = Translator.getTranslator(language)
+    let (_language, t) = React.useContext(LanguageContext.context)
 
     let (rotated, setRotate) = React.useState(_ => false)
     let rotatedClass = if rotated { "rotated" } else { "" }

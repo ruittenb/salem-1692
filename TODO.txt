@@ -3,5 +3,4 @@
  - move currentPage to gameState
  - move scenarioIndex to turnState
  - make hasConstable superfluous: use optional<string> anyway, with <ErrorPage>
- - store (language, t) in context
 

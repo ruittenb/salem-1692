@@ -9,8 +9,7 @@ open Types
 
 @react.component
 let make = (): React.element => {
-    let language = React.useContext(LanguageContext.context)
-    let t = Translator.getTranslator(language)
+    let (_language, t) = React.useContext(LanguageContext.context)
 
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
 

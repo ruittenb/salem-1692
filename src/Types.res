@@ -3,10 +3,10 @@
  * Types
  */
 
-type clickHandler = ReactEvent.Mouse.t => unit
-type mediaHandler = ReactEvent.Media.t => unit
-type changeHandler = ReactEvent.Form.t => unit
-type blurHandler = ReactEvent.Focus.t => unit
+type clickHandler  = ReactEvent.Mouse.t => unit
+type mediaHandler  = ReactEvent.Media.t => unit
+type changeHandler = ReactEvent.Form.t  => unit
+type blurHandler   = ReactEvent.Focus.t => unit
 
 type either<'t, 'v> =
     | Left('t)
