@@ -80,6 +80,11 @@ div.text-padding {
     height: calc(100% - 40px);
 }
 
+div.paragraph {
+    margin: 10px 20px;
+    line-height: 1.15;
+}
+
 .nl_NL .page .condensed_nl {
     font-size: 24px;
 }

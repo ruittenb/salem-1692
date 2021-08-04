@@ -31,7 +31,6 @@ let arrayConcat3 = (items1, items2, items3) => {
 let make = (): React.element => {
 
     let (_language, t) = React.useContext(LanguageContext.context)
-
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
 
     // handlers for existing players
@@ -105,6 +104,9 @@ let make = (): React.element => {
 
     <>
         <h2> {React.string(t("Names"))} </h2>
+        <div className="paragraph">
+            {React.string(t("Enter the names of the players in clockwise order, starting at the head of the table."))}
+        </div>
         {React.array(playerItems)}
         <PlayerEntryItem
             key={gameState.players->Belt.Array.length->Belt.Int.toString} // make key unique

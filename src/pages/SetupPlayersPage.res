@@ -25,6 +25,7 @@ let make = (
     let (gameState, _) = React.useContext(GameStateContext.context)
     let hasEnoughPlayers = gameState.players->Js.Array.length > 1 // need > 2 players
 
+    // cleanup after render
     React.useEffect(() => {
         Some(
             () => savePlayersToLocalStorage(gameState.players)

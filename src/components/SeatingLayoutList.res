@@ -10,7 +10,6 @@ open Types
 @react.component
 let make = (): React.element => {
     let (_language, t) = React.useContext(LanguageContext.context)
-
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
 
     let evenOdd = if gameState.players->Js.Array2.length->mod(2) === 0 { Even } else { Odd }
@@ -22,6 +21,9 @@ let make = (): React.element => {
 
     <>
         <h2> {React.string(t("Seating layout"))} </h2>
+        <div className="paragraph">
+            {React.string(t("How are the players seated around the table?"))}
+        </div>
         <div id="layout-list">
             {
                 switch (evenOdd, gameState.seatingLayout) {
