@@ -57,6 +57,11 @@ input[type=text] {
     width: 50%;
 }
 
+input[type=text]::placeholder {
+    font-style: italic;
+    color: #bbb;
+}
+
 .flex-vertical {
     display: flex;
     justify-content: flex-start;
@@ -224,6 +229,7 @@ div.paragraph {
 }
 
 #setup-players-page {
+    background: url(../images/overlay-pawn.png) -190px 120px no-repeat;
     overflow-y: scroll;
 }
 
