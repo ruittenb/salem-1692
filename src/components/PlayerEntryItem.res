@@ -8,6 +8,7 @@ open Types
 @react.component
 let make = (
     ~value: string,
+    ~placeholder: string = "",
     ~showMoveButton: bool,
     ~showRemoveButton: bool,
     ~onRemove: clickHandler = (_) => (),
@@ -15,7 +16,7 @@ let make = (
     ~onBlur: blurHandler,
 ): React.element => {
 
-    let inputField = <input type_="text" defaultValue=value onBlur />
+    let inputField = <input type_="text" defaultValue=value placeholder onBlur />
 
     <div className="player-entry-item">
         {

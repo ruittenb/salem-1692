@@ -44,7 +44,8 @@ let make = (
             <a href="http://www.famfamfam.com/lab/icons/silk/"> {React.string("FamFamFam")} </a> spacedComma
             <a href="https://icons8.com"> {React.string("Icons8")} </a> spacedComma
             <a href="https://flagpedia.net"> {React.string("Flagpedia")} </a> spacedComma
-            <a href="https://clipartmag.com/download-clipart-image#paper-scrolls-clipart-38.jpg"> {React.string("ClipArtMag")} </a>
+            <a href="https://clipartmag.com/download-clipart-image#paper-scrolls-clipart-38.jpg"> {React.string("ClipArtMag")} </a> spacedComma
+            <a href="https://www.flaticon.com/free-icon/chess-piece_891932"> {React.string("FlatIcon")} </a>
         </p>
         <Spacer />
         <Button

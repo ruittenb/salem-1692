@@ -111,6 +111,7 @@ let make = (): React.element => {
         <PlayerEntryItem
             key={gameState.players->Belt.Array.length->Belt.Int.toString} // make key unique
             value=""
+            placeholder={t("(add one)")}
             showMoveButton=false
             showRemoveButton=false
             onBlur=addHandler
