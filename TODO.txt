@@ -1,4 +1,3 @@
- - make more use of <p> instead of <div>
- - store language and effects/speech flags in localStorage
+ - store language in localStorage
  - make hasConstable superfluous: use optional<string> anyway, with <ErrorPage>
 

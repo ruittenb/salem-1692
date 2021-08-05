@@ -11,11 +11,10 @@ import * as Main from './Main.bs'
  * Register serviceworker if supported
  */
 
-/*
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker
-            .register('/serviceworker.js')
+            .register('serviceworker.js')
             .then((registration) => {
                 console.log('ServiceWorker registered with scope', registration.scope);
             })
@@ -24,7 +23,6 @@ if ('serviceWorker' in navigator) {
             });
     })
 }
-*/
 
 /** **********************************************************************
  * Make version number available for
