@@ -24,16 +24,12 @@ let initialTurnState = {
 }
 
 let getLanguageClassName = (language: language): string => {
-    switch language {
-        | EN_US => "en_US"
-        | NL_NL => "nl_NL"
-        | ES_ES => "es_ES"
-    }
+    Translator.getLanguageCode(language)
 }
 
 let loadPlayersFromLocalStorage = (setGameState): unit => {
     let storageKey = localStoragePrefix ++ localStoragePlayersKey
-    let _ = LocalStorage.getItem(storageKey)            // this yields an option<string>
+    LocalStorage.getItem(storageKey)                    // this yields an option<string>
         ->option2AndThen(
             playersString => safeExec(
                 () => Js.Json.parseExn(playersString),
@@ -47,8 +43,19 @@ let loadPlayersFromLocalStorage = (setGameState): unit => {
                 ->Js.Array2.map(Js.Json.decodeString)   // this yields an array<option<string>>
                 ->arrayFilterSome                       // this yields an array<string>
         )                                               // this yields an option<array<string>>
-        ->option2Map(
+        ->option2AndExec(
             players => setGameState(prevState => { ...prevState, players })
+        )
+}
+
+let loadLanguageFromLocalStorage = (setLanguage): unit => {
+    let storageKey = localStoragePrefix ++ localStorageLanguageKey
+    LocalStorage.getItem(storageKey)                    // this yields an option<string>
+        ->option2AndThen(
+            Translator.getLanguageByCode
+        )                                               // this yields an option<language>
+        ->option2AndExec(
+            language => setLanguage(_prevLanguage => language)
         )
 }
 
@@ -58,12 +65,13 @@ let make = (): React.element => {
     let (currentPage, goToPage)   = React.useState(_ => initialPage)
     let (gameState, setGameState) = React.useState(_ => initialGameState)
     let (turnState, setTurnState) = React.useState(_ => initialTurnState)
-    let (language, setLanguage)   = React.useState(_ => initialLanguage)
+    let (language,  setLanguage)  = React.useState(_ => initialLanguage)
     let translator                = Translator.getTranslator(language)
 
     // run once after mounting
     React.useEffect0(() => {
         loadPlayersFromLocalStorage(setGameState)
+        loadLanguageFromLocalStorage(setLanguage)
         None // cleanup function
     })
 

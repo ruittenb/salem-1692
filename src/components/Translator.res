@@ -5,6 +5,23 @@
 
 open Types
 
+let getLanguageCode = (language: language): string => {
+    switch language {
+        | EN_US => "en_US"
+        | NL_NL => "nl_NL"
+        | ES_ES => "es_ES"
+    }
+}
+
+let getLanguageByCode = (language: string): option<language> => {
+    switch language {
+        | "en_US" => Some(EN_US)
+        | "nl_NL" => Some(NL_NL)
+        | "es_ES" => Some(ES_ES)
+        | _ => None
+    }
+}
+
 let lookup = (table: Js.Dict.t<string>, message: string, languageName: string) => {
     switch Js.Dict.get(table, message) {
         | Some(translation) => translation

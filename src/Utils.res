@@ -21,6 +21,19 @@ let arrayFilterSome = (
 }
 
 /**
+ * Call function if Some(x)
+ */
+let option2AndExec = (
+    maybeValue: option<'a>,
+    fn: ('a => unit)
+): unit => {
+    switch maybeValue {
+        | Some(value) => fn(value)
+        | None        => ()
+    }
+}
+
+/**
  * like Js.Option.andThen(), but data-first
  */
 let option2AndThen = (
