@@ -3,8 +3,8 @@
  * Serviceworker for Salem 1692 Moderator
  */
 
-const version = "v0.13.0";
-const cacheName = 'salem-1692-' + version;
+const version = "0.14.0";
+const cacheName = 'salem-1692-v' + version;
 const rootDir = '/salem-1692/dist';
 const filesToCache = [
     'index.html',
