@@ -15152,7 +15152,7 @@ function CreditsPage(Props) {
   }, "soundbible.com"), ")", spacedComma, React.createElement("a", {
     href: "https://mixkit.co/free-sound-effects/buzzer/"
   }, "mixkit.co")), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Voice actors:")), " Helmi Megens"), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Images:")), " ", React.createElement("a", {
-    href: "https://www.freepik.com/free-vector/cross-icons-collection_806517.htm#page=1&query=cross&position=16"
+    href: "https://www.freepik.com/free-vector/old-town-village-transparent-background_11575329.htm"
   }, "Freepik"), spacedComma, React.createElement("a", {
     href: "https://www.vecteezy.com/free-vector/cog"
   }, "Vecteezy"), spacedComma, React.createElement("a", {

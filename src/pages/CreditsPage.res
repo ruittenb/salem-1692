@@ -39,7 +39,7 @@ let make = (
         <p>
             <span> {React.string(t("Images:"))} </span>
             {React.string(" ")}
-            <a href="https://www.freepik.com/free-vector/cross-icons-collection_806517.htm#page=1&query=cross&position=16"> {React.string("Freepik")} </a> spacedComma
+            <a href="https://www.freepik.com/free-vector/old-town-village-transparent-background_11575329.htm"> {React.string("Freepik")} </a> spacedComma
             <a href="https://www.vecteezy.com/free-vector/cog"> {React.string("Vecteezy")} </a> spacedComma
             <a href="http://www.famfamfam.com/lab/icons/silk/"> {React.string("FamFamFam")} </a> spacedComma
             <a href="https://icons8.com"> {React.string("Icons8")} </a> spacedComma
