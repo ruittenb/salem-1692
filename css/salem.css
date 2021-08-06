@@ -207,7 +207,7 @@ div.paragraph {
  */
 
 #title-page {
-    background: url(../images/overlay-title.png) center / contain no-repeat;
+    background: url(../images/overlay-title-smooth.png) center / contain no-repeat;
     justify-content: flex-end; /* prio over flex-vertical */
 }
 
@@ -284,6 +284,14 @@ div.paragraph {
 
 #credits-page p span:first-child {
     font-style: italic;
+}
+
+/** ****************************************************************************
+ * Daytime Page
+ */
+
+#daytime-page {
+    background: url(../images/overlay-village.png) 90% 20vh / auto 80vh no-repeat;
 }
 
 /** ****************************************************************************
