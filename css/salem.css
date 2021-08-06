@@ -193,6 +193,11 @@ div.paragraph {
 .page button.icon-checked   { background-image: url(../images/icon-checked.png); }
 .page button.icon-unchecked { background-image: url(../images/icon-unchecked.png); }
 
+.page button.icon-left.icon-checked,
+.page button.icon-left.icon-unchecked {
+    background-position: 16px center;
+}
+
 .buttonpair {
     width: 80%;
     display: flex;
