@@ -9,14 +9,15 @@ let localStorageLanguageKey = ".language"
 
 let backgroundVolume = 0.1
 
+// Stripped of .mp3 extension
 let musicTracks = [
-    "Danse Macabre.mp3",
-    "Egmont Overture.mp3",
-    "Moonlight Hall.mp3",
-    "Night Vigil.mp3",
-    "Not As It Seems.mp3",
-    "Suonatore di Liuto.mp3",
-    "The Descent.mp3",
-    "Willow and the Light.mp3",
+    "Danse Macabre",
+    "Egmont Overture",
+    "Moonlight Hall",
+    "Night Vigil",
+    "Not As It Seems",
+    "Suonatore di Liuto",
+    "The Descent",
+    "Willow and the Light",
 ]
 

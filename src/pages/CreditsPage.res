@@ -13,39 +13,57 @@ let make = (
 ): React.element => {
     let (_language, t) = React.useContext(LanguageContext.context)
     let spacedComma = React.string(",  ")
-    let closeParen = React.string(")")
     <div id="credits-page" className="page flex-vertical text-padding">
         <h1> {React.string(t("Credits"))} </h1>
         <Spacer />
         <p>
-            <span> {React.string(t("App:"))} </span>
-            {React.string(" " ++ t("version") ++ " v" ++ salemAppVersion ++ ` René Uittenbogaard © 2021`)}
+            <span> {React.string(t("App: "))} </span>
+            {React.string(t("version") ++ " v" ++ salemAppVersion ++ ` René Uittenbogaard © 2021`)}
         </p>
         <p>
-            <span> {React.string(t("For use with the game:"))} </span>
-            {React.string(` Salem 1692, Travis Hancock © 2015, `)}
+            <span> {React.string(t("For use with the game: "))} </span>
+            {React.string(`Salem 1692, Travis Hancock © 2015, `)}
             <a href="https://facadegames.com/"> {React.string(`Façade Games`)} </a>
         </p>
         <p>
-            <span> {React.string(t("Sound effects:"))} </span>
-            {React.string(" Daniel Simon (")}
-            <a href="https://soundbible.com/"> {React.string("soundbible.com")} </a> closeParen spacedComma
+            <span> {React.string(t("Sound effects: "))} </span>
+            <a href="https://soundbible.com/2206-Tolling-Bell.html"> {React.string("Daniel Simion")} </a> spacedComma
+            <a href="https://soundbible.com/1218-Rooster-Crow.html"> {React.string("Mike Koenig")} </a> spacedComma
             <a href="https://mixkit.co/free-sound-effects/buzzer/"> {React.string("mixkit.co")} </a>
         </p>
         <p>
-            <span> {React.string(t("Voice actors:"))} </span>
-            {React.string(" Helmi Megens")} /* {React.string("Paul Scholey")} {React.string("Mario Ruiz")} */
+            <span> {React.string(t("Voice actors: "))} </span>
+            {React.string("Helmi Megens")} /* {React.string("Paul Scholey")} {React.string("Mario Ruiz")} */
         </p>
         <p>
-            <span> {React.string(t("Images:"))} </span>
-            {React.string(" ")}
-            <a href="https://www.freepik.com/free-vector/old-town-village-transparent-background_11575329.htm"> {React.string("Freepik")} </a> spacedComma
-            <a href="https://www.vecteezy.com/free-vector/cog"> {React.string("Vecteezy")} </a> spacedComma
-            <a href="http://www.famfamfam.com/lab/icons/silk/"> {React.string("FamFamFam")} </a> spacedComma
-            <a href="https://icons8.com"> {React.string("Icons8")} </a> spacedComma
-            <a href="https://flagpedia.net"> {React.string("Flagpedia")} </a> spacedComma
+            <span> {React.string(t("Music: "))} </span>
+            {
+                React.array(
+                    Constants.musicTracks->Js.Array2.map(track => {
+                        <>
+                            <a href={"https://incompetech.com/music/royalty-free/mp3-royaltyfree/" ++ track ++ ".mp3"}>
+                                {React.string(track)}
+                            </a>
+                            spacedComma
+                        </>
+                    })
+                )
+            }
+            {React.string(`© `)}
+            <a href="https://incompetech.com/music/royalty-free/music.html"> {React.string("Kevin MacLeod")} </a> spacedComma
+            <a href="http://creativecommons.org/licenses/by/4.0/"> {React.string("Licensed under CC BY 4.0")} </a>
+        </p>
+        <p>
+            <span> {React.string(t("Images: "))} </span>
+            <a href="https://www.dreamstime.com/cute-funny-old-gramophone-vector-cute-funny-yelloe-vintage-gramophone-simple-cartoon-style-image185881168"> {React.string("Ogieurvil")} </a> spacedComma
             <a href="https://clipartmag.com/download-clipart-image#paper-scrolls-clipart-38.jpg"> {React.string("ClipArtMag")} </a> spacedComma
-            <a href="https://www.flaticon.com/free-icon/chess-piece_891932"> {React.string("FlatIcon")} </a>
+            <a href="https://flagpedia.net"> {React.string("Flagpedia")} </a> spacedComma
+            <a href="https://www.flaticon.com/free-icon/chess-piece_891932"> {React.string("FlatIcon")} </a> spacedComma
+            <a href="https://cliparts.zone/clipart/541458"> {React.string("ClipArtsZone")} </a> spacedComma
+            <a href="http://www.famfamfam.com/lab/icons/silk/"> {React.string("FamFamFam")} </a> spacedComma
+            <a href="https://www.freepik.com/free-vector/"> {React.string("Freepik")} </a> spacedComma
+            <a href="https://icons8.com"> {React.string("Icons8")} </a> spacedComma
+            <a href="https://www.freepik.com/free-vector/old-town-village-transparent-background_11575329.htm"> {React.string("brgfx")} </a>
         </p>
         <Spacer />
         <Button
