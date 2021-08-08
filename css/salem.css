@@ -71,6 +71,7 @@ input[type=text]::placeholder {
 
 .spacer {
     height: 25px;
+    min-height: 25px;
 }
 
 #root {
@@ -274,6 +275,7 @@ div.paragraph {
 
 #credits-page {
     background: url(../images/overlay-scroll.png) -290px 120px no-repeat;
+    overflow-y: scroll;
     width: 100%;
 }
 
