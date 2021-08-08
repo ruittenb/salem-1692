@@ -15,6 +15,7 @@ let initialGameState = {
     seatingLayout: OneAtHead,
     doPlayEffects: true,
     doPlaySpeech: true,
+    backgroundMusic: None,
 }
 let initialTurnState = {
     nrWitches: 1,

@@ -17,14 +17,15 @@ let getLanguageDirectory = (language: language): string => {
 
 @react.component
 let make = (
-    ~track: scenarioStep,
+    ~track: audioType,
     ~proceed: mediaHandler,
     ~onError: mediaHandler,
 ): React.element => {
 
     let (language, _translator) = React.useContext(LanguageContext.context)
 
-    let effectDirectory = "audio/"
+    let musicDirectory  = "audio/music/"
+    let effectDirectory = "audio/effects/"
     let speechDirectory = "audio/" ++ getLanguageDirectory(language)
 
     let src = switch track {
@@ -44,7 +45,8 @@ let make = (
         | Effect(Silence2s)           => effectDirectory ++ "silence-2s.mp3"
         | Effect(Rooster)             => effectDirectory ++ "rooster.mp3"
         | Effect(ChurchBell)          => effectDirectory ++ "church-bell-once.mp3"
-        | _                           => effectDirectory ++ "silence-1s.mp3"
+
+        | Music(fileName)             => musicDirectory ++ "/" ++ fileName
     }
     <audio src
         autoPlay=true

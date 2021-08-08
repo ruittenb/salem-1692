@@ -13495,104 +13495,116 @@ function $$Audio(Props) {
   var speechDirectory = "audio/" + getLanguageDirectory(match[0]);
   var src;
 
-  if (typeof track === "number") {
-    src = "audio/silence-1s.mp3";
-  } else if (track.TAG ===
-  /* Speech */
-  0) {
-    switch (track._0) {
-      case
-      /* TownGoToSleep */
-      0:
-        src = speechDirectory + "town-go-to-sleep.mp3";
-        break;
+  switch (track.TAG | 0) {
+    case
+    /* Speech */
+    0:
+      switch (track._0) {
+        case
+        /* TownGoToSleep */
+        0:
+          src = speechDirectory + "town-go-to-sleep.mp3";
+          break;
 
-      case
-      /* WitchWakeUp */
-      1:
-        src = speechDirectory + "witch-wake-up.mp3";
-        break;
+        case
+        /* WitchWakeUp */
+        1:
+          src = speechDirectory + "witch-wake-up.mp3";
+          break;
 
-      case
-      /* WitchesWakeUp */
-      2:
-        src = speechDirectory + "witches-wake-up.mp3";
-        break;
+        case
+        /* WitchesWakeUp */
+        2:
+          src = speechDirectory + "witches-wake-up.mp3";
+          break;
 
-      case
-      /* WitchDecideCat */
-      3:
-        src = speechDirectory + "witch-decide-cat.mp3";
-        break;
+        case
+        /* WitchDecideCat */
+        3:
+          src = speechDirectory + "witch-decide-cat.mp3";
+          break;
 
-      case
-      /* WitchesDecideCat */
-      4:
-        src = speechDirectory + "witches-decide-cat.mp3";
-        break;
+        case
+        /* WitchesDecideCat */
+        4:
+          src = speechDirectory + "witches-decide-cat.mp3";
+          break;
 
-      case
-      /* WitchesDecideMurder */
-      5:
-        src = speechDirectory + "witches-decide-murder.mp3";
-        break;
+        case
+        /* WitchesDecideMurder */
+        5:
+          src = speechDirectory + "witches-decide-murder.mp3";
+          break;
 
-      case
-      /* WitchGoToSleep */
-      6:
-        src = speechDirectory + "witch-go-to-sleep.mp3";
-        break;
+        case
+        /* WitchGoToSleep */
+        6:
+          src = speechDirectory + "witch-go-to-sleep.mp3";
+          break;
 
-      case
-      /* WitchesGoToSleep */
-      7:
-        src = speechDirectory + "witches-go-to-sleep.mp3";
-        break;
+        case
+        /* WitchesGoToSleep */
+        7:
+          src = speechDirectory + "witches-go-to-sleep.mp3";
+          break;
 
-      case
-      /* ConstableWakeUp */
-      8:
-        src = speechDirectory + "constable-wake-up.mp3";
-        break;
+        case
+        /* ConstableWakeUp */
+        8:
+          src = speechDirectory + "constable-wake-up.mp3";
+          break;
 
-      case
-      /* ConstableGoToSleep */
-      9:
-        src = speechDirectory + "constable-go-to-sleep.mp3";
-        break;
+        case
+        /* ConstableGoToSleep */
+        9:
+          src = speechDirectory + "constable-go-to-sleep.mp3";
+          break;
 
-      case
-      /* TownWakeUp */
-      10:
-        src = speechDirectory + "town-wake-up.mp3";
-        break;
-    }
-  } else {
-    switch (track._0) {
-      case
-      /* ChurchBell */
-      0:
-        src = "audio/church-bell-once.mp3";
-        break;
+        case
+        /* TownWakeUp */
+        10:
+          src = speechDirectory + "town-wake-up.mp3";
+          break;
+      }
 
-      case
-      /* Rooster */
-      1:
-        src = "audio/rooster.mp3";
-        break;
+      break;
 
-      case
-      /* Silence1s */
-      2:
-        src = "audio/silence-1s.mp3";
-        break;
+    case
+    /* Effect */
+    1:
+      switch (track._0) {
+        case
+        /* ChurchBell */
+        0:
+          src = "audio/effects/church-bell-once.mp3";
+          break;
 
-      case
-      /* Silence2s */
-      3:
-        src = "audio/silence-2s.mp3";
-        break;
-    }
+        case
+        /* Rooster */
+        1:
+          src = "audio/effects/rooster.mp3";
+          break;
+
+        case
+        /* Silence1s */
+        2:
+          src = "audio/effects/silence-1s.mp3";
+          break;
+
+        case
+        /* Silence2s */
+        3:
+          src = "audio/effects/silence-2s.mp3";
+          break;
+      }
+
+      break;
+
+    case
+    /* Music */
+    2:
+      src = "audio/music//" + track._0;
+      break;
   }
 
   return React.createElement("audio", {
@@ -13730,7 +13742,8 @@ var defaultState = {
   /* TwoAtHead */
   1,
   doPlayEffects: true,
-  doPlaySpeech: true
+  doPlaySpeech: true,
+  backgroundMusic: undefined
 };
 exports.defaultState = defaultState;
 var context = React.createContext([defaultState, defaultSetter]);
@@ -14016,35 +14029,35 @@ function getScenario(subPage) {
     7:
       return [{
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* ChurchBell */
         0
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* TownGoToSleep */
         0
       }, {
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* Silence2s */
         3
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* WitchWakeUp */
         1
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* WitchDecideCat */
@@ -14055,28 +14068,28 @@ function getScenario(subPage) {
       /* ConfirmWitches */
       1, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* WitchGoToSleep */
         6
       }, {
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* Silence2s */
         3
       }, {
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* Rooster */
         1
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* TownWakeUp */
@@ -14088,35 +14101,35 @@ function getScenario(subPage) {
     8:
       return [{
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* ChurchBell */
         0
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* TownGoToSleep */
         0
       }, {
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* Silence2s */
         3
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* WitchesWakeUp */
         2
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* WitchesDecideCat */
@@ -14127,28 +14140,28 @@ function getScenario(subPage) {
       /* ConfirmWitches */
       1, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* WitchesGoToSleep */
         7
       }, {
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* Silence2s */
         3
       }, {
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* Rooster */
         1
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* TownWakeUp */
@@ -14160,35 +14173,35 @@ function getScenario(subPage) {
     9:
       return [{
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* ChurchBell */
         0
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* TownGoToSleep */
         0
       }, {
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* Silence2s */
         3
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* WitchesWakeUp */
         2
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* WitchesDecideMurder */
@@ -14199,21 +14212,21 @@ function getScenario(subPage) {
       /* ConfirmWitches */
       1, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* WitchesGoToSleep */
         7
       }, {
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* Silence2s */
         3
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* ConstableWakeUp */
@@ -14224,28 +14237,28 @@ function getScenario(subPage) {
       /* ConfirmConstable */
       3, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* ConstableGoToSleep */
         9
       }, {
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* Silence2s */
         3
       }, {
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* Rooster */
         1
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* TownWakeUp */
@@ -14257,35 +14270,35 @@ function getScenario(subPage) {
     10:
       return [{
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* ChurchBell */
         0
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* TownGoToSleep */
         0
       }, {
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* Silence2s */
         3
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* WitchesWakeUp */
         2
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* WitchesDecideMurder */
@@ -14296,28 +14309,28 @@ function getScenario(subPage) {
       /* ConfirmWitches */
       1, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* WitchesGoToSleep */
         7
       }, {
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* Silence2s */
         3
       }, {
         TAG:
-        /* Effect */
+        /* PlayEffect */
         1,
         _0:
         /* Rooster */
         1
       }, {
         TAG:
-        /* Speech */
+        /* PlaySpeech */
         0,
         _0:
         /* TownWakeUp */
@@ -14469,7 +14482,8 @@ function PlayerEntryList(Props) {
         players: players,
         seatingLayout: prevGameState.seatingLayout,
         doPlayEffects: prevGameState.doPlayEffects,
-        doPlaySpeech: prevGameState.doPlaySpeech
+        doPlaySpeech: prevGameState.doPlaySpeech,
+        backgroundMusic: prevGameState.backgroundMusic
       };
     });
   };
@@ -14487,7 +14501,8 @@ function PlayerEntryList(Props) {
             players: players,
             seatingLayout: prevGameState.seatingLayout,
             doPlayEffects: prevGameState.doPlayEffects,
-            doPlaySpeech: prevGameState.doPlaySpeech
+            doPlaySpeech: prevGameState.doPlaySpeech,
+            backgroundMusic: prevGameState.backgroundMusic
           };
         });
       },
@@ -14500,7 +14515,8 @@ function PlayerEntryList(Props) {
             players: players,
             seatingLayout: prevGameState.seatingLayout,
             doPlayEffects: prevGameState.doPlayEffects,
-            doPlaySpeech: prevGameState.doPlaySpeech
+            doPlaySpeech: prevGameState.doPlaySpeech,
+            backgroundMusic: prevGameState.backgroundMusic
           };
         });
       },
@@ -14512,7 +14528,8 @@ function PlayerEntryList(Props) {
             players: players,
             seatingLayout: prevGameState.seatingLayout,
             doPlayEffects: prevGameState.doPlayEffects,
-            doPlaySpeech: prevGameState.doPlaySpeech
+            doPlaySpeech: prevGameState.doPlaySpeech,
+            backgroundMusic: prevGameState.backgroundMusic
           };
         });
       },
@@ -14707,7 +14724,8 @@ function SeatingLayoutList(Props) {
         players: prevGameState.players,
         seatingLayout: seatingLayout,
         doPlayEffects: prevGameState.doPlayEffects,
-        doPlaySpeech: prevGameState.doPlaySpeech
+        doPlaySpeech: prevGameState.doPlaySpeech,
+        backgroundMusic: prevGameState.backgroundMusic
       };
     });
   };
@@ -15496,7 +15514,8 @@ var initialGameState = {
   /* OneAtHead */
   0,
   doPlayEffects: true,
-  doPlaySpeech: true
+  doPlaySpeech: true,
+  backgroundMusic: undefined
 };
 exports.initialGameState = initialGameState;
 var initialTurnState = {
@@ -15523,7 +15542,8 @@ function loadPlayersFromLocalStorage(setGameState) {
         players: players,
         seatingLayout: prevState.seatingLayout,
         doPlayEffects: prevState.doPlayEffects,
-        doPlaySpeech: prevState.doPlaySpeech
+        doPlaySpeech: prevState.doPlaySpeech,
+        backgroundMusic: prevState.backgroundMusic
       };
     });
   });
@@ -15956,7 +15976,7 @@ function NightScenarioPage(Props) {
 
   if (typeof maybeScenarioStep !== "number") {
     if (maybeScenarioStep.TAG ===
-    /* Speech */
+    /* PlaySpeech */
     0) {
       if (gameState.doPlaySpeech) {
         return React.createElement(NightStepPage$Salem1692.make, {
@@ -16216,7 +16236,8 @@ function SetupPage(Props) {
           players: prev.players,
           seatingLayout: prev.seatingLayout,
           doPlayEffects: !prev.doPlayEffects,
-          doPlaySpeech: prev.doPlaySpeech
+          doPlaySpeech: prev.doPlaySpeech,
+          backgroundMusic: prev.backgroundMusic
         };
       });
     }
@@ -16229,7 +16250,8 @@ function SetupPage(Props) {
           players: prev.players,
           seatingLayout: prev.seatingLayout,
           doPlayEffects: prev.doPlayEffects,
-          doPlaySpeech: !prev.doPlaySpeech
+          doPlaySpeech: !prev.doPlaySpeech,
+          backgroundMusic: prev.backgroundMusic
         };
       });
     }
