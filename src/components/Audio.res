@@ -18,6 +18,7 @@ let getLanguageDirectory = (language: language): string => {
 @react.component
 let make = (
     ~track: audioType,
+    ~volume: float = 1.0,
     ~proceed: mediaHandler,
     ~onError: mediaHandler,
 ): React.element => {
@@ -46,10 +47,11 @@ let make = (
         | Effect(Rooster)             => effectDirectory ++ "rooster.mp3"
         | Effect(ChurchBell)          => effectDirectory ++ "church-bell-once.mp3"
 
-        | Music(fileName)             => musicDirectory ++ "/" ++ fileName
+        | Music(fileName)             => musicDirectory ++ fileName
     }
     <audio src
         autoPlay=true
+        //volume=Belt.Float.toString(volume)
         onEnded={ proceed }
         onError={ onError }
     />

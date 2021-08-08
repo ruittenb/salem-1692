@@ -51,8 +51,13 @@ let make = (
 
     let soundImage = <img src="images/gramophone.png" className="sound-image" />
 
+    let backgroundMusicElement = switch gameState.backgroundMusic {
+        | Some(track) => <AudioBackground track />
+        | None        => React.null
+    }
+
     // Construct the page
-    switch (hasError, maybeScenarioStep) {
+    let pageElement = switch (hasError, maybeScenarioStep) {
         | (true, _)                       => <NightErrorPage message=t("Unable to load audio") goToPage></NightErrorPage>
         | (false, None)                   => React.null // catch this situation in useEffect above
         | (false, Some(PlayEffect(effect)))
@@ -81,5 +86,10 @@ let make = (
         | (false, Some(ConfirmWitches))   => <NightConfirmPage goToPrevStep goToNextStep addressed=witchOrWitches />
         | (false, Some(ConfirmConstable)) => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable      />
     }
+
+    <>
+        {backgroundMusicElement}
+        {pageElement}
+    </>
 }
 

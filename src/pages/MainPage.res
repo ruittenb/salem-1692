@@ -15,7 +15,7 @@ let initialGameState = {
     seatingLayout: OneAtHead,
     doPlayEffects: true,
     doPlaySpeech: true,
-    backgroundMusic: None,
+    backgroundMusic: Some("Egmont Overture.mp3"),
 }
 let initialTurnState = {
     nrWitches: 1,
