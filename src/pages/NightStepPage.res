@@ -12,7 +12,7 @@ open Types
 let make = (
     ~title: string = "Night", // must not have been translated yet
     ~children: React.element,
-    ~showBackButton: bool = true,
+    ~showAbortButton: bool = true,
     ~goToPage,
 ): React.element => {
 
@@ -28,10 +28,10 @@ let make = (
             <Spacer />
             {children}
             <Spacer />
-            { if showBackButton {
+            { if showAbortButton {
                 <Button
-                    label={t("Back")}
-                    className="icon-left icon-back"
+                    label={t("Abort")}
+                    className="icon-left icon-abort"
                     onClick={ (_event) => goToPage(_prev => Daytime) }
                 />
             } else {

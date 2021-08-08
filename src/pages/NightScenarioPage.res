@@ -71,10 +71,10 @@ let make = (
         | (false, Some(Speech(_)))        => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
                                              React.null
 
-        | (false, Some(ChooseWitches))    => <NightStepPage goToPage showBackButton=false>
+        | (false, Some(ChooseWitches))    => <NightStepPage goToPage showAbortButton=false>
                                                  <PlayerList addressed=witchOrWitches choiceHandler=goFromWitchChoiceToNextStep />
                                              </NightStepPage>
-        | (false, Some(ChooseConstable))  => <NightStepPage goToPage showBackButton=false>
+        | (false, Some(ChooseConstable))  => <NightStepPage goToPage showAbortButton=false>
                                                  <PlayerList addressed=Constable  choiceHandler=goFromConstableChoiceToNextStep />
                                              </NightStepPage>
 

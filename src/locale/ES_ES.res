@@ -59,6 +59,7 @@ let table = Js.Dict.fromArray([
     ("The constable's turn", "Turno del alguacil"),
     ("Choose someone to protect:", `Elige a quién quieres proteger:`),
     ("Rotate", "Girar"),
+    ("Abort", "Abortar"),
     // Confirm
     ("Witch, ", "Bruja, "),
     ("Witches, ", "Brujas, "),
