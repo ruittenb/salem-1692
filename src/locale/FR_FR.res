@@ -1,0 +1,93 @@
+
+/**
+ * Locale: fr_FR
+ */
+
+let table = Js.Dict.fromArray([
+    // TitlePage
+    ("New Game", "Nouveau jeu"),
+    ("Start Game", `Démarrer jeu`),
+    ("Play Game", "Jouer"),
+    ("Setup", "Configuration"),
+    ("Exit", "Fermer"),
+    // Setup
+    ("Players", "Joueurs"),
+    ("Names", "Noms"),
+    ("Enter the names of the players in clockwise order, starting at the head of the table.", `Saisissez les noms des joueurs dans le sens des aiguilles d'une montre, en commençant par la tête de la table`),
+    ("(add one)", "(ajouter)"),
+    ("Sound effects", "Effets sonores"),
+    ("Speech", "Discours"),
+    ("How many witches?", `Combien de sorcières?`),
+    ("Seating layout", `Disposition des sièges`),
+    ("How are the players seated around the table?", "Comment les joueurs sont-ils assis autour de la table?"),
+    ("Language", "Langue"),
+    ("English", "English"),
+    ("Nederlands", "Nederlands"),
+    ("Deutsch", "Deutsch"),
+    (`Français`, `Français`),
+    (`Español`, `Español`),
+    ("Italiano", "Italiano"),
+    ("Back", `Précédent`),
+    ("Next", "Suivant"),
+    // Credits
+    ("Credits", `Crédits`),
+    ("Game:", "Jeu:"),
+    ("version", "version"),
+    ("For use with the game:", "Pour utiliser avec le jeu:"),
+    ("App:", "App:"),
+    ("Sound effects:", "Effets sonores:"),
+    ("Voice actors:", "Acteurs de voix:"),
+    ("Images:", "Images:"),
+    // Day
+    ("Daytime", `La journée`),
+    ("First night,", `Première nuit,`),
+    ("one witch", `une sorcière`),
+    ("more witches", `plusieurs sorcières`),
+    ("Other nights,", "Autres nuits,"),
+    ("with constable", "avec gendarme"),
+    ("without constable", "sans gendarme"),
+    // Night
+    ("Night", "La nuit"),
+    ("Night with constable", "Nuit avec gendarme"),
+    ("Night without constable", "Nuit sans gendarme"),
+    ("The witches", `Les sorcières`),
+    ("The witch's turn", `Le tour de la sorcière`),
+    ("The witches' turn", `Le tour des sorcières`),
+    ("Choose-SG a victim:", "Choisis un victime:"),
+    ("Choose-PL a victim:", "Choisissez un victime:"),
+    ("The constable", "Le gendarme"),
+    ("The constable's turn", "Le tour du gendarme"),
+    ("Choose someone to protect:", `Choisis un protégé:`),
+    ("Rotate", "Tourner"),
+    ("Abort", `Arrêter`),
+    // Confirm
+    ("Witch, ", `Sorcière, `),
+    ("Witches, ", `Les sorcières, `),
+    ("Constable, ", "Gendarme, "),
+    ("are you-MASC-SG sure?", `tu es sûr?`),
+    ("are you-FEM-SG sure?", `tu es sûre?`),
+    ("are you-PL sure?", `vous êtes sûres?`),
+    ("Confirm", "Confirmer"),
+    ("Yes", "Oui"),
+    ("No", "Non"),
+    // Error
+    ("Error", "Erreur"),
+    ("Unable to load audio", `Impossible de télécharger le fichier audio`),
+    ("Index out of bounds", `Index hors de portée`),
+    // Confess
+    ("Confess", "Avouer"),
+    ("Everyone,", "Les joueurs,"),
+    ("decide whether you want to confess", `décidez si vous voulez avouer`),
+    // Reveal
+    ("The Reveal", `La révélation`),
+    ("Reveal witch's victim", `Révéler victime de la sorcière`),
+    ("Reveal witches' victim", `Révéler victime des sorcières`),
+    ("The witch attacked-PRE", `La sorcière a attaqué`),
+    ("The witch attacked-POST", ""),
+    ("The witches attacked-PRE", `Les sorcières ont attaqué`),
+    ("The witches attacked-POST", ""),
+    ("Reveal constable's protection", `Révéler protégé du gendarme`),
+    ("The constable protected-PRE", `Le gendarme a protégé`),
+    ("The constable protected-POST", ""),
+])
+
