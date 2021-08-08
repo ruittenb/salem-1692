@@ -71,10 +71,12 @@ let make = (
                                                  <Audio track=Speech(speech) proceed=goToNextStep onError />
                                              </NightStepPage>
 
-        | (false, Some(PlayEffect(_)))    => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
-                                             React.null
-        | (false, Some(PlaySpeech(_)))    => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
-                                             React.null
+        | (false, Some(PlayEffect(_)))    => { goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+                                               React.null
+                                             }
+        | (false, Some(PlaySpeech(_)))    => { goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+                                               React.null
+                                             }
 
         | (false, Some(ChooseWitches))    => <NightStepPage goToPage showAbortButton=false>
                                                  <PlayerList addressed=witchOrWitches choiceHandler=goFromWitchChoiceToNextStep />
@@ -87,6 +89,7 @@ let make = (
         | (false, Some(ConfirmConstable)) => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable      />
     }
 
+    // render the page
     <>
         {backgroundMusicElement}
         {pageElement}

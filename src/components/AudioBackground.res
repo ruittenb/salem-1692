@@ -15,8 +15,6 @@ let make = (
 
     <Audio track=Music(track)
         volume=backgroundVolume
-        proceed={_ => ()}
-        onError={_ => ()}
     />
 }
 

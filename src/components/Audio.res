@@ -2,10 +2,17 @@
 /** ****************************************************************************
  * Audio
  *
- * See also: https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement
+ * See also:
+ * - https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement
+ * - https://github.com/reasonml-community/bs-webapi-incubator
+ * - https://dev.to/jdeisenberg/manipulating-the-dom-with-rescript-3llf
  */
 
 open Types
+open Utils
+
+@set external setVolume: (Dom.htmlAudioElement, float) => unit = "volume"
+external unsafeAsHtmlAudioElement : Dom.element => Dom.htmlAudioElement = "%identity"
 
 let getLanguageDirectory = (language: language): string => {
     switch language {
@@ -19,11 +26,23 @@ let getLanguageDirectory = (language: language): string => {
 let make = (
     ~track: audioType,
     ~volume: float = 1.0,
-    ~proceed: mediaHandler,
-    ~onError: mediaHandler,
+    ~proceed: mediaHandler = _ => (),
+    ~onError: mediaHandler = _ => (),
 ): React.element => {
 
     let (language, _translator) = React.useContext(LanguageContext.context)
+
+    let audioRef = React.useRef(Js.Nullable.null)
+
+    // run after mounting
+    React.useEffect0(() => {
+        audioRef.current->Js.Nullable.toOption->option2AndExec(
+            domNode => domNode
+                ->unsafeAsHtmlAudioElement
+                ->setVolume(volume)
+        )
+        None // cleanup function
+    })
 
     let musicDirectory  = "audio/music/"
     let effectDirectory = "audio/effects/"
@@ -51,9 +70,9 @@ let make = (
     }
     <audio src
         autoPlay=true
-        //volume=Belt.Float.toString(volume)
         onEnded={ proceed }
         onError={ onError }
+        ref={ReactDOM.Ref.domRef(audioRef)}
     />
 }
 
