@@ -39,6 +39,7 @@ const filesToCache = [
     'images/flag-nl.png',
     'images/flag-us.png',
     'images/gramophone.png',
+    'images/icon-abort.png',
     'images/icon-back.png',
     'images/icon-checked.png',
     'images/icon-cross.png',
