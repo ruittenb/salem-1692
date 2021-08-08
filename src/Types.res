@@ -41,6 +41,7 @@ type gameState = {
     seatingLayout: seatingLayout,
     doPlayEffects: bool,
     doPlaySpeech: bool,
+    backgroundMusic: option<string>,
 }
 type gameStateSetter = (gameState => gameState) => unit
 
@@ -87,9 +88,16 @@ type audioEffect =
     | Silence1s
     | Silence2s
 
-type scenarioStep =
+type audioMusic = string
+
+type audioType =
     | Speech(audioSpeech)
     | Effect(audioEffect)
+    | Music(audioMusic)
+
+type scenarioStep =
+    | PlaySpeech(audioSpeech)
+    | PlayEffect(audioEffect)
     | ChooseWitches
     | ConfirmWitches
     | ChooseConstable

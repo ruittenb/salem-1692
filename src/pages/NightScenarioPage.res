@@ -51,25 +51,32 @@ let make = (
 
     let soundImage = <img src="images/gramophone.png" className="sound-image" />
 
+    let backgroundMusicElement = switch gameState.backgroundMusic {
+        | Some(track) => <AudioBackground track />
+        | None        => React.null
+    }
+
     // Construct the page
-    switch (hasError, maybeScenarioStep) {
+    let pageElement = switch (hasError, maybeScenarioStep) {
         | (true, _)                       => <NightErrorPage message=t("Unable to load audio") goToPage></NightErrorPage>
         | (false, None)                   => React.null // catch this situation in useEffect above
-        | (false, Some(Effect(effect)))
+        | (false, Some(PlayEffect(effect)))
                if gameState.doPlayEffects => <NightStepPage goToPage>
                                                  {soundImage}
                                                  <Audio track=Effect(effect) proceed=goToNextStep onError />
                                              </NightStepPage>
-        | (false, Some(Speech(speech)))
+        | (false, Some(PlaySpeech(speech)))
                 if gameState.doPlaySpeech => <NightStepPage goToPage>
                                                  {soundImage}
                                                  <Audio track=Speech(speech) proceed=goToNextStep onError />
                                              </NightStepPage>
 
-        | (false, Some(Effect(_)))        => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
-                                             React.null
-        | (false, Some(Speech(_)))        => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
-                                             React.null
+        | (false, Some(PlayEffect(_)))    => { goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+                                               React.null
+                                             }
+        | (false, Some(PlaySpeech(_)))    => { goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+                                               React.null
+                                             }
 
         | (false, Some(ChooseWitches))    => <NightStepPage goToPage showAbortButton=false>
                                                  <PlayerList addressed=witchOrWitches choiceHandler=goFromWitchChoiceToNextStep />
@@ -81,5 +88,11 @@ let make = (
         | (false, Some(ConfirmWitches))   => <NightConfirmPage goToPrevStep goToNextStep addressed=witchOrWitches />
         | (false, Some(ConfirmConstable)) => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable      />
     }
+
+    // render the page
+    <>
+        {backgroundMusicElement}
+        {pageElement}
+    </>
 }
 

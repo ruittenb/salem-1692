@@ -2,10 +2,17 @@
 /** ****************************************************************************
  * Audio
  *
- * See also: https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement
+ * See also:
+ * - https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement
+ * - https://github.com/reasonml-community/bs-webapi-incubator
+ * - https://dev.to/jdeisenberg/manipulating-the-dom-with-rescript-3llf
  */
 
 open Types
+open Utils
+
+@set external setVolume: (Dom.htmlAudioElement, float) => unit = "volume"
+external unsafeAsHtmlAudioElement : Dom.element => Dom.htmlAudioElement = "%identity"
 
 let getLanguageDirectory = (language: language): string => {
     switch language {
@@ -17,14 +24,28 @@ let getLanguageDirectory = (language: language): string => {
 
 @react.component
 let make = (
-    ~track: scenarioStep,
-    ~proceed: mediaHandler,
-    ~onError: mediaHandler,
+    ~track: audioType,
+    ~volume: float = 1.0,
+    ~proceed: mediaHandler = _ => (),
+    ~onError: mediaHandler = _ => (),
 ): React.element => {
 
     let (language, _translator) = React.useContext(LanguageContext.context)
 
-    let effectDirectory = "audio/"
+    let audioRef = React.useRef(Js.Nullable.null)
+
+    // run after mounting
+    React.useEffect0(() => {
+        audioRef.current->Js.Nullable.toOption->option2AndExec(
+            domNode => domNode
+                ->unsafeAsHtmlAudioElement
+                ->setVolume(volume)
+        )
+        None // cleanup function
+    })
+
+    let musicDirectory  = "audio/music/"
+    let effectDirectory = "audio/effects/"
     let speechDirectory = "audio/" ++ getLanguageDirectory(language)
 
     let src = switch track {
@@ -44,12 +65,14 @@ let make = (
         | Effect(Silence2s)           => effectDirectory ++ "silence-2s.mp3"
         | Effect(Rooster)             => effectDirectory ++ "rooster.mp3"
         | Effect(ChurchBell)          => effectDirectory ++ "church-bell-once.mp3"
-        | _                           => effectDirectory ++ "silence-1s.mp3"
+
+        | Music(fileName)             => musicDirectory ++ fileName
     }
     <audio src
         autoPlay=true
         onEnded={ proceed }
         onError={ onError }
+        ref={ReactDOM.Ref.domRef(audioRef)}
     />
 }
 
