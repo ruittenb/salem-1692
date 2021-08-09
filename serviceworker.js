@@ -10,7 +10,6 @@ const rootDir = '/salem-1692/dist';
 const filesToCache = [
     'index.html',
     'index.html?utm_source=pwa',
-    'serviceworker.js',
     'js/bundle.js',
     'css/normalize.min.css',
     'css/salem.min.css',
