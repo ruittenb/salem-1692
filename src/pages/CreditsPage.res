@@ -51,11 +51,12 @@ let make = (
             }
             {React.string(`© `)}
             <a href="https://incompetech.com/music/royalty-free/music.html"> {React.string("Kevin MacLeod")} </a> spacedComma
-            <a href="http://creativecommons.org/licenses/by/4.0/"> {React.string("Licensed under CC BY 4.0")} </a>
+            {React.string(t("Licensed under") ++ " ")}
+            <a href="http://creativecommons.org/licenses/by/4.0/"> {React.string("CC BY 4.0")} </a>
         </p>
         <p>
             <span> {React.string(t("Images: "))} </span>
-            <a href="https://www.dreamstime.com/cute-funny-old-gramophone-vector-cute-funny-yelloe-vintage-gramophone-simple-cartoon-style-image185881168"> {React.string("Ogieurvil")} </a> spacedComma
+            <a href="https://www.dreamstime.com/cute-funny-old-gramophone-image185881168"> {React.string("Ogieurvil")} </a> spacedComma
             <a href="https://clipartmag.com/download-clipart-image#paper-scrolls-clipart-38.jpg"> {React.string("ClipArtMag")} </a> spacedComma
             <a href="https://flagpedia.net"> {React.string("Flagpedia")} </a> spacedComma
             <a href="https://www.flaticon.com/free-icon/chess-piece_891932"> {React.string("FlatIcon")} </a> spacedComma

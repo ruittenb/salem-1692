@@ -11,7 +11,7 @@ let defaultState: gameState = {
     seatingLayout: TwoAtHead,
     doPlayEffects: true,
     doPlaySpeech: true,
-    backgroundMusic: None,
+    backgroundMusic: [],
 }
 let context = React.createContext(
     (defaultState, defaultSetter)

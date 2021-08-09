@@ -15,7 +15,7 @@ let initialGameState = {
     seatingLayout: OneAtHead,
     doPlayEffects: true,
     doPlaySpeech: true,
-    backgroundMusic: None, // Some("Egmont Overture.mp3"),
+    backgroundMusic: [],
 }
 let initialTurnState = {
     nrWitches: 1,
@@ -79,9 +79,10 @@ let make = (): React.element => {
     let currentPage = switch currentPage {
         | Title                   => <TitlePage goToPage />
         | Setup                   => <SetupPage goToPage />
+        | SetupLanguage           => <SetupLanguagePage goToPage setLanguage />
+        | SetupMusic              => <SetupMusic goToPage />
         | SetupPlayers            => <SetupPlayersPage goToPage />
         | SetupPlayersForGame     => <SetupPlayersPage goToPage contineToGame=true />
-        | SetupLanguage           => <SetupLanguagePage goToPage setLanguage />
         | Credits                 => <CreditsPage goToPage />
         | Daytime                 => <DaytimePage goToPage />
         | FirstNightOneWitch      => <NightScenarioPage goToPage subPage=currentPage />

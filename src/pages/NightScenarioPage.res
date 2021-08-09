@@ -51,8 +51,8 @@ let make = (
 
     let soundImage = <img src="images/gramophone.png" className="sound-image" />
 
-    let backgroundMusicElement = switch gameState.backgroundMusic {
-        | Some(track) => <AudioBackground track />
+    let backgroundMusicElement = switch gameState.backgroundMusic->Belt.Array.get(0) {
+        | Some(track) => <AudioBackground track={track ++ ".mp3"} />
         | None        => React.null
     }
 

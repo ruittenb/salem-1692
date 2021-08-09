@@ -17,6 +17,7 @@ let table = Js.Dict.fromArray([
     ("(add one)", `(añadir otro)`),
     ("Sound effects", "FX sonido"),
     ("Speech", "Discurso"),
+    ("Music", `Música`),
     ("How many witches?", `¿Cuantas brujas?`),
     ("Seating layout", "Plan de mesa"),
     ("How are the players seated around the table?", `¿Cómo se sientan los jugadores alrededor de la mesa?`),
@@ -39,6 +40,7 @@ let table = Js.Dict.fromArray([
     ("Voice actors: ", "Actores de voz: "),
     ("Images: ", `Imágenes: `),
     ("Music: ", `Música: `),
+    ("Licensed under", "Con licencia de"),
     // Day
     ("Daytime", `El día`),
     ("First night,", "Primera noche,"),

@@ -23,6 +23,8 @@ let make = (
         doPlaySpeech: !prev.doPlaySpeech
     })
 
+    let hasBackgroundMusic = gameState.backgroundMusic->Js.Array2.length > 0
+
     <div id="setup-page" className="page flex-vertical">
         <h1> {React.string(t("Setup"))} </h1>
         <Spacer />
@@ -43,6 +45,11 @@ let make = (
             label={t("Speech")}
             className={"icon-left " ++ if gameState.doPlaySpeech { "icon-checked" } else { "icon-unchecked" }}
             onClick={ _event => togglePlaySpeech() }
+        />
+        <Button
+            label={t("Music")}
+            className={"icon-left " ++ if hasBackgroundMusic { "icon-checked" } else { "icon-unchecked" }}
+            onClick={ _event => goToPage(_prev => SetupMusic) }
         />
         <Button
             label={t("Credits")}

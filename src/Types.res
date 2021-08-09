@@ -41,7 +41,7 @@ type gameState = {
     seatingLayout: seatingLayout,
     doPlayEffects: bool,
     doPlaySpeech: bool,
-    backgroundMusic: option<string>,
+    backgroundMusic: array<string>,
 }
 type gameStateSetter = (gameState => gameState) => unit
 
@@ -57,6 +57,7 @@ type page =
     | Title
     | Setup
     | SetupLanguage
+    | SetupMusic
     | SetupPlayers
     | SetupPlayersForGame
     | Credits
