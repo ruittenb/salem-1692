@@ -11,13 +11,16 @@ let backgroundVolume = 0.1
 
 // Stripped of .mp3 extension
 let musicTracks = [
+    "Agnus Dei X",
+    "Crusade",
     "Danse Macabre",
-    "Egmont Overture",
-    "Moonlight Hall",
-    "Night Vigil",
+    "Dark Times",
+    "Darkling",
+    "Eternal Terminal",
+    "Intended Force",
+    "Nightmare Machine",
     "Not As It Seems",
-    "Suonatore di Liuto",
-    "The Descent",
-    "Willow and the Light",
+    "Schmetterling",
+    "Toccata and Fugue in D Minor",
 ]
 

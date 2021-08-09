@@ -39,9 +39,12 @@ let make = (
             <span> {React.string(t("Music: "))} </span>
             {
                 React.array(
-                    Constants.musicTracks->Js.Array2.map(track => {
+                    Constants.musicTracks->Js.Array2.mapi((track, index) => {
                         <>
-                            <a href={"https://incompetech.com/music/royalty-free/mp3-royaltyfree/" ++ track ++ ".mp3"}>
+                            <a
+                                href={"https://incompetech.com/music/royalty-free/mp3-royaltyfree/" ++ track ++ ".mp3"}
+                                key={ Belt.Int.toString(index) ++ "/" ++ track }
+                            >
                                 {React.string(track)}
                             </a>
                             spacedComma
@@ -64,7 +67,8 @@ let make = (
             <a href="http://www.famfamfam.com/lab/icons/silk/"> {React.string("FamFamFam")} </a> spacedComma
             <a href="https://www.freepik.com/free-vector/"> {React.string("Freepik")} </a> spacedComma
             <a href="https://icons8.com"> {React.string("Icons8")} </a> spacedComma
-            <a href="https://www.freepik.com/free-vector/old-town-village-transparent-background_11575329.htm"> {React.string("brgfx")} </a>
+            <a href="https://www.freepik.com/free-vector/old-town_11575329.htm"> {React.string("brgfx")} </a> spacedComma
+            <a href="https://openclipart.org/detail/4757/lute-1"> {React.string("papapishu")} </a>
         </p>
         <Spacer />
         <Button

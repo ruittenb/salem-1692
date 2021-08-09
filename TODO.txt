@@ -1,3 +1,8 @@
- - store language in localStorage
  - make hasConstable superfluous: use optional<string> anyway, with <ErrorPage>
+ - Helmi file without -t
+ - play music preview after selecting on SetupMusicPage
+ - fade music out
+ - use native rescript localstate
+ - cleanup music array when files are deprecated
+ - save music array in localstate
 

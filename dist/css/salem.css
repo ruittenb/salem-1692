@@ -256,6 +256,10 @@ div.paragraph {
     top: 31px;
 }
 
+#setup-music {
+    overflow-y: auto;
+}
+
 #layout-list {
     width: 100%;
     display: grid;

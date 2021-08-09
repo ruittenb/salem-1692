@@ -2,6 +2,7 @@
 /node_modules/
 /_fabriek/famfamfam/
 /_fabriek/audio/raw/
+/_fabriek/music/
 /lib/
 /.bsb.lock
 /.merlin
