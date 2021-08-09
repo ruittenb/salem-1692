@@ -5,6 +5,7 @@
 
 const version = "0.15.0";
 const cacheName = 'salem-1692-v' + version;
+//const rootDir = '.';
 const rootDir = '/salem-1692/dist';
 const filesToCache = [
     'index.html',
@@ -39,7 +40,6 @@ const filesToCache = [
     'images/flag-nl.png',
     'images/flag-us.png',
     'images/gramophone.png',
-    'images/icon-abort.png',
     'images/icon-back.png',
     'images/icon-checked.png',
     'images/icon-cross.png',
@@ -68,7 +68,7 @@ const filesToCache = [
  * Cache important files when installing
  */
 self.addEventListener('install', function (event) {
-    console.log('[ServiceWorker] Installing');
+    console.log('[ServiceWorker] Installing ', version);
     self.skipWaiting();
     event.waitUntil(
         caches.open(cacheName).then(function (cache) {
@@ -82,7 +82,7 @@ self.addEventListener('install', function (event) {
  * Remove old caches when activating
  */
 self.addEventListener('activate', function (event) {
-    console.log('[ServiceWorker] Activating');
+    console.log('[ServiceWorker] Activating ', version);
     event.waitUntil(
         caches.keys().then(function (keyList) {
             return Promise.all(keyList.map(function (key) {
