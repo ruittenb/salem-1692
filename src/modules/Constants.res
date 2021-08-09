@@ -21,6 +21,5 @@ let musicTracks = [
     "Nightmare Machine",
     "Not As It Seems",
     "Schmetterling",
-    "Toccata and Fugue in D Minor",
 ]
 

@@ -40,7 +40,7 @@ let make = (
         })
     )
 
-    <div id="setup-music" className="page flex-vertical">
+    <div id="setup-music-page" className="page flex-vertical">
         <h1> {React.string(t("Music"))} </h1>
         <Spacer />
         {trackButtons}
