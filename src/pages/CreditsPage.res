@@ -26,29 +26,26 @@ let make = (
             <a href="https://facadegames.com/"> {React.string(`Façade Games`)} </a>
         </p>
         <p>
+            <span> {React.string(t("Voice actors: "))} </span>
+            {React.string("Helmi Megens")} /* {React.string("Paul Scholey")} {React.string("Mario Ruiz")} */
+        </p>
+        <p>
             <span> {React.string(t("Sound effects: "))} </span>
             <a href="https://soundbible.com/2206-Tolling-Bell.html"> {React.string("Daniel Simion")} </a> spacedComma
             <a href="https://soundbible.com/1218-Rooster-Crow.html"> {React.string("Mike Koenig")} </a> spacedComma
             <a href="https://mixkit.co/free-sound-effects/buzzer/"> {React.string("mixkit.co")} </a>
         </p>
         <p>
-            <span> {React.string(t("Voice actors: "))} </span>
-            {React.string("Helmi Megens")} /* {React.string("Paul Scholey")} {React.string("Mario Ruiz")} */
-        </p>
-        <p>
             <span> {React.string(t("Music: "))} </span>
             {
                 React.array(
                     Constants.musicTracks->Js.Array2.mapi((track, index) => {
-                        <>
-                            <a
-                                href={"https://incompetech.com/music/royalty-free/mp3-royaltyfree/" ++ track ++ ".mp3"}
-                                key={ Belt.Int.toString(index) ++ "/" ++ track }
-                            >
+                        <React.Fragment key={ Belt.Int.toString(index) ++ "/" ++ track } >
+                            <a href={"https://incompetech.com/music/royalty-free/mp3-royaltyfree/" ++ track ++ ".mp3"} >
                                 {React.string(track)}
                             </a>
                             spacedComma
-                        </>
+                        </React.Fragment>
                     })
                 )
             }

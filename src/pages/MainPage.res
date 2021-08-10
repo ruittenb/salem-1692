@@ -30,22 +30,20 @@ let getLanguageClassName = (language: language): string => {
 
 let loadPlayersFromLocalStorage = (setGameState): unit => {
     let storageKey = localStoragePrefix ++ localStoragePlayersKey
-    LocalStorage.getItem(storageKey)                    // this yields an option<string>
-        ->option2AndThen(
-            playersString => safeExec(
-                () => Js.Json.parseExn(playersString),
-            )
-        )                                               // this yields an option<Js.Json.t>
-        ->option2AndThen(
-            json => Js.Json.decodeArray(json),
-        )                                               // this yields an option<array<Js.Json.t>>
-        ->option2Map(
-            jsonString => jsonString
-                ->Js.Array2.map(Js.Json.decodeString)   // this yields an array<option<string>>
-                ->arrayFilterSome                       // this yields an array<string>
-        )                                               // this yields an option<array<string>>
+    LocalStorage.getStringArray(storageKey) // this yields an option<array<string>>
         ->option2AndExec(
             players => setGameState(prevState => { ...prevState, players })
+        )
+}
+
+let loadTracksFromLocalStorage = (setGameState): unit => {
+    let storageKey = localStoragePrefix ++ localStorageMusicKey
+    LocalStorage.getStringArray(storageKey) // this yields an option<array<string>>
+        ->option2Map(
+            Js.Array.filter(Constants.musicTracks->Js.Array2.includes)
+        )
+        ->option2AndExec(
+            tracks => setGameState(prevState => { ...prevState, backgroundMusic: tracks })
         )
 }
 
@@ -72,6 +70,7 @@ let make = (): React.element => {
     // run once after mounting
     React.useEffect0(() => {
         loadPlayersFromLocalStorage(setGameState)
+        loadTracksFromLocalStorage(setGameState)
         loadLanguageFromLocalStorage(setLanguage)
         None // cleanup function
     })
