@@ -14646,8 +14646,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setItem = setItem;
 exports.getItem = getItem;
+exports.getStringArray = getStringArray;
+
+var Js_json = _interopRequireWildcard(require("rescript/lib/es6/js_json.js"));
 
 var Caml_option = _interopRequireWildcard(require("rescript/lib/es6/caml_option.js"));
+
+var Utils$Salem1692 = _interopRequireWildcard(require("./Utils.bs.js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -14661,9 +14666,19 @@ function setItem(key, value) {
 function getItem(key) {
   return Caml_option.null_to_opt(localStorage.getItem(key));
 }
+
+function getStringArray(key) {
+  return Utils$Salem1692.option2Map(Utils$Salem1692.option2AndThen(Utils$Salem1692.option2AndThen(Caml_option.null_to_opt(localStorage.getItem(key)), function (jsonString) {
+    return Utils$Salem1692.safeExec(function (param) {
+      return JSON.parse(jsonString);
+    });
+  }), Js_json.decodeArray), function (jsonArray) {
+    return Utils$Salem1692.arrayFilterSome(jsonArray.map(Js_json.decodeString));
+  });
+}
 /* No side effect */
 
-},{"rescript/lib/es6/caml_option.js":17}],57:[function(require,module,exports){
+},{"./Utils.bs.js":59,"rescript/lib/es6/caml_option.js":17,"rescript/lib/es6/js_json.js":22}],57:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15241,15 +15256,17 @@ function CreditsPage(Props) {
     id: "credits-page"
   }, React.createElement("h1", undefined, Curry._1(t, "Credits")), React.createElement(Spacer$Salem1692.make, {}), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "App: ")), Curry._1(t, "version") + " v" + salemAppVersion + " René Uittenbogaard © 2021"), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "For use with the game: ")), "Salem 1692, Travis Hancock © 2015, ", React.createElement("a", {
     href: "https://facadegames.com/"
-  }, "Façade Games")), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Sound effects: ")), React.createElement("a", {
+  }, "Façade Games")), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Voice actors: ")), "Helmi Megens"), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Sound effects: ")), React.createElement("a", {
     href: "https://soundbible.com/2206-Tolling-Bell.html"
   }, "Daniel Simion"), spacedComma, React.createElement("a", {
     href: "https://soundbible.com/1218-Rooster-Crow.html"
   }, "Mike Koenig"), spacedComma, React.createElement("a", {
     href: "https://mixkit.co/free-sound-effects/buzzer/"
-  }, "mixkit.co")), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Voice actors: ")), "Helmi Megens"), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Music: ")), Constants$Salem1692.musicTracks.map(function (track, index) {
-    return React.createElement(React.Fragment, undefined, React.createElement("a", {
-      key: String(index) + "/" + track,
+  }, "mixkit.co")), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Music: ")), Constants$Salem1692.musicTracks.map(function (track, index) {
+    return React.createElement(React.Fragment, {
+      children: null,
+      key: String(index) + "/" + track
+    }, React.createElement("a", {
       href: "https://incompetech.com/music/royalty-free/mp3-royaltyfree/" + track + ".mp3"
     }, track), spacedComma);
   }), "© ", React.createElement("a", {
@@ -15587,14 +15604,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.loadPlayersFromLocalStorage = loadPlayersFromLocalStorage;
+exports.loadTracksFromLocalStorage = loadTracksFromLocalStorage;
 exports.loadLanguageFromLocalStorage = loadLanguageFromLocalStorage;
 exports.make = exports.getLanguageClassName = exports.initialTurnState = exports.initialGameState = exports.initialPage = exports.initialLanguage = void 0;
 
 var Curry = _interopRequireWildcard(require("rescript/lib/es6/curry.js"));
 
 var React = _interopRequireWildcard(require("react"));
-
-var Js_json = _interopRequireWildcard(require("rescript/lib/es6/js_json.js"));
 
 var Utils$Salem1692 = _interopRequireWildcard(require("../modules/Utils.bs.js"));
 
@@ -15661,13 +15677,7 @@ exports.getLanguageClassName = getLanguageClassName;
 
 function loadPlayersFromLocalStorage(setGameState) {
   var storageKey = Constants$Salem1692.localStoragePrefix + Constants$Salem1692.localStoragePlayersKey;
-  return Utils$Salem1692.option2AndExec(Utils$Salem1692.option2Map(Utils$Salem1692.option2AndThen(Utils$Salem1692.option2AndThen(LocalStorage$Salem1692.getItem(storageKey), function (playersString) {
-    return Utils$Salem1692.safeExec(function (param) {
-      return JSON.parse(playersString);
-    });
-  }), Js_json.decodeArray), function (jsonString) {
-    return Utils$Salem1692.arrayFilterSome(jsonString.map(Js_json.decodeString));
-  }), function (players) {
+  return Utils$Salem1692.option2AndExec(LocalStorage$Salem1692.getStringArray(storageKey), function (players) {
     return Curry._1(setGameState, function (prevState) {
       return {
         players: players,
@@ -15675,6 +15685,25 @@ function loadPlayersFromLocalStorage(setGameState) {
         doPlayEffects: prevState.doPlayEffects,
         doPlaySpeech: prevState.doPlaySpeech,
         backgroundMusic: prevState.backgroundMusic
+      };
+    });
+  });
+}
+
+function loadTracksFromLocalStorage(setGameState) {
+  var storageKey = Constants$Salem1692.localStoragePrefix + Constants$Salem1692.localStorageMusicKey;
+  return Utils$Salem1692.option2AndExec(Utils$Salem1692.option2Map(LocalStorage$Salem1692.getStringArray(storageKey), function (param) {
+    return param.filter(function (param) {
+      return Constants$Salem1692.musicTracks.includes(param);
+    });
+  }), function (tracks) {
+    return Curry._1(setGameState, function (prevState) {
+      return {
+        players: prevState.players,
+        seatingLayout: prevState.seatingLayout,
+        doPlayEffects: prevState.doPlayEffects,
+        doPlaySpeech: prevState.doPlaySpeech,
+        backgroundMusic: tracks
       };
     });
   });
@@ -15720,6 +15749,7 @@ function MainPage(Props) {
 
   React.useEffect(function () {
     loadPlayersFromLocalStorage(setGameState);
+    loadTracksFromLocalStorage(setGameState);
     loadLanguageFromLocalStorage(setLanguage);
   }, []);
   var currentPage$1;
@@ -15864,7 +15894,7 @@ var make = MainPage;
 
 exports.make = make;
 
-},{"../components/GameStateContext.bs.js":39,"../components/LanguageContext.bs.js":40,"../components/TurnStateContext.bs.js":50,"../modules/Constants.bs.js":55,"../modules/LocalStorage.bs.js":56,"../modules/Translator.bs.js":58,"../modules/Utils.bs.js":59,"./ClosePage.bs.js":60,"./CreditsPage.bs.js":61,"./DaytimeConfessPage.bs.js":62,"./DaytimePage.bs.js":63,"./DaytimeRevealPage.bs.js":64,"./NightScenarioPage.bs.js":68,"./SetupLanguagePage.bs.js":70,"./SetupMusicPage.bs.js":71,"./SetupPage.bs.js":72,"./SetupPlayersPage.bs.js":73,"./TitlePage.bs.js":74,"react":8,"rescript/lib/es6/curry.js":19,"rescript/lib/es6/js_json.js":22}],66:[function(require,module,exports){
+},{"../components/GameStateContext.bs.js":39,"../components/LanguageContext.bs.js":40,"../components/TurnStateContext.bs.js":50,"../modules/Constants.bs.js":55,"../modules/LocalStorage.bs.js":56,"../modules/Translator.bs.js":58,"../modules/Utils.bs.js":59,"./ClosePage.bs.js":60,"./CreditsPage.bs.js":61,"./DaytimeConfessPage.bs.js":62,"./DaytimePage.bs.js":63,"./DaytimeRevealPage.bs.js":64,"./NightScenarioPage.bs.js":68,"./SetupLanguagePage.bs.js":70,"./SetupMusicPage.bs.js":71,"./SetupPage.bs.js":72,"./SetupPlayersPage.bs.js":73,"./TitlePage.bs.js":74,"react":8,"rescript/lib/es6/curry.js":19}],66:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
