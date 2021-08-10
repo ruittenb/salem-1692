@@ -3,5 +3,3 @@
  - fade music out
  - cycle through tracks in night page
  - cleanup music array when files are deprecated
- - save music array in localstate
- - use native rescript localstate

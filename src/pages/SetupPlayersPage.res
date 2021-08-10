@@ -27,9 +27,7 @@ let make = (
 
     // cleanup after render
     React.useEffect(() => {
-        Some(
-            () => savePlayersToLocalStorage(gameState.players)
-        )
+        Some(() => savePlayersToLocalStorage(gameState.players))
     })
 
     <div id="setup-players-page" className="page flex-vertical">

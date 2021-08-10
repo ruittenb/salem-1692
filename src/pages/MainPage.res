@@ -80,7 +80,7 @@ let make = (): React.element => {
         | Title                   => <TitlePage goToPage />
         | Setup                   => <SetupPage goToPage />
         | SetupLanguage           => <SetupLanguagePage goToPage setLanguage />
-        | SetupMusic              => <SetupMusic goToPage />
+        | SetupMusic              => <SetupMusicPage goToPage />
         | SetupPlayers            => <SetupPlayersPage goToPage />
         | SetupPlayersForGame     => <SetupPlayersPage goToPage contineToGame=true />
         | Credits                 => <CreditsPage goToPage />

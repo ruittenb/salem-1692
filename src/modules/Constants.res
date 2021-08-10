@@ -4,6 +4,7 @@
  */
 
 let localStoragePrefix = "salem1692"
+let localStorageMusicKey = ".tracks"
 let localStoragePlayersKey = ".players"
 let localStorageLanguageKey = ".language"
 
