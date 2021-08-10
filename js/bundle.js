@@ -13368,7 +13368,7 @@ if ('serviceWorker' in navigator) {
  */
 
 
-window.salemAppVersion = "0.16.1";
+window.salemAppVersion = "0.16.2";
 /** **********************************************************************
  * Run the game. Specify the game's DOM node.
  */
