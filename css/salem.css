@@ -241,6 +241,10 @@ div.paragraph {
     padding-top: 20px;
 }
 
+#setup-music-page {
+    background: url(../images/overlay-lute.png) -100px 120px no-repeat;
+}
+
 #setup-players-page {
     background: url(../images/overlay-pawn.png) -190px 120px no-repeat;
 }

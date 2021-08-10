@@ -52,6 +52,7 @@ const filesToCache = [
     'images/icon-unchecked.png',
     'images/overlay-gear.png',
     'images/overlay-hourglass.png',
+    'images/overlay-lute.png',
     'images/overlay-night.png',
     'images/overlay-pawn.png',
     'images/overlay-scroll.png',
