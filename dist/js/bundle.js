@@ -16356,7 +16356,7 @@ function SetupMusic(Props) {
     var isIncluded = gameState.backgroundMusic.includes(availableTrack);
     return React.createElement(Button$Salem1692.make, {
       label: availableTrack,
-      className: "wide-button icon-left " + (isIncluded ? "icon-checked" : "icon-unchecked"),
+      className: "widebutton icon-left " + (isIncluded ? "icon-checked" : "icon-unchecked"),
       onClick: function (_event) {
         var newBackgroundMusic = isIncluded ? gameState.backgroundMusic.filter(function (stateTrack) {
           return stateTrack !== availableTrack;

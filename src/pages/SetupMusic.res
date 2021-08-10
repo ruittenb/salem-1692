@@ -34,7 +34,7 @@ let make = (
             <Button
                 key={ Belt.Int.toString(index) ++ "/" ++ availableTrack }
                 label=availableTrack
-                className={"wide-button icon-left " ++ if isIncluded { "icon-checked" } else { "icon-unchecked" }}
+                className={"widebutton icon-left " ++ if isIncluded { "icon-checked" } else { "icon-unchecked" }}
                 onClick={ _event => toggleMusicTrack() }
             />
         })
