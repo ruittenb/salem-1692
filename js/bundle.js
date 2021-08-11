@@ -4569,7 +4569,7 @@ if(/^(https?|file):$/.test(protocol)){// eslint-disable-next-line react-internal
 console.info('%cDownload the React DevTools '+'for a better development experience: '+'https://reactjs.org/link/react-devtools'+(protocol==='file:'?'\nYou might need to use a local HTTP server (instead of file://): '+'https://reactjs.org/link/react-devtools-faq':''),'font-weight:bold');}}}}exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED=Internals;exports.createPortal=createPortal$1;exports.findDOMNode=findDOMNode;exports.flushSync=flushSync;exports.hydrate=hydrate;exports.render=render;exports.unmountComponentAtNode=unmountComponentAtNode;exports.unstable_batchedUpdates=batchedUpdates$1;exports.unstable_createPortal=unstable_createPortal;exports.unstable_renderSubtreeIntoContainer=renderSubtreeIntoContainer;exports.version=ReactVersion;})();}
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":2,"object-assign":1,"react":8,"scheduler":29,"scheduler/tracing":30}],4:[function(require,module,exports){
+},{"_process":2,"object-assign":1,"react":8,"scheduler":30,"scheduler/tracing":31}],4:[function(require,module,exports){
 /** @license React v17.0.2
  * react-dom.production.min.js
  *
@@ -4868,7 +4868,7 @@ exports.findDOMNode=function(a){if(null==a)return null;if(1===a.nodeType)return 
 exports.render=function(a,b,c){if(!rk(b))throw Error(y(200));return tk(null,a,b,!1,c)};exports.unmountComponentAtNode=function(a){if(!rk(a))throw Error(y(40));return a._reactRootContainer?(Xj(function(){tk(null,null,a,!1,function(){a._reactRootContainer=null;a[ff]=null})}),!0):!1};exports.unstable_batchedUpdates=Wj;exports.unstable_createPortal=function(a,b){return uk(a,b,2<arguments.length&&void 0!==arguments[2]?arguments[2]:null)};
 exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!rk(c))throw Error(y(200));if(null==a||void 0===a._reactInternals)throw Error(y(38));return tk(a,b,c,!1,d)};exports.version="17.0.2";
 
-},{"object-assign":1,"react":8,"scheduler":29}],5:[function(require,module,exports){
+},{"object-assign":1,"react":8,"scheduler":30}],5:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -8084,7 +8084,154 @@ function joinWith(a, sep, toString) {
 }
 /* No side effect */
 
-},{"./caml.js":15,"./caml_option.js":17,"./curry.js":19,"./js_math.js":23}],10:[function(require,module,exports){
+},{"./caml.js":16,"./caml_option.js":18,"./curry.js":20,"./js_math.js":24}],10:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.keepU = keepU;
+exports.keep = keep;
+exports.forEachU = forEachU;
+exports.forEach = forEach;
+exports.getExn = getExn;
+exports.mapWithDefaultU = mapWithDefaultU;
+exports.mapWithDefault = mapWithDefault;
+exports.mapU = mapU;
+exports.map = map;
+exports.flatMapU = flatMapU;
+exports.flatMap = flatMap;
+exports.getWithDefault = getWithDefault;
+exports.isSome = isSome;
+exports.isNone = isNone;
+exports.eqU = eqU;
+exports.eq = eq;
+exports.cmpU = cmpU;
+exports.cmp = cmp;
+
+var Curry = _interopRequireWildcard(require("./curry.js"));
+
+var Caml_option = _interopRequireWildcard(require("./caml_option.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function keepU(opt, p) {
+  if (opt !== undefined && p(Caml_option.valFromOption(opt))) {
+    return opt;
+  }
+}
+
+function keep(opt, p) {
+  return keepU(opt, Curry.__1(p));
+}
+
+function forEachU(opt, f) {
+  if (opt !== undefined) {
+    return f(Caml_option.valFromOption(opt));
+  }
+}
+
+function forEach(opt, f) {
+  return forEachU(opt, Curry.__1(f));
+}
+
+function getExn(x) {
+  if (x !== undefined) {
+    return Caml_option.valFromOption(x);
+  }
+
+  throw {
+    RE_EXN_ID: "Not_found",
+    Error: new Error()
+  };
+}
+
+function mapWithDefaultU(opt, $$default, f) {
+  if (opt !== undefined) {
+    return f(Caml_option.valFromOption(opt));
+  } else {
+    return $$default;
+  }
+}
+
+function mapWithDefault(opt, $$default, f) {
+  return mapWithDefaultU(opt, $$default, Curry.__1(f));
+}
+
+function mapU(opt, f) {
+  if (opt !== undefined) {
+    return Caml_option.some(f(Caml_option.valFromOption(opt)));
+  }
+}
+
+function map(opt, f) {
+  return mapU(opt, Curry.__1(f));
+}
+
+function flatMapU(opt, f) {
+  if (opt !== undefined) {
+    return f(Caml_option.valFromOption(opt));
+  }
+}
+
+function flatMap(opt, f) {
+  return flatMapU(opt, Curry.__1(f));
+}
+
+function getWithDefault(opt, $$default) {
+  if (opt !== undefined) {
+    return Caml_option.valFromOption(opt);
+  } else {
+    return $$default;
+  }
+}
+
+function isSome(param) {
+  return param !== undefined;
+}
+
+function isNone(x) {
+  return x === undefined;
+}
+
+function eqU(a, b, f) {
+  if (a !== undefined) {
+    if (b !== undefined) {
+      return f(Caml_option.valFromOption(a), Caml_option.valFromOption(b));
+    } else {
+      return false;
+    }
+  } else {
+    return b === undefined;
+  }
+}
+
+function eq(a, b, f) {
+  return eqU(a, b, Curry.__2(f));
+}
+
+function cmpU(a, b, f) {
+  if (a !== undefined) {
+    if (b !== undefined) {
+      return f(Caml_option.valFromOption(a), Caml_option.valFromOption(b));
+    } else {
+      return 1;
+    }
+  } else if (b !== undefined) {
+    return -1;
+  } else {
+    return 0;
+  }
+}
+
+function cmp(a, b, f) {
+  return cmpU(a, b, Curry.__2(f));
+}
+/* No side effect */
+
+},{"./caml_option.js":18,"./curry.js":20}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8426,7 +8573,7 @@ var checkInvariantInternal = Belt_internalAVLset.checkInvariantInternal;
 
 exports.checkInvariantInternal = checkInvariantInternal;
 
-},{"./belt_internalAVLset.js":13,"./belt_internalSetInt.js":14}],11:[function(require,module,exports){
+},{"./belt_internalAVLset.js":14,"./belt_internalSetInt.js":15}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8950,7 +9097,7 @@ var $$String;
 
 exports.$$String = $$String;
 
-},{"./belt_Array.js":9,"./curry.js":19}],12:[function(require,module,exports){
+},{"./belt_Array.js":9,"./curry.js":20}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9419,7 +9566,7 @@ function binarySearch(sorted, key) {
 }
 /* No side effect */
 
-},{"./belt_Array.js":9}],13:[function(require,module,exports){
+},{"./belt_Array.js":9}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10474,7 +10621,7 @@ function removeMinAuxWithRootMutate(nt, n) {
 }
 /* No side effect */
 
-},{"./belt_SortArray.js":11,"./caml_option.js":17,"./curry.js":19}],14:[function(require,module,exports){
+},{"./belt_SortArray.js":12,"./caml_option.js":18,"./curry.js":20}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10748,7 +10895,7 @@ var A;
 
 exports.A = A;
 
-},{"./belt_SortArrayInt.js":12,"./belt_internalAVLset.js":13}],15:[function(require,module,exports){
+},{"./belt_SortArrayInt.js":13,"./belt_internalAVLset.js":14}],16:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10965,7 +11112,7 @@ function i64_max(x, y) {
 }
 /* No side effect */
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11111,7 +11258,7 @@ function dup(prim) {
 }
 /* No side effect */
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11201,7 +11348,7 @@ function option_unwrap(x) {
 }
 /* No side effect */
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11251,7 +11398,7 @@ var spliceObjApply = function (obj, name, args) {
 
 exports.spliceObjApply = spliceObjApply;
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11721,7 +11868,7 @@ function __8(o) {
 }
 /* No side effect */
 
-},{"./caml_array.js":16}],20:[function(require,module,exports){
+},{"./caml_array.js":17}],21:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11824,7 +11971,7 @@ function map(f, source) {
 }
 /* No side effect */
 
-},{"./caml_option.js":17}],21:[function(require,module,exports){
+},{"./caml_option.js":18}],22:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11844,7 +11991,7 @@ var min = -2147483648;
 
 exports.min = min;
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12077,7 +12224,7 @@ function deserializeUnsafe(s) {
 }
 /* No side effect */
 
-},{"./caml_option.js":17}],23:[function(require,module,exports){
+},{"./caml_option.js":18}],24:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12135,7 +12282,7 @@ var floor = floor_int;
 
 exports.floor = floor;
 
-},{"./js_int.js":21}],24:[function(require,module,exports){
+},{"./js_int.js":22}],25:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12247,7 +12394,7 @@ var $$default = getWithDefault;
 
 exports.default = exports.$$default = $$default;
 
-},{"./caml_option.js":17}],25:[function(require,module,exports){
+},{"./caml_option.js":18}],26:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler-tracing.development.js
@@ -12598,7 +12745,7 @@ exports.unstable_wrap = unstable_wrap;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":2}],26:[function(require,module,exports){
+},{"_process":2}],27:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler-tracing.production.min.js
  *
@@ -12609,7 +12756,7 @@ exports.unstable_wrap = unstable_wrap;
  */
 'use strict';var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_subscribe=function(){};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_unsubscribe=function(){};exports.unstable_wrap=function(a){return a};
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler.development.js
@@ -13259,7 +13406,7 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":2}],28:[function(require,module,exports){
+},{"_process":2}],29:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler.production.min.js
  *
@@ -13281,7 +13428,7 @@ exports.unstable_next=function(a){switch(P){case 1:case 2:case 3:var b=3;break;d
 exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();"object"===typeof c&&null!==c?(c=c.delay,c="number"===typeof c&&0<c?d+c:d):c=d;switch(a){case 1:var e=-1;break;case 2:e=250;break;case 5:e=1073741823;break;case 4:e=1E4;break;default:e=5E3}e=c+e;a={id:N++,callback:b,priorityLevel:a,startTime:c,expirationTime:e,sortIndex:-1};c>d?(a.sortIndex=c,H(M,a),null===J(L)&&a===J(M)&&(S?h():S=!0,g(U,c-d))):(a.sortIndex=e,H(L,a),R||Q||(R=!0,f(V)));return a};
 exports.unstable_wrapCallback=function(a){var b=P;return function(){var c=P;P=b;try{return a.apply(this,arguments)}finally{P=c}}};
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -13292,7 +13439,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":27,"./cjs/scheduler.production.min.js":28,"_process":2}],30:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":28,"./cjs/scheduler.production.min.js":29,"_process":2}],31:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -13303,7 +13450,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":25,"./cjs/scheduler-tracing.production.min.js":26,"_process":2}],31:[function(require,module,exports){
+},{"./cjs/scheduler-tracing.development.js":26,"./cjs/scheduler-tracing.production.min.js":27,"_process":2}],32:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13332,11 +13479,11 @@ function run(elementId) {
 }
 /* react Not a pure module */
 
-},{"./pages/MainPage.bs.js":65,"react":8,"react-dom":5}],32:[function(require,module,exports){
+},{"./pages/MainPage.bs.js":66,"react":8,"react-dom":5}],33:[function(require,module,exports){
 // Generated by ReScript, PLEASE EDIT WITH CARE
 /* This output is empty. Its source's type definitions, externals and/or unused code got optimized away. */
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 "use strict";
 
 var Main = _interopRequireWildcard(require("./Main.bs"));
@@ -13375,7 +13522,7 @@ window.salemAppVersion = "0.16.2";
 
 Main.run('root');
 
-},{"./Main.bs":31}],34:[function(require,module,exports){
+},{"./Main.bs":32}],35:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13386,9 +13533,9 @@ exports.make = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
-var Caml_option = _interopRequireWildcard(require("rescript/lib/es6/caml_option.js"));
+var Belt_Option = _interopRequireWildcard(require("rescript/lib/es6/belt_Option.js"));
 
-var Utils$Salem1692 = _interopRequireWildcard(require("../modules/Utils.bs.js"));
+var Caml_option = _interopRequireWildcard(require("rescript/lib/es6/caml_option.js"));
 
 var LanguageContext$Salem1692 = _interopRequireWildcard(require("./LanguageContext.bs.js"));
 
@@ -13427,7 +13574,7 @@ function $$Audio(Props) {
   var match = React.useContext(LanguageContext$Salem1692.context);
   var audioRef = React.useRef(null);
   React.useEffect(function () {
-    Utils$Salem1692.option2AndExec(Caml_option.nullable_to_opt(audioRef.current), function (domNode) {
+    Belt_Option.forEach(Caml_option.nullable_to_opt(audioRef.current), function (domNode) {
       domNode.volume = volume;
     });
   }, []);
@@ -13560,7 +13707,7 @@ var make = $$Audio;
 
 exports.make = make;
 
-},{"../modules/Utils.bs.js":59,"./LanguageContext.bs.js":40,"react":8,"rescript/lib/es6/caml_option.js":17}],35:[function(require,module,exports){
+},{"./LanguageContext.bs.js":41,"react":8,"rescript/lib/es6/belt_Option.js":10,"rescript/lib/es6/caml_option.js":18}],36:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13597,7 +13744,7 @@ var make = AudioBackground;
 
 exports.make = make;
 
-},{"../modules/Constants.bs.js":55,"./Audio.bs.js":34,"react":8}],36:[function(require,module,exports){
+},{"../modules/Constants.bs.js":56,"./Audio.bs.js":35,"react":8}],37:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13625,7 +13772,7 @@ var make = AudioError;
 
 exports.make = make;
 
-},{"react":8}],37:[function(require,module,exports){
+},{"react":8}],38:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13664,7 +13811,7 @@ var make = Button;
 
 exports.make = make;
 
-},{"react":8,"rescript/lib/es6/caml_option.js":17}],38:[function(require,module,exports){
+},{"react":8,"rescript/lib/es6/caml_option.js":18}],39:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13694,7 +13841,7 @@ var make = ButtonPair;
 
 exports.make = make;
 
-},{"react":8,"rescript/lib/es6/caml_option.js":17}],39:[function(require,module,exports){
+},{"react":8,"rescript/lib/es6/caml_option.js":18}],40:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13745,7 +13892,7 @@ var Provider = {
 
 exports.Provider = Provider;
 
-},{"react":8}],40:[function(require,module,exports){
+},{"react":8}],41:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13796,7 +13943,7 @@ var defaultLanguage =
 
 exports.defaultLanguage = defaultLanguage;
 
-},{"../modules/Translator.bs.js":58,"react":8}],41:[function(require,module,exports){
+},{"../modules/Translator.bs.js":59,"react":8}],42:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13898,7 +14045,7 @@ var make = LanguageList;
 
 exports.make = make;
 
-},{"../modules/Constants.bs.js":55,"../modules/LocalStorage.bs.js":56,"../modules/Translator.bs.js":58,"./Button.bs.js":37,"./LanguageContext.bs.js":40,"./Spacer.bs.js":48,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":19}],42:[function(require,module,exports){
+},{"../modules/Constants.bs.js":56,"../modules/LocalStorage.bs.js":57,"../modules/Translator.bs.js":59,"./Button.bs.js":38,"./LanguageContext.bs.js":41,"./Spacer.bs.js":49,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":20}],43:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13938,7 +14085,7 @@ var make = LargeButton;
 
 exports.make = make;
 
-},{"./Button.bs.js":37,"react":8,"rescript/lib/es6/caml_option.js":17}],43:[function(require,module,exports){
+},{"./Button.bs.js":38,"react":8,"rescript/lib/es6/caml_option.js":18}],44:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13993,7 +14140,7 @@ var make = LargeRevealButton;
 
 exports.make = make;
 
-},{"./LargeButton.bs.js":42,"react":8,"rescript/lib/es6/curry.js":19}],44:[function(require,module,exports){
+},{"./LargeButton.bs.js":43,"react":8,"rescript/lib/es6/curry.js":20}],45:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14047,7 +14194,7 @@ var make = PlayerEntryItem;
 
 exports.make = make;
 
-},{"./Button.bs.js":37,"react":8}],45:[function(require,module,exports){
+},{"./Button.bs.js":38,"react":8}],46:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14174,7 +14321,7 @@ var make = PlayerEntryList;
 
 exports.make = make;
 
-},{"./GameStateContext.bs.js":39,"./LanguageContext.bs.js":40,"./PlayerEntryItem.bs.js":44,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":19}],46:[function(require,module,exports){
+},{"./GameStateContext.bs.js":40,"./LanguageContext.bs.js":41,"./PlayerEntryItem.bs.js":45,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":20}],47:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14304,7 +14451,7 @@ var make = PlayerList;
 
 exports.make = make;
 
-},{"./Button.bs.js":37,"./GameStateContext.bs.js":39,"./LanguageContext.bs.js":40,"./Spacer.bs.js":48,"./SquareButton.bs.js":49,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/belt_SetInt.js":10,"rescript/lib/es6/curry.js":19,"rescript/lib/es6/js_option.js":24}],47:[function(require,module,exports){
+},{"./Button.bs.js":38,"./GameStateContext.bs.js":40,"./LanguageContext.bs.js":41,"./Spacer.bs.js":49,"./SquareButton.bs.js":50,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/belt_SetInt.js":11,"rescript/lib/es6/curry.js":20,"rescript/lib/es6/js_option.js":25}],48:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14420,7 +14567,7 @@ var make = SeatingLayoutList;
 
 exports.make = make;
 
-},{"./GameStateContext.bs.js":39,"./LanguageContext.bs.js":40,"./SquareButton.bs.js":49,"react":8,"rescript/lib/es6/curry.js":19}],48:[function(require,module,exports){
+},{"./GameStateContext.bs.js":40,"./LanguageContext.bs.js":41,"./SquareButton.bs.js":50,"react":8,"rescript/lib/es6/curry.js":20}],49:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14446,7 +14593,7 @@ var make = Spacer;
 
 exports.make = make;
 
-},{"react":8}],49:[function(require,module,exports){
+},{"react":8}],50:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14489,7 +14636,7 @@ var make = SquareButton;
 
 exports.make = make;
 
-},{"./Button.bs.js":37,"react":8,"rescript/lib/es6/caml_option.js":17}],50:[function(require,module,exports){
+},{"./Button.bs.js":38,"react":8,"rescript/lib/es6/caml_option.js":18}],51:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14535,7 +14682,7 @@ var Provider = {
 
 exports.Provider = Provider;
 
-},{"react":8}],51:[function(require,module,exports){
+},{"react":8}],52:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14555,7 +14702,7 @@ var table = Js_dict.fromArray([["New Game", "New Game"], ["Start Game", "Start G
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":20}],52:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":21}],53:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14575,7 +14722,7 @@ var table = Js_dict.fromArray([["New Game", "Nuevo juego"], ["Start Game", "Come
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":20}],53:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":21}],54:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14595,7 +14742,7 @@ var table = Js_dict.fromArray([["New Game", "Nouveau jeu"], ["Start Game", "Dém
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":20}],54:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":21}],55:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14615,7 +14762,7 @@ var table = Js_dict.fromArray([["New Game", "Nieuw spel"], ["Start Game", "Spel 
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":20}],55:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":21}],56:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14638,7 +14785,7 @@ var backgroundVolume = 0.1;
 
 exports.backgroundVolume = backgroundVolume;
 
-},{}],56:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14649,6 +14796,8 @@ exports.getItem = getItem;
 exports.getStringArray = getStringArray;
 
 var Js_json = _interopRequireWildcard(require("rescript/lib/es6/js_json.js"));
+
+var Belt_Option = _interopRequireWildcard(require("rescript/lib/es6/belt_Option.js"));
 
 var Caml_option = _interopRequireWildcard(require("rescript/lib/es6/caml_option.js"));
 
@@ -14668,7 +14817,7 @@ function getItem(key) {
 }
 
 function getStringArray(key) {
-  return Utils$Salem1692.option2Map(Utils$Salem1692.option2AndThen(Utils$Salem1692.option2AndThen(Caml_option.null_to_opt(localStorage.getItem(key)), function (jsonString) {
+  return Belt_Option.map(Belt_Option.flatMap(Belt_Option.flatMap(Caml_option.null_to_opt(localStorage.getItem(key)), function (jsonString) {
     return Utils$Salem1692.safeExec(function (param) {
       return JSON.parse(jsonString);
     });
@@ -14678,7 +14827,7 @@ function getStringArray(key) {
 }
 /* No side effect */
 
-},{"./Utils.bs.js":59,"rescript/lib/es6/caml_option.js":17,"rescript/lib/es6/js_json.js":22}],57:[function(require,module,exports){
+},{"./Utils.bs.js":60,"rescript/lib/es6/belt_Option.js":10,"rescript/lib/es6/caml_option.js":18,"rescript/lib/es6/js_json.js":23}],58:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15040,7 +15189,7 @@ function getScenario(subPage) {
 }
 /* No side effect */
 
-},{}],58:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15139,21 +15288,16 @@ function getTranslator(language, message) {
 }
 /* EN_US-Salem1692 Not a pure module */
 
-},{"../locale/EN_US.bs.js":51,"../locale/ES_ES.bs.js":52,"../locale/NL_NL.bs.js":54,"rescript/lib/es6/js_dict.js":20}],59:[function(require,module,exports){
+},{"../locale/EN_US.bs.js":52,"../locale/ES_ES.bs.js":53,"../locale/NL_NL.bs.js":55,"rescript/lib/es6/js_dict.js":21}],60:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.arrayFilterSome = arrayFilterSome;
-exports.option2AndExec = option2AndExec;
-exports.option2AndThen = option2AndThen;
-exports.option2Map = option2Map;
 exports.safeExec = safeExec;
 
 var Curry = _interopRequireWildcard(require("rescript/lib/es6/curry.js"));
-
-var Js_option = _interopRequireWildcard(require("rescript/lib/es6/js_option.js"));
 
 var Caml_option = _interopRequireWildcard(require("rescript/lib/es6/caml_option.js"));
 
@@ -15174,20 +15318,6 @@ function arrayFilterSome(elements) {
   })]);
 }
 
-function option2AndExec(maybeValue, fn) {
-  if (maybeValue !== undefined) {
-    return Curry._1(fn, Caml_option.valFromOption(maybeValue));
-  }
-}
-
-function option2AndThen(maybeValue, fn) {
-  return Js_option.andThen(Curry.__1(fn), maybeValue);
-}
-
-function option2Map(maybeValue, fn) {
-  return Js_option.map(Curry.__1(fn), maybeValue);
-}
-
 function safeExec(functionThatMayThrow) {
   try {
     return Caml_option.some(Curry._1(functionThatMayThrow, undefined));
@@ -15197,7 +15327,7 @@ function safeExec(functionThatMayThrow) {
 }
 /* No side effect */
 
-},{"rescript/lib/es6/caml_option.js":17,"rescript/lib/es6/caml_splice_call.js":18,"rescript/lib/es6/curry.js":19,"rescript/lib/es6/js_option.js":24}],60:[function(require,module,exports){
+},{"rescript/lib/es6/caml_option.js":18,"rescript/lib/es6/caml_splice_call.js":19,"rescript/lib/es6/curry.js":20}],61:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15221,7 +15351,7 @@ var make = ClosePage;
 
 exports.make = make;
 
-},{"react":8}],61:[function(require,module,exports){
+},{"react":8}],62:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15312,7 +15442,7 @@ var make = CreditsPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":37,"../components/LanguageContext.bs.js":40,"../components/Spacer.bs.js":48,"../modules/Constants.bs.js":55,"react":8,"rescript/lib/es6/curry.js":19}],62:[function(require,module,exports){
+},{"../components/Button.bs.js":38,"../components/LanguageContext.bs.js":41,"../components/Spacer.bs.js":49,"../modules/Constants.bs.js":56,"react":8,"rescript/lib/es6/curry.js":20}],63:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15374,7 +15504,7 @@ var make = DaytimeConfessPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":37,"../components/LanguageContext.bs.js":40,"../components/LargeRevealButton.bs.js":43,"../components/Spacer.bs.js":48,"../components/TurnStateContext.bs.js":50,"react":8,"rescript/lib/es6/curry.js":19}],63:[function(require,module,exports){
+},{"../components/Button.bs.js":38,"../components/LanguageContext.bs.js":41,"../components/LargeRevealButton.bs.js":44,"../components/Spacer.bs.js":49,"../components/TurnStateContext.bs.js":51,"react":8,"rescript/lib/es6/curry.js":20}],64:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15501,7 +15631,7 @@ var make = DaytimePage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":37,"../components/LanguageContext.bs.js":40,"../components/LargeButton.bs.js":42,"../components/Spacer.bs.js":48,"../components/TurnStateContext.bs.js":50,"react":8,"rescript/lib/es6/curry.js":19}],64:[function(require,module,exports){
+},{"../components/Button.bs.js":38,"../components/LanguageContext.bs.js":41,"../components/LargeButton.bs.js":43,"../components/Spacer.bs.js":49,"../components/TurnStateContext.bs.js":51,"react":8,"rescript/lib/es6/curry.js":20}],65:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15597,7 +15727,7 @@ var make = DaytimeRevealPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":37,"../components/ButtonPair.bs.js":38,"../components/LanguageContext.bs.js":40,"../components/LargeRevealButton.bs.js":43,"../components/Spacer.bs.js":48,"../components/TurnStateContext.bs.js":50,"react":8,"rescript/lib/es6/curry.js":19}],65:[function(require,module,exports){
+},{"../components/Button.bs.js":38,"../components/ButtonPair.bs.js":39,"../components/LanguageContext.bs.js":41,"../components/LargeRevealButton.bs.js":44,"../components/Spacer.bs.js":49,"../components/TurnStateContext.bs.js":51,"react":8,"rescript/lib/es6/curry.js":20}],66:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15612,7 +15742,7 @@ var Curry = _interopRequireWildcard(require("rescript/lib/es6/curry.js"));
 
 var React = _interopRequireWildcard(require("react"));
 
-var Utils$Salem1692 = _interopRequireWildcard(require("../modules/Utils.bs.js"));
+var Belt_Option = _interopRequireWildcard(require("rescript/lib/es6/belt_Option.js"));
 
 var ClosePage$Salem1692 = _interopRequireWildcard(require("./ClosePage.bs.js"));
 
@@ -15677,7 +15807,7 @@ exports.getLanguageClassName = getLanguageClassName;
 
 function loadPlayersFromLocalStorage(setGameState) {
   var storageKey = Constants$Salem1692.localStoragePrefix + Constants$Salem1692.localStoragePlayersKey;
-  return Utils$Salem1692.option2AndExec(LocalStorage$Salem1692.getStringArray(storageKey), function (players) {
+  return Belt_Option.forEach(LocalStorage$Salem1692.getStringArray(storageKey), function (players) {
     return Curry._1(setGameState, function (prevState) {
       return {
         players: players,
@@ -15692,7 +15822,7 @@ function loadPlayersFromLocalStorage(setGameState) {
 
 function loadTracksFromLocalStorage(setGameState) {
   var storageKey = Constants$Salem1692.localStoragePrefix + Constants$Salem1692.localStorageMusicKey;
-  return Utils$Salem1692.option2AndExec(Utils$Salem1692.option2Map(LocalStorage$Salem1692.getStringArray(storageKey), function (param) {
+  return Belt_Option.forEach(Belt_Option.map(LocalStorage$Salem1692.getStringArray(storageKey), function (param) {
     return param.filter(function (param) {
       return Constants$Salem1692.musicTracks.includes(param);
     });
@@ -15711,7 +15841,7 @@ function loadTracksFromLocalStorage(setGameState) {
 
 function loadLanguageFromLocalStorage(setLanguage) {
   var storageKey = Constants$Salem1692.localStoragePrefix + Constants$Salem1692.localStorageLanguageKey;
-  return Utils$Salem1692.option2AndExec(Utils$Salem1692.option2AndThen(LocalStorage$Salem1692.getItem(storageKey), Translator$Salem1692.getLanguageByCode), function (language) {
+  return Belt_Option.forEach(Belt_Option.flatMap(LocalStorage$Salem1692.getItem(storageKey), Translator$Salem1692.getLanguageByCode), function (language) {
     return Curry._1(setLanguage, function (_prevLanguage) {
       return language;
     });
@@ -15894,7 +16024,7 @@ var make = MainPage;
 
 exports.make = make;
 
-},{"../components/GameStateContext.bs.js":39,"../components/LanguageContext.bs.js":40,"../components/TurnStateContext.bs.js":50,"../modules/Constants.bs.js":55,"../modules/LocalStorage.bs.js":56,"../modules/Translator.bs.js":58,"../modules/Utils.bs.js":59,"./ClosePage.bs.js":60,"./CreditsPage.bs.js":61,"./DaytimeConfessPage.bs.js":62,"./DaytimePage.bs.js":63,"./DaytimeRevealPage.bs.js":64,"./NightScenarioPage.bs.js":68,"./SetupLanguagePage.bs.js":70,"./SetupMusicPage.bs.js":71,"./SetupPage.bs.js":72,"./SetupPlayersPage.bs.js":73,"./TitlePage.bs.js":74,"react":8,"rescript/lib/es6/curry.js":19}],66:[function(require,module,exports){
+},{"../components/GameStateContext.bs.js":40,"../components/LanguageContext.bs.js":41,"../components/TurnStateContext.bs.js":51,"../modules/Constants.bs.js":56,"../modules/LocalStorage.bs.js":57,"../modules/Translator.bs.js":59,"./ClosePage.bs.js":61,"./CreditsPage.bs.js":62,"./DaytimeConfessPage.bs.js":63,"./DaytimePage.bs.js":64,"./DaytimeRevealPage.bs.js":65,"./NightScenarioPage.bs.js":69,"./SetupLanguagePage.bs.js":71,"./SetupMusicPage.bs.js":72,"./SetupPage.bs.js":73,"./SetupPlayersPage.bs.js":74,"./TitlePage.bs.js":75,"react":8,"rescript/lib/es6/belt_Option.js":10,"rescript/lib/es6/curry.js":20}],67:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15970,7 +16100,7 @@ var make = NightConfirmPage;
 
 exports.make = make;
 
-},{"../components/LanguageContext.bs.js":40,"../components/LargeButton.bs.js":42,"../components/Spacer.bs.js":48,"../components/TurnStateContext.bs.js":50,"react":8,"rescript/lib/es6/curry.js":19}],67:[function(require,module,exports){
+},{"../components/LanguageContext.bs.js":41,"../components/LargeButton.bs.js":43,"../components/Spacer.bs.js":49,"../components/TurnStateContext.bs.js":51,"react":8,"rescript/lib/es6/curry.js":20}],68:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16004,7 +16134,7 @@ var make = NightErrorPage;
 
 exports.make = make;
 
-},{"../components/AudioError.bs.js":36,"./NightStepPage.bs.js":69,"react":8}],68:[function(require,module,exports){
+},{"../components/AudioError.bs.js":37,"./NightStepPage.bs.js":70,"react":8}],69:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16254,7 +16384,7 @@ var make = NightScenarioPage;
 
 exports.make = make;
 
-},{"../components/Audio.bs.js":34,"../components/AudioBackground.bs.js":35,"../components/GameStateContext.bs.js":39,"../components/LanguageContext.bs.js":40,"../components/PlayerList.bs.js":46,"../components/TurnStateContext.bs.js":50,"../modules/NightScenarios.bs.js":57,"./NightConfirmPage.bs.js":66,"./NightErrorPage.bs.js":67,"./NightStepPage.bs.js":69,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":19}],69:[function(require,module,exports){
+},{"../components/Audio.bs.js":35,"../components/AudioBackground.bs.js":36,"../components/GameStateContext.bs.js":40,"../components/LanguageContext.bs.js":41,"../components/PlayerList.bs.js":47,"../components/TurnStateContext.bs.js":51,"../modules/NightScenarios.bs.js":58,"./NightConfirmPage.bs.js":67,"./NightErrorPage.bs.js":68,"./NightStepPage.bs.js":70,"react":8,"rescript/lib/es6/belt_Array.js":9,"rescript/lib/es6/curry.js":20}],70:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16311,7 +16441,7 @@ var make = NightStepPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":37,"../components/LanguageContext.bs.js":40,"../components/Spacer.bs.js":48,"react":8,"rescript/lib/es6/curry.js":19}],70:[function(require,module,exports){
+},{"../components/Button.bs.js":38,"../components/LanguageContext.bs.js":41,"../components/Spacer.bs.js":49,"react":8,"rescript/lib/es6/curry.js":20}],71:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16350,7 +16480,7 @@ var make = SetupLanguagePage;
 
 exports.make = make;
 
-},{"../components/LanguageContext.bs.js":40,"../components/LanguageList.bs.js":41,"react":8,"rescript/lib/es6/curry.js":19}],71:[function(require,module,exports){
+},{"../components/LanguageContext.bs.js":41,"../components/LanguageList.bs.js":42,"react":8,"rescript/lib/es6/curry.js":20}],72:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16441,7 +16571,7 @@ var make = SetupMusicPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":37,"../components/GameStateContext.bs.js":39,"../components/LanguageContext.bs.js":40,"../components/Spacer.bs.js":48,"../modules/Constants.bs.js":55,"../modules/LocalStorage.bs.js":56,"react":8,"rescript/lib/es6/curry.js":19}],72:[function(require,module,exports){
+},{"../components/Button.bs.js":38,"../components/GameStateContext.bs.js":40,"../components/LanguageContext.bs.js":41,"../components/Spacer.bs.js":49,"../modules/Constants.bs.js":56,"../modules/LocalStorage.bs.js":57,"react":8,"rescript/lib/es6/curry.js":20}],73:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16565,7 +16695,7 @@ var make = SetupPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":37,"../components/GameStateContext.bs.js":39,"../components/LanguageContext.bs.js":40,"../components/Spacer.bs.js":48,"react":8,"rescript/lib/es6/curry.js":19}],73:[function(require,module,exports){
+},{"../components/Button.bs.js":38,"../components/GameStateContext.bs.js":40,"../components/LanguageContext.bs.js":41,"../components/Spacer.bs.js":49,"react":8,"rescript/lib/es6/curry.js":20}],74:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16670,7 +16800,7 @@ var make = SetupPlayersPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":37,"../components/ButtonPair.bs.js":38,"../components/GameStateContext.bs.js":39,"../components/LanguageContext.bs.js":40,"../components/PlayerEntryList.bs.js":45,"../components/SeatingLayoutList.bs.js":47,"../components/Spacer.bs.js":48,"../modules/Constants.bs.js":55,"../modules/LocalStorage.bs.js":56,"react":8,"rescript/lib/es6/curry.js":19}],74:[function(require,module,exports){
+},{"../components/Button.bs.js":38,"../components/ButtonPair.bs.js":39,"../components/GameStateContext.bs.js":40,"../components/LanguageContext.bs.js":41,"../components/PlayerEntryList.bs.js":46,"../components/SeatingLayoutList.bs.js":48,"../components/Spacer.bs.js":49,"../modules/Constants.bs.js":56,"../modules/LocalStorage.bs.js":57,"react":8,"rescript/lib/es6/curry.js":20}],75:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16742,4 +16872,4 @@ var make = TitlePage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":37,"../components/GameStateContext.bs.js":39,"../components/LanguageContext.bs.js":40,"react":8,"rescript/lib/es6/curry.js":19}]},{},[53,52,54,51,32,41,46,48,35,45,42,37,47,44,34,39,38,43,36,50,40,49,31,58,55,59,57,56,67,65,66,62,61,64,72,68,74,73,71,60,70,63,69,33]);
+},{"../components/Button.bs.js":38,"../components/GameStateContext.bs.js":40,"../components/LanguageContext.bs.js":41,"react":8,"rescript/lib/es6/curry.js":20}]},{},[54,53,55,52,33,42,47,49,36,46,43,38,48,45,35,40,39,44,37,51,41,50,32,59,56,60,58,57,68,66,67,63,62,65,73,69,75,74,72,61,71,64,70,34]);
