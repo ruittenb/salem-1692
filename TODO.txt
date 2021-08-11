@@ -1,6 +1,5 @@
  - make hasConstable superfluous: use optional<string> anyway, with <ErrorPage>
  - fade music out
  - cycle through tracks in night page
- - implement actual Pause(2) step
  - English speech
  - Spanish speech
