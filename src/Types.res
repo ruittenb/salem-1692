@@ -86,8 +86,6 @@ type audioSpeech =
 type audioEffect =
     | ChurchBell
     | Rooster
-    | Silence1s
-    | Silence2s
 
 type audioMusic = string
 
@@ -99,6 +97,7 @@ type audioType =
 type scenarioStep =
     | PlaySpeech(audioSpeech)
     | PlayEffect(audioEffect)
+    | Pause(float)
     | ChooseWitches
     | ConfirmWitches
     | ChooseConstable

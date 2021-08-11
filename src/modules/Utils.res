@@ -10,14 +10,10 @@
 let arrayFilterSome = (
     elements: array<option<'a>>
 ): array<'a> => {
-    []->Js.Array2.concatMany(
-        elements->Js.Array2.map(
-            element => switch element {
-                | Some(x) => [ x ]
-                | None    => []
-            }
-        )
-    )
+    elements                                           // array<option<'a>>
+        ->Js.Array2.filter(Js.Option.isSome)           // array<Some('a)>
+        ->Js.Array2.map(Js.Option.getWithDefault(""))  // array<'a>
+    // The default is irrelevant since all values are Some(x)
 }
 
 /**

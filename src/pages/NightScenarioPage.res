@@ -49,7 +49,8 @@ let make = (
         goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
     }
 
-    let soundImage = <img src="images/gramophone.png" className="sound-image" />
+    let soundImage       = <img src="images/gramophone.png" className="sound-image" />
+    let soundImageGreyed = <img src="images/gramophone.png" className="sound-image greyed" />
 
     let backgroundMusicElement = gameState.backgroundMusic
         ->Belt.Array.get(0) // TODO pick a random one
@@ -62,6 +63,14 @@ let make = (
     let pageElement = switch (hasError, maybeScenarioStep) {
         | (true, _)                       => <NightErrorPage message=t("Unable to load audio") goToPage></NightErrorPage>
         | (false, None)                   => React.null // catch this situation in useEffect above
+        | (false, Some(Pause(duration)))  => <NightStepPage goToPage>
+                                                 { let _ = Js.Global.setTimeout(
+                                                       () => goToScenarioIndex(scenarioIndex => scenarioIndex + 1),
+                                                       Belt.Float.toInt(1000.0 *. duration)
+                                                   )
+                                                   soundImageGreyed
+                                                 }
+                                             </NightStepPage>
         | (false, Some(PlayEffect(effect)))
                if gameState.doPlayEffects => <NightStepPage goToPage>
                                                  {soundImage}
