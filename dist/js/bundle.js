@@ -15924,7 +15924,7 @@ function CreditsPage(Props) {
   }, "Icons8"), spacedComma, React.createElement("a", {
     href: "https://www.freepik.com/free-vector/old-town_11575329.htm"
   }, "brgfx"), spacedComma, React.createElement("a", {
-    href: "https://openclipart.org/detail/4757/lute-1"
+    href: "https://openclipart.org/detail/10065/lute-1"
   }, "papapishu")), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
     label: Curry._1(t, "Back"),
     className: "icon-left icon-back",

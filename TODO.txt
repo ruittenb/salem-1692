@@ -1,5 +1,6 @@
  - make hasConstable superfluous: use optional<string> anyway, with <ErrorPage>
- - play music preview after selecting on SetupMusicPage
  - fade music out
  - cycle through tracks in night page
- - implement actual Silence(2) step
+ - implement actual Pause(2) step
+ - English speech
+ - Spanish speech
