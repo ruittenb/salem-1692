@@ -2,3 +2,4 @@
  - play music preview after selecting on SetupMusicPage
  - fade music out
  - cycle through tracks in night page
+ - implement actual Silence(2) step

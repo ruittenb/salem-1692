@@ -21,37 +21,15 @@ let arrayFilterSome = (
 }
 
 /**
- * Call function if Some(x)
+ * Call function if Some(x):
+ * use Belt.Option.forEach()
+ *
+ * Js.Option.andThen(), but data-first:
+ * use Belt.Option.flatMap() instead
+ *
+ * Js.Option.map(), but data-first:
+ * use Belt.Option.map() instead
  */
-let option2AndExec = (
-    maybeValue: option<'a>,
-    fn: ('a => unit)
-): unit => {
-    switch maybeValue {
-        | Some(value) => fn(value)
-        | None        => ()
-    }
-}
-
-/**
- * like Js.Option.andThen(), but data-first
- */
-let option2AndThen = (
-    maybeValue: option<'a>,
-    fn: ('a => option<'b>)
-): option<'b> => {
-    Js.Option.andThen((. value) => fn(value), maybeValue)
-}
-
-/**
- * like Js.Option.map(), but data-first
- */
-let option2Map = (
-    maybeValue: option<'a>,
-    fn: ('a => 'b)
-): option<'b> => {
-    Js.Option.map((. value) => fn(value), maybeValue)
-}
 
 /**
  * calls a function that may throw an exception and converts

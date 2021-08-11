@@ -4,7 +4,6 @@
  */
 
 open Types
-open Utils
 open Constants
 
 let initialLanguage: Types.language = EN_US
@@ -31,7 +30,7 @@ let getLanguageClassName = (language: language): string => {
 let loadPlayersFromLocalStorage = (setGameState): unit => {
     let storageKey = localStoragePrefix ++ localStoragePlayersKey
     LocalStorage.getStringArray(storageKey) // this yields an option<array<string>>
-        ->option2AndExec(
+        ->Belt.Option.forEach(
             players => setGameState(prevState => { ...prevState, players })
         )
 }
@@ -39,10 +38,10 @@ let loadPlayersFromLocalStorage = (setGameState): unit => {
 let loadTracksFromLocalStorage = (setGameState): unit => {
     let storageKey = localStoragePrefix ++ localStorageMusicKey
     LocalStorage.getStringArray(storageKey) // this yields an option<array<string>>
-        ->option2Map(
+        ->Belt.Option.map(
             Js.Array.filter(Constants.musicTracks->Js.Array2.includes)
         )
-        ->option2AndExec(
+        ->Belt.Option.forEach(
             tracks => setGameState(prevState => { ...prevState, backgroundMusic: tracks })
         )
 }
@@ -50,10 +49,10 @@ let loadTracksFromLocalStorage = (setGameState): unit => {
 let loadLanguageFromLocalStorage = (setLanguage): unit => {
     let storageKey = localStoragePrefix ++ localStorageLanguageKey
     LocalStorage.getItem(storageKey)                    // this yields an option<string>
-        ->option2AndThen(
+        ->Belt.Option.flatMap(
             Translator.getLanguageByCode
         )                                               // this yields an option<language>
-        ->option2AndExec(
+        ->Belt.Option.forEach(
             language => setLanguage(_prevLanguage => language)
         )
 }

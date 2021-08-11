@@ -9,7 +9,6 @@
  */
 
 open Types
-open Utils
 
 @set external setVolume: (Dom.htmlAudioElement, float) => unit = "volume"
 external unsafeAsHtmlAudioElement : Dom.element => Dom.htmlAudioElement = "%identity"
@@ -36,11 +35,13 @@ let make = (
 
     // run after mounting
     React.useEffect0(() => {
-        audioRef.current->Js.Nullable.toOption->option2AndExec(
-            domNode => domNode
-                ->unsafeAsHtmlAudioElement
-                ->setVolume(volume)
-        )
+        audioRef.current
+            ->Js.Nullable.toOption
+            ->Belt.Option.forEach(
+                domNode => domNode
+                    ->unsafeAsHtmlAudioElement
+                    ->setVolume(volume)
+            )
         None // cleanup function
     })
 
