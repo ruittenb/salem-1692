@@ -62,6 +62,12 @@ let make = (
     let pageElement = switch (hasError, maybeScenarioStep) {
         | (true, _)                       => <NightErrorPage message=t("Unable to load audio") goToPage></NightErrorPage>
         | (false, None)                   => React.null // catch this situation in useEffect above
+        | (false, Some(Pause(duration)))  => { let _ = Js.Global.setTimeout(
+                                                   () => goToScenarioIndex(scenarioIndex => scenarioIndex + 1),
+                                                   Belt.Float.toInt(1000.0 *. duration)
+                                               )
+                                               React.null
+                                             }
         | (false, Some(PlayEffect(effect)))
                if gameState.doPlayEffects => <NightStepPage goToPage>
                                                  {soundImage}

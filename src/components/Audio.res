@@ -63,10 +63,8 @@ let make = (
         | Speech(ConstableGoToSleep)  => speechDirectory ++ "constable-go-to-sleep.mp3"
         | Speech(TownWakeUp)          => speechDirectory ++ "town-wake-up.mp3"
 
-        | Effect(Silence1s)           => effectDirectory ++ "silence-1s.mp3"
-        | Effect(Silence2s)           => effectDirectory ++ "silence-2s.mp3"
-        | Effect(Rooster)             => effectDirectory ++ "rooster.mp3"
         | Effect(ChurchBell)          => effectDirectory ++ "church-bell-once.mp3"
+        | Effect(Rooster)             => effectDirectory ++ "rooster.mp3"
 
         | Music(fileName)             => musicDirectory ++ fileName
     }

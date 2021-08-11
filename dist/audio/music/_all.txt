@@ -1,52 +1,51 @@
-   + Danse Macabre: toepasselijk
-   o Egmont Overture: toepasselijk, wel veel verschil in dynamiek
-   o Moonlight Hall: sprookjesachtig
-   - Night Vigil: erg neerslachtig
-   + Not as it seems: toepasselijk
-   o Suonatore di liuto: baroque
-   o The Descent: avontuurlijk; toepasselijk?
-   o Willow and the Light: percussie => geschikt; toepasselijk?
-
-   - Blue Feather: teveel stiltes
-   o The Endless: veel stiltes, wel toepasselijk
-   + Agnus Dei X: toepasselijk
-   + Toccata en Fuga in d mineur: toepasselijk
-   + Intended Force: vlot, percussie, geschikt
-   - Thaxted (Holst): melancholisch, niet zo toepasselijk
-   - Relent: te somber
-   + Schmetterling: toepasselijk, wel kort
-   - Snowdrop: te zacht
-   o Trio for Piano Violin and Viola: klassiek, wat kort. wel geschikt
-   - Mourning song: te langzaam en neerslachtig
-   - Lift Motif: te simpel
-   o Sonatina in C minor: oosters geluid; minder toepasselijk?
-   o Waltz (Tschaikovsky Op. 40)": geschikt, minder toepasselijk?
-   - Laendler in C Minor (Hess 68): somber
-   o New Hero in Town: wel geschikt maar oosters, modern, minder toepasselijk?
-   - Magistar: geschikt, toepasselijk, te zware percussie
-   + Crusade - Heavy industry: super toepasselijk, geschikt
-   - I can feel it coming: minder toepasselijk
-   - Twisting: minder toepasselijk
-   o Burnt Spirit: eerie, geschikt
-   + Nightmare machine: geschikt, toepasselijk
-   + Darkling: geschikt, toepasselijk
-   + Eternal Terminal: geschikt, toepasselijk; misschien te horror
-   - Thinking Music: niet geschikt
-   o Myst on the Moor: eerie
-   - Corruption: te SF
-   - Anguish: te zacht
-   - Reign supreme
-   - volatile reaction
-   o Hitman: geschikt; te modern?
-   o Steel Rods: te modern?
-   + Crusade: geschikt, toepasselijk
-   - Constance: te eentonig
-   - Five Armies: te bombastisch
-   - unlight: niet toepasselijk
-   + Dark Times: stemmig, somber maar wel geschikt
-   - Rites: te zacht
-   - Alchemist's tower: te kort
-   - Rising Game: te modern
-   - Truth of the legend: te modern
-   o Serpentine Trek: mysterieus
-   o Some amount of evil: mysterieus, driven; toepasselijk, geschikt? eindigt zacht
++ Danse Macabre: toepasselijk
+o Egmont Overture: toepasselijk, wel veel verschil in dynamiek
+o Moonlight Hall: sprookjesachtig
+- Night Vigil: erg neerslachtig
++ Not as it seems: toepasselijk
+o Suonatore di liuto: baroque
+o The Descent: avontuurlijk; toepasselijk?
+o Willow and the Light: percussie => geschikt; toepasselijk?
+- Blue Feather: teveel stiltes
+o The Endless: veel stiltes, wel toepasselijk
++ Agnus Dei X: toepasselijk
++ Toccata en Fuga in d mineur: toepasselijk
++ Intended Force: vlot, percussie, geschikt
+- Thaxted (Holst): melancholisch, niet zo toepasselijk
+- Relent: te somber
++ Schmetterling: toepasselijk, wel kort
+- Snowdrop: te zacht
+o Trio for Piano Violin and Viola: klassiek, wat kort. wel geschikt
+- Mourning song: te langzaam en neerslachtig
+- Lift Motif: te simpel
+o Sonatina in C minor: oosters geluid; minder toepasselijk?
+o Waltz (Tschaikovsky Op. 40)": geschikt, minder toepasselijk?
+- Laendler in C Minor (Hess 68): somber
+o New Hero in Town: wel geschikt maar oosters, modern, minder toepasselijk?
+- Magistar: geschikt, toepasselijk, te zware percussie
++ Crusade - Heavy industry: super toepasselijk, geschikt
+- I can feel it coming: minder toepasselijk
+- Twisting: minder toepasselijk
+o Burnt Spirit: eerie, geschikt
++ Nightmare machine: geschikt, toepasselijk
++ Darkling: geschikt, toepasselijk
++ Eternal Terminal: geschikt, toepasselijk; misschien te horror
+- Thinking Music: niet geschikt
+o Myst on the Moor: eerie
+- Corruption: te SF
+- Anguish: te zacht
+- Reign supreme
+- Volatile reaction
+o Hitman: geschikt; te modern?
+o Steel Rods: te modern?
++ Crusade: geschikt, toepasselijk
+- Constance: te eentonig
+- Five Armies: te bombastisch
+- unlight: niet toepasselijk
++ Dark Times: stemmig, somber maar wel geschikt
+- Rites: te zacht
+- Alchemist's tower: te kort
+- Rising Game: te modern
+- Truth of the legend: te modern
+o Serpentine Trek: mysterieus
+o Some amount of evil: mysterieus, driven; toepasselijk, geschikt? eindigt zacht
