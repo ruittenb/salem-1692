@@ -22,16 +22,25 @@ let make = (
     let (_language, t) = React.useContext(LanguageContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
 
+    let previewRef = React.useRef(None)
+    let previewNode = previewRef.current
+        ->Belt.Option.mapWithDefault(
+            React.null,
+            track => <AudioBackground track />
+        )
+
     let trackButtons = React.array(
         Constants.musicTracks->Js.Array2.mapi((availableTrack, index) => {
 
             let isIncluded = gameState.backgroundMusic->Js.Array2.includes(availableTrack)
             let toggleMusicTrack = () => {
                 let newBackgroundMusic = if isIncluded {
+                    previewRef.current = None
                     gameState.backgroundMusic->Js.Array2.filter(
                         stateTrack => stateTrack !== availableTrack
                     )
                 } else {
+                    previewRef.current = Some(availableTrack)
                     gameState.backgroundMusic->Js.Array2.concat([ availableTrack ])
                 }
                 setGameState(prevState => {
@@ -40,10 +49,13 @@ let make = (
                 })
             }
 
+            let checkedClass = if isIncluded { "icon-checked" } else { "icon-unchecked" }
+            let previewClass = if previewRef.current == Some(availableTrack) { "playing" } else { "" }
+
             <Button
                 key={ Belt.Int.toString(index) ++ "/" ++ availableTrack }
                 label=availableTrack
-                className={"widebutton icon-left " ++ if isIncluded { "icon-checked" } else { "icon-unchecked" }}
+                className={"widebutton icon-left " ++ checkedClass ++ " " ++ previewClass}
                 onClick={ _event => toggleMusicTrack() }
             />
         })
@@ -56,6 +68,7 @@ let make = (
 
     <div id="setup-music-page" className="page flex-vertical">
         <h1> {React.string(t("Music"))} </h1>
+        {previewNode}
         <Spacer />
         {trackButtons}
         <Button

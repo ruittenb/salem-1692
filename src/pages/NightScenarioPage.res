@@ -51,10 +51,12 @@ let make = (
 
     let soundImage = <img src="images/gramophone.png" className="sound-image" />
 
-    let backgroundMusicElement = switch gameState.backgroundMusic->Belt.Array.get(0) {
-        | Some(track) => <AudioBackground track={track ++ ".mp3"} />
-        | None        => React.null
-    }
+    let backgroundMusicElement = gameState.backgroundMusic
+        ->Belt.Array.get(0) // TODO pick a random one
+        ->Belt.Option.mapWithDefault(
+            React.null,
+            track => <AudioBackground track />
+        )
 
     // Construct the page
     let pageElement = switch (hasError, maybeScenarioStep) {
