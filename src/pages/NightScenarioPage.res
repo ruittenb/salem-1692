@@ -49,8 +49,8 @@ let make = (
         goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
     }
 
-    let soundImage       = <img className="sound-image" src="images/gramophone.png" />
-    let soundPlaceholder = <div className="sound-placeholder" />
+    let soundImage       = <img src="images/gramophone.png" className="sound-image" />
+    let soundImageGreyed = <img src="images/gramophone.png" className="sound-image greyed" />
 
     let backgroundMusicElement = gameState.backgroundMusic
         ->Belt.Array.get(0) // TODO pick a random one
@@ -68,7 +68,7 @@ let make = (
                                                        () => goToScenarioIndex(scenarioIndex => scenarioIndex + 1),
                                                        Belt.Float.toInt(1000.0 *. duration)
                                                    )
-                                                   soundPlaceholder
+                                                   soundImageGreyed
                                                  }
                                              </NightStepPage>
         | (false, Some(PlayEffect(effect)))
