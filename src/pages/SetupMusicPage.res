@@ -26,7 +26,7 @@ let make = (
     let previewNode = previewRef.current
         ->Belt.Option.mapWithDefault(
             React.null,
-            track => <AudioBackground track />
+            track => <AudioBackground track volume=1.0 />
         )
 
     let trackButtons = React.array(

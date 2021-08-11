@@ -65,12 +65,12 @@ let make = (
         | (false, Some(PlayEffect(effect)))
                if gameState.doPlayEffects => <NightStepPage goToPage>
                                                  {soundImage}
-                                                 <Audio track=Effect(effect) proceed=goToNextStep onError />
+                                                 <Audio track=Effect(effect) onEnded=goToNextStep onError />
                                              </NightStepPage>
         | (false, Some(PlaySpeech(speech)))
                 if gameState.doPlaySpeech => <NightStepPage goToPage>
                                                  {soundImage}
-                                                 <Audio track=Speech(speech) proceed=goToNextStep onError />
+                                                 <Audio track=Speech(speech) onEnded=goToNextStep onError />
                                              </NightStepPage>
 
         | (false, Some(PlayEffect(_)))    => { goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
