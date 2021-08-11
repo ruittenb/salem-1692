@@ -16,6 +16,7 @@ let make = (
     <Audio
         track=Music(track ++ ".mp3")
         volume=backgroundVolume
+        loop=true
     />
 }
 

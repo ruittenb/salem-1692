@@ -25,6 +25,7 @@ let getLanguageDirectory = (language: language): string => {
 let make = (
     ~track: audioType,
     ~volume: float = 1.0,
+    ~loop: bool = false,
     ~onEnded: mediaHandler = _ => (),
     ~onError: mediaHandler = _ => (),
 ): React.element => {
@@ -69,8 +70,7 @@ let make = (
 
         | Music(fileName)             => musicDirectory ++ fileName
     }
-    <audio src
-        autoPlay=true
+    <audio src loop autoPlay=true
         onEnded
         onError
         ref={ReactDOM.Ref.domRef(audioRef)}
