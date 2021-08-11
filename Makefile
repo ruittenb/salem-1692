@@ -69,8 +69,8 @@ watch-css: ## Compile the css files; watch for changes
 		$(MAKE) compile-css mark;                \
 	done &
 
-.PHONY: watch
-watch: ## Compile the res files; bundle the js files; watch for changes
+.PHONY: watch-res
+watch-res: ## Compile the res files; bundle the js files; watch for changes
 	fswatch -o $(JS_FILES) | while read f; do \
 		tput setaf $(JS_COLOR);               \
 		echo '>>>> Bundling';                 \
@@ -78,6 +78,18 @@ watch: ## Compile the res files; bundle the js files; watch for changes
 		$(MAKE) bundle mark;                  \
 	done &
 	npm run re:watch
+
+.PHONY: watch
+watch: ## Compile the res and css files; bundle the js files; watch for changes
+	$(MAKE) watch-css
+	fswatch -o $(JS_FILES) | while read f; do \
+		tput setaf $(JS_COLOR);               \
+		echo '>>>> Bundling';                 \
+		tput sgr0;                            \
+		$(MAKE) bundle mark;                  \
+	done &
+	npm run re:watch
+
 
 .PHONY: watch-stop
 watch-stop: ## Stop watching for changes
