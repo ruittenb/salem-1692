@@ -21,12 +21,16 @@ let make = (
 
     let (_language, t) = React.useContext(LanguageContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
+    let (preview, setPreview)   = React.useState(_ => None)
 
-    let previewRef = React.useRef(None)
-    let previewNode = previewRef.current
+    let previewNode = preview
         ->Belt.Option.mapWithDefault(
             React.null,
-            track => <AudioBackground track volume=1.0 />
+            track => <Audio
+                track=Music(track ++ ".mp3")
+                volume=1.0
+                onEnded=(_event => setPreview(_prev => None))
+            />
         )
 
     let trackButtons = React.array(
@@ -35,12 +39,12 @@ let make = (
             let isIncluded = gameState.backgroundMusic->Js.Array2.includes(availableTrack)
             let toggleMusicTrack = () => {
                 let newBackgroundMusic = if isIncluded {
-                    previewRef.current = None
+                    setPreview(_prev => None)
                     gameState.backgroundMusic->Js.Array2.filter(
                         stateTrack => stateTrack !== availableTrack
                     )
                 } else {
-                    previewRef.current = Some(availableTrack)
+                    setPreview(_prev => Some(availableTrack))
                     gameState.backgroundMusic->Js.Array2.concat([ availableTrack ])
                 }
                 setGameState(prevState => {
@@ -50,7 +54,7 @@ let make = (
             }
 
             let checkedClass = if isIncluded { "icon-checked" } else { "icon-unchecked" }
-            let previewClass = if previewRef.current == Some(availableTrack) { "playing" } else { "" }
+            let previewClass = if preview == Some(availableTrack) { "playing" } else { "" }
 
             <Button
                 key={ Belt.Int.toString(index) ++ "/" ++ availableTrack }
