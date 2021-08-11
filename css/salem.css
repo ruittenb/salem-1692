@@ -44,8 +44,11 @@ h2,
     font-weight: bold;
 }
 
-img.sound-image {
+img.sound-image,
+div.sound-placeholder {
     margin: 50px 0 30px 0;
+    width: 200px;
+    height: 213px;
 }
 
 input[type=text] {
