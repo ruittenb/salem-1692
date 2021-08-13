@@ -34,6 +34,7 @@ let table = Js.Dict.fromArray([
     // Credits
     ("Credits", `Créditos`),
     ("Game:", "Juego:"),
+    ("website", "sitio web"),
     ("version", `versión`),
     ("For use with the game: ", "Para usar con el juego: "),
     ("App: ", `Aplicación: `),

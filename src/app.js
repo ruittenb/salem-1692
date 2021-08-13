@@ -21,7 +21,7 @@ if ('serviceWorker' in navigator) {
             .catch((err) => {
                 console.log('ServiceWorker registration failed:', err);
             });
-    })
+    });
 }
 
 /** **********************************************************************
@@ -34,5 +34,5 @@ window.salemAppVersion = "0.18.2";
  * Run the game. Specify the game's DOM node.
  */
 
-Main.run('root')
+Main.run('root');
 
