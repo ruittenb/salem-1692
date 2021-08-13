@@ -13,7 +13,7 @@ let make = (
 
     // Translator, game state
     let (_language, t) = React.useContext(LanguageContext.context)
-    let (gameState, _) = React.useContext(GameStateContext.context)
+    let (gameState, setGameState) = React.useContext(GameStateContext.context)
 
     // Audio error handler
     let (hasError, setError) = React.useState(_ => false)
@@ -25,13 +25,30 @@ let make = (
     let maybeScenarioStep: option<scenarioStep> = Belt.Array.get(scenario, scenarioIndex)
     let witchOrWitches: addressed = if subPage === FirstNightOneWitch { Witch } else { Witches }
 
-    // Runs after every render
+    // After every render: check if there is still a next scenario step
     React.useEffect(() => {
         switch maybeScenarioStep {
             | Some(_) => ()
             | None    => goToPage(_page => DaytimeConfess)
         }
         None // no cleanup function
+    })
+
+    // Runs only once right after mounting the component
+    React.useEffect0(() => {
+        Some(() => { // Cleanup: cycle through background music tracks
+            gameState.backgroundMusic
+                ->Belt.Array.get(0)
+                ->Belt.Option.forEach(firstTrack => {
+                    let newBackgroundMusic = gameState.backgroundMusic
+                        ->Js.Array2.sliceFrom(1)
+                        ->Js.Array2.concat([ firstTrack ])
+                    setGameState(prevGameState => {
+                        ...prevGameState,
+                        backgroundMusic: newBackgroundMusic
+                    })
+                })
+        })
     })
 
     // Event handlers for stepping through scenario
@@ -53,7 +70,7 @@ let make = (
     let soundImageGreyed = <img src="images/gramophone.png" className="sound-image greyed" />
 
     let backgroundMusicElement = gameState.backgroundMusic
-        ->Belt.Array.get(0) // TODO pick a random one
+        ->Belt.Array.get(0)
         ->Belt.Option.mapWithDefault(
             React.null,
             track => <AudioBackground track />

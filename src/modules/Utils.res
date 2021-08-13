@@ -41,3 +41,15 @@ let safeExec = (
     }
 }
 
+/**
+ * replaces a value with another one.
+ *
+ * Example:
+ * fn1()->replaceWith(React.null)
+ */
+let replaceWith = (
+    _first: 'a,
+    second: 'b
+): 'b => {
+    second
+}
