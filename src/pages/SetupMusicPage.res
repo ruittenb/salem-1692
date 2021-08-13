@@ -73,8 +73,12 @@ let make = (
     <div id="setup-music-page" className="page flex-vertical">
         <h1> {React.string(t("Music"))} </h1>
         {previewNode}
+        <div className="paragraph">
+            {React.string(t("Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played."))}
+        </div>
         <Spacer />
         {trackButtons}
+        <Spacer />
         <Button
             label={t("Back")}
             className="icon-left icon-back"

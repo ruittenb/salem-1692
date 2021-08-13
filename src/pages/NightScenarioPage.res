@@ -52,18 +52,19 @@ let make = (
     })
 
     // Event handlers for stepping through scenario
-    let goToPrevStep = (_event): unit => goToScenarioIndex(scenarioIndex => scenarioIndex - 1)
-    let goToNextStep = (_event): unit => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+    let goToNextStepImperative = (): unit => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+    let goToPrevStep     = (_event): unit => goToScenarioIndex(scenarioIndex => scenarioIndex - 1)
+    let goToNextStep     = (_event): unit => goToNextStepImperative()
 
     // Store chosen players (killed and saved) in context
     let (_, setTurnState) = React.useContext(TurnStateContext.context)
     let goFromWitchChoiceToNextStep = (player: player, _event): unit => {
         setTurnState(prevTurnState => { ...prevTurnState, choiceWitches: player })
-        goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+        goToNextStepImperative()
     }
     let goFromConstableChoiceToNextStep = (player: player, _event): unit => {
         setTurnState(prevTurnState => { ...prevTurnState, choiceConstable: player })
-        goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+        goToNextStepImperative()
     }
 
     let soundImage       = <img src="images/gramophone.png" className="sound-image" />
@@ -82,7 +83,7 @@ let make = (
         | (false, None)                   => React.null // catch this situation in useEffect above
         | (false, Some(Pause(duration)))  => <NightStepPage goToPage>
                                                  { let _ = Js.Global.setTimeout(
-                                                       () => goToScenarioIndex(scenarioIndex => scenarioIndex + 1),
+                                                       goToNextStepImperative,
                                                        Belt.Float.toInt(1000.0 *. duration)
                                                    )
                                                    soundImageGreyed
@@ -99,10 +100,10 @@ let make = (
                                                  <Audio track=Speech(speech) onEnded=goToNextStep onError />
                                              </NightStepPage>
 
-        | (false, Some(PlayEffect(_)))    => { goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+        | (false, Some(PlayEffect(_)))    => { goToNextStepImperative()
                                                React.null
                                              }
-        | (false, Some(PlaySpeech(_)))    => { goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+        | (false, Some(PlaySpeech(_)))    => { goToNextStepImperative()
                                                React.null
                                              }
 

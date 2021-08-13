@@ -30,6 +30,7 @@ let table = Js.Dict.fromArray([
     ("Italiano", "Italiano"),
     ("Back", "Terug"),
     ("Next", "Volgende"),
+    ("Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played.", "Plaats vinkjes om een playlist samen te stellen voor de nachten. Elke volgende nacht zal het volgende track van de playlist worden gespeeld."),
     // Credits
     ("Credits", "Credits"),
     ("Game:", "Spel:"),

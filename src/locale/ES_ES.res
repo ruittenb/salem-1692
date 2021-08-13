@@ -30,6 +30,7 @@ let table = Js.Dict.fromArray([
     ("Italiano", "Italiano"),
     ("Back", "Regresar"),
     ("Next", "Avanzar"),
+    ("Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played.", `Marque las casillas para componer una lista de reproducción para las noches. Cada noche sucesiva, se reproducirá la siguiente pista de la lista de reproducción.`),
     // Credits
     ("Credits", `Créditos`),
     ("Game:", "Juego:"),
