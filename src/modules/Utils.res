@@ -3,18 +3,17 @@
  * Utils
  */
 
+let identity = (arg: 'a): 'a => arg
+
 /**
- * converts [ Some(3), Some(6), None, Some(-1), None ]
+ * Converts [ Some(3), Some(6), None, Some(-1), None ]
  * into     [ 3, 6, -1 ]
  */
-let arrayFilterSome = (
-    elements: array<option<'a>>
-): array<'a> => {
-    elements                                           // array<option<'a>>
-        ->Js.Array2.filter(Js.Option.isSome)           // array<Some('a)>
-        ->Js.Array2.map(Js.Option.getWithDefault(""))  // array<'a>
-    // The default is irrelevant since all values are Some(x)
-}
+// let arrayFilterSome = (
+//     elements: array<option<'a>>
+// ): array<'a> => {
+//     elements->Belt.Array.keepMap(identity)
+// }
 
 /**
  * Call function if Some(x):
@@ -28,7 +27,7 @@ let arrayFilterSome = (
  */
 
 /**
- * calls a function that may throw an exception and converts
+ * Calls a function that may throw an exception and converts
  * the result into an option<'a>
  */
 let safeExec = (
@@ -42,7 +41,7 @@ let safeExec = (
 }
 
 /**
- * replaces a value with another one.
+ * Replaces a value with another one.
  *
  * Example:
  * fn1()->replaceWith(React.null)

@@ -22,5 +22,5 @@ let musicTracks = [
     "Nightmare Machine",
     "Not As It Seems",
     "Schmetterling",
-]
+]->Js.Array2.sortInPlace
 

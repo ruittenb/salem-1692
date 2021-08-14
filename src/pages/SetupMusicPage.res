@@ -21,7 +21,7 @@ let make = (
 
     let (_language, t) = React.useContext(LanguageContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
-    let (preview, setPreview)   = React.useState(_ => None)
+    let (preview,   setPreview)   = React.useState(_ => None)
 
     let previewNode = preview
         ->Belt.Option.mapWithDefault(

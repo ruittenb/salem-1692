@@ -28,6 +28,6 @@ let getStringArray = (key: string): option<array<string>> => {
         ->Belt.Option.map(
             jsonArray => jsonArray
                 ->Js.Array2.map(Js.Json.decodeString)    // this yields an array<option<string>>
-                ->arrayFilterSome                        // this yields an array<string>
+                ->Belt.Array.keepMap(identity)           // this yields an array<string>
         )                                                // this yields an option<array<string>>
 }
