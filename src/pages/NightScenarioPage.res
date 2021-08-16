@@ -27,9 +27,13 @@ let make = (
 
     // After every render: check if there is still a next scenario step
     React.useEffect(() => {
-        switch maybeScenarioStep {
-            | Some(_) => ()
-            | None    => goToPage(_page => DaytimeConfess)
+        switch (maybeScenarioStep, subPage) {
+            // There are still steps in the scenario
+            | (Some(_), _)                  => ()
+            // The scenario is exhausted: find the correct next page
+            | (None, FirstNightOneWitch)
+            | (None, FirstNightMoreWitches) => goToPage(_page => DaytimeReveal)
+            | (None, _)                     => goToPage(_page => DaytimeConfess)
         }
         None // no cleanup function
     })

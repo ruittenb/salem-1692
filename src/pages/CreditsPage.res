@@ -61,16 +61,16 @@ let make = (
         <p>
             <span> {React.string(t("Images: "))} </span>
             <a href="https://www.dreamstime.com/cute-funny-old-gramophone-image185881168"> {React.string("Ogieurvil")} </a> spacedComma
-            <a href="http://www.famfamfam.com/lab/icons/silk/"> {React.string("FamFamFam")} </a> spacedComma
+            <a href="https://openclipart.org/detail/10065/lute-1"> {React.string("papapishu")} </a> spacedComma
             <a href="https://clipartmag.com/download-clipart-image#paper-scrolls-clipart-38.jpg"> {React.string("ClipArtMag")} </a> spacedComma
             <a href="https://flagpedia.net"> {React.string("Flagpedia")} </a> spacedComma
             <a href="https://www.flaticon.com/free-icon/chess-piece_891932"> {React.string("FlatIcon")} </a> spacedComma
             <a href="https://cliparts.zone/clipart/541458"> {React.string("ClipArtsZone")} </a> spacedComma
             <a href="https://www.freepik.com/free-vector/"> {React.string("Freepik")} </a> spacedComma
-
+            <a href="https://www.freepik.com/free-vector/magic-set_3886841.htm"> {React.string("macrovector")} </a> spacedComma
             <a href="https://icons8.com"> {React.string("Icons8")} </a> spacedComma
             <a href="https://www.freepik.com/free-vector/old-town_11575329.htm"> {React.string("brgfx")} </a> spacedComma
-            <a href="https://openclipart.org/detail/10065/lute-1"> {React.string("papapishu")} </a>
+            <a href="http://www.famfamfam.com/lab/icons/silk/"> {React.string("FamFamFam")} </a>
         </p>
         <Spacer />
         <Button

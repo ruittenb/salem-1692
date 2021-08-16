@@ -8,12 +8,9 @@ let identity = (arg: 'a): 'a => arg
 /**
  * Converts [ Some(3), Some(6), None, Some(-1), None ]
  * into     [ 3, 6, -1 ]
+ *
+ * elements->Belt.Array.keepMap(identity)
  */
-// let arrayFilterSome = (
-//     elements: array<option<'a>>
-// ): array<'a> => {
-//     elements->Belt.Array.keepMap(identity)
-// }
 
 /**
  * Call function if Some(x):
