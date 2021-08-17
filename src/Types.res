@@ -32,9 +32,10 @@ type evenOdd =
  *          o   o        o   o        o   o        o   o
  *          o   o          o          o   o          o
  */
-type seatingLayout =
-    | OneAtHead
-    | TwoAtHead
+type seatingLayout = [
+    | #OneAtHead
+    | #TwoAtHead
+]
 
 type gameState = {
     players: players,
