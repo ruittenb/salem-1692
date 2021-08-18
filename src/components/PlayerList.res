@@ -37,7 +37,7 @@ let assemble = (
 /**
  *             even nr. players                       odd nr. players
  *       -----------------------------           --------------------------
- *       TwoAtHead           OneAtHead           OneAtHead        TwoAtHead
+ *       TwoAtTop           OneAtTop           OneAtTop        TwoAtTop
  *       ---------           ---------           ---------        ---------
  *         0   1                 1                   1              0   1
  *         2   3               2   3               2   3            2   3
@@ -54,19 +54,19 @@ let getSortIndexes = (
 ): array<int> => {
 
     switch (evenOdd, seatingLayout) {
-        | (Even, TwoAtHead) => Belt.Array.concat(
+        | (Even, #TwoAtTop) => Belt.Array.concat(
             Belt.Array.rangeBy(1, numPlayers,   ~step=2),
             Belt.Array.rangeBy(0, numPlayers-1, ~step=2)->Belt.Array.reverse,
         )
-        | (Even, OneAtHead) => Belt.Array.concat(
+        | (Even, #OneAtTop) => Belt.Array.concat(
             Belt.Array.rangeBy(1, numPlayers, ~step=2),
             Belt.Array.rangeBy(2, numPlayers, ~step=2)->Belt.Array.reverse,
         )
-        | (Odd, OneAtHead) => Belt.Array.concat(
+        | (Odd, #OneAtTop) => Belt.Array.concat(
             Belt.Array.rangeBy(1, numPlayers, ~step=2),
             Belt.Array.rangeBy(2, numPlayers, ~step=2)->Belt.Array.reverse,
         )
-        | (Odd, TwoAtHead) => Belt.Array.concat(
+        | (Odd, #TwoAtTop) => Belt.Array.concat(
             Belt.Array.rangeBy(0, numPlayers,   ~step=2)->Belt.Array.reverse,
             Belt.Array.rangeBy(1, numPlayers-1, ~step=2),
         )
@@ -97,10 +97,10 @@ let make = (
 
     let sortIndexes = getSortIndexes(gameState.seatingLayout, numPlayers, evenOdd)
     let headPositions = switch (evenOdd, gameState.seatingLayout) {
-        | (Even, TwoAtHead) => Belt.Set.Int.fromArray([])
-        | (Even, OneAtHead) => Belt.Set.Int.fromArray([ 1, numPlayers ])
-        | (Odd,  OneAtHead) => Belt.Set.Int.fromArray([ 1 ])
-        | (Odd,  TwoAtHead) => Belt.Set.Int.fromArray([ numPlayers - 1 ])
+        | (Even, #TwoAtTop) => Belt.Set.Int.fromArray([])
+        | (Even, #OneAtTop) => Belt.Set.Int.fromArray([ 1, numPlayers ])
+        | (Odd,  #OneAtTop) => Belt.Set.Int.fromArray([ 1 ])
+        | (Odd,  #TwoAtTop) => Belt.Set.Int.fromArray([ numPlayers - 1 ])
     }
 
     let buttons = assemble(

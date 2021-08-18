@@ -25,16 +25,17 @@ type evenOdd =
  *
  *           even nr. players          odd nr. players
  *        ----------------------    ----------------------
- *        TwoAtHead    OneAtHead    OneAtHead    TwoAtHead
- *        ---------    ---------    ---------    ---------
+ *        TwoAtTop      OneAtTop    OneAtTop      TwoAtTop
+ *        --------      --------    --------      --------
  *          o   o          o            o          o   o
  *          o   o        o   o        o   o        o   o
  *          o   o        o   o        o   o        o   o
  *          o   o          o          o   o          o
  */
-type seatingLayout =
-    | OneAtHead
-    | TwoAtHead
+type seatingLayout = [
+    | #OneAtTop
+    | #TwoAtTop
+]
 
 type gameState = {
     players: players,

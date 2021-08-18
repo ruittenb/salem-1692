@@ -27,28 +27,28 @@ let make = (): React.element => {
         <div id="layout-list">
             {
                 switch (evenOdd, gameState.seatingLayout) {
-                    | (Odd, OneAtHead) => {
+                    | (Odd, #OneAtTop) => {
                         <>
-                            <SquareButton className="layout-1222 icon-left icon-checked"   onClick=onClick(OneAtHead) />
-                            <SquareButton className="layout-2221 icon-left icon-unchecked" onClick=onClick(TwoAtHead) />
+                            <SquareButton className="layout-1222 icon-left icon-checked"   onClick=onClick(#OneAtTop) />
+                            <SquareButton className="layout-2221 icon-left icon-unchecked" onClick=onClick(#TwoAtTop) />
                         </>
                     }
-                    | (Odd, TwoAtHead) => {
+                    | (Odd, #TwoAtTop) => {
                         <>
-                            <SquareButton className="layout-1222 icon-left icon-unchecked" onClick=onClick(OneAtHead) />
-                            <SquareButton className="layout-2221 icon-left icon-checked"   onClick=onClick(TwoAtHead) />
+                            <SquareButton className="layout-1222 icon-left icon-unchecked" onClick=onClick(#OneAtTop) />
+                            <SquareButton className="layout-2221 icon-left icon-checked"   onClick=onClick(#TwoAtTop) />
                         </>
                     }
-                    | (Even, OneAtHead) => {
+                    | (Even, #OneAtTop) => {
                         <>
-                            <SquareButton className="layout-1221 icon-left icon-checked"   onClick=onClick(OneAtHead) />
-                            <SquareButton className="layout-2222 icon-left icon-unchecked" onClick=onClick(TwoAtHead) />
+                            <SquareButton className="layout-1221 icon-left icon-checked"   onClick=onClick(#OneAtTop) />
+                            <SquareButton className="layout-2222 icon-left icon-unchecked" onClick=onClick(#TwoAtTop) />
                         </>
                     }
-                    | (Even, TwoAtHead) => {
+                    | (Even, #TwoAtTop) => {
                         <>
-                            <SquareButton className="layout-1221 icon-left icon-unchecked" onClick=onClick(OneAtHead) />
-                            <SquareButton className="layout-2222 icon-left icon-checked"   onClick=onClick(TwoAtHead) />
+                            <SquareButton className="layout-1221 icon-left icon-unchecked" onClick=onClick(#OneAtTop) />
+                            <SquareButton className="layout-2222 icon-left icon-checked"   onClick=onClick(#TwoAtTop) />
                         </>
                     }
                 }
