@@ -48,12 +48,12 @@ let assemble = (
  *    1,3,5,7,6,4,2,0     1,3,5,7,8,6,4,2     1,3,5,7,6,4,2     6,4,2,0,1,3,5
  */
 let getSortIndexes = (
-    seatingLayout: seatingLayout,
+    seating: SeatingCodec.t,
     numPlayers: int,
     evenOdd: evenOdd,
 ): array<int> => {
 
-    switch (evenOdd, seatingLayout) {
+    switch (evenOdd, seating) {
         | (Even, #TwoAtTop) => Belt.Array.concat(
             Belt.Array.rangeBy(1, numPlayers,   ~step=2),
             Belt.Array.rangeBy(0, numPlayers-1, ~step=2)->Belt.Array.reverse,
@@ -95,8 +95,8 @@ let make = (
     let numPlayers = gameState.players->Belt.Array.length
     let evenOdd = if mod(numPlayers, 2) === 0 { Even } else { Odd }
 
-    let sortIndexes = getSortIndexes(gameState.seatingLayout, numPlayers, evenOdd)
-    let headPositions = switch (evenOdd, gameState.seatingLayout) {
+    let sortIndexes = getSortIndexes(gameState.seating, numPlayers, evenOdd)
+    let headPositions = switch (evenOdd, gameState.seating) {
         | (Even, #TwoAtTop) => Belt.Set.Int.fromArray([])
         | (Even, #OneAtTop) => Belt.Set.Int.fromArray([ 1, numPlayers ])
         | (Odd,  #OneAtTop) => Belt.Set.Int.fromArray([ 1 ])

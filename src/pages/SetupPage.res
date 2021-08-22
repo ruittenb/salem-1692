@@ -13,15 +13,21 @@ let make = (
     let (_language, t) = React.useContext(LanguageContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
 
-    let togglePlayEffects = () => setGameState(prev => {
-        ...prev,
-        doPlayEffects: !prev.doPlayEffects
-    })
+    let togglePlayEffects = () => {
+        setGameState(prev => {
+            ...prev,
+            doPlayEffects: !prev.doPlayEffects
+        })
+        LocalStorage.saveGameState(gameState)
+    }
 
-    let togglePlaySpeech = () => setGameState(prev => {
-        ...prev,
-        doPlaySpeech: !prev.doPlaySpeech
-    })
+    let togglePlaySpeech = () => {
+        setGameState(prev => {
+            ...prev,
+            doPlaySpeech: !prev.doPlaySpeech
+        })
+        LocalStorage.saveGameState(gameState)
+    }
 
     let hasBackgroundMusic = gameState.backgroundMusic->Js.Array2.length > 0
 

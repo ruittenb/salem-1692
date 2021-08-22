@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@rescript/react": "^0.10.3",
+    "decco": "^1.5.0",
     "react": "^17.0.2"
   }
 }

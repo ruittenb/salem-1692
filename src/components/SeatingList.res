@@ -1,6 +1,6 @@
 
 /** ****************************************************************************
- * SeatingLayoutList
+ * SeatingList
  */
 
 @@warning("-33") // Unused 'open Types'
@@ -14,9 +14,9 @@ let make = (): React.element => {
 
     let evenOdd = if gameState.players->Js.Array2.length->mod(2) === 0 { Even } else { Odd }
 
-    let onClick: (seatingLayout => clickHandler) = (seatingLayout, _event) => setGameState(prevGameState => {
+    let onClick: (SeatingCodec.t => clickHandler) = (seating, _event) => setGameState(prevGameState => {
         ...prevGameState,
-        seatingLayout
+        seating
     })
 
     <>
@@ -26,7 +26,7 @@ let make = (): React.element => {
         </div>
         <div id="layout-list">
             {
-                switch (evenOdd, gameState.seatingLayout) {
+                switch (evenOdd, gameState.seating) {
                     | (Odd, #OneAtTop) => {
                         <>
                             <SquareButton className="layout-1222 icon-left icon-checked"   onClick=onClick(#OneAtTop) />

@@ -8,14 +8,6 @@
 open Types
 open Constants
 
-let savePlayersToLocalStorage = (players: array<player>): unit => {
-    let storageKey = localStoragePrefix ++ localStoragePlayersKey
-    switch Js.Json.stringifyAny(players) {
-        | Some(jsonString) => LocalStorage.setItem(storageKey, jsonString)
-        | None             => ()
-    }
-}
-
 @react.component
 let make = (
     ~goToPage,
@@ -27,14 +19,14 @@ let make = (
 
     // cleanup after render
     React.useEffect(() => {
-        Some(() => savePlayersToLocalStorage(gameState.players))
+        Some(() => LocalStorage.saveGameState(gameState))
     })
 
     <div id="setup-players-page" className="page flex-vertical">
         <h1> {React.string(t("Players"))} </h1>
         <PlayerEntryList />
         <Spacer />
-        <SeatingLayoutList />
+        <SeatingList />
         {
             if contineToGame && hasEnoughPlayers {
                 <ButtonPair>
@@ -59,5 +51,4 @@ let make = (
         }
     </div>
 }
-
 

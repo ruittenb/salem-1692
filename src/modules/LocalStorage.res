@@ -16,18 +16,31 @@ let getItem = (key: string): option<string> => {
     Dom.Storage2.localStorage->Dom.Storage2.getItem(key)
 }
 
-let getStringArray = (key: string): option<array<string>> => {
+let gameStateKey = Constants.localStoragePrefix ++ Constants.localStorageGameStateKey
+
+let loadGameState = (): option<gameState> => {
     Dom.Storage2.localStorage
-        ->Dom.Storage2.getItem(key)                      // this yields an option<string>
+        ->Dom.Storage2.getItem(gameStateKey)             // this yields an option<string>
         ->Belt.Option.flatMap(
             jsonString => safeExec(
                 () => jsonString->Js.Json.parseExn
             )
         )                                                // this yields an option<Js.Json.t>
-        ->Belt.Option.flatMap(Js.Json.decodeArray)       // this yields an option<array<Js.Json.t>>
-        ->Belt.Option.map(
-            jsonArray => jsonArray
-                ->Js.Array2.map(Js.Json.decodeString)    // this yields an array<option<string>>
-                ->Belt.Array.keepMap(identity)           // this yields an array<string>
-        )                                                // this yields an option<array<string>>
+        ->Belt.Option.flatMap(
+            str => str
+                ->gameState_decode                       // this yields a Result<gameState, Decco.decodeError>
+                ->Belt.Result.mapWithDefault(None, Js.Option.some)
+        )
 }
+
+let saveGameState = (gameState: gameState): unit => {
+    gameState
+        ->gameState_encode
+        ->Js.Json.stringifyAny
+        ->Belt.Option.forEach(
+            jsonGameState => setItem(gameStateKey, jsonGameState)
+        )
+}
+
+
+

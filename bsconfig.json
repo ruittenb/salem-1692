@@ -14,8 +14,11 @@
   }],
   "suffix": ".bs.js",
   "bs-dependencies": [
-    "@rescript/react"
+    "@rescript/react",
+    "decco"
   ],
-  "ppx-flags": [],
+  "ppx-flags": [
+    "decco/ppx"
+  ],
   "refmt": 3
 }
