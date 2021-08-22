@@ -4,7 +4,6 @@
  */
 
 open Types
-open Constants
 
 let initialLanguage: Types.language = EN_US
 let initialPage: Types.page = Title
@@ -27,33 +26,10 @@ let getLanguageClassName = (language: language): string => {
     Translator.getLanguageCode(language)
 }
 
-let loadPlayersFromLocalStorage = (setGameState): unit => {
-    let storageKey = localStoragePrefix ++ localStoragePlayersKey
-    LocalStorage.getStringArray(storageKey) // this yields an option<array<string>>
+let loadGameStateFromLocalStorage = (setGameState): unit => {
+    LocalStorage.loadGameStateFromLocalStorage()
         ->Belt.Option.forEach(
-            players => setGameState(prevState => { ...prevState, players })
-        )
-}
-
-let loadTracksFromLocalStorage = (setGameState): unit => {
-    let storageKey = localStoragePrefix ++ localStorageMusicKey
-    LocalStorage.getStringArray(storageKey) // this yields an option<array<string>>
-        ->Belt.Option.map(
-            Js.Array.filter(Constants.musicTracks->Js.Array2.includes)
-        )
-        ->Belt.Option.forEach(
-            tracks => setGameState(prevState => { ...prevState, backgroundMusic: tracks })
-        )
-}
-
-let loadLanguageFromLocalStorage = (setLanguage): unit => {
-    let storageKey = localStoragePrefix ++ localStorageLanguageKey
-    LocalStorage.getItem(storageKey)                    // this yields an option<string>
-        ->Belt.Option.flatMap(
-            Translator.getLanguageByCode
-        )                                               // this yields an option<language>
-        ->Belt.Option.forEach(
-            language => setLanguage(_prevLanguage => language)
+            gameState => setGameState(_prev => gameState)
         )
 }
 
@@ -68,9 +44,7 @@ let make = (): React.element => {
 
     // run once after mounting
     React.useEffect0(() => {
-        loadPlayersFromLocalStorage(setGameState)
-        loadTracksFromLocalStorage(setGameState)
-        loadLanguageFromLocalStorage(setLanguage)
+        loadGameStateFromLocalStorage(setGameState)
         None // cleanup function
     })
 
