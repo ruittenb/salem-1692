@@ -18,7 +18,7 @@ let getItem = (key: string): option<string> => {
 
 let gameStateKey = Constants.localStoragePrefix ++ Constants.localStorageGameStateKey
 
-let loadGameStateFromLocalStorage = (): option<gameState> => {
+let loadGameState = (): option<gameState> => {
     Dom.Storage2.localStorage
         ->Dom.Storage2.getItem(gameStateKey)             // this yields an option<string>
         ->Belt.Option.flatMap(
@@ -33,7 +33,7 @@ let loadGameStateFromLocalStorage = (): option<gameState> => {
         )
 }
 
-let saveGameStateToLocalStorage = (gameState: gameState): unit => {
+let saveGameState = (gameState: gameState): unit => {
     gameState
         ->gameState_encode
         ->Js.Json.stringifyAny

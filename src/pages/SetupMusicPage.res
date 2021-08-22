@@ -42,7 +42,7 @@ let make = (
                     ...prevState,
                     backgroundMusic: newBackgroundMusic
                 })
-                LocalStorage.saveGameStateToLocalStorage(gameState)
+                LocalStorage.saveGameState(gameState)
             }
 
             let checkedClass = if isIncluded { "icon-checked" } else { "icon-unchecked" }

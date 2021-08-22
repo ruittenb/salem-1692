@@ -27,7 +27,7 @@ let getLanguageClassName = (language: language): string => {
 }
 
 let loadGameStateFromLocalStorage = (setGameState): unit => {
-    LocalStorage.loadGameStateFromLocalStorage()
+    LocalStorage.loadGameState()
         ->Belt.Option.forEach(
             gameState => setGameState(_prev => gameState)
         )

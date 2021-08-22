@@ -18,7 +18,7 @@ let make = (
             ...prev,
             doPlayEffects: !prev.doPlayEffects
         })
-        LocalStorage.saveGameStateToLocalStorage(gameState)
+        LocalStorage.saveGameState(gameState)
     }
 
     let togglePlaySpeech = () => {
@@ -26,7 +26,7 @@ let make = (
             ...prev,
             doPlaySpeech: !prev.doPlaySpeech
         })
-        LocalStorage.saveGameStateToLocalStorage(gameState)
+        LocalStorage.saveGameState(gameState)
     }
 
     let hasBackgroundMusic = gameState.backgroundMusic->Js.Array2.length > 0

@@ -56,6 +56,8 @@ let make = (
             <span> {React.string(t("Sound effects: "))} </span>
             <a href="https://soundbible.com/2206-Tolling-Bell.html"> {React.string("Daniel Simion")} </a> spacedComma
             <a href="https://soundbible.com/1218-Rooster-Crow.html"> {React.string("Mike Koenig")} </a> spacedComma
+            <a href="https://soundbible.com/2083-Crickets-Chirping-At-Night.html"> {React.string("Lisa Redfern")} </a> spacedComma
+            <a href="https://soundbible.com/1954-Cat-Meow-2.html"> {React.string("Cat Stevens")} </a> spacedComma
             <a href="https://mixkit.co/free-sound-effects/buzzer/"> {React.string("mixkit.co")} </a>
         </p>
         <p>

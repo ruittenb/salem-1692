@@ -5,3 +5,4 @@
  - night pages: replace "abort" button with "skip"?
  - English speech
  - Spanish speech
+ - add random sound bites
