@@ -2,5 +2,6 @@
  - fade music out
  - first night should not ask to confess: fix arrow buttons
  - save complete game state to localstorage
+ - night pages: replace "abort" button with "skip"?
  - English speech
  - Spanish speech

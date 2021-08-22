@@ -11,7 +11,7 @@ let initialPage: Types.page = Title
 
 let initialGameState = {
     players: [],
-    seatingLayout: #OneAtTop,
+    seating: #OneAtTop,
     doPlayEffects: true,
     doPlaySpeech: true,
     backgroundMusic: [],

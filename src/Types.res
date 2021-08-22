@@ -13,33 +13,16 @@ type language =
     | EN_US
     | ES_ES
 
-type player = string
-type players = array<player>
-
 type evenOdd =
     | Even
     | Odd
 
-/**
- * How are the players seated around the table?
- *
- *           even nr. players          odd nr. players
- *        ----------------------    ----------------------
- *        TwoAtTop      OneAtTop    OneAtTop      TwoAtTop
- *        --------      --------    --------      --------
- *          o   o          o            o          o   o
- *          o   o        o   o        o   o        o   o
- *          o   o        o   o        o   o        o   o
- *          o   o          o          o   o          o
- */
-type seatingLayout = [
-    | #OneAtTop
-    | #TwoAtTop
-]
+@decco type player = string
+@decco type players = array<player>
 
-type gameState = {
+@decco type gameState = {
     players: players,
-    seatingLayout: seatingLayout,
+    seating: SeatingCodec.t,
     doPlayEffects: bool,
     doPlaySpeech: bool,
     backgroundMusic: array<string>,

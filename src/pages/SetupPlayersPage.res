@@ -34,7 +34,7 @@ let make = (
         <h1> {React.string(t("Players"))} </h1>
         <PlayerEntryList />
         <Spacer />
-        <SeatingLayoutList />
+        <SeatingList />
         {
             if contineToGame && hasEnoughPlayers {
                 <ButtonPair>

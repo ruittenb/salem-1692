@@ -8,7 +8,7 @@ open Types
 let defaultSetter: gameStateSetter = (_: gameState => gameState) => ()
 let defaultState: gameState = {
     players: [],
-    seatingLayout: #TwoAtTop,
+    seating: #TwoAtTop,
     doPlayEffects: true,
     doPlaySpeech: true,
     backgroundMusic: [],

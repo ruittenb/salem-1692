@@ -5,6 +5,8 @@
  * ReScript            : https://rescript-lang.org/docs/manual/latest/overview
  * ReScript-React      : https://rescript-lang.org/docs/react/latest/introduction
  * ReactJS             : https://reactjs.org/docs/getting-started.html
+ * Decco               : https://github.com/reasonml-labs/decco
+ *                       https://blog.thomasdeconinck.fr/articles/decoder-une-enumeration-depuis-une-api-en-rescript-avec-decco
  *
  * React               : Bindings to React
  * ReactDOM            : Bindings to the ReactDOM
