@@ -1,6 +1,6 @@
 
 /** ****************************************************************************
- * PlayerEntryList
+ * PlayerForm
  */
 
 open Types
@@ -87,7 +87,7 @@ let make = (): React.element => {
     let playerItems = gameState.players->Js.Array2.mapi(
         (player, index) => {
             let showMoveButton = index + 1 < gameState.players->Js.Array.length
-            <PlayerEntryItem
+            <PlayerFormLine
                 key={Belt.Int.toString(index) ++ "/" ++ player} // make key unique
                 value=player
                 showMoveButton
@@ -105,7 +105,7 @@ let make = (): React.element => {
             {React.string(t("Enter the names of the players in clockwise order, starting at the head of the table."))}
         </div>
         {React.array(playerItems)}
-        <PlayerEntryItem
+        <PlayerFormLine
             key={gameState.players->Belt.Array.length->Belt.Int.toString} // make key unique
             value=""
             placeholder={t("(add one)")}

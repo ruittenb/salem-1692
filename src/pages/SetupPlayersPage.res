@@ -19,9 +19,9 @@ let make = (
 
     <div id="setup-players-page" className="page flex-vertical">
         <h1> {React.string(t("Players"))} </h1>
-        <PlayerEntryList />
+        <PlayerForm />
         <Spacer />
-        <SeatingList />
+        <SeatingForm />
         {
             if contineToGame && hasEnoughPlayers {
                 <ButtonPair>

@@ -1,6 +1,6 @@
 
 /** ****************************************************************************
- * SeatingList
+ * SeatingForm
  */
 
 @@warning("-33") // Unused 'open Types'
@@ -14,10 +14,14 @@ let make = (): React.element => {
 
     let evenOdd = if gameState.players->Js.Array2.length->mod(2) === 0 { Even } else { Odd }
 
-    let onClick: (SeatingCodec.t => clickHandler) = (seating, _event) => setGameState(prevGameState => {
-        ...prevGameState,
-        seating
-    })
+    let onClick: (SeatingCodec.t => clickHandler) = (seating, _event) => {
+        let newGameState = {
+            ...gameState,
+            seating
+        }
+        setGameState(_prevGameState => newGameState)
+        LocalStorage.saveGameState(newGameState)
+    }
 
     <>
         <h2> {React.string(t("Seating layout"))} </h2>
