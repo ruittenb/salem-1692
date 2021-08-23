@@ -19260,19 +19260,25 @@ function SetupMusicPage(Props) {
         })) : (Curry._1(setPreview, function (_prev) {
           return availableTrack;
         }), gameState.backgroundMusic.concat([availableTrack]));
+        var newGameState_language = gameState.language;
+        var newGameState_players = gameState.players;
+        var newGameState_seating = gameState.seating;
+        var newGameState_doPlayEffects = gameState.doPlayEffects;
+        var newGameState_doPlaySpeech = gameState.doPlaySpeech;
+        var newGameState = {
+          language: newGameState_language,
+          players: newGameState_players,
+          seating: newGameState_seating,
+          doPlayEffects: newGameState_doPlayEffects,
+          doPlaySpeech: newGameState_doPlaySpeech,
+          backgroundMusic: newBackgroundMusic
+        };
 
-        Curry._1(setGameState, function (prevState) {
-          return {
-            language: prevState.language,
-            players: prevState.players,
-            seating: prevState.seating,
-            doPlayEffects: prevState.doPlayEffects,
-            doPlaySpeech: prevState.doPlaySpeech,
-            backgroundMusic: newBackgroundMusic
-          };
+        Curry._1(setGameState, function (_prevState) {
+          return newGameState;
         });
 
-        return LocalStorage$Salem1692.saveGameState(gameState);
+        return LocalStorage$Salem1692.saveGameState(newGameState);
       },
       key: String(index) + "/" + availableTrack
     });
@@ -19367,35 +19373,51 @@ function SetupPage(Props) {
     label: Curry._1(t, "Sound effects"),
     className: "condensed_nl icon-left " + (gameState.doPlayEffects ? "icon-checked" : "icon-unchecked"),
     onClick: function (_event) {
-      Curry._1(setGameState, function (prev) {
-        return {
-          language: prev.language,
-          players: prev.players,
-          seating: prev.seating,
-          doPlayEffects: !prev.doPlayEffects,
-          doPlaySpeech: prev.doPlaySpeech,
-          backgroundMusic: prev.backgroundMusic
-        };
+      var newGameState_language = gameState.language;
+      var newGameState_players = gameState.players;
+      var newGameState_seating = gameState.seating;
+      var newGameState_doPlayEffects = !gameState.doPlayEffects;
+      var newGameState_doPlaySpeech = gameState.doPlaySpeech;
+      var newGameState_backgroundMusic = gameState.backgroundMusic;
+      var newGameState = {
+        language: newGameState_language,
+        players: newGameState_players,
+        seating: newGameState_seating,
+        doPlayEffects: newGameState_doPlayEffects,
+        doPlaySpeech: newGameState_doPlaySpeech,
+        backgroundMusic: newGameState_backgroundMusic
+      };
+
+      Curry._1(setGameState, function (_prevState) {
+        return newGameState;
       });
 
-      return LocalStorage$Salem1692.saveGameState(gameState);
+      return LocalStorage$Salem1692.saveGameState(newGameState);
     }
   }), React.createElement(Button$Salem1692.make, {
     label: Curry._1(t, "Speech"),
     className: "icon-left " + (gameState.doPlaySpeech ? "icon-checked" : "icon-unchecked"),
     onClick: function (_event) {
-      Curry._1(setGameState, function (prev) {
-        return {
-          language: prev.language,
-          players: prev.players,
-          seating: prev.seating,
-          doPlayEffects: prev.doPlayEffects,
-          doPlaySpeech: !prev.doPlaySpeech,
-          backgroundMusic: prev.backgroundMusic
-        };
+      var newGameState_language = gameState.language;
+      var newGameState_players = gameState.players;
+      var newGameState_seating = gameState.seating;
+      var newGameState_doPlayEffects = gameState.doPlayEffects;
+      var newGameState_doPlaySpeech = !gameState.doPlaySpeech;
+      var newGameState_backgroundMusic = gameState.backgroundMusic;
+      var newGameState = {
+        language: newGameState_language,
+        players: newGameState_players,
+        seating: newGameState_seating,
+        doPlayEffects: newGameState_doPlayEffects,
+        doPlaySpeech: newGameState_doPlaySpeech,
+        backgroundMusic: newGameState_backgroundMusic
+      };
+
+      Curry._1(setGameState, function (_prevState) {
+        return newGameState;
       });
 
-      return LocalStorage$Salem1692.saveGameState(gameState);
+      return LocalStorage$Salem1692.saveGameState(newGameState);
     }
   }), React.createElement(Button$Salem1692.make, {
     label: Curry._1(t, "Music"),
