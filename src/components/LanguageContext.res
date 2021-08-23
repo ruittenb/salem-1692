@@ -3,9 +3,11 @@
  * LanguageContext
  */
 
+@@warning("-33") // Unused 'open Types'
+
 open Types
 
-let defaultLanguage = EN_US
+let defaultLanguage: LanguageCodec.t = #EN_US
 let defaultTranslator = Translator.getTranslator(defaultLanguage)
 
 let context = React.createContext(

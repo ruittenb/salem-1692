@@ -5,10 +5,10 @@
 
 open Types
 
-let initialLanguage: Types.language = EN_US
 let initialPage: Types.page = Title
 
 let initialGameState = {
+    language: #EN_US,
     players: [],
     seating: #OneAtTop,
     doPlayEffects: true,
@@ -20,10 +20,6 @@ let initialTurnState = {
     hasConstable: false,
     choiceWitches: "",
     choiceConstable: "",
-}
-
-let getLanguageClassName = (language: language): string => {
-    Translator.getLanguageCode(language)
 }
 
 let loadGameStateFromLocalStorage = (setGameState): unit => {
@@ -39,8 +35,7 @@ let make = (): React.element => {
     let (currentPage, goToPage)   = React.useState(_ => initialPage)
     let (gameState, setGameState) = React.useState(_ => initialGameState)
     let (turnState, setTurnState) = React.useState(_ => initialTurnState)
-    let (language,  setLanguage)  = React.useState(_ => initialLanguage)
-    let translator                = Translator.getTranslator(language)
+    let translator                = Translator.getTranslator(gameState.language)
 
     // run once after mounting
     React.useEffect0(() => {
@@ -51,7 +46,7 @@ let make = (): React.element => {
     let currentPage = switch currentPage {
         | Title                   => <TitlePage goToPage />
         | Setup                   => <SetupPage goToPage />
-        | SetupLanguage           => <SetupLanguagePage goToPage setLanguage />
+        | SetupLanguage           => <SetupLanguagePage goToPage />
         | SetupMusic              => <SetupMusicPage goToPage />
         | SetupPlayers            => <SetupPlayersPage goToPage />
         | SetupPlayersForGame     => <SetupPlayersPage goToPage contineToGame=true />
@@ -66,8 +61,8 @@ let make = (): React.element => {
         | Close                   => <ClosePage />
     }
 
-    <LanguageContext.Provider value=(language, translator)>
-        <div className=getLanguageClassName(language)>
+    <LanguageContext.Provider value=(gameState.language, translator)>
+        <div className=LanguageCodec.languageToJs(gameState.language)>
             <GameStateContext.Provider value=(gameState, setGameState)>
                 <TurnStateContext.Provider value=(turnState, setTurnState)>
                     {currentPage}

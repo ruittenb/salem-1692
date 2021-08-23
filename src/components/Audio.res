@@ -13,14 +13,6 @@ open Types
 @set external setVolume: (Dom.htmlAudioElement, float) => unit = "volume"
 external unsafeAsHtmlAudioElement : Dom.element => Dom.htmlAudioElement = "%identity"
 
-let getLanguageDirectory = (language: language): string => {
-    switch language {
-        | NL_NL => "nl_NL/"
-        | EN_US => "en_US/"
-        | ES_ES => "es_ES/"
-    }
-}
-
 @react.component
 let make = (
     ~track: audioType,
@@ -48,7 +40,7 @@ let make = (
 
     let musicDirectory  = "audio/music/"
     let effectDirectory = "audio/effects/"
-    let speechDirectory = "audio/" ++ getLanguageDirectory(language)
+    let speechDirectory = "audio/" ++ LanguageCodec.languageToJs(language)
 
     let src = switch track {
         | Speech(TownGoToSleep)       => speechDirectory ++ "town-go-to-sleep.mp3"
