@@ -12,8 +12,8 @@ let make = (
     ~goToPage,
 ): React.element => {
 
-    let (_language, t) = React.useContext(LanguageContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
+    let t = Translator.getTranslator(gameState.language)
 
     let allLanguages: array<LanguageCodec.t> = [ #NL_NL, #EN_US, #ES_ES ] // is there no way to retrieve these dynamically?
 

@@ -13,9 +13,9 @@ let make = (
     ~goToPage,
     ~contineToGame: bool = false,
 ): React.element => {
-    let (_language, t) = React.useContext(LanguageContext.context)
     let (gameState, _) = React.useContext(GameStateContext.context)
-    let hasEnoughPlayers = gameState.players->Js.Array.length > 1 // need > 2 players
+    let t = Translator.getTranslator(gameState.language)
+    let hasEnoughPlayers = gameState.players->Js.Array.length > 1 // needs at least 2 players
 
     // cleanup after render
     React.useEffect(() => {

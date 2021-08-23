@@ -22,7 +22,7 @@ let make = (
     ~onError: mediaHandler = _ => (),
 ): React.element => {
 
-    let (language, _translator) = React.useContext(LanguageContext.context)
+    let (gameState, _setGameState) = React.useContext(GameStateContext.context)
 
     let audioRef = React.useRef(Js.Nullable.null)
 
@@ -40,7 +40,7 @@ let make = (
 
     let musicDirectory  = "audio/music/"
     let effectDirectory = "audio/effects/"
-    let speechDirectory = "audio/" ++ LanguageCodec.languageToJs(language)
+    let speechDirectory = "audio/" ++ LanguageCodec.languageToJs(gameState.language)
 
     let src = switch track {
         | Speech(TownGoToSleep)       => speechDirectory ++ "town-go-to-sleep.mp3"

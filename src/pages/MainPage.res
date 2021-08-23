@@ -35,7 +35,6 @@ let make = (): React.element => {
     let (currentPage, goToPage)   = React.useState(_ => initialPage)
     let (gameState, setGameState) = React.useState(_ => initialGameState)
     let (turnState, setTurnState) = React.useState(_ => initialTurnState)
-    let translator                = Translator.getTranslator(gameState.language)
 
     // run once after mounting
     React.useEffect0(() => {
@@ -61,14 +60,12 @@ let make = (): React.element => {
         | Close                   => <ClosePage />
     }
 
-    <LanguageContext.Provider value=(gameState.language, translator)>
+    <GameStateContext.Provider value=(gameState, setGameState)>
         <div className=LanguageCodec.languageToJs(gameState.language)>
-            <GameStateContext.Provider value=(gameState, setGameState)>
-                <TurnStateContext.Provider value=(turnState, setTurnState)>
-                    {currentPage}
-                </TurnStateContext.Provider>
-            </GameStateContext.Provider>
+            <TurnStateContext.Provider value=(turnState, setTurnState)>
+                {currentPage}
+            </TurnStateContext.Provider>
         </div>
-    </LanguageContext.Provider>
+    </GameStateContext.Provider>
 }
 

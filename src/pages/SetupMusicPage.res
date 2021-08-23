@@ -10,8 +10,8 @@ let make = (
     ~goToPage,
 ): React.element => {
 
-    let (_language, t) = React.useContext(LanguageContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
+    let t = Translator.getTranslator(gameState.language)
     let (preview,   setPreview)   = React.useState(_ => None)
 
     let previewNode = preview

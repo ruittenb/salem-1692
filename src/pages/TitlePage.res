@@ -10,8 +10,8 @@ let make = (
     ~goToPage
 ): React.element => {
 
-    let (_language, t) = React.useContext(LanguageContext.context)
-    let (gameState, _) = React.useContext(GameStateContext.context)
+    let (gameState, _setGameState) = React.useContext(GameStateContext.context)
+    let t = Translator.getTranslator(gameState.language)
 
     let firstGamePage = if gameState.players->Belt.Array.length > 0 { Daytime } else { SetupPlayersForGame }
 

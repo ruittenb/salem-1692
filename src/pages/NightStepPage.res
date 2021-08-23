@@ -17,7 +17,8 @@ let make = (
 ): React.element => {
 
     // Language and translator
-    let (_language, t) = React.useContext(LanguageContext.context)
+    let (gameState, _setGameState) = React.useContext(GameStateContext.context)
+    let t = Translator.getTranslator(gameState.language)
 
     // Construct the core element for this page
     <div id="night-page" className="page">

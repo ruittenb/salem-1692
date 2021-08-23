@@ -9,8 +9,9 @@ open Types
 let make = (
     ~goToPage,
 ): React.element => {
-    let (_language, t) = React.useContext(LanguageContext.context)
     let (turnState, _) = React.useContext(TurnStateContext.context)
+    let (gameState, _setGameState) = React.useContext(GameStateContext.context)
+    let t = Translator.getTranslator(gameState.language)
 
     <div id="daytime-confess-page" className="page flex-vertical">
         <h1> {React.string(t("Confess"))} </h1>
