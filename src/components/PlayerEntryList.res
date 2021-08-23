@@ -30,8 +30,8 @@ let arrayConcat3 = (items1, items2, items3) => {
 @react.component
 let make = (): React.element => {
 
-    let (_language, t) = React.useContext(LanguageContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
+    let t = Translator.getTranslator(gameState.language)
 
     // handlers for existing players
     let blurHandler: (int => blurHandler) = (playerIndex, event) => {

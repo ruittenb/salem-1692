@@ -79,7 +79,8 @@ let make = (
     ~choiceHandler: (player, _) => unit,
 ): React.element => {
 
-    let (_language, t) = React.useContext(LanguageContext.context)
+    let (gameState, _setGameState) = React.useContext(GameStateContext.context)
+    let t = Translator.getTranslator(gameState.language)
 
     let (rotated, setRotate) = React.useState(_ => false)
     let rotatedClass = if rotated { "rotated" } else { "" }
@@ -91,7 +92,6 @@ let make = (
     }
 
     // determine order in which players must be traversed
-    let (gameState, _) = React.useContext(GameStateContext.context)
     let numPlayers = gameState.players->Belt.Array.length
     let evenOdd = if mod(numPlayers, 2) === 0 { Even } else { Odd }
 

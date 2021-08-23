@@ -5,7 +5,6 @@
 
 let localStoragePrefix = "salem1692"
 let localStorageGameStateKey = ".gameState"
-let localStorageLanguageKey = ".language"
 
 let backgroundVolume = 0.1
 
