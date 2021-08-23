@@ -10,9 +10,10 @@ let make = (
     ~goToPage,
 ): React.element => {
 
-    let (_language, t) = React.useContext(LanguageContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
-    let (preview,   setPreview)   = React.useState(_ => None)
+    let t = Translator.getTranslator(gameState.language)
+
+    let (preview, setPreview) = React.useState(_ => None)
 
     let previewNode = preview
         ->Belt.Option.mapWithDefault(
@@ -38,11 +39,12 @@ let make = (
                     setPreview(_prev => Some(availableTrack))
                     gameState.backgroundMusic->Js.Array2.concat([ availableTrack ])
                 }
-                setGameState(prevState => {
-                    ...prevState,
+                let newGameState = {
+                    ...gameState,
                     backgroundMusic: newBackgroundMusic
-                })
-                LocalStorage.saveGameState(gameState)
+                }
+                setGameState(_prevState => newGameState)
+                LocalStorage.saveGameState(newGameState)
             }
 
             let checkedClass = if isIncluded { "icon-checked" } else { "icon-unchecked" }

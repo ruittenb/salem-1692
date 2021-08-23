@@ -12,8 +12,8 @@ let make = (
 ): React.element => {
 
     // Translator, game state
-    let (_language, t) = React.useContext(LanguageContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
+    let t = Translator.getTranslator(gameState.language)
 
     // Audio error handler
     let (hasError, setError) = React.useState(_ => false)

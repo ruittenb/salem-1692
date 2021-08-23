@@ -102,7 +102,7 @@ div.paragraph {
     line-height: 1.15;
 }
 
-.nl_NL .page .condensed_nl {
+.NL_NL .page .condensed_nl {
     font-size: 24px;
 }
 
@@ -260,11 +260,13 @@ div.paragraph {
     animation: AnimatedBackground 3s ease-in-out infinite;
 }
 
-/* @keyframes AnimatedGradientBackground { */
-/*     0% { background-position: 0% 50% } */
-/*     50% { background-position: 100% 50% } */
-/*     100% { background-position: 0% 50% } */
-/* } */
+/*
+@keyframes AnimatedGradientBackground { // cannot be combined with background-image
+	0% { background-position: 0% 50% }
+	50% { background-position: 100% 50% }
+	100% { background-position: 0% 50% }
+}
+ */
 @keyframes AnimatedBackground {
     0% { background-color: #90783b }
     50% { background-color: #d4ce7b }

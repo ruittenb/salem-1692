@@ -8,11 +8,6 @@ type mediaHandler  = ReactEvent.Media.t => unit
 type changeHandler = ReactEvent.Form.t  => unit
 type blurHandler   = ReactEvent.Focus.t => unit
 
-type language =
-    | NL_NL
-    | EN_US
-    | ES_ES
-
 type evenOdd =
     | Even
     | Odd
@@ -21,6 +16,7 @@ type evenOdd =
 @decco type players = array<player>
 
 @decco type gameState = {
+    language: LanguageCodec.t,
     players: players,
     seating: SeatingCodec.t,
     doPlayEffects: bool,

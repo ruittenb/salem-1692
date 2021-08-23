@@ -11,7 +11,8 @@ open Types
 let make = (
     ~goToPage,
 ): React.element => {
-    let (_language, t) = React.useContext(LanguageContext.context)
+    let (gameState, _setGameState) = React.useContext(GameStateContext.context)
+    let t = Translator.getTranslator(gameState.language)
     let spacedComma = React.string(", ")
     <div id="credits-page" className="page flex-vertical text-padding">
         <h1> {React.string(t("Credits"))} </h1>

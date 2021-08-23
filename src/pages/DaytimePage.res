@@ -9,7 +9,8 @@ open Types
 let make = (
     ~goToPage,
 ): React.element => {
-    let (_language, t) = React.useContext(LanguageContext.context)
+    let (gameState, _setGameState) = React.useContext(GameStateContext.context)
+    let t = Translator.getTranslator(gameState.language)
 
     let (_, setTurnState) = React.useContext(TurnStateContext.context)
     let defaultNextState = {

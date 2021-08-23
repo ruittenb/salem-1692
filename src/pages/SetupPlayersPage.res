@@ -13,20 +13,15 @@ let make = (
     ~goToPage,
     ~contineToGame: bool = false,
 ): React.element => {
-    let (_language, t) = React.useContext(LanguageContext.context)
     let (gameState, _) = React.useContext(GameStateContext.context)
-    let hasEnoughPlayers = gameState.players->Js.Array.length > 1 // need > 2 players
-
-    // cleanup after render
-    React.useEffect(() => {
-        Some(() => LocalStorage.saveGameState(gameState))
-    })
+    let t = Translator.getTranslator(gameState.language)
+    let hasEnoughPlayers = gameState.players->Js.Array.length > 1 // needs at least 2 players
 
     <div id="setup-players-page" className="page flex-vertical">
         <h1> {React.string(t("Players"))} </h1>
-        <PlayerEntryList />
+        <PlayerForm />
         <Spacer />
-        <SeatingList />
+        <SeatingForm />
         {
             if contineToGame && hasEnoughPlayers {
                 <ButtonPair>
