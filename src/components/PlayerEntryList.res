@@ -33,57 +33,54 @@ let make = (): React.element => {
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
+    let setAndSaveGameState = (newGameState: gameState): unit => {
+        setGameState(_prevState => newGameState)
+        LocalStorage.saveGameState(newGameState)
+    }
+
     // handlers for existing players
     let blurHandler: (int => blurHandler) = (playerIndex, event) => {
         let newValue: player = ReactEvent.Focus.currentTarget(event)["value"]
-        setGameState(prevGameState => {
-            let players = arrayConcat3(
-                prevGameState.players->sliceFirst(playerIndex - 1),
-                [ newValue ],
-                prevGameState.players->sliceLast(playerIndex + 1)
-            )
-            { ...prevGameState, players }
-        })
+        let players = arrayConcat3(
+            gameState.players->sliceFirst(playerIndex - 1),
+            [ newValue ],
+            gameState.players->sliceLast(playerIndex + 1)
+        )
+        setAndSaveGameState({ ...gameState, players })
     }
     let removeHandler: (int => clickHandler) = (playerIndex, _event) => {
-        setGameState(prevGameState => {
-            let players = Js.Array2.concat(
-                prevGameState.players->sliceFirst(playerIndex - 1),
-                prevGameState.players->sliceLast(playerIndex + 1)
-            )
-            { ...prevGameState, players }
-        })
+        let players = Js.Array2.concat(
+            gameState.players->sliceFirst(playerIndex - 1),
+            gameState.players->sliceLast(playerIndex + 1)
+        )
+        setAndSaveGameState({ ...gameState, players })
     }
     let moveHandler: (int => clickHandler) = (playerIndex, _event) => {
-        setGameState(prevGameState => {
-            let firstSwapPlayer : option<player> = prevGameState.players->Belt.Array.get(playerIndex)
-            let secondSwapPlayer: option<player> = prevGameState.players->Belt.Array.get(playerIndex + 1)
+        let firstSwapPlayer : option<player> = gameState.players->Belt.Array.get(playerIndex)
+        let secondSwapPlayer: option<player> = gameState.players->Belt.Array.get(playerIndex + 1)
 
-            let players = switch (firstSwapPlayer, secondSwapPlayer) {
-                | (Some(first), Some(second)) => {
-                    arrayConcat3(
-                        prevGameState.players->sliceFirst(playerIndex - 1),
-                        [ second, first ],
-                        prevGameState.players->sliceLast(playerIndex + 2),
-                    )
-                }
-                | (_, _) => prevGameState.players // no change
+        let players = switch (firstSwapPlayer, secondSwapPlayer) {
+            | (Some(first), Some(second)) => {
+                arrayConcat3(
+                    gameState.players->sliceFirst(playerIndex - 1),
+                    [ second, first ],
+                    gameState.players->sliceLast(playerIndex + 2),
+                )
             }
-            { ...prevGameState, players }
-        })
+            | (_, _) => gameState.players // no change
+        }
+        setAndSaveGameState({ ...gameState, players })
     }
     // handler for new players
     let addHandler: blurHandler = (event) => {
         let newPlayer: player = ReactEvent.Focus.currentTarget(event)["value"]
-        setGameState(prevGameState => {
-            let newPlayers = if newPlayer->Js.String.length > 0 {
-                [ newPlayer ]
-            } else {
-                []
-            }
-            let players = Js.Array2.concat(prevGameState.players, newPlayers)
-            { ...prevGameState, players }
-        })
+        let newPlayers = if newPlayer->Js.String.length > 0 {
+            [ newPlayer ]
+        } else {
+            []
+        }
+        let players = Js.Array2.concat(gameState.players, newPlayers)
+        setAndSaveGameState({ ...gameState, players })
     }
 
     // create buttons for every player

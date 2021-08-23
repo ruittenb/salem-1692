@@ -13,22 +13,23 @@ let make = (
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let togglePlayEffects = () => {
-        let newGameState = {
-            ...gameState,
-            doPlayEffects: !gameState.doPlayEffects
-        }
+    let setAndSaveGameState = (newGameState: gameState): unit => {
         setGameState(_prevState => newGameState)
         LocalStorage.saveGameState(newGameState)
     }
 
+    let togglePlayEffects = () => {
+        setAndSaveGameState({
+            ...gameState,
+            doPlayEffects: !gameState.doPlayEffects
+        })
+    }
+
     let togglePlaySpeech = () => {
-        let newGameState = {
+        setAndSaveGameState({
             ...gameState,
             doPlaySpeech: !gameState.doPlaySpeech
-        }
-        setGameState(_prevState => newGameState)
-        LocalStorage.saveGameState(newGameState)
+        })
     }
 
     let hasBackgroundMusic = gameState.backgroundMusic->Js.Array2.length > 0

@@ -17,11 +17,6 @@ let make = (
     let t = Translator.getTranslator(gameState.language)
     let hasEnoughPlayers = gameState.players->Js.Array.length > 1 // needs at least 2 players
 
-    // cleanup after render
-    React.useEffect(() => {
-        Some(() => LocalStorage.saveGameState(gameState))
-    })
-
     <div id="setup-players-page" className="page flex-vertical">
         <h1> {React.string(t("Players"))} </h1>
         <PlayerEntryList />
