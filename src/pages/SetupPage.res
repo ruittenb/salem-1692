@@ -14,19 +14,21 @@ let make = (
     let t = Translator.getTranslator(gameState.language)
 
     let togglePlayEffects = () => {
-        setGameState(prev => {
-            ...prev,
-            doPlayEffects: !prev.doPlayEffects
-        })
-        LocalStorage.saveGameState(gameState)
+        let newGameState = {
+            ...gameState,
+            doPlayEffects: !gameState.doPlayEffects
+        }
+        setGameState(_prevState => newGameState)
+        LocalStorage.saveGameState(newGameState)
     }
 
     let togglePlaySpeech = () => {
-        setGameState(prev => {
-            ...prev,
-            doPlaySpeech: !prev.doPlaySpeech
-        })
-        LocalStorage.saveGameState(gameState)
+        let newGameState = {
+            ...gameState,
+            doPlaySpeech: !gameState.doPlaySpeech
+        }
+        setGameState(_prevState => newGameState)
+        LocalStorage.saveGameState(newGameState)
     }
 
     let hasBackgroundMusic = gameState.backgroundMusic->Js.Array2.length > 0
