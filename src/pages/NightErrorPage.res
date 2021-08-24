@@ -14,7 +14,7 @@ let make = (
 ): React.element => {
 
     // Construct the core element for this page
-    <NightStepPage title="Error" goToPage >
+    <NightStepPage error=true goToPage >
         <div> {React.string(message)} </div>
         <AudioError />
     </NightStepPage>

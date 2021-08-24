@@ -10,7 +10,7 @@ open Types
 
 @react.component
 let make = (
-    ~title: string = "Night", // must not have been translated yet
+    ~error: bool = false,
     ~children: React.element,
     ~showAbortButton: bool = true,
     ~goToPage,
@@ -19,6 +19,8 @@ let make = (
     // Language and translator
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
+
+    let title = if error { "Error" } else { "Night" }
 
     // Construct the core element for this page
     <div id="night-page" className="page">
