@@ -19,9 +19,10 @@ let lookup = (table: Js.Dict.t<string>, message: string, languageName: string) =
 
 let getTranslator = (language: LanguageCodec.t, message: string): string => {
     switch language {
-        | #EN_US => lookup(EN_US.table, message, "English")
-        | #NL_NL => lookup(NL_NL.table, message, "Dutch")
-        | #ES_ES => lookup(ES_ES.table, message, "Spanish")
+        // modules EN_US etc. need to start with capital letters
+        | #en_US => lookup(EN_US.table, message, "English")
+        | #nl_NL => lookup(NL_NL.table, message, "Dutch")
+        | #es_ES => lookup(ES_ES.table, message, "Spanish")
     }
 }
 

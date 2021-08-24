@@ -15,7 +15,7 @@ let make = (
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let allLanguages: array<LanguageCodec.t> = [ #NL_NL, #EN_US, #ES_ES ]
+    let allLanguages: array<LanguageCodec.t> = [ #nl_NL, #en_US, #es_ES ]
 
     let buttons: array<React.element> = allLanguages
         ->Belt.Array.map(buttonLanguage => {
@@ -29,9 +29,9 @@ let make = (
                 goToPage(_prev => Setup)
             }
             let (className, label) = switch buttonLanguage {
-                | #NL_NL => ("icon-left flag-nl", t("Nederlands"))
-                | #EN_US => ("icon-left flag-us", t("English"))
-                | #ES_ES => ("icon-left flag-es", t(`Español`))
+                | #nl_NL => ("icon-left flag-nl", t("Nederlands"))
+                | #en_US => ("icon-left flag-us", t("English"))
+                | #es_ES => ("icon-left flag-es", t(`Español`))
             }
             <Button key={label} label className onClick />
         })

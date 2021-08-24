@@ -8,7 +8,7 @@ open Types
 let initialPage: Types.page = Title
 
 let initialGameState = {
-    language: #EN_US,
+    language: #en_US,
     players: [],
     seating: #OneAtTop,
     doPlayEffects: true,

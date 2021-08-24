@@ -20,5 +20,13 @@ A PWA for representing the moderator in the Salem 1692 card game
 make build
 ```
 
-Output files will be put in dist/
+Output files will be put in `dist/`
+
+## Serving
+
+For running locally, a webserver may be started with:
+
+```
+make serve
+```
 
