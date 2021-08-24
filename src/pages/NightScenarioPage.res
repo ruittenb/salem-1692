@@ -32,7 +32,7 @@ let make = (
             | (Some(_), _)                  => ()
             // The scenario is exhausted: find the correct next page
             | (None, FirstNightOneWitch)
-            | (None, FirstNightMoreWitches) => goToPage(_page => DaytimeReveal)
+            | (None, FirstNightMoreWitches) => goToPage(_page => DaytimeRevealNoConfess)
             | (None, _)                     => goToPage(_page => DaytimeConfess)
         }
         None // no cleanup function
@@ -47,10 +47,12 @@ let make = (
                     let newBackgroundMusic = gameState.backgroundMusic
                         ->Js.Array2.sliceFrom(1)
                         ->Js.Array2.concat([ firstTrack ])
-                    setGameState(prevGameState => {
-                        ...prevGameState,
+                    let newGameState = {
+                        ...gameState,
                         backgroundMusic: newBackgroundMusic
-                    })
+                    }
+                    setGameState(_prevGameState => newGameState)
+                    LocalStorage.saveGameState(newGameState)
                 })
         })
     })

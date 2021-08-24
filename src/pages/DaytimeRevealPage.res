@@ -8,6 +8,7 @@ open Types
 @react.component
 let make = (
     ~goToPage,
+    ~allowBackToConfess: bool = true,
 ): React.element => {
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
@@ -32,6 +33,19 @@ let make = (
             t("The witches attacked-POST"),
         )
     }
+
+    let backToConfessButton =
+        <Button
+            label={t("Back")}
+            className="icon-left icon-back"
+            onClick={ _event => goToPage(_prev => DaytimeConfess) }
+        />
+    let forwardToDaytimeButton =
+        <Button
+            label={t("Next")}
+            className="condensed_nl icon-right icon-forw"
+            onClick={ _event => goToPage(_prev => Daytime) }
+        />
 
     <div id="daytime-reveal-page" className="page flex-vertical">
         <h1> {React.string(t("The Reveal"))} </h1>
@@ -62,25 +76,15 @@ let make = (
         }
         // Back/Forward buttons
         {
-            if freeToProceed {
+            if allowBackToConfess && freeToProceed {
                 <ButtonPair>
-                    <Button
-                        label={t("Back")}
-                        className="icon-left icon-back"
-                        onClick={ _event => goToPage(_prev => DaytimeConfess) }
-                    />
-                    <Button
-                        label={t("Next")}
-                        className="condensed_nl icon-right icon-forw"
-                        onClick={ _event => goToPage(_prev => Daytime) }
-                    />
+                    {backToConfessButton}
+                    {forwardToDaytimeButton}
                 </ButtonPair>
+            } else if allowBackToConfess {
+                {backToConfessButton}
             } else {
-                <Button
-                    label={t("Back")}
-                    className="icon-left icon-back"
-                    onClick={ _event => goToPage(_prev => DaytimeConfess) }
-                />
+                {forwardToDaytimeButton}
             }
         }
     </div>

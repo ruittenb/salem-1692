@@ -57,6 +57,7 @@ let make = (): React.element => {
         | OtherNightWithConstable => <NightScenarioPage goToPage subPage=currentPage />
         | DaytimeConfess          => <DaytimeConfessPage goToPage />
         | DaytimeReveal           => <DaytimeRevealPage goToPage />
+        | DaytimeRevealNoConfess  => <DaytimeRevealPage goToPage allowBackToConfess=false />
         | Close                   => <ClosePage />
     }
 

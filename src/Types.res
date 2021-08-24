@@ -48,6 +48,7 @@ type page =
     | OtherNightNoConstable
     | DaytimeConfess
     | DaytimeReveal
+    | DaytimeRevealNoConfess
     | Close
 
 type audioSpeech =
