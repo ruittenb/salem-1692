@@ -83,8 +83,10 @@ let make = (
                 </ButtonPair>
             } else if allowBackToConfess {
                 {backToConfessButton}
-            } else {
+            } else if freeToProceed {
                 {forwardToDaytimeButton}
+            } else {
+                React.null
             }
         }
     </div>
