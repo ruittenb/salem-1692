@@ -44,7 +44,7 @@ let make = (
         <Button
             label={t("Next")}
             disabled={!freeToProceed}
-            className="condensed_nl icon-right icon-forw"
+            className="icon-right icon-forw condensed-nl"
             onClick={ _event => goToPage(_prev => Daytime) }
         />
 

@@ -29,7 +29,7 @@ let make = (
             label={t("Play")}
             disabled={!hasEnoughPlayers}
             onClick={ _event => goToPage(_prev => Daytime) }
-            className="condensed_nl icon-left icon-forw spacer-top"
+            className="icon-left icon-forw spacer-top condensed-nl"
         />
 
     <div id="setup-players-page" className="page flex-vertical">

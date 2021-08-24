@@ -47,7 +47,7 @@ let make = (
         />
         <Button
             label={t("Sound effects")}
-            className={"condensed_nl icon-left " ++ if gameState.doPlayEffects { "icon-checked" } else { "icon-unchecked" }}
+            className={"condensed-nl icon-left " ++ if gameState.doPlayEffects { "icon-checked" } else { "icon-unchecked" }}
             onClick={ _event => togglePlayEffects() }
         />
         <Button

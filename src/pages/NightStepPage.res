@@ -12,8 +12,9 @@ open Types
 let make = (
     ~error: bool = false,
     ~children: React.element,
-    ~showAbortButton: bool = true,
+    ~showNavButtons: bool = true,
     ~goToPage,
+    ~goToNextStep = () => (),
 ): React.element => {
 
     // Language and translator
@@ -26,17 +27,26 @@ let make = (
     <div id="night-page" className="page">
         <div id="night-subpage" className="page flex-vertical">
             <h1> {React.string(t(title))} </h1>
+            // vertically step past background eyes
             <Spacer />
             <Spacer />
             <Spacer />
             {children}
             <Spacer />
-            { if showAbortButton {
-                <Button
-                    label={t("Abort")}
-                    className="icon-left icon-abort"
-                    onClick={ (_event) => goToPage(_prev => Daytime) }
-                />
+            { if showNavButtons {
+                <ButtonPair>
+                    <Button
+                        label={t("Abort")}
+                        className="icon-left icon-abort condensed-nl"
+                        onClick={ (_event) => goToPage(_prev => Daytime) }
+                    />
+                    <Button
+                        label={t("Next")}
+                        disabled=error
+                        className="icon-right icon-forw condensed-nl"
+                        onClick={ (_event) => goToNextStep() }
+                    />
+                </ButtonPair>
             } else {
                 React.null
             }}

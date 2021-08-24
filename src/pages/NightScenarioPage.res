@@ -87,7 +87,7 @@ let make = (
     let pageElement = switch (hasError, maybeScenarioStep) {
         | (true, _)                       => <NightErrorPage message=t("Unable to load audio") goToPage></NightErrorPage>
         | (false, None)                   => React.null // catch this situation in useEffect above
-        | (false, Some(Pause(duration)))  => <NightStepPage goToPage>
+        | (false, Some(Pause(duration)))  => <NightStepPage goToPage goToNextStep>
                                                  { let _ = Js.Global.setTimeout(
                                                        goToNextStepImperative,
                                                        Belt.Float.toInt(1000.0 *. duration)
@@ -96,12 +96,12 @@ let make = (
                                                  }
                                              </NightStepPage>
         | (false, Some(PlayEffect(effect)))
-               if gameState.doPlayEffects => <NightStepPage goToPage>
+               if gameState.doPlayEffects => <NightStepPage goToPage goToNextStep>
                                                  {soundImage}
                                                  <Audio track=Effect(effect) onEnded=goToNextStep onError />
                                              </NightStepPage>
         | (false, Some(PlaySpeech(speech)))
-                if gameState.doPlaySpeech => <NightStepPage goToPage>
+                if gameState.doPlaySpeech => <NightStepPage goToPage goToNextStep>
                                                  {soundImage}
                                                  <Audio track=Speech(speech) onEnded=goToNextStep onError />
                                              </NightStepPage>
@@ -113,10 +113,10 @@ let make = (
                                                React.null
                                              }
 
-        | (false, Some(ChooseWitches))    => <NightStepPage goToPage showAbortButton=false>
+        | (false, Some(ChooseWitches))    => <NightStepPage goToPage goToNextStep showNavButtons=false>
                                                  <PlayerList addressed=witchOrWitches choiceHandler=goFromWitchChoiceToNextStep />
                                              </NightStepPage>
-        | (false, Some(ChooseConstable))  => <NightStepPage goToPage showAbortButton=false>
+        | (false, Some(ChooseConstable))  => <NightStepPage goToPage goToNextStep showNavButtons=false>
                                                  <PlayerList addressed=Constable  choiceHandler=goFromConstableChoiceToNextStep />
                                              </NightStepPage>
 
