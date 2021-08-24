@@ -53,7 +53,7 @@ a[href$=".mp3"]::after {
 }
 
 img.sound-image {
-    margin: 50px 0 30px 0;
+    margin: 50px 0 60px 0;
 }
 img.sound-image.greyed {
     filter: grayscale(1);
@@ -102,7 +102,7 @@ div.paragraph {
     line-height: 1.15;
 }
 
-.nl_NL .page .condensed_nl {
+.nl_NL .page .condensed-nl {
     font-size: 24px;
 }
 
