@@ -48,7 +48,7 @@ let make = (): React.element => {
         | SetupLanguage           => <SetupLanguagePage goToPage />
         | SetupMusic              => <SetupMusicPage goToPage />
         | SetupPlayers            => <SetupPlayersPage goToPage />
-        | SetupPlayersForGame     => <SetupPlayersPage goToPage contineToGame=true />
+        | SetupPlayersForGame     => <SetupPlayersPage goToPage fromTitle=true />
         | Credits                 => <CreditsPage goToPage />
         | Daytime                 => <DaytimePage goToPage />
         | FirstNightOneWitch      => <NightScenarioPage goToPage subPage=currentPage />

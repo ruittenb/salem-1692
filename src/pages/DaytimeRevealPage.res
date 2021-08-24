@@ -43,6 +43,7 @@ let make = (
     let forwardToDaytimeButton =
         <Button
             label={t("Next")}
+            disabled={!freeToProceed}
             className="condensed_nl icon-right icon-forw"
             onClick={ _event => goToPage(_prev => Daytime) }
         />
@@ -76,17 +77,13 @@ let make = (
         }
         // Back/Forward buttons
         {
-            if allowBackToConfess && freeToProceed {
+            if allowBackToConfess {
                 <ButtonPair>
                     {backToConfessButton}
                     {forwardToDaytimeButton}
                 </ButtonPair>
-            } else if allowBackToConfess {
-                {backToConfessButton}
-            } else if freeToProceed {
-                {forwardToDaytimeButton}
             } else {
-                React.null
+                {forwardToDaytimeButton}
             }
         }
     </div>
