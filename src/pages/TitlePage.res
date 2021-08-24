@@ -13,7 +13,7 @@ let make = (
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let firstGamePage = if gameState.players->Belt.Array.length > 0 { Daytime } else { SetupPlayersForGame }
+    let firstGamePage = if gameState.players->Belt.Array.length >= 2 { Daytime } else { SetupPlayersForGame }
 
     <div id="title-page" className="page flex-vertical">
         <Button label={t("Play Game")} onClick={ _event => goToPage(_prev => firstGamePage) } />

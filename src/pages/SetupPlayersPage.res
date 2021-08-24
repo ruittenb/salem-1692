@@ -37,9 +37,10 @@ let make = (
                     />
                 </ButtonPair>
             } else {
+                let backPage = if contineToGame { Title } else { Setup }
                 <Button
                     label={t("Back")}
-                    onClick={ _event => goToPage(_prev => Setup) }
+                    onClick={ _event => goToPage(_prev => backPage) }
                     className="icon-left icon-back spacer-top"
                 />
             }
