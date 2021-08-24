@@ -8,7 +8,7 @@ open Types
 let getScenario = (subPage: page): scenario => {
     switch subPage {
         | FirstNightOneWitch      => [
-            PlayEffect(ChurchBell),
+            PlayEffect([ ChurchBell ]),
             PlaySpeech(TownGoToSleep),
             Pause(2.0),
             PlaySpeech(WitchWakeUp),
@@ -17,11 +17,11 @@ let getScenario = (subPage: page): scenario => {
             ConfirmWitches,
             PlaySpeech(WitchGoToSleep),
             Pause(2.0),
-            PlayEffect(Rooster),
+            PlayEffect([ Rooster, Lark ]),
             PlaySpeech(TownWakeUp),
         ]
         | FirstNightMoreWitches   => [
-            PlayEffect(ChurchBell),
+            PlayEffect([ ChurchBell ]),
             PlaySpeech(TownGoToSleep),
             Pause(2.0),
             PlaySpeech(WitchesWakeUp),
@@ -30,11 +30,11 @@ let getScenario = (subPage: page): scenario => {
             ConfirmWitches,
             PlaySpeech(WitchesGoToSleep),
             Pause(2.0),
-            PlayEffect(Rooster),
+            PlayEffect([ Rooster, Lark ]),
             PlaySpeech(TownWakeUp),
         ]
         | OtherNightWithConstable => [
-            PlayEffect(ChurchBell),
+            PlayEffect([ ChurchBell ]),
             PlaySpeech(TownGoToSleep),
             Pause(2.0),
             PlaySpeech(WitchesWakeUp),
@@ -48,11 +48,11 @@ let getScenario = (subPage: page): scenario => {
             ConfirmConstable,
             PlaySpeech(ConstableGoToSleep),
             Pause(2.0),
-            PlayEffect(Rooster),
+            PlayEffect([ Rooster, Lark ]),
             PlaySpeech(TownWakeUp),
         ]
         | OtherNightNoConstable   => [
-            PlayEffect(ChurchBell),
+            PlayEffect([ ChurchBell ]),
             PlaySpeech(TownGoToSleep),
             Pause(2.0),
             PlaySpeech(WitchesWakeUp),
@@ -61,7 +61,7 @@ let getScenario = (subPage: page): scenario => {
             ConfirmWitches,
             PlaySpeech(WitchesGoToSleep),
             Pause(2.0),
-            PlayEffect(Rooster),
+            PlayEffect([ Rooster, Lark ]),
             PlaySpeech(TownWakeUp),
         ]
         | _ => []

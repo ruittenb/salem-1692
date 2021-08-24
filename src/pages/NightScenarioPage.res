@@ -4,6 +4,7 @@
  */
 
 open Types
+open Utils
 
 @react.component
 let make = (
@@ -90,15 +91,17 @@ let make = (
         | (false, Some(Pause(duration)))  => <NightStepPage goToPage goToNextStep>
                                                  { let _ = Js.Global.setTimeout(
                                                        goToNextStepImperative,
-                                                       Belt.Float.toInt(1000.0 *. duration)
+                                                       Belt.Float.toInt(1000. *. duration)
                                                    )
                                                    soundImageGreyed
                                                  }
                                              </NightStepPage>
-        | (false, Some(PlayEffect(effect)))
-               if gameState.doPlayEffects => <NightStepPage goToPage goToNextStep>
+
+        | (false, Some(PlayEffect(effectSet)))
+              if (Belt.Array.length(effectSet) > 0
+              && gameState.doPlayEffects) => <NightStepPage goToPage goToNextStep>
                                                  {soundImage}
-                                                 <Audio track=Effect(effect) onEnded=goToNextStep onError />
+                                                 <Audio track=Effect(pickRandomElement(effectSet, Silence2s)) onEnded=goToNextStep onError />
                                              </NightStepPage>
         | (false, Some(PlaySpeech(speech)))
                 if gameState.doPlaySpeech => <NightStepPage goToPage goToNextStep>

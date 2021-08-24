@@ -65,8 +65,10 @@ type audioSpeech =
     | TownWakeUp
 
 type audioEffect =
+    | Silence2s
     | ChurchBell
     | Rooster
+    | Lark
 
 type audioMusic = string
 
@@ -77,7 +79,7 @@ type audioType =
 
 type scenarioStep =
     | PlaySpeech(audioSpeech)
-    | PlayEffect(audioEffect)
+    | PlayEffect(array<audioEffect>)
     | Pause(float)
     | ChooseWitches
     | ConfirmWitches
