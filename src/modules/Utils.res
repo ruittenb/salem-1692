@@ -6,6 +6,15 @@
 let identity = (arg: 'a): 'a => arg
 
 /**
+ * Pick a random element from a set.
+ */
+let pickRandomElement = (set: array<'a>, default: 'a): 'a => {
+    let index = Js.Math.random_int(0, set->Belt.Array.length)
+    set ->Belt.Array.get(index)
+        ->Belt.Option.getWithDefault(default)
+}
+
+/**
  * Calls a function that may throw an exception and converts
  * the result into an option<'a>
  */
