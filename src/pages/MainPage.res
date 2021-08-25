@@ -22,7 +22,8 @@ let rec getCurrentPage = (
         | SetupLanguage           => <SetupLanguagePage goToPage setLanguage />
         | Credits                 => <CreditsPage goToPage />
         | Daytime                 => <DaytimePage goToPage />
-        | FirstNight              => <NightPage subPage=currentPage goToPage players />
+        | FirstNightOneWitch      => <NightPage subPage=currentPage goToPage players />
+        | FirstNightMoreWitches   => <NightPage subPage=currentPage goToPage players />
         | OtherNightNoConstable   => <NightPage subPage=currentPage goToPage players />
         | OtherNightWithConstable => <NightPage subPage=currentPage goToPage players />
         | DaytimeReveal           => <div>{React.string("Daytime Reveal")} </div>

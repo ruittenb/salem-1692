@@ -3,13 +3,16 @@
  * ConfirmDialog
  */
 
+@@warning("-33") // Unused 'open Types'
+
 open Types
 
 @react.component
 let make = (
     ~address: string,
     ~choice: string,
-    ~goToPage,
+    ~goToPrevStep,
+    ~goToNextStep,
 ): React.element => {
     let language = React.useContext(LanguageContext.context)
     let t = Translator.getTranslator(language)
@@ -25,11 +28,11 @@ let make = (
             { React.string(choice) }
             <Spacer />
             <Spacer />
-            <LargeButton className="confirm_yes" onClick={ _event => goToPage(_prev => FirstNight) } >
+            <LargeButton className="confirm_yes" onClick=goToNextStep >
                 {React.string(t(`✔`))}
             </LargeButton>
             <Spacer />
-            <LargeButton className="confirm_no" onClick={ _event => goToPage(_prev => OtherNightWithConstable) } >
+            <LargeButton className="confirm_no" onClick=goToPrevStep >
                 {React.string(t(`✘`))}
             </LargeButton>
             <Spacer />

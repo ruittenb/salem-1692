@@ -28,7 +28,9 @@ let table = Js.Dict.fromArray([
     ("Images:", `Imágenes:`),
     // Day
     ("Daytime", `El día`),
-    ("First night", "Primera noche"),
+    ("First night,", "Primera noche,"),
+    ("one witch", "una bruja"),
+    ("more witches", `más brujas`),
     ("Other nights,", "Otras noches,"),
     ("with constable", "con agente jefe"),
     ("without constable", "sin agente jefe"),
@@ -49,6 +51,7 @@ let table = Js.Dict.fromArray([
     ("No", "No"),
     (`✔`, `✔`),
     (`✘`, `✘`),
+    ("ERROR while loading audio", "ERROR al cargar el audio"),
     // Dawn
     ("Decide whether you want to confess", "Decide si quieres confesar"),
     ("Reveal victim", `Revelar víctima`),

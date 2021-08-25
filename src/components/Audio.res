@@ -19,6 +19,7 @@ let getLanguageDirectory = (language: language): string => {
 let make = (
     ~track: scenarioStep,
     ~proceed: mediaHandler,
+    ~onError: mediaHandler,
 ): React.element => {
 
     let language = React.useContext(LanguageContext.context)
@@ -29,7 +30,7 @@ let make = (
         | Effect(Silence1s)           => effectDirectory ++ "silence-1s.mp3"
         | Effect(Silence2s)           => effectDirectory ++ "silence-2s.mp3"
         | Effect(Rooster)             => effectDirectory ++ "rooster.mp3"
-        | Effect(ChurchBell)          => effectDirectory ++ "tolling-bell-once.mp3"
+        | Effect(ChurchBell)          => effectDirectory ++ "church-bell-once.mp3"
 
         | Speech(TownGoToSleep)       => speechDirectory ++ "town-go-to-sleep.mp3"
         | Speech(WitchWakeUp)         => speechDirectory ++ "witch-wake-up.mp3"
@@ -47,6 +48,7 @@ let make = (
     <audio src
         autoPlay=true
         onEnded={ proceed }
+        onError={ onError }
     />
 }
 

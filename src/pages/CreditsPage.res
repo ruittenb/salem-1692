@@ -23,8 +23,9 @@ let make = (
             <dt> {React.string(t("App:"))} </dt>
             <dd> {React.string(`René Uittenbogaard © 2021`)} </dd>
             <dt> {React.string(t("Sound effects:"))} </dt>
-            <dd> {React.string("Daniel Simon, ")}
-                <a href="https://soundbible.com/"> {React.string("soundbible.com")} </a>
+            <dd> {React.string("Daniel Simon @ ")}
+                <a href="https://soundbible.com/"> {React.string("soundbible.com")} </a> spacedComma
+                <a href="https://mixkit.co/free-sound-effects/buzzer/"> {React.string("mixkit.co")} </a>
             </dd>
             <dt> {React.string(t("Voice actors:"))} </dt>
             <dd> {React.string(`René Uittenbogaard`)} </dd>

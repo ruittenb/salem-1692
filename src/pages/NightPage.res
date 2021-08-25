@@ -9,12 +9,27 @@ let elementify = _ => React.null // for converting impure (side-effect) function
 
 let getScenario = (subPage: page): scenario => {
     switch subPage {
-        | FirstNight              => [
+        | FirstNightOneWitch      => [
             Effect(ChurchBell),
-            //TODO Speech(TownGoToSleep),
+            Speech(TownGoToSleep),
             Effect(Silence1s),
             Effect(Silence2s),
-            //TODO Speech(WitchesWakeUp),
+            Speech(WitchWakeUp),
+            Speech(WitchDecideCat),
+            ChooseWitch,
+            ConfirmWitch,
+            Effect(Silence2s),
+            Speech(WitchGoToSleep),
+            Effect(Silence2s),
+            Effect(Rooster),
+            Speech(TownWakeUp),
+        ]
+        | FirstNightMoreWitches   => [
+            Effect(ChurchBell),
+            Speech(TownGoToSleep),
+            Effect(Silence1s),
+            Effect(Silence2s),
+            Speech(WitchesWakeUp),
             Speech(WitchesDecideCat),
             ChooseWitch,
             ConfirmWitch,
@@ -35,6 +50,7 @@ let getScenario = (subPage: page): scenario => {
             ConfirmWitch,
             Effect(Silence2s),
             Speech(WitchesGoToSleep),
+            Effect(Silence1s),
             Speech(ConstableWakeUp),
             ChooseConstable,
             ConfirmConstable,
@@ -63,17 +79,51 @@ let getScenario = (subPage: page): scenario => {
     }
 }
 
-let getPage = (
-    scenarioStep: scenarioStep,
+let getPageTemplate = (
+    t: string => string,
+    children: React.element,
     goToPage: (page => page) => unit,
-    goToPrevStep,
-    goToNextStep,
-    goToScenarioIndex,
-    players: players,
 ): React.element => {
+    <div id="night-page" className="page">
+        <div id="night-subpage" className="page flex-vertical">
+            <h1> {React.string(t("Night"))} </h1>
+            <Spacer />
+            <Spacer />
+            <Spacer />
+            {children}
+            <Spacer />
+            <Button
+                label={t("Back")}
+                className="icon icon_back"
+                onClick={ (_event) => goToPage(_prev => Daytime) }
+            />
+        </div>
+    </div>
+}
 
-    let language = React.useContext(LanguageContext.context)
-    let t = Translator.getTranslator(language)
+let getErrorPage = (
+    t: string => string,
+    goToPage: (page => page) => unit,
+): React.element => {
+    getPageTemplate(
+        t,
+        <>
+            <div> {React.string(t("ERROR while loading audio"))} </div>
+            <AudioError />
+        </>,
+        goToPage,
+    )
+}
+
+let getPage = (
+    t: string => string,
+    scenarioStep: scenarioStep,
+    isLastStep: bool,
+    players: players,
+    goToPage: (page => page) => unit,
+    goToScenarioIndex,
+    setError,
+): React.element => {
 
     let (witchVictimPlayer, setWitchVictimPlayer): (string, chosenPlayerSetter) = React.useContext(ChosenPlayerContext.context1)
     let (constableSavePlayer, setConstableSavePlayer): (string, chosenPlayerSetter) = React.useContext(ChosenPlayerContext.context2)
@@ -87,9 +137,17 @@ let getPage = (
         goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
     }
 
+    let onError      = (_event): unit => setError(_ => true)
+    let goToPrevStep = (_event): unit => goToScenarioIndex(scenarioIndex => scenarioIndex - 1)
+    let goToNextStep = (_event): unit => if isLastStep {
+        goToPage(_page => DaytimeReveal)
+    } else {
+        goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+    }
+
     let pageCoreElement = switch scenarioStep {
-        | Effect(_)        => <Audio track=scenarioStep proceed=goToNextStep />
-        | Speech(_)        => <Audio track=scenarioStep proceed=goToNextStep />
+        | Effect(_)        => <Audio track=scenarioStep proceed=goToNextStep onError />
+        | Speech(_)        => <Audio track=scenarioStep proceed=goToNextStep onError />
         | ChooseWitch      => <PlayerList
                                 players
                                 choiceHandler=goFromWitchChoiceToNextStep
@@ -105,29 +163,17 @@ let getPage = (
         | ConfirmWitch     => <ConfirmDialog
                                 choice=witchVictimPlayer
                                 address=t("Witches, ")
-                                goToPage
+                                goToPrevStep
+                                goToNextStep
                               />
         | ConfirmConstable => <ConfirmDialog
                                 choice=constableSavePlayer
                                 address=t("Constable, ")
-                                goToPage
+                                goToPrevStep
+                                goToNextStep
                               />
     }
-    <div id="night-page" className="page">
-        <div id="night-subpage" className="page flex-vertical">
-            <h1> {React.string(t("Night"))} </h1>
-            <Spacer />
-            <Spacer />
-            <Spacer />
-            {pageCoreElement}
-            <Spacer />
-            <Button
-                label={t("Back")}
-                className="icon icon_back"
-                onClick={ (_event) => goToPage(_prev => Daytime) }
-            />
-        </div>
-    </div>
+    getPageTemplate(t, pageCoreElement, goToPage)
 }
 
 @react.component
@@ -137,23 +183,30 @@ let make = (
     ~goToPage,
 ): React.element => {
 
-    let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
+    let language = React.useContext(LanguageContext.context)
+    let t = Translator.getTranslator(language)
 
-    let goToPrevStep = (_event): unit => goToScenarioIndex(scenarioIndex => scenarioIndex - 1)
-    let goToNextStep = (_event): unit => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+    let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
+    let (hasError, setError)               = React.useState(_ => false)
 
     let scenario: scenario = getScenario(subPage)
     let maybeScenarioStep: option<scenarioStep> = Belt.Array.get(scenario, scenarioIndex)
+    let isLastStep = scenarioIndex + 1 >= scenario->Belt.Array.length
 
-    switch maybeScenarioStep {
-        | None               => goToPage(_prev => DaytimeReveal)->elementify
-        | Some(scenarioStep) => getPage(
-            scenarioStep,
-            goToPage,
-            goToPrevStep,
-            goToNextStep,
-            goToScenarioIndex,
-            players)
+    if hasError {
+        getErrorPage(t, goToPage)
+    } else {
+        switch maybeScenarioStep {
+            | None               => React.null // should never happen
+            | Some(scenarioStep) => getPage(
+                t,
+                scenarioStep,
+                isLastStep,
+                players,
+                goToPage,
+                goToScenarioIndex,
+                setError)
+        }
     }
 }
 

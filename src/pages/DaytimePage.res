@@ -14,8 +14,13 @@ let make = (
     <div id="daytime-page" className="page flex-vertical">
         <h1> {React.string(t("Daytime"))} </h1>
         <Spacer />
-        <LargeButton onClick={ _event => goToPage(_prev => FirstNight) } >
-            {React.string(t("First night"))}
+        <LargeButton onClick={ _event => goToPage(_prev => FirstNightOneWitch) } >
+            {React.string(t("First night,"))} <br />
+            {React.string(t("one witch"))}
+        </LargeButton>
+        <LargeButton onClick={ _event => goToPage(_prev => FirstNightMoreWitches) } >
+            {React.string(t("First night,"))} <br />
+            {React.string(t("more witches"))}
         </LargeButton>
         <LargeButton onClick={ _event => goToPage(_prev => OtherNightWithConstable) } >
             {React.string(t("Other nights,"))} <br />

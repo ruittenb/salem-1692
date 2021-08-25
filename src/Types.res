@@ -27,7 +27,8 @@ type page =
     | SetupPlayers
     | Credits
     | Daytime
-    | FirstNight
+    | FirstNightOneWitch
+    | FirstNightMoreWitches
     | OtherNightWithConstable
     | OtherNightNoConstable
     | DaytimeReveal

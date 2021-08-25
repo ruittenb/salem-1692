@@ -2,7 +2,7 @@
 /** ****************************************************************************
  * SetupPage
  *
- * Language, player names, nr. witches, credits
+ * Language, player names, nr. witches, credits, TODO: reveal constable immediately
  */
 
 open Types
