@@ -23,6 +23,17 @@ let make = (
 
     let title = if error { "Error" } else { "Night" }
 
+    let abortButton = <Button
+        label={t("Abort")}
+        className="icon-left icon-abort condensed-nl"
+        onClick={ (_event) => goToPage(_prev => Daytime) }
+    />
+    let skipButton = <Button
+        label={t("Next")}
+        className="icon-right icon-forw condensed-nl"
+        onClick={ (_event) => goToNextStep() }
+    />
+
     // Construct the core element for this page
     <div id="night-page" className="page">
         <div id="night-subpage" className="page flex-vertical">
@@ -33,19 +44,12 @@ let make = (
             <Spacer />
             {children}
             <Spacer />
-            { if showNavButtons {
+            { if error {
+                {abortButton}
+            } else if showNavButtons {
                 <ButtonPair>
-                    <Button
-                        label={t("Abort")}
-                        className="icon-left icon-abort condensed-nl"
-                        onClick={ (_event) => goToPage(_prev => Daytime) }
-                    />
-                    <Button
-                        label={t("Next")}
-                        disabled=error
-                        className="icon-right icon-forw condensed-nl"
-                        onClick={ (_event) => goToNextStep() }
-                    />
+                    {abortButton}
+                    {skipButton}
                 </ButtonPair>
             } else {
                 React.null

@@ -62,6 +62,7 @@ let make = (
         | Effect(Footsteps)           => effectDirectory ++ "footsteps.mp3"
         | Effect(Lark)                => effectDirectory ++ "lark.mp3"
         | Effect(Rooster)             => effectDirectory ++ "rooster.mp3"
+        | Effect(Silence1s)           => effectDirectory ++ "silence-1s.mp3"
         | Effect(Silence2s)           => effectDirectory ++ "silence-2s.mp3"
         | Effect(Thunderstrike)       => effectDirectory ++ "thunderstrike.mp3"
 

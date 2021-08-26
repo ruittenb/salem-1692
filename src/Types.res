@@ -72,6 +72,7 @@ type audioEffect =
     | Footsteps
     | Lark
     | Rooster
+    | Silence1s
     | Silence2s
     | Thunderstrike
 
