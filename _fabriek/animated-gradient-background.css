@@ -1,0 +1,24 @@
+@keyframes AnimatedGradientBackground {
+    0%   { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #90783b   0%, #d4ce7b  50%, #90783b 100%              ); }
+    5%   { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #90783b  -5%, #d4ce7b  45%, #90783b  95%, #d4ce7b 145%); }
+    10%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #90783b -10%, #d4ce7b  40%, #90783b  90%, #d4ce7b 140%); }
+    15%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #90783b -15%, #d4ce7b  35%, #90783b  85%, #d4ce7b 135%); }
+    20%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #90783b -20%, #d4ce7b  30%, #90783b  80%, #d4ce7b 130%); }
+    25%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #90783b -25%, #d4ce7b  25%, #90783b  75%, #d4ce7b 125%); }
+    30%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #90783b -30%, #d4ce7b  20%, #90783b  70%, #d4ce7b 120%); }
+    35%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #90783b -35%, #d4ce7b  15%, #90783b  65%, #d4ce7b 115%); }
+    40%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #90783b -40%, #d4ce7b  10%, #90783b  60%, #d4ce7b 110%); }
+    45%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #90783b -45%, #d4ce7b   5%, #90783b  55%, #d4ce7b 105%); }
+    50%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #d4ce7b   0%, #90783b  50%, #d4ce7b 100%              ); }
+    55%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #d4ce7b  -5%, #90783b  45%, #d4ce7b  95%, #90783b 145%); }
+    60%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #d4ce7b -10%, #90783b  40%, #d4ce7b  90%, #90783b 140%); }
+    65%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #d4ce7b -15%, #90783b  35%, #d4ce7b  85%, #90783b 135%); }
+    70%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #d4ce7b -20%, #90783b  30%, #d4ce7b  80%, #90783b 130%); }
+    75%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #d4ce7b -25%, #90783b  25%, #d4ce7b  75%, #90783b 125%); }
+    80%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #d4ce7b -30%, #90783b  20%, #d4ce7b  70%, #90783b 120%); }
+    85%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #d4ce7b -35%, #90783b  15%, #d4ce7b  65%, #90783b 115%); }
+    90%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #d4ce7b -40%, #90783b  10%, #d4ce7b  60%, #90783b 110%); }
+    95%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #d4ce7b -45%, #90783b   5%, #d4ce7b  55%, #90783b 105%); }
+    100% { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(135deg, #90783b   0%, #d4ce7b  50%, #90783b 100%              ); }
+}
+
