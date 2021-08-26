@@ -7,6 +7,8 @@ open Types
 
 @val external salemAppVersion: string = "salemAppVersion"
 
+let nnbsp = ` ` // U+202F Narrow No-Break Space
+
 @react.component
 let make = (
     ~goToPage,
@@ -41,7 +43,7 @@ let make = (
                     Constants.musicTracks->Js.Array2.mapi((track, index) => {
                         <React.Fragment key={ Belt.Int.toString(index) ++ "/" ++ track } >
                             <a href={"https://incompetech.com/music/royalty-free/mp3-royaltyfree/" ++ track ++ ".mp3"} >
-                                {React.string(track)}
+                                {React.string(track ++ nnbsp ++ `♪`)}
                             </a>
                             spacedComma
                         </React.Fragment>
