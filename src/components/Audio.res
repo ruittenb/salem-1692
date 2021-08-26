@@ -55,10 +55,15 @@ let make = (
         | Speech(ConstableGoToSleep)  => speechDirectory ++ "constable-go-to-sleep.mp3"
         | Speech(TownWakeUp)          => speechDirectory ++ "town-wake-up.mp3"
 
-        | Effect(Silence2s)           => effectDirectory ++ "silence-2s.mp3"
+        | Effect(CatMeowing)          => effectDirectory ++ "cat-meowing.mp3"
         | Effect(ChurchBell)          => effectDirectory ++ "church-bell.mp3"
-        | Effect(Rooster)             => effectDirectory ++ "rooster.mp3"
+        | Effect(Crickets)            => effectDirectory ++ "crickets.mp3"
+        | Effect(DogBarking)          => effectDirectory ++ "dog-barking.mp3"
+        | Effect(Footsteps)           => effectDirectory ++ "footsteps.mp3"
         | Effect(Lark)                => effectDirectory ++ "lark.mp3"
+        | Effect(Rooster)             => effectDirectory ++ "rooster.mp3"
+        | Effect(Silence2s)           => effectDirectory ++ "silence-2s.mp3"
+        | Effect(Thunderstrike)       => effectDirectory ++ "thunderstrike.mp3"
 
         | Music(fileName)             => musicDirectory ++ fileName
     }

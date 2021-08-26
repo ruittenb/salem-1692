@@ -65,10 +65,15 @@ type audioSpeech =
     | TownWakeUp
 
 type audioEffect =
-    | Silence2s
+    | CatMeowing
     | ChurchBell
-    | Rooster
+    | Crickets
+    | DogBarking
+    | Footsteps
     | Lark
+    | Rooster
+    | Silence2s
+    | Thunderstrike
 
 type audioMusic = string
 
