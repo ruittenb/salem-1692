@@ -48,10 +48,6 @@ a[href] {
     color: brown;
 }
 
-a[href$=".mp3"]::after {
-    content: "_♪";
-}
-
 img.sound-image {
     margin: 50px 0 60px 0;
 }
@@ -71,6 +67,10 @@ input[type=text] {
 input[type=text]::placeholder {
     font-style: italic;
     color: #bbb;
+}
+
+.nowrap {
+    white-space: nowrap;
 }
 
 .flex-vertical {
