@@ -15,9 +15,13 @@ let musicTracks = [
     "Danse Macabre",
     "Dark Times",
     "Darkling",
+    "Egmont Overture",
     "Eternal Terminal",
+    "Moonlight Hall",
+    "Myst on the Moor",
     "Nightmare Machine",
     "Not As It Seems",
     "Schmetterling",
+    "Some Amount of Evil",
 ]->Js.Array2.sortInPlace
 
