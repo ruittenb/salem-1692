@@ -85,7 +85,8 @@ type audioType =
 
 type scenarioStep =
     | PlaySpeech(audioSpeech)
-    | PlayEffect(array<audioEffect>)
+    | PlayEffect(audioEffect)
+    | PlayRandomEffect(array<audioEffect>)
     | Pause(float)
     | ChooseWitches
     | ConfirmWitches

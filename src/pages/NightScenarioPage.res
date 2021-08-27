@@ -23,8 +23,23 @@ let make = (
     // Scenario: getter and setter, get current step
     let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
     let scenario: scenario = NightScenarios.getScenario(subPage)
-    let maybeScenarioStep: option<scenarioStep> = Belt.Array.get(scenario, scenarioIndex)
     let witchOrWitches: addressed = if subPage === FirstNightOneWitch { Witch } else { Witches }
+
+    let maybeScenarioStep: option<scenarioStep> = Belt.Array.get(scenario, scenarioIndex)
+        ->Belt.Option.map(step => {
+            // resolve effectSets
+            let resolvedStep = switch step {
+                // should effectSet be empty: use default of 1s silence
+                | PlayRandomEffect(effectSet) => PlayEffect(pickRandomElement(effectSet, Silence1s))
+                | _                           => step
+            }
+            // replace silences with actual Pauses
+            switch resolvedStep {
+                | PlayEffect(Silence2s) => Pause(2.0)
+                | PlayEffect(Silence1s) => Pause(1.0)
+                | _                     => resolvedStep
+            }
+        })
 
     // After every render: check if there is still a next scenario step
     React.useEffect(() => {
@@ -97,11 +112,13 @@ let make = (
                                                  }
                                              </NightStepPage>
 
-        | (false, Some(PlayEffect(effectSet)))
-              if (Belt.Array.length(effectSet) > 0
-              && gameState.doPlayEffects) => <NightStepPage goToPage goToNextStep>
+        | (false, Some(PlayRandomEffect(_))) => Js.log("This should not happen")
+                                                React.null // has been resolved above
+
+        | (false, Some(PlayEffect(effect)))
+               if gameState.doPlayEffects => <NightStepPage goToPage goToNextStep>
                                                  {soundImage}
-                                                 <Audio track=Effect(pickRandomElement(effectSet, Silence2s)) onEnded=goToNextStep onError />
+                                                 <Audio track=Effect(effect) onEnded=goToNextStep onError />
                                              </NightStepPage>
         | (false, Some(PlaySpeech(speech)))
                 if gameState.doPlaySpeech => <NightStepPage goToPage goToNextStep>
