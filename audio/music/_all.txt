@@ -10,14 +10,14 @@
  + Toccata en Fuga in d mineur: toepasselijk
 
  o Burnt Spirit: eerie, geschikt
- o Egmont Overture: toepasselijk, wel veel verschil in dynamiek
+ + Egmont Overture: toepasselijk, wel veel verschil in dynamiek
  o Hitman: geschikt; te modern?
- o Moonlight Hall: sprookjesachtig
- o Myst on the Moor: eerie
+ + Moonlight Hall: sprookjesachtig; te vrolijk?
+ + Myst on the Moor: eerie
  o New Hero in Town: wel geschikt maar oosters, modern, minder toepasselijk?
  o Serpentine Trek: mysterieus
  o Sneaky Snitch: vrolijk
- o Some amount of evil: mysterieus, driven; toepasselijk, geschikt? eindigt zacht
+ + Some amount of evil: mysterieus, driven; toepasselijk, geschikt? eindigt zacht
  o Sonatina in C minor: oosters geluid; minder toepasselijk?
  o Steel Rods: te modern?
  o Suonatore di liuto: baroque
@@ -39,7 +39,7 @@
  - Intended Force: vlot, percussie, maar te vrolijk
  - Laendler in C Minor (Hess 68): somber
  - Lift Motif: te simpel
- - Magistar: geschikt, toepasselijk, te zware percussie
+ - Magistar: te modern, te zware percussie
  - Mourning song: te langzaam en neerslachtig
  - Night Vigil: erg neerslachtig
  - Reign supreme
