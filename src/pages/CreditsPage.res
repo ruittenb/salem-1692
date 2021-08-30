@@ -34,7 +34,7 @@ let make = (
         </p>
         <p>
             <span> {React.string(t("Voice actors: "))} </span>
-            {React.string("Helmi Megens")} /* {React.string("Paul Scholey")} {React.string("Mario Ruiz")} */
+            {React.string("Helmi Megens, Mario Ruiz")} /* {React.string("Paul Scholey")} */
         </p>
         <p>
             <span> {React.string(t("Music: "))} </span>
