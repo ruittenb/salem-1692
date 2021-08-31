@@ -13,7 +13,7 @@ let initialGameState = {
     seating: #OneAtTop,
     doPlayEffects: true,
     doPlaySpeech: true,
-    backgroundMusic: [],
+    backgroundMusic: ["Some Amount of Evil", "Myst on the Moor"],
 }
 let initialTurnState = {
     nrWitches: 1,

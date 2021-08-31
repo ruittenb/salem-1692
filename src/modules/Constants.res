@@ -3,6 +3,8 @@
  * Constants
  */
 
+let siteUrl = "https://ruittenb.github.io/salem-1692/dist/"
+
 let localStoragePrefix = "salem1692"
 let localStorageGameStateKey = ".gameState"
 
