@@ -1,5 +1,5 @@
  - make hasConstable superfluous: use optional<string> anyway, with <ErrorPage>
  - fade music out
- - English speech
  - Spanish speech louder
- - crickets softer
+ - gear icon for settings page
+ - settings page scrolls in?
