@@ -29,7 +29,7 @@ let make = (
         onClick={ (_event) => goToPage(_prev => Daytime) }
     />
     let skipButton = <Button
-        label={t("Next")}
+        label={t("Skip")}
         className="icon-right icon-forw condensed-nl"
         onClick={ (_event) => goToNextStep() }
     />
