@@ -10,6 +10,7 @@ open Types
 @react.component
 let make = (
     ~goToPage,
+    ~returnPage: page,
 ): React.element => {
 
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
@@ -26,7 +27,7 @@ let make = (
                 }
                 setGameState(_prevState => newGameState)
                 LocalStorage.saveGameState(newGameState)
-                goToPage(_prev => Setup)
+                goToPage(_prev => Setup(returnPage))
             }
             let (className, label) = switch buttonLanguage {
                 | #nl_NL => ("icon-left flag-nl", t("Nederlands"))

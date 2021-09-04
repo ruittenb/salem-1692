@@ -21,6 +21,7 @@ let make = (
     }
 
     <div id="daytime-page" className="page flex-vertical">
+        <SettingsGear goToPage returnPage=Daytime />
         <h1> {React.string(t("Daytime"))} </h1>
         <Spacer />
         <LargeButton onClick={ _event => {

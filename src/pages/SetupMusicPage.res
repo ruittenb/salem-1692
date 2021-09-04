@@ -8,6 +8,7 @@ open Types
 @react.component
 let make = (
     ~goToPage,
+    ~returnPage: page,
 ): React.element => {
 
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
@@ -71,7 +72,7 @@ let make = (
         <Button
             label={t("Back")}
             className="icon-left icon-back"
-            onClick={ _event => goToPage(_prev => Setup) }
+            onClick={ _event => goToPage(_prev => Setup(returnPage)) }
         />
     </div>
 }
