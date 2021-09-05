@@ -3,3 +3,5 @@
  - Spanish speech louder
  - gear icon for settings page
  - settings page scrolls in?
+ - square "rotate" button
+ - square player name buttons
