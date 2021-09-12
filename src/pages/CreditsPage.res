@@ -33,7 +33,7 @@ let make = (
         <Spacer />
         <p>
             <span> {React.string(t("App: "))} </span>
-            <a href="{siteUrl}"> {React.string(t("website"))} </a> spacedComma
+            <a href={Constants.siteUrl}> {React.string(t("website"))} </a> spacedComma
             {React.string(t("version") ++ " v" ++ salemAppVersion ++ ` René Uittenbogaard © 2021`)}
         </p>
         <p>

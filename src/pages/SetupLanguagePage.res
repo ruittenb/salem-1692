@@ -16,9 +16,10 @@ let make = (
     let t = Translator.getTranslator(gameState.language)
 
     <div id="setup-page" className="page flex-vertical">
-        <h1> {React.string(t("Setup"))} </h1>
+        <h1> {React.string(t("Language"))} </h1>
+        <Spacer />
         <LanguageList goToPage returnPage />
-        <br />
+        <Spacer />
         <Button
             label={t("Back")}
             onClick={ _event => goToPage(_prev => Setup(returnPage)) }
