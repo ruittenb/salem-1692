@@ -268,7 +268,7 @@ div.paragraph {
 /* https://tinyurl.com/background-image-and-gradient */
 @keyframes AnimatedBackground {
     0%   { background-color: #90783b }
-    50%  { background-color: #d4ce7b }
+    50%  { background-color: #e2d286 }
     100% { background-color: #90783b }
 }
 

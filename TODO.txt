@@ -5,3 +5,4 @@
  - settings page scrolls in?
  - square "rotate" button
  - square player name buttons
+ - use sprintf("%s", name)
