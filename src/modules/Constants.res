@@ -29,3 +29,7 @@ let musicTracks = [
     "Some Amount of Evil",
 ]->Js.Array2.sortInPlace
 
+let defaultSelectedMusicTracks = [
+    "Myst on the Moor",
+    "Some Amount of Evil",
+]

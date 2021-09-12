@@ -12,6 +12,7 @@ let nnbsp = ` ` // U+202F Narrow No-Break Space
 @react.component
 let make = (
     ~goToPage,
+    ~returnPage: page,
 ): React.element => {
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
@@ -82,7 +83,7 @@ let make = (
         <Spacer />
         <Button
             label={t("Back")}
-            onClick={ _event => goToPage(_prev => Setup) }
+            onClick={ _event => goToPage(_prev => Setup(returnPage)) }
             className="icon-left icon-back"
         />
     </div>

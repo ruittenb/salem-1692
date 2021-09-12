@@ -4,6 +4,7 @@
  */
 
 open Types
+open Constants
 
 let initialPage: Types.page = Title
 
@@ -13,7 +14,7 @@ let initialGameState = {
     seating: #OneAtTop,
     doPlayEffects: true,
     doPlaySpeech: true,
-    backgroundMusic: ["Some Amount of Evil", "Myst on the Moor"],
+    backgroundMusic: defaultSelectedMusicTracks,
 }
 let initialTurnState = {
     nrWitches: 1,
@@ -43,22 +44,22 @@ let make = (): React.element => {
     })
 
     let currentPage = switch currentPage {
-        | Title                   => <TitlePage goToPage />
-        | Setup                   => <SetupPage goToPage />
-        | SetupLanguage           => <SetupLanguagePage goToPage />
-        | SetupMusic              => <SetupMusicPage goToPage />
-        | SetupPlayers            => <SetupPlayersPage goToPage />
-        | SetupPlayersForGame     => <SetupPlayersPage goToPage fromTitle=true />
-        | Credits                 => <CreditsPage goToPage />
-        | Daytime                 => <DaytimePage goToPage />
-        | FirstNightOneWitch      => <NightScenarioPage goToPage subPage=currentPage />
-        | FirstNightMoreWitches   => <NightScenarioPage goToPage subPage=currentPage />
-        | OtherNightNoConstable   => <NightScenarioPage goToPage subPage=currentPage />
-        | OtherNightWithConstable => <NightScenarioPage goToPage subPage=currentPage />
-        | DaytimeConfess          => <DaytimeConfessPage goToPage />
-        | DaytimeReveal           => <DaytimeRevealPage goToPage />
-        | DaytimeRevealNoConfess  => <DaytimeRevealPage goToPage allowBackToConfess=false />
-        | Close                   => <ClosePage />
+        | Title                           => <TitlePage goToPage />
+        | Setup(returnPage)               => <SetupPage goToPage returnPage />
+        | SetupLanguage(returnPage)       => <SetupLanguagePage goToPage returnPage />
+        | SetupMusic(returnPage)          => <SetupMusicPage goToPage returnPage />
+        | SetupPlayers(returnPage)        => <SetupPlayersPage goToPage returnPage />
+        | SetupPlayersForGame(returnPage) => <SetupPlayersPage goToPage returnPage />
+        | Credits(returnPage)             => <CreditsPage goToPage returnPage />
+        | Daytime                         => <DaytimePage goToPage />
+        | FirstNightOneWitch              => <NightScenarioPage goToPage subPage=currentPage />
+        | FirstNightMoreWitches           => <NightScenarioPage goToPage subPage=currentPage />
+        | OtherNightNoConstable           => <NightScenarioPage goToPage subPage=currentPage />
+        | OtherNightWithConstable         => <NightScenarioPage goToPage subPage=currentPage />
+        | DaytimeConfess                  => <DaytimeConfessPage goToPage />
+        | DaytimeReveal                   => <DaytimeRevealPage goToPage />
+        | DaytimeRevealNoConfess          => <DaytimeRevealPage goToPage allowBackToConfess=false />
+        | Close                           => <ClosePage />
     }
 
     <GameStateContext.Provider value=(gameState, setGameState)>

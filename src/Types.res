@@ -33,14 +33,14 @@ type turnState = {
 }
 type turnStateSetter = (turnState => turnState) => unit
 
-type page =
+type rec page =
     | Title
-    | Setup
-    | SetupLanguage
-    | SetupMusic
-    | SetupPlayers
-    | SetupPlayersForGame
-    | Credits
+    | Setup(page)
+    | SetupLanguage(page)
+    | SetupMusic(page)
+    | SetupPlayers(page)
+    | SetupPlayersForGame(page)
+    | Credits(page)
     | Daytime
     | FirstNightOneWitch
     | FirstNightMoreWitches

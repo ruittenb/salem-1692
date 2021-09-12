@@ -8,6 +8,7 @@ open Types
 @react.component
 let make = (
     ~goToPage,
+    ~returnPage: page,
 ): React.element => {
 
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
@@ -39,11 +40,11 @@ let make = (
         <Spacer />
         <Button
             label={t("Players")}
-            onClick={ _event => goToPage(_prev => SetupPlayers) }
+            onClick={ _event => goToPage(_prev => SetupPlayers(Setup(returnPage))) }
         />
         <Button
             label={t("Language")}
-            onClick={ _event => goToPage(_prev => SetupLanguage) }
+            onClick={ _event => goToPage(_prev => SetupLanguage(returnPage)) }
         />
         <Button
             label={t("Sound effects")}
@@ -58,15 +59,15 @@ let make = (
         <Button
             label={t("Music")}
             className={"icon-left " ++ if hasBackgroundMusic { "icon-checked" } else { "icon-unchecked" }}
-            onClick={ _event => goToPage(_prev => SetupMusic) }
+            onClick={ _event => goToPage(_prev => SetupMusic(returnPage)) }
         />
         <Button
             label={t("Credits")}
-            onClick={ _event => goToPage(_prev => Credits) }
+            onClick={ _event => goToPage(_prev => Credits(returnPage)) }
         />
         <Button
             label={t("Back")}
-            onClick={ _event => goToPage(_prev => Title) }
+            onClick={ _event => goToPage(_prev => returnPage) }
             className="icon-left icon-back"
         />
     </div>
