@@ -23,8 +23,17 @@ let initialTurnState = {
     choiceConstable: "",
 }
 
+let validateGameState = (gameState): gameState => {
+    let knownMusicTracksInclude = musicTracks->Js.Array2.includes // curried
+    {
+        ...gameState,
+        backgroundMusic: gameState.backgroundMusic->Js.Array2.filter(knownMusicTracksInclude)
+    }
+}
+
 let loadGameStateFromLocalStorage = (setGameState): unit => {
     LocalStorage.loadGameState()
+        ->Belt.Option.map(validateGameState)
         ->Belt.Option.forEach(
             gameState => setGameState(_prev => gameState)
         )

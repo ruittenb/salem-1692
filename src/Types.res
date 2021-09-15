@@ -12,6 +12,12 @@ type evenOdd =
     | Even
     | Odd
 
+type rotation =
+    | Deg0 // RotNone
+    | Deg90 // RotOneQuarter
+    | Deg180 // RotOneHalf
+    | Deg270 // RotThreeQuarters
+
 @decco type player = string
 @decco type players = array<player>
 

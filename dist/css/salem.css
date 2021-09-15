@@ -148,9 +148,10 @@ div.paragraph {
     margin-top: 25px;
 }
 
-.page button.rotated {
-    transform: rotate(180deg);
-}
+.page button.rot0   { transform: rotate(0deg);   }
+.page button.rot90  { transform: rotate(90deg);  }
+.page button.rot180 { transform: rotate(180deg); }
+.page button.rot270 { transform: rotate(270deg); }
 
 .page button.largebutton {
     width: 80%;
@@ -159,9 +160,9 @@ div.paragraph {
 
 .page button.squarebutton {
     justify-self: center;
-    margin: 10px 5%;
-    width: 80%;
-    height: 80px;
+    margin: 20px 9%;
+    width: 72%;
+    height: 90px;
 }
 
 .page button.largebutton.confirm-yes {

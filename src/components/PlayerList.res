@@ -73,6 +73,15 @@ let getSortIndexes = (
     }
 }
 
+let rotateMore = (rotation: rotation) => {
+    switch rotation {
+        | Deg0   => Deg90
+        | Deg90  => Deg180
+        | Deg180 => Deg270
+        | Deg270 => Deg0
+    }
+}
+
 @react.component
 let make = (
     ~addressed: addressed,
@@ -82,8 +91,13 @@ let make = (
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let (rotated, setRotate) = React.useState(_ => false)
-    let rotatedClass = if rotated { "rotated" } else { "" }
+    let (rotation, setRotation) = React.useState(_ => Deg0)
+    let rotatedClass = switch rotation {
+        | Deg0   => "rot0"
+        | Deg90  => "rot90"
+        | Deg180 => "rot180"
+        | Deg270 => "rot270"
+    }
 
     let (title, subtitle) = switch addressed {
         | Witch     => (t("The witch's turn"),     t("Choose-SG a victim:"))
@@ -129,7 +143,7 @@ let make = (
         <Button
             label={t("Rotate")}
             className="icon-left icon-rot spacer-top"
-            onClick={ (_event) => setRotate(prev => !prev) }
+            onClick={ (_event) => setRotation(prevRotation => rotateMore(prevRotation)) }
         />
     </>
 }
