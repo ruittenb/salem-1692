@@ -81,7 +81,7 @@ let make = (
     // Store chosen players (killed and saved) in context
     let (_, setTurnState) = React.useContext(TurnStateContext.context)
     let goFromWitchChoiceToNextStep = (player: player, _event): unit => {
-        setTurnState(prevTurnState => { ...prevTurnState, choiceWitches: player })
+        setTurnState(prevTurnState => { ...prevTurnState, choiceWitches: Some(player) })
         goToNextStepImperative()
     }
     let goFromConstableChoiceToNextStep = (player: player, _event): unit => {
@@ -112,7 +112,7 @@ let make = (
                                                  }
                                              </NightStepPage>
 
-        | (false, Some(PlayRandomEffect(_))) => Js.log("This should not happen")
+        | (false, Some(PlayRandomEffect(_))) => Js.log("This step should have been replaced with PlayEffect")
                                                 React.null // has been resolved above
 
         | (false, Some(PlayEffect(effect)))
@@ -134,14 +134,21 @@ let make = (
                                              }
 
         | (false, Some(ChooseWitches))    => <NightStepPage goToPage goToNextStep showNavButtons=false>
-                                                 <PlayerList addressed=witchOrWitches choiceHandler=goFromWitchChoiceToNextStep />
+                                                 <PlayerList
+                                                     addressed=witchOrWitches
+                                                     choiceHandler=goFromWitchChoiceToNextStep
+                                                 />
                                              </NightStepPage>
         | (false, Some(ChooseConstable))  => <NightStepPage goToPage goToNextStep showNavButtons=false>
-                                                 <PlayerList addressed=Constable  choiceHandler=goFromConstableChoiceToNextStep />
+                                                 <PlayerList
+                                                     addressed=Constable
+                                                     choiceHandler=goFromConstableChoiceToNextStep
+                                                 />
                                              </NightStepPage>
 
         | (false, Some(ConfirmWitches))   => <NightConfirmPage goToPrevStep goToNextStep addressed=witchOrWitches />
         | (false, Some(ConfirmConstable)) => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable      />
+        // TODO also pass "choice" to the confirm pages above
     }
 
     // render the page

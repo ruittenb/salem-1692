@@ -36,14 +36,21 @@ let make = (
     }
 
     let witchesRevealButton =
-        <LargeRevealButton
-            revealPrompt=witchesRevealPrompt
-            revelationPromptPre=witchesRevelationPromptPre
-            revelationPromptPost=witchesRevelationPromptPost
-            secret=turnState.choiceWitches
-            revealed=witchTargetRevealed
-            onClick={_event => setWitchTargetRevealed(prev => !prev)}
-        />
+        switch turnState.choiceWitches {
+            | None => React.null
+            | Some(witchTargetName) =>
+                <>
+                    <LargeRevealButton
+                        revealPrompt=witchesRevealPrompt
+                        revelationPromptPre=witchesRevelationPromptPre
+                        revelationPromptPost=witchesRevelationPromptPost
+                        secret=witchTargetName
+                        revealed=witchTargetRevealed
+                        onClick={_event => setWitchTargetRevealed(prev => !prev)}
+                    />
+                    <Spacer />
+                </>
+        }
 
     let constableRevealButton =
         switch turnState.choiceConstable {

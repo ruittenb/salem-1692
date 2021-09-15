@@ -18,7 +18,7 @@ let initialGameState = {
 }
 let initialTurnState = {
     nrWitches: One,
-    choiceWitches: "",
+    choiceWitches: None,
     choiceConstable: None,
 }
 

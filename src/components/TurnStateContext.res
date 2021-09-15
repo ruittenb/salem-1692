@@ -8,7 +8,7 @@ open Types
 let defaultSetter: turnStateSetter = (_: turnState => turnState) => ()
 let defaultState: turnState = {
     nrWitches: One,
-    choiceWitches: "",
+    choiceWitches: None,
     choiceConstable: None,
 }
 let context = React.createContext(

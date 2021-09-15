@@ -37,7 +37,7 @@ type gameStateSetter = (gameState => gameState) => unit
 
 type turnState = {
     nrWitches: nrWitches,
-    choiceWitches: string,
+    choiceWitches: option<string>,
     choiceConstable: option<string>,
 }
 type turnStateSetter = (turnState => turnState) => unit

@@ -5,3 +5,5 @@
  - four "rotate" buttons
  - use sprintf("%s", name)
  - resolve "choice cannot be None here"
+ - nightscenariopage: PlayRandomEffect
+

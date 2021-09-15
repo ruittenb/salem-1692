@@ -15,7 +15,7 @@ let make = (
     let (_, setTurnState) = React.useContext(TurnStateContext.context)
     let defaultNextState = {
         nrWitches: More,
-        choiceWitches: "",
+        choiceWitches: None,
         choiceConstable: None,
     }
 
