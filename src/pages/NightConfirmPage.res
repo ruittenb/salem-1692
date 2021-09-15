@@ -36,9 +36,9 @@ let make = (
             <Spacer />
             <Spacer />
             <Spacer />
-            { React.string(question) }
+            {React.string(question)}
             <div />
-            { React.string(choice) }
+            <h2> {React.string(choice)} </h2>
             <Spacer />
             <Spacer />
             <LargeButton className="confirm-yes" onClick=goToNextStep ></LargeButton>

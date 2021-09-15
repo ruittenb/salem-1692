@@ -160,7 +160,8 @@ div.paragraph {
 
 .page button.squarebutton {
     justify-self: center;
-    margin: 20px 9%;
+    font-size: 32px;
+    margin: 24px 9%;
     width: 72%;
     height: 90px;
 }

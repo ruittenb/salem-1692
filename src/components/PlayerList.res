@@ -75,10 +75,10 @@ let getSortIndexes = (
 
 let rotateMore = (rotation: rotation) => {
     switch rotation {
-        | Deg0   => Deg90
-        | Deg90  => Deg180
-        | Deg180 => Deg270
-        | Deg270 => Deg0
+        | RotNone          => RotOneQuarter
+        | RotOneQuarter    => RotOneHalf
+        | RotOneHalf       => RotThreeQuarters
+        | RotThreeQuarters => RotNone
     }
 }
 
@@ -91,12 +91,12 @@ let make = (
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let (rotation, setRotation) = React.useState(_ => Deg0)
+    let (rotation, setRotation) = React.useState(_ => RotNone)
     let rotatedClass = switch rotation {
-        | Deg0   => "rot0"
-        | Deg90  => "rot90"
-        | Deg180 => "rot180"
-        | Deg270 => "rot270"
+        | RotNone          => "rot0"
+        | RotOneQuarter    => "rot90"
+        | RotOneHalf       => "rot180"
+        | RotThreeQuarters => "rot270"
     }
 
     let (title, subtitle) = switch addressed {
