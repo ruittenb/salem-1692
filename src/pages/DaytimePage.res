@@ -14,10 +14,9 @@ let make = (
 
     let (_, setTurnState) = React.useContext(TurnStateContext.context)
     let defaultNextState = {
-        nrWitches: 2,
-        hasConstable: false,
+        nrWitches: More,
         choiceWitches: "",
-        choiceConstable: "",
+        choiceConstable: None,
     }
 
     <div id="daytime-page" className="page flex-vertical">
@@ -25,7 +24,7 @@ let make = (
         <h1> {React.string(t("Daytime"))} </h1>
         <Spacer />
         <LargeButton onClick={ _event => {
-            setTurnState(_prev => { ...defaultNextState, nrWitches: 1 })
+            setTurnState(_prev => { ...defaultNextState, nrWitches: One })
             goToPage(_prev => FirstNightOneWitch)
         } } >
             {React.string(t("First night,"))} <br />
@@ -39,7 +38,7 @@ let make = (
             {React.string(t("more witches"))}
         </LargeButton>
         <LargeButton onClick={ _event => {
-            setTurnState(_prev => { ...defaultNextState, hasConstable: true })
+            setTurnState(_prev => defaultNextState)
             goToPage(_prev => OtherNightWithConstable)
         } } >
             {React.string(t("Other nights,"))} <br />

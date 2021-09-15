@@ -17,10 +17,9 @@ let initialGameState = {
     backgroundMusic: defaultSelectedMusicTracks,
 }
 let initialTurnState = {
-    nrWitches: 1,
-    hasConstable: false,
+    nrWitches: One,
     choiceWitches: "",
-    choiceConstable: "",
+    choiceConstable: None,
 }
 
 let validateGameState = (gameState): gameState => {

@@ -13,15 +13,9 @@ let make = (
     ~revelationPromptPre: string,
     ~revelationPromptPost: string,
     ~secret: string,
-    ~onReveal = (_) => (),
+    ~revealed: bool,
+    ~onClick: clickHandler,
 ): React.element => {
-
-    let (revealed, setRevealed) = React.useState(_ => false)
-
-    let onClick = _event => {
-        onReveal(prev => !prev)
-        setRevealed(prev => !prev)
-    }
 
     <LargeButton label="" onClick>
         {

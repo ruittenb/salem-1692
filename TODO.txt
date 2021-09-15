@@ -1,6 +1,7 @@
- - make hasConstable superfluous: use optional<string> anyway, with <ErrorPage>
  - fade music out
  - Spanish speech louder
  - gear icon for settings page: refactor using state
+ - rework night eyes
  - four "rotate" buttons
  - use sprintf("%s", name)
+ - resolve "choice cannot be None here"

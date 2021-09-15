@@ -85,7 +85,7 @@ let make = (
         goToNextStepImperative()
     }
     let goFromConstableChoiceToNextStep = (player: player, _event): unit => {
-        setTurnState(prevTurnState => { ...prevTurnState, choiceConstable: player })
+        setTurnState(prevTurnState => { ...prevTurnState, choiceConstable: Some(player) })
         goToNextStepImperative()
     }
 

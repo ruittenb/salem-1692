@@ -7,10 +7,9 @@ open Types
 
 let defaultSetter: turnStateSetter = (_: turnState => turnState) => ()
 let defaultState: turnState = {
-    nrWitches: 0,
-    hasConstable: false,
+    nrWitches: One,
     choiceWitches: "",
-    choiceConstable: "",
+    choiceConstable: None,
 }
 let context = React.createContext(
     (defaultState, defaultSetter)

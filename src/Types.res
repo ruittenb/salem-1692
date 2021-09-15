@@ -18,6 +18,10 @@ type rotation =
     | RotOneHalf
     | RotThreeQuarters
 
+type nrWitches =
+    | One
+    | More
+
 @decco type player = string
 @decco type players = array<player>
 
@@ -32,10 +36,9 @@ type rotation =
 type gameStateSetter = (gameState => gameState) => unit
 
 type turnState = {
-    nrWitches: int,
-    hasConstable: bool,
+    nrWitches: nrWitches,
     choiceWitches: string,
-    choiceConstable: string,
+    choiceConstable: option<string>,
 }
 type turnStateSetter = (turnState => turnState) => unit
 

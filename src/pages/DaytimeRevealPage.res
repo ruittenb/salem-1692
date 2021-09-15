@@ -14,13 +14,14 @@ let make = (
     let t = Translator.getTranslator(gameState.language)
     let (turnState, _) = React.useContext(TurnStateContext.context)
 
-    let (freeToProceed, setFreeToProceed) = React.useState(_ => false)
+    let (witchTargetRevealed,     setWitchTargetRevealed)     = React.useState(_ => false)
+    let (constableTargetRevealed, setConstableTargetRevealed) = React.useState(_ => false)
 
     let (
         witchesRevealPrompt,
         witchesRevelationPromptPre,
         witchesRevelationPromptPost
-    ) = if turnState.nrWitches === 1 {
+    ) = if turnState.nrWitches === One {
         (
             t("Reveal witch's victim"),
             t("The witch attacked-PRE"),
@@ -33,6 +34,35 @@ let make = (
             t("The witches attacked-POST"),
         )
     }
+
+    let witchesRevealButton =
+        <LargeRevealButton
+            revealPrompt=witchesRevealPrompt
+            revelationPromptPre=witchesRevelationPromptPre
+            revelationPromptPost=witchesRevelationPromptPost
+            secret=turnState.choiceWitches
+            revealed=witchTargetRevealed
+            onClick={_event => setWitchTargetRevealed(prev => !prev)}
+        />
+
+    let constableRevealButton =
+        switch turnState.choiceConstable {
+            | None => React.null
+            | Some(constableTargetName) =>
+                <>
+                    <LargeRevealButton
+                        revealPrompt=t("Reveal constable's protection")
+                        revelationPromptPre=t("The constable protected-PRE")
+                        revelationPromptPost=t("The constable protected-POST")
+                        secret=constableTargetName
+                        revealed=constableTargetRevealed
+                        onClick={_event => setConstableTargetRevealed(prev => !prev)}
+                    />
+                    <Spacer />
+                </>
+        }
+
+    let freeToProceed = witchTargetRevealed && (constableTargetRevealed || turnState.choiceConstable === None)
 
     let backToConfessButton =
         <Button
@@ -48,33 +78,12 @@ let make = (
             onClick={ _event => goToPage(_prev => Daytime) }
         />
 
+    // component
     <div id="daytime-reveal-page" className="page flex-vertical">
         <h1> {React.string(t("The Reveal"))} </h1>
         <Spacer />
-        // Witches reveal button
-        <LargeRevealButton
-            revealPrompt=witchesRevealPrompt
-            revelationPromptPre=witchesRevelationPromptPre
-            revelationPromptPost=witchesRevelationPromptPost
-            secret=turnState.choiceWitches
-            onReveal=setFreeToProceed
-        />
-        // Constable reveal button
-        {
-            if turnState.hasConstable {
-                <>
-                    <LargeRevealButton
-                        revealPrompt=t("Reveal constable's protection")
-                        revelationPromptPre=t("The constable protected-PRE")
-                        revelationPromptPost=t("The constable protected-POST")
-                        secret=turnState.choiceConstable
-                    />
-                    <Spacer />
-                </>
-            } else {
-                React.null
-            }
-        }
+        {witchesRevealButton}
+        {constableRevealButton}
         // Back/Forward buttons
         {
             if allowBackToConfess {

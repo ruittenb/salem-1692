@@ -26,7 +26,7 @@ let make = (
     let choice = switch addressed {
         | Witch
         | Witches   => turnState.choiceWitches
-        | Constable => turnState.choiceConstable
+        | Constable => turnState.choiceConstable->Belt.Option.getWithDefault("") // choice cannot be None here
     }
 
     // This dialog hides the encompassing page in the background
