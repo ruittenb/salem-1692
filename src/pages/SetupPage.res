@@ -36,7 +36,7 @@ let make = (
     let hasBackgroundMusic = gameState.backgroundMusic->Js.Array2.length > 0
 
     <div id="setup-page" className="page flex-vertical">
-        <h1> {React.string(t("Setup"))} </h1>
+        <h1> {React.string(t("Settings"))} </h1>
         <Spacer />
         <Button
             label={t("Players")}

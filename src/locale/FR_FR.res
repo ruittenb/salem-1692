@@ -9,7 +9,7 @@ let table = Js.Dict.fromArray([
     ("Start Game", `Démarrer jeu`),
     ("Play Game", "Jouer"),
     ("Play", "Jouer"),
-    ("Setup", "Configuration"),
+    ("Settings", "Configuration"),
     ("Exit", "Fermer"),
     // Setup
     ("Players", "Joueurs"),
