@@ -25,21 +25,24 @@ let make = (
     let scenario: scenario = NightScenarios.getScenario(subPage)
     let witchOrWitches: addressed = if subPage === FirstNightOneWitch { Witch } else { Witches }
 
+    let resolveEffectSet = (step): scenarioStep => {
+        switch step {
+            // should effectSet be empty: use default of 1s silence
+            | PlayRandomEffect(effectSet) => PlayEffect(pickRandomElement(effectSet, Silence1s))
+            | _                           => step
+        }
+    }
+    let resolveSilences = (step): scenarioStep => {
+        switch step {
+            | PlayEffect(Silence2s) => Pause(2.0)
+            | PlayEffect(Silence1s) => Pause(1.0)
+            | _                     => step
+        }
+    }
+
     let maybeScenarioStep: option<scenarioStep> = Belt.Array.get(scenario, scenarioIndex)
-        ->Belt.Option.map(step => {
-            // resolve effectSets
-            let resolvedStep = switch step {
-                // should effectSet be empty: use default of 1s silence
-                | PlayRandomEffect(effectSet) => PlayEffect(pickRandomElement(effectSet, Silence1s))
-                | _                           => step
-            }
-            // replace silences with actual Pauses
-            switch resolvedStep {
-                | PlayEffect(Silence2s) => Pause(2.0)
-                | PlayEffect(Silence1s) => Pause(1.0)
-                | _                     => resolvedStep
-            }
-        })
+        ->Belt.Option.map(resolveEffectSet)
+        ->Belt.Option.map(resolveSilences)
 
     // After every render: check if there is still a next scenario step
     React.useEffect(() => {

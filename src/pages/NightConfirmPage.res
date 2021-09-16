@@ -25,7 +25,7 @@ let make = (
     }
     let choice = switch addressed {
         | Witch
-        | Witches   => turnState.choiceWitches->Belt.Option.getWithDefault("")
+        | Witches   => turnState.choiceWitches->Belt.Option.getWithDefault("") // choice cannot be None here
         | Constable => turnState.choiceConstable->Belt.Option.getWithDefault("") // choice cannot be None here
     }
 
