@@ -44,12 +44,12 @@ type turnStateSetter = (turnState => turnState) => unit
 
 type rec page =
     | Title
-    | Setup(page)
-    | SetupLanguage(page)
-    | SetupMusic(page)
-    | SetupPlayers(page)
-    | SetupPlayersForGame(page)
-    | Credits(page)
+    | Setup
+    | SetupLanguage
+    | SetupMusic
+    | SetupPlayers
+    | SetupPlayersForGame
+    | Credits
     | Daytime
     | FirstNightOneWitch
     | FirstNightMoreWitches
@@ -59,6 +59,8 @@ type rec page =
     | DaytimeReveal
     | DaytimeRevealNoConfess
     | Close
+
+type navigationSetter = (option<page> => option<page>) => unit
 
 type audioSpeech =
     | TownGoToSleep

@@ -3,10 +3,7 @@
  * SetupPlayersPage
  */
 
-@@warning("-33") // Unused 'open Types'
-
 open Types
-open Constants
 
 @react.component
 let make = (
@@ -15,7 +12,7 @@ let make = (
 ): React.element => {
     let (gameState, _) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
-    let hasEnoughPlayers = gameState.players->Js.Array.length > 1 // needs at least 2 players
+    let hasEnoughPlayers = gameState.players->Js.Array.length >= 2 // needs at least 2 players
 
     let backButton =
         <Button
