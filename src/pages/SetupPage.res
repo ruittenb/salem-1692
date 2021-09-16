@@ -8,10 +8,10 @@ open Types
 @react.component
 let make = (
     ~goToPage,
-    ~returnPage: page,
 ): React.element => {
 
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
+    let (navigation, setNavigation) = React.useContext(NavigationContext.context)
     let t = Translator.getTranslator(gameState.language)
 
     let setAndSaveGameState = (newGameState: gameState): unit => {
@@ -36,15 +36,15 @@ let make = (
     let hasBackgroundMusic = gameState.backgroundMusic->Js.Array2.length > 0
 
     <div id="setup-page" className="page flex-vertical">
-        <h1> {React.string(t("Setup"))} </h1>
+        <h1> {React.string(t("Settings"))} </h1>
         <Spacer />
         <Button
             label={t("Players")}
-            onClick={ _event => goToPage(_prev => SetupPlayers(Setup(returnPage))) }
+            onClick={ _event => goToPage(_prev => SetupPlayers) }
         />
         <Button
             label={t("Language")}
-            onClick={ _event => goToPage(_prev => SetupLanguage(returnPage)) }
+            onClick={ _event => goToPage(_prev => SetupLanguage) }
         />
         <Button
             label={t("Sound effects")}
@@ -59,15 +59,18 @@ let make = (
         <Button
             label={t("Music")}
             className={"icon-left " ++ if hasBackgroundMusic { "icon-checked" } else { "icon-unchecked" }}
-            onClick={ _event => goToPage(_prev => SetupMusic(returnPage)) }
+            onClick={ _event => goToPage(_prev => SetupMusic) }
         />
         <Button
             label={t("Credits")}
-            onClick={ _event => goToPage(_prev => Credits(returnPage)) }
+            onClick={ _event => goToPage(_prev => Credits) }
         />
         <Button
             label={t("Back")}
-            onClick={ _event => goToPage(_prev => returnPage) }
+            onClick={ _event => {
+                setNavigation(_prev => None)
+                goToPage(_prev => navigation->Belt.Option.getWithDefault(Title))
+            } }
             className="icon-left icon-back"
         />
     </div>

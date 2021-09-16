@@ -5,10 +5,13 @@
 
 open Types
 
+let intro =
+    "Check the boxes to compose a playlist for the nights. " ++
+    "Each successive night, the next track from the playlist will be played."
+
 @react.component
 let make = (
     ~goToPage,
-    ~returnPage: page,
 ): React.element => {
 
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
@@ -64,7 +67,7 @@ let make = (
         <h1> {React.string(t("Music"))} </h1>
         {previewNode}
         <div className="paragraph">
-            {React.string(t("Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played."))}
+            {React.string(t(intro))}
         </div>
         <Spacer />
         {trackButtons}
@@ -72,7 +75,7 @@ let make = (
         <Button
             label={t("Back")}
             className="icon-left icon-back"
-            onClick={ _event => goToPage(_prev => Setup(returnPage)) }
+            onClick={ _event => goToPage(_prev => Setup) }
         />
     </div>
 }

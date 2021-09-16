@@ -3,8 +3,6 @@
  * SettingsGear
  */
 
-@@warning("-33") // Unused 'open Types'
-
 open Types
 
 @react.component
@@ -13,8 +11,11 @@ let make = (
     ~returnPage: page,
 ): React.element => {
 
+    let (_navigation, setNavigation) = React.useContext(NavigationContext.context)
+
     let onClick: clickHandler = (_event => {
-        goToPage(_prev => Setup(returnPage))
+        setNavigation(_prev => Some(returnPage))
+        goToPage(_prev => Setup)
     })
 
     <div className="icon-gear" onClick></div>

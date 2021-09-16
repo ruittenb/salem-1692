@@ -8,20 +8,21 @@ open Types
 @val external salemAppVersion: string = "salemAppVersion"
 
 let nnbsp = ` ` // U+202F Narrow No-Break Space
+let note  = `♪` // U+266A Eighth Note (quaver)
 
 @react.component
 let make = (
     ~goToPage,
-    ~returnPage: page,
 ): React.element => {
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
     let spacedComma = React.string(", ")
+
     let trackList = React.array(
         Constants.musicTracks->Js.Array2.mapi((track, index) => {
             <React.Fragment key={ Belt.Int.toString(index) ++ "/" ++ track } >
             <a href={"https://incompetech.com/music/royalty-free/mp3-royaltyfree/" ++ track ++ ".mp3"} >
-            {React.string(track ++ nnbsp ++ `♪`)}
+            {React.string(track ++ nnbsp ++ note)}
             </a>
             spacedComma
             </React.Fragment>
@@ -83,7 +84,7 @@ let make = (
         <Spacer />
         <Button
             label={t("Back")}
-            onClick={ _event => goToPage(_prev => Setup(returnPage)) }
+            onClick={ _event => goToPage(_prev => Setup) }
             className="icon-left icon-back"
         />
     </div>
