@@ -17,7 +17,7 @@ let table = Js.Dict.fromArray([
     ("Enter the names of the players in clockwise order, starting at the head of the table.", "Please enter the names of the players in clockwise order, starting at the head of the table,"),
     ("(add one)", "(add one)"),
     ("Sound effects", "Sound FX"),
-    ("Speech", "Speech"),
+    ("Speech", "Dialog"),
     ("Music", "Music"),
     ("How many witches?", "How many witches?"),
     ("Seating layout", "Seating layout"),
