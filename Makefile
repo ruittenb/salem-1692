@@ -116,6 +116,7 @@ tag-%: ## Update the %:major:minor:patch:% version number and create git tag
 	npm version $* && \
 	VERSION_TO=$$(jq .version package.json) && \
 	rpl $$VERSION_FROM $$VERSION_TO $(VERSION_FILES)
+	@echo Please recompile: make compile-minify; git commit -a --amend; make move-tag; git push
 
 .PHONY: move-tag
 move-tag: ## Move the tag for the current package.json version to this branch
