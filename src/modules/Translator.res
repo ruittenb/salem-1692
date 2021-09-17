@@ -21,8 +21,10 @@ let getTranslator = (language: LanguageCodec.t, message: string): string => {
     switch language {
         // modules EN_US etc. need to start with capital letters
         | #en_US => lookup(EN_US.table, message, "English")
-        | #nl_NL => lookup(NL_NL.table, message, "Dutch")
         | #es_ES => lookup(ES_ES.table, message, "Spanish")
+        | #fr_FR => lookup(FR_FR.table, message, "French")
+        | #de_DE => lookup(DE_DE.table, message, "German")
+        | #nl_NL => lookup(NL_NL.table, message, "Dutch")
     }
 }
 

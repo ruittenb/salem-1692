@@ -135,7 +135,7 @@ let make = (
 
     <>
         <h2> {React.string(title)} </h2>
-        <div> {React.string(subtitle)} </div>
+        <div className="text-centered"> {React.string(subtitle)} </div>
         <div id="player-list">
             {React.array(buttons)}
         </div>

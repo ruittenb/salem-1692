@@ -19,9 +19,9 @@ let make = (
     let (turnState, _) = React.useContext(TurnStateContext.context)
 
     let question = switch addressed {
-        | Witch     => t("Witch, ")     ++ t("are you-FEM-SG sure?")
-        | Witches   => t("Witches, ")   ++ t("are you-PL sure?")
-        | Constable => t("Constable, ") ++ t("are you-MASC-SG sure?")
+        | Witch     => t("Witch, are you sure?")
+        | Witches   => t("Witches, are you sure?")
+        | Constable => t("Constable, are you sure?")
     }
     let choice = switch addressed {
         | Witch

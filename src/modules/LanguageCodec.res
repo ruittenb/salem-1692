@@ -6,9 +6,11 @@
 // generates the functions languageToJs() and languageFromJs()
 @deriving(jsConverter)
 type language = [
-    | #nl_NL
     | #en_US
     | #es_ES
+    | #fr_FR
+    | #de_DE
+    | #nl_NL
 ]
 
 let encoder: Decco.encoder<language> = (lanugage: language): Js.Json.t => {

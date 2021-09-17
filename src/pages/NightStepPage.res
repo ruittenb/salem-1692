@@ -25,12 +25,12 @@ let make = (
 
     let abortButton = <Button
         label={t("Abort")}
-        className="icon-left icon-abort condensed-nl"
+        className="icon-left icon-abort condensed-nl condensed-de"
         onClick={ (_event) => goToPage(_prev => Daytime) }
     />
     let skipButton = <Button
         label={t("Skip")}
-        className="icon-right icon-forw condensed-nl"
+        className="icon-right icon-forw condensed-nl condensed-de"
         onClick={ (_event) => goToNextStep() }
     />
 

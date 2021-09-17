@@ -23,7 +23,7 @@ let make = (
                 <>
                     <div> {React.string(revelationPromptPre)} </div>
                     <div>
-                        <span className="h2-no-margin"> {React.string(secret)} </span>
+                        <span className="font-large"> {React.string(secret)} </span>
                         <span> {React.string(revelationPromptPost)} </span>
                     </div>
                 </>

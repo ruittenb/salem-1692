@@ -44,6 +44,7 @@ let make = (
         />
         <Button
             label={t("Language")}
+            className="icon-left icon-lang"
             onClick={ _event => goToPage(_prev => SetupLanguage) }
         />
         <Button

@@ -68,12 +68,9 @@ let table = Js.Dict.fromArray([
     ("Abort", "Abortar"),
     ("Skip", "Saltar"),
     // Confirm
-    ("Witch, ", "Bruja, "),
-    ("Witches, ", "Brujas, "),
-    ("Constable, ", "Alguacil, "),
-    ("are you-MASC-SG sure?", `¿estás seguro?`),
-    ("are you-FEM-SG sure?", `¿estás segura?`),
-    ("are you-PL sure?", `¿estáis seguras?`), // estan?
+    ("Witch, are you sure?", `Bruja, ¿estás segura?`),
+    ("Witches, are you sure?", `Brujas, ¿estáis seguras?`), // están?
+    ("Constable, are you sure?", `Alguacil, ¿estás seguro?`),
     ("Confirm", "Confirmar"),
     ("Yes", `Sí`),
     ("No", "No"),
