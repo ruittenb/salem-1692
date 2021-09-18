@@ -87,6 +87,7 @@ let make = (
 
     // component
     <div id="daytime-reveal-page" className="page flex-vertical">
+        <SettingsGear goToPage returnPage=DaytimeReveal />
         <h1> {React.string(t("The Reveal"))} </h1>
         <Spacer />
         {witchesRevealButton}

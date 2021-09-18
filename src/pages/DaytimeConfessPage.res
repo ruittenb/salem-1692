@@ -33,6 +33,7 @@ let make = (
         }
 
     <div id="daytime-confess-page" className="page flex-vertical">
+        <SettingsGear goToPage returnPage=DaytimeConfess />
         <h1> {React.string(t("Confess"))} </h1>
         <h2> {React.string(t("Everyone,"))} </h2>
         <div className="paragraph text-centered"> {React.string(t("decide whether you want to confess"))} </div>

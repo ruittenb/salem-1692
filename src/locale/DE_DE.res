@@ -48,7 +48,7 @@ let table = Js.Dict.fromArray([
     ("Daytime", "Der Tag"),
     ("First night,", "Die erste Nacht,"),
     ("one witch", "eine Hexe"),
-    ("more witches", "mehr Hexen"),
+    ("more witches", "mehrere Hexen"),
     ("Other nights,", `Folgenden Nächte,`),
     ("with constable", "mit Sheriff"),
     ("without constable", "ohne Sheriff"),
@@ -90,7 +90,7 @@ let table = Js.Dict.fromArray([
     ("The witch attacked-POST", " angegriffen"),
     ("The witches attacked-PRE", "Die Hexen haben"),
     ("The witches attacked-POST", " angegriffen"),
-    ("Reveal constable's protection", `Schützling der Sheriff enthüllen`),
+    ("Reveal constable's protection", `Schützling des Sheriffs enthüllen`),
     ("The constable protected-PRE", "Der Sheriff hat"),
     ("The constable protected-POST", ` beschützt`),
 ])
