@@ -369,6 +369,13 @@ div.paragraph {
     color: #eee;
 }
 
+#night-subpage button.realsquarebutton {
+    background-position: center center;
+    width: 125px;
+    height: 125px;
+    min-height: 125px;
+}
+
 #player-list {
     width: 100%;
     display: grid;
