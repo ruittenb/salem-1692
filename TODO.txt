@@ -1,7 +1,6 @@
  - fade music out
  - Spanish speech louder
  - rework night eyes
- - four "rotate" buttons
  - use sprintf("%s", name)
  - resolve "choice cannot be None here"
  - nightscenariopage: PlayRandomEffect "this should not happen"

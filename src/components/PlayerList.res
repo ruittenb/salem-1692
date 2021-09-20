@@ -141,8 +141,7 @@ let make = (
         </div>
         <Spacer />
         <Button
-            label={t("Rotate")}
-            className="icon-left icon-rot spacer-top"
+            className="icon-rot spacer-top realsquarebutton"
             onClick={ (_event) => setRotation(prevRotation => rotateMore(prevRotation)) }
         />
     </>
