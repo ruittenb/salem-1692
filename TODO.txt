@@ -1,5 +1,4 @@
  - fade music out
- - Spanish speech louder
  - rework night eyes
  - use sprintf("%s", name)
  - resolve "choice cannot be None here"
