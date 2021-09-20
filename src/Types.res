@@ -42,7 +42,7 @@ type turnState = {
 }
 type turnStateSetter = (turnState => turnState) => unit
 
-type rec page =
+type page =
     | Title
     | Setup
     | SetupLanguage
