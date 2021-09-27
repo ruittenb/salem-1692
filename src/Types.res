@@ -8,6 +8,11 @@ type mediaHandler  = ReactEvent.Media.t => unit
 type changeHandler = ReactEvent.Form.t  => unit
 type blurHandler   = ReactEvent.Focus.t => unit
 
+type gameId = string
+type gameType =
+    | Master(gameId)
+    | Slave(gameId)
+
 type evenOdd =
     | Even
     | Odd
