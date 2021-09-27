@@ -1,5 +1,7 @@
 .DS_Store
-/node_modules/
+/.bsb.lock
+/.merlin
+/_fabriek/firebase/quickstart-js/
 /_fabriek/famfamfam/
 /_fabriek/audio/raw/
 /_fabriek/audio/speech-NL/
@@ -7,8 +9,7 @@
 /_fabriek/audio/speech-ES/
 /_fabriek/music/
 /lib/
-/.bsb.lock
-/.merlin
+node_modules/
 *.swp
 *.swo
 *.bs.js

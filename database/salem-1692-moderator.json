@@ -1,0 +1,16 @@
+{
+  "games": {
+    "a45-t81-p03": {
+      "game_id": "a45-t81-p03",
+      "players": [
+        "René",
+        "Dirk",
+        "Helmi",
+        "Joyce",
+        "Kees"
+      ],
+      "seating": "OneAtTop",
+      "auth_key": "t91-y44"
+    }
+  }
+}
