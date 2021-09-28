@@ -112,6 +112,10 @@ div.paragraph {
 .de_DE .page .condensed-de {
     font-size: 20px;
 }
+.es_ES .page h1.condensed-es {
+    font-size: 58px;
+    margin-top: 30px;
+}
 
 .page {
     position: absolute;

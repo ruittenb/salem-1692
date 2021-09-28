@@ -50,6 +50,8 @@ type page =
     | SetupMusic
     | SetupPlayers
     | SetupPlayersForGame
+    | SetupMaster
+    | SetupSlave
     | Credits
     | Daytime
     | FirstNightOneWitch
