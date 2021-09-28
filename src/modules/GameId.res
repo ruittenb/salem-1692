@@ -19,6 +19,6 @@ let getGameIdUnit = (): string => {
 }
 
 let getGameId = (): string => {
-    [ getGameIdUnit(), getGameIdUnit(), getGameIdUnit() ]->Js.Array2.joinWith("-")
+    [ getGameIdUnit(), getGameIdUnit(), getGameIdUnit(), getGameIdUnit() ]->Js.Array2.joinWith("-")
 }
 

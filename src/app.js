@@ -47,7 +47,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const firebaseDb = getDatabase(firebaseApp);
-const gamesRef = ref(firebaseDb, 'games');
 
 const myGameRef = ref(firebaseDb, 'games/a45-t81-p03');
 onValue(myGameRef, (snapshot) => {

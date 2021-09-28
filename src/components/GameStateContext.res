@@ -7,6 +7,7 @@ open Types
 
 let defaultSetter: gameStateSetter = (_: gameState => gameState) => ()
 let defaultState: gameState = {
+    gameType: StandAlone,
     language: #en_US,
     players: [],
     seating: #TwoAtTop,

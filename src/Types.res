@@ -8,11 +8,6 @@ type mediaHandler  = ReactEvent.Media.t => unit
 type changeHandler = ReactEvent.Form.t  => unit
 type blurHandler   = ReactEvent.Focus.t => unit
 
-type gameId = string
-type gameType =
-    | Master(gameId)
-    | Slave(gameId)
-
 type evenOdd =
     | Even
     | Odd
@@ -31,6 +26,7 @@ type nrWitches =
 @decco type players = array<player>
 
 @decco type gameState = {
+    gameType: GameTypeCodec.t,
     language: LanguageCodec.t,
     players: players,
     seating: SeatingCodec.t,

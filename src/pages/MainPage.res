@@ -8,9 +8,9 @@ open Constants
 
 let initialPage: page = Title
 let initialNavigation: option<page> = None
-let initialGameType: gameType = Master(GameId.getGameId())
 
 let initialGameState = {
+    gameType: StandAlone,
     language: #en_US,
     players: [],
     seating: #OneAtTop,
@@ -45,7 +45,6 @@ let make = (): React.element => {
 
     let (currentPage, goToPage)     = React.useState(_ => initialPage)
     let (gameState, setGameState)   = React.useState(_ => initialGameState)
-    let (gameType, setGameType)     = React.useState(_ => initialGameType)
     let (navigation, setNavigation) = React.useState(_ => initialNavigation)
     let (turnState, setTurnState)   = React.useState(_ => initialTurnState)
 
