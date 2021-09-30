@@ -14,6 +14,17 @@ let make = (
 
     let freeToProceed = true // TODO whether a valid game ID has been entered
 
+    let placeholder = "x00-x00-x00-x00"
+    let defaultValue = switch gameState.gameType {
+        | StandAlone    => ""
+        | Master(_)     => ""
+        | Slave(gameId) => gameId
+    }
+
+    let onBlur = (_) => {
+        goToPage(_prev => Title) // TODO
+    }
+
     // component
     <div id="setup-slave-page" className="page flex-vertical">
         <SettingsGear goToPage returnPage=SetupSlave />
@@ -25,8 +36,13 @@ let make = (
             {React.string(t("It is possible to join a game running on another telephone."))}
             <br />
             <br />
-            {React.string(t(`Take the other telephone and look in the app under Settings → Game ID. Then enter the Game ID here.`))}
+            {React.string(t(
+                `Take the other telephone and look in the app under Settings → Game ID. ` ++
+                `Then enter the Game ID here.`
+            ))}
         </div>
+        <Spacer />
+        <input type_="text" defaultValue placeholder onBlur />
         <Spacer />
         // Back/Forward buttons
         <ButtonPair>

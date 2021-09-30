@@ -1,7 +1,7 @@
 {
   "games": {
-    "a45-t81-p03": {
-      "game_id": "a45-t81-p03",
+    "a45-t81-p03-y52": {
+      "game_id": "a45-t81-p03-y52",
       "players": [
         "René",
         "Dirk",
@@ -10,7 +10,7 @@
         "Kees"
       ],
       "seating": "OneAtTop",
-      "auth_key": "t91-y44"
+      "phase": "DaytimeParked"
     }
   }
 }
