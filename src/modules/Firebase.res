@@ -34,7 +34,7 @@ let connect = (
     )
     ->Belt.Option.forEach((myGameRef) => {
         onValue(myGameRef, (snapshot: 'fbSnapshot) => {
-            let data = getValue(snapshot)
+            let _data = getValue(snapshot)
         })
     })
 }

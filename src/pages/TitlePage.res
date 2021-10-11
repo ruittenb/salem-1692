@@ -21,7 +21,7 @@ let make = (
         SetupPlayersForGame
     }
 
-    Firebase.connect("x00-x00-x00-x00")
+    //Firebase.connect("x00-x00-x00-x00")
 
     <div id="title-page" className="page flex-vertical">
         <SettingsGear goToPage returnPage=currentPage />
