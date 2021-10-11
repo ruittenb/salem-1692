@@ -4,7 +4,7 @@ A. Es wird Nacht. Die Dorfbewohner schläfen ein; jeder schliesst die Augen.
 
 B. Wenn alle die Augen geschlossen haben, wacht die Hexe auf.
 
-E. Die Hexe őffnet die Augen und geräuschlos entscheidet sie
+E. Die Hexe öffnet die Augen und geräuschlos entscheidet sie
    wer die schwarze Katze bekommt.
    Sie darf sich selbst wählen.
 
@@ -12,23 +12,23 @@ H. Die Hexe hat ihre Entscheidung gemacht und schliesst die Augen wieder.
 
 
 D. Wenn alle die Augen geschlossen haben, wachen die Hexen auf.
-   Die Hexen őffnen die Augen und nehmen Blickkontakt auf.
+   Die Hexen öffnen die Augen und nehmen Blickkontakt auf.
 
-F. Geräuschlos und nur mit Gesten kommen sie űberein wer die
+F. Geräuschlos und nur mit Gesten kommen sie überein wer die
    schwarze Katze bekommt.
-   Sie dűrfen eine von sich selbst wählen.
+   Sie dürfen eine von sich selbst wählen.
 
-G. Geräuschlos und nur mit Gesten kommen sie űberein wer wird ermordet.
-   Sie dűrfen eine von sich selbst wählen.
+G. Geräuschlos und nur mit Gesten kommen sie überein wer wird ermordet.
+   Sie dürfen eine von sich selbst wählen.
 
 J. Die Hexen haben ihre Entscheidung gemacht und schliessen die Augen wieder.
 
 
 M. Wenn die Hexen die Augen wieder geschlossen haben, wacht der Sheriff auf.
-   Der Sheriff entscheidet wer diese Nacht geschűtzt wird.
+   Der Sheriff entscheidet wer diese Nacht geschützt wird.
    Er darf nicht sich selbst wählen.
 
-N. Der Scheriff has eine Entscheidung gemacht und schliesst die Augen wieder.
+N. Der Sheriff has eine Entscheidung gemacht und schliesst die Augen wieder.
 
-Z. Es ist Morgen. Alle wachen auf und őffnen sich die Augen.
+Z. Es ist Morgen. Alle wachen auf und öffnen sich die Augen.
 

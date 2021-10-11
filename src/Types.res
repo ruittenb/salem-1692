@@ -26,6 +26,7 @@ type nrWitches =
 @decco type players = array<player>
 
 @decco type gameState = {
+    gameType: GameTypeCodec.t,
     language: LanguageCodec.t,
     players: players,
     seating: SeatingCodec.t,
@@ -49,6 +50,8 @@ type page =
     | SetupMusic
     | SetupPlayers
     | SetupPlayersForGame
+    | SetupMaster
+    | SetupSlave
     | Credits
     | Daytime
     | FirstNightOneWitch
@@ -111,3 +114,12 @@ type addressed =
     | Witches
     | Constable
 
+type firebaseConfig = {
+    apiKey            : string,
+    authDomain        : string,
+    databaseURL       : string,
+    projectId         : string,
+    storageBucket     : string,
+    messagingSenderId : string,
+    appId             : string,
+}

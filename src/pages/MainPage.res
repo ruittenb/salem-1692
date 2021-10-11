@@ -10,6 +10,7 @@ let initialPage: page = Title
 let initialNavigation: option<page> = None
 
 let initialGameState = {
+    gameType: StandAlone,
     language: #en_US,
     players: [],
     seating: #OneAtTop,
@@ -60,6 +61,8 @@ let make = (): React.element => {
         | SetupMusic              => <SetupMusicPage goToPage />
         | SetupPlayers            => <SetupPlayersPage goToPage returnPage=Setup />
         | SetupPlayersForGame     => <SetupPlayersPage goToPage returnPage=Title />
+        | SetupMaster             => <SetupMasterPage goToPage />
+        | SetupSlave              => <SetupSlavePage goToPage />
         | Credits                 => <CreditsPage goToPage />
         | Daytime                 => <DaytimePage goToPage />
         | FirstNightOneWitch      => <NightScenarioPage goToPage subPage=currentPage />

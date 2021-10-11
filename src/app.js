@@ -5,7 +5,8 @@
  * Bridges ReScript to JavaScript
  */
 
-import * as Main from './Main.bs'
+// Main Salem Moderator code
+import * as Main from './Main.bs';
 
 /** **********************************************************************
  * Register serviceworker if supported
@@ -25,13 +26,13 @@ if ('serviceWorker' in navigator) {
 }
 
 /** **********************************************************************
- * Make version number available for
+ * Make some variables available for Rescript
  */
 
 window.salemAppVersion = "0.27.2";
 
 /** **********************************************************************
- * Run the game. Specify the game's DOM node.
+ * Run the game. Specify the game's DOM node id.
  */
 
 Main.run('root');

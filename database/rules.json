@@ -1,0 +1,24 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "games": {
+      ".read": false,
+      ".write": true,
+      "$game_id": {
+        ".read": true,
+        ".write": "
+             newData.child('game_id').val() == $game_id
+          && newData.child('game_id').val() == data.child('game_id').val() /* same id */
+          && newData.child('game_id').val().matches(/^([a-z][0-9][0-9]-){3}[a-z][0-9][0-9]$/)
+        ",
+        ".validate": "newData.hasChildren([ 'game_id', 'players', 'seating', 'phase' ])",
+        "game_id":  { ".validate": "newData.isString()" },
+        "players":  { ".validate": true, /* there is no "newData.isArray()"? */ },
+        "seating":  { ".validate": "newData.isString() && newData.val().matches(/^(One|Two)AtTop$/)" },
+        "phase":    { ".validate": "newData.isString()" },
+        "$other":   { ".validate": false }
+      }
+    }
+  }
+}

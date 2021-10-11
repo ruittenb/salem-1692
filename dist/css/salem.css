@@ -58,6 +58,11 @@ img.sound-image {
 img.sound-image.greyed {
     filter: grayscale(1);
 }
+img.qr-code {
+    padding: 4px;
+    border: 3px solid black;
+    background-color: white;
+}
 
 input[type=text] {
     background-color: #faf8ea;
@@ -106,11 +111,24 @@ div.paragraph {
     line-height: 1.15;
 }
 
+div.input {
+    background-color: #eee;
+    border: 3px solid #666;
+    text-align: center;
+    font-family: inherit;
+    font-size: 28px;
+    width: 50%;
+}
+
 .nl_NL .page .condensed-nl {
     font-size: 24px;
 }
 .de_DE .page .condensed-de {
     font-size: 20px;
+}
+.es_ES .page h1.condensed-es {
+    font-size: 58px;
+    margin-top: 30px;
 }
 
 .page {
