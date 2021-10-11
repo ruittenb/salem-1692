@@ -29,7 +29,7 @@ if ('serviceWorker' in navigator) {
  * Make some variables available for Rescript
  */
 
-window.salemAppVersion = "0.27.2";
+window.salemAppVersion = "0.28.0";
 
 /** **********************************************************************
  * Run the game. Specify the game's DOM node id.

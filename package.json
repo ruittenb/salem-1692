@@ -1,10 +1,14 @@
 {
   "name": "salem-1692",
-  "version": "0.27.2",
+  "version": "0.28.0",
   "description": "Moderator PWA for the card game Salem 1692",
   "author": "René Uittenbogaard <ruittenb@gmail.com>",
   "homepage": "https://github.com/ruittenb/salem-1692",
-  "keywords": [ "rescript", "boardgame", "cardgame" ],
+  "keywords": [
+    "rescript",
+    "boardgame",
+    "cardgame"
+  ],
   "license": "GNU GPLv3",
   "main": "dist/index.html",
   "scripts": {
