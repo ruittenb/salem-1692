@@ -28915,8 +28915,6 @@ var React = _interopRequireWildcard(require("react"));
 
 var Button$Salem1692 = _interopRequireWildcard(require("../components/Button.bs.js"));
 
-var Firebase$Salem1692 = _interopRequireWildcard(require("../modules/Firebase.bs.js"));
-
 var Translator$Salem1692 = _interopRequireWildcard(require("../modules/Translator.bs.js"));
 
 var SettingsGear$Salem1692 = _interopRequireWildcard(require("../components/SettingsGear.bs.js"));
@@ -28943,7 +28941,6 @@ function TitlePage(Props) {
   9 :
   /* SetupPlayersForGame */
   5;
-  Firebase$Salem1692.connect("x00-x00-x00-x00");
   return React.createElement("div", {
     className: "page flex-vertical",
     id: "title-page"
@@ -28988,4 +28985,4 @@ var make = TitlePage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":53,"../components/GameStateContext.bs.js":55,"../components/SettingsGear.bs.js":65,"../modules/Firebase.bs.js":75,"../modules/Translator.bs.js":82,"react":17,"rescript/lib/es6/curry.js":34}]},{},[72,71,73,70,69,48,64,59,56,62,66,65,51,60,57,53,61,50,55,54,58,52,63,68,67,47,82,77,74,81,78,83,76,80,75,79,95,91,99,89,90,86,85,88,97,92,100,98,96,84,94,87,93,49]);
+},{"../components/Button.bs.js":53,"../components/GameStateContext.bs.js":55,"../components/SettingsGear.bs.js":65,"../modules/Translator.bs.js":82,"react":17,"rescript/lib/es6/curry.js":34}]},{},[72,71,73,70,69,48,64,59,56,62,66,65,51,60,57,53,61,50,55,54,58,52,63,68,67,47,82,77,74,81,78,83,76,80,75,79,95,91,99,89,90,86,85,88,97,92,100,98,96,84,94,87,93,49]);
