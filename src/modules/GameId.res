@@ -22,3 +22,6 @@ let getGameId = (): string => {
     [ getGameIdUnit(), getGameIdUnit(), getGameIdUnit(), getGameIdUnit() ]->Js.Array2.joinWith("-")
 }
 
+let isValid = (id: string): bool => {
+    Js.Re.test_(%re("/^([a-z][0-9][0-9]-){3}[a-z][0-9][0-9]$/"), id)
+}

@@ -12,7 +12,7 @@ let make = (
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let freeToProceed = true // TODO whether a valid game ID has been entered
+    let freeToProceed = true // TODO  GameId.isValid()
 
     let placeholder = "x00-x00-x00-x00"
     let defaultValue = switch gameState.gameType {

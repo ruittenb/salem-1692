@@ -16,7 +16,7 @@ open Utils
 let connect = (
     gameId: GameTypeCodec.gameId
 ): unit => {
-    let firebaseApp = initializeApp(Config.firebaseConfig)
+    let firebaseApp = initializeApp(Constants.firebaseConfig)
     let firebaseDb = getDatabase(firebaseApp)
     safeExec(
         () => getRef(firebaseDb, "games/" ++ gameId)
