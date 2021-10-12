@@ -33,12 +33,12 @@ let make = (
         </h1>
         <Spacer />
         <div className="paragraph">
-            {React.string(t("It is possible to join a game running on another telephone."))}
+            {React.string(t("It is possible to join a game running on another smartphone."))}
             <br />
             <br />
             {React.string(t(
-                `Take the other telephone and look in the app under Settings → Game ID. ` ++
-                `Then enter the Game ID here.`
+                `Take the other smartphone and look in the app under Settings → Game ID. ` ++ // need backticks for arrow
+                "Then enter the Game ID here."
             ))}
         </div>
         <Spacer />

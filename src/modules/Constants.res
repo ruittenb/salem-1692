@@ -10,6 +10,8 @@ let localStorageGameStateKey = ".gameState"
 
 let backgroundVolume = 0.1
 
+let consoleErrorFormatting = "color: red; font-weight: bold"
+
 // Stripped of .mp3 extension
 let musicTracks = [
     "Agnus Dei X",

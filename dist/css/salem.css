@@ -107,8 +107,10 @@ div.text-padding {
 }
 
 div.paragraph {
-    margin: 10px 20px;
+    margin: 5px 15px;
+    padding: 5px;
     line-height: 1.15;
+    backdrop-filter: blur(5px);
 }
 
 div.input {
@@ -323,6 +325,11 @@ div.input {
 #setup-players-page .player-entry-item .staggered {
     position: relative;
     top: 31px;
+}
+
+#setup-master-page,
+#setup-slave-page {
+    background: url(../images/overlay-old-phone.png) -220px 100px no-repeat;
 }
 
 #layout-list {

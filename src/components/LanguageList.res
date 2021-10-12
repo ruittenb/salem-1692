@@ -15,7 +15,7 @@ let make = (
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let offeredLanguages: array<LanguageCodec.t> = [ #en_US, #es_ES, /* #fr_FR, #de_DE, */ #nl_NL ]
+    let offeredLanguages: array<LanguageCodec.t> = [ #en_US, #es_ES, #fr_FR, #de_DE, #nl_NL ]
 
     let buttons: array<React.element> = offeredLanguages
         ->Belt.Array.map(buttonLanguage => {
