@@ -52,7 +52,7 @@ let make = (
             {React.string(t("Take the other smartphone and look in the app under Join Game. Then enter the following Game ID there."))}
         </div>
         <Spacer />
-        <div className="input"> {React.string(gameId)} </div>
+        <div className="id-input"> {React.string(gameId)} </div>
         <Spacer />
         <QR value=gameId />
         <Spacer />

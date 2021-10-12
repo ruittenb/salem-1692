@@ -110,15 +110,19 @@ div.paragraph {
     margin: 5px 15px;
     padding: 5px;
     line-height: 1.15;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(2px);
 }
 
-div.input {
+div.id-input {
     background-color: #eee;
+}
+div.id-input,
+input[type=text].id-input {
     border: 3px solid #666;
     text-align: center;
-    font-family: inherit;
-    font-size: 28px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    padding: 6px 0;
     width: 50%;
 }
 

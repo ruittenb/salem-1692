@@ -8,9 +8,9 @@ let siteUrl = "https://ruittenb.github.io/salem-1692/dist/"
 let localStoragePrefix = "salem1692"
 let localStorageGameStateKey = ".gameState"
 
-let backgroundVolume = 0.1
-
 let consoleErrorFormatting = "color: red; font-weight: bold"
+
+let backgroundVolume = 0.1
 
 // Stripped of .mp3 extension
 let musicTracks = [

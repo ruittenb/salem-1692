@@ -42,7 +42,7 @@ let make = (
             ))}
         </div>
         <Spacer />
-        <input type_="text" defaultValue placeholder onBlur />
+        <input type_="text" className="id-input" defaultValue placeholder onBlur />
         <Spacer />
         // Back/Forward buttons
         <ButtonPair>
