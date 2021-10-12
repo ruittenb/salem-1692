@@ -28390,7 +28390,7 @@ function SetupLanguagePage(Props) {
 
   return React.createElement("div", {
     className: "page flex-vertical",
-    id: "setup-page"
+    id: "setup-language-page"
   }, React.createElement("h1", undefined, Curry._1(t, "Language")), React.createElement(Spacer$Salem1692.make, {}), React.createElement(LanguageList$Salem1692.make, {
     goToPage: goToPage
   }), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
@@ -28961,7 +28961,7 @@ function SetupSlavePage(Props) {
   /* Master */
   0 ? "" : gameId._0;
 
-  var onBlur = function (param) {
+  var onBlur = function (_event) {
     return Curry._1(goToPage, function (_prev) {
       return (
         /* Title */
