@@ -21,7 +21,7 @@ let make = (
         | Slave(gameId) => gameId
     }
 
-    let onBlur = (_) => {
+    let onBlur = (_event) => {
         goToPage(_prev => Title) // TODO
     }
 
@@ -37,7 +37,8 @@ let make = (
             <br />
             <br />
             {React.string(t(
-                `Take the other smartphone and look in the app under Settings → Game ID. ` ++ // need backticks for arrow
+                // needs backticks for unicode arrow
+                `Take the other smartphone and look in the app under Settings → Game ID. ` ++
                 "Then enter the Game ID here."
             ))}
         </div>

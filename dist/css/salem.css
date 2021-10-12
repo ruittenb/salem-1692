@@ -119,9 +119,10 @@ div.id-input {
 div.id-input,
 input[type=text].id-input {
     border: 3px solid #666;
-    text-align: center;
     font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
     font-size: 18px;
+    text-align: center;
     padding: 6px 0;
     width: 50%;
 }
@@ -298,6 +299,10 @@ input[type=text].id-input {
 #setup-page {
     background: url(../images/overlay-gear.png) -190px 120px no-repeat;
     padding-top: 20px;
+}
+
+#setup-language-page {
+    background: url(../images/overlay-language.png) -130px 120px no-repeat;
 }
 
 #setup-music-page {

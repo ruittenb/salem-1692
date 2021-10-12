@@ -49,7 +49,9 @@ let make = (
             {React.string(t("It is possible to join this game from another smartphone."))}
             <br />
             <br />
-            {React.string(t("Take the other smartphone and look in the app under Join Game. Then enter the following Game ID there."))}
+            {React.string(t(
+                "Take the other smartphone and look in the app under Join Game. Then enter the following Game ID there."
+            ))}
         </div>
         <Spacer />
         <div className="id-input"> {React.string(gameId)} </div>
