@@ -1,6 +1,5 @@
  - fade music out
  - rework night eyes
- - use sprintf("%s", name)
  - resolve "choice cannot be None here"
  - nightscenariopage: PlayRandomEffect "this should not happen"
  - Firebase.res: try/catch
