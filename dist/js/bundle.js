@@ -24999,8 +24999,6 @@ var Button$Salem1692 = _interopRequireWildcard(require("./Button.bs.js"));
 
 var Translator$Salem1692 = _interopRequireWildcard(require("../modules/Translator.bs.js"));
 
-var LocalStorage$Salem1692 = _interopRequireWildcard(require("../modules/LocalStorage.bs.js"));
-
 var GameStateContext$Salem1692 = _interopRequireWildcard(require("./GameStateContext.bs.js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -25044,7 +25042,6 @@ function LanguageList(Props) {
         return newGameState;
       });
 
-      LocalStorage$Salem1692.saveGameState(newGameState);
       return Curry._1(goToPage, function (_prev) {
         return (
           /* Setup */
@@ -25069,7 +25066,7 @@ var make = LanguageList;
 
 exports.make = make;
 
-},{"../modules/LocalStorage.bs.js":79,"../modules/Translator.bs.js":82,"./Button.bs.js":53,"./GameStateContext.bs.js":55,"react":17,"rescript/lib/es6/belt_Array.js":19,"rescript/lib/es6/curry.js":34}],57:[function(require,module,exports){
+},{"../modules/Translator.bs.js":82,"./Button.bs.js":53,"./GameStateContext.bs.js":55,"react":17,"rescript/lib/es6/belt_Array.js":19,"rescript/lib/es6/curry.js":34}],57:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25207,8 +25204,6 @@ var Belt_Array = _interopRequireWildcard(require("rescript/lib/es6/belt_Array.js
 
 var Translator$Salem1692 = _interopRequireWildcard(require("../modules/Translator.bs.js"));
 
-var LocalStorage$Salem1692 = _interopRequireWildcard(require("../modules/LocalStorage.bs.js"));
-
 var PlayerFormLine$Salem1692 = _interopRequireWildcard(require("./PlayerFormLine.bs.js"));
 
 var GameStateContext$Salem1692 = _interopRequireWildcard(require("./GameStateContext.bs.js"));
@@ -25244,29 +25239,18 @@ function PlayerForm(Props) {
     var newPlayer = $$event.currentTarget.value;
     var newPlayers = newPlayer.length > 0 ? [newPlayer] : [];
     var players = gameState.players.concat(newPlayers);
-    var newGameState_gameType = gameState.gameType;
-    var newGameState_gameId = gameState.gameId;
-    var newGameState_language = gameState.language;
-    var newGameState_seating = gameState.seating;
-    var newGameState_doPlayEffects = gameState.doPlayEffects;
-    var newGameState_doPlaySpeech = gameState.doPlaySpeech;
-    var newGameState_backgroundMusic = gameState.backgroundMusic;
-    var newGameState = {
-      gameType: newGameState_gameType,
-      gameId: newGameState_gameId,
-      language: newGameState_language,
-      players: players,
-      seating: newGameState_seating,
-      doPlayEffects: newGameState_doPlayEffects,
-      doPlaySpeech: newGameState_doPlaySpeech,
-      backgroundMusic: newGameState_backgroundMusic
-    };
-
-    Curry._1(setGameState, function (_prevState) {
-      return newGameState;
+    return Curry._1(setGameState, function (prevGameState) {
+      return {
+        gameType: prevGameState.gameType,
+        gameId: prevGameState.gameId,
+        language: prevGameState.language,
+        players: players,
+        seating: prevGameState.seating,
+        doPlayEffects: prevGameState.doPlayEffects,
+        doPlaySpeech: prevGameState.doPlaySpeech,
+        backgroundMusic: prevGameState.backgroundMusic
+      };
     });
-
-    return LocalStorage$Salem1692.saveGameState(newGameState);
   };
 
   var playerItems = gameState.players.map(function (player, index) {
@@ -25277,84 +25261,51 @@ function PlayerForm(Props) {
       showRemoveButton: true,
       onRemove: function (param) {
         var players = sliceFirst(gameState.players, index - 1 | 0).concat(gameState.players.slice(index + 1 | 0));
-        var newGameState_gameType = gameState.gameType;
-        var newGameState_gameId = gameState.gameId;
-        var newGameState_language = gameState.language;
-        var newGameState_seating = gameState.seating;
-        var newGameState_doPlayEffects = gameState.doPlayEffects;
-        var newGameState_doPlaySpeech = gameState.doPlaySpeech;
-        var newGameState_backgroundMusic = gameState.backgroundMusic;
-        var newGameState = {
-          gameType: newGameState_gameType,
-          gameId: newGameState_gameId,
-          language: newGameState_language,
-          players: players,
-          seating: newGameState_seating,
-          doPlayEffects: newGameState_doPlayEffects,
-          doPlaySpeech: newGameState_doPlaySpeech,
-          backgroundMusic: newGameState_backgroundMusic
-        };
-
-        Curry._1(setGameState, function (_prevState) {
-          return newGameState;
+        return Curry._1(setGameState, function (prevGameState) {
+          return {
+            gameType: prevGameState.gameType,
+            gameId: prevGameState.gameId,
+            language: prevGameState.language,
+            players: players,
+            seating: prevGameState.seating,
+            doPlayEffects: prevGameState.doPlayEffects,
+            doPlaySpeech: prevGameState.doPlaySpeech,
+            backgroundMusic: prevGameState.backgroundMusic
+          };
         });
-
-        return LocalStorage$Salem1692.saveGameState(newGameState);
       },
       onMove: function (param) {
         var firstSwapPlayer = Belt_Array.get(gameState.players, index);
         var secondSwapPlayer = Belt_Array.get(gameState.players, index + 1 | 0);
         var players = firstSwapPlayer !== undefined && secondSwapPlayer !== undefined ? arrayConcat3(sliceFirst(gameState.players, index - 1 | 0), [secondSwapPlayer, firstSwapPlayer], gameState.players.slice(index + 2 | 0)) : gameState.players;
-        var newGameState_gameType = gameState.gameType;
-        var newGameState_gameId = gameState.gameId;
-        var newGameState_language = gameState.language;
-        var newGameState_seating = gameState.seating;
-        var newGameState_doPlayEffects = gameState.doPlayEffects;
-        var newGameState_doPlaySpeech = gameState.doPlaySpeech;
-        var newGameState_backgroundMusic = gameState.backgroundMusic;
-        var newGameState = {
-          gameType: newGameState_gameType,
-          gameId: newGameState_gameId,
-          language: newGameState_language,
-          players: players,
-          seating: newGameState_seating,
-          doPlayEffects: newGameState_doPlayEffects,
-          doPlaySpeech: newGameState_doPlaySpeech,
-          backgroundMusic: newGameState_backgroundMusic
-        };
-
-        Curry._1(setGameState, function (_prevState) {
-          return newGameState;
+        return Curry._1(setGameState, function (prevGameState) {
+          return {
+            gameType: prevGameState.gameType,
+            gameId: prevGameState.gameId,
+            language: prevGameState.language,
+            players: players,
+            seating: prevGameState.seating,
+            doPlayEffects: prevGameState.doPlayEffects,
+            doPlaySpeech: prevGameState.doPlaySpeech,
+            backgroundMusic: prevGameState.backgroundMusic
+          };
         });
-
-        return LocalStorage$Salem1692.saveGameState(newGameState);
       },
       onBlur: function (param) {
         var newValue = param.currentTarget.value;
         var players = arrayConcat3(sliceFirst(gameState.players, index - 1 | 0), [newValue], gameState.players.slice(index + 1 | 0));
-        var newGameState_gameType = gameState.gameType;
-        var newGameState_gameId = gameState.gameId;
-        var newGameState_language = gameState.language;
-        var newGameState_seating = gameState.seating;
-        var newGameState_doPlayEffects = gameState.doPlayEffects;
-        var newGameState_doPlaySpeech = gameState.doPlaySpeech;
-        var newGameState_backgroundMusic = gameState.backgroundMusic;
-        var newGameState = {
-          gameType: newGameState_gameType,
-          gameId: newGameState_gameId,
-          language: newGameState_language,
-          players: players,
-          seating: newGameState_seating,
-          doPlayEffects: newGameState_doPlayEffects,
-          doPlaySpeech: newGameState_doPlaySpeech,
-          backgroundMusic: newGameState_backgroundMusic
-        };
-
-        Curry._1(setGameState, function (_prevState) {
-          return newGameState;
+        return Curry._1(setGameState, function (prevGameState) {
+          return {
+            gameType: prevGameState.gameType,
+            gameId: prevGameState.gameId,
+            language: prevGameState.language,
+            players: players,
+            seating: prevGameState.seating,
+            doPlayEffects: prevGameState.doPlayEffects,
+            doPlaySpeech: prevGameState.doPlaySpeech,
+            backgroundMusic: prevGameState.backgroundMusic
+          };
         });
-
-        return LocalStorage$Salem1692.saveGameState(newGameState);
       },
       key: String(index) + "/" + player
     });
@@ -25376,7 +25327,7 @@ var make = PlayerForm;
 
 exports.make = make;
 
-},{"../modules/LocalStorage.bs.js":79,"../modules/Translator.bs.js":82,"./GameStateContext.bs.js":55,"./PlayerFormLine.bs.js":61,"react":17,"rescript/lib/es6/belt_Array.js":19,"rescript/lib/es6/curry.js":34}],61:[function(require,module,exports){
+},{"../modules/Translator.bs.js":82,"./GameStateContext.bs.js":55,"./PlayerFormLine.bs.js":61,"react":17,"rescript/lib/es6/belt_Array.js":19,"rescript/lib/es6/curry.js":34}],61:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25675,8 +25626,6 @@ var React = _interopRequireWildcard(require("react"));
 
 var Translator$Salem1692 = _interopRequireWildcard(require("../modules/Translator.bs.js"));
 
-var LocalStorage$Salem1692 = _interopRequireWildcard(require("../modules/LocalStorage.bs.js"));
-
 var SquareButton$Salem1692 = _interopRequireWildcard(require("./SquareButton.bs.js"));
 
 var GameStateContext$Salem1692 = _interopRequireWildcard(require("./GameStateContext.bs.js"));
@@ -25720,12 +25669,9 @@ function SeatingForm(Props) {
       doPlaySpeech: newGameState_doPlaySpeech,
       backgroundMusic: newGameState_backgroundMusic
     };
-
-    Curry._1(setGameState, function (_prevGameState) {
+    return Curry._1(setGameState, function (_prevGameState) {
       return newGameState;
     });
-
-    return LocalStorage$Salem1692.saveGameState(newGameState);
   };
 
   var match$1 = gameState.seating;
@@ -25781,7 +25727,7 @@ var make = SeatingForm;
 
 exports.make = make;
 
-},{"../modules/LocalStorage.bs.js":79,"../modules/Translator.bs.js":82,"./GameStateContext.bs.js":55,"./SquareButton.bs.js":67,"react":17,"rescript/lib/es6/curry.js":34}],65:[function(require,module,exports){
+},{"../modules/Translator.bs.js":82,"./GameStateContext.bs.js":55,"./SquareButton.bs.js":67,"react":17,"rescript/lib/es6/curry.js":34}],65:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27646,8 +27592,6 @@ var PlayerList$Salem1692 = _interopRequireWildcard(require("../components/Player
 
 var Translator$Salem1692 = _interopRequireWildcard(require("../modules/Translator.bs.js"));
 
-var LocalStorage$Salem1692 = _interopRequireWildcard(require("../modules/LocalStorage.bs.js"));
-
 var NightStepPage$Salem1692 = _interopRequireWildcard(require("./NightStepPage.bs.js"));
 
 var NightErrorPage$Salem1692 = _interopRequireWildcard(require("./NightErrorPage.bs.js"));
@@ -27804,12 +27748,9 @@ function NightScenarioPage(Props) {
           doPlaySpeech: newGameState_doPlaySpeech,
           backgroundMusic: newBackgroundMusic
         };
-
-        Curry._1(setGameState, function (_prevGameState) {
+        return Curry._1(setGameState, function (_prevGameState) {
           return newGameState;
         });
-
-        return LocalStorage$Salem1692.saveGameState(newGameState);
       });
     };
   }, []);
@@ -28026,7 +27967,7 @@ var make = NightScenarioPage;
 
 exports.make = make;
 
-},{"../components/Audio.bs.js":50,"../components/AudioBackground.bs.js":51,"../components/GameStateContext.bs.js":55,"../components/PlayerList.bs.js":62,"../components/TurnStateContext.bs.js":68,"../modules/LocalStorage.bs.js":79,"../modules/NightScenarios.bs.js":80,"../modules/Translator.bs.js":82,"../modules/Utils.bs.js":83,"./NightConfirmPage.bs.js":89,"./NightErrorPage.bs.js":90,"./NightStepPage.bs.js":92,"react":17,"rescript/lib/es6/belt_Array.js":19,"rescript/lib/es6/belt_Option.js":20,"rescript/lib/es6/curry.js":34}],92:[function(require,module,exports){
+},{"../components/Audio.bs.js":50,"../components/AudioBackground.bs.js":51,"../components/GameStateContext.bs.js":55,"../components/PlayerList.bs.js":62,"../components/TurnStateContext.bs.js":68,"../modules/NightScenarios.bs.js":80,"../modules/Translator.bs.js":82,"../modules/Utils.bs.js":83,"./NightConfirmPage.bs.js":89,"./NightErrorPage.bs.js":90,"./NightStepPage.bs.js":92,"react":17,"rescript/lib/es6/belt_Array.js":19,"rescript/lib/es6/belt_Option.js":20,"rescript/lib/es6/curry.js":34}],92:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28236,6 +28177,9 @@ function RootPage(Props) {
   React.useEffect(function () {
     loadGameStateFromLocalStorage(setGameState);
   }, []);
+  React.useEffect(function () {
+    LocalStorage$Salem1692.saveGameState(gameState);
+  }, [gameState]);
   var currentPage$1;
   var exit = 0;
 
@@ -28487,8 +28431,6 @@ var Spacer$Salem1692 = _interopRequireWildcard(require("../components/Spacer.bs.
 
 var Translator$Salem1692 = _interopRequireWildcard(require("../modules/Translator.bs.js"));
 
-var LocalStorage$Salem1692 = _interopRequireWildcard(require("../modules/LocalStorage.bs.js"));
-
 var GameStateContext$Salem1692 = _interopRequireWildcard(require("../components/GameStateContext.bs.js"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -28511,26 +28453,18 @@ function SetupMasterPage(Props) {
 
   var applyMasterGameId = function (gameId) {
     return Curry._1(setGameState, function (prevGameState) {
-      var newGameState_language = prevGameState.language;
-      var newGameState_players = prevGameState.players;
-      var newGameState_seating = prevGameState.seating;
-      var newGameState_doPlayEffects = prevGameState.doPlayEffects;
-      var newGameState_doPlaySpeech = prevGameState.doPlaySpeech;
-      var newGameState_backgroundMusic = prevGameState.backgroundMusic;
-      var newGameState = {
+      return {
         gameType:
         /* Master */
         1,
         gameId: gameId,
-        language: newGameState_language,
-        players: newGameState_players,
-        seating: newGameState_seating,
-        doPlayEffects: newGameState_doPlayEffects,
-        doPlaySpeech: newGameState_doPlaySpeech,
-        backgroundMusic: newGameState_backgroundMusic
+        language: prevGameState.language,
+        players: prevGameState.players,
+        seating: prevGameState.seating,
+        doPlayEffects: prevGameState.doPlayEffects,
+        doPlaySpeech: prevGameState.doPlaySpeech,
+        backgroundMusic: prevGameState.backgroundMusic
       };
-      LocalStorage$Salem1692.saveGameState(newGameState);
-      return newGameState;
     });
   };
 
@@ -28574,7 +28508,7 @@ var make = SetupMasterPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":53,"../components/GameStateContext.bs.js":55,"../components/QR.bs.js":63,"../components/Spacer.bs.js":66,"../modules/GameId.bs.js":76,"../modules/LocalStorage.bs.js":79,"../modules/Translator.bs.js":82,"react":17,"rescript/lib/es6/curry.js":34}],96:[function(require,module,exports){
+},{"../components/Button.bs.js":53,"../components/GameStateContext.bs.js":55,"../components/QR.bs.js":63,"../components/Spacer.bs.js":66,"../modules/GameId.bs.js":76,"../modules/Translator.bs.js":82,"react":17,"rescript/lib/es6/curry.js":34}],96:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28599,8 +28533,6 @@ var Spacer$Salem1692 = _interopRequireWildcard(require("../components/Spacer.bs.
 var Constants$Salem1692 = _interopRequireWildcard(require("../modules/Constants.bs.js"));
 
 var Translator$Salem1692 = _interopRequireWildcard(require("../modules/Translator.bs.js"));
-
-var LocalStorage$Salem1692 = _interopRequireWildcard(require("../modules/LocalStorage.bs.js"));
 
 var GameStateContext$Salem1692 = _interopRequireWildcard(require("../components/GameStateContext.bs.js"));
 
@@ -28670,12 +28602,9 @@ function SetupMusicPage(Props) {
           doPlaySpeech: newGameState_doPlaySpeech,
           backgroundMusic: newBackgroundMusic
         };
-
-        Curry._1(setGameState, function (_prevState) {
+        return Curry._1(setGameState, function (_prevState) {
           return newGameState;
         });
-
-        return LocalStorage$Salem1692.saveGameState(newGameState);
       },
       key: String(index) + "/" + availableTrack
     });
@@ -28704,7 +28633,7 @@ var make = SetupMusicPage;
 
 exports.make = make;
 
-},{"../components/Audio.bs.js":50,"../components/Button.bs.js":53,"../components/GameStateContext.bs.js":55,"../components/Spacer.bs.js":66,"../modules/Constants.bs.js":74,"../modules/LocalStorage.bs.js":79,"../modules/Translator.bs.js":82,"react":17,"rescript/lib/es6/belt_Option.js":20,"rescript/lib/es6/caml_obj.js":32,"rescript/lib/es6/curry.js":34}],97:[function(require,module,exports){
+},{"../components/Audio.bs.js":50,"../components/Button.bs.js":53,"../components/GameStateContext.bs.js":55,"../components/Spacer.bs.js":66,"../modules/Constants.bs.js":74,"../modules/Translator.bs.js":82,"react":17,"rescript/lib/es6/belt_Option.js":20,"rescript/lib/es6/caml_obj.js":32,"rescript/lib/es6/curry.js":34}],97:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28723,8 +28652,6 @@ var Button$Salem1692 = _interopRequireWildcard(require("../components/Button.bs.
 var Spacer$Salem1692 = _interopRequireWildcard(require("../components/Spacer.bs.js"));
 
 var Translator$Salem1692 = _interopRequireWildcard(require("../modules/Translator.bs.js"));
-
-var LocalStorage$Salem1692 = _interopRequireWildcard(require("../modules/LocalStorage.bs.js"));
 
 var GameStateContext$Salem1692 = _interopRequireWildcard(require("../components/GameStateContext.bs.js"));
 
@@ -28778,59 +28705,35 @@ function SetupPage(Props) {
     label: Curry._1(t, "Sound effects"),
     className: "condensed-nl icon-left " + (gameState.doPlayEffects ? "icon-checked" : "icon-unchecked"),
     onClick: function (_event) {
-      var newGameState_gameType = gameState.gameType;
-      var newGameState_gameId = gameState.gameId;
-      var newGameState_language = gameState.language;
-      var newGameState_players = gameState.players;
-      var newGameState_seating = gameState.seating;
-      var newGameState_doPlayEffects = !gameState.doPlayEffects;
-      var newGameState_doPlaySpeech = gameState.doPlaySpeech;
-      var newGameState_backgroundMusic = gameState.backgroundMusic;
-      var newGameState = {
-        gameType: newGameState_gameType,
-        gameId: newGameState_gameId,
-        language: newGameState_language,
-        players: newGameState_players,
-        seating: newGameState_seating,
-        doPlayEffects: newGameState_doPlayEffects,
-        doPlaySpeech: newGameState_doPlaySpeech,
-        backgroundMusic: newGameState_backgroundMusic
-      };
-
-      Curry._1(setGameState, function (_prevState) {
-        return newGameState;
+      return Curry._1(setGameState, function (prevGameState) {
+        return {
+          gameType: prevGameState.gameType,
+          gameId: prevGameState.gameId,
+          language: prevGameState.language,
+          players: prevGameState.players,
+          seating: prevGameState.seating,
+          doPlayEffects: !prevGameState.doPlayEffects,
+          doPlaySpeech: prevGameState.doPlaySpeech,
+          backgroundMusic: prevGameState.backgroundMusic
+        };
       });
-
-      return LocalStorage$Salem1692.saveGameState(newGameState);
     }
   }), React.createElement(Button$Salem1692.make, {
     label: Curry._1(t, "Speech"),
     className: "icon-left " + (gameState.doPlaySpeech ? "icon-checked" : "icon-unchecked"),
     onClick: function (_event) {
-      var newGameState_gameType = gameState.gameType;
-      var newGameState_gameId = gameState.gameId;
-      var newGameState_language = gameState.language;
-      var newGameState_players = gameState.players;
-      var newGameState_seating = gameState.seating;
-      var newGameState_doPlayEffects = gameState.doPlayEffects;
-      var newGameState_doPlaySpeech = !gameState.doPlaySpeech;
-      var newGameState_backgroundMusic = gameState.backgroundMusic;
-      var newGameState = {
-        gameType: newGameState_gameType,
-        gameId: newGameState_gameId,
-        language: newGameState_language,
-        players: newGameState_players,
-        seating: newGameState_seating,
-        doPlayEffects: newGameState_doPlayEffects,
-        doPlaySpeech: newGameState_doPlaySpeech,
-        backgroundMusic: newGameState_backgroundMusic
-      };
-
-      Curry._1(setGameState, function (_prevState) {
-        return newGameState;
+      return Curry._1(setGameState, function (prevGameState) {
+        return {
+          gameType: prevGameState.gameType,
+          gameId: prevGameState.gameId,
+          language: prevGameState.language,
+          players: prevGameState.players,
+          seating: prevGameState.seating,
+          doPlayEffects: prevGameState.doPlayEffects,
+          doPlaySpeech: !prevGameState.doPlaySpeech,
+          backgroundMusic: prevGameState.backgroundMusic
+        };
       });
-
-      return LocalStorage$Salem1692.saveGameState(newGameState);
     }
   }), React.createElement(Button$Salem1692.make, {
     label: Curry._1(t, "Music"),
@@ -28883,7 +28786,7 @@ var make = SetupPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":53,"../components/GameStateContext.bs.js":55,"../components/NavigationContext.bs.js":59,"../components/Spacer.bs.js":66,"../modules/LocalStorage.bs.js":79,"../modules/Translator.bs.js":82,"react":17,"rescript/lib/es6/belt_Option.js":20,"rescript/lib/es6/curry.js":34}],98:[function(require,module,exports){
+},{"../components/Button.bs.js":53,"../components/GameStateContext.bs.js":55,"../components/NavigationContext.bs.js":59,"../components/Spacer.bs.js":66,"../modules/Translator.bs.js":82,"react":17,"rescript/lib/es6/belt_Option.js":20,"rescript/lib/es6/curry.js":34}],98:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

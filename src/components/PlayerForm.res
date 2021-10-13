@@ -33,11 +33,6 @@ let make = (): React.element => {
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let setAndSaveGameState = (newGameState: gameState): unit => {
-        setGameState(_prevState => newGameState)
-        LocalStorage.saveGameState(newGameState)
-    }
-
     // handlers for existing players
     let blurHandler: (int => blurHandler) = (playerIndex, event) => {
         let newValue: player = ReactEvent.Focus.currentTarget(event)["value"]
@@ -46,14 +41,20 @@ let make = (): React.element => {
             [ newValue ],
             gameState.players->sliceLast(playerIndex + 1)
         )
-        setAndSaveGameState({ ...gameState, players })
+        setGameState(prevGameState => {
+            ...prevGameState,
+            players
+        })
     }
     let removeHandler: (int => clickHandler) = (playerIndex, _event) => {
         let players = Js.Array2.concat(
             gameState.players->sliceFirst(playerIndex - 1),
             gameState.players->sliceLast(playerIndex + 1)
         )
-        setAndSaveGameState({ ...gameState, players })
+        setGameState(prevGameState => {
+            ...prevGameState,
+            players
+        })
     }
     let moveHandler: (int => clickHandler) = (playerIndex, _event) => {
         let firstSwapPlayer : option<player> = gameState.players->Belt.Array.get(playerIndex)
@@ -69,7 +70,10 @@ let make = (): React.element => {
             }
             | (_, _) => gameState.players // no change
         }
-        setAndSaveGameState({ ...gameState, players })
+        setGameState(prevGameState => {
+            ...prevGameState,
+            players
+        })
     }
     // handler for new players
     let addHandler: blurHandler = (event) => {
@@ -80,7 +84,10 @@ let make = (): React.element => {
             []
         }
         let players = Js.Array2.concat(gameState.players, newPlayers)
-        setAndSaveGameState({ ...gameState, players })
+        setGameState(prevGameState => {
+            ...prevGameState,
+            players
+        })
     }
 
     // create buttons for every player

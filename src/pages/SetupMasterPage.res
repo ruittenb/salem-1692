@@ -21,7 +21,6 @@ let make = (
                 gameType: Master,
                 gameId,
             }
-            LocalStorage.saveGameState(newGameState)
             newGameState
         })
     }

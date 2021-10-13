@@ -55,6 +55,12 @@ let make = (): React.element => {
         None // cleanup function
     })
 
+    // save game state to localstorage after every change
+    React.useEffect1(() => {
+        LocalStorage.saveGameState(gameState)
+        None // cleanup function
+    }, [ gameState ])
+
     let currentPage = switch currentPage {
         | Title                   => <TitlePage goToPage />
         | Setup                   => <SetupPage goToPage />

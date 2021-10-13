@@ -25,7 +25,6 @@ let make = (
                     language: buttonLanguage
                 }
                 setGameState(_prevState => newGameState)
-                LocalStorage.saveGameState(newGameState)
                 goToPage(_prev => Setup)
             }
             let (className, label) = switch buttonLanguage {
