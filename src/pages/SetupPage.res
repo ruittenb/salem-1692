@@ -14,22 +14,17 @@ let make = (
     let (navigation, setNavigation) = React.useContext(NavigationContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let setAndSaveGameState = (newGameState: gameState): unit => {
-        setGameState(_prevState => newGameState)
-        LocalStorage.saveGameState(newGameState)
-    }
-
     let togglePlayEffects = () => {
-        setAndSaveGameState({
-            ...gameState,
-            doPlayEffects: !gameState.doPlayEffects
+        setGameState(prevGameState => {
+            ...prevGameState,
+            doPlayEffects: !prevGameState.doPlayEffects
         })
     }
 
     let togglePlaySpeech = () => {
-        setAndSaveGameState({
-            ...gameState,
-            doPlaySpeech: !gameState.doPlaySpeech
+        setGameState(prevGameState => {
+            ...prevGameState,
+            doPlaySpeech: !prevGameState.doPlaySpeech
         })
     }
 

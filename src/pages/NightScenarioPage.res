@@ -71,7 +71,6 @@ let make = (
                         backgroundMusic: newBackgroundMusic
                     }
                     setGameState(_prevGameState => newGameState)
-                    LocalStorage.saveGameState(newGameState)
                 })
         })
     })

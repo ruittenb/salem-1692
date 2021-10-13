@@ -12,16 +12,16 @@ let make = (
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let freeToProceed = true // TODO whether a valid game ID has been entered
+    let freeToProceed = true // TODO  GameId.isValid()
 
     let placeholder = "x00-x00-x00-x00"
     let defaultValue = switch gameState.gameType {
         | StandAlone    => ""
-        | Master(_)     => ""
+        | Master        => ""
         | Slave(gameId) => gameId
     }
 
-    let onBlur = (_) => {
+    let onBlur = (_event) => {
         goToPage(_prev => Title) // TODO
     }
 
@@ -33,16 +33,17 @@ let make = (
         </h1>
         <Spacer />
         <div className="paragraph">
-            {React.string(t("It is possible to join a game running on another telephone."))}
+            {React.string(t("It is possible to join a game running on another smartphone."))}
             <br />
             <br />
             {React.string(t(
-                `Take the other telephone and look in the app under Settings → Game ID. ` ++
-                `Then enter the Game ID here.`
+                // needs backticks for unicode arrow
+                `Take the other smartphone and look in the app under Settings → Game ID. ` ++
+                "Then enter the Game ID here."
             ))}
         </div>
         <Spacer />
-        <input type_="text" defaultValue placeholder onBlur />
+        <input type_="text" className="id-input" defaultValue placeholder onBlur />
         <Spacer />
         // Back/Forward buttons
         <ButtonPair>

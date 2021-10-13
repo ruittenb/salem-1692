@@ -3,4 +3,4 @@
  - use sprintf("%s", name)
  - resolve "choice cannot be None here"
  - nightscenariopage: PlayRandomEffect "this should not happen"
- - SetupPage -> SettingsPage
+ - Firebase.res: try/catch

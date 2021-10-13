@@ -3,11 +3,6 @@
  * Types
  */
 
-type clickHandler  = ReactEvent.Mouse.t => unit
-type mediaHandler  = ReactEvent.Media.t => unit
-type changeHandler = ReactEvent.Form.t  => unit
-type blurHandler   = ReactEvent.Focus.t => unit
-
 type evenOdd =
     | Even
     | Odd
@@ -18,15 +13,53 @@ type rotation =
     | RotOneHalf
     | RotThreeQuarters
 
-type nrWitches =
-    | One
-    | More
+/** **********************************************************************
+ * Event Types
+ */
+
+type clickHandler  = ReactEvent.Mouse.t => unit
+type mediaHandler  = ReactEvent.Media.t => unit
+type changeHandler = ReactEvent.Form.t  => unit
+type blurHandler   = ReactEvent.Focus.t => unit
+
+/** **********************************************************************
+ * Firebase Types (some of these are defined in Firebase.res)
+ */
+
+module Firebase = {
+
+    type app
+    type database
+    type reference
+    type snapshot
+    type data
+
+    type connection = {
+        app: app,
+        db: database
+    }
+
+    type config = {
+        apiKey            : string,
+        authDomain        : string,
+        databaseURL       : string,
+        projectId         : string,
+        storageBucket     : string,
+        messagingSenderId : string,
+        appId             : string,
+    }
+}
+
+/** **********************************************************************
+ * Game Types
+ */
 
 @decco type player = string
 @decco type players = array<player>
 
 @decco type gameState = {
     gameType: GameTypeCodec.t,
+    gameId: GameTypeCodec.gameId,
     language: LanguageCodec.t,
     players: players,
     seating: SeatingCodec.t,
@@ -35,6 +68,10 @@ type nrWitches =
     backgroundMusic: array<string>,
 }
 type gameStateSetter = (gameState => gameState) => unit
+
+type nrWitches =
+    | One
+    | More
 
 type turnState = {
     nrWitches: nrWitches,
@@ -114,12 +151,3 @@ type addressed =
     | Witches
     | Constable
 
-type firebaseConfig = {
-    apiKey            : string,
-    authDomain        : string,
-    databaseURL       : string,
-    projectId         : string,
-    storageBucket     : string,
-    messagingSenderId : string,
-    appId             : string,
-}

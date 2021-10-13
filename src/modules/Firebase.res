@@ -2,45 +2,54 @@
  * Firebase
  */
 
-@@warning("-33") // Unused 'open Types'
+// @@warning("-33") // Unused 'open Types'
 
-open Types
+open Types.Firebase
 open Utils
 
-@module("firebase/app") external initializeApp: (firebaseConfig) => 'fbApp = "initializeApp"
-@module("firebase/database") external getDatabase: ('fbApp => 'fbDatabase) = "getDatabase"
-@module("firebase/database") external getRef: ('fbDatabase, string) => 'fbRef = "ref"
-@module("firebase/database") external onValue: ('fbRef, ('fbSnapshot) => unit) => unit = "onValue"
-@send external getValue: ('fbSnapshot) => 'fbData = "val"
+@module("firebase/app") external initializeApp: (config) => app = "initializeApp"
+@module("firebase/database") external getDatabase: (app => database) = "getDatabase"
+@module("firebase/database") external getRef: (database, string) => reference = "ref"
+@module("firebase/database") external onValue: (reference, (snapshot) => unit) => unit = "onValue"
+@module("firebase/database") external set: (reference, data) => unit = "set"
+@send external getValue: (snapshot) => data = "val"
 
-// Your web app's Firebase configuration
-let firebaseConfig: firebaseConfig = {
-    apiKey            : "AIzaSyD_SDDuyHYXcj_xiw8V_BXmWb_X9TUWpK8",
-    authDomain        : "salem-1692-moderator.firebaseapp.com",
-    databaseURL       : "https://salem-1692-moderator-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId         : "salem-1692-moderator",
-    storageBucket     : "salem-1692-moderator.appspot.com",
-    messagingSenderId : "910714101001",
-    appId             : "1:910714101001:web:1a9d4882f11f07376807d8",
+/**
+ * Functions
+ */
+
+let connect = (): connection => {
+    // TODO try/catch
+    let app = initializeApp(Constants.firebaseConfig)
+    let db = getDatabase(app)
+    { app, db }
 }
 
-let connect = (
+let createGame = (
+    connection: connection,
     gameId: GameTypeCodec.gameId
 ): unit => {
-    let firebaseApp = initializeApp(firebaseConfig)
-    let firebaseDb = getDatabase(firebaseApp)
+    () // TODO
+}
+
+let destroyGame = (
+//    connection: connection,
+//    gameId: GameTypeCodec.gameId
+): unit => {
+    () // TODO
+}
+
+let joinGame = (
+    connection: connection,
+    gameId: GameTypeCodec.gameId
+): unit => {
     safeExec(
-        () => getRef(firebaseDb, "games/" ++ gameId)
+        () => getRef(connection.db, "games/" ++ gameId)
     )
-    ->Belt.Option.forEach((myGameRef) => {
-        onValue(myGameRef, (snapshot: 'fbSnapshot) => {
+    ->Belt.Option.forEach(myGameRef => {
+        onValue(myGameRef, (snapshot: snapshot) => {
             let _data = getValue(snapshot)
         })
     })
 }
 
-/* let openGame = ( */
-/*     gameId: GameTypeCodec.gameId */
-/* ): unit => { */
-/*     () */
-/* } */

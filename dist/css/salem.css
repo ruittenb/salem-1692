@@ -107,16 +107,23 @@ div.text-padding {
 }
 
 div.paragraph {
-    margin: 10px 20px;
+    margin: 5px 15px;
+    padding: 5px;
     line-height: 1.15;
+    backdrop-filter: blur(2px);
 }
 
-div.input {
+div.id-input {
     background-color: #eee;
+}
+div.id-input,
+input[type=text].id-input {
     border: 3px solid #666;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 18px;
     text-align: center;
-    font-family: inherit;
-    font-size: 28px;
+    padding: 6px 0;
     width: 50%;
 }
 
@@ -294,6 +301,10 @@ div.input {
     padding-top: 20px;
 }
 
+#setup-language-page {
+    background: url(../images/overlay-language.png) -130px 120px no-repeat;
+}
+
 #setup-music-page {
     background: url(../images/overlay-lute.png) -100px 120px no-repeat;
 }
@@ -302,7 +313,6 @@ div.input {
     animation: AnimatedBackground 3s ease-in-out infinite;
 }
 
-/* https://tinyurl.com/background-image-and-gradient */
 @keyframes AnimatedBackground {
     0%   { background-color: #90783b }
     50%  { background-color: #e2d286 }
@@ -323,6 +333,11 @@ div.input {
 #setup-players-page .player-entry-item .staggered {
     position: relative;
     top: 31px;
+}
+
+#setup-master-page,
+#setup-slave-page {
+    background: url(../images/overlay-old-phone.png) -220px 100px no-repeat;
 }
 
 #layout-list {

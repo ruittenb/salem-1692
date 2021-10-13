@@ -55,6 +55,7 @@ const filesToCache = [
     'images/overlay-hourglass.png',
     'images/overlay-lute.png',
     'images/overlay-night.png',
+    'images/overlay-old-phone.png',
     'images/overlay-pawn.png',
     'images/overlay-scroll.png',
     'images/overlay-title.png',

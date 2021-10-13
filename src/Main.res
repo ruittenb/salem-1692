@@ -7,6 +7,8 @@
  * ReactJS             : https://reactjs.org/docs/getting-started.html
  * Decco               : https://github.com/reasonml-labs/decco
  *                       https://blog.thomasdeconinck.fr/articles/decoder-une-enumeration-depuis-une-api-en-rescript-avec-decco
+ * Firebase            : https://firebase.google.com/docs/database
+ * FirebaseDatabase    : https://firebase.google.com/docs/database/web/start
  *
  * React               : Bindings to React
  * ReactDOM            : Bindings to the ReactDOM
@@ -17,9 +19,9 @@
  */
 
 let run = (elementId: string) => {
-    switch (ReactDOM.querySelector("#" ++ elementId)) {
-        | Some(rootElement) => ReactDOM.render(<RootPage />, rootElement)
-        | None => ()
+    switch (Utils.safeQuerySelector(elementId)) {
+        | Ok(rootElement) => ReactDOM.render(<RootPage />, rootElement)
+        | Error(msg) => Utils.logError(msg)
     }
 }
 

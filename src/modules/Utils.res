@@ -6,6 +6,20 @@
 let identity = (arg: 'a): 'a => arg
 
 /**
+ * Log a message to console with error formatting
+ */
+let logError = (msg: string): unit => {
+    Js.log2("%cError: " ++ msg, Constants.consoleErrorFormatting)
+}
+
+let getExceptionMessage = (error: exn): string => {
+    error
+        ->Js.Exn.asJsExn
+        ->Belt.Option.flatMap(Js.Exn.message)
+        ->Belt.Option.getWithDefault("An unknown error occurred")
+}
+
+/**
  * Pick a random element from a set.
  */
 let pickRandomElement = (set: array<'a>, default: 'a): 'a => {
@@ -15,8 +29,8 @@ let pickRandomElement = (set: array<'a>, default: 'a): 'a => {
 }
 
 /**
- * Calls a function that may throw an exception and converts
- * the result into an option<'a>
+ * Calls a function that may throw an exception.
+ * The result is converted into an option.
  */
 let safeExec = (
     functionThatMayThrow: () => 'a
@@ -24,7 +38,30 @@ let safeExec = (
     try {
         functionThatMayThrow()->Some
     } catch {
-        | _ => None
+        | error =>
+            error
+                ->getExceptionMessage
+                ->logError
+            None
+    }
+}
+
+/**
+ * Tries to find a DOM node in the document.  Returns a Result.
+ */
+let safeQuerySelector = (
+    elementId: string
+): Belt.Result.t<Dom.element, string> => {
+    try {
+        switch (ReactDOM.querySelector("#" ++ elementId)) {
+            | Some(element) => Ok(element)
+            | None          => Error("Cannot find DOM element with id '" ++ elementId ++ "'")
+        }
+    } catch {
+        | error =>
+            error
+                ->getExceptionMessage
+                ->Error
     }
 }
 

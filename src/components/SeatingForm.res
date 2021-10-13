@@ -20,7 +20,6 @@ let make = (): React.element => {
             seating
         }
         setGameState(_prevGameState => newGameState)
-        LocalStorage.saveGameState(newGameState)
     }
 
     <>
