@@ -11,6 +11,7 @@ let initialNavigation: option<page> = None
 
 let initialGameState = {
     gameType: StandAlone,
+    gameId: GameId.getGameId(),
     language: #en_US,
     players: [],
     seating: #OneAtTop,

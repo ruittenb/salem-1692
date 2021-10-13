@@ -12,17 +12,14 @@ let make = (
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let gameId = switch gameState.gameType {
-        | Master(gameId) => gameId
-        | StandAlone
-        | Slave(_)       => GameId.getGameId()
-    }
+    let gameId = gameState.gameId
 
-    let applyGameId = (gameId: string): unit => {
+    let applyMasterGameId = (gameId: string): unit => {
         setGameState((prevGameState) => {
             let newGameState = {
                 ...prevGameState,
-                gameType: Master(gameId)
+                gameType: Master,
+                gameId,
             }
             LocalStorage.saveGameState(newGameState)
             newGameState
@@ -30,13 +27,13 @@ let make = (
     }
 
     let generateNewGameId = () => {
-        GameId.getGameId()->applyGameId
+        GameId.getGameId()->applyMasterGameId
     }
 
     // Runs after every completed render
     React.useEffect(() => {
-        if (gameState.gameType != Master(gameId)) {
-            applyGameId(gameId)
+        if (gameState.gameType != Master) {
+            applyMasterGameId(gameId)
         }
         None // cleanup function
     })

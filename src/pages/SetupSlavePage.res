@@ -17,7 +17,7 @@ let make = (
     let placeholder = "x00-x00-x00-x00"
     let defaultValue = switch gameState.gameType {
         | StandAlone    => ""
-        | Master(_)     => ""
+        | Master        => ""
         | Slave(gameId) => gameId
     }
 

@@ -65,7 +65,6 @@ let safeQuerySelector = (
     }
 }
 
-
 /**
  * Replaces a value with another one.
  *
