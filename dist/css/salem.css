@@ -313,7 +313,6 @@ input[type=text].id-input {
     animation: AnimatedBackground 3s ease-in-out infinite;
 }
 
-/* https://tinyurl.com/background-image-and-gradient */
 @keyframes AnimatedBackground {
     0%   { background-color: #90783b }
     50%  { background-color: #e2d286 }

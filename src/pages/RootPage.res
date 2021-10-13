@@ -24,7 +24,7 @@ let initialTurnState = {
     choiceConstable: None,
 }
 
-let validateGameState = (gameState): gameState => {
+let cleanupGameState = (gameState): gameState => {
     let knownMusicTracksInclude = musicTracks->Js.Array2.includes // curried
     {
         ...gameState,
@@ -34,7 +34,7 @@ let validateGameState = (gameState): gameState => {
 
 let loadGameStateFromLocalStorage = (setGameState): unit => {
     LocalStorage.loadGameState()
-        ->Belt.Option.map(validateGameState)
+        ->Belt.Option.map(cleanupGameState)
         ->Belt.Option.forEach(
             gameState => setGameState(_prev => gameState)
         )
@@ -43,10 +43,10 @@ let loadGameStateFromLocalStorage = (setGameState): unit => {
 @react.component
 let make = (): React.element => {
 
-    let (currentPage, goToPage)     = React.useState(_ => initialPage)
-    let (gameState, setGameState)   = React.useState(_ => initialGameState)
-    let (navigation, setNavigation) = React.useState(_ => initialNavigation)
-    let (turnState, setTurnState)   = React.useState(_ => initialTurnState)
+    let (currentPage, goToPage)         = React.useState(_ => initialPage)
+    let (gameState, setGameState)       = React.useState(_ => initialGameState)
+    let (navigation, setNavigation)     = React.useState(_ => initialNavigation)
+    let (turnState, setTurnState)       = React.useState(_ => initialTurnState)
 
     // run once after mounting
     React.useEffect0(() => {

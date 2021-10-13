@@ -114,7 +114,22 @@ type addressed =
     | Witches
     | Constable
 
-type firebaseConfig = {
+/**
+ * Firebase (these are defined in Firebase.res)
+ */
+
+type fbApp
+type fbDatabase
+type fbRef
+type fbSnapshot
+type fbData
+
+type fbConnection = {
+    app: fbApp,
+    db: fbDatabase
+}
+
+type fbConfig = {
     apiKey            : string,
     authDomain        : string,
     databaseURL       : string,
@@ -123,3 +138,4 @@ type firebaseConfig = {
     messagingSenderId : string,
     appId             : string,
 }
+
