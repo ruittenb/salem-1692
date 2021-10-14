@@ -13,10 +13,11 @@ let make = (
     ~showRemoveButton: bool,
     ~onRemove: clickHandler = (_) => (),
     ~onMove: clickHandler = (_) => (),
-    ~onBlur: blurHandler,
+    ~onBlur: blurHandler = (_) => (),
+    ~onChange: changeHandler = (_) => (),
 ): React.element => {
 
-    let inputField = <input type_="text" defaultValue=value placeholder onBlur />
+    let inputField = <input type_="text" defaultValue=value placeholder onBlur onChange />
 
     <div className="player-entry-item">
         {

@@ -65,7 +65,6 @@ let make = (
             label={t("Credits")}
             onClick={ _event => goToPage(_prev => Credits) }
         />
-        <Spacer />
         <Button
             label={t("Back")}
             onClick={ _event => {
