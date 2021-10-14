@@ -4,8 +4,10 @@
  */
 
 open Types
+open Types.FbDb
 open Constants
 
+let initialDbConnection: dbConnection = Firebase.connect()
 let initialPage: page = Title
 let initialNavigation: option<page> = None
 
@@ -44,6 +46,7 @@ let loadGameStateFromLocalStorage = (setGameState): unit => {
 @react.component
 let make = (): React.element => {
 
+    let (dbConnection, setDbConnection) = React.useState(_ => initialDbConnection)
     let (currentPage, goToPage)         = React.useState(_ => initialPage)
     let (gameState, setGameState)       = React.useState(_ => initialGameState)
     let (navigation, setNavigation)     = React.useState(_ => initialNavigation)
@@ -82,14 +85,16 @@ let make = (): React.element => {
         | Close                   => <ClosePage />
     }
 
-    <GameStateContext.Provider value=(gameState, setGameState)>
-        <div className=LanguageCodec.languageToJs(gameState.language)>
-            <NavigationContext.Provider value=(navigation, setNavigation)>
-                <TurnStateContext.Provider value=(turnState, setTurnState)>
-                    {currentPage}
-                </TurnStateContext.Provider>
-            </NavigationContext.Provider>
-        </div>
-    </GameStateContext.Provider>
+    <DbConnectionContext.Provider value=(dbConnection, setDbConnection)>
+        <GameStateContext.Provider value=(gameState, setGameState)>
+            <div className=LanguageCodec.languageToJs(gameState.language)>
+                <NavigationContext.Provider value=(navigation, setNavigation)>
+                    <TurnStateContext.Provider value=(turnState, setTurnState)>
+                        {currentPage}
+                    </TurnStateContext.Provider>
+                </NavigationContext.Provider>
+            </div>
+        </GameStateContext.Provider>
+    </DbConnectionContext.Provider>
 }
 

@@ -26,7 +26,7 @@ type blurHandler   = ReactEvent.Focus.t => unit
  * Firebase Types (some of these are defined in Firebase.res)
  */
 
-module Firebase = {
+module FbDb = {
 
     type app
     type database
@@ -34,10 +34,12 @@ module Firebase = {
     type snapshot
     type data
 
-    type connection = {
+    type dbConnection = {
         app: app,
         db: database
     }
+
+    type dbConnectionSetter = (dbConnection => dbConnection) => unit
 
     type config = {
         apiKey            : string,

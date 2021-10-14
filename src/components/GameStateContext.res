@@ -6,7 +6,7 @@
 open Types
 
 let defaultSetter: gameStateSetter = (_: gameState => gameState) => ()
-let defaultState: gameState = {
+let defaultValue: gameState = {
     gameType: StandAlone,
     gameId: GameId.getGameId(),
     language: #en_US,
@@ -17,10 +17,10 @@ let defaultState: gameState = {
     backgroundMusic: [],
 }
 let context = React.createContext(
-    (defaultState, defaultSetter)
+    (defaultValue, defaultSetter)
 )
 
-module Provider= {
+module Provider = {
     let provider = React.Context.provider(context)
 
     @react.component

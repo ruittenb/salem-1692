@@ -3,7 +3,7 @@
  * Constants
  */
 
-let firebaseConfig: Types.Firebase.config = {
+let firebaseConfig: Types.FbDb.config = {
     apiKey            : "AIzaSyD_SDDuyHYXcj_xiw8V_BXmWb_X9TUWpK8",
     authDomain        : "salem-1692-moderator.firebaseapp.com",
     databaseURL       : "https://salem-1692-moderator-default-rtdb.europe-west1.firebasedatabase.app",

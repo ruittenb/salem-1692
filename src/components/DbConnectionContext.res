@@ -1,12 +1,12 @@
 
 /** ****************************************************************************
- * NavigationContext
+ * DbConnectionContext
  */
 
-open Types
+open Types.FbDb
 
-let defaultSetter: navigationSetter = (_: option<page> => option<page>) => ()
-let defaultValue: option<page> = None
+let defaultSetter: dbConnectionSetter = (_: dbConnection => dbConnection) => ()
+let defaultValue: dbConnection = Firebase.connect()
 
 let context = React.createContext(
     (defaultValue, defaultSetter)

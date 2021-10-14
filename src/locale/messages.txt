@@ -1,0 +1,5 @@
+Enter a Game ID
+Malformed ID
+No connection
+No game with this ID
+Game joined
