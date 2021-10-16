@@ -36,7 +36,7 @@ let make = (
         <GearFloatingButton goToPage returnPage=DaytimeConfess />
         <h1> {React.string(t("Confess"))} </h1>
         <h2> {React.string(t("Everyone,"))} </h2>
-        <div className="paragraph text-centered"> {React.string(t("decide whether you want to confess"))} </div>
+        <p> {React.string(t("decide whether you want to confess"))} </p>
         <Spacer />
         {constableRevealButton}
         <Button

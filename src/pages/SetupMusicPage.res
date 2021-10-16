@@ -66,14 +66,12 @@ let make = (
         <BackFloatingButton onClick={ _event => goToPage(_prev => Setup) } />
         <h1> {React.string(t("Music"))} </h1>
         {previewNode}
-        <div className="paragraph">
-            {React.string(t(intro))}
-        </div>
+        <p> {React.string(t(intro))} </p>
         <Spacer />
         {trackButtons}
         <Spacer />
         <Button
-            label={t("Done")}
+            label={t("OK")}
             onClick={ _event => goToPage(_prev => Setup) }
         />
     </div>

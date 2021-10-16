@@ -115,9 +115,9 @@ let make = (): React.element => {
     // component
     <>
         <h2> {React.string(t("Names"))} </h2>
-        <div className="paragraph">
+        <p>
             {React.string(t("Enter the names of the players in clockwise order, starting at the head of the table."))}
-        </div>
+        </p>
         {React.array(playerItems)}
         <PlayerFormLine
             key={gameState.players->Belt.Array.length->Belt.Int.toString} // make key unique

@@ -24,9 +24,9 @@ let make = (): React.element => {
 
     <>
         <h2> {React.string(t("Seating layout"))} </h2>
-        <div className="paragraph">
+        <p>
             {React.string(t("How are the players seated around the table?"))}
-        </div>
+        </p>
         <div id="layout-list">
             {
                 switch (evenOdd, gameState.seating) {

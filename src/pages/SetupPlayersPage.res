@@ -24,7 +24,7 @@ let make = (
 
     let okButton =
         <Button
-            label={t("Done")}
+            label={t("OK")}
             onClick={ _event => goToPage(_prev => Setup) }
             className="spacer-top"
         />
@@ -40,7 +40,7 @@ let make = (
                 // back == Title, forward == Daytime
                 {forwardButton}
             } else {
-                // back == Setup, done == Setup
+                // back == Setup, ok == Setup
                 {okButton}
             }
         }
