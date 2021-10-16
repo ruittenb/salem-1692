@@ -1,0 +1,11 @@
+Enter a Game Code
+Malformed Code
+No connection
+No game with this Code
+Game joined
+
+Host Game
+Organiser jeu
+Spel hosten
+Spiel veranstalten
+
