@@ -73,16 +73,14 @@ let make = (
             {React.string(t("Join Game"))}
         </h1>
         <Spacer />
-        <div className="paragraph">
-            {React.string(t("It is possible to join a game running on another smartphone."))}
-            <br />
-            <br />
+        <p> {React.string(t("It is possible to join a game running on another smartphone."))} </p>
+        <p>
             {React.string(t(
                 // needs backticks for unicode arrow
                 `Take the other smartphone and look in the app under Settings → Host Game. ` ++
                 "Then enter the game code here."
             ))}
-        </div>
+        </p>
         <Spacer />
         <input type_="text" className="id-input" maxLength=15 defaultValue placeholder onBlur />
         <Spacer />
