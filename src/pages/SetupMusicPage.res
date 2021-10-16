@@ -63,6 +63,7 @@ let make = (
     )
 
     <div id="setup-music-page" className="page flex-vertical">
+        <BackFloatingButton onClick={ _event => goToPage(_prev => Setup) } />
         <h1> {React.string(t("Music"))} </h1>
         {previewNode}
         <div className="paragraph">
@@ -72,8 +73,7 @@ let make = (
         {trackButtons}
         <Spacer />
         <Button
-            label={t("Back")}
-            className="icon-left icon-back"
+            label={t("Done")}
             onClick={ _event => goToPage(_prev => Setup) }
         />
     </div>

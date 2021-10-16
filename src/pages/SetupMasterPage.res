@@ -39,14 +39,15 @@ let make = (
 
     // component
     <div id="setup-master-page" className="page flex-vertical">
-        <h1> {React.string(t("Game ID"))} </h1>
+        <BackFloatingButton onClick={ _event => goToPage(_prev => Setup) } />
+        <h1> {React.string(t("Host Game"))} </h1>
         <Spacer />
         <div className="paragraph">
             {React.string(t("It is possible to join this game from another smartphone."))}
             <br />
             <br />
             {React.string(t(
-                "Take the other smartphone and look in the app under Join Game. Then enter the following Game ID there."
+                "Take the other smartphone and look in the app under Join Game. Then enter the following game code there."
             ))}
         </div>
         <Spacer />
@@ -56,13 +57,8 @@ let make = (
         <Spacer />
         <Spacer />
         <Button
-            label={t("New Game ID")}
+            label={t("New Game Code")}
             onClick={ _event => generateNewGameId() }
-        />
-        <Button
-            label={t("Back")}
-            className="icon-left icon-back"
-            onClick={ _event => goToPage(_prev => Setup) }
         />
     </div>
 }

@@ -68,7 +68,7 @@ let make = (
 
     // component
     <div id="setup-slave-page" className="page flex-vertical">
-        <SettingsGear goToPage returnPage=SetupSlave />
+        <GearFloatingButton goToPage returnPage=SetupSlave />
         <h1 className="condensed-es" >
             {React.string(t("Join Game"))}
         </h1>
@@ -79,8 +79,8 @@ let make = (
             <br />
             {React.string(t(
                 // needs backticks for unicode arrow
-                `Take the other smartphone and look in the app under Settings → Game ID. ` ++
-                "Then enter the Game ID here."
+                `Take the other smartphone and look in the app under Settings → Host Game. ` ++
+                "Then enter the game code here."
             ))}
         </div>
         <Spacer />

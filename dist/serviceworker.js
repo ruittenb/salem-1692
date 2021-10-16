@@ -40,6 +40,7 @@ const filesToCache = [
     'images/flag-us.png',
     'images/gramophone.png',
     'images/icon-back.png',
+    'images/icon-back-32.png',
     'images/icon-checked.png',
     'images/icon-cross.png',
     'images/icon-exit.png',

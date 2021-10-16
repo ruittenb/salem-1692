@@ -31,6 +31,12 @@ let make = (
     let hasBackgroundMusic = gameState.backgroundMusic->Js.Array2.length > 0
 
     <div id="setup-page" className="page flex-vertical">
+        <BackFloatingButton
+            onClick={ _event => {
+                setNavigation(_prev => None)
+                goToPage(_prev => navigation->Belt.Option.getWithDefault(Title))
+            } }
+        />
         <h1> {React.string(t("Settings"))} </h1>
         <Spacer />
         <Button
@@ -58,20 +64,12 @@ let make = (
             onClick={ _event => goToPage(_prev => SetupMusic) }
         />
         <Button
-            label={t("Game ID")}
+            label={t("Host Game")}
             onClick={ _event => goToPage(_prev => SetupMaster) }
         />
         <Button
             label={t("Credits")}
             onClick={ _event => goToPage(_prev => Credits) }
-        />
-        <Button
-            label={t("Back")}
-            onClick={ _event => {
-                setNavigation(_prev => None)
-                goToPage(_prev => navigation->Belt.Option.getWithDefault(Title))
-            } }
-            className="icon-left icon-back"
         />
     </div>
 }

@@ -1,6 +1,6 @@
 
 /** ****************************************************************************
- * SettingsGear
+ * GearFloatingButton
  */
 
 open Types
@@ -18,6 +18,6 @@ let make = (
         goToPage(_prev => Setup)
     })
 
-    <div className="icon-gear" onClick></div>
+    <div className="floating-button floating-right icon-gear" onClick></div>
 }
 

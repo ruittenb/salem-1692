@@ -20,7 +20,8 @@ let make = (
     }
 
     <div id="daytime-page" className="page flex-vertical">
-        <SettingsGear goToPage returnPage=Daytime />
+        <BackFloatingButton onClick={ _event => goToPage(_prev => Title) } />
+        <GearFloatingButton goToPage returnPage=Daytime />
         <h1> {React.string(t("Daytime"))} </h1>
         <Spacer />
         <LargeButton onClick={ _event => {
@@ -51,12 +52,6 @@ let make = (
             {React.string(t("Other nights,"))} <br />
             {React.string(t("without constable"))}
         </LargeButton>
-        <Spacer />
-        <Button
-            label={t("Back")}
-            className="icon-left icon-back"
-            onClick={ _event => goToPage(_prev => Title) }
-        />
     </div>
 }
 

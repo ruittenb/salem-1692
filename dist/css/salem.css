@@ -100,12 +100,6 @@ input[type=text]::placeholder {
     height: 100%;
 }
 
-div.text-padding {
-    padding: 20px;
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-}
-
 div.paragraph {
     margin: 5px 15px;
     padding: 5px;
@@ -202,15 +196,15 @@ input[type=text].id-input {
     font-size: 80px;
     color: #172;
     background-image: url(../images/confirm-yes.png);
-    background-repeat: no-repeat;
     background-position: center center;
+    background-repeat: no-repeat;
 }
 .page button.largebutton.confirm-no  {
     font-size: 80px;
     color: #a24;
     background-image: url(../images/confirm-no.png);
-    background-repeat: no-repeat;
     background-position: center center;
+    background-repeat: no-repeat;
 }
 
 .page button.icon-left {
@@ -230,15 +224,21 @@ input[type=text].id-input {
     margin-bottom: 0;
 }
 
-.page .icon-gear {
+.page div.floating-right {
+    right: 20px;
+}
+.page div.floating-left {
+    left: 20px;
+}
+.page div.floating-button {
+    background-position: center center;
+    background-repeat: no-repeat;
     position: absolute;
     top: 20px;
-    right: 20px;
     width: 32px;
     height: 32px;
     z-index: 10;
-    background: url(../images/icon-gear.png) center center;
-    opacity: 0.75;
+    /* opacity: 0.75; */
 }
 
 .page button.flag-nl { background-image: url(../images/flag-nl.png); }
@@ -248,15 +248,17 @@ input[type=text].id-input {
 .page button.flag-es { background-image: url(../images/flag-es.png); }
 .page button.flag-it { background-image: url(../images/flag-it.png); }
 
+.page button.icon-back  { background-image: url(../images/icon-back.png); }
 .page button.icon-pawn  { background-image: url(../images/icon-pawn.png); }
 .page button.icon-lang  { background-image: url(../images/icon-lang.png); }
-.page button.icon-back  { background-image: url(../images/icon-back.png); }
 .page button.icon-forw  { background-image: url(../images/icon-forw.png); }
 .page button.icon-move  { background-image: url(../images/icon-move.png); }
 .page button.icon-exit  { background-image: url(../images/icon-exit.png); }
 .page button.icon-rot   { background-image: url(../images/icon-rot.png); }
 .page button.icon-trash { background-image: url(../images/icon-cross.png); }
 .page button.icon-abort { background-image: url(../images/icon-cross.png); }
+.page    div.icon-gear  { background-image: url(../images/icon-gear.png); }
+.page    div.icon-back  { background-image: url(../images/icon-back-32.png); }
 
 .page button.icon-checked   { background-image: url(../images/icon-checked.png); }
 .page button.icon-unchecked { background-image: url(../images/icon-unchecked.png); }
@@ -298,7 +300,6 @@ input[type=text].id-input {
 
 #setup-page {
     background: url(../images/overlay-gear.png) -190px 120px no-repeat;
-    padding-top: 20px;
 }
 
 #setup-language-page {
@@ -372,9 +373,10 @@ input[type=text].id-input {
 
 #credits-page p {
     width: 100%;
-    margin: 0;
+    margin: 0 20px;
     padding-left: 20px;
     text-indent: -20px;
+    width: calc(100% - 40px);
 }
 
 #credits-page p span:first-child {

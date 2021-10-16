@@ -29,7 +29,8 @@ let make = (
         })
     )
 
-    <div id="credits-page" className="page flex-vertical text-padding">
+    <div id="credits-page" className="page flex-vertical">
+        <BackFloatingButton onClick={ _event => goToPage(_prev => Setup) } />
         <h1> {React.string(t("Credits"))} </h1>
         <Spacer />
         <p>
@@ -83,9 +84,8 @@ let make = (
         </p>
         <Spacer />
         <Button
-            label={t("Back")}
+            label={t("OK")}
             onClick={ _event => goToPage(_prev => Setup) }
-            className="icon-left icon-back"
         />
     </div>
 }
