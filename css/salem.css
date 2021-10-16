@@ -100,11 +100,11 @@ input[type=text]::placeholder {
     height: 100%;
 }
 
-div.paragraph {
+p {
     margin: 5px 15px;
     padding: 5px;
-    line-height: 1.15;
-    backdrop-filter: blur(2px);
+    line-height: 1.2;
+    backdrop-filter: blur(3px);
 }
 
 div.id-input {
@@ -367,16 +367,15 @@ input[type=text].id-input {
     width: 100%;
 }
 
-#credits-page p::first-line {
-    text-indent: 0;
+#credits-page p {
+    margin: 0 15px;
+    padding: 0 5px 0 25px;
+    text-indent: -20px;
+    line-height: 1.4;
 }
 
-#credits-page p {
-    width: 100%;
-    margin: 0 20px;
-    padding-left: 20px;
-    text-indent: -20px;
-    width: calc(100% - 40px);
+#credits-page p::first-line {
+    text-indent: 0;
 }
 
 #credits-page p span:first-child {
