@@ -6,16 +6,16 @@
 open Types
 
 let defaultSetter: turnStateSetter = (_: turnState => turnState) => ()
-let defaultState: turnState = {
+let defaultValue: turnState = {
     nrWitches: One,
     choiceWitches: None,
     choiceConstable: None,
 }
 let context = React.createContext(
-    (defaultState, defaultSetter)
+    (defaultValue, defaultSetter)
 )
 
-module Provider= {
+module Provider = {
     let provider = React.Context.provider(context)
 
     @react.component

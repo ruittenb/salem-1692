@@ -33,19 +33,22 @@ let make = (): React.element => {
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    // handlers for existing players
+    // change a player on leaving the field
     let blurHandler: (int => blurHandler) = (playerIndex, event) => {
         let newValue: player = ReactEvent.Focus.currentTarget(event)["value"]
-        let players = arrayConcat3(
-            gameState.players->sliceFirst(playerIndex - 1),
-            [ newValue ],
-            gameState.players->sliceLast(playerIndex + 1)
-        )
+        let newPlayer = newValue->Js.String2.length > 0 ? [ newValue ] : []
+        let players =
+            arrayConcat3(
+                gameState.players->sliceFirst(playerIndex - 1),
+                newPlayer,
+                gameState.players->sliceLast(playerIndex + 1)
+            )
         setGameState(prevGameState => {
             ...prevGameState,
             players
         })
     }
+    // remove a player on button click
     let removeHandler: (int => clickHandler) = (playerIndex, _event) => {
         let players = Js.Array2.concat(
             gameState.players->sliceFirst(playerIndex - 1),
@@ -56,6 +59,7 @@ let make = (): React.element => {
             players
         })
     }
+    // swap two players
     let moveHandler: (int => clickHandler) = (playerIndex, _event) => {
         let firstSwapPlayer : option<player> = gameState.players->Belt.Array.get(playerIndex)
         let secondSwapPlayer: option<player> = gameState.players->Belt.Array.get(playerIndex + 1)
@@ -75,8 +79,10 @@ let make = (): React.element => {
             players
         })
     }
-    // handler for new players
+    // add a new player
+    //let addHandler: changeHandler = (event) => {
     let addHandler: blurHandler = (event) => {
+        //let newPlayer: player = ReactEvent.Form.currentTarget(event)["value"]
         let newPlayer: player = ReactEvent.Focus.currentTarget(event)["value"]
         let newPlayers = if newPlayer->Js.String.length > 0 {
             [ newPlayer ]
@@ -106,6 +112,7 @@ let make = (): React.element => {
         }
     )
 
+    // component
     <>
         <h2> {React.string(t("Names"))} </h2>
         <div className="paragraph">
