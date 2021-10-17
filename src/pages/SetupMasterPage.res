@@ -39,6 +39,7 @@ let make = (
                     <Spacer />
                     <Button
                         label={t("Start Hosting")}
+                        className="condensed-fr"
                         onClick={ _event => startHosting() }
                     />
                 </>
