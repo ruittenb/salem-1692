@@ -127,6 +127,9 @@ input[type=text].id-input {
 .de_DE .page .condensed-de {
     font-size: 20px;
 }
+.fr_FR .page .condensed-fr {
+    font-size: 22px;
+}
 .es_ES .page h1.condensed-es {
     font-size: 58px;
     margin-top: 30px;
