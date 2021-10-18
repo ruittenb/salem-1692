@@ -4,12 +4,13 @@
  */
 
 open Types
+open Types.FbDb
 
 @react.component
 let make = (
     ~goToPage,
 ): React.element => {
-    let (dbConnection, _setDbConnection) = React.useContext(DbConnectionContext.context)
+    let (maybeDbConnection, _setDbConnection) = React.useContext(DbConnectionContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
@@ -18,11 +19,10 @@ let make = (
     // how to update a field
     // https://firebase.google.com/docs/database/web/read-and-write#update_specific_fields
 
-    let leaveAnyCurrentGame = (dbConnection, gameState: gameState) => {
-        switch (gameState.gameType) {
-            | StandAlone    => ()
-            | Master        => ()
-            | Slave(gameId) => Firebase.leaveGame(dbConnection, gameId)
+    let leaveAnyCurrentGame = (maybeDbConnection: maybeDbConnection, gameState: gameState) => {
+        switch (maybeDbConnection, gameState.gameType) {
+            | (Some(dbConnection), Slave(gameId)) => Firebase.leaveGame(dbConnection, gameId)
+            | (_, _)                              => ()
         }
     }
 
@@ -38,8 +38,11 @@ let make = (
         if (!GameId.isValid(newGameId)) {
             setFreeToProceed(_prev => false)
         } else {
-            leaveAnyCurrentGame(dbConnection, gameState)
-            Firebase.joinGame(dbConnection, newGameId)
+            leaveAnyCurrentGame(maybeDbConnection, gameState)
+            switch (maybeDbConnection) {
+                | None               => Js.log("No connection")
+                | Some(dbConnection) => Firebase.joinGame(dbConnection, newGameId)
+            }
             // also TODO: what if failure?
             setGameState(prevGameState => {
                 {
@@ -52,7 +55,7 @@ let make = (
     }
 
     let onBack = (_event) => {
-        leaveAnyCurrentGame(dbConnection, gameState)
+        leaveAnyCurrentGame(maybeDbConnection, gameState)
         setGameState(prevGameState => {
             {
                 ...prevGameState,
@@ -68,6 +71,7 @@ let make = (
 
     // component
     <div id="setup-slave-page" className="page flex-vertical">
+        <BackFloatingButton onClick=onBack />
         <GearFloatingButton goToPage returnPage=SetupSlave />
         <h1 className="condensed-es" >
             {React.string(t("Join Game"))}

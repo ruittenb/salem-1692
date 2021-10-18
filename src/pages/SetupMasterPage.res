@@ -4,27 +4,68 @@
  */
 
 open Types
+open Types.FbDb
 
 @react.component
 let make = (
     ~goToPage,
 ): React.element => {
+    let (maybeDbConnection, setDbConnection) = React.useContext(DbConnectionContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
+    let (connectionStatus, setConnectionStatus) = React.useState(_ => {
+        switch gameState.gameType {
+            | StandAlone => NotConnected
+            | Master     => Connected
+            | Slave(_)   => Connected
+        }
+    })
+
     let startHosting = () => {
-        setGameState((prevGameState) => {
-            ...prevGameState,
-            gameType: Master,
-            gameId: GameId.getGameId()
-        })
+        setConnectionStatus(_prev => Connecting)
+        Firebase.connect()
+            ->Promise.then(dbConnection => {
+                setDbConnection(_prev => Some(dbConnection))
+                setConnectionStatus(_prev => Connected)
+                setGameState(prevGameState => {
+                    let newGameState = {
+                        ...prevGameState,
+                        gameType: Master,
+                        gameId: GameId.getGameId()
+                    }
+                    Firebase.createGame(dbConnection, newGameState)
+                    newGameState
+                })
+                Promise.resolve(true)
+            })
+            ->ignore
     }
 
     let stopHosting = () => {
-        setGameState((prevGameState) => {
-            ...prevGameState,
-            gameType: StandAlone
-        })
+        switch maybeDbConnection {
+            | None               => ()
+            | Some(dbConnection) => {
+                Firebase.disconnect(dbConnection)
+                setConnectionStatus(_prev => NotConnected)
+                setGameState((prevGameState) => {
+                    ...prevGameState,
+                    gameType: StandAlone
+                })
+            }
+        }
+    }
+
+    let connectionStatus = switch (connectionStatus) {
+        | NotConnected => React.null
+        | Connecting   => <>
+                              <Spacer />
+                              {React.string("Connecting...")}
+                          </>
+        | Connected    => <>
+                              <Spacer />
+                              {React.string("Connected")}
+                          </>
     }
 
     // component
@@ -36,6 +77,7 @@ let make = (
         {
             if (gameState.gameType !== Master) {
                 <>
+                    {connectionStatus}
                     <Spacer />
                     <Button
                         label={t("Start Hosting")}

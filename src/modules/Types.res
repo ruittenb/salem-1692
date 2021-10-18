@@ -13,6 +13,9 @@ type rotation =
     | RotOneHalf
     | RotThreeQuarters
 
+@decco type player = string
+@decco type players = array<player>
+
 /** **********************************************************************
  * Event Types
  */
@@ -39,7 +42,14 @@ module FbDb = {
         db: database
     }
 
-    type dbConnectionSetter = (dbConnection => dbConnection) => unit
+    type connectionStatus =
+        | NotConnected
+        | Connecting
+        | Connected
+
+    type maybeDbConnection = option<dbConnection>
+
+    type dbConnectionSetter = (maybeDbConnection => maybeDbConnection) => unit
 
     type config = {
         apiKey            : string,
@@ -50,14 +60,26 @@ module FbDb = {
         messagingSenderId : string,
         appId             : string,
     }
+
+    type phase =
+        | Daytime
+        | NightChooseWitches
+        | NightConfirmWitches
+        | NightChooseConstable
+        | NightConfirmConstable
+
+    type record = {
+        phase: phase,
+        players: array<player>,
+        seating: SeatingCodec.t,
+        choiceWitches: option<player>,
+        choiceConstable: option<player>,
+    }
 }
 
 /** **********************************************************************
  * Game Types
  */
-
-@decco type player = string
-@decco type players = array<player>
 
 @decco type gameState = {
     gameType: GameTypeCodec.t,
@@ -77,8 +99,8 @@ type nrWitches =
 
 type turnState = {
     nrWitches: nrWitches,
-    choiceWitches: option<string>,
-    choiceConstable: option<string>,
+    choiceWitches: option<player>,
+    choiceConstable: option<player>,
 }
 type turnStateSetter = (turnState => turnState) => unit
 

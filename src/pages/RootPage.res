@@ -7,7 +7,7 @@ open Types
 open Types.FbDb
 open Constants
 
-let initialDbConnection: dbConnection = Firebase.connect()
+let initialDbConnection: option<dbConnection> = None
 let initialPage: page = Title
 let initialNavigation: option<page> = None
 
