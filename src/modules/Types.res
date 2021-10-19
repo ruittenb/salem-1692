@@ -59,19 +59,22 @@ module FbDb = {
         appId             : string,
     }
 
-    type phase =
-        | Daytime
-        | NightChooseWitches
-        | NightConfirmWitches
-        | NightChooseConstable
-        | NightConfirmConstable
+    @deriving(jsConverter)
+    @decco type phase = [
+        | #DaytimeParked
+        | #NightChooseWitches
+        | #NightConfirmWitches
+        | #NightChooseConstable
+        | #NightConfirmConstable
+    ]
 
-    type record = {
-        phase: phase,
-        players: array<player>,
-        seating: SeatingCodec.t,
-        choiceWitches: option<player>,
-        choiceConstable: option<player>,
+    type dbRecord = {
+        masterGameId: GameTypeCodec.gameId,
+        masterPhase: phase,
+        masterPlayers: array<player>,
+        masterSeating: string,
+        slaveChoiceWitches: player,
+        slaveChoiceConstable: player,
     }
 }
 

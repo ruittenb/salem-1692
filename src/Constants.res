@@ -3,6 +3,15 @@
  * Constants
  */
 
+// You can enable debug mode by changing the User-Agent string to contain the text
+// "Salem/1692". See https://www.alphr.com/change-user-agent-string-google-chrome/
+
+type navigator
+@val external navigator: navigator = "navigator"
+@get external userAgent: (navigator) => string = "userAgent"
+
+let debug = navigator->userAgent->Js.String2.includes("Salem/1692")
+
 let firebaseConfig: Types.FbDb.config = {
     apiKey            : "AIzaSyD_SDDuyHYXcj_xiw8V_BXmWb_X9TUWpK8",
     authDomain        : "salem-1692-moderator.firebaseapp.com",

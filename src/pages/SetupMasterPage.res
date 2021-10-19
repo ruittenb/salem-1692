@@ -37,7 +37,10 @@ let make = (
         switch dbConnectionStatus {
             | NotConnected            => ()
             | Connecting              => ()
-            | Connected(dbConnection) => Firebase.disconnect(dbConnection)
+            | Connected(dbConnection) => {
+                Firebase.destroyGame(dbConnection, gameState.gameId)
+                Firebase.disconnect(dbConnection)
+            }
         }
         setDbConnectionStatus(_prev => NotConnected)
         setGameState((prevGameState) => {
