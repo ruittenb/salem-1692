@@ -10,24 +10,15 @@ open Types.FbDb
 let make = (
     ~goToPage,
 ): React.element => {
-    let (maybeDbConnection, setDbConnection) = React.useContext(DbConnectionContext.context)
+    let (dbConnectionStatus, setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let (connectionStatus, setConnectionStatus) = React.useState(_ => {
-        switch gameState.gameType {
-            | StandAlone => NotConnected
-            | Master     => Connected
-            | Slave(_)   => Connected
-        }
-    })
-
     let startHosting = () => {
-        setConnectionStatus(_prev => Connecting)
+        setDbConnectionStatus(_prev => Connecting)
         Firebase.connect()
             ->Promise.then(dbConnection => {
-                setDbConnection(_prev => Some(dbConnection))
-                setConnectionStatus(_prev => Connected)
+                setDbConnectionStatus(_prev => Connected(dbConnection))
                 setGameState(prevGameState => {
                     let newGameState = {
                         ...prevGameState,
@@ -43,26 +34,25 @@ let make = (
     }
 
     let stopHosting = () => {
-        switch maybeDbConnection {
-            | None               => ()
-            | Some(dbConnection) => {
-                Firebase.disconnect(dbConnection)
-                setConnectionStatus(_prev => NotConnected)
-                setGameState((prevGameState) => {
-                    ...prevGameState,
-                    gameType: StandAlone
-                })
-            }
+        switch dbConnectionStatus {
+            | NotConnected            => ()
+            | Connecting              => ()
+            | Connected(dbConnection) => Firebase.disconnect(dbConnection)
         }
+        setDbConnectionStatus(_prev => NotConnected)
+        setGameState((prevGameState) => {
+            ...prevGameState,
+            gameType: StandAlone
+        })
     }
 
-    let connectionStatus = switch (connectionStatus) {
+    let connectionStatus = switch (dbConnectionStatus) {
         | NotConnected => React.null
         | Connecting   => <>
                               <Spacer />
                               {React.string("Connecting...")}
                           </>
-        | Connected    => <>
+        | Connected(_) => <>
                               <Spacer />
                               {React.string("Connected")}
                           </>

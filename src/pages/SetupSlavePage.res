@@ -19,10 +19,10 @@ let make = (
     // how to update a field
     // https://firebase.google.com/docs/database/web/read-and-write#update_specific_fields
 
-    let leaveAnyCurrentGame = (maybeDbConnection: maybeDbConnection, gameState: gameState) => {
-        switch (maybeDbConnection, gameState.gameType) {
-            | (Some(dbConnection), Slave(gameId)) => Firebase.leaveGame(dbConnection, gameId)
-            | (_, _)                              => ()
+    let leaveAnyCurrentGame = (dbConnectionStatus: dbConnectionStatus, gameState: gameState) => {
+        switch (dbConnectionStatus, gameState.gameType) {
+            | (Connected(dbConnection), Slave(gameId)) => Firebase.leaveGame(dbConnection, gameId) // TODO also disconnect
+            | (_, _)                                   => ()
         }
     }
 
@@ -40,8 +40,9 @@ let make = (
         } else {
             leaveAnyCurrentGame(maybeDbConnection, gameState)
             switch (maybeDbConnection) {
-                | None               => Js.log("No connection")
-                | Some(dbConnection) => Firebase.joinGame(dbConnection, newGameId)
+                | NotConnected            => Js.log("No connection")
+                | Connecting              => Js.log("Connecting")
+                | Connected(dbConnection) => Firebase.joinGame(dbConnection, newGameId)
             }
             // also TODO: what if failure?
             setGameState(prevGameState => {

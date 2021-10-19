@@ -42,14 +42,12 @@ module FbDb = {
         db: database
     }
 
-    type connectionStatus =
+    type dbConnectionStatus =
         | NotConnected
         | Connecting
-        | Connected
+        | Connected(dbConnection)
 
-    type maybeDbConnection = option<dbConnection>
-
-    type dbConnectionSetter = (maybeDbConnection => maybeDbConnection) => unit
+    type dbConnectionSetter = (dbConnectionStatus => dbConnectionStatus) => unit
 
     type config = {
         apiKey            : string,

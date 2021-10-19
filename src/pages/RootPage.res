@@ -7,7 +7,7 @@ open Types
 open Types.FbDb
 open Constants
 
-let initialDbConnection: option<dbConnection> = None
+let initialDbConnectionStatus = NotConnected
 let initialPage: page = Title
 let initialNavigation: option<page> = None
 
@@ -46,11 +46,12 @@ let loadGameStateFromLocalStorage = (setGameState): unit => {
 @react.component
 let make = (): React.element => {
 
-    let (dbConnection, setDbConnection) = React.useState(_ => initialDbConnection)
-    let (currentPage, goToPage)         = React.useState(_ => initialPage)
-    let (gameState, setGameState)       = React.useState(_ => initialGameState)
-    let (navigation, setNavigation)     = React.useState(_ => initialNavigation)
-    let (turnState, setTurnState)       = React.useState(_ => initialTurnState)
+    let (dbConnectionStatus, setDbConnectionStatus)
+                                    = React.useState(_ => initialDbConnectionStatus)
+    let (currentPage, goToPage)     = React.useState(_ => initialPage)
+    let (gameState, setGameState)   = React.useState(_ => initialGameState)
+    let (navigation, setNavigation) = React.useState(_ => initialNavigation)
+    let (turnState, setTurnState)   = React.useState(_ => initialTurnState)
 
     // run once after mounting
     React.useEffect0(() => {
@@ -85,7 +86,7 @@ let make = (): React.element => {
         | Close                   => <ClosePage />
     }
 
-    <DbConnectionContext.Provider value=(dbConnection, setDbConnection)>
+    <DbConnectionContext.Provider value=(dbConnectionStatus, setDbConnectionStatus)>
         <GameStateContext.Provider value=(gameState, setGameState)>
             <div className=LanguageCodec.languageToJs(gameState.language)>
                 <NavigationContext.Provider value=(navigation, setNavigation)>

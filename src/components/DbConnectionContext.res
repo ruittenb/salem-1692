@@ -5,8 +5,8 @@
 
 open Types.FbDb
 
-let defaultSetter: dbConnectionSetter = (_: maybeDbConnection => maybeDbConnection) => ()
-let defaultValue: maybeDbConnection = None
+let defaultSetter: dbConnectionSetter = (_: dbConnectionStatus => dbConnectionStatus) => ()
+let defaultValue: dbConnectionStatus = NotConnected
 
 let context = React.createContext(
     (defaultValue, defaultSetter)
