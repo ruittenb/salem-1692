@@ -57,8 +57,8 @@ let disconnect = (
 ): unit => {
     let connectionInfoRef = getRef(dbConnection.db, connectionInfoKey);
     off(connectionInfoRef)
-    // we could go offline here, but it would require us to use a different method
-    // to connect each subsequent time than the first time.
+    // We could go offline here, but then reconnecting would require a
+    // different method than when connecting the first time.
     //goOffline(dbConnection.db)
     logDebug("Disconnected")
 }

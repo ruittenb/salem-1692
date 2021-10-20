@@ -34,14 +34,10 @@ let make = (
     }
 
     let stopHosting = () => {
-        switch dbConnectionStatus {
-            | NotConnected            => ()
-            | Connecting              => ()
-            | Connected(dbConnection) => {
-                Firebase.destroyGame(dbConnection, gameState.gameId)
-                Firebase.disconnect(dbConnection)
-            }
-        }
+        Utils.ifConnected(dbConnectionStatus, (dbConnection) => {
+            Firebase.destroyGame(dbConnection, gameState.gameId)
+            Firebase.disconnect(dbConnection)
+        })
         setDbConnectionStatus(_prev => NotConnected)
         setGameState((prevGameState) => {
             ...prevGameState,
@@ -82,7 +78,8 @@ let make = (
                 <>
                     <p>
                         {React.string(t(
-                            "Take the other smartphone and look in the app under Join Game. Then enter the following game code there."
+                            "Take the other smartphone and look in the app under Join Game. " ++
+                            "Then enter the following game code there."
                         ))}
                     </p>
                     <Spacer />

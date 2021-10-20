@@ -90,6 +90,34 @@ let replaceWith = (
 }
 
 /**
+ * Call function if connection state reflects that we're connected to firebase
+ */
+let ifConnected = (
+    dbConnectionStatus: Types.FbDb.dbConnectionStatus,
+    func: (Types.FbDb.dbConnection) => unit
+) => {
+    switch dbConnectionStatus {
+        | NotConnected            => ()
+        | Connecting              => ()
+        | Connected(dbConnection) => func(dbConnection)
+    }
+}
+
+/**
+ * Call function if game state reflects that we're Master
+ */
+let ifMaster = (
+    gameType: GameTypeCodec.t,
+    func: () => unit
+) => {
+    switch gameType {
+        | StandAlone => ()
+        | Master     => func()
+        | Slave(_)   => ()
+    }
+}
+
+/**
  * Convert [ Some(3), Some(6), None, Some(-1), None ] into [ 3, 6, -1 ]:
  * use Belt.Array.keepMap(identity)
  *

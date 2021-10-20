@@ -38,9 +38,15 @@ let cleanupGameState = (gameState): gameState => {
 let loadGameStateFromLocalStorage = (setGameState): unit => {
     LocalStorage.loadGameState()
         ->Belt.Option.map(cleanupGameState)
-        ->Belt.Option.forEach(
-            gameState => setGameState(_prev => gameState)
-        )
+        ->Belt.Option.forEach(gameState => {
+            setGameState(_prev => gameState)
+            Utils.ifMaster(
+                gameState.gameType,
+                () => {
+                    Firebase.connect()->ignore
+                }
+            ) // TODO probably better to do a watered-down variant of SetupMasterPage.startHosting()
+        })
 }
 
 @react.component

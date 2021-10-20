@@ -3,7 +3,7 @@
  * Constants
  */
 
-// You can enable debug mode by changing the User-Agent string to contain the text
+// Debug mode can be enabled by changing the User-Agent string to contain the text
 // "Salem/1692". See https://www.alphr.com/change-user-agent-string-google-chrome/
 
 type navigator
@@ -11,6 +11,8 @@ type navigator
 @get external userAgent: (navigator) => string = "userAgent"
 
 let debug = navigator->userAgent->Js.String2.includes("Salem/1692")
+
+// firebase, url, localstorage
 
 let firebaseConfig: Types.FbDb.config = {
     apiKey            : "AIzaSyD_SDDuyHYXcj_xiw8V_BXmWb_X9TUWpK8",
@@ -26,6 +28,8 @@ let siteUrl = "https://ruittenb.github.io/salem-1692/dist/"
 
 let localStoragePrefix = "salem1692"
 let localStorageGameStateKey = ".gameState"
+
+// game parameters
 
 let consoleErrorFormatting = "color: red; font-weight: bold"
 
