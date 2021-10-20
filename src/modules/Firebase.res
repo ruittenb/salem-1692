@@ -13,7 +13,7 @@ open Utils
 @module("firebase/database") external goOffline: (database) => unit = "goOffline"
 @module("firebase/database") external onValue: (reference, (snapshot) => unit) => unit = "onValue"
 @module("firebase/database") external off: (reference) => unit = "off"
-@module("firebase/database") external set: (reference, 'data) => unit = "set"
+@module("firebase/database") external set: (reference, 'data) => Promise.t<unit> = "set"
 @module("firebase/database") external remove: (reference) => unit = "remove"
 @send external getValue: (snapshot) => 'data = "val"
 
@@ -38,17 +38,21 @@ let transformToDbRecord = (gameState: gameState): dbRecord => {
  */
 
 let connect = (): Promise.t<dbConnection> => {
-    Promise.make((resolve, _reject) => {
-        let app = initializeApp(Constants.firebaseConfig)
-        let db = getDatabase(app)
-        let connectionInfoRef = getRef(db, connectionInfoKey);
-        onValue(connectionInfoRef, (snapshot) => {
-            let connected: bool = getValue(snapshot)
-            if (connected) {
-                logDebug("Connected")
-                resolve(. { app, db })
-            }
-        })
+    Promise.make((resolve, reject) => {
+        try {
+            let app = initializeApp(Constants.firebaseConfig)
+            let db = getDatabase(app)
+            let connectionInfoRef = getRef(db, connectionInfoKey);
+            onValue(connectionInfoRef, (snapshot) => {
+                let connected: bool = getValue(snapshot)
+                if (connected) {
+                    logDebug("Connected")
+                    resolve(. { app, db })
+                }
+            })
+        } catch {
+            | error => reject(. error)
+        }
     })
 }
 
@@ -67,9 +71,10 @@ let disconnect = (
  * create/destroy (Master)
  */
 
-let createGame = (
+let writeGame = (
     dbConnection: dbConnection,
-    gameState: gameState
+    gameState: gameState,
+    action: string
 ): unit => {
     let dbRecord = transformToDbRecord(gameState)
     safeExec(
@@ -77,8 +82,30 @@ let createGame = (
     )
     ->Belt.Option.forEach(myGameRef => {
         set(myGameRef, dbRecord)
-        logDebug("Created game " ++ gameState.gameId)
+            ->Promise.then(() => {
+                logDebug(action ++ " game " ++ gameState.gameId)
+                Promise.resolve()
+            })
+            ->Promise.catch((error) => {
+                error->getExceptionMessage->logError
+                Promise.resolve()
+            })
+            ->ignore
     })
+}
+
+let createGame = (
+    dbConnection: dbConnection,
+    gameState: gameState
+): unit => {
+    writeGame(dbConnection, gameState, "Created")
+}
+
+let updateGame = (
+    dbConnection: dbConnection,
+    gameState: gameState
+): unit => {
+    writeGame(dbConnection, gameState, "Updated")
 }
 
 let destroyGame = (

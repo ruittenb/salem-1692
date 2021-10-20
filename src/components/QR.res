@@ -3,6 +3,8 @@
  * QR
  */
 
+open Utils
+
 type qrCodeClass
 type qrCode
 type qrCorrectLevel
@@ -16,40 +18,48 @@ type qrParams = {
 
 @val external qrCodeClass: qrCodeClass = "QRCode"
 @val external getQrCode: (Dom.element, qrParams) => qrCode = "getQrCode"
+@send external clear: (qrCode) => unit = "clear"
 @send external makeCode: (qrCode, string) => unit = "makeCode"
 @get external correctLevel: (qrCodeClass) => qrCorrectLevel = "CorrectLevel"
 @get external low: (qrCorrectLevel) => qrCorrectLevelLow = "L"
+
+let elementId = "qr-code"
+let size = "150"
+let style = ReactDOM.Style.make(
+    ~width = size ++ "px",
+    ~height = size ++ "px",
+    ()
+)
+
+let displayQrCode = (
+    qrElement: Dom.element, value: string
+): qrCode => {
+    logDebug("Creating QR code for " ++ value)
+
+    let qrParams: qrParams = {
+        text: value,
+        width: size,
+        height: size,
+        correctLevel : qrCodeClass->correctLevel->low
+    }
+    getQrCode(qrElement, qrParams)
+}
 
 @react.component
 let make = (
     ~value: string
 ): React.element => {
 
-    let elementId = "qr-code"
-    let size = "150"
-    let style=ReactDOM.Style.make(
-        ~width = size ++ "px",
-        ~height = size ++ "px",
-        ()
-    )
-
-    let displayQrCode = (qrElement) => {
-        let qrParams: qrParams = {
-            text: value,
-            width: size,
-            height: size,
-            correctLevel : qrCodeClass->correctLevel->low
-        }
-        let qrCode = getQrCode(qrElement, qrParams)
-        qrCode->makeCode(value)
-    }
-
-    React.useEffect(() => {
-        switch (Utils.safeQuerySelector(elementId)) {
-            | Ok(qrElement) => displayQrCode(qrElement)
-            | Error(msg) => Utils.logError(msg)
-        }
-        None
+    // only after mounting the component
+    React.useEffect0(() => {
+        // this is a Some() when the element node is found in the DOM
+        let maybeQrCode: option<qrCode> =
+            switch (safeQuerySelector(elementId)) {
+                | Ok(qrElement) => displayQrCode(qrElement, value)->Some
+                | Error(msg)    => logError(msg)->replaceWith(None)
+            }
+        // cleanup: if we have the DOM node, clear it
+        Some(() => maybeQrCode->Belt.Option.forEach(qrCode => qrCode->clear))
     })
 
     // component

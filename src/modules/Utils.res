@@ -70,9 +70,10 @@ let safeQuerySelector = (
             | None          => Error("Cannot find DOM element with id '" ++ elementId ++ "'")
         }
     } catch {
-        | error => error
-            ->getExceptionMessage
-            ->Error
+        | error =>
+            error
+                ->getExceptionMessage
+                ->Error
     }
 }
 
