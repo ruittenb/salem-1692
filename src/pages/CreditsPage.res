@@ -29,7 +29,7 @@ let make = (
         })
     )
 
-    <div id="credits-page" className="page flex-vertical">
+    <div id="credits-page" className="page">
         <BackFloatingButton onClick={ _event => goToPage(_prev => Setup) } />
         <h1> {React.string(t("Credits"))} </h1>
         <Spacer />
@@ -49,6 +49,10 @@ let make = (
         <p>
             <span> {React.string(t("Voice actors: "))} </span>
             {React.string("Helmi Megens, Mario Ruiz, Paul Scholey")}
+        </p>
+        <p>
+            <span> {React.string(t("Libraries: "))} </span>
+            <a href="https://github.com/davidshimjs/qrcodejs"> {React.string("QRCode.js")} </a>
         </p>
         <p>
             <span> {React.string(t("Music: "))} </span>
@@ -83,10 +87,13 @@ let make = (
             <a href="http://www.famfamfam.com/lab/icons/silk/"> {React.string("FamFamFam")} </a>
         </p>
         <Spacer />
-        <Button
-            label={t("OK")}
-            onClick={ _event => goToPage(_prev => Setup) }
-        />
+        <div className="flex-vertical">
+            <Button
+                label={t("OK")}
+                onClick={ _event => goToPage(_prev => Setup) }
+            />
+        </div>
+        <Spacer />
     </div>
 }
 

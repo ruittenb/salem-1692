@@ -50,6 +50,7 @@ let table = Js.Dict.fromArray([
     ("version", `versión`),
     ("For use with the game: ", "Para usar con el juego: "),
     ("App: ", `Aplicación: `),
+    ("Libraries: ", "Bibliotecas: "),
     ("Sound effects: ", "Efectos de sonido: "),
     ("Voice actors: ", "Actores de voz: "),
     ("Images: ", `Imágenes: `),

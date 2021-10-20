@@ -58,7 +58,7 @@ img.sound-image {
 img.sound-image.greyed {
     filter: grayscale(1);
 }
-img.qr-code {
+div#qr-code {
     padding: 4px;
     border: 3px solid black;
     background-color: white;
@@ -365,6 +365,10 @@ input[type=text].id-input {
 #credits-page {
     background: url(../images/overlay-scroll.png) -290px 120px no-repeat;
     width: 100%;
+}
+
+#credits-page h1 {
+    text-align: center;
 }
 
 #credits-page p {
