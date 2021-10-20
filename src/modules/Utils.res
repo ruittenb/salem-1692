@@ -12,6 +12,18 @@ let logError = (msg: string): unit => {
     Js.log2("%cError: " ++ msg, Constants.consoleErrorFormatting)
 }
 
+/**
+ * Log a message to console only if debug flag is set
+ */
+let logDebug = (msg: string): unit => {
+    if (Constants.debug) {
+        Js.log(msg)
+    }
+}
+
+/**
+ * Extract message from exception
+ */
 let getExceptionMessage = (error: exn): string => {
     error
         ->Js.Exn.asJsExn
@@ -58,10 +70,9 @@ let safeQuerySelector = (
             | None          => Error("Cannot find DOM element with id '" ++ elementId ++ "'")
         }
     } catch {
-        | error =>
-            error
-                ->getExceptionMessage
-                ->Error
+        | error => error
+            ->getExceptionMessage
+            ->Error
     }
 }
 
@@ -76,6 +87,34 @@ let replaceWith = (
     second: 'b
 ): 'b => {
     second
+}
+
+/**
+ * Call function if connection state reflects that we're connected to firebase
+ */
+let ifConnected = (
+    dbConnectionStatus: Types.FbDb.dbConnectionStatus,
+    func: (Types.FbDb.dbConnection) => unit
+) => {
+    switch dbConnectionStatus {
+        | NotConnected            => ()
+        | Connecting              => ()
+        | Connected(dbConnection) => func(dbConnection)
+    }
+}
+
+/**
+ * Call function if game state reflects that we're Master
+ */
+let ifMaster = (
+    gameType: GameTypeCodec.t,
+    func: () => unit
+) => {
+    switch gameType {
+        | StandAlone => ()
+        | Master     => func()
+        | Slave(_)   => ()
+    }
 }
 
 /**

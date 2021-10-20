@@ -5,8 +5,8 @@
 
 open Types.FbDb
 
-let defaultSetter: dbConnectionSetter = (_: dbConnection => dbConnection) => ()
-let defaultValue: dbConnection = Firebase.connect()
+let defaultSetter: dbConnectionSetter = (_: dbConnectionStatus => dbConnectionStatus) => ()
+let defaultValue: dbConnectionStatus = NotConnected
 
 let context = React.createContext(
     (defaultValue, defaultSetter)
