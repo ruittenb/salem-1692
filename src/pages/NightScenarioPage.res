@@ -4,7 +4,6 @@
  */
 
 open Types
-open Utils
 
 @react.component
 let make = (
@@ -28,7 +27,7 @@ let make = (
     let resolveEffectSet = (step): scenarioStep => {
         switch step {
             // should effectSet be empty: use default of 1s silence
-            | PlayRandomEffect(effectSet) => PlayEffect(pickRandomElement(effectSet, Silence1s))
+            | PlayRandomEffect(effectSet) => Utils.pickRandomElement(effectSet, Silence1s)->PlayEffect
             | _                           => step
         }
     }
@@ -76,19 +75,19 @@ let make = (
     })
 
     // Event handlers for stepping through scenario
-    let goToNextStepImperative = (): unit => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
-    let goToPrevStep     = (_event): unit => goToScenarioIndex(scenarioIndex => scenarioIndex - 1)
-    let goToNextStep     = (_event): unit => goToNextStepImperative()
+    let goToPrevStep        = (): unit => goToScenarioIndex(scenarioIndex => scenarioIndex - 1)
+    let goToNextStep        = (): unit => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+    let goToNextStepHandler = (_event): unit => goToNextStep()
 
     // Store chosen players (killed and saved) in context
     let (_, setTurnState) = React.useContext(TurnStateContext.context)
     let goFromWitchChoiceToNextStep = (player: player, _event): unit => {
         setTurnState(prevTurnState => { ...prevTurnState, choiceWitches: Some(player) })
-        goToNextStepImperative()
+        goToNextStep()
     }
     let goFromConstableChoiceToNextStep = (player: player, _event): unit => {
         setTurnState(prevTurnState => { ...prevTurnState, choiceConstable: Some(player) })
-        goToNextStepImperative()
+        goToNextStep()
     }
 
     let soundImage       = <img src="images/gramophone.png" className="sound-image" />
@@ -103,35 +102,38 @@ let make = (
 
     // Construct the page
     let pageElement = switch (hasError, maybeScenarioStep) {
-        | (true, _)                       => <NightErrorPage message=t("Unable to load audio") goToPage></NightErrorPage>
+        | (true, _)                       => <NightErrorPage message=t("Unable to load audio") goToPage />
         | (false, None)                   => React.null // catch this situation in useEffect above
-        | (false, Some(Pause(duration)))  => <NightStepPage goToPage goToNextStep>
-                                                 { let _ = Js.Global.setTimeout(
-                                                       goToNextStepImperative,
-                                                       Belt.Float.toInt(1000. *. duration)
-                                                   )
-                                                   soundImageGreyed
-                                                 }
+        | (false, Some(Pause(duration)))  => <NightStepPage goToPage goToNextStep
+                                                timerId={
+                                                    Utils.logDebug("Setting timer")
+                                                    Js.Global.setTimeout(
+                                                        goToNextStep,
+                                                        Belt.Float.toInt(1000. *. duration)
+                                                    )
+                                                }
+                                             >
+                                                 { soundImageGreyed }
                                              </NightStepPage>
 
-        | (false, Some(PlayRandomEffect(_))) => Js.log("This step should have been replaced with PlayEffect")
+        | (false, Some(PlayRandomEffect(_))) => Utils.logDebug("This step should have been replaced with PlayEffect")
                                                 React.null // has been resolved above
 
         | (false, Some(PlayEffect(effect)))
                if gameState.doPlayEffects => <NightStepPage goToPage goToNextStep>
                                                  {soundImage}
-                                                 <Audio track=Effect(effect) onEnded=goToNextStep onError />
+                                                 <Audio track=Effect(effect) onEnded=goToNextStepHandler onError />
                                              </NightStepPage>
         | (false, Some(PlaySpeech(speech)))
                 if gameState.doPlaySpeech => <NightStepPage goToPage goToNextStep>
                                                  {soundImage}
-                                                 <Audio track=Speech(speech) onEnded=goToNextStep onError />
+                                                 <Audio track=Speech(speech) onEnded=goToNextStepHandler onError />
                                              </NightStepPage>
 
-        | (false, Some(PlayEffect(_)))    => { goToNextStepImperative()
+        | (false, Some(PlayEffect(_)))    => { goToNextStep()
                                                React.null
                                              }
-        | (false, Some(PlaySpeech(_)))    => { goToNextStepImperative()
+        | (false, Some(PlaySpeech(_)))    => { goToNextStep()
                                                React.null
                                              }
 
@@ -150,7 +152,6 @@ let make = (
 
         | (false, Some(ConfirmWitches))   => <NightConfirmPage goToPrevStep goToNextStep addressed=witchOrWitches />
         | (false, Some(ConfirmConstable)) => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable      />
-        // TODO also pass "choice" to the confirm pages above
     }
 
     // render the page

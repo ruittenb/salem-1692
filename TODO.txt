@@ -1,6 +1,4 @@
  - fade music out
  - rework night eyes
- - resolve "choice cannot be None here"
- - nightscenariopage: PlayRandomEffect "this should not happen"
- - animated connection icon
  - on night step: ifMaster => save to firebase
+ - button "abort connecting"
