@@ -62,6 +62,7 @@ module FbDb = {
     @deriving(jsConverter)
     @decco type phase = [
         | #DaytimeParked
+        | #NightParked
         | #NightChooseWitches
         | #NightConfirmWitches
         | #NightChooseConstable
@@ -75,6 +76,7 @@ module FbDb = {
         masterSeating: string,
         slaveChoiceWitches: player,
         slaveChoiceConstable: player,
+        updatedAt: string,
     }
 }
 

@@ -31,6 +31,7 @@ let transformToDbRecord = (gameState: gameState): dbRecord => {
     masterSeating: SeatingCodec.seatingToJs(gameState.seating),
     slaveChoiceWitches: "",
     slaveChoiceConstable: "",
+    updatedAt: Js.Date.make()->Js.Date.toISOString
 }
 
 /** **********************************************************************
@@ -62,53 +63,57 @@ let disconnect = (
     let connectionInfoRef = getRef(dbConnection.db, connectionInfoKey);
     off(connectionInfoRef)
     // We could go offline here, but then reconnecting would require a
-    // different method than when connecting the first time.
+    // different method than when connecting for the first time.
     //goOffline(dbConnection.db)
     logDebug("Disconnected")
 }
 
 /** **********************************************************************
- * create/destroy (Master)
+ * create/update/delete (Master)
  */
 
-let writeGame = (
+let upsertGame = (
     dbConnection: dbConnection,
     gameState: gameState,
-    action: string
-): unit => {
+    action: string, // "created" or "updated"
+): Promise.t<unit> => {
     let dbRecord = transformToDbRecord(gameState)
-    safeExec(
-        () => getRef(dbConnection.db, gamesKeyPrefix ++ gameState.gameId)
-    )
-    ->Belt.Option.forEach(myGameRef => {
-        set(myGameRef, dbRecord)
-            ->Promise.then(() => {
-                logDebug(action ++ " game " ++ gameState.gameId)
-                Promise.resolve()
-            })
-            ->Promise.catch((error) => {
-                error->getExceptionMessage->logError
-                Promise.resolve()
-            })
-            ->ignore
+    Promise.make((resolve, reject) => {
+        try {
+            let myGameRef = getRef(dbConnection.db, gamesKeyPrefix ++ gameState.gameId)
+            set(myGameRef, dbRecord)
+                ->Promise.then(() => {
+                    logDebug(action ++ " game " ++ gameState.gameId)
+                    resolve(. ignore())
+                    Promise.resolve()
+                })
+                ->Promise.catch(error => {
+                    error->getExceptionMessage->logError
+                    reject(. error)
+                    Promise.reject(error)
+                })
+                ->ignore
+        } catch {
+            | error => reject(. error)
+        }
     })
 }
 
 let createGame = (
     dbConnection: dbConnection,
     gameState: gameState
-): unit => {
-    writeGame(dbConnection, gameState, "Created")
+): Promise.t<unit> => {
+    upsertGame(dbConnection, gameState, "Created")
 }
 
 let updateGame = (
     dbConnection: dbConnection,
     gameState: gameState
-): unit => {
-    writeGame(dbConnection, gameState, "Updated")
+): Promise.t<unit> => {
+    upsertGame(dbConnection, gameState, "Updated")
 }
 
-let destroyGame = (
+let deleteGame = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId
 ): unit => {
@@ -117,7 +122,7 @@ let destroyGame = (
     )
     ->Belt.Option.forEach(myGameRef => {
         remove(myGameRef)
-        logDebug("Destroyed game " ++ gameId)
+        logDebug("Deleted game " ++ gameId)
     })
 }
 

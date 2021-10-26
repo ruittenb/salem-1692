@@ -7,28 +7,28 @@ open Types
 open Types.FbDb
 open Utils
 
-let startHosting = (setDbConnectionStatus, setGameState) => {
+let startHosting = (setDbConnectionStatus, gameState, setGameState) => {
     setDbConnectionStatus(_prev => Connecting)
     Firebase.connect()
         ->Promise.then(dbConnection => {
-            setDbConnectionStatus(_prev => Connected(dbConnection))
-            setGameState(prevGameState => {
-                let newGameId = if prevGameState.gameType === Master {
-                    // We already are Master. This happens when the Master state
-                    // was read from localstorage. Reuse the old gameId.
-                    prevGameState.gameId
-                } else {
-                    GameId.getGameId()
-                }
-                let newGameState = {
-                    ...prevGameState,
-                    gameType: Master,
-                    gameId: newGameId
-                }
-                Firebase.createGame(dbConnection, newGameState)
-                newGameState
-            })
-            Promise.resolve()
+            let newGameId = if gameState.gameType === Master {
+                // We already are Master. This happens when the Master state
+                // was read from localstorage. Reuse the old gameId.
+                gameState.gameId
+            } else {
+                GameId.getGameId()
+            }
+            let newGameState = {
+                ...gameState,
+                gameType: Master,
+                gameId: newGameId
+            }
+            Firebase.createGame(dbConnection, newGameState)
+                ->Promise.then(() => {
+                    setGameState(_prev => newGameState)
+                    setDbConnectionStatus(_prev => Connected(dbConnection))
+                    Promise.resolve()
+                })
         })
         ->Promise.catch(error => {
             setDbConnectionStatus(_prev => NotConnected)
@@ -40,7 +40,7 @@ let startHosting = (setDbConnectionStatus, setGameState) => {
 
 let stopHosting = (dbConnectionStatus, setDbConnectionStatus, gameState, setGameState) => {
     ifConnected(dbConnectionStatus, (dbConnection) => {
-        Firebase.destroyGame(dbConnection, gameState.gameId)
+        Firebase.deleteGame(dbConnection, gameState.gameId)
         Firebase.disconnect(dbConnection)
     })
     setDbConnectionStatus(_prev => NotConnected)
@@ -64,7 +64,9 @@ let make = (
                               <Button
                                   label={t("Start Hosting")}
                                   className="condensed-fr"
-                                  onClick={ _event => startHosting(setDbConnectionStatus, setGameState) }
+                                  onClick={ _event => startHosting(
+                                      setDbConnectionStatus, gameState, setGameState
+                                  ) }
                               />
                           </>
         | Connecting   => <>

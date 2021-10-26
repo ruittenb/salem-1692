@@ -54,7 +54,7 @@ let make = (): React.element => {
                 setGameState(_prev => gameState)
                 Utils.ifMaster(
                     gameState.gameType,
-                    () => SetupMasterPage.startHosting(setDbConnectionStatus, setGameState)
+                    () => SetupMasterPage.startHosting(setDbConnectionStatus, gameState, setGameState)
                 )
             })
         None // cleanup function
@@ -69,6 +69,15 @@ let make = (): React.element => {
                 Utils.ifConnected(
                     dbConnectionStatus,
                     (dbConnection) => Firebase.updateGame(dbConnection, gameState)
+                        ->Promise.catch((error) => {
+                            // don't immediately disconnect
+                            // setDbConnectionStatus(_prev => NotConnected)
+                            error
+                                ->Utils.getExceptionMessage
+                                ->Utils.logError
+                            Promise.resolve()
+                        })
+                        ->ignore
                 )
             }
         )

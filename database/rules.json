@@ -18,7 +18,8 @@
             'masterPlayers',
             'masterSeating',
             'slaveChoiceWitches',
-            'slaveChoiceConstable'
+            'slaveChoiceConstable',
+            'updatedAt',
         ])",
         "masterGameId":   { ".validate": "newData.isString()" },
         "masterPhase":    { ".validate": "newData.isString() && newData.val().matches(/^(DaytimeParked|Night)/)" },
@@ -26,6 +27,7 @@
         "masterSeating":  { ".validate": "newData.isString() && newData.val().matches(/^(One|Two)AtTop$/)" },
         "slaveChoiceWitches":   { ".validate": "newData.isString()" },
         "slaveChoiceConstable": { ".validate": "newData.isString()" },
+        "updatedAt":      { ".validate": "newData.isString()" },
         "$other":         { ".validate": false } /* no other fields allowed */
       }
     }
