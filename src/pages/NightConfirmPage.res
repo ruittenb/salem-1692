@@ -25,9 +25,21 @@ let make = (
     }
     let choice = switch addressed {
         | Witch
-        | Witches   => turnState.choiceWitches->Belt.Option.getWithDefault("") // choice cannot be None here
-        | Constable => turnState.choiceConstable->Belt.Option.getWithDefault("") // choice cannot be None here
+        | Witches   => turnState.choiceWitches->Belt.Option.getWithDefault("")
+        | Constable => turnState.choiceConstable->Belt.Option.getWithDefault("")
     }
+
+    React.useEffect0(() => {
+        // At this point we should have a choice to ask confirmation for.
+        // Therefore, these situations should never happen.
+        switch addressed {
+            | Witch     if turnState.choiceWitches   === None => goToPrevStep()
+            | Witches   if turnState.choiceWitches   === None => goToPrevStep()
+            | Constable if turnState.choiceConstable === None => goToPrevStep()
+            | _         => ()
+        }
+        None
+    })
 
     // This dialog hides the encompassing page in the background
     <div id="night-page" className="page">
@@ -41,9 +53,9 @@ let make = (
             <h2> {React.string(choice)} </h2>
             <Spacer />
             <Spacer />
-            <LargeButton className="confirm-yes" onClick=goToNextStep ></LargeButton>
+            <LargeButton className="confirm-yes" onClick={ (_event) => goToNextStep() } ></LargeButton>
             <Spacer />
-            <LargeButton className="confirm-no" onClick=goToPrevStep ></LargeButton>
+            <LargeButton className="confirm-no" onClick={ (_event) => goToPrevStep() } ></LargeButton>
             <Spacer />
         </div>
     </div>

@@ -1,9 +1,4 @@
  - fade music out
  - rework night eyes
- - resolve "choice cannot be None here"
- - nightscenariopage: PlayRandomEffect "this should not happen"
- - Firebase.res: try/catch
- - Firebase.connect(): ontpromisen?
- - animated connection icon
- - on change game params: ifMaster(save to firebase)
- - on extract game state: if Master: connect to firebase
+ - on night step: ifMaster => save to firebase
+ - button "abort connecting"

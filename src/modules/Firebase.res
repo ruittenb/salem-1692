@@ -13,7 +13,7 @@ open Utils
 @module("firebase/database") external goOffline: (database) => unit = "goOffline"
 @module("firebase/database") external onValue: (reference, (snapshot) => unit) => unit = "onValue"
 @module("firebase/database") external off: (reference) => unit = "off"
-@module("firebase/database") external set: (reference, 'data) => unit = "set"
+@module("firebase/database") external set: (reference, 'data) => Promise.t<unit> = "set"
 @module("firebase/database") external remove: (reference) => unit = "remove"
 @send external getValue: (snapshot) => 'data = "val"
 
@@ -31,6 +31,7 @@ let transformToDbRecord = (gameState: gameState): dbRecord => {
     masterSeating: SeatingCodec.seatingToJs(gameState.seating),
     slaveChoiceWitches: "",
     slaveChoiceConstable: "",
+    updatedAt: Js.Date.make()->Js.Date.toISOString
 }
 
 /** **********************************************************************
@@ -38,17 +39,21 @@ let transformToDbRecord = (gameState: gameState): dbRecord => {
  */
 
 let connect = (): Promise.t<dbConnection> => {
-    Promise.make((resolve, _reject) => {
-        let app = initializeApp(Constants.firebaseConfig)
-        let db = getDatabase(app)
-        let connectionInfoRef = getRef(db, connectionInfoKey);
-        onValue(connectionInfoRef, (snapshot) => {
-            let connected: bool = getValue(snapshot)
-            if (connected) {
-                logDebug("Connected")
-                resolve(. { app, db })
-            }
-        })
+    Promise.make((resolve, reject) => {
+        try {
+            let app = initializeApp(Constants.firebaseConfig)
+            let db = getDatabase(app)
+            let connectionInfoRef = getRef(db, connectionInfoKey);
+            onValue(connectionInfoRef, (snapshot) => {
+                let connected: bool = getValue(snapshot)
+                if (connected) {
+                    logDebug("Connected")
+                    resolve(. { app, db })
+                }
+            })
+        } catch {
+            | error => reject(. error)
+        }
     })
 }
 
@@ -58,30 +63,57 @@ let disconnect = (
     let connectionInfoRef = getRef(dbConnection.db, connectionInfoKey);
     off(connectionInfoRef)
     // We could go offline here, but then reconnecting would require a
-    // different method than when connecting the first time.
+    // different method than when connecting for the first time.
     //goOffline(dbConnection.db)
     logDebug("Disconnected")
 }
 
 /** **********************************************************************
- * create/destroy (Master)
+ * create/update/delete (Master)
  */
+
+let upsertGame = (
+    dbConnection: dbConnection,
+    gameState: gameState,
+    action: string, // "created" or "updated"
+): Promise.t<unit> => {
+    let dbRecord = transformToDbRecord(gameState)
+    Promise.make((resolve, reject) => {
+        try {
+            let myGameRef = getRef(dbConnection.db, gamesKeyPrefix ++ gameState.gameId)
+            set(myGameRef, dbRecord)
+                ->Promise.then(() => {
+                    logDebug(action ++ " game " ++ gameState.gameId)
+                    resolve(. ignore())
+                    Promise.resolve()
+                })
+                ->Promise.catch(error => {
+                    error->getExceptionMessage->logError
+                    reject(. error)
+                    Promise.reject(error)
+                })
+                ->ignore
+        } catch {
+            | error => reject(. error)
+        }
+    })
+}
 
 let createGame = (
     dbConnection: dbConnection,
     gameState: gameState
-): unit => {
-    let dbRecord = transformToDbRecord(gameState)
-    safeExec(
-        () => getRef(dbConnection.db, gamesKeyPrefix ++ gameState.gameId)
-    )
-    ->Belt.Option.forEach(myGameRef => {
-        set(myGameRef, dbRecord)
-        logDebug("Created game " ++ gameState.gameId)
-    })
+): Promise.t<unit> => {
+    upsertGame(dbConnection, gameState, "Created")
 }
 
-let destroyGame = (
+let updateGame = (
+    dbConnection: dbConnection,
+    gameState: gameState
+): Promise.t<unit> => {
+    upsertGame(dbConnection, gameState, "Updated")
+}
+
+let deleteGame = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId
 ): unit => {
@@ -90,7 +122,7 @@ let destroyGame = (
     )
     ->Belt.Option.forEach(myGameRef => {
         remove(myGameRef)
-        logDebug("Destroyed game " ++ gameId)
+        logDebug("Deleted game " ++ gameId)
     })
 }
 

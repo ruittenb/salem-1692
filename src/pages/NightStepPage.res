@@ -15,13 +15,14 @@ let make = (
     ~showNavButtons: bool = true,
     ~goToPage,
     ~goToNextStep = () => (),
+    ~timerId: option<Js.Global.timeoutId> = ?,
 ): React.element => {
 
     // Language and translator
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let title = if error { "Error" } else { "Night" }
+    let title = error ? "Error" : "Night"
 
     let abortButton = <Button
         label={t("Abort")}
@@ -31,7 +32,13 @@ let make = (
     let skipButton = <Button
         label={t("Skip")}
         className="icon-right icon-forw condensed-nl condensed-de"
-        onClick={ (_event) => goToNextStep() }
+        onClick={ (_event) => {
+            timerId->Belt.Option.forEach(timerId => {
+                Utils.logDebug("Clearing timer")
+                Js.Global.clearTimeout(timerId)
+            })
+            goToNextStep()
+        } }
     />
 
     // Construct the core element for this page

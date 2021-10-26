@@ -35,20 +35,6 @@ let cleanupGameState = (gameState): gameState => {
     }
 }
 
-let loadGameStateFromLocalStorage = (setGameState): unit => {
-    LocalStorage.loadGameState()
-        ->Belt.Option.map(cleanupGameState)
-        ->Belt.Option.forEach(gameState => {
-            setGameState(_prev => gameState)
-            Utils.ifMaster(
-                gameState.gameType,
-                () => {
-                    Firebase.connect()->ignore
-                }
-            ) // TODO probably better to do a watered-down variant of SetupMasterPage.startHosting()
-        })
-}
-
 @react.component
 let make = (): React.element => {
 
@@ -59,15 +45,42 @@ let make = (): React.element => {
     let (navigation, setNavigation) = React.useState(_ => initialNavigation)
     let (turnState, setTurnState)   = React.useState(_ => initialTurnState)
 
-    // run once after mounting
+    // run once after mounting: read localstorage.
+    // if we're master, then connect to firebase.
     React.useEffect0(() => {
-        loadGameStateFromLocalStorage(setGameState)
+        LocalStorage.loadGameState()
+            ->Belt.Option.map(cleanupGameState)
+            ->Belt.Option.forEach(gameState => {
+                setGameState(_prev => gameState)
+                Utils.ifMaster(
+                    gameState.gameType,
+                    () => SetupMasterPage.startHosting(setDbConnectionStatus, gameState, setGameState)
+                )
+            })
         None // cleanup function
     })
 
     // save game state to localstorage after every change
     React.useEffect1(() => {
         LocalStorage.saveGameState(gameState)
+        Utils.ifMaster(
+            gameState.gameType,
+            () => {
+                Utils.ifConnected(
+                    dbConnectionStatus,
+                    (dbConnection) => Firebase.updateGame(dbConnection, gameState)
+                        ->Promise.catch((error) => {
+                            // don't immediately disconnect
+                            // setDbConnectionStatus(_prev => NotConnected)
+                            error
+                                ->Utils.getExceptionMessage
+                                ->Utils.logError
+                            Promise.resolve()
+                        })
+                        ->ignore
+                )
+            }
+        )
         None // cleanup function
     }, [ gameState ])
 
