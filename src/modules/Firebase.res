@@ -31,6 +31,8 @@ let transformToDbRecord = (gameState: gameState): dbRecord => {
     masterSeating: SeatingCodec.seatingToJs(gameState.seating),
     slaveChoiceWitches: "",
     slaveChoiceConstable: "",
+    slaveConfirmWitches: Undecided,
+    slaveConfirmConstable: Undecided,
     updatedAt: Js.Date.make()->Js.Date.toISOString
 }
 

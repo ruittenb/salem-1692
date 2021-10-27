@@ -69,6 +69,11 @@ module FbDb = {
         | #NightConfirmConstable
     ]
 
+    @decco type decision =
+        | Yes
+        | No
+        | Undecided
+
     type dbRecord = {
         masterGameId: GameTypeCodec.gameId,
         masterPhase: phase,
@@ -76,6 +81,8 @@ module FbDb = {
         masterSeating: string,
         slaveChoiceWitches: player,
         slaveChoiceConstable: player,
+        slaveConfirmWitches: decision,
+        slaveConfirmConstable: decision,
         updatedAt: string,
     }
 }

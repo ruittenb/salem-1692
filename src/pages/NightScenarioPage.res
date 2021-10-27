@@ -137,18 +137,18 @@ let make = (
                                                React.null
                                            }
 
-        | Some(ChooseWitches)           => <NightStepPage goToPage goToNextStep showNavButtons=false>
+        | Some(ChooseWitches)           => <NightChoicePage>
                                                <PlayerList
                                                    addressed=witchOrWitches
                                                    choiceHandler=goFromWitchChoiceToNextStep
                                                />
-                                           </NightStepPage>
-        | Some(ChooseConstable)         => <NightStepPage goToPage goToNextStep showNavButtons=false>
+                                           </NightChoicePage>
+        | Some(ChooseConstable)         => <NightChoicePage>
                                                <PlayerList
                                                    addressed=Constable
                                                    choiceHandler=goFromConstableChoiceToNextStep
                                                />
-                                           </NightStepPage>
+                                           </NightChoicePage>
 
         | Some(ConfirmWitches)          => <NightConfirmPage goToPrevStep goToNextStep addressed=witchOrWitches />
         | Some(ConfirmConstable)        => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable      />
