@@ -45,3 +45,9 @@ For running locally, a webserver may be started with:
 make serve
 ```
 
+## Debugging
+
+Debugging output (in the browser console) can be obtained by
+[changing the User-Agent string](https://www.alphr.com/change-user-agent-string-google-chrome/)
+to contain the text "Salem/1692".
+

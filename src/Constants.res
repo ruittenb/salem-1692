@@ -3,13 +3,12 @@
  * Constants
  */
 
-// Debug mode can be enabled by changing the User-Agent string to contain the text
-// "Salem/1692". See https://www.alphr.com/change-user-agent-string-google-chrome/
-
 type navigator
 @val external navigator: navigator = "navigator"
 @get external userAgent: (navigator) => string = "userAgent"
 
+
+// Enable debug mode when the User-Agent string contains the text "Salem/1692".
 let debug = navigator->userAgent->Js.String2.includes("Salem/1692")
 
 // firebase, url, localstorage
