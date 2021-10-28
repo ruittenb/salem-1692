@@ -81,7 +81,7 @@ let make = (
 
     // if we're hosting, save turn state to firebase after every change
     React.useEffect1(() => {
-        FirebaseClient.ifMasterAndConnectedThenUpdateGame(dbConnectionStatus, gameState, subPage, turnState, maybeScenarioStep)
+        FirebaseClient.ifMasterAndConnectedThenSaveGameState(dbConnectionStatus, gameState, subPage, turnState, maybeScenarioStep)
         None // cleanup function
     }, [ maybeScenarioStep ])
 

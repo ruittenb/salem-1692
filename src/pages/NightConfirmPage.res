@@ -40,7 +40,7 @@ let make = (
             | _         => ()
         }
         Some(() => {
-            () // TODO Firebase.ifMasterAndConnectedThenUpdateGame TODO is this right? Is this the slave page?
+            () // TODO Firebase.ifMasterAndConnectedThenSaveGameState TODO is this right? Is this the slave page?
         })
     })
 

@@ -132,7 +132,7 @@ let deleteGame = (
     FirebaseAdapter.deleteGame(dbConnection, gameId)
 }
 
-let ifMasterAndConnectedThenUpdateGame = (
+let ifMasterAndConnectedThenSaveGameState = (
     dbConnectionStatus: dbConnectionStatus,
     gameState: gameState,
     page: page,
