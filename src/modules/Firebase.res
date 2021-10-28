@@ -29,25 +29,25 @@ let getDbPage = (
     step: scenarioStep,
 ): phase => {
     switch (page, step) {
-        | (Title,                  _) => #DaytimeParked
-        | (Setup,                  _) => #DaytimeParked
-        | (SetupLanguage,          _) => #DaytimeParked
-        | (SetupMusic,             _) => #DaytimeParked
-        | (SetupPlayers,           _) => #DaytimeParked
-        | (SetupPlayersForGame,    _) => #DaytimeParked
-        | (SetupMaster,            _) => #DaytimeParked
-        | (SetupSlave,             _) => #DaytimeParked
-        | (Credits,                _) => #DaytimeParked
-        | (Daytime,                _) => #DaytimeParked
-        | (DaytimeConfess,         _) => #DaytimeParked
-        | (DaytimeReveal,          _) => #DaytimeParked
-        | (DaytimeRevealNoConfess, _) => #DaytimeParked
-        | (Close,                  _) => #DaytimeParked
+        | (Title,                  _) => #DaytimeWaiting
+        | (Setup,                  _) => #DaytimeWaiting
+        | (SetupLanguage,          _) => #DaytimeWaiting
+        | (SetupMusic,             _) => #DaytimeWaiting
+        | (SetupPlayers,           _) => #DaytimeWaiting
+        | (SetupPlayersForGame,    _) => #DaytimeWaiting
+        | (SetupMaster,            _) => #DaytimeWaiting
+        | (SetupSlave,             _) => #DaytimeWaiting
+        | (Credits,                _) => #DaytimeWaiting
+        | (Daytime,                _) => #DaytimeWaiting
+        | (DaytimeConfess,         _) => #DaytimeWaiting
+        | (DaytimeReveal,          _) => #DaytimeWaiting
+        | (DaytimeRevealNoConfess, _) => #DaytimeWaiting
+        | (Close,                  _) => #DaytimeWaiting
         | (_,          ChooseWitches) => #NightChooseWitches
         | (_,         ConfirmWitches) => #NightConfirmWitches
         | (_,        ChooseConstable) => #NightChooseConstable
         | (_,       ConfirmConstable) => #NightConfirmConstable
-        | (_,                      _) => #NightParked
+        | (_,                      _) => #NightWaiting
     }
 }
 
@@ -66,6 +66,10 @@ let transformToDbRecord = (
     slaveConfirmWitches: #Undecided,
     slaveConfirmConstable: #Undecided,
     updatedAt: Js.Date.make()->Js.Date.toISOString
+}
+
+let ifMasterAndConnectedThenUpdateGame = () => {
+    () // TODO
 }
 
 /** **********************************************************************
@@ -111,14 +115,14 @@ let upsertGame = (
     gameState: gameState,
     currentPage: page,
     turnState: turnState,
-    maybeScenarioStep: option<scenarioStep>,
+    scenarioStep: scenarioStep,
     action: string, // "created" or "updated"
 ): Promise.t<unit> => {
     let dbRecord = transformToDbRecord(
         gameState,
         currentPage,
         turnState,
-        maybeScenarioStep->Belt.Option.getWithDefault(Pause(0.))
+        scenarioStep,
     )
     Promise.make((resolve, reject) => {
         try {
@@ -126,7 +130,7 @@ let upsertGame = (
             set(myGameRef, dbRecord)
                 ->Promise.then(() => {
                     logDebug(action ++ " game " ++ gameState.gameId)
-                    resolve(. ignore())
+                    resolve(. ignore()) // workaround to pass a unit argument
                     Promise.resolve()
                 })
                 ->Promise.catch(error => {
@@ -150,7 +154,7 @@ let createGame = (
         choiceWitches: None,
         choiceConstable: None,
     }
-    upsertGame(dbConnection, gameState, Title, emptyTurnState, None, "Created")
+    upsertGame(dbConnection, gameState, Title, emptyTurnState, Pause(0.), "Created")
 }
 
 let updateGame = (
@@ -160,7 +164,7 @@ let updateGame = (
     turnState: turnState,
     maybeScenarioStep: option<scenarioStep>,
 ): Promise.t<unit> => {
-    upsertGame(dbConnection, gameState, currentPage, turnState, maybeScenarioStep, "Updated")
+    upsertGame(dbConnection, gameState, currentPage, turnState, maybeScenarioStep->Belt.Option.getWithDefault(Pause(0.)), "Updated")
 }
 
 let deleteGame = (
