@@ -14,6 +14,9 @@ let make = (
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
+    // TODO Utils.ifMaster: useeffect to listen to game key 'choice*' -> or move to PlayerList?
+    // if response: store name in gamestate and callback()
+
     // Construct the core element for this page
     <div id="night-page" className="page">
         <div id="night-subpage" className="page flex-vertical">

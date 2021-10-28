@@ -11,6 +11,11 @@ let make = (
     ~goToPage,
 ): React.element => {
 
+    // connection status
+    let (dbConnectionStatus, _setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
+    // turn state
+    let (turnState, setTurnState) = React.useContext(TurnStateContext.context)
+
     // Translator, game state
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
@@ -74,13 +79,33 @@ let make = (
         })
     })
 
+    // if we're hosting, save turn state to firebase after every change
+    React.useEffect1(() => {
+        Utils.ifMaster(
+            gameState.gameType,
+            () => {
+                Utils.ifConnected(
+                    dbConnectionStatus,
+                    (dbConnection) => Firebase.updateGame(dbConnection, gameState, subPage, turnState, maybeScenarioStep)
+                        ->Promise.catch((error) => {
+                            error
+                                ->Utils.getExceptionMessage
+                                ->Utils.logError
+                            Promise.resolve()
+                        })
+                        ->ignore
+                )
+            }
+        )
+        None // cleanup function
+    }, [ maybeScenarioStep ])
+
     // Event handlers for stepping through scenario
     let goToPrevStep  = (): unit => goToScenarioIndex(scenarioIndex => scenarioIndex - 1)
     let goToNextStep  = (): unit => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
     let onEnded = (_event): unit => goToNextStep()
 
     // Store chosen players (killed and saved) in context
-    let (_, setTurnState) = React.useContext(TurnStateContext.context)
     let goFromWitchChoiceToNextStep = (player: player, _event): unit => {
         setTurnState(prevTurnState => { ...prevTurnState, choiceWitches: Some(player) })
         goToNextStep()

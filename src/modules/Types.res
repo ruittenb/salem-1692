@@ -69,10 +69,12 @@ module FbDb = {
         | #NightConfirmConstable
     ]
 
-    @decco type decision =
-        | Yes
-        | No
-        | Undecided
+    @deriving(jsConverter)
+    @decco type decision = [
+        | #Yes
+        | #No
+        | #Undecided
+    ]
 
     type dbRecord = {
         masterGameId: GameTypeCodec.gameId,

@@ -20,19 +20,51 @@ open Utils
 let connectionInfoKey = "/.info/connected"
 let gamesKeyPrefix = "/games/"
 
-/**
+/** **********************************************************************
  * Functions
  */
 
-let transformToDbRecord = (gameState: gameState): dbRecord => {
+let getDbPage = (
+    page: page,
+    step: scenarioStep,
+): phase => {
+    switch (page, step) {
+        | (Title,                  _) => #DaytimeParked
+        | (Setup,                  _) => #DaytimeParked
+        | (SetupLanguage,          _) => #DaytimeParked
+        | (SetupMusic,             _) => #DaytimeParked
+        | (SetupPlayers,           _) => #DaytimeParked
+        | (SetupPlayersForGame,    _) => #DaytimeParked
+        | (SetupMaster,            _) => #DaytimeParked
+        | (SetupSlave,             _) => #DaytimeParked
+        | (Credits,                _) => #DaytimeParked
+        | (Daytime,                _) => #DaytimeParked
+        | (DaytimeConfess,         _) => #DaytimeParked
+        | (DaytimeReveal,          _) => #DaytimeParked
+        | (DaytimeRevealNoConfess, _) => #DaytimeParked
+        | (Close,                  _) => #DaytimeParked
+        | (_,          ChooseWitches) => #NightChooseWitches
+        | (_,         ConfirmWitches) => #NightConfirmWitches
+        | (_,        ChooseConstable) => #NightChooseConstable
+        | (_,       ConfirmConstable) => #NightConfirmConstable
+        | (_,                      _) => #NightParked
+    }
+}
+
+let transformToDbRecord = (
+    gameState: gameState,
+    currentPage: page,
+    turnState: turnState,
+    scenarioStep: scenarioStep,
+): dbRecord => {
     masterGameId: gameState.gameId,
-    masterPhase: #DaytimeParked,
+    masterPhase: getDbPage(currentPage, scenarioStep),
     masterPlayers: gameState.players,
     masterSeating: SeatingCodec.seatingToJs(gameState.seating),
-    slaveChoiceWitches: "",
-    slaveChoiceConstable: "",
-    slaveConfirmWitches: Undecided,
-    slaveConfirmConstable: Undecided,
+    slaveChoiceWitches: turnState.choiceWitches->Belt.Option.getWithDefault(""),
+    slaveChoiceConstable: turnState.choiceConstable->Belt.Option.getWithDefault(""),
+    slaveConfirmWitches: #Undecided,
+    slaveConfirmConstable: #Undecided,
     updatedAt: Js.Date.make()->Js.Date.toISOString
 }
 
@@ -77,9 +109,17 @@ let disconnect = (
 let upsertGame = (
     dbConnection: dbConnection,
     gameState: gameState,
+    currentPage: page,
+    turnState: turnState,
+    maybeScenarioStep: option<scenarioStep>,
     action: string, // "created" or "updated"
 ): Promise.t<unit> => {
-    let dbRecord = transformToDbRecord(gameState)
+    let dbRecord = transformToDbRecord(
+        gameState,
+        currentPage,
+        turnState,
+        maybeScenarioStep->Belt.Option.getWithDefault(Pause(0.))
+    )
     Promise.make((resolve, reject) => {
         try {
             let myGameRef = getRef(dbConnection.db, gamesKeyPrefix ++ gameState.gameId)
@@ -105,14 +145,22 @@ let createGame = (
     dbConnection: dbConnection,
     gameState: gameState
 ): Promise.t<unit> => {
-    upsertGame(dbConnection, gameState, "Created")
+    let emptyTurnState: turnState = {
+        nrWitches: One,
+        choiceWitches: None,
+        choiceConstable: None,
+    }
+    upsertGame(dbConnection, gameState, Title, emptyTurnState, None, "Created")
 }
 
 let updateGame = (
     dbConnection: dbConnection,
-    gameState: gameState
+    gameState: gameState,
+    currentPage: page,
+    turnState: turnState,
+    maybeScenarioStep: option<scenarioStep>,
 ): Promise.t<unit> => {
-    upsertGame(dbConnection, gameState, "Updated")
+    upsertGame(dbConnection, gameState, currentPage, turnState, maybeScenarioStep, "Updated")
 }
 
 let deleteGame = (

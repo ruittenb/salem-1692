@@ -39,6 +39,7 @@ let table = Js.Dict.fromArray([
     (`Français`, `Français`),
     (`Español`, `Español`),
     ("Italiano", "Italiano"),
+    ("Interface only, no dialogue yet", `Interfaz solamente, sin diálogo todavía`),
     ("Back", "Regresar"),
     ("Next", "Avanzar"),
     ("Done", "Listo"),
