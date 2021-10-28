@@ -85,7 +85,7 @@ let rotateMore = (rotation: rotation) => {
 @react.component
 let make = (
     ~addressed: addressed,
-    ~choiceHandler: (player, _) => unit,
+    ~choiceProcessor: (player) => unit,
 ): React.element => {
 
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
@@ -127,12 +127,13 @@ let make = (
                 label=player
                 className={rotatedClass ++ wideClass}
                 style=ReactDOM.Style.make(~order=Belt.Int.toString(index), ())
-                onClick=choiceHandler(player)
+                onClick={_event => choiceProcessor(player)}
             />
         },
         0 // default sort order
     )
 
+    // component
     <>
         <h2> {React.string(title)} </h2>
         <div className="text-centered"> {React.string(subtitle)} </div>

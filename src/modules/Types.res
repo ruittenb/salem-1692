@@ -76,6 +76,12 @@ module FbDb = {
         | #Undecided
     ]
 
+    type dbObservable =
+        | ChoiceWitches
+        | ChoiceConstable
+        | DecisionWitches
+        | DecisionConstable
+
     type dbRecord = {
         masterGameId: GameTypeCodec.gameId,
         masterPhase: phase,

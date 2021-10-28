@@ -9,8 +9,9 @@ open Types
 let make = (
     ~goToPage,
 ): React.element => {
-    let (turnState, _) = React.useContext(TurnStateContext.context)
-    let (gameState, _setGameState) = React.useContext(GameStateContext.context)
+    let (dbConnectionStatus, _) = React.useContext(DbConnectionContext.context)
+    let (turnState, _)          = React.useContext(TurnStateContext.context)
+    let (gameState, _)          = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
     let (constableTargetRevealed, setConstableTargetRevealed) = React.useState(_ => false)
@@ -31,6 +32,14 @@ let make = (
                     <Spacer />
                 </>
         }
+
+    // Runs only once right after mounting the component
+    React.useEffect0(() => {
+        FirebaseClient.ifMasterAndConnectedThenSaveGameState(
+            dbConnectionStatus, gameState, DaytimeConfess, Constants.initialTurnState, None
+        )
+        None // cleanup
+    })
 
     <div id="daytime-confess-page" className="page flex-vertical">
         <GearFloatingButton goToPage returnPage=DaytimeConfess />

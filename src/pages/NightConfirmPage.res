@@ -31,6 +31,7 @@ let make = (
 
     // Runs only once right after mounting the component
     React.useEffect0(() => {
+        Utils.logDebug("Mounted confirm page") // TODO
         // At this point we should have a choice to ask confirmation for.
         // Therefore, these situations should never happen.
         switch addressed {
@@ -40,6 +41,7 @@ let make = (
             | _         => ()
         }
         Some(() => {
+            Utils.logDebug("Unmounting Confirm page") // TODO
             () // TODO Firebase.ifMasterAndConnectedThenSaveGameState TODO is this right? Is this the slave page?
         })
     })
