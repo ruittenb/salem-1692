@@ -29,6 +29,7 @@ let make = (
         | Constable => turnState.choiceConstable->Belt.Option.getWithDefault("")
     }
 
+    // Runs only once right after mounting the component
     React.useEffect0(() => {
         // At this point we should have a choice to ask confirmation for.
         // Therefore, these situations should never happen.
@@ -38,7 +39,9 @@ let make = (
             | Constable if turnState.choiceConstable === None => goToPrevStep()
             | _         => ()
         }
-        None
+        Some(() => {
+            () // TODO Firebase.ifMasterAndConnectedThenSaveGameState TODO is this right? Is this the slave page?
+        })
     })
 
     // This dialog hides the encompassing page in the background

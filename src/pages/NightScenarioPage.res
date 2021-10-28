@@ -11,6 +11,11 @@ let make = (
     ~goToPage,
 ): React.element => {
 
+    // connection status
+    let (dbConnectionStatus, _setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
+    // turn state
+    let (turnState, setTurnState) = React.useContext(TurnStateContext.context)
+
     // Translator, game state
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
@@ -74,13 +79,18 @@ let make = (
         })
     })
 
+    // if we're hosting, save turn state to firebase after every change
+    React.useEffect1(() => {
+        FirebaseClient.ifMasterAndConnectedThenSaveGameState(dbConnectionStatus, gameState, subPage, turnState, maybeScenarioStep)
+        None // cleanup function
+    }, [ maybeScenarioStep ])
+
     // Event handlers for stepping through scenario
-    let goToPrevStep        = (): unit => goToScenarioIndex(scenarioIndex => scenarioIndex - 1)
-    let goToNextStep        = (): unit => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
-    let goToNextStepHandler = (_event): unit => goToNextStep()
+    let goToPrevStep  = (): unit => goToScenarioIndex(scenarioIndex => scenarioIndex - 1)
+    let goToNextStep  = (): unit => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+    let onEnded = (_event): unit => goToNextStep()
 
     // Store chosen players (killed and saved) in context
-    let (_, setTurnState) = React.useContext(TurnStateContext.context)
     let goFromWitchChoiceToNextStep = (player: player, _event): unit => {
         setTurnState(prevTurnState => { ...prevTurnState, choiceWitches: Some(player) })
         goToNextStep()
@@ -100,58 +110,58 @@ let make = (
             track => <AudioBackground track />
         )
 
+    let makeTimer = (duration: float): Js.Global.timeoutId => {
+        Utils.logDebug("Setting timer")
+        Js.Global.setTimeout(
+            goToNextStep,
+            Belt.Float.toInt(1000. *. duration)
+        )
+    }
+
     // Construct the page
-    let pageElement = switch (hasError, maybeScenarioStep) {
-        | (true, _)                       => <NightErrorPage message=t("Unable to load audio") goToPage />
-        | (false, None)                   => React.null // catch this situation in useEffect above
-        | (false, Some(Pause(duration)))  => <NightStepPage goToPage goToNextStep
-                                                timerId={
-                                                    Utils.logDebug("Setting timer")
-                                                    Js.Global.setTimeout(
-                                                        goToNextStep,
-                                                        Belt.Float.toInt(1000. *. duration)
-                                                    )
-                                                }
-                                             >
-                                                 { soundImageGreyed }
-                                             </NightStepPage>
+    let pageElement = switch maybeScenarioStep {
+        | _ if hasError                 => <NightErrorPage message=t("Unable to load audio") goToPage />
+        | None                          => React.null // catch this situation in useEffect above
+        | Some(Pause(duration))         => <NightStepPage goToPage goToNextStep timerId={makeTimer(duration)} >
+                                               { soundImageGreyed }
+                                           </NightStepPage>
 
-        | (false, Some(PlayRandomEffect(_))) => Utils.logDebug("This step should have been replaced with PlayEffect")
-                                                React.null // has been resolved above
+        | Some(PlayRandomEffect(_))     => Utils.logDebug("This step should have been replaced with PlayEffect")
+                                               React.null // has been resolved above
 
-        | (false, Some(PlayEffect(effect)))
-               if gameState.doPlayEffects => <NightStepPage goToPage goToNextStep>
-                                                 {soundImage}
-                                                 <Audio track=Effect(effect) onEnded=goToNextStepHandler onError />
-                                             </NightStepPage>
-        | (false, Some(PlaySpeech(speech)))
-                if gameState.doPlaySpeech => <NightStepPage goToPage goToNextStep>
-                                                 {soundImage}
-                                                 <Audio track=Speech(speech) onEnded=goToNextStepHandler onError />
-                                             </NightStepPage>
+        | Some(PlayEffect(effect))
+             if gameState.doPlayEffects => <NightStepPage goToPage goToNextStep>
+                                               {soundImage}
+                                               <Audio track=Effect(effect) onEnded onError />
+                                           </NightStepPage>
+        | Some(PlaySpeech(speech))
+             if gameState.doPlaySpeech  => <NightStepPage goToPage goToNextStep>
+                                               {soundImage}
+                                               <Audio track=Speech(speech) onEnded onError />
+                                           </NightStepPage>
 
-        | (false, Some(PlayEffect(_)))    => { goToNextStep()
+        | Some(PlayEffect(_))           => {   goToNextStep()
                                                React.null
-                                             }
-        | (false, Some(PlaySpeech(_)))    => { goToNextStep()
+                                           }
+        | Some(PlaySpeech(_))           => {   goToNextStep()
                                                React.null
-                                             }
+                                           }
 
-        | (false, Some(ChooseWitches))    => <NightStepPage goToPage goToNextStep showNavButtons=false>
-                                                 <PlayerList
-                                                     addressed=witchOrWitches
-                                                     choiceHandler=goFromWitchChoiceToNextStep
-                                                 />
-                                             </NightStepPage>
-        | (false, Some(ChooseConstable))  => <NightStepPage goToPage goToNextStep showNavButtons=false>
-                                                 <PlayerList
-                                                     addressed=Constable
-                                                     choiceHandler=goFromConstableChoiceToNextStep
-                                                 />
-                                             </NightStepPage>
+        | Some(ChooseWitches)           => <NightChoicePage>
+                                               <PlayerList
+                                                   addressed=witchOrWitches
+                                                   choiceHandler=goFromWitchChoiceToNextStep
+                                               />
+                                           </NightChoicePage>
+        | Some(ChooseConstable)         => <NightChoicePage>
+                                               <PlayerList
+                                                   addressed=Constable
+                                                   choiceHandler=goFromConstableChoiceToNextStep
+                                               />
+                                           </NightChoicePage>
 
-        | (false, Some(ConfirmWitches))   => <NightConfirmPage goToPrevStep goToNextStep addressed=witchOrWitches />
-        | (false, Some(ConfirmConstable)) => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable      />
+        | Some(ConfirmWitches)          => <NightConfirmPage goToPrevStep goToNextStep addressed=witchOrWitches />
+        | Some(ConfirmConstable)        => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable      />
     }
 
     // render the page

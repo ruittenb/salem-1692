@@ -23,10 +23,10 @@ all: ## Compile, bundle and minify everything. Identical to 'make compile-minify
 	$(MAKE) compile-minify
 
 .PHONY: mark
-mark: # Put asterisk in corner of terminal, to signal "done"
+mark: # Put "ready" in corner of terminal
 	@echo
-	@tput cup $$((`tput lines` - 1)) $$((`tput cols` - 1))
-	@printf "*"
+	@tput cup $$((`tput lines` - 1)) $$((`tput cols` - 5))
+	@printf `tput bold`ready`tput sgr0`
 	@tput cuu1 && tput cuu1 && echo
 
 %.min.css: %.css

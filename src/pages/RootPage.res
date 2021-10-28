@@ -60,31 +60,14 @@ let make = (): React.element => {
         None // cleanup function
     })
 
-    // save game state to localstorage after every change
+    // save game state to localstorage after every change; and to firebase if we're hosting
     React.useEffect1(() => {
         LocalStorage.saveGameState(gameState)
-        Utils.ifMaster(
-            gameState.gameType,
-            () => {
-                Utils.ifConnected(
-                    dbConnectionStatus,
-                    (dbConnection) => Firebase.updateGame(dbConnection, gameState)
-                        ->Promise.catch((error) => {
-                            // don't immediately disconnect
-                            // setDbConnectionStatus(_prev => NotConnected)
-                            error
-                                ->Utils.getExceptionMessage
-                                ->Utils.logError
-                            Promise.resolve()
-                        })
-                        ->ignore
-                )
-            }
-        )
+        FirebaseClient.ifMasterAndConnectedThenSaveGameState(dbConnectionStatus, gameState, currentPage, initialTurnState, None)
         None // cleanup function
     }, [ gameState ])
 
-    let currentPage = switch currentPage {
+    let currentPageElement = switch currentPage {
         | Title                   => <TitlePage goToPage />
         | Setup                   => <SetupPage goToPage />
         | SetupLanguage           => <SetupLanguagePage goToPage />
@@ -110,7 +93,7 @@ let make = (): React.element => {
             <div className=LanguageCodec.languageToJs(gameState.language)>
                 <NavigationContext.Provider value=(navigation, setNavigation)>
                     <TurnStateContext.Provider value=(turnState, setTurnState)>
-                        {currentPage}
+                        {currentPageElement}
                     </TurnStateContext.Provider>
                 </NavigationContext.Provider>
             </div>

@@ -1,6 +1,8 @@
 /** ****************************************************************************
- * Firebase
+ * FirebaseAdapter
  */
+
+@@warning("-33") // Unused 'open Types'
 
 open Types
 open Types.FbDb
@@ -20,20 +22,6 @@ open Utils
 let connectionInfoKey = "/.info/connected"
 let gamesKeyPrefix = "/games/"
 
-/**
- * Functions
- */
-
-let transformToDbRecord = (gameState: gameState): dbRecord => {
-    masterGameId: gameState.gameId,
-    masterPhase: #DaytimeParked,
-    masterPlayers: gameState.players,
-    masterSeating: SeatingCodec.seatingToJs(gameState.seating),
-    slaveChoiceWitches: "",
-    slaveChoiceConstable: "",
-    updatedAt: Js.Date.make()->Js.Date.toISOString
-}
-
 /** **********************************************************************
  * connect/disconnect
  */
@@ -44,10 +32,11 @@ let connect = (): Promise.t<dbConnection> => {
             let app = initializeApp(Constants.firebaseConfig)
             let db = getDatabase(app)
             let connectionInfoRef = getRef(db, connectionInfoKey);
+            // We usually receive more than one snapshot, therefore don't use 'once'
             onValue(connectionInfoRef, (snapshot) => {
                 let connected: bool = getValue(snapshot)
                 if (connected) {
-                    logDebug("Connected")
+                    Utils.logDebug("Connected")
                     resolve(. { app, db })
                 }
             })
@@ -65,26 +54,26 @@ let disconnect = (
     // We could go offline here, but then reconnecting would require a
     // different method than when connecting for the first time.
     //goOffline(dbConnection.db)
-    logDebug("Disconnected")
+    Utils.logDebug("Disconnected")
 }
 
 /** **********************************************************************
- * create/update/delete (Master)
+ * write/delete (Master)
  */
 
-let upsertGame = (
+let writeGame = (
     dbConnection: dbConnection,
-    gameState: gameState,
+    dbRecord: dbRecord,
     action: string, // "created" or "updated"
 ): Promise.t<unit> => {
-    let dbRecord = transformToDbRecord(gameState)
     Promise.make((resolve, reject) => {
         try {
-            let myGameRef = getRef(dbConnection.db, gamesKeyPrefix ++ gameState.gameId)
+            let gameId = dbRecord.masterGameId
+            let myGameRef = getRef(dbConnection.db, gamesKeyPrefix ++ gameId)
             set(myGameRef, dbRecord)
                 ->Promise.then(() => {
-                    logDebug(action ++ " game " ++ gameState.gameId)
-                    resolve(. ignore())
+                    Utils.logDebug(action ++ " game " ++ gameId)
+                    resolve(. ignore()) // workaround to pass a unit argument
                     Promise.resolve()
                 })
                 ->Promise.catch(error => {
@@ -99,20 +88,6 @@ let upsertGame = (
     })
 }
 
-let createGame = (
-    dbConnection: dbConnection,
-    gameState: gameState
-): Promise.t<unit> => {
-    upsertGame(dbConnection, gameState, "Created")
-}
-
-let updateGame = (
-    dbConnection: dbConnection,
-    gameState: gameState
-): Promise.t<unit> => {
-    upsertGame(dbConnection, gameState, "Updated")
-}
-
 let deleteGame = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId
@@ -122,7 +97,7 @@ let deleteGame = (
     )
     ->Belt.Option.forEach(myGameRef => {
         remove(myGameRef)
-        logDebug("Deleted game " ++ gameId)
+        Utils.logDebug("Deleted game " ++ gameId)
     })
 }
 
@@ -138,9 +113,9 @@ let joinGame = (
         () => getRef(dbConnection.db, gamesKeyPrefix ++ gameId)
     )
     ->Belt.Option.forEach(myGameRef => {
-        logDebug("Joined game " ++ gameId)
+        Utils.logDebug("Joined game " ++ gameId)
         onValue(myGameRef, (snapshot: snapshot) => {
-            logDebug("Data received")
+            Utils.logDebug("Data received")
             let _data = getValue(snapshot)
         })
     })
@@ -155,7 +130,7 @@ let leaveGame = (
     )
     ->Belt.Option.forEach(myGameRef => {
         off(myGameRef)
-        logDebug("Left game " ++ gameId)
+        Utils.logDebug("Left game " ++ gameId)
     })
 }
 

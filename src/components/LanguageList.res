@@ -15,7 +15,7 @@ let make = (
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let offeredLanguages: array<LanguageCodec.t> = [ #en_US, #es_ES, /* #fr_FR, #de_DE, */ #nl_NL ]
+    let offeredLanguages: array<LanguageCodec.t> = [ #en_US, #es_ES, #fr_FR, #de_DE, #nl_NL ]
 
     let buttons: array<React.element> = offeredLanguages
         ->Belt.Array.map(buttonLanguage => {
@@ -30,13 +30,17 @@ let make = (
             let (className, label) = switch buttonLanguage {
                 | #en_US => ("icon-left flag-us", t("English"))
                 | #es_ES => ("icon-left flag-es", t(`Español`))
-                | #fr_FR => ("icon-left flag-fr", t(`Français`))
-                | #de_DE => ("icon-left flag-de", t("Deutsch"))
+                | #fr_FR => ("icon-left flag-fr", t(`Français`) ++ " *")
+                | #de_DE => ("icon-left flag-de", t("Deutsch") ++ " *")
                 | #nl_NL => ("icon-left flag-nl", t("Nederlands"))
             }
             <Button key={label} label className onClick />
         })
 
-    {React.array(buttons)}
+    // React component
+    <>
+        {React.array(buttons)}
+        <p>{React.string("* " ++ t("Interface only, no dialogue yet"))}</p>
+    </>
 }
 
