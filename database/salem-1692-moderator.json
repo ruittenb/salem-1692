@@ -1,16 +1,14 @@
 {
-  "games": {
-    "a45-t81-p03-y52": {
-      "game_id": "a45-t81-p03-y52",
-      "players": [
-        "René",
-        "Dirk",
-        "Helmi",
-        "Joyce",
-        "Kees"
-      ],
-      "seating": "OneAtTop",
-      "phase": "DaytimeParked"
-    }
-  }
+  "d19-a28-p62-t42" : {
+    "masterGameId" : "d19-a28-p62-t42",
+    "masterPhase" : "DaytimeWaiting",
+    "masterPlayers" : [ "Erwin", "Helmi", "Joyce", "René", "Richella" ],
+    "masterSeating" : "TwoAtTop",
+    "slaveChoiceConstable" : "",
+    "slaveChoiceWitches" : "",
+    "slaveConfirmConstable" : "Undecided",
+    "slaveConfirmWitches" : "Undecided",
+    "updatedAt" : "2021-10-28T11:12:07.736Z"
+  },
+  "keep" : 1
 }
