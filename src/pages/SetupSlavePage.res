@@ -21,7 +21,7 @@ let make = (
 
     let leaveAnyCurrentGame = (dbConnectionStatus: dbConnectionStatus, gameState: gameState) => {
         switch (dbConnectionStatus, gameState.gameType) {
-            | (Connected(dbConnection), Slave(gameId)) => Firebase.leaveGame(dbConnection, gameId) // TODO also disconnect
+            | (Connected(dbConnection), Slave(gameId)) => FirebaseClient.leaveGame(dbConnection, gameId) // TODO also disconnect
             | (_, _)                                   => ()
         }
     }
@@ -42,7 +42,7 @@ let make = (
             switch (maybeDbConnection) {
                 | NotConnected            => Js.log("No connection")
                 | Connecting              => Js.log("Connecting")
-                | Connected(dbConnection) => Firebase.joinGame(dbConnection, newGameId)
+                | Connected(dbConnection) => FirebaseClient.joinGame(dbConnection, newGameId)
             }
             // also TODO: what if failure?
             setGameState(prevGameState => {

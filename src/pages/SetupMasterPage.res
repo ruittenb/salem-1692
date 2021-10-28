@@ -9,7 +9,7 @@ open Utils
 
 let startHosting = (setDbConnectionStatus, gameState, setGameState) => {
     setDbConnectionStatus(_prev => Connecting)
-    Firebase.connect()
+    FirebaseClient.connect()
         ->Promise.then(dbConnection => {
             let newGameId = if gameState.gameType === Master {
                 // We already are Master. This happens when the Master state
@@ -23,7 +23,7 @@ let startHosting = (setDbConnectionStatus, gameState, setGameState) => {
                 gameType: Master,
                 gameId: newGameId
             }
-            Firebase.createGame(dbConnection, newGameState)
+            FirebaseClient.createGame(dbConnection, newGameState)
                 ->Promise.then(() => {
                     setGameState(_prev => newGameState)
                     setDbConnectionStatus(_prev => Connected(dbConnection))
@@ -40,8 +40,8 @@ let startHosting = (setDbConnectionStatus, gameState, setGameState) => {
 
 let stopHosting = (dbConnectionStatus, setDbConnectionStatus, gameState, setGameState) => {
     ifConnected(dbConnectionStatus, (dbConnection) => {
-        Firebase.deleteGame(dbConnection, gameState.gameId)
-        Firebase.disconnect(dbConnection)
+        FirebaseClient.deleteGame(dbConnection, gameState.gameId)
+        FirebaseClient.disconnect(dbConnection)
     })
     setDbConnectionStatus(_prev => NotConnected)
     setGameState((prevGameState) => {

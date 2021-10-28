@@ -63,24 +63,7 @@ let make = (): React.element => {
     // save game state to localstorage after every change; and to firebase if we're hosting
     React.useEffect1(() => {
         LocalStorage.saveGameState(gameState)
-        Utils.ifMaster(
-            gameState.gameType,
-            () => {
-                Utils.ifConnected(
-                    dbConnectionStatus,
-                    (dbConnection) => Firebase.updateGame(dbConnection, gameState, currentPage, initialTurnState, None)
-                        ->Promise.catch((error) => {
-                            // don't immediately disconnect
-                            // setDbConnectionStatus(_prev => NotConnected)
-                            error
-                                ->Utils.getExceptionMessage
-                                ->Utils.logError
-                            Promise.resolve()
-                        })
-                        ->ignore
-                )
-            }
-        )
+        FirebaseClient.ifMasterAndConnectedThenUpdateGame(dbConnectionStatus, gameState, currentPage, initialTurnState, None)
         None // cleanup function
     }, [ gameState ])
 

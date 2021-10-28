@@ -1,6 +1,8 @@
 /** ****************************************************************************
- * Firebase
+ * FirebaseAdapter
  */
+
+@@warning("-33") // Unused 'open Types'
 
 open Types
 open Types.FbDb
@@ -21,58 +23,6 @@ let connectionInfoKey = "/.info/connected"
 let gamesKeyPrefix = "/games/"
 
 /** **********************************************************************
- * Functions
- */
-
-let getDbPage = (
-    page: page,
-    step: scenarioStep,
-): phase => {
-    switch (page, step) {
-        | (Title,                  _) => #DaytimeWaiting
-        | (Setup,                  _) => #DaytimeWaiting
-        | (SetupLanguage,          _) => #DaytimeWaiting
-        | (SetupMusic,             _) => #DaytimeWaiting
-        | (SetupPlayers,           _) => #DaytimeWaiting
-        | (SetupPlayersForGame,    _) => #DaytimeWaiting
-        | (SetupMaster,            _) => #DaytimeWaiting
-        | (SetupSlave,             _) => #DaytimeWaiting
-        | (Credits,                _) => #DaytimeWaiting
-        | (Daytime,                _) => #DaytimeWaiting
-        | (DaytimeConfess,         _) => #DaytimeWaiting
-        | (DaytimeReveal,          _) => #DaytimeWaiting
-        | (DaytimeRevealNoConfess, _) => #DaytimeWaiting
-        | (Close,                  _) => #DaytimeWaiting
-        | (_,          ChooseWitches) => #NightChooseWitches
-        | (_,         ConfirmWitches) => #NightConfirmWitches
-        | (_,        ChooseConstable) => #NightChooseConstable
-        | (_,       ConfirmConstable) => #NightConfirmConstable
-        | (_,                      _) => #NightWaiting
-    }
-}
-
-let transformToDbRecord = (
-    gameState: gameState,
-    currentPage: page,
-    turnState: turnState,
-    scenarioStep: scenarioStep,
-): dbRecord => {
-    masterGameId: gameState.gameId,
-    masterPhase: getDbPage(currentPage, scenarioStep),
-    masterPlayers: gameState.players,
-    masterSeating: SeatingCodec.seatingToJs(gameState.seating),
-    slaveChoiceWitches: turnState.choiceWitches->Belt.Option.getWithDefault(""),
-    slaveChoiceConstable: turnState.choiceConstable->Belt.Option.getWithDefault(""),
-    slaveConfirmWitches: #Undecided,
-    slaveConfirmConstable: #Undecided,
-    updatedAt: Js.Date.make()->Js.Date.toISOString
-}
-
-let ifMasterAndConnectedThenUpdateGame = () => {
-    () // TODO
-}
-
-/** **********************************************************************
  * connect/disconnect
  */
 
@@ -82,10 +32,11 @@ let connect = (): Promise.t<dbConnection> => {
             let app = initializeApp(Constants.firebaseConfig)
             let db = getDatabase(app)
             let connectionInfoRef = getRef(db, connectionInfoKey);
+            // We usually receive more than one snapshot, therefore don't use 'once'
             onValue(connectionInfoRef, (snapshot) => {
                 let connected: bool = getValue(snapshot)
                 if (connected) {
-                    logDebug("Connected")
+                    Utils.logDebug("Connected")
                     resolve(. { app, db })
                 }
             })
@@ -103,33 +54,25 @@ let disconnect = (
     // We could go offline here, but then reconnecting would require a
     // different method than when connecting for the first time.
     //goOffline(dbConnection.db)
-    logDebug("Disconnected")
+    Utils.logDebug("Disconnected")
 }
 
 /** **********************************************************************
- * create/update/delete (Master)
+ * write/delete (Master)
  */
 
-let upsertGame = (
+let writeGame = (
     dbConnection: dbConnection,
-    gameState: gameState,
-    currentPage: page,
-    turnState: turnState,
-    scenarioStep: scenarioStep,
+    dbRecord: dbRecord,
     action: string, // "created" or "updated"
 ): Promise.t<unit> => {
-    let dbRecord = transformToDbRecord(
-        gameState,
-        currentPage,
-        turnState,
-        scenarioStep,
-    )
     Promise.make((resolve, reject) => {
         try {
-            let myGameRef = getRef(dbConnection.db, gamesKeyPrefix ++ gameState.gameId)
+            let gameId = dbRecord.masterGameId
+            let myGameRef = getRef(dbConnection.db, gamesKeyPrefix ++ gameId)
             set(myGameRef, dbRecord)
                 ->Promise.then(() => {
-                    logDebug(action ++ " game " ++ gameState.gameId)
+                    Utils.logDebug(action ++ " game " ++ gameId)
                     resolve(. ignore()) // workaround to pass a unit argument
                     Promise.resolve()
                 })
@@ -145,28 +88,6 @@ let upsertGame = (
     })
 }
 
-let createGame = (
-    dbConnection: dbConnection,
-    gameState: gameState
-): Promise.t<unit> => {
-    let emptyTurnState: turnState = {
-        nrWitches: One,
-        choiceWitches: None,
-        choiceConstable: None,
-    }
-    upsertGame(dbConnection, gameState, Title, emptyTurnState, Pause(0.), "Created")
-}
-
-let updateGame = (
-    dbConnection: dbConnection,
-    gameState: gameState,
-    currentPage: page,
-    turnState: turnState,
-    maybeScenarioStep: option<scenarioStep>,
-): Promise.t<unit> => {
-    upsertGame(dbConnection, gameState, currentPage, turnState, maybeScenarioStep->Belt.Option.getWithDefault(Pause(0.)), "Updated")
-}
-
 let deleteGame = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId
@@ -176,7 +97,7 @@ let deleteGame = (
     )
     ->Belt.Option.forEach(myGameRef => {
         remove(myGameRef)
-        logDebug("Deleted game " ++ gameId)
+        Utils.logDebug("Deleted game " ++ gameId)
     })
 }
 
@@ -192,9 +113,9 @@ let joinGame = (
         () => getRef(dbConnection.db, gamesKeyPrefix ++ gameId)
     )
     ->Belt.Option.forEach(myGameRef => {
-        logDebug("Joined game " ++ gameId)
+        Utils.logDebug("Joined game " ++ gameId)
         onValue(myGameRef, (snapshot: snapshot) => {
-            logDebug("Data received")
+            Utils.logDebug("Data received")
             let _data = getValue(snapshot)
         })
     })
@@ -209,7 +130,7 @@ let leaveGame = (
     )
     ->Belt.Option.forEach(myGameRef => {
         off(myGameRef)
-        logDebug("Left game " ++ gameId)
+        Utils.logDebug("Left game " ++ gameId)
     })
 }
 
