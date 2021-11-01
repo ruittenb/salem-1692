@@ -71,7 +71,7 @@ let make = (
                           </>
         | Connecting   => <>
                               <Spacer />
-                              {React.string("Connecting...")}
+                              {React.string(t("Connecting..."))}
                           </>
         | Connected(_) => <>
                               <p>

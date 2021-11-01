@@ -25,6 +25,7 @@ let table = Js.Dict.fromArray([
     ("Game Code", "Code du jeu"),
     ("Start Hosting", `Commencer à héberger`),
     ("Stop Hosting", `Arrêter d'héberger`),
+    ("Connecting...", `En train de connecter…`),
     ("It is possible to join a game running on another smartphone.", `Il est possible de joindre un jeu en cours sur un autre smartphone.`),
     (`Take the other smartphone and look in the app under Settings → Host Game. Then enter the game code here.`, `Prenez l'autre smartphone et regardez dans l'application sous Configuration → Héberger jeu. Puis, saisissez le code du jeu ici.`),
     ("It is possible to join this game from another smartphone.", `Il est possible de rejoindre ce jeu à partir d'un autre smartphone.`),

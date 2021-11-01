@@ -1,7 +1,7 @@
 
 # Moderator PWA for the card game Salem 1692
 
-A PWA for representing the moderator in the Salem 1692 card game
+A web app for fulfilling the moderator role in the Salem 1692 card game
 
 ## The Game
 
@@ -11,15 +11,20 @@ A PWA for representing the moderator in the Salem 1692 card game
 ## PWA Hosting
 
 - [Project on GitHub](https://github.com/ruittenb/salem-1692)
-- [Active Website](https://ruittenb.github.io/salem-1692/dist/) Click here to see the website in action.
+- [See this web app in action](https://ruittenb.github.io/salem-1692/dist/)
 - [Firebase Console](https://console.firebase.google.com/u/1/project/salem-1692-moderator/overview)
 
 ## Technologies Used
 
 - [ReScript](https://rescript-lang.org/docs/manual/latest/overview)
-- [ReScript Forum](https://www.reddit.com/r/rescript/)
+  - [ReScript Forum](https://www.reddit.com/r/rescript/)
+- [Decco](https://github.com/reasonml-labs/decco)
+  - [How To Encode/Decode with Decco](https://blog.thomasdeconinck.fr/articles/decoder-une-enumeration-depuis-une-api-en-rescript-avec-decco)
 - [React](https://reactjs.org/docs/getting-started.html)
+  - [ReScript-React](https://rescript-lang.org/docs/react/latest/introduction)
 - [Firebase Realtime Database](https://firebase.google.com/docs/database)
+  - [Getting Started (documentation)](https://firebase.google.com/docs/database/web/start)
+  - [Getting Started (video)](https://www.youtube.com/watch?v=rQvOAnNvcNQ)
 
 ## Directory Structure
 
@@ -47,7 +52,5 @@ make serve
 
 ## Debugging
 
-Debugging output (in the browser console) can be obtained by
-[changing the User-Agent string](https://www.alphr.com/change-user-agent-string-google-chrome/)
-to contain the text "Salem/1692".
+Debugging output (in the browser console) can be obtained by [changing the User-Agent string](https://www.alphr.com/change-user-agent-string-google-chrome/) to contain the text "Salem/1692".
 
