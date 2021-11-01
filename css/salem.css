@@ -406,7 +406,7 @@ input[type=text].id-input {
 }
 
 #night-subpage {
-    background: url(../images/overlay-night.png) top / contain no-repeat;
+    background: url(../images/overlay-night.png) top / 375px no-repeat;
     color: #eee;
 }
 
