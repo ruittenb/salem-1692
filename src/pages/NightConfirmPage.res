@@ -10,8 +10,8 @@ open Types
 @react.component
 let make = (
     ~addressed: addressed,
+    ~decisionProcessor,
     ~goToPrevStep,
-    ~goToNextStep,
 ): React.element => {
 
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
@@ -42,7 +42,7 @@ let make = (
         }
         Some(() => {
             Utils.logDebug("Unmounting Confirm page") // TODO
-            () // TODO Firebase.ifMasterAndConnectedThenSaveGameState TODO is this right? Is this the slave page?
+            ()
         })
     })
 
@@ -58,9 +58,9 @@ let make = (
             <h2> {React.string(choice)} </h2>
             <Spacer />
             <Spacer />
-            <LargeButton className="confirm-yes" onClick={ (_event) => goToNextStep() } ></LargeButton>
+            <LargeButton className="confirm-yes" onClick={ (_event) => decisionProcessor(#Yes) } ></LargeButton>
             <Spacer />
-            <LargeButton className="confirm-no" onClick={ (_event) => goToPrevStep() } ></LargeButton>
+            <LargeButton className="confirm-no" onClick={ (_event) => decisionProcessor(#No) } ></LargeButton>
             <Spacer />
         </div>
     </div>

@@ -33,7 +33,7 @@ let make = (
                                          ...turnState,
                                          choiceWitches: None,
                                      })
-                                     Types.FbDb.ChoiceWitches
+                                     Types.FbDb.ChooseWitchesSubject
                                  }
             | Constable       => {
                                      Utils.logDebug("Clearing constable's choice from turn state...")
@@ -41,7 +41,7 @@ let make = (
                                          ...turnState,
                                          choiceConstable: None,
                                      })
-                                     Types.FbDb.ChoiceConstable
+                                     Types.FbDb.ChooseConstableSubject
                                  }
         }
         Utils.ifMasterAndConnected(

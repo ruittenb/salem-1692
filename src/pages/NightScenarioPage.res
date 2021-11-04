@@ -122,6 +122,27 @@ let make = (
         goToNextStep()
     }
 
+    // Store confirmation in db
+    let continueFromWitchDecision = (decision: Types.FbDb.decision): unit => {
+        FirebaseClient.ifMasterAndConnectedThenSaveGameConfirmations(
+            dbConnectionStatus, gameState, decision, #Undecided)
+        switch decision {
+            | #Yes       => goToNextStep()
+            | #No        => goToPrevStep()
+            | #Undecided => ()
+        }
+    }
+    let continueFromConstableDecision = (decision: Types.FbDb.decision): unit => {
+        FirebaseClient.ifMasterAndConnectedThenSaveGameConfirmations(
+            dbConnectionStatus, gameState, #Yes, decision)
+        switch decision {
+            | #Yes       => goToNextStep()
+            | #No        => goToPrevStep()
+            | #Undecided => ()
+        }
+    }
+
+    // prepare components
     let soundImage       = <img src="images/gramophone.png" className="sound-image" />
     let soundImageGreyed = <img src="images/gramophone.png" className="sound-image greyed" />
 
@@ -177,9 +198,16 @@ let make = (
                                                addressed=Constable
                                                choiceProcessor=goFromConstableChoiceToNextStep
                                            />
-
-        | Some(ConfirmWitches)          => <NightConfirmPage goToPrevStep goToNextStep addressed=witchOrWitches />
-        | Some(ConfirmConstable)        => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable      />
+        | Some(ConfirmWitches)          => <NightConfirmPage
+                                               addressed=witchOrWitches
+                                               decisionProcessor=continueFromWitchDecision
+                                               goToPrevStep
+                                           />
+        | Some(ConfirmConstable)        => <NightConfirmPage
+                                               addressed=Constable
+                                               decisionProcessor=continueFromConstableDecision
+                                               goToPrevStep
+                                           />
     }
 
     // render the page

@@ -185,6 +185,29 @@ let ifMasterAndConnectedThenSaveGameChoices = (
     )
 }
 
+let ifMasterAndConnectedThenSaveGameConfirmations = (
+    dbConnectionStatus: dbConnectionStatus,
+    gameState: gameState,
+    confirmWitches: decision,
+    confirmConstable: decision,
+) => {
+    Utils.ifMasterAndConnected(
+        gameState.gameType,
+        dbConnectionStatus,
+        (dbConnection) => Promise.all([
+            updateGameKey(dbConnection, gameState.gameId, "slaveConfirmWitches", confirmWitches->decisionToJs),
+            updateGameKey(dbConnection, gameState.gameId, "slaveConfirmConstable", confirmConstable->decisionToJs)
+        ])
+            ->Promise.catch((error) => {
+                error
+                ->Utils.getExceptionMessage
+                ->Utils.logError
+                Promise.resolve([])
+            })
+            ->ignore
+    )
+}
+
 let ifMasterAndConnectedThenSaveGamePhase = (
     dbConnectionStatus: dbConnectionStatus,
     gameState: gameState,

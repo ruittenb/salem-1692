@@ -77,10 +77,10 @@ module FbDb = {
     ]
 
     type dbObservable =
-        | ChoiceWitches
-        | ChoiceConstable
-        | DecisionWitches
-        | DecisionConstable
+        | ChooseWitchesSubject
+        | ChooseConstableSubject
+        | ConfirmWitchesSubject
+        | ConfirmConstableSubject
 
     type dbRecord = {
         masterGameId: GameTypeCodec.gameId,
