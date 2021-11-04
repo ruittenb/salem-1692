@@ -1,4 +1,3 @@
  - fade music out
  - rework night eyes
- - on night step: ifMaster => save to firebase
  - button "abort connecting"
