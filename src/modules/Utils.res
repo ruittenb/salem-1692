@@ -22,6 +22,15 @@ let logDebug = (msg: string): unit => {
 }
 
 /**
+ * Log a message to console with highlighting
+ */
+let logDebug2 = (msg: string, style: string): unit => {
+    if (Constants.debug) {
+        Js.log2("%c" ++ msg, style)
+    }
+}
+
+/**
  * Extract message from exception
  */
 let getExceptionMessage = (error: exn): string => {
@@ -116,6 +125,27 @@ let ifMaster = (
         | Master     => func()
         | Slave(_)   => ()
     }
+}
+
+/**
+ * Combine two functions above
+ */
+let ifMasterAndConnected = (
+    gameType: GameTypeCodec.t,
+    dbConnectionStatus: Types.FbDb.dbConnectionStatus,
+    func: (Types.FbDb.dbConnection) => unit
+) => {
+    ifMaster(
+        gameType,
+        () => {
+            ifConnected(
+                dbConnectionStatus,
+                (dbConnection) => {
+                    func(dbConnection)
+                }
+            )
+        }
+    )
 }
 
 /**

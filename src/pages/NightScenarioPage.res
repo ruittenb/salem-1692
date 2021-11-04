@@ -31,7 +31,7 @@ let make = (
 
     let resolveEffectSet = (step): scenarioStep => {
         switch step {
-            // should effectSet be empty: use default of 1s silence
+            // should effectSet be empty: use 1s of silence as default
             | PlayRandomEffect(effectSet) => Utils.pickRandomElement(effectSet, Silence1s)->PlayEffect
             | _                           => step
         }
@@ -81,7 +81,29 @@ let make = (
 
     // if we're hosting, save turn state to firebase after every change
     React.useEffect1(() => {
-        FirebaseClient.ifMasterAndConnectedThenSaveGameState(dbConnectionStatus, gameState, subPage, turnState, maybeScenarioStep)
+        let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
+        let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
+        Utils.logDebug2(
+            "Change: turnState changed;" ++ " witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
+            "font-weight: bold"
+        )
+        FirebaseClient.ifMasterAndConnectedThenSaveGameChoices(
+            dbConnectionStatus, gameState, choiceWitches, choiceConstable
+        )
+        None // cleanup function
+    }, [ turnState ])
+
+    // if we're hosting, save game page+step (= phase) to firebase after every change
+    React.useEffect1(() => {
+        let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
+        let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
+        Utils.logDebug2(
+            "Change: scenarioStep changed;" ++ " witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
+            "font-weight: bold"
+        )
+        FirebaseClient.ifMasterAndConnectedThenSaveGamePhase(
+            dbConnectionStatus, gameState, subPage, maybeScenarioStep
+        )
         None // cleanup function
     }, [ maybeScenarioStep ])
 
@@ -91,11 +113,11 @@ let make = (
     let onEnded = (_event): unit => goToNextStep()
 
     // Store chosen players (killed and saved) in context
-    let goFromWitchChoiceToNextStep = (player: player, _event): unit => {
+    let goFromWitchChoiceToNextStep = (player: player): unit => {
         setTurnState(prevTurnState => { ...prevTurnState, choiceWitches: Some(player) })
         goToNextStep()
     }
-    let goFromConstableChoiceToNextStep = (player: player, _event): unit => {
+    let goFromConstableChoiceToNextStep = (player: player): unit => {
         setTurnState(prevTurnState => { ...prevTurnState, choiceConstable: Some(player) })
         goToNextStep()
     }
@@ -123,12 +145,12 @@ let make = (
         | _ if hasError                 => <NightErrorPage message=t("Unable to load audio") goToPage />
         | None                          => React.null // catch this situation in useEffect above
         | Some(Pause(duration))         => <NightStepPage goToPage goToNextStep timerId={makeTimer(duration)} >
-                                               { soundImageGreyed }
+                                               {soundImageGreyed}
                                            </NightStepPage>
 
-        | Some(PlayRandomEffect(_))     => Utils.logDebug("This step should have been replaced with PlayEffect")
+        | Some(PlayRandomEffect(_))     => {   Utils.logDebug("This step should have been replaced with PlayEffect")
                                                React.null // has been resolved above
-
+                                           }
         | Some(PlayEffect(effect))
              if gameState.doPlayEffects => <NightStepPage goToPage goToNextStep>
                                                {soundImage}
@@ -147,18 +169,14 @@ let make = (
                                                React.null
                                            }
 
-        | Some(ChooseWitches)           => <NightChoicePage>
-                                               <PlayerList
-                                                   addressed=witchOrWitches
-                                                   choiceHandler=goFromWitchChoiceToNextStep
-                                               />
-                                           </NightChoicePage>
-        | Some(ChooseConstable)         => <NightChoicePage>
-                                               <PlayerList
-                                                   addressed=Constable
-                                                   choiceHandler=goFromConstableChoiceToNextStep
-                                               />
-                                           </NightChoicePage>
+        | Some(ChooseWitches)           => <NightChoicePage
+                                               addressed=witchOrWitches
+                                               choiceProcessor=goFromWitchChoiceToNextStep
+                                           />
+        | Some(ChooseConstable)         => <NightChoicePage
+                                               addressed=Constable
+                                               choiceProcessor=goFromConstableChoiceToNextStep
+                                           />
 
         | Some(ConfirmWitches)          => <NightConfirmPage goToPrevStep goToNextStep addressed=witchOrWitches />
         | Some(ConfirmConstable)        => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable      />

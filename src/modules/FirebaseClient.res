@@ -11,7 +11,7 @@ let gamesKeyPrefix = "/games/"
  * Functions
  */
 
-let getDbPage = (
+let getPhase = (
     page: page,
     step: scenarioStep,
 ): phase => {
@@ -45,7 +45,7 @@ let transformToDbRecord = (
     scenarioStep: scenarioStep,
 ): dbRecord => {
     masterGameId: gameState.gameId,
-    masterPhase: getDbPage(currentPage, scenarioStep),
+    masterPhase: getPhase(currentPage, scenarioStep),
     masterPlayers: gameState.players,
     masterSeating: SeatingCodec.seatingToJs(gameState.seating),
     slaveChoiceWitches: turnState.choiceWitches->Belt.Option.getWithDefault(""),
@@ -125,6 +125,15 @@ let updateGame = (
     FirebaseAdapter.writeGame(dbConnection, dbRecord, "Updated")
 }
 
+let updateGameKey = (
+    dbConnection: dbConnection,
+    gameId: GameTypeCodec.gameId,
+    key: string,
+    value: string,
+): Promise.t<unit> => {
+    FirebaseAdapter.writeGameKey(dbConnection, gameId, key, value)
+}
+
 let deleteGame = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId
@@ -139,23 +148,91 @@ let ifMasterAndConnectedThenSaveGameState = (
     turnState: turnState,
     maybeScenarioStep: option<scenarioStep>,
 ) => {
-    Utils.ifMaster(
+    Utils.ifMasterAndConnected(
         gameState.gameType,
-        () => {
-            Utils.ifConnected(
-                dbConnectionStatus,
-                (dbConnection) => updateGame(dbConnection, gameState, page, turnState, maybeScenarioStep)
-                    ->Promise.catch((error) => {
-                        // don't immediately disconnect
-                        // setDbConnectionStatus(_prev => NotConnected)
-                        error
-                            ->Utils.getExceptionMessage
-                            ->Utils.logError
-                        Promise.resolve()
-                    })
-                    ->ignore
-            )
-        }
+        dbConnectionStatus,
+        (dbConnection) => updateGame(dbConnection, gameState, page, turnState, maybeScenarioStep)
+            ->Promise.catch((error) => {
+                error
+                ->Utils.getExceptionMessage
+                ->Utils.logError
+                Promise.resolve()
+            })
+            ->ignore
     )
 }
 
+let ifMasterAndConnectedThenSaveGameChoices = (
+    dbConnectionStatus: dbConnectionStatus,
+    gameState: gameState,
+    choiceWitches: player,
+    choiceConstable: player,
+) => {
+    Utils.ifMasterAndConnected(
+        gameState.gameType,
+        dbConnectionStatus,
+        (dbConnection) => Promise.all([
+            updateGameKey(dbConnection, gameState.gameId, "slaveChoiceWitches", choiceWitches),
+            updateGameKey(dbConnection, gameState.gameId, "slaveChoiceConstable", choiceConstable)
+        ])
+            ->Promise.catch((error) => {
+                error
+                ->Utils.getExceptionMessage
+                ->Utils.logError
+                Promise.resolve([])
+            })
+            ->ignore
+    )
+}
+
+let ifMasterAndConnectedThenSaveGamePhase = (
+    dbConnectionStatus: dbConnectionStatus,
+    gameState: gameState,
+    page: page,
+    maybeScenarioStep: option<scenarioStep>,
+) => {
+    let scenarioStep = maybeScenarioStep->Belt.Option.getWithDefault(Pause(0.))
+    let phase = getPhase(page, scenarioStep)->phaseToJs
+    Utils.ifMasterAndConnected(
+        gameState.gameType,
+        dbConnectionStatus,
+        (dbConnection) => updateGameKey(dbConnection, gameState.gameId, "masterPhase", phase)
+            ->Promise.catch((error) => {
+                error
+                ->Utils.getExceptionMessage
+                ->Utils.logError
+                Promise.resolve()
+            })
+            ->ignore
+    )
+}
+
+/** **********************************************************************
+ * listen (Master)
+ */
+
+let listen = (
+    dbConnection: dbConnection,
+    gameId: GameTypeCodec.gameId,
+    subject: dbObservable,
+    callback: (string) => unit
+): unit => {
+    FirebaseAdapter.listen(
+        dbConnection,
+        gameId,
+        FirebaseAdapter.subjectKey(subject),
+        callback
+    )
+}
+
+let stopListening = (
+    dbConnection: dbConnection,
+    gameId: GameTypeCodec.gameId,
+    subject: dbObservable,
+): unit => {
+    FirebaseAdapter.stopListening(
+        dbConnection,
+        gameId,
+        FirebaseAdapter.subjectKey(subject)
+    )
+}

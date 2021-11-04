@@ -21,11 +21,6 @@ let initialGameState = {
     doPlaySpeech: true,
     backgroundMusic: defaultSelectedMusicTracks,
 }
-let initialTurnState = {
-    nrWitches: One,
-    choiceWitches: None,
-    choiceConstable: None,
-}
 
 let cleanupGameState = (gameState): gameState => {
     let knownMusicTracksInclude = musicTracks->Js.Array2.includes // curried
@@ -63,7 +58,9 @@ let make = (): React.element => {
     // save game state to localstorage after every change; and to firebase if we're hosting
     React.useEffect1(() => {
         LocalStorage.saveGameState(gameState)
-        FirebaseClient.ifMasterAndConnectedThenSaveGameState(dbConnectionStatus, gameState, currentPage, initialTurnState, None)
+        FirebaseClient.ifMasterAndConnectedThenSaveGameState(
+            dbConnectionStatus, gameState, currentPage, initialTurnState, None
+        )
         None // cleanup function
     }, [ gameState ])
 

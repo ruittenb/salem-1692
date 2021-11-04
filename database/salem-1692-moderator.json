@@ -1,4 +1,5 @@
 {
+  "_keep" : 1,
   "d19-a28-p62-t42" : {
     "masterGameId" : "d19-a28-p62-t42",
     "masterPhase" : "DaytimeWaiting",
@@ -9,6 +10,5 @@
     "slaveConfirmConstable" : "Undecided",
     "slaveConfirmWitches" : "Undecided",
     "updatedAt" : "2021-10-28T11:12:07.736Z"
-  },
-  "keep" : 1
+  }
 }

@@ -20,7 +20,17 @@ open Utils
 @send external getValue: (snapshot) => 'data = "val"
 
 let connectionInfoKey = "/.info/connected"
-let gamesKeyPrefix = "/games/"
+
+let gameKey = (id: GameTypeCodec.gameId): string => {
+    "/games/" ++ id
+}
+
+let subjectKey = (subject) => switch subject {
+    | ChoiceWitches     => "slaveChoiceWitches"
+    | ChoiceConstable   => "slaveChoiceConstable"
+    | DecisionWitches   => "slaveConfirmWitches"
+    | DecisionConstable => "slaveConfirmConstable"
+}
 
 /** **********************************************************************
  * connect/disconnect
@@ -32,7 +42,8 @@ let connect = (): Promise.t<dbConnection> => {
             let app = initializeApp(Constants.firebaseConfig)
             let db = getDatabase(app)
             let connectionInfoRef = getRef(db, connectionInfoKey);
-            // We usually receive more than one snapshot, therefore don't use 'once'
+            // We will immediately receive a snapshot upon attaching the listener;
+            // and then upon every change.
             onValue(connectionInfoRef, (snapshot) => {
                 let connected: bool = getValue(snapshot)
                 if (connected) {
@@ -69,10 +80,37 @@ let writeGame = (
     Promise.make((resolve, reject) => {
         try {
             let gameId = dbRecord.masterGameId
-            let myGameRef = getRef(dbConnection.db, gamesKeyPrefix ++ gameId)
+            let myGameRef = getRef(dbConnection.db, gameKey(gameId))
             set(myGameRef, dbRecord)
                 ->Promise.then(() => {
                     Utils.logDebug(action ++ " game " ++ gameId)
+                    resolve(. ignore()) // workaround to pass a unit argument
+                    Promise.resolve()
+                })
+                ->Promise.catch(error => {
+                    error->getExceptionMessage->logError
+                    reject(. error)
+                    Promise.reject(error)
+                })
+                ->ignore
+        } catch {
+            | error => reject(. error)
+        }
+    })
+}
+
+let writeGameKey = (
+    dbConnection: dbConnection,
+    gameId: GameTypeCodec.gameId,
+    key: string,
+    value: string,
+): Promise.t<unit> => {
+    Promise.make((resolve, reject) => {
+        try {
+            let myGameRef = getRef(dbConnection.db, gameKey(gameId) ++ "/" ++ key)
+            set(myGameRef, value)
+                ->Promise.then(() => {
+                    Utils.logDebug("game key " ++ key ++ " updated with value " ++ value)
                     resolve(. ignore()) // workaround to pass a unit argument
                     Promise.resolve()
                 })
@@ -93,7 +131,7 @@ let deleteGame = (
     gameId: GameTypeCodec.gameId
 ): unit => {
     safeExec(
-        () => getRef(dbConnection.db, gamesKeyPrefix ++ gameId)
+        () => getRef(dbConnection.db, gameKey(gameId))
     )
     ->Belt.Option.forEach(myGameRef => {
         remove(myGameRef)
@@ -110,7 +148,7 @@ let joinGame = (
     gameId: GameTypeCodec.gameId
 ): unit => {
     safeExec(
-        () => getRef(dbConnection.db, gamesKeyPrefix ++ gameId)
+        () => getRef(dbConnection.db, gameKey(gameId))
     )
     ->Belt.Option.forEach(myGameRef => {
         Utils.logDebug("Joined game " ++ gameId)
@@ -126,11 +164,62 @@ let leaveGame = (
     gameId: GameTypeCodec.gameId
 ): unit => {
     safeExec(
-        () => getRef(dbConnection.db, gamesKeyPrefix ++ gameId)
+        () => getRef(dbConnection.db, gameKey(gameId))
     )
     ->Belt.Option.forEach(myGameRef => {
         off(myGameRef)
         Utils.logDebug("Left game " ++ gameId)
+    })
+}
+
+/** **********************************************************************
+ * listen (Master)
+ */
+
+let listen = (
+    dbConnection: dbConnection,
+    gameId: GameTypeCodec.gameId,
+    subjectKey: string,
+    callback: (string) => unit
+): unit => {
+    let observableKey = gameKey(gameId) ++ "/" ++ subjectKey
+    safeExec(
+        // TODO What to do if this fails?
+        () => getRef(dbConnection.db, observableKey)
+    )
+    ->Belt.Option.forEach(observableRef => {
+        //let discardedFirst = ref(false)
+        Utils.logDebug("Listening on " ++ observableKey)
+        onValue(observableRef, (snapshot) => {
+            // We are going to get a snapshot immediately upon installing the listener.
+            // Since the observed key is always cleared in NightScenarioPage, we don't
+            // need to worry about this and we can let the observer deal with it.
+            let result: string = getValue(snapshot)
+            Utils.logDebug("Received data from " ++ observableKey ++ ": '" ++ result ++ "'")
+            //if !discardedFirst.contents {
+            //    Utils.logDebug("Discarding first received data")
+            //    discardedFirst := true
+            //} else {
+                Utils.logDebug("Processing received data")
+                callback(result)
+            //}
+        })
+    })
+}
+
+let stopListening = (
+    dbConnection: dbConnection,
+    gameId: GameTypeCodec.gameId,
+    subjectKey: string,
+): unit => {
+    let observableKey = gameKey(gameId) ++ "/" ++ subjectKey
+    safeExec(
+        // TODO What to do if this fails?
+        () => getRef(dbConnection.db, observableKey)
+    )
+    ->Belt.Option.forEach(observableRef => {
+        Utils.logDebug("Stopping listening on " ++ observableKey)
+        off(observableRef)
     })
 }
 

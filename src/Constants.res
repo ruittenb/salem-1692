@@ -3,6 +3,8 @@
  * Constants
  */
 
+open Types
+
 type navigator
 @val external navigator: navigator = "navigator"
 @get external userAgent: (navigator) => string = "userAgent"
@@ -57,3 +59,12 @@ let defaultSelectedMusicTracks = [
     "Myst on the Moor",
     "Some Amount of Evil",
 ]
+
+// Initialization values
+
+let initialTurnState: turnState = {
+    nrWitches: One,
+    choiceWitches: None,
+    choiceConstable: None,
+}
+
