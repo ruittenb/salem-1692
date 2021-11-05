@@ -19,6 +19,8 @@ open Utils
 @module("firebase/database") external remove: (reference) => unit = "remove"
 @send external getValue: (snapshot) => 'data = "val"
 
+let p = "[FirebaseAdapter] "
+
 let connectionInfoKey = "/.info/connected"
 
 let gameKey = (id: GameTypeCodec.gameId): string => {
@@ -47,7 +49,7 @@ let connect = (): Promise.t<dbConnection> => {
             onValue(connectionInfoRef, (snapshot) => {
                 let connected: bool = getValue(snapshot)
                 if (connected) {
-                    Utils.logDebug("Connected")
+                    Utils.logDebug(p ++ "Connected")
                     resolve(. { app, db })
                 }
             })
@@ -65,7 +67,7 @@ let disconnect = (
     // We could go offline here, but then reconnecting would require a
     // different method than when connecting for the first time.
     //goOffline(dbConnection.db)
-    Utils.logDebug("Disconnected")
+    Utils.logDebug(p ++ "Disconnected")
 }
 
 /** **********************************************************************
@@ -83,7 +85,7 @@ let writeGame = (
             let myGameRef = getRef(dbConnection.db, gameKey(gameId))
             set(myGameRef, dbRecord)
                 ->Promise.then(() => {
-                    Utils.logDebug(action ++ " game " ++ gameId)
+                    Utils.logDebug(p ++ action ++ " game " ++ gameId)
                     resolve(. ignore()) // workaround to pass a unit argument
                     Promise.resolve()
                 })
@@ -110,7 +112,7 @@ let writeGameKey = (
             let myGameRef = getRef(dbConnection.db, gameKey(gameId) ++ "/" ++ key)
             set(myGameRef, value)
                 ->Promise.then(() => {
-                    Utils.logDebug("game key " ++ key ++ " updated with value " ++ value)
+                    Utils.logDebug(p ++ "Updated game key " ++ key ++ " with value " ++ value)
                     resolve(. ignore()) // workaround to pass a unit argument
                     Promise.resolve()
                 })
@@ -135,7 +137,7 @@ let deleteGame = (
     )
     ->Belt.Option.forEach(myGameRef => {
         remove(myGameRef)
-        Utils.logDebug("Deleted game " ++ gameId)
+        Utils.logDebug(p ++ "Deleted game " ++ gameId)
     })
 }
 
@@ -151,9 +153,9 @@ let joinGame = (
         () => getRef(dbConnection.db, gameKey(gameId))
     )
     ->Belt.Option.forEach(myGameRef => {
-        Utils.logDebug("Joined game " ++ gameId)
+        Utils.logDebug(p ++ "Joined game " ++ gameId)
         onValue(myGameRef, (snapshot: snapshot) => {
-            Utils.logDebug("Data received")
+            Utils.logDebug(p ++ "Received data")
             let _data = getValue(snapshot)
         })
     })
@@ -168,7 +170,7 @@ let leaveGame = (
     )
     ->Belt.Option.forEach(myGameRef => {
         off(myGameRef)
-        Utils.logDebug("Left game " ++ gameId)
+        Utils.logDebug(p ++ "Left game " ++ gameId)
     })
 }
 
@@ -188,21 +190,15 @@ let listen = (
         () => getRef(dbConnection.db, observableKey)
     )
     ->Belt.Option.forEach(observableRef => {
-        //let discardedFirst = ref(false)
-        Utils.logDebug("Listening on " ++ observableKey)
+        Utils.logDebug(p ++ "Listening on " ++ observableKey)
         onValue(observableRef, (snapshot) => {
             // We are going to get a snapshot immediately upon installing the listener.
             // Since the observed key is always cleared in NightScenarioPage, we don't
             // need to worry about this and we can let the observer deal with it.
             let result: string = getValue(snapshot)
-            Utils.logDebug("Received data from " ++ observableKey ++ ": '" ++ result ++ "'")
-            //if !discardedFirst.contents {
-            //    Utils.logDebug("Discarding first received data")
-            //    discardedFirst := true
-            //} else {
-                Utils.logDebug("Processing received data")
-                callback(result)
-            //}
+            Utils.logDebug(p ++ "Received data from " ++ observableKey ++ ": '" ++ result ++ "'")
+            Utils.logDebug(p ++ "Processing received data")
+            callback(result)
         })
     })
 }
@@ -218,7 +214,7 @@ let stopListening = (
         () => getRef(dbConnection.db, observableKey)
     )
     ->Belt.Option.forEach(observableRef => {
-        Utils.logDebug("Stopping listening on " ++ observableKey)
+        Utils.logDebug(p ++ "Stopping listening on " ++ observableKey)
         off(observableRef)
     })
 }

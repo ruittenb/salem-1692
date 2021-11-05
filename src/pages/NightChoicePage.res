@@ -5,6 +5,8 @@
 
 open Types
 
+let p = "[NightChoicePage] "
+
 @react.component
 let make = (
     ~addressed: addressed,
@@ -21,14 +23,14 @@ let make = (
 
     // Runs only once right after mounting the component
     React.useEffect0(() => {
-        Utils.logDebug2("Mounted ChoicePage", "font-weight: bold")
+        Utils.logDebugGreen(p ++ "Mounted")
         // This serves two purposes:
         // 1. determine which database key to install the listener on;
         // 2. clear any previous choice that was recorded. (NightScenarioPage
         // has an effect hook that saves it to the database).
         let subject = switch addressed {
             | Witch | Witches => {
-                                     Utils.logDebug("Clearing witches' choice from turn state...")
+                                     Utils.logDebug(p ++ "Clearing witches' choice from turn state...")
                                      setTurnState(_prevTurnState => {
                                          ...turnState,
                                          choiceWitches: None,
@@ -36,7 +38,7 @@ let make = (
                                      Types.FbDb.ChooseWitchesSubject
                                  }
             | Constable       => {
-                                     Utils.logDebug("Clearing constable's choice from turn state...")
+                                     Utils.logDebug(p ++ "Clearing constable's choice from turn state...")
                                      setTurnState(_prevTurnState => {
                                          ...turnState,
                                          choiceConstable: None,
@@ -48,7 +50,7 @@ let make = (
             gameState.gameType,
             dbConnectionStatus,
             (dbConnection) => {
-                Utils.logDebug("About to install choice listener")
+                Utils.logDebug(p ++ "About to install choice listener")
                 FirebaseClient.listen(
                     dbConnection,
                     gameState.gameId,
@@ -60,12 +62,12 @@ let make = (
             }
         )
         Some(() => { // Cleanup: remove listener
-            Utils.logDebug("Unmounting ChoicePage")
+            Utils.logDebugRed(p ++ "Unmounting")
             Utils.ifMasterAndConnected(
                 gameState.gameType,
                 dbConnectionStatus,
                 (dbConnection) => {
-                    Utils.logDebug("About to remove choice listener")
+                    Utils.logDebug(p ++ "About to remove choice listener")
                     FirebaseClient.stopListening(
                         dbConnection,
                         gameState.gameId,

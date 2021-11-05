@@ -5,6 +5,8 @@
 
 open Types
 
+let p = "[NightScenarioPage] "
+
 @react.component
 let make = (
     ~subPage: page,
@@ -83,8 +85,8 @@ let make = (
     React.useEffect1(() => {
         let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
         let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
-        Utils.logDebug2(
-            "Change: turnState changed;" ++ " witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
+        Utils.logDebugStyled(
+            p ++ "Detected turnState change; witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
             "font-weight: bold"
         )
         FirebaseClient.ifMasterAndConnectedThenSaveGameChoices(
@@ -97,8 +99,8 @@ let make = (
     React.useEffect1(() => {
         let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
         let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
-        Utils.logDebug2(
-            "Change: scenarioStep changed;" ++ " witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
+        Utils.logDebugStyled(
+            p ++ "Detected scenarioStep change; witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
             "font-weight: bold"
         )
         FirebaseClient.ifMasterAndConnectedThenSaveGamePhase(
@@ -154,7 +156,7 @@ let make = (
         )
 
     let makeTimer = (duration: float): Js.Global.timeoutId => {
-        Utils.logDebug("Setting timer")
+        Utils.logDebug(p ++ "Setting timer")
         Js.Global.setTimeout(
             goToNextStep,
             Belt.Float.toInt(1000. *. duration)
@@ -169,7 +171,7 @@ let make = (
                                                {soundImageGreyed}
                                            </NightStepPage>
 
-        | Some(PlayRandomEffect(_))     => {   Utils.logDebug("This step should have been replaced with PlayEffect")
+        | Some(PlayRandomEffect(_))     => {   Utils.logDebug(p ++ "This step should have been replaced with PlayEffect")
                                                React.null // has been resolved above
                                            }
         | Some(PlayEffect(effect))

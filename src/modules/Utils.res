@@ -24,9 +24,27 @@ let logDebug = (msg: string): unit => {
 /**
  * Log a message to console with highlighting
  */
-let logDebug2 = (msg: string, style: string): unit => {
+let logDebugStyled = (msg: string, style: string): unit => {
     if (Constants.debug) {
         Js.log2("%c" ++ msg, style)
+    }
+}
+
+/**
+ * Log a message to console with highlighting
+ */
+let logDebugRed = (msg: string): unit => {
+    if (Constants.debug) {
+        Js.log2("%c" ++ msg, "color: red")
+    }
+}
+
+/**
+ * Log a message to console with highlighting
+ */
+let logDebugGreen = (msg: string): unit => {
+    if (Constants.debug) {
+        Js.log2("%c" ++ msg, "font-weight: bold; color: green")
     }
 }
 

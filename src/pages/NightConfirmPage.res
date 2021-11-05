@@ -7,6 +7,8 @@
 
 open Types
 
+let p = "[NightConfirmPage] "
+
 @react.component
 let make = (
     ~addressed: addressed,
@@ -31,7 +33,7 @@ let make = (
 
     // Runs only once right after mounting the component
     React.useEffect0(() => {
-        Utils.logDebug("Mounted confirm page") // TODO
+        Utils.logDebugGreen(p ++ "Mounted")
         // At this point we should have a choice to ask confirmation for.
         // Therefore, these situations should never happen.
         switch addressed {
@@ -41,7 +43,7 @@ let make = (
             | _         => ()
         }
         Some(() => {
-            Utils.logDebug("Unmounting Confirm page") // TODO
+            Utils.logDebugRed(p ++ "Unmounting")
             ()
         })
     })
