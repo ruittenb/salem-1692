@@ -59,6 +59,16 @@ let getExceptionMessage = (error: exn): string => {
 }
 
 /**
+ * Catch an exception, log it, and ignore it
+ */
+let catchLogAndIgnore = (p, resolutionValue): unit => {
+    Promise.catch(p, (error: exn) => {
+        error->getExceptionMessage->logError
+        Promise.resolve(resolutionValue)
+    })->ignore
+}
+
+/**
  * Pick a random element from a set.
  */
 let pickRandomElement = (set: array<'a>, default: 'a): 'a => {
@@ -149,30 +159,20 @@ let ifMaster = (
  * Combine two functions above
  */
 let ifMasterAndConnected = (
-    gameType: GameTypeCodec.t,
     dbConnectionStatus: Types.FbDb.dbConnectionStatus,
+    gameType: GameTypeCodec.t,
     func: (Types.FbDb.dbConnection) => unit
 ) => {
-    ifMaster(
-        gameType,
-        () => {
-            ifConnected(
-                dbConnectionStatus,
-                (dbConnection) => {
-                    func(dbConnection)
-                }
-            )
-        }
-    )
+    ifMaster(gameType, () => {
+        ifConnected(dbConnectionStatus, (dbConnection) => {
+            func(dbConnection)
+        })
+    })
 }
 
 /**
  * Convert [ Some(3), Some(6), None, Some(-1), None ] into [ 3, 6, -1 ]:
  * use Belt.Array.keepMap(identity)
- *
- *
- * Call function if Some(x):
- * use Belt.Option.forEach()
  *
  *
  * Js.Option.andThen(), but data-first:

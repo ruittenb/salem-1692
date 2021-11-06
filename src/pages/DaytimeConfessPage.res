@@ -36,9 +36,9 @@ let make = (
     // Runs only once right after mounting the component
     React.useEffect0(() => {
         // Clear turn data from database and revert to DaytimeWaiting
-        FirebaseClient.ifMasterAndConnectedThenSaveGameState(
-            dbConnectionStatus, gameState, DaytimeConfess, Constants.initialTurnState, None
-        )
+        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+            FirebaseClient.saveGameState(dbConnection, gameState, DaytimeConfess, Constants.initialTurnState, None)
+        })
         None // cleanup
     })
 

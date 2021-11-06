@@ -46,35 +46,27 @@ let make = (
                                      Types.FbDb.ChooseConstableSubject
                                  }
         }
-        Utils.ifMasterAndConnected(
-            gameState.gameType,
-            dbConnectionStatus,
-            (dbConnection) => {
-                Utils.logDebug(p ++ "About to install choice listener")
-                FirebaseClient.listen(
+        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+            Utils.logDebug(p ++ "About to install choice listener")
+            FirebaseClient.listen(
+                dbConnection,
+                gameState.gameId,
+                subject,
+                (player) => {
+                    if player !== "" { choiceProcessor(player) } else { () }
+                },
+            )
+        })
+        Some(() => { // Cleanup: remove listener
+            Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+                Utils.logDebug(p ++ "About to remove choice listener")
+                FirebaseClient.stopListening(
                     dbConnection,
                     gameState.gameId,
                     subject,
-                    (player) => {
-                        if player !== "" { choiceProcessor(player) } else { () }
-                    },
                 )
-            }
-        )
-        Some(() => { // Cleanup: remove listener
-            Utils.logDebugRed(p ++ "Unmounting")
-            Utils.ifMasterAndConnected(
-                gameState.gameType,
-                dbConnectionStatus,
-                (dbConnection) => {
-                    Utils.logDebug(p ++ "About to remove choice listener")
-                    FirebaseClient.stopListening(
-                        dbConnection,
-                        gameState.gameId,
-                        subject,
-                    )
-                }
-            )
+            })
+            Utils.logDebugRed(p ++ "Unmounted")
         })
     })
 

@@ -197,7 +197,6 @@ let listen = (
             // need to worry about this and we can let the observer deal with it.
             let result: string = getValue(snapshot)
             Utils.logDebug(p ++ "Received data from " ++ observableKey ++ ": '" ++ result ++ "'")
-            Utils.logDebug(p ++ "Processing received data")
             callback(result)
         })
     })
