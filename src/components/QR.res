@@ -23,6 +23,8 @@ type qrParams = {
 @get external correctLevel: (qrCodeClass) => qrCorrectLevel = "CorrectLevel"
 @get external low: (qrCorrectLevel) => qrCorrectLevelLow = "L"
 
+let p = "[QR] "
+
 let elementId = "qr-code"
 let size = "150"
 let style = ReactDOM.Style.make(
@@ -34,7 +36,7 @@ let style = ReactDOM.Style.make(
 let displayQrCode = (
     qrElement: Dom.element, value: string
 ): qrCode => {
-    logDebug("Creating QR code for " ++ value)
+    logDebug(p ++ "Creating QR code for " ++ value)
 
     let qrParams: qrParams = {
         text: value,

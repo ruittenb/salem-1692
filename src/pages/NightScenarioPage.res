@@ -5,6 +5,8 @@
 
 open Types
 
+let p = "[NightScenarioPage] "
+
 @react.component
 let make = (
     ~subPage: page,
@@ -83,13 +85,13 @@ let make = (
     React.useEffect1(() => {
         let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
         let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
-        Utils.logDebug2(
-            "Change: turnState changed;" ++ " witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
+        Utils.logDebugStyled(
+            p ++ "Detected turnState change; witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
             "font-weight: bold"
         )
-        FirebaseClient.ifMasterAndConnectedThenSaveGameChoices(
-            dbConnectionStatus, gameState, choiceWitches, choiceConstable
-        )
+        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+            FirebaseClient.saveGameChoices(dbConnection, gameState.gameId, choiceWitches, choiceConstable)
+        })
         None // cleanup function
     }, [ turnState ])
 
@@ -97,13 +99,13 @@ let make = (
     React.useEffect1(() => {
         let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
         let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
-        Utils.logDebug2(
-            "Change: scenarioStep changed;" ++ " witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
+        Utils.logDebugStyled(
+            p ++ "Detected scenarioStep change; witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
             "font-weight: bold"
         )
-        FirebaseClient.ifMasterAndConnectedThenSaveGamePhase(
-            dbConnectionStatus, gameState, subPage, maybeScenarioStep
-        )
+        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+            FirebaseClient.saveGamePhase(dbConnection, gameState.gameId, subPage, maybeScenarioStep)
+        })
         None // cleanup function
     }, [ maybeScenarioStep ])
 
@@ -122,6 +124,29 @@ let make = (
         goToNextStep()
     }
 
+    // Store confirmation in db
+    let continueFromWitchDecision = (decision: Types.FbDb.decision): unit => {
+        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+            FirebaseClient.saveGameConfirmations(dbConnection, gameState.gameId, decision, #Undecided)
+        })
+        switch decision {
+            | #Yes       => goToNextStep()
+            | #No        => goToPrevStep()
+            | #Undecided => ()
+        }
+    }
+    let continueFromConstableDecision = (decision: Types.FbDb.decision): unit => {
+        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+            FirebaseClient.saveGameConfirmations(dbConnection, gameState.gameId, #Yes, decision)
+        })
+        switch decision {
+            | #Yes       => goToNextStep()
+            | #No        => goToPrevStep()
+            | #Undecided => ()
+        }
+    }
+
+    // prepare components
     let soundImage       = <img src="images/gramophone.png" className="sound-image" />
     let soundImageGreyed = <img src="images/gramophone.png" className="sound-image greyed" />
 
@@ -133,7 +158,7 @@ let make = (
         )
 
     let makeTimer = (duration: float): Js.Global.timeoutId => {
-        Utils.logDebug("Setting timer")
+        Utils.logDebug(p ++ "Setting timer")
         Js.Global.setTimeout(
             goToNextStep,
             Belt.Float.toInt(1000. *. duration)
@@ -148,7 +173,7 @@ let make = (
                                                {soundImageGreyed}
                                            </NightStepPage>
 
-        | Some(PlayRandomEffect(_))     => {   Utils.logDebug("This step should have been replaced with PlayEffect")
+        | Some(PlayRandomEffect(_))     => {   Utils.logDebug(p ++ "This step should have been replaced with PlayEffect")
                                                React.null // has been resolved above
                                            }
         | Some(PlayEffect(effect))
@@ -177,9 +202,16 @@ let make = (
                                                addressed=Constable
                                                choiceProcessor=goFromConstableChoiceToNextStep
                                            />
-
-        | Some(ConfirmWitches)          => <NightConfirmPage goToPrevStep goToNextStep addressed=witchOrWitches />
-        | Some(ConfirmConstable)        => <NightConfirmPage goToPrevStep goToNextStep addressed=Constable      />
+        | Some(ConfirmWitches)          => <NightConfirmPage
+                                               addressed=witchOrWitches
+                                               confirmationProcessor=continueFromWitchDecision
+                                               goToPrevStep
+                                           />
+        | Some(ConfirmConstable)        => <NightConfirmPage
+                                               addressed=Constable
+                                               confirmationProcessor=continueFromConstableDecision
+                                               goToPrevStep
+                                           />
     }
 
     // render the page

@@ -7,16 +7,22 @@
 
 open Types
 
+let p = "[NightConfirmPage] "
+
 @react.component
 let make = (
     ~addressed: addressed,
+    ~confirmationProcessor,
     ~goToPrevStep,
-    ~goToNextStep,
 ): React.element => {
 
+    // db connection status
+    let (dbConnectionStatus, _setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
+    // turn state
+    let (turnState, _setTurnState) = React.useContext(TurnStateContext.context)
+    // translator, game state
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
-    let (turnState, _) = React.useContext(TurnStateContext.context)
 
     let question = switch addressed {
         | Witch     => t("Witch, are you sure?")
@@ -31,7 +37,7 @@ let make = (
 
     // Runs only once right after mounting the component
     React.useEffect0(() => {
-        Utils.logDebug("Mounted confirm page") // TODO
+        Utils.logDebugGreen(p ++ "Mounted")
         // At this point we should have a choice to ask confirmation for.
         // Therefore, these situations should never happen.
         switch addressed {
@@ -40,9 +46,36 @@ let make = (
             | Constable if turnState.choiceConstable === None => goToPrevStep()
             | _         => ()
         }
-        Some(() => {
-            Utils.logDebug("Unmounting Confirm page") // TODO
-            () // TODO Firebase.ifMasterAndConnectedThenSaveGameState TODO is this right? Is this the slave page?
+        let subject = switch addressed {
+            | Witch | Witches => {
+                                     Utils.logDebug(p ++ "Clearing witches' confirmation from turn state...")
+                                     Types.FbDb.ConfirmWitchesSubject
+                                 }
+            | Constable       => {
+                                     Utils.logDebug(p ++ "Clearing constable's confirmation from turn state...")
+                                     Types.FbDb.ConfirmConstableSubject
+                                 }
+        }
+        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+            // clear any previous confirmation that was recorded
+            FirebaseClient.saveGameConfirmation(dbConnection, gameState.gameId, subject, #Undecided)
+
+            // install new listener
+            Utils.logDebug(p ++ "About to install confirmation listener")
+            FirebaseClient.listen(dbConnection, gameState.gameId, subject, (decision) => {
+                switch decision {
+                    | "Yes" => confirmationProcessor(#Yes)
+                    | "No"  => confirmationProcessor(#No)
+                    | _     => ()
+                }
+            })
+        })
+        Some(() => { // Cleanup: remove listener
+            Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+                Utils.logDebug(p ++ "About to remove confirmation listener")
+                FirebaseClient.stopListening(dbConnection, gameState.gameId, subject)
+            })
+            Utils.logDebugRed(p ++ "Unmounted")
         })
     })
 
@@ -58,9 +91,9 @@ let make = (
             <h2> {React.string(choice)} </h2>
             <Spacer />
             <Spacer />
-            <LargeButton className="confirm-yes" onClick={ (_event) => goToNextStep() } ></LargeButton>
+            <LargeButton className="confirm-yes" onClick={ (_event) => confirmationProcessor(#Yes) } ></LargeButton>
             <Spacer />
-            <LargeButton className="confirm-no" onClick={ (_event) => goToPrevStep() } ></LargeButton>
+            <LargeButton className="confirm-no" onClick={ (_event) => confirmationProcessor(#No) } ></LargeButton>
             <Spacer />
         </div>
     </div>

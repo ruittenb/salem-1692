@@ -141,70 +141,63 @@ let deleteGame = (
     FirebaseAdapter.deleteGame(dbConnection, gameId)
 }
 
-let ifMasterAndConnectedThenSaveGameState = (
-    dbConnectionStatus: dbConnectionStatus,
+let saveGameState = (
+    dbConnection: dbConnection,
     gameState: gameState,
     page: page,
     turnState: turnState,
     maybeScenarioStep: option<scenarioStep>,
-) => {
-    Utils.ifMasterAndConnected(
-        gameState.gameType,
-        dbConnectionStatus,
-        (dbConnection) => updateGame(dbConnection, gameState, page, turnState, maybeScenarioStep)
-            ->Promise.catch((error) => {
-                error
-                ->Utils.getExceptionMessage
-                ->Utils.logError
-                Promise.resolve()
-            })
-            ->ignore
-    )
+): unit => {
+    updateGame(dbConnection, gameState, page, turnState, maybeScenarioStep)
+        ->Utils.catchLogAndIgnore()
 }
 
-let ifMasterAndConnectedThenSaveGameChoices = (
-    dbConnectionStatus: dbConnectionStatus,
-    gameState: gameState,
+let saveGameChoices = (
+    dbConnection: dbConnection,
+    gameId: GameTypeCodec.gameId,
     choiceWitches: player,
     choiceConstable: player,
-) => {
-    Utils.ifMasterAndConnected(
-        gameState.gameType,
-        dbConnectionStatus,
-        (dbConnection) => Promise.all([
-            updateGameKey(dbConnection, gameState.gameId, "slaveChoiceWitches", choiceWitches),
-            updateGameKey(dbConnection, gameState.gameId, "slaveChoiceConstable", choiceConstable)
-        ])
-            ->Promise.catch((error) => {
-                error
-                ->Utils.getExceptionMessage
-                ->Utils.logError
-                Promise.resolve([])
-            })
-            ->ignore
-    )
+): unit => {
+    Promise.all([
+        updateGameKey(dbConnection, gameId, "slaveChoiceWitches", choiceWitches),
+        updateGameKey(dbConnection, gameId, "slaveChoiceConstable", choiceConstable)
+    ])
+        ->Utils.catchLogAndIgnore([])
 }
 
-let ifMasterAndConnectedThenSaveGamePhase = (
-    dbConnectionStatus: dbConnectionStatus,
-    gameState: gameState,
+let saveGameConfirmation = (
+    dbConnection: dbConnection,
+    gameId: GameTypeCodec.gameId,
+    subject: dbObservable,
+    confirmation: decision,
+) => {
+    updateGameKey(dbConnection, gameId, FirebaseAdapter.subjectKey(subject), confirmation->decisionToJs)
+        ->Utils.catchLogAndIgnore()
+}
+
+let saveGameConfirmations = (
+    dbConnection: dbConnection,
+    gameId: GameTypeCodec.gameId,
+    confirmWitches: decision,
+    confirmConstable: decision,
+): unit => {
+    Promise.all([
+        updateGameKey(dbConnection, gameId, "slaveConfirmWitches", confirmWitches->decisionToJs),
+        updateGameKey(dbConnection, gameId, "slaveConfirmConstable", confirmConstable->decisionToJs)
+    ])
+        ->Utils.catchLogAndIgnore([])
+}
+
+let saveGamePhase = (
+    dbConnection: dbConnection,
+    gameId: GameTypeCodec.gameId,
     page: page,
     maybeScenarioStep: option<scenarioStep>,
-) => {
+): unit => {
     let scenarioStep = maybeScenarioStep->Belt.Option.getWithDefault(Pause(0.))
     let phase = getPhase(page, scenarioStep)->phaseToJs
-    Utils.ifMasterAndConnected(
-        gameState.gameType,
-        dbConnectionStatus,
-        (dbConnection) => updateGameKey(dbConnection, gameState.gameId, "masterPhase", phase)
-            ->Promise.catch((error) => {
-                error
-                ->Utils.getExceptionMessage
-                ->Utils.logError
-                Promise.resolve()
-            })
-            ->ignore
-    )
+    updateGameKey(dbConnection, gameId, "masterPhase", phase)
+        ->Utils.catchLogAndIgnore()
 }
 
 /** **********************************************************************

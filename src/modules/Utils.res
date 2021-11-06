@@ -24,9 +24,27 @@ let logDebug = (msg: string): unit => {
 /**
  * Log a message to console with highlighting
  */
-let logDebug2 = (msg: string, style: string): unit => {
+let logDebugStyled = (msg: string, style: string): unit => {
     if (Constants.debug) {
         Js.log2("%c" ++ msg, style)
+    }
+}
+
+/**
+ * Log a message to console with highlighting
+ */
+let logDebugRed = (msg: string): unit => {
+    if (Constants.debug) {
+        Js.log2("%c" ++ msg, "color: red")
+    }
+}
+
+/**
+ * Log a message to console with highlighting
+ */
+let logDebugGreen = (msg: string): unit => {
+    if (Constants.debug) {
+        Js.log2("%c" ++ msg, "font-weight: bold; color: green")
     }
 }
 
@@ -38,6 +56,16 @@ let getExceptionMessage = (error: exn): string => {
         ->Js.Exn.asJsExn
         ->Belt.Option.flatMap(Js.Exn.message)
         ->Belt.Option.getWithDefault("An unknown error occurred")
+}
+
+/**
+ * Catch an exception, log it, and ignore it
+ */
+let catchLogAndIgnore = (p, resolutionValue): unit => {
+    Promise.catch(p, (error: exn) => {
+        error->getExceptionMessage->logError
+        Promise.resolve(resolutionValue)
+    })->ignore
 }
 
 /**
@@ -131,30 +159,20 @@ let ifMaster = (
  * Combine two functions above
  */
 let ifMasterAndConnected = (
-    gameType: GameTypeCodec.t,
     dbConnectionStatus: Types.FbDb.dbConnectionStatus,
+    gameType: GameTypeCodec.t,
     func: (Types.FbDb.dbConnection) => unit
 ) => {
-    ifMaster(
-        gameType,
-        () => {
-            ifConnected(
-                dbConnectionStatus,
-                (dbConnection) => {
-                    func(dbConnection)
-                }
-            )
-        }
-    )
+    ifMaster(gameType, () => {
+        ifConnected(dbConnectionStatus, (dbConnection) => {
+            func(dbConnection)
+        })
+    })
 }
 
 /**
  * Convert [ Some(3), Some(6), None, Some(-1), None ] into [ 3, 6, -1 ]:
  * use Belt.Array.keepMap(identity)
- *
- *
- * Call function if Some(x):
- * use Belt.Option.forEach()
  *
  *
  * Js.Option.andThen(), but data-first:
