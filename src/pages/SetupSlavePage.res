@@ -6,25 +6,65 @@
 open Types
 open Types.FbDb
 
+let p = "[SetupSlavePage] "
+
+let leaveAnyCurrentGame = (dbConnectionStatus, setDbConnectionStatus, gameState, setGameState) => {
+    Utils.ifConnected(dbConnectionStatus, (dbConnection) => {
+        switch (gameState.gameType) {
+            | Master        => {
+                                   Utils.logDebug(p ++ "Stopping hosted game " ++ gameState.gameId)
+                                   FirebaseClient.deleteGame(dbConnection, gameState.gameId)
+                                   FirebaseClient.disconnect(dbConnection)
+                               }
+            | Slave(gameId) => {
+                                   Utils.logDebug(p ++ "Leaving game " ++ gameId)
+                                   FirebaseClient.leaveGame(dbConnection, gameId)
+                                   FirebaseClient.disconnect(dbConnection)
+                               }
+            | StandAlone    => ()
+        }
+        setDbConnectionStatus(_prev => NotConnected)
+        setGameState((prevGameState) => {
+            ...prevGameState,
+            gameType: StandAlone
+        })
+    })
+}
+
+let connectAndJoin = (setDbConnectionStatus, setGameState, newGameId) => {
+    Utils.logDebug(p ++ "Joining game " ++ newGameId)
+    setDbConnectionStatus(_prev => Connecting)
+    FirebaseClient.connect()
+        ->Promise.then(dbConnection => {
+            setGameState(prevGameState => {
+                ...prevGameState,
+                gameType: Slave(newGameId)
+            })
+            setDbConnectionStatus(_prev => Connected(dbConnection))
+            FirebaseClient.joinGame(dbConnection, newGameId)
+            Promise.resolve()
+        })
+        ->Promise.catch(error => {
+            setGameState(prevGameState => {
+                ...prevGameState,
+                gameType: StandAlone
+            })
+            setDbConnectionStatus(_prev => NotConnected)
+            error->Utils.getExceptionMessage->Utils.logError
+            Promise.resolve()
+        })
+        ->ignore
+}
+
 @react.component
 let make = (
     ~goToPage,
 ): React.element => {
-    let (maybeDbConnection, _setDbConnection) = React.useContext(DbConnectionContext.context)
+    let (dbConnectionStatus, setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
     let (freeToProceed, setFreeToProceed) = React.useState(_ => false)
-
-    // how to update a field
-    // https://firebase.google.com/docs/database/web/read-and-write#update_specific_fields
-
-    let leaveAnyCurrentGame = (dbConnectionStatus: dbConnectionStatus, gameState: gameState) => {
-        switch (dbConnectionStatus, gameState.gameType) {
-            | (Connected(dbConnection), Slave(gameId)) => FirebaseClient.leaveGame(dbConnection, gameId) // TODO also disconnect
-            | (_, _)                                   => ()
-        }
-    }
 
     let placeholder = "x00-x00-x00-x00"
     let defaultValue = switch gameState.gameType {
@@ -38,36 +78,26 @@ let make = (
         if (!GameId.isValid(newGameId)) {
             setFreeToProceed(_prev => false)
         } else {
-            leaveAnyCurrentGame(maybeDbConnection, gameState)
-            switch (maybeDbConnection) {
-                | NotConnected            => Js.log("No connection")
-                | Connecting              => Js.log("Connecting")
-                | Connected(dbConnection) => FirebaseClient.joinGame(dbConnection, newGameId)
-            }
-            // also TODO: what if failure?
-            setGameState(prevGameState => {
-                {
-                    ...prevGameState,
-                    gameType: Slave(newGameId)
-                }
-            })
+            // TODO if already connected to current game, do nothing
+            leaveAnyCurrentGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
+            connectAndJoin(setDbConnectionStatus, setGameState, newGameId)
             setFreeToProceed(_prev => true)
         }
     }
 
     let onBack = (_event) => {
-        leaveAnyCurrentGame(maybeDbConnection, gameState)
-        setGameState(prevGameState => {
-            {
-                ...prevGameState,
-                gameType: StandAlone
-            }
-        })
+        leaveAnyCurrentGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
         goToPage(_prev => Title)
     }
 
     let onForward = (_event) => {
         goToPage(_prev => SetupSlave) // TODO
+    }
+
+    let connectionStatus = switch (dbConnectionStatus) {
+        | NotConnected => <p> {React.string(t("Not connected"))} </p>
+        | Connecting   => <p> {React.string(t("Connecting..."))} </p>
+        | Connected(_) => <p> {React.string(t("Connected."))} </p>
     }
 
     // component
@@ -88,6 +118,7 @@ let make = (
         </p>
         <Spacer />
         <input type_="text" className="id-input" maxLength=15 defaultValue placeholder onBlur />
+        {connectionStatus}
         <Spacer />
         // Back/Forward buttons
         <ButtonPair>
@@ -105,5 +136,4 @@ let make = (
         </ButtonPair>
     </div>
 }
-
 

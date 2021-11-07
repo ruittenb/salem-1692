@@ -1,14 +1,14 @@
 
 /** ****************************************************************************
- * NightStepPage
+ * NightAudioPage
  *
- * One step in a Night Scenario.
+ * One audio step in a Night Scenario.
  * Used by NightScenarioPage and NightErrorPage
  */
 
 open Types
 
-let p = "[NightStepPage] "
+let p = "[NightAudioPage] "
 
 @react.component
 let make = (
