@@ -69,6 +69,7 @@ let table = Js.Dict.fromArray([
     ("Other nights,", "Otras noches,"),
     ("with constable", "con alguacil"),
     ("without constable", "sin alguacil"),
+    ("Waiting for the host to announce nighttime...", `Esperando hasta que el anfitrión anuncie la noche...`),
     // Night
     ("Night", "La noche"),
     ("Night with constable", "Noche con alguacil"),

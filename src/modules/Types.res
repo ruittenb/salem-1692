@@ -133,6 +133,7 @@ type page =
     | SetupSlave
     | Credits
     | Daytime
+    | DaytimeWaiting
     | FirstNightOneWitch
     | FirstNightMoreWitches
     | OtherNightWithConstable

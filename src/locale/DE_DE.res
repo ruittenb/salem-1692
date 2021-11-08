@@ -28,7 +28,7 @@ let table = Js.Dict.fromArray([
     ("Not connected", "Nicht verbunden"),
     ("Connecting...", "Verbinden..."),
     ("Connected.", "Verbunden."),
-    ("It is possible to join a game running on another smartphone.", `Es ist möglich an einem Spiel teilzunehmen, das auf einem anderen Smartphone läuft.`),
+    ("It is possible to join a game running on another smartphone.", `Es ist möglich an einem Spiel beizutreten, das auf einem anderen Smartphone läuft.`),
     (`Take the other smartphone and look in the app under Settings → Host Game. Then enter the game code here.`, `Nehmen Sie das andere Smartphone und schauen Sie in der App unter Einstellungen → Spiel hosten. Dann geben Sie hier den Spielcode ein.`),
     ("It is possible to join this game from another smartphone.", `Es ist möglich an diesem Spiel beizutreten von einem anderen Smartphone aus.`),
     ("Take the other smartphone and look in the app under Join Game. Then enter the following game code there.", `Nehmen Sie das andere Smartphone und schauen Sie in der App unter Spiel beitreten. Dann geben Sie dort den folgenden Spielcode rein.`),
@@ -69,6 +69,7 @@ let table = Js.Dict.fromArray([
     ("Other nights,", `Folgenden Nächte,`),
     ("with constable", "mit Sheriff"),
     ("without constable", "ohne Sheriff"),
+    ("Waiting for the host to announce nighttime...", `Warten bis der Gastgeber die Nacht ankündigt...`),
     // Night
     ("Night", "Die Nacht"),
     ("Night with constable", "Nacht mit Sheriff"),

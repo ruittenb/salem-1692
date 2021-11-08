@@ -75,6 +75,7 @@ let make = (): React.element => {
         | SetupSlave              => <SetupSlavePage goToPage />
         | Credits                 => <CreditsPage goToPage />
         | Daytime                 => <DaytimePage goToPage />
+        | DaytimeWaiting          => <DaytimeWaitingPage goToPage />
         | FirstNightOneWitch      => <NightScenarioPage goToPage subPage=currentPage />
         | FirstNightMoreWitches   => <NightScenarioPage goToPage subPage=currentPage />
         | OtherNightNoConstable   => <NightScenarioPage goToPage subPage=currentPage />

@@ -91,7 +91,7 @@ let make = (
     }
 
     let onForward = (_event) => {
-        goToPage(_prev => SetupSlave) // TODO
+        goToPage(_prev => DaytimeWaiting)
     }
 
     let connectionStatus = switch (dbConnectionStatus) {
