@@ -32,6 +32,7 @@ let subjectKey = (subject) => switch subject {
     | ChooseConstableSubject   => "slaveChoiceConstable"
     | ConfirmWitchesSubject    => "slaveConfirmWitches"
     | ConfirmConstableSubject  => "slaveConfirmConstable"
+    | MasterPhaseSubject       => "masterPhase"
 }
 
 /** **********************************************************************

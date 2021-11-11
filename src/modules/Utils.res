@@ -127,6 +127,16 @@ let replaceWith = (
     second
 }
 
+let resultForEach = (
+    result: Belt.Result.t<'ok, 'err>,
+    fn: ('ok) => unit
+) => {
+    switch result {
+        | Ok(value) => fn(value)
+        | Error(_)  => ()
+    }
+}
+
 /**
  * Call function if connection state reflects that we're connected to firebase
  */

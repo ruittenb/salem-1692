@@ -81,6 +81,7 @@ module FbDb = {
         | ChooseConstableSubject
         | ConfirmWitchesSubject
         | ConfirmConstableSubject
+        | MasterPhaseSubject
 
     type dbRecord = {
         masterGameId: GameTypeCodec.gameId,
