@@ -171,6 +171,39 @@ let ifMasterAndConnected = (
 }
 
 /**
+ * Call function if game state reflects that we're Slave
+ */
+let ifSlave = (
+    gameType: GameTypeCodec.t,
+    func: (GameTypeCodec.gameId) => unit
+) => {
+    switch gameType {
+        | StandAlone    => ()
+        | Master        => ()
+        | Slave(gameId) => func(gameId)
+    }
+}
+
+/**
+ * Combine two functions above
+ */
+let ifSlaveAndConnected = (
+    dbConnectionStatus: Types.FbDb.dbConnectionStatus,
+    gameType: GameTypeCodec.t,
+    func: (
+        Types.FbDb.dbConnection,
+        GameTypeCodec.gameId
+    ) => unit
+) => {
+    ifSlave(gameType, (gameId) => {
+        ifConnected(dbConnectionStatus, (dbConnection) => {
+            func(dbConnection, gameId)
+        })
+    })
+}
+
+
+/**
  * Convert [ Some(3), Some(6), None, Some(-1), None ] into [ 3, 6, -1 ]:
  * use Belt.Array.keepMap(identity)
  *
