@@ -29,7 +29,7 @@ let make = (
     // Scenario: getter and setter, get current step
     let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
     let scenario: scenario = NightScenarios.getScenario(subPage)
-    let witchOrWitches: addressed = if subPage === FirstNightOneWitch { Witch } else { Witches }
+    let witchOrWitches: addressed = if subPage === NightFirstOneWitch { Witch } else { Witches }
 
     let resolveEffectSet = (step): scenarioStep => {
         switch step {
@@ -56,8 +56,8 @@ let make = (
             // There are still steps in the scenario
             | (Some(_), _)                  => ()
             // The scenario is exhausted: find the correct next page
-            | (None, FirstNightOneWitch)
-            | (None, FirstNightMoreWitches) => goToPage(_page => DaytimeRevealNoConfess)
+            | (None, NightFirstOneWitch)
+            | (None, NightFirstMoreWitches) => goToPage(_page => DaytimeRevealNoConfess)
             | (None, _)                     => goToPage(_page => DaytimeConfess)
         }
         None // no cleanup function
@@ -169,23 +169,23 @@ let make = (
     let pageElement = switch maybeScenarioStep {
         | _ if hasError                 => <NightErrorPage message=t("Unable to load audio") goToPage />
         | None                          => React.null // catch this situation in useEffect above
-        | Some(Pause(duration))         => <NightStepPage goToPage goToNextStep timerId={makeTimer(duration)} >
+        | Some(Pause(duration))         => <NightAudioPage goToPage goToNextStep timerId={makeTimer(duration)} >
                                                {soundImageGreyed}
-                                           </NightStepPage>
+                                           </NightAudioPage>
 
         | Some(PlayRandomEffect(_))     => {   Utils.logDebug(p ++ "This step should have been replaced with PlayEffect")
                                                React.null // has been resolved above
                                            }
         | Some(PlayEffect(effect))
-             if gameState.doPlayEffects => <NightStepPage goToPage goToNextStep>
+             if gameState.doPlayEffects => <NightAudioPage goToPage goToNextStep>
                                                {soundImage}
                                                <Audio track=Effect(effect) onEnded onError />
-                                           </NightStepPage>
+                                           </NightAudioPage>
         | Some(PlaySpeech(speech))
-             if gameState.doPlaySpeech  => <NightStepPage goToPage goToNextStep>
+             if gameState.doPlaySpeech  => <NightAudioPage goToPage goToNextStep>
                                                {soundImage}
                                                <Audio track=Speech(speech) onEnded onError />
-                                           </NightStepPage>
+                                           </NightAudioPage>
 
         | Some(PlayEffect(_))           => {   goToNextStep()
                                                React.null

@@ -26,15 +26,29 @@ let getPhase = (
         | (SetupSlave,             _) => #DaytimeWaiting
         | (Credits,                _) => #DaytimeWaiting
         | (Daytime,                _) => #DaytimeWaiting
+        | (DaytimeWaiting,         _) => #DaytimeWaiting
         | (DaytimeConfess,         _) => #DaytimeWaiting
         | (DaytimeReveal,          _) => #DaytimeWaiting
         | (DaytimeRevealNoConfess, _) => #DaytimeWaiting
         | (Close,                  _) => #DaytimeWaiting
-        | (_,          ChooseWitches) => #NightChooseWitches
+        | (_,          ChooseWitches) => #NightChoiceWitches
         | (_,         ConfirmWitches) => #NightConfirmWitches
-        | (_,        ChooseConstable) => #NightChooseConstable
+        | (_,        ChooseConstable) => #NightChoiceConstable
         | (_,       ConfirmConstable) => #NightConfirmConstable
         | (_,                      _) => #NightWaiting
+    }
+}
+
+let getPage = (
+    phase: phase
+): page => {
+    switch phase {
+        | #DaytimeWaiting        => DaytimeWaiting
+        | #NightWaiting          => NightWaiting
+        | #NightChoiceWitches    => NightChoiceWitches
+        | #NightConfirmWitches   => NightConfirmWitches
+        | #NightChoiceConstable  => NightChoiceConstable
+        | #NightConfirmConstable => NightConfirmConstable
     }
 }
 

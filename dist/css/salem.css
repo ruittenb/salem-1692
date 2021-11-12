@@ -106,6 +106,10 @@ p {
     line-height: 1.2;
     backdrop-filter: blur(3px);
 }
+p.left-aligned {
+    width: calc(100% - 30px);
+    text-align: left;
+}
 
 div.id-input {
     background-color: #eee;
@@ -393,7 +397,8 @@ input[type=text].id-input {
  * Daytime Page
  */
 
-#daytime-page {
+#daytime-page,
+#daytime-waiting-page {
     background: url(../images/overlay-village.png) 90% 20vh / auto 80vh no-repeat;
 }
 
@@ -402,7 +407,7 @@ input[type=text].id-input {
  */
 
 #night-page {
-    background: url(../images/background-night.png) center / cover no-repeat;
+    background: url(../images/background-night.png) repeat;
 }
 
 #night-subpage {

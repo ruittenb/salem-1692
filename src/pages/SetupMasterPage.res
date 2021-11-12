@@ -38,6 +38,7 @@ let startHosting = (setDbConnectionStatus, gameState, setGameState) => {
         ->ignore
 }
 
+// Identical to the function in SetupSlavePage
 let stopHosting = (dbConnectionStatus, setDbConnectionStatus, gameState, setGameState) => {
     ifConnected(dbConnectionStatus, (dbConnection) => {
         FirebaseClient.deleteGame(dbConnection, gameState.gameId)

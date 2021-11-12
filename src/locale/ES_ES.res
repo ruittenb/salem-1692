@@ -25,11 +25,16 @@ let table = Js.Dict.fromArray([
     ("Game Code", `Código del juego`),
     ("Start Hosting", "Empezar a albergar"),
     ("Stop Hosting", "Dejar de albergar"),
+    ("Invalid code", `Código inválido`),
+    ("Not connected", "No conectado"),
     ("Connecting...", "Conectando..."),
+    ("Connected.", "Conectado."),
     ("It is possible to join a game running on another smartphone.", `Es posible unirse a un juego en progreso en otro smartphone.`),
     (`Take the other smartphone and look in the app under Settings → Host Game. Then enter the game code here.`, `Tome el otro smartphone y busque en la aplicación en Configuración → Albergar juego. Luego ingrese el código aquí.`),
     ("It is possible to join this game from another smartphone.", `Es posible unirse a este juego desde otro smartphone.`),
     ("Take the other smartphone and look in the app under Join Game. Then enter the following game code there.", `Tome el otro smartphone y busque en la aplicación en Unirse a un juego. Luego ingrese el siguiente código allí.`),
+    ("You are currently hosting a game.", `Actualmente estás albergando un juego.`),
+    ("If you want to join a running game, you should stop hosting first.", `Si deseas unirse a un juego en progreso, primero debes dejar de albergar.`),
     ("How many witches?", `¿Cuantas brujas?`),
     ("Seating layout", `Posición de los jugadores`),
     ("How are the players seated around the table?", `¿Cómo están sentados los jugadores alrededor de la mesa?`),
@@ -67,6 +72,7 @@ let table = Js.Dict.fromArray([
     ("Other nights,", "Otras noches,"),
     ("with constable", "con alguacil"),
     ("without constable", "sin alguacil"),
+    ("Waiting for the host to announce nighttime...", `Esperando hasta que el anfitrión anuncie la noche...`),
     // Night
     ("Night", "La noche"),
     ("Night with constable", "Noche con alguacil"),
@@ -82,6 +88,7 @@ let table = Js.Dict.fromArray([
     ("Rotate", "Girar"),
     ("Abort", "Abortar"),
     ("Skip", "Saltar"),
+    ("Everybody is sound asleep... what about you?", `Todos duermen profundamente... ¿y tú?`), // contains non-breaking space
     // Confirm
     ("Witch, are you sure?", `Bruja, ¿estás segura?`),
     ("Witches, are you sure?", `Brujas, ¿estáis seguras?`), // están?

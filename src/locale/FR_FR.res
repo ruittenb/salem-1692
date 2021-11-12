@@ -25,11 +25,16 @@ let table = Js.Dict.fromArray([
     ("Game Code", "Code du jeu"),
     ("Start Hosting", `Commencer à héberger`),
     ("Stop Hosting", `Arrêter d'héberger`),
+    ("Invalid code", "Code invalide"),
+    ("Not connected", `Pas connecté`),
     ("Connecting...", `En train de connecter…`),
-    ("It is possible to join a game running on another smartphone.", `Il est possible de joindre un jeu en cours sur un autre smartphone.`),
+    ("Connected.", `Connecté.`),
+    ("It is possible to join a game running on another smartphone.", `Il est possible de rejoindre un jeu en cours sur un autre smartphone.`),
     (`Take the other smartphone and look in the app under Settings → Host Game. Then enter the game code here.`, `Prenez l'autre smartphone et regardez dans l'application sous Configuration → Héberger jeu. Puis, saisissez le code du jeu ici.`),
     ("It is possible to join this game from another smartphone.", `Il est possible de rejoindre ce jeu à partir d'un autre smartphone.`),
     ("Take the other smartphone and look in the app under Join Game. Then enter the following game code there.", `Prenez l'autre smartphone et regardez dans l'application sous Joindre un jeu. Puis, saisissez le code du jeu suivant là-bas.`),
+    ("You are currently hosting a game.", `Vous hébergez actuellement un jeu.`),
+    ("If you want to join a running game, you should stop hosting first.", `Si vous souhaitez rejoindre un jeu en cours, il faut d'abord arrêter d'héberger.`),
     ("How many witches?", `Combien de sorcières?`),
     ("Seating layout", `Disposition des sièges`),
     ("How are the players seated around the table?", "Comment les joueurs sont-ils assis autour de la table?"),
@@ -67,6 +72,7 @@ let table = Js.Dict.fromArray([
     ("Other nights,", "Autres nuits,"),
     ("with constable", `avec shérif`),
     ("without constable", `sans shérif`),
+    ("Waiting for the host to announce nighttime...", `En attendant que l'hôte annonce la nuit...`),
     // Night
     ("Night", "La nuit"),
     ("Night with constable", `Nuit avec shérif`),
@@ -82,6 +88,7 @@ let table = Js.Dict.fromArray([
     ("Rotate", "Tourner"),
     ("Abort", `Arrêter`),
     ("Skip", "Sauter"),
+    ("Everybody is sound asleep... what about you?", `Tout le monde dort profondément... et tu?`), // contains non-breaking spaces
     // Confirm
     ("Witch, are you sure?", `Sorcière, tu es sûre?`),
     ("Witches, are you sure?", `Les sorcières, vous êtes sûres?`),

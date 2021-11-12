@@ -63,9 +63,9 @@ module FbDb = {
     @decco type phase = [
         | #DaytimeWaiting
         | #NightWaiting
-        | #NightChooseWitches
+        | #NightChoiceWitches
         | #NightConfirmWitches
-        | #NightChooseConstable
+        | #NightChoiceConstable
         | #NightConfirmConstable
     ]
 
@@ -81,6 +81,7 @@ module FbDb = {
         | ChooseConstableSubject
         | ConfirmWitchesSubject
         | ConfirmConstableSubject
+        | MasterPhaseSubject
 
     type dbRecord = {
         masterGameId: GameTypeCodec.gameId,
@@ -132,11 +133,20 @@ type page =
     | SetupMaster
     | SetupSlave
     | Credits
+    // Master
     | Daytime
-    | FirstNightOneWitch
-    | FirstNightMoreWitches
-    | OtherNightWithConstable
-    | OtherNightNoConstable
+    | NightFirstOneWitch
+    | NightFirstMoreWitches
+    | NightOtherWithConstable
+    | NightOtherNoConstable
+    // Slave
+    | DaytimeWaiting
+    | NightWaiting
+    | NightChoiceWitches
+    | NightConfirmWitches
+    | NightChoiceConstable
+    | NightConfirmConstable
+    // Master
     | DaytimeConfess
     | DaytimeReveal
     | DaytimeRevealNoConfess

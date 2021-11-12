@@ -25,11 +25,16 @@ let table = Js.Dict.fromArray([
     ("Game Code", "Game Code"),
     ("Start Hosting", "Start Hosting"),
     ("Stop Hosting", "Stop Hosting"),
+    ("Invalid code", "Invalid code"),
+    ("Not connected", "Not connected"),
     ("Connecting...", "Connecting..."),
+    ("Connected.", "Connected."),
     ("It is possible to join a game running on another smartphone.", "It is possible to join a game running on another smartphone."),
     (`Take the other smartphone and look in the app under Settings → Host Game. Then enter the game code here.`, `Take the other smartphone and look in the app under Settings → Host Game. Then enter the game code here.`),
     ("It is possible to join this game from another smartphone.", "It is possible to join this game from another smartphone."),
     ("Take the other smartphone and look in the app under Join Game. Then enter the following game code there.", "Take the other smartphone and look in the app under Join Game. Then enter the following game code there."),
+    ("You are currently hosting a game.", "You are currently hosting a game."),
+    ("If you want to join a running game, you should stop hosting first.", "If you want to join a running game, you should stop hosting first."),
     ("How many witches?", "How many witches?"),
     ("Seating layout", "Seating layout"),
     ("How are the players seated around the table?", "How are the players seated around the table?"),
@@ -67,6 +72,7 @@ let table = Js.Dict.fromArray([
     ("Other nights,", "Other nights,"),
     ("with constable", "with constable"),
     ("without constable", "without constable"),
+    ("Waiting for the host to announce nighttime...", "Waiting for the host to announce nighttime..."),
     // Night
     ("Night", "Night"),
     ("Night with constable", "Night with constable"),
@@ -82,6 +88,7 @@ let table = Js.Dict.fromArray([
     ("Rotate", "Rotate"),
     ("Abort", "Abort"),
     ("Skip", "Skip"),
+    ("Everybody is sound asleep... what about you?", `Everybody is sound asleep... what about you?`), // contains non-breaking spaces
     // Confirm
     ("Witch, are you sure?", "Witch, are you sure?"),
     ("Witches, are you sure?", "Witches, are you sure?"),
