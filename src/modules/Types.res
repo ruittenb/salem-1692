@@ -16,6 +16,21 @@ type rotation =
 @decco type player = string
 @decco type players = array<player>
 
+type nrWitches =
+    | One
+    | More
+
+let nrWitchesToJs = (n: nrWitches): string => switch n {
+    | One => "One"
+    | More => "More"
+}
+
+let nrWitchesFromJs = (n: string): Belt.Result.t<nrWitches, string> => switch n {
+    | "One" => Ok(One)
+    | "More" => Ok(More)
+    | _     => Error("Unknown number of witches")
+}
+
 /** **********************************************************************
  * Event Types
  */
@@ -88,6 +103,7 @@ module FbDb = {
         masterPhase: phase,
         masterPlayers: array<player>,
         masterSeating: string,
+        masterNumberWitches: string,
         slaveChoiceWitches: player,
         slaveChoiceConstable: player,
         slaveConfirmWitches: decision,
@@ -111,10 +127,6 @@ module FbDb = {
     backgroundMusic: array<string>,
 }
 type gameStateSetter = (gameState => gameState) => unit
-
-type nrWitches =
-    | One
-    | More
 
 type turnState = {
     nrWitches: nrWitches,
