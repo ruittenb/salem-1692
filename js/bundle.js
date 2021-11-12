@@ -24409,9 +24409,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 /** **********************************************************************
  * Register serviceworker if supported
  */
+const debug = navigator.userAgent.includes('Salem/1692') ? '?debug=1' : '';
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('serviceworker.js').then(registration => {
+    navigator.serviceWorker.register('serviceworker.js' + debug).then(registration => {
       console.log('ServiceWorker registered with scope', registration.scope);
     }).catch(err => {
       console.log('ServiceWorker registration failed:', err);
