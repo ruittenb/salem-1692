@@ -12,10 +12,12 @@ import * as Main from './Main.bs';
  * Register serviceworker if supported
  */
 
+const debug = navigator.userAgent.includes('Salem/1692') ? '?debug=1' : '';
+
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker
-            .register('serviceworker.js')
+            .register('serviceworker.js' + debug)
             .then((registration) => {
                 console.log('ServiceWorker registered with scope', registration.scope);
             })
