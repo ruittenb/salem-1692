@@ -397,7 +397,8 @@ input[type=text].id-input {
  * Daytime Page
  */
 
-#daytime-page {
+#daytime-page,
+#daytime-waiting-page {
     background: url(../images/overlay-village.png) 90% 20vh / auto 80vh no-repeat;
 }
 
