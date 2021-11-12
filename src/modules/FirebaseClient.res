@@ -62,6 +62,7 @@ let transformToDbRecord = (
     masterPhase: getPhase(currentPage, scenarioStep),
     masterPlayers: gameState.players,
     masterSeating: SeatingCodec.seatingToJs(gameState.seating),
+    masterNumberWitches: turnState.nrWitches->nrWitchesToJs,
     slaveChoiceWitches: turnState.choiceWitches->Belt.Option.getWithDefault(""),
     slaveChoiceConstable: turnState.choiceConstable->Belt.Option.getWithDefault(""),
     slaveConfirmWitches: #Undecided,
@@ -166,13 +167,15 @@ let saveGameState = (
         ->Utils.catchLogAndIgnore()
 }
 
-let saveGameChoices = (
+let saveGameTurnState = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId,
-    choiceWitches: player,
-    choiceConstable: player,
+    nrWitches: string,
+    choiceWitches: string,
+    choiceConstable: string,
 ): unit => {
     Promise.all([
+        updateGameKey(dbConnection, gameId, "masterNumberWitches", nrWitches),
         updateGameKey(dbConnection, gameId, "slaveChoiceWitches", choiceWitches),
         updateGameKey(dbConnection, gameId, "slaveChoiceConstable", choiceConstable)
     ])

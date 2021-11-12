@@ -5,14 +5,10 @@
 
 open Types
 
-let p = "[NightWaitingPage] "
-
 @react.component
 let make = (
     ~goToPage,
 ): React.element => {
-
-    // Language and translator
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 

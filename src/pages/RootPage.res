@@ -81,12 +81,12 @@ let make = (): React.element => {
         | NightOtherNoConstable   => <NightScenarioPage goToPage subPage=currentPage />
         | NightOtherWithConstable => <NightScenarioPage goToPage subPage=currentPage />
         // Slave
-        | DaytimeWaiting          => <DaytimeWaitingPage goToPage />
-        | NightWaiting            => <NightWaitingPage goToPage />
-        | NightChoiceWitches      => React.null
-        | NightConfirmWitches     => React.null
-        | NightChoiceConstable    => React.null
-        | NightConfirmConstable   => React.null
+        | DaytimeWaiting          => <SlavePage goToPage subPage=currentPage />
+        | NightWaiting            => <SlavePage goToPage subPage=currentPage />
+        | NightChoiceWitches      => <SlavePage goToPage subPage=currentPage />
+        | NightConfirmWitches     => <SlavePage goToPage subPage=currentPage />
+        | NightChoiceConstable    => <SlavePage goToPage subPage=currentPage />
+        | NightConfirmConstable   => <SlavePage goToPage subPage=currentPage />
         // Master
         | DaytimeConfess          => <DaytimeConfessPage goToPage />
         | DaytimeReveal           => <DaytimeRevealPage goToPage />
