@@ -29,7 +29,7 @@ let make = (
     // Scenario: getter and setter, get current step
     let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
     let scenario: scenario = NightScenarios.getScenario(subPage)
-    let witchOrWitches: addressed = if subPage === FirstNightOneWitch { Witch } else { Witches }
+    let witchOrWitches: addressed = if subPage === NightFirstOneWitch { Witch } else { Witches }
 
     let resolveEffectSet = (step): scenarioStep => {
         switch step {
@@ -56,8 +56,8 @@ let make = (
             // There are still steps in the scenario
             | (Some(_), _)                  => ()
             // The scenario is exhausted: find the correct next page
-            | (None, FirstNightOneWitch)
-            | (None, FirstNightMoreWitches) => goToPage(_page => DaytimeRevealNoConfess)
+            | (None, NightFirstOneWitch)
+            | (None, NightFirstMoreWitches) => goToPage(_page => DaytimeRevealNoConfess)
             | (None, _)                     => goToPage(_page => DaytimeConfess)
         }
         None // no cleanup function

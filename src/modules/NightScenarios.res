@@ -7,7 +7,7 @@ open Types
 
 let getScenario = (subPage: page): scenario => {
     switch subPage {
-        | FirstNightOneWitch      => [
+        | NightFirstOneWitch      => [
             PlayEffect(ChurchBell),
             PlaySpeech(TownGoToSleep),
             PlayRandomEffect([ Silence2s, Crickets ]),
@@ -20,7 +20,7 @@ let getScenario = (subPage: page): scenario => {
             PlayEffect(Rooster),
             PlaySpeech(TownWakeUp),
         ]
-        | FirstNightMoreWitches   => [
+        | NightFirstMoreWitches   => [
             PlayEffect(ChurchBell),
             PlaySpeech(TownGoToSleep),
             PlayRandomEffect([ Silence2s, Crickets ]),
@@ -33,7 +33,7 @@ let getScenario = (subPage: page): scenario => {
             PlayEffect(Rooster),
             PlaySpeech(TownWakeUp),
         ]
-        | OtherNightWithConstable => [
+        | NightOtherWithConstable => [
             PlayEffect(ChurchBell),
             PlaySpeech(TownGoToSleep),
             PlayRandomEffect([ Silence2s, Crickets ]),
@@ -53,7 +53,7 @@ let getScenario = (subPage: page): scenario => {
             PlayEffect(Rooster),
             PlaySpeech(TownWakeUp),
         ]
-        | OtherNightNoConstable   => [
+        | NightOtherNoConstable   => [
             PlayEffect(ChurchBell),
             PlaySpeech(TownGoToSleep),
             PlayRandomEffect([ Silence2s, Crickets ]),

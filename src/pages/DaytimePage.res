@@ -26,28 +26,28 @@ let make = (
         <Spacer />
         <LargeButton onClick={ _event => {
             setTurnState(_prev => { ...defaultNextState, nrWitches: One })
-            goToPage(_prev => FirstNightOneWitch)
+            goToPage(_prev => NightFirstOneWitch)
         } } >
             {React.string(t("First night,"))} <br />
             {React.string(t("one witch"))}
         </LargeButton>
         <LargeButton onClick={ _event => {
             setTurnState(_prev => defaultNextState)
-            goToPage(_prev => FirstNightMoreWitches)
+            goToPage(_prev => NightFirstMoreWitches)
         } } >
             {React.string(t("First night,"))} <br />
             {React.string(t("more witches"))}
         </LargeButton>
         <LargeButton onClick={ _event => {
             setTurnState(_prev => defaultNextState)
-            goToPage(_prev => OtherNightWithConstable)
+            goToPage(_prev => NightOtherWithConstable)
         } } >
             {React.string(t("Other nights,"))} <br />
             {React.string(t("with constable"))}
         </LargeButton>
         <LargeButton onClick={ _event => {
             setTurnState(_prev => defaultNextState)
-            goToPage(_prev => OtherNightNoConstable)
+            goToPage(_prev => NightOtherNoConstable)
         } } >
             {React.string(t("Other nights,"))} <br />
             {React.string(t("without constable"))}

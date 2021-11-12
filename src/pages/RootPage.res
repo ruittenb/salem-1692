@@ -75,11 +75,19 @@ let make = (): React.element => {
         | SetupSlave              => <SetupSlavePage goToPage />
         | Credits                 => <CreditsPage goToPage />
         | Daytime                 => <DaytimePage goToPage />
+        // Master
+        | NightFirstOneWitch      => <NightScenarioPage goToPage subPage=currentPage />
+        | NightFirstMoreWitches   => <NightScenarioPage goToPage subPage=currentPage />
+        | NightOtherNoConstable   => <NightScenarioPage goToPage subPage=currentPage />
+        | NightOtherWithConstable => <NightScenarioPage goToPage subPage=currentPage />
+        // Slave
         | DaytimeWaiting          => <DaytimeWaitingPage goToPage />
-        | FirstNightOneWitch      => <NightScenarioPage goToPage subPage=currentPage />
-        | FirstNightMoreWitches   => <NightScenarioPage goToPage subPage=currentPage />
-        | OtherNightNoConstable   => <NightScenarioPage goToPage subPage=currentPage />
-        | OtherNightWithConstable => <NightScenarioPage goToPage subPage=currentPage />
+        | NightWaiting            => <NightWaitingPage goToPage />
+        | NightChoiceWitches      => React.null
+        | NightConfirmWitches     => React.null
+        | NightChoiceConstable    => React.null
+        | NightConfirmConstable   => React.null
+        // Master
         | DaytimeConfess          => <DaytimeConfessPage goToPage />
         | DaytimeReveal           => <DaytimeRevealPage goToPage />
         | DaytimeRevealNoConfess  => <DaytimeRevealPage goToPage allowBackToConfess=false />

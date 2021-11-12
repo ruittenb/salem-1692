@@ -15,18 +15,23 @@ let make = (
     let (gameState, _) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
+    // TODO Split this into SlaveScenarioPage and all subpages
     React.useEffect0(() => {
         Utils.logDebugGreen(p ++ "Mounted")
         Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
             Utils.logDebug(p ++ "About to install phase listener")
-            FirebaseClient.listen(dbConnection, gameId, MasterPhase, (pageString) => {
-                if (pageString === "NightWaiting") { goToPage(_prev => DaytimeWaiting /* NightWaiting */) }
+            FirebaseClient.listen(dbConnection, gameId, MasterPhaseSubject, (phaseString) => {
+                phaseString
+                    ->Types.FbDb.phaseFromJs
+                    ->Belt.Option.forEach(
+                        phase => goToPage(_prev => phase->FirebaseClient.getPage)
+                    )
             })
         })
         Some(() => { // Cleanup: remove listener
             Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
                 Utils.logDebug(p ++ "About to remove remove listener")
-                FirebaseClient.stopListening(dbConnection, gameId, MasterPhase)
+                FirebaseClient.stopListening(dbConnection, gameId, MasterPhaseSubject)
             })
             Utils.logDebugRed(p ++ "Unmounted")
         })

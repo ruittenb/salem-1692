@@ -63,9 +63,9 @@ module FbDb = {
     @decco type phase = [
         | #DaytimeWaiting
         | #NightWaiting
-        | #NightChooseWitches
+        | #NightChoiceWitches
         | #NightConfirmWitches
-        | #NightChooseConstable
+        | #NightChoiceConstable
         | #NightConfirmConstable
     ]
 
@@ -133,12 +133,20 @@ type page =
     | SetupMaster
     | SetupSlave
     | Credits
+    // Master
     | Daytime
+    | NightFirstOneWitch
+    | NightFirstMoreWitches
+    | NightOtherWithConstable
+    | NightOtherNoConstable
+    // Slave
     | DaytimeWaiting
-    | FirstNightOneWitch
-    | FirstNightMoreWitches
-    | OtherNightWithConstable
-    | OtherNightNoConstable
+    | NightWaiting
+    | NightChoiceWitches
+    | NightConfirmWitches
+    | NightChoiceConstable
+    | NightConfirmConstable
+    // Master
     | DaytimeConfess
     | DaytimeReveal
     | DaytimeRevealNoConfess

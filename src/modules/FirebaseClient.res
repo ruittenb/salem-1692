@@ -31,9 +31,9 @@ let getPhase = (
         | (DaytimeReveal,          _) => #DaytimeWaiting
         | (DaytimeRevealNoConfess, _) => #DaytimeWaiting
         | (Close,                  _) => #DaytimeWaiting
-        | (_,          ChooseWitches) => #NightChooseWitches
+        | (_,          ChooseWitches) => #NightChoiceWitches
         | (_,         ConfirmWitches) => #NightConfirmWitches
-        | (_,        ChooseConstable) => #NightChooseConstable
+        | (_,        ChooseConstable) => #NightChoiceConstable
         | (_,       ConfirmConstable) => #NightConfirmConstable
         | (_,                      _) => #NightWaiting
     }
@@ -44,11 +44,11 @@ let getPage = (
 ): page => {
     switch phase {
         | #DaytimeWaiting        => DaytimeWaiting
-        | #NightWaiting          => DaytimeWaiting // NightWaiting
-        | #NightChooseWitches    => DaytimeWaiting // NightChoice
-        | #NightConfirmWitches   => DaytimeWaiting // NightConfirm
-        | #NightChooseConstable  => DaytimeWaiting // NightChoice
-        | #NightConfirmConstable => DaytimeWaiting // NightConfirm
+        | #NightWaiting          => NightWaiting
+        | #NightChoiceWitches    => NightChoiceWitches
+        | #NightConfirmWitches   => NightConfirmWitches
+        | #NightChoiceConstable  => NightChoiceConstable
+        | #NightConfirmConstable => NightConfirmConstable
     }
 }
 
