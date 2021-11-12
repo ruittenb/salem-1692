@@ -88,6 +88,7 @@ let table = Js.Dict.fromArray([
     ("Rotate", "Rotate"),
     ("Abort", "Abort"),
     ("Skip", "Skip"),
+    ("Everybody is sound asleep... what about you?", "Everybody is sound asleep... what about you?"),
     // Confirm
     ("Witch, are you sure?", "Witch, are you sure?"),
     ("Witches, are you sure?", "Witches, are you sure?"),

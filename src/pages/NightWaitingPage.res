@@ -24,7 +24,7 @@ let make = (
             <Spacer />
             <Spacer />
             <Spacer />
-            <p className="text-centered"> {React.string(t("Everybody is asleep... what about you?"))} </p>
+            <p className="text-centered"> {React.string(t("Everybody is sound asleep... what about you?"))} </p>
             <Spacer />
             <Button
                 label={t("Abort")}
