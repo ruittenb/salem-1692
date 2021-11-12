@@ -88,7 +88,7 @@ let table = Js.Dict.fromArray([
     ("Rotate", "Tourner"),
     ("Abort", `Arrêter`),
     ("Skip", "Sauter"),
-    ("Everybody is sound asleep... what about you?", `Tout le monde dort profondément... et tu?`),
+    ("Everybody is sound asleep... what about you?", `Tout le monde dort profondément... et tu?`), // contains non-breaking spaces
     // Confirm
     ("Witch, are you sure?", `Sorcière, tu es sûre?`),
     ("Witches, are you sure?", `Les sorcières, vous êtes sûres?`),

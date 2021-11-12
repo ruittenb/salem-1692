@@ -407,7 +407,7 @@ input[type=text].id-input {
  */
 
 #night-page {
-    background: url(../images/background-night.png) center / cover no-repeat;
+    background: url(../images/background-night.png) repeat;
 }
 
 #night-subpage {
