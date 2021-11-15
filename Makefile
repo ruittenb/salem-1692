@@ -105,7 +105,7 @@ tag-%: ## Update the %:major:minor:patch:% version number and create git tag
 	VERSION_TO=$$(jq .version package.json) && \
 	rpl $$VERSION_FROM $$VERSION_TO $(VERSION_FILES)
 	@read -p $$'\nPress ENTER to recompile to integrate the new version number:' ans
-	make build-minify && git commit -a --amend && make move-tag && git push"
+	$(MAKE) build-minify && git commit -a --amend && $(MAKE) move-tag && git push
 
 .PHONY: move-tag
 move-tag: ## Move the tag for the current package.json version to this branch
