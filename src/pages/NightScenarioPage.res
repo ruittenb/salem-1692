@@ -108,7 +108,11 @@ let make = (
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
             FirebaseClient.saveGamePhase(dbConnection, gameState.gameId, subPage, maybeScenarioStep)
         })
-        None // cleanup function
+        Some(() => { // cleanup function
+            Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+                FirebaseClient.saveGamePhase(dbConnection, gameState.gameId, DaytimeWaiting, None)
+            })
+        })
     }, [ maybeScenarioStep ])
 
     // Event handlers for stepping through scenario
