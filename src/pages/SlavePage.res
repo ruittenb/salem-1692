@@ -4,6 +4,7 @@
  */
 
 open Types
+open Types.FbDb
 
 let p = "[SlavePage] "
 
@@ -20,10 +21,19 @@ let make = (
     React.useEffect0(() => {
         Utils.logDebugGreen(p ++ "Mounted")
         Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+            //Utils.logDebug(p ++ "About to install game listener") // TODO
+            //FirebaseClient.listen(dbConnection, gameId, GameSubject, (dbRecordStr: string) => {
+            //    dbRecordStr
+            //        ->dbRecordToJs
+            //        //->Belt.Option.forEach(
+            //        //    phase => goToPage(_prev => phase->FirebaseClient.getPage)
+            //        //)
+            //    ()
+            //})
             Utils.logDebug(p ++ "About to install phase listener")
-            FirebaseClient.listen(dbConnection, gameId, MasterPhaseSubject, (phaseString) => {
-                phaseString
-                    ->Types.FbDb.phaseFromJs
+            FirebaseClient.listen(dbConnection, gameId, MasterPhaseSubject, (phaseStr: string) => {
+                phaseStr
+                    ->phaseFromJs
                     ->Belt.Option.forEach(
                         phase => goToPage(_prev => phase->FirebaseClient.getPage)
                     )
@@ -50,6 +60,16 @@ let make = (
                         })
                     })
             })
+            Utils.logDebug(p ++ "About to install numberWitches listener")
+            FirebaseClient.listen(dbConnection, gameId, MasterNumberWitchesSubject, (numberWitchesStr: string) => {
+                numberWitchesStr
+                    ->nrWitchesFromJs
+                    ->Utils.resultForEach(nrWitches => {
+                        setTurnState(prevTurnState => {
+                            { ...prevTurnState, nrWitches }
+                        })
+                    })
+            })
         })
         Some(() => { // Cleanup: remove listener
             Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
@@ -57,12 +77,13 @@ let make = (
                 FirebaseClient.stopListening(dbConnection, gameId, MasterPhaseSubject)
                 FirebaseClient.stopListening(dbConnection, gameId, MasterPlayersSubject)
                 FirebaseClient.stopListening(dbConnection, gameId, MasterSeatingSubject)
+                FirebaseClient.stopListening(dbConnection, gameId, MasterNumberWitchesSubject)
             })
             Utils.logDebugRed(p ++ "Unmounted")
         })
     })
 
-    let witchOrWitches: addressed = if subPage === NightFirstOneWitch { Witch } else { Witches }
+    let witchOrWitches: addressed = if (turnState.nrWitches === One) { Witch } else { Witches }
 
     let pageElement = switch subPage {
         | DaytimeWaiting        => <DaytimeWaitingPage goToPage />
@@ -92,14 +113,14 @@ let make = (
         | NightConfirmWitches   => <NightConfirmPage
                                        addressed=witchOrWitches
                                        confirmationProcessor={
-                                           (decision): unit => ()
+                                           (decision): unit => Utils.logDebug("confirmationProcessor for witches")
                                        }
                                        goToPrevStep={ () => goToPage(_prev => NightChoiceWitches) }
                                    />
         | NightConfirmConstable => <NightConfirmPage
                                        addressed=Constable
                                        confirmationProcessor={
-                                           (decision): unit => ()
+                                           (decision): unit => Utils.logDebug("confirmationProcessor for constable")
                                        }
                                        goToPrevStep={ () => goToPage(_prev => NightChoiceConstable) }
                                    />

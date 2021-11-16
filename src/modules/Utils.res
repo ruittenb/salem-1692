@@ -127,6 +127,12 @@ let replaceWith = (
     second
 }
 
+/**
+ * Run a function on an Ok-value
+ *
+ * Example:
+ * queryResult->resultForEach(value => process(value))
+ */
 let resultForEach = (
     result: Belt.Result.t<'ok, 'err>,
     fn: ('ok) => unit

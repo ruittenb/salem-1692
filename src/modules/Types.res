@@ -103,9 +103,11 @@ module FbDb = {
     ]
 
     type dbObservable =
+        | GameSubject
         | MasterPhaseSubject
         | MasterPlayersSubject
         | MasterSeatingSubject
+        | MasterNumberWitchesSubject
         | ChooseWitchesSubject
         | ChooseConstableSubject
         | ConfirmWitchesSubject
