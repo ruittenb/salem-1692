@@ -50,10 +50,12 @@ bundle-minify: ## Bundle and minify the js files
 	browserify -g uglifyify $(JS_FILES) -p esmify | uglifyjs > $(BUNDLE)
 
 .PHONY: build
-build: build-css build-res bundle ## Compile the res and css files; bundle the js files
+build: build-css build-res ## Compile the res and css files; bundle the js files
+	$(MAKE) bundle
 
 .PHONY: build-minify
-build-minify: build-css build-res bundle-minify ## Compile the res and css files; bundle and minify the js files
+build-minify: build-css build-res ## Compile the res and css files; bundle and minify the js files
+	$(MAKE) bundle-minify
 
 ##@ Building during development:
 
