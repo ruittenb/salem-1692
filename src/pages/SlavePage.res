@@ -13,8 +13,9 @@ let make = (
     ~subPage: page,
 ): React.element => {
     let (dbConnectionStatus, _setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
-    let (gameState, _) = React.useContext(GameStateContext.context)
-    let t = Translator.getTranslator(gameState.language)
+    let (gameState, setGameState) = React.useContext(GameStateContext.context)
+    // turn state
+    let (turnState, setTurnState) = React.useContext(TurnStateContext.context)
 
     React.useEffect0(() => {
         Utils.logDebugGreen(p ++ "Mounted")
@@ -27,11 +28,35 @@ let make = (
                         phase => goToPage(_prev => phase->FirebaseClient.getPage)
                     )
             })
+            Utils.logDebug(p ++ "About to install players listener")
+            FirebaseClient.listen(dbConnection, gameId, MasterPlayersSubject, (playersStr: string): unit => {
+                let playersJson: option<array<string>> = playersStr
+                    ->Js.Json.string
+                    ->playersFromJson
+                switch playersJson {
+                    | Some(players) => setGameState(prevGameState => {
+                                           { ...prevGameState, players }
+                                       })
+                    | None => ()
+                }
+            })
+            Utils.logDebug(p ++ "About to install seating listener")
+            FirebaseClient.listen(dbConnection, gameId, MasterSeatingSubject, (seatingStr: string): unit => {
+                seatingStr
+                    ->SeatingCodec.seatingFromJs
+                    ->Belt.Option.forEach( seating => {
+                        setGameState(prevGameState => {
+                            { ...prevGameState, seating }
+                        })
+                    })
+            })
         })
         Some(() => { // Cleanup: remove listener
             Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
-                Utils.logDebug(p ++ "About to remove remove listener")
+                Utils.logDebug(p ++ "About to remove remove listeners")
                 FirebaseClient.stopListening(dbConnection, gameId, MasterPhaseSubject)
+                FirebaseClient.stopListening(dbConnection, gameId, MasterPlayersSubject)
+                FirebaseClient.stopListening(dbConnection, gameId, MasterSeatingSubject)
             })
             Utils.logDebugRed(p ++ "Unmounted")
         })
@@ -44,20 +69,38 @@ let make = (
         | NightWaiting          => <NightWaitingPage goToPage />
         | NightChoiceWitches    => <NightChoicePage
                                        addressed=witchOrWitches
-                                       choiceProcessor={ (player) => () }
+                                       choiceProcessor={
+                                           (player) => {
+                                               setTurnState(prevTurnState => {
+                                                   { ...prevTurnState, choiceWitches: Some(player) }
+                                               })
+                                               goToPage(_prev => NightConfirmWitches)
+                                           }
+                                       }
                                    />
         | NightChoiceConstable  => <NightChoicePage
                                        addressed=Constable
-                                       choiceProcessor={ (player) => () }
+                                       choiceProcessor={
+                                           (player) => {
+                                               setTurnState(prevTurnState => {
+                                                   { ...prevTurnState, choiceConstable: Some(player) }
+                                               })
+                                               goToPage(_prev => NightConfirmConstable)
+                                           }
+                                       }
                                    />
         | NightConfirmWitches   => <NightConfirmPage
                                        addressed=witchOrWitches
-                                       confirmationProcessor={ (decision):unit => () }
+                                       confirmationProcessor={
+                                           (decision):unit => ()
+                                       }
                                        goToPrevStep={ () => goToPage(_prev => NightChoiceWitches) }
                                    />
         | NightConfirmConstable => <NightConfirmPage
                                        addressed=Constable
-                                       confirmationProcessor={ (decision):unit => () }
+                                       confirmationProcessor={
+                                           (decision):unit => ()
+                                       }
                                        goToPrevStep={ () => goToPage(_prev => NightChoiceConstable) }
                                    />
         | _                     => <DaytimeWaitingPage goToPage />

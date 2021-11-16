@@ -16,19 +16,30 @@ type rotation =
 @decco type player = string
 @decco type players = array<player>
 
+let playersFromJson = (playerArrayJson: Js.Json.t): option<array<string>> => {
+    playerArrayJson
+        ->Js.Json.decodeArray
+        ->Belt.Option.map(playerJsonArray => {
+            playerJsonArray->Js.Array2.map(playerJson => {
+                playerJson->Js.Json.decodeString
+            })
+                ->Belt.Array.keepMap(x => x)
+        })
+}
+
 type nrWitches =
     | One
     | More
 
 let nrWitchesToJs = (n: nrWitches): string => switch n {
-    | One => "One"
+    | One  => "One"
     | More => "More"
 }
 
 let nrWitchesFromJs = (n: string): Belt.Result.t<nrWitches, string> => switch n {
-    | "One" => Ok(One)
+    | "One"  => Ok(One)
     | "More" => Ok(More)
-    | _     => Error("Unknown number of witches")
+    | _      => Error("Unknown number of witches")
 }
 
 /** **********************************************************************
@@ -92,11 +103,13 @@ module FbDb = {
     ]
 
     type dbObservable =
+        | MasterPhaseSubject
+        | MasterPlayersSubject
+        | MasterSeatingSubject
         | ChooseWitchesSubject
         | ChooseConstableSubject
         | ConfirmWitchesSubject
         | ConfirmConstableSubject
-        | MasterPhaseSubject
 
     type dbRecord = {
         masterGameId: GameTypeCodec.gameId,

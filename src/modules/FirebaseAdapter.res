@@ -28,11 +28,13 @@ let gameKey = (id: GameTypeCodec.gameId): string => {
 }
 
 let subjectKey = (subject) => switch subject {
+    | MasterPhaseSubject       => "masterPhase"
+    | MasterPlayersSubject     => "masterPlayers"
+    | MasterSeatingSubject     => "masterSeating"
     | ChooseWitchesSubject     => "slaveChoiceWitches"
     | ChooseConstableSubject   => "slaveChoiceConstable"
     | ConfirmWitchesSubject    => "slaveConfirmWitches"
     | ConfirmConstableSubject  => "slaveConfirmConstable"
-    | MasterPhaseSubject       => "masterPhase"
 }
 
 /** **********************************************************************
