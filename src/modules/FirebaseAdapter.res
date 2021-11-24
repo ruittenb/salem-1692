@@ -80,7 +80,7 @@ let disconnect = (
 
 let writeGame = (
     dbConnection: dbConnection,
-    dbRecord: dbRecord,
+    dbRecord: dbRecord, // DbRecordCodec.dbRecord, // TODO
     action: string, // "created" or "updated"
 ): Promise.t<unit> => {
     Promise.make((resolve, reject) => {

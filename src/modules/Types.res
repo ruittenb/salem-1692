@@ -52,7 +52,7 @@ type changeHandler = ReactEvent.Form.t  => unit
 type blurHandler   = ReactEvent.Focus.t => unit
 
 /** **********************************************************************
- * Firebase Types (some of these are defined in Firebase.res)
+ * Firebase Types (some of these are defined in FirebaseAdapter.res)
  */
 
 type dbApp
