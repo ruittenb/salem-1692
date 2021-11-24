@@ -3,7 +3,7 @@
  * DbConnectionContext
  */
 
-open Types.FbDb
+open Types
 
 let defaultSetter: dbConnectionSetter = (_: dbConnectionStatus => dbConnectionStatus) => ()
 let defaultValue: dbConnectionStatus = NotConnected

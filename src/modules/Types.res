@@ -16,19 +16,30 @@ type rotation =
 @decco type player = string
 @decco type players = array<player>
 
+let playersFromJson = (playerArrayJson: Js.Json.t): option<array<string>> => {
+    playerArrayJson
+        ->Js.Json.decodeArray
+        ->Belt.Option.map(playerJsonArray => {
+            playerJsonArray->Js.Array2.map(playerJson => {
+                playerJson->Js.Json.decodeString
+            })
+                ->Belt.Array.keepMap(x => x)
+        })
+}
+
 type nrWitches =
     | One
     | More
 
 let nrWitchesToJs = (n: nrWitches): string => switch n {
-    | One => "One"
+    | One  => "One"
     | More => "More"
 }
 
 let nrWitchesFromJs = (n: string): Belt.Result.t<nrWitches, string> => switch n {
-    | "One" => Ok(One)
+    | "One"  => Ok(One)
     | "More" => Ok(More)
-    | _     => Error("Unknown number of witches")
+    | _      => Error("Unknown number of witches")
 }
 
 /** **********************************************************************
@@ -44,72 +55,72 @@ type blurHandler   = ReactEvent.Focus.t => unit
  * Firebase Types (some of these are defined in Firebase.res)
  */
 
-module FbDb = {
+type dbApp
+type dbDatabase
+type dbReference
+type dbSnapshot
 
-    type app
-    type database
-    type reference
-    type snapshot
-    type data
+type dbConnection = {
+    app: dbApp,
+    db: dbDatabase
+}
 
-    type dbConnection = {
-        app: app,
-        db: database
-    }
+type dbConnectionStatus =
+    | NotConnected
+    | Connecting
+    | Connected(dbConnection)
 
-    type dbConnectionStatus =
-        | NotConnected
-        | Connecting
-        | Connected(dbConnection)
+type dbConnectionSetter = (dbConnectionStatus => dbConnectionStatus) => unit
 
-    type dbConnectionSetter = (dbConnectionStatus => dbConnectionStatus) => unit
+type dbConfig = {
+    apiKey            : string,
+    authDomain        : string,
+    databaseURL       : string,
+    projectId         : string,
+    storageBucket     : string,
+    messagingSenderId : string,
+    appId             : string,
+}
 
-    type config = {
-        apiKey            : string,
-        authDomain        : string,
-        databaseURL       : string,
-        projectId         : string,
-        storageBucket     : string,
-        messagingSenderId : string,
-        appId             : string,
-    }
+@deriving(jsConverter)
+@decco type phase = [
+    | #DaytimeWaiting
+    | #NightWaiting
+    | #NightChoiceWitches
+    | #NightConfirmWitches
+    | #NightChoiceConstable
+    | #NightConfirmConstable
+]
 
-    @deriving(jsConverter)
-    @decco type phase = [
-        | #DaytimeWaiting
-        | #NightWaiting
-        | #NightChoiceWitches
-        | #NightConfirmWitches
-        | #NightChoiceConstable
-        | #NightConfirmConstable
-    ]
+@deriving(jsConverter)
+@decco type decision = [
+    | #Yes
+    | #No
+    | #Undecided
+]
 
-    @deriving(jsConverter)
-    @decco type decision = [
-        | #Yes
-        | #No
-        | #Undecided
-    ]
+type dbObservable =
+    | GameSubject
+    | MasterPhaseSubject
+    | MasterPlayersSubject
+    | MasterSeatingSubject
+    | MasterNumberWitchesSubject
+    | ChooseWitchesSubject
+    | ChooseConstableSubject
+    | ConfirmWitchesSubject
+    | ConfirmConstableSubject
 
-    type dbObservable =
-        | ChooseWitchesSubject
-        | ChooseConstableSubject
-        | ConfirmWitchesSubject
-        | ConfirmConstableSubject
-        | MasterPhaseSubject
-
-    type dbRecord = {
-        masterGameId: GameTypeCodec.gameId,
-        masterPhase: phase,
-        masterPlayers: array<player>,
-        masterSeating: string,
-        masterNumberWitches: string,
-        slaveChoiceWitches: player,
-        slaveChoiceConstable: player,
-        slaveConfirmWitches: decision,
-        slaveConfirmConstable: decision,
-        updatedAt: string,
-    }
+type dbRecord = {
+    masterGameId: GameTypeCodec.gameId,
+    masterPhase: phase,
+    masterPlayers: array<player>,
+    masterSeating: string,
+    masterNumberWitches: string,
+    slaveChoiceWitches: player,
+    slaveChoiceConstable: player,
+    slaveConfirmWitches: decision,
+    slaveConfirmConstable: decision,
+    updatedAt: string,
 }
 
 /** **********************************************************************

@@ -127,6 +127,12 @@ let replaceWith = (
     second
 }
 
+/**
+ * Run a function on an Ok-value
+ *
+ * Example:
+ * queryResult->resultForEach(value => process(value))
+ */
 let resultForEach = (
     result: Belt.Result.t<'ok, 'err>,
     fn: ('ok) => unit
@@ -141,8 +147,8 @@ let resultForEach = (
  * Call function if connection state reflects that we're connected to firebase
  */
 let ifConnected = (
-    dbConnectionStatus: Types.FbDb.dbConnectionStatus,
-    func: (Types.FbDb.dbConnection) => unit
+    dbConnectionStatus: Types.dbConnectionStatus,
+    func: (Types.dbConnection) => unit
 ) => {
     switch dbConnectionStatus {
         | NotConnected            => ()
@@ -169,9 +175,9 @@ let ifMaster = (
  * Combine two functions above
  */
 let ifMasterAndConnected = (
-    dbConnectionStatus: Types.FbDb.dbConnectionStatus,
+    dbConnectionStatus: Types.dbConnectionStatus,
     gameType: GameTypeCodec.t,
-    func: (Types.FbDb.dbConnection) => unit
+    func: (Types.dbConnection) => unit
 ) => {
     ifMaster(gameType, () => {
         ifConnected(dbConnectionStatus, (dbConnection) => {
@@ -198,10 +204,10 @@ let ifSlave = (
  * Combine two functions above
  */
 let ifSlaveAndConnected = (
-    dbConnectionStatus: Types.FbDb.dbConnectionStatus,
+    dbConnectionStatus: Types.dbConnectionStatus,
     gameType: GameTypeCodec.t,
     func: (
-        Types.FbDb.dbConnection,
+        Types.dbConnection,
         GameTypeCodec.gameId
     ) => unit
 ) => {

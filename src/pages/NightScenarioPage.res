@@ -131,7 +131,7 @@ let make = (
     }
 
     // Store confirmation in db
-    let continueFromWitchDecision = (decision: Types.FbDb.decision): unit => {
+    let continueFromWitchDecision = (decision: decision): unit => {
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
             FirebaseClient.saveGameConfirmations(dbConnection, gameState.gameId, decision, #Undecided)
         })
@@ -141,7 +141,7 @@ let make = (
             | #Undecided => ()
         }
     }
-    let continueFromConstableDecision = (decision: Types.FbDb.decision): unit => {
+    let continueFromConstableDecision = (decision: decision): unit => {
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
             FirebaseClient.saveGameConfirmations(dbConnection, gameState.gameId, #Yes, decision)
         })

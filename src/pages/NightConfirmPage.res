@@ -37,7 +37,10 @@ let make = (
 
     // Runs only once right after mounting the component
     React.useEffect0(() => {
-        Utils.logDebugGreen(p ++ "Mounted")
+        Utils.logDebugGreen(
+            p ++ "Mounted; choiceWitches:" ++ turnState.choiceWitches->Belt.Option.getWithDefault("") ++
+            " choiceConstable:" ++ turnState.choiceConstable->Belt.Option.getWithDefault("")
+        )
         // At this point we should have a choice to ask confirmation for.
         // Therefore, these situations should never happen.
         switch addressed {
@@ -49,11 +52,11 @@ let make = (
         let subject = switch addressed {
             | Witch | Witches => {
                                      Utils.logDebug(p ++ "Clearing witches' confirmation from turn state...")
-                                     Types.FbDb.ConfirmWitchesSubject
+                                     Types.ConfirmWitchesSubject
                                  }
             | Constable       => {
                                      Utils.logDebug(p ++ "Clearing constable's confirmation from turn state...")
-                                     Types.FbDb.ConfirmConstableSubject
+                                     Types.ConfirmConstableSubject
                                  }
         }
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
@@ -79,7 +82,7 @@ let make = (
         })
     })
 
-    // This dialog hides the encompassing page in the background
+    // component
     <div id="night-page" className="page">
         <div id="night-subpage" className="page flex-vertical">
             <h1> {React.string(t("Confirm"))} </h1>

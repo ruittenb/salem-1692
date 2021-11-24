@@ -4,7 +4,6 @@
  */
 
 open Types
-open Types.FbDb
 open Constants
 
 let initialDbConnectionStatus = NotConnected

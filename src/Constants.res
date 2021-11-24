@@ -15,7 +15,7 @@ let debug = navigator->userAgent->Js.String2.includes("Salem/1692")
 
 // firebase, url, localstorage
 
-let firebaseConfig: Types.FbDb.config = {
+let firebaseConfig: dbConfig = {
     apiKey            : "AIzaSyD_SDDuyHYXcj_xiw8V_BXmWb_X9TUWpK8",
     authDomain        : "salem-1692-moderator.firebaseapp.com",
     databaseURL       : "https://salem-1692-moderator-default-rtdb.europe-west1.firebasedatabase.app",
