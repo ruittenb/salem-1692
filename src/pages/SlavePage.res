@@ -112,14 +112,14 @@ let make = (
         | NightConfirmWitches   => <NightConfirmPage
                                        addressed=witchOrWitches
                                        confirmationProcessor={
-                                           (decision): unit => Utils.logDebug("confirmationProcessor for witches")
+                                           (_decision): unit => Utils.logDebug("confirmationProcessor for witches") // TODO
                                        }
                                        goToPrevStep={ () => goToPage(_prev => NightChoiceWitches) }
                                    />
         | NightConfirmConstable => <NightConfirmPage
                                        addressed=Constable
                                        confirmationProcessor={
-                                           (decision): unit => Utils.logDebug("confirmationProcessor for constable")
+                                           (_decision): unit => Utils.logDebug("confirmationProcessor for constable") // TODO
                                        }
                                        goToPrevStep={ () => goToPage(_prev => NightChoiceConstable) }
                                    />
