@@ -55,75 +55,72 @@ type blurHandler   = ReactEvent.Focus.t => unit
  * Firebase Types (some of these are defined in Firebase.res)
  */
 
-module FbDb = {
+type dbApp
+type dbDatabase
+type dbReference
+type dbSnapshot
 
-    type dbApp
-    type dbDatabase
-    type dbReference
-    type dbSnapshot
+type dbConnection = {
+    app: dbApp,
+    db: dbDatabase
+}
 
-    type dbConnection = {
-        app: dbApp,
-        db: dbDatabase
-    }
+type dbConnectionStatus =
+    | NotConnected
+    | Connecting
+    | Connected(dbConnection)
 
-    type dbConnectionStatus =
-        | NotConnected
-        | Connecting
-        | Connected(dbConnection)
+type dbConnectionSetter = (dbConnectionStatus => dbConnectionStatus) => unit
 
-    type dbConnectionSetter = (dbConnectionStatus => dbConnectionStatus) => unit
+type dbConfig = {
+    apiKey            : string,
+    authDomain        : string,
+    databaseURL       : string,
+    projectId         : string,
+    storageBucket     : string,
+    messagingSenderId : string,
+    appId             : string,
+}
 
-    type dbConfig = {
-        apiKey            : string,
-        authDomain        : string,
-        databaseURL       : string,
-        projectId         : string,
-        storageBucket     : string,
-        messagingSenderId : string,
-        appId             : string,
-    }
+@deriving(jsConverter)
+@decco type phase = [
+    | #DaytimeWaiting
+    | #NightWaiting
+    | #NightChoiceWitches
+    | #NightConfirmWitches
+    | #NightChoiceConstable
+    | #NightConfirmConstable
+]
 
-    @deriving(jsConverter)
-    @decco type phase = [
-        | #DaytimeWaiting
-        | #NightWaiting
-        | #NightChoiceWitches
-        | #NightConfirmWitches
-        | #NightChoiceConstable
-        | #NightConfirmConstable
-    ]
+@deriving(jsConverter)
+@decco type decision = [
+    | #Yes
+    | #No
+    | #Undecided
+]
 
-    @deriving(jsConverter)
-    @decco type decision = [
-        | #Yes
-        | #No
-        | #Undecided
-    ]
+type dbObservable =
+    | GameSubject
+    | MasterPhaseSubject
+    | MasterPlayersSubject
+    | MasterSeatingSubject
+    | MasterNumberWitchesSubject
+    | ChooseWitchesSubject
+    | ChooseConstableSubject
+    | ConfirmWitchesSubject
+    | ConfirmConstableSubject
 
-    type dbObservable =
-        | GameSubject
-        | MasterPhaseSubject
-        | MasterPlayersSubject
-        | MasterSeatingSubject
-        | MasterNumberWitchesSubject
-        | ChooseWitchesSubject
-        | ChooseConstableSubject
-        | ConfirmWitchesSubject
-        | ConfirmConstableSubject
-
-    type dbRecord = {
-        masterGameId: GameTypeCodec.gameId,
-        masterPhase: phase,
-        masterPlayers: array<player>,
-        masterSeating: string,
-        masterNumberWitches: string,
-        slaveChoiceWitches: player,
-        slaveChoiceConstable: player,
-        slaveConfirmWitches: decision,
-        slaveConfirmConstable: decision,
-        updatedAt: string,
-    }
+type dbRecord = {
+    masterGameId: GameTypeCodec.gameId,
+    masterPhase: phase,
+    masterPlayers: array<player>,
+    masterSeating: string,
+    masterNumberWitches: string,
+    slaveChoiceWitches: player,
+    slaveChoiceConstable: player,
+    slaveConfirmWitches: decision,
+    slaveConfirmConstable: decision,
+    updatedAt: string,
 }
 
 /** **********************************************************************

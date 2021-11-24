@@ -5,7 +5,6 @@
 @@warning("-33") // Unused 'open Types'
 
 open Types
-open Types.FbDb
 open Utils
 
 @module("firebase/app") external initializeApp: (dbConfig) => dbApp = "initializeApp"

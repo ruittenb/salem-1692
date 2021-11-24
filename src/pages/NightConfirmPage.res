@@ -52,11 +52,11 @@ let make = (
         let subject = switch addressed {
             | Witch | Witches => {
                                      Utils.logDebug(p ++ "Clearing witches' confirmation from turn state...")
-                                     Types.FbDb.ConfirmWitchesSubject
+                                     Types.ConfirmWitchesSubject
                                  }
             | Constable       => {
                                      Utils.logDebug(p ++ "Clearing constable's confirmation from turn state...")
-                                     Types.FbDb.ConfirmConstableSubject
+                                     Types.ConfirmConstableSubject
                                  }
         }
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {

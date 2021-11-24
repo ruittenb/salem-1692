@@ -4,7 +4,6 @@
  */
 
 open Types
-open Types.FbDb
 open Utils
 
 let startHosting = (setDbConnectionStatus, gameState, setGameState) => {

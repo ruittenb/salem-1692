@@ -3,7 +3,6 @@
  */
 
 open Types
-open Types.FbDb
 
 let gamesKeyPrefix = "/games/"
 

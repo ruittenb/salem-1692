@@ -4,7 +4,6 @@
  */
 
 open Types
-open Types.FbDb
 
 @get external getValue: (Dom.element) => string = "value"
 
