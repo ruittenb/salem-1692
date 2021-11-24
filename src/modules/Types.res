@@ -57,15 +57,14 @@ type blurHandler   = ReactEvent.Focus.t => unit
 
 module FbDb = {
 
-    type app
-    type database
-    type reference
-    type snapshot
-    type data
+    type dbApp
+    type dbDatabase
+    type dbReference
+    type dbSnapshot
 
     type dbConnection = {
-        app: app,
-        db: database
+        app: dbApp,
+        db: dbDatabase
     }
 
     type dbConnectionStatus =
@@ -75,7 +74,7 @@ module FbDb = {
 
     type dbConnectionSetter = (dbConnectionStatus => dbConnectionStatus) => unit
 
-    type config = {
+    type dbConfig = {
         apiKey            : string,
         authDomain        : string,
         databaseURL       : string,

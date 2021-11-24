@@ -8,16 +8,16 @@ open Types
 open Types.FbDb
 open Utils
 
-@module("firebase/app") external initializeApp: (config) => app = "initializeApp"
-@module("firebase/database") external getDatabase: (app => database) = "getDatabase"
-@module("firebase/database") external getRef: (database, string) => reference = "ref"
-@module("firebase/database") external onConnect: (database, () => unit) => unit = "onConnect"
-@module("firebase/database") external goOffline: (database) => unit = "goOffline"
-@module("firebase/database") external onValue: (reference, (snapshot) => unit) => unit = "onValue"
-@module("firebase/database") external off: (reference) => unit = "off"
-@module("firebase/database") external set: (reference, 'data) => Promise.t<unit> = "set"
-@module("firebase/database") external remove: (reference) => unit = "remove"
-@send external getValue: (snapshot) => 'data = "val"
+@module("firebase/app") external initializeApp: (dbConfig) => dbApp = "initializeApp"
+@module("firebase/database") external getDatabase: (dbApp => dbDatabase) = "getDatabase"
+@module("firebase/database") external getRef: (dbDatabase, string) => dbReference = "ref"
+@module("firebase/database") external onConnect: (dbDatabase, () => unit) => unit = "onConnect"
+@module("firebase/database") external goOffline: (dbDatabase) => unit = "goOffline"
+@module("firebase/database") external onValue: (dbReference, (dbSnapshot) => unit) => unit = "onValue"
+@module("firebase/database") external off: (dbReference) => unit = "off"
+@module("firebase/database") external set: (dbReference, 'data) => Promise.t<unit> = "set"
+@module("firebase/database") external remove: (dbReference) => unit = "remove"
+@send external getValue: (dbSnapshot) => 'data = "val"
 
 let p = "[FirebaseAdapter] "
 
@@ -159,7 +159,7 @@ let joinGame = (
     )
     ->Belt.Option.forEach(myGameRef => {
         Utils.logDebug(p ++ "Joined game " ++ gameId)
-        onValue(myGameRef, (snapshot: snapshot) => {
+        onValue(myGameRef, (snapshot: dbSnapshot) => {
             Utils.logDebug(p ++ "Received data")
             let _data = getValue(snapshot)
         })
