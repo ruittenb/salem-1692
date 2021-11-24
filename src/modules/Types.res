@@ -3,6 +3,19 @@
  * Types
  */
 
+/** **********************************************************************
+ * Event Types (convenience)
+ */
+
+type clickHandler  = ReactEvent.Mouse.t => unit
+type mediaHandler  = ReactEvent.Media.t => unit
+type changeHandler = ReactEvent.Form.t  => unit
+type blurHandler   = ReactEvent.Focus.t => unit
+
+/** **********************************************************************
+ * Game Types
+ */
+
 type evenOdd =
     | Even
     | Odd
@@ -27,7 +40,7 @@ let playersFromJson = (playerArrayJson: Js.Json.t): option<array<string>> => {
         })
 }
 
-type nrWitches =
+@decco type nrWitches =
     | One
     | More
 
@@ -41,91 +54,6 @@ let nrWitchesFromJs = (n: string): Belt.Result.t<nrWitches, string> => switch n 
     | "More" => Ok(More)
     | _      => Error("Unknown number of witches")
 }
-
-/** **********************************************************************
- * Event Types
- */
-
-type clickHandler  = ReactEvent.Mouse.t => unit
-type mediaHandler  = ReactEvent.Media.t => unit
-type changeHandler = ReactEvent.Form.t  => unit
-type blurHandler   = ReactEvent.Focus.t => unit
-
-/** **********************************************************************
- * Firebase Types (some of these are defined in FirebaseAdapter.res)
- */
-
-type dbApp
-type dbDatabase
-type dbReference
-type dbSnapshot
-
-type dbConnection = {
-    app: dbApp,
-    db: dbDatabase
-}
-
-type dbConnectionStatus =
-    | NotConnected
-    | Connecting
-    | Connected(dbConnection)
-
-type dbConnectionSetter = (dbConnectionStatus => dbConnectionStatus) => unit
-
-type dbConfig = {
-    apiKey            : string,
-    authDomain        : string,
-    databaseURL       : string,
-    projectId         : string,
-    storageBucket     : string,
-    messagingSenderId : string,
-    appId             : string,
-}
-
-@deriving(jsConverter)
-@decco type phase = [
-    | #DaytimeWaiting
-    | #NightWaiting
-    | #NightChoiceWitches
-    | #NightConfirmWitches
-    | #NightChoiceConstable
-    | #NightConfirmConstable
-]
-
-@deriving(jsConverter)
-@decco type decision = [
-    | #Yes
-    | #No
-    | #Undecided
-]
-
-type dbObservable =
-    | GameSubject
-    | MasterPhaseSubject
-    | MasterPlayersSubject
-    | MasterSeatingSubject
-    | MasterNumberWitchesSubject
-    | ChooseWitchesSubject
-    | ChooseConstableSubject
-    | ConfirmWitchesSubject
-    | ConfirmConstableSubject
-
-type dbRecord = {
-    masterGameId: GameTypeCodec.gameId,
-    masterPhase: phase,
-    masterPlayers: array<player>,
-    masterSeating: string,
-    masterNumberWitches: string,
-    slaveChoiceWitches: player,
-    slaveChoiceConstable: player,
-    slaveConfirmWitches: decision,
-    slaveConfirmConstable: decision,
-    updatedAt: string,
-}
-
-/** **********************************************************************
- * Game Types
- */
 
 @decco type gameState = {
     gameType: GameTypeCodec.t,
@@ -225,4 +153,77 @@ type addressed =
     | Witch
     | Witches
     | Constable
+
+/** **********************************************************************
+ * Firebase Types
+ */
+
+// These are defined in FirebaseAdapter.res through bindings
+type dbApp
+type dbDatabase
+type dbReference
+type dbSnapshot
+
+type dbConnection = {
+    app: dbApp,
+    db: dbDatabase
+}
+
+type dbConnectionStatus =
+    | NotConnected
+    | Connecting
+    | Connected(dbConnection)
+
+type dbConnectionSetter = (dbConnectionStatus => dbConnectionStatus) => unit
+
+type dbConfig = {
+    apiKey            : string,
+    authDomain        : string,
+    databaseURL       : string,
+    projectId         : string,
+    storageBucket     : string,
+    messagingSenderId : string,
+    appId             : string,
+}
+
+type dbObservable =
+    | GameSubject
+    | MasterPhaseSubject
+    | MasterPlayersSubject
+    | MasterSeatingSubject
+    | MasterNumberWitchesSubject
+    | ChooseWitchesSubject
+    | ChooseConstableSubject
+    | ConfirmWitchesSubject
+    | ConfirmConstableSubject
+
+@deriving(jsConverter)
+@decco type phase = [
+    | #DaytimeWaiting
+    | #NightWaiting
+    | #NightChoiceWitches
+    | #NightConfirmWitches
+    | #NightChoiceConstable
+    | #NightConfirmConstable
+]
+
+@deriving(jsConverter)
+@decco type decision = [
+    | #Yes
+    | #No
+    | #Undecided
+]
+
+@decco type dbRecord = {
+    masterGameId: GameTypeCodec.gameId,
+    masterPhase: phase,
+    masterPlayers: array<player>,
+    masterSeating: SeatingCodec.t,
+    masterNumberWitches: nrWitches,
+    slaveChoiceWitches: player,
+    slaveChoiceConstable: player,
+    slaveConfirmWitches: decision,
+    slaveConfirmConstable: decision,
+    updatedAt: string,
+}
 
