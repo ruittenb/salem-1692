@@ -17,6 +17,11 @@ let encoder: Decco.encoder<language> = (lanugage: language): Js.Json.t => {
     lanugage->languageToJs->Decco.stringToJson
 }
 
+// note: type Decco.decodeError has members
+// - path: string
+// - message: string
+// - value: Js.Json.t
+
 let decoder: Decco.decoder<language> = (
     json: Js.Json.t
 ): Belt.Result.t<language, Decco.decodeError> => {

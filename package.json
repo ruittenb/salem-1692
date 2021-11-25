@@ -12,8 +12,10 @@
   "license": "GNU GPLv3",
   "main": "dist/index.html",
   "scripts": {
+    "all": "make all",
     "build": "make build",
-    "watch": "make watch"
+    "watch": "make watch",
+    "serve": "make serve"
   },
   "devDependencies": {
     "browserify": "^17.0.0",

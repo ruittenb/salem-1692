@@ -22,10 +22,15 @@ let make = (
         Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
             Utils.logDebug(p ++ "About to install game listener")
             FirebaseClient.listen(dbConnection, gameId, GameSubject, (dbRecordStr: string) => {
-                dbRecordStr
-                    ->Js.Json.string
-                    ->dbRecord_decode // this yields a Result<dbRecord, Decco.decodeError>
-                    ->Utils.resultForEach(dbRecord => {
+                switch (dbRecordStr->Js.Json.string->dbRecord_decode) {
+                    | Error(deccoError) => {
+                        Utils.logError(
+                            deccoError.path ++ ": " ++ deccoError.message ++ ": " ++
+                            deccoError.value->Js.Json.decodeString->Belt.Option.getWithDefault("<None>")
+                        )
+                    }
+                    | Ok(dbRecord) => {
+                        Utils.logDebug(p ++ "Received dbRecord")
                         goToPage(_prev => dbRecord.masterPhase->FirebaseClient.getPage)
                         setGameState(prevGameState => {
                             {
@@ -44,7 +49,8 @@ let make = (
                         //slaveChoiceConstable: player,
                         //slaveConfirmWitches: decision,
                         //slaveConfirmConstable: decision,
-                    })
+                    }
+                }
             })
         })
         Some(() => { // Cleanup: remove listener

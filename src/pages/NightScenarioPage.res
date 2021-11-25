@@ -83,7 +83,7 @@ let make = (
 
     // if we're hosting, save turn state to firebase after every change
     React.useEffect1(() => {
-        let nrWitches = turnState.nrWitches->nrWitchesToJs
+        let nrWitches = turnState.nrWitches->NumerusCodec.numerusToJs
         let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
         let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
         Utils.logDebugStyled(
@@ -131,7 +131,7 @@ let make = (
     }
 
     // Store confirmation in db
-    let continueFromWitchDecision = (decision: decision): unit => {
+    let continueFromWitchDecision = (decision: DecisionCodec.t): unit => {
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
             FirebaseClient.saveGameConfirmations(dbConnection, gameState.gameId, decision, #Undecided)
         })
@@ -141,7 +141,7 @@ let make = (
             | #Undecided => ()
         }
     }
-    let continueFromConstableDecision = (decision: decision): unit => {
+    let continueFromConstableDecision = (decision: DecisionCodec.t): unit => {
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
             FirebaseClient.saveGameConfirmations(dbConnection, gameState.gameId, #Yes, decision)
         })

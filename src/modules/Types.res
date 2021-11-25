@@ -33,26 +33,10 @@ let playersFromJson = (playerArrayJson: Js.Json.t): option<array<string>> => {
     playerArrayJson
         ->Js.Json.decodeArray
         ->Belt.Option.map(playerJsonArray => {
-            playerJsonArray->Js.Array2.map(playerJson => {
-                playerJson->Js.Json.decodeString
-            })
+            playerJsonArray
+                ->Js.Array2.map(Js.Json.decodeString)
                 ->Belt.Array.keepMap(x => x)
         })
-}
-
-@decco type nrWitches =
-    | One
-    | More
-
-let nrWitchesToJs = (n: nrWitches): string => switch n {
-    | One  => "One"
-    | More => "More"
-}
-
-let nrWitchesFromJs = (n: string): Belt.Result.t<nrWitches, string> => switch n {
-    | "One"  => Ok(One)
-    | "More" => Ok(More)
-    | _      => Error("Unknown number of witches")
 }
 
 @decco type gameState = {
@@ -68,7 +52,7 @@ let nrWitchesFromJs = (n: string): Belt.Result.t<nrWitches, string> => switch n 
 type gameStateSetter = (gameState => gameState) => unit
 
 type turnState = {
-    nrWitches: nrWitches,
+    nrWitches: NumerusCodec.t,
     choiceWitches: option<player>,
     choiceConstable: option<player>,
 }
@@ -197,33 +181,16 @@ type dbObservable =
     | ConfirmWitchesSubject
     | ConfirmConstableSubject
 
-@deriving(jsConverter)
-@decco type phase = [
-    | #DaytimeWaiting
-    | #NightWaiting
-    | #NightChoiceWitches
-    | #NightConfirmWitches
-    | #NightChoiceConstable
-    | #NightConfirmConstable
-]
-
-@deriving(jsConverter)
-@decco type decision = [
-    | #Yes
-    | #No
-    | #Undecided
-]
-
 @decco type dbRecord = {
     masterGameId: GameTypeCodec.gameId,
-    masterPhase: phase,
+    masterPhase: PhaseCodec.t,
     masterPlayers: array<player>,
     masterSeating: SeatingCodec.t,
-    masterNumberWitches: nrWitches,
+    masterNumberWitches: NumerusCodec.t,
     slaveChoiceWitches: player,
     slaveChoiceConstable: player,
-    slaveConfirmWitches: decision,
-    slaveConfirmConstable: decision,
+    slaveConfirmWitches: DecisionCodec.t,
+    slaveConfirmConstable: DecisionCodec.t,
     updatedAt: string,
 }
 
