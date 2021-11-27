@@ -3,6 +3,7 @@
  */
 
 open Types
+open DecisionCodec
 
 let gamesKeyPrefix = "/games/"
 
@@ -13,7 +14,7 @@ let gamesKeyPrefix = "/games/"
 let getPhase = (
     page: page,
     step: scenarioStep,
-): phase => {
+): PhaseCodec.t => {
     switch (page, step) {
         | (Title,                  _) => #DaytimeWaiting
         | (Setup,                  _) => #DaytimeWaiting
@@ -39,7 +40,7 @@ let getPhase = (
 }
 
 let getPage = (
-    phase: phase
+    phase: PhaseCodec.t
 ): page => {
     switch phase {
         | #DaytimeWaiting        => DaytimeWaiting
@@ -60,8 +61,8 @@ let transformToDbRecord = (
     masterGameId: gameState.gameId,
     masterPhase: getPhase(currentPage, scenarioStep),
     masterPlayers: gameState.players,
-    masterSeating: SeatingCodec.seatingToJs(gameState.seating),
-    masterNumberWitches: turnState.nrWitches->nrWitchesToJs,
+    masterSeating: gameState.seating,
+    masterNumberWitches: turnState.nrWitches,
     slaveChoiceWitches: turnState.choiceWitches->Belt.Option.getWithDefault(""),
     slaveChoiceConstable: turnState.choiceConstable->Belt.Option.getWithDefault(""),
     slaveConfirmWitches: #Undecided,
@@ -185,7 +186,7 @@ let saveGameConfirmation = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId,
     subject: dbObservable,
-    confirmation: decision,
+    confirmation: DecisionCodec.t,
 ) => {
     updateGameKey(dbConnection, gameId, FirebaseAdapter.subjectKey(subject), confirmation->decisionToJs)
         ->Utils.catchLogAndIgnore()
@@ -194,8 +195,8 @@ let saveGameConfirmation = (
 let saveGameConfirmations = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId,
-    confirmWitches: decision,
-    confirmConstable: decision,
+    confirmWitches: DecisionCodec.t,
+    confirmConstable: DecisionCodec.t,
 ): unit => {
     Promise.all([
         updateGameKey(dbConnection, gameId, "slaveConfirmWitches", confirmWitches->decisionToJs),
@@ -211,7 +212,7 @@ let saveGamePhase = (
     maybeScenarioStep: option<scenarioStep>,
 ): unit => {
     let scenarioStep = maybeScenarioStep->Belt.Option.getWithDefault(Pause(0.))
-    let phase = getPhase(page, scenarioStep)->phaseToJs
+    let phase = getPhase(page, scenarioStep)->PhaseCodec.phaseToJs
     updateGameKey(dbConnection, gameId, "masterPhase", phase)
         ->Utils.catchLogAndIgnore()
 }

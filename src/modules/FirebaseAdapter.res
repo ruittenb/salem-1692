@@ -7,16 +7,16 @@
 open Types
 open Utils
 
-@module("firebase/app") external initializeApp: (dbConfig) => dbApp = "initializeApp"
-@module("firebase/database") external getDatabase: (dbApp => dbDatabase) = "getDatabase"
-@module("firebase/database") external getRef: (dbDatabase, string) => dbReference = "ref"
-@module("firebase/database") external onConnect: (dbDatabase, () => unit) => unit = "onConnect"
-@module("firebase/database") external goOffline: (dbDatabase) => unit = "goOffline"
-@module("firebase/database") external onValue: (dbReference, (dbSnapshot) => unit) => unit = "onValue"
-@module("firebase/database") external off: (dbReference) => unit = "off"
-@module("firebase/database") external set: (dbReference, 'data) => Promise.t<unit> = "set"
-@module("firebase/database") external remove: (dbReference) => unit = "remove"
-@send external getValue: (dbSnapshot) => 'data = "val"
+@module("firebase/app")      external initializeApp: (dbConfig)                    => dbApp           = "initializeApp"
+@module("firebase/database") external getDatabase:   (dbApp)                       => dbDatabase      = "getDatabase"
+@module("firebase/database") external getRef:        (dbDatabase, string)          => dbReference     = "ref"
+@module("firebase/database") external onConnect:     (dbDatabase, () => unit)      => unit            = "onConnect"
+@module("firebase/database") external goOffline:     (dbDatabase)                  => unit            = "goOffline"
+@module("firebase/database") external onValue: (dbReference, (dbSnapshot) => unit) => unit            = "onValue"
+@module("firebase/database") external off:           (dbReference)                 => unit            = "off"
+@module("firebase/database") external set:           (dbReference, 'data)          => Promise.t<unit> = "set"
+@module("firebase/database") external remove:        (dbReference)                 => unit            = "remove"
+@send                        external getValue:      (dbSnapshot)                  => 'data           = "val"
 
 let p = "[FirebaseAdapter] "
 
@@ -47,7 +47,7 @@ let connect = (): Promise.t<dbConnection> => {
         try {
             let app = initializeApp(Constants.firebaseConfig)
             let db = getDatabase(app)
-            let connectionInfoRef = getRef(db, connectionInfoKey);
+            let connectionInfoRef = getRef(db, connectionInfoKey)
             // We will immediately receive a snapshot upon attaching the listener;
             // and then upon every change.
             onValue(connectionInfoRef, (snapshot) => {
@@ -66,7 +66,7 @@ let connect = (): Promise.t<dbConnection> => {
 let disconnect = (
     dbConnection: dbConnection
 ): unit => {
-    let connectionInfoRef = getRef(dbConnection.db, connectionInfoKey);
+    let connectionInfoRef = getRef(dbConnection.db, connectionInfoKey)
     off(connectionInfoRef)
     // We could go offline here, but then reconnecting would require a
     // different method than when connecting for the first time.
@@ -80,7 +80,7 @@ let disconnect = (
 
 let writeGame = (
     dbConnection: dbConnection,
-    dbRecord: dbRecord, // DbRecordCodec.dbRecord, // TODO
+    dbRecord: dbRecord,
     action: string, // "created" or "updated"
 ): Promise.t<unit> => {
     Promise.make((resolve, reject) => {

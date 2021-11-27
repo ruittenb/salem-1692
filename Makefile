@@ -24,9 +24,10 @@ all: build-minify ## Compile, bundle and minify everything. Identical to 'make b
 .PHONY: mark
 mark: # Put "ready" in corner of terminal
 	@echo
-	@tput cup $$((`tput lines` - 1)) $$((`tput cols` - 5))
-	@printf `tput bold`ready`tput sgr0`
-	@tput cuu1 && tput cuu1 && echo
+	@tput cup $$((`tput lines` - 1)) $$((`tput cols` - 7))
+	@tput bold && tput rev
+	@printf " ready."
+	@tput sgr0 && tput cuu1 && tput cuu1 && echo
 
 %.min.css: %.css
 	@# descend into the directory in order to prevent corrupting URLs in CSS
