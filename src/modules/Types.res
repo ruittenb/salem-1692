@@ -64,6 +64,7 @@ type page =
     | SetupMusic
     | SetupPlayers
     | SetupPlayersForGame
+    | SetupNetwork
     | SetupMaster
     | SetupSlave
     | Credits

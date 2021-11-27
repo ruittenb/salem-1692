@@ -1,0 +1,26 @@
+
+StandAlone:
+
+- You may host a game so that people can join from another smartphone.
+- [ Host Game ]
+- You may join a game hosted on another smartphone.
+- [ Join Game ]
+
+Master:
+
+- You are hosting a game. People can join from another smartphone.
+- (details)
+- If you want to join a running game, you should stop hosting first.
+- [ Stop Hosting ]
+
+Slave:
+
+- Enter the code from bla bla...
+- (details)
+- [ Back ]
+
+- You have joined a running game. 
+- (details)
+- [ Leave Game ]
+
+
