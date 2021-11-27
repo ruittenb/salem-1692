@@ -39,14 +39,13 @@ let make = (
                                 seating: dbRecord.masterSeating
                             }
                         })
-                        setTurnState(prevTurnState => {
+                        setTurnState(_prevTurnState => {
                             {
-                                ...prevTurnState,
-                                nrWitches: dbRecord.masterNumberWitches
+                                nrWitches: dbRecord.masterNumberWitches,
+                                choiceWitches: dbRecord.slaveChoiceWitches === "" ? None : Some(dbRecord.slaveChoiceWitches),
+                                choiceConstable: dbRecord.slaveChoiceConstable === "" ? None : Some(dbRecord.slaveChoiceConstable)
                             }
                         })
-                        //slaveChoiceWitches: player,
-                        //slaveChoiceConstable: player,
                         //slaveConfirmWitches: decision,
                         //slaveConfirmConstable: decision,
                     }
