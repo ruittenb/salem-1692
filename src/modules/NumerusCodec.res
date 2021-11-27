@@ -18,7 +18,6 @@ let numerusFromJs = (n: string): Js.Option.t<numerus> => switch n {
     | _      => None
 }
 
-
 let encoder: Decco.encoder<numerus> = (numerus: numerus): Js.Json.t => {
     numerus->numerusToJs->Decco.stringToJson
 }

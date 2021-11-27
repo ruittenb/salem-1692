@@ -87,7 +87,7 @@ let writeGame = (
         try {
             let gameId = dbRecord.masterGameId
             let myGameRef = getRef(dbConnection.db, gameKey(gameId))
-            set(myGameRef, dbRecord)
+            set(myGameRef, dbRecord->dbRecord_encode)
                 ->Promise.then(() => {
                     Utils.logDebug(p ++ action ++ " game " ++ gameId)
                     resolve(. ignore()) // workaround to pass a unit argument
