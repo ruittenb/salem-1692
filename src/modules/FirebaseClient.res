@@ -228,12 +228,7 @@ let listen = (
     subject: dbObservable,
     callback: (string) => unit
 ): unit => {
-    FirebaseAdapter.listen(
-        dbConnection,
-        gameId,
-        FirebaseAdapter.subjectKey(subject),
-        callback
-    )
+    FirebaseAdapter.listen(dbConnection, gameId, subject, callback)
 }
 
 let stopListening = (
@@ -241,9 +236,5 @@ let stopListening = (
     gameId: GameTypeCodec.gameId,
     subject: dbObservable,
 ): unit => {
-    FirebaseAdapter.stopListening(
-        dbConnection,
-        gameId,
-        FirebaseAdapter.subjectKey(subject)
-    )
+    FirebaseAdapter.stopListening(dbConnection, gameId, subject)
 }

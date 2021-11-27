@@ -106,7 +106,15 @@ let make = (
         | NightConfirmWitches   => <NightConfirmPage
                                        addressed=witchOrWitches
                                        confirmationProcessor={
-                                           (_decision) => {
+                                           (decision) => {
+                                               Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+                                                   FirebaseClient.saveGameConfirmation(
+                                                       dbConnection,
+                                                       gameId,
+                                                       ConfirmWitchesSubject,
+                                                       decision,
+                                                   )
+                                               })
                                                goToPage(_prev => NightWaiting)
                                            }
                                        }
@@ -115,7 +123,15 @@ let make = (
         | NightConfirmConstable => <NightConfirmPage
                                        addressed=Constable
                                        confirmationProcessor={
-                                           (_decision) => {
+                                           (decision) => {
+                                               Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+                                                   FirebaseClient.saveGameConfirmation(
+                                                       dbConnection,
+                                                       gameId,
+                                                       ConfirmConstableSubject,
+                                                       decision,
+                                                   )
+                                               })
                                                goToPage(_prev => NightWaiting)
                                            }
                                        }
