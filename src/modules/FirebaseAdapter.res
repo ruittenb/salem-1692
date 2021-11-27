@@ -32,8 +32,8 @@ let subjectKey = (subject) => switch subject {
     | MasterPlayersSubject       => "masterPlayers"
     | MasterSeatingSubject       => "masterSeating"
     | MasterNumberWitchesSubject => "masterNumberWitches"
-    | ChooseWitchesSubject       => "slaveChoiceWitches"
-    | ChooseConstableSubject     => "slaveChoiceConstable"
+    | ChoiceWitchesSubject       => "slaveChoiceWitches"
+    | ChoiceConstableSubject     => "slaveChoiceConstable"
     | ConfirmWitchesSubject      => "slaveConfirmWitches"
     | ConfirmConstableSubject    => "slaveConfirmConstable"
 }
@@ -108,9 +108,10 @@ let writeGame = (
 let writeGameKey = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId,
-    key: string,
+    subject: dbObservable,
     value: string,
 ): Promise.t<unit> => {
+    let key = subjectKey(subject)
     Promise.make((resolve, reject) => {
         try {
             let myGameRef = getRef(dbConnection.db, gameKey(gameId) ++ "/" ++ key)

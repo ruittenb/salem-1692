@@ -26728,12 +26728,12 @@ function subjectKey(subject) {
       return "masterNumberWitches";
 
     case
-    /* ChooseWitchesSubject */
+    /* ChoiceWitchesSubject */
     5:
       return "slaveChoiceWitches";
 
     case
-    /* ChooseConstableSubject */
+    /* ChoiceConstableSubject */
     6:
       return "slaveChoiceConstable";
 
@@ -26802,7 +26802,8 @@ function writeGame(dbConnection, dbRecord, action) {
   });
 }
 
-function writeGameKey(dbConnection, gameId, key, value) {
+function writeGameKey(dbConnection, gameId, subject, value) {
+  var key = subjectKey(subject);
   return new Promise(function (resolve, reject) {
     try {
       var myGameRef = Database.ref(dbConnection.db, "/games/" + gameId + "/" + key);
@@ -27048,15 +27049,25 @@ function saveGameState(dbConnection, gameState, page, turnState, maybeScenarioSt
 }
 
 function saveGameTurnState(dbConnection, gameId, nrWitches, choiceWitches, choiceConstable) {
-  return Utils$Salem1692.catchLogAndIgnore(Promise.all([updateGameKey(dbConnection, gameId, "masterNumberWitches", nrWitches), updateGameKey(dbConnection, gameId, "slaveChoiceWitches", choiceWitches), updateGameKey(dbConnection, gameId, "slaveChoiceConstable", choiceConstable)]), []);
+  return Utils$Salem1692.catchLogAndIgnore(Promise.all([updateGameKey(dbConnection, gameId,
+  /* MasterNumberWitchesSubject */
+  4, nrWitches), updateGameKey(dbConnection, gameId,
+  /* ChoiceWitchesSubject */
+  5, choiceWitches), updateGameKey(dbConnection, gameId,
+  /* ChoiceConstableSubject */
+  6, choiceConstable)]), []);
 }
 
 function saveGameConfirmation(dbConnection, gameId, subject, confirmation) {
-  return Utils$Salem1692.catchLogAndIgnore(updateGameKey(dbConnection, gameId, FirebaseAdapter$Salem1692.subjectKey(subject), DecisionCodec$Salem1692.decisionToJs(confirmation)), undefined);
+  return Utils$Salem1692.catchLogAndIgnore(updateGameKey(dbConnection, gameId, subject, DecisionCodec$Salem1692.decisionToJs(confirmation)), undefined);
 }
 
 function saveGameConfirmations(dbConnection, gameId, confirmWitches, confirmConstable) {
-  return Utils$Salem1692.catchLogAndIgnore(Promise.all([updateGameKey(dbConnection, gameId, "slaveConfirmWitches", DecisionCodec$Salem1692.decisionToJs(confirmWitches)), updateGameKey(dbConnection, gameId, "slaveConfirmConstable", DecisionCodec$Salem1692.decisionToJs(confirmConstable))]), []);
+  return Utils$Salem1692.catchLogAndIgnore(Promise.all([updateGameKey(dbConnection, gameId,
+  /* ConfirmWitchesSubject */
+  7, DecisionCodec$Salem1692.decisionToJs(confirmWitches)), updateGameKey(dbConnection, gameId,
+  /* ConfirmConstableSubject */
+  8, DecisionCodec$Salem1692.decisionToJs(confirmConstable))]), []);
 }
 
 function saveGamePhase(dbConnection, gameId, page, maybeScenarioStep) {
@@ -27067,7 +27078,9 @@ function saveGamePhase(dbConnection, gameId, page, maybeScenarioStep) {
     _0: 0
   });
   var phase = PhaseCodec$Salem1692.phaseToJs(getPhase(page, scenarioStep));
-  return Utils$Salem1692.catchLogAndIgnore(updateGameKey(dbConnection, gameId, "masterPhase", phase), undefined);
+  return Utils$Salem1692.catchLogAndIgnore(updateGameKey(dbConnection, gameId,
+  /* MasterPhaseSubject */
+  1, phase), undefined);
 }
 
 function listen(dbConnection, gameId, subject, callback) {
@@ -29596,7 +29609,7 @@ function NightChoicePage(Props) {
         choiceConstable: undefined
       };
     }),
-    /* ChooseConstableSubject */
+    /* ChoiceConstableSubject */
     6) : (Utils$Salem1692.logDebug("[NightChoicePage] Clearing witches' choice from turn state..."), Curry._1(setTurnState, function (_prevTurnState) {
       return {
         nrWitches: turnState.nrWitches,
@@ -29604,7 +29617,7 @@ function NightChoicePage(Props) {
         choiceConstable: turnState.choiceConstable
       };
     }),
-    /* ChooseWitchesSubject */
+    /* ChoiceWitchesSubject */
     5);
     Utils$Salem1692.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection) {
       Utils$Salem1692.logDebug("[NightChoicePage] About to install choice listener");
