@@ -22,6 +22,7 @@ let getPhase = (
         | (SetupMusic,             _) => #DaytimeWaiting
         | (SetupPlayers,           _) => #DaytimeWaiting
         | (SetupPlayersForGame,    _) => #DaytimeWaiting
+        //| (SetupNetwork,           _) => #DaytimeWaiting
         | (SetupMaster,            _) => #DaytimeWaiting
         | (SetupSlave,             _) => #DaytimeWaiting
         | (Credits,                _) => #DaytimeWaiting
@@ -143,10 +144,10 @@ let updateGame = (
 let updateGameKey = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId,
-    key: string,
+    subject: dbObservable,
     value: string,
 ): Promise.t<unit> => {
-    FirebaseAdapter.writeGameKey(dbConnection, gameId, key, value)
+    FirebaseAdapter.writeGameKey(dbConnection, gameId, subject, value)
 }
 
 let deleteGame = (
@@ -175,9 +176,9 @@ let saveGameTurnState = (
     choiceConstable: string,
 ): unit => {
     Promise.all([
-        updateGameKey(dbConnection, gameId, "masterNumberWitches", nrWitches),
-        updateGameKey(dbConnection, gameId, "slaveChoiceWitches", choiceWitches),
-        updateGameKey(dbConnection, gameId, "slaveChoiceConstable", choiceConstable)
+        updateGameKey(dbConnection, gameId, MasterNumberWitchesSubject, nrWitches),
+        updateGameKey(dbConnection, gameId, ChoiceWitchesSubject, choiceWitches),
+        updateGameKey(dbConnection, gameId, ChoiceConstableSubject, choiceConstable)
     ])
         ->Utils.catchLogAndIgnore([])
 }
@@ -188,7 +189,7 @@ let saveGameConfirmation = (
     subject: dbObservable,
     confirmation: DecisionCodec.t,
 ) => {
-    updateGameKey(dbConnection, gameId, FirebaseAdapter.subjectKey(subject), confirmation->decisionToJs)
+    updateGameKey(dbConnection, gameId, subject, confirmation->decisionToJs)
         ->Utils.catchLogAndIgnore()
 }
 
@@ -199,8 +200,8 @@ let saveGameConfirmations = (
     confirmConstable: DecisionCodec.t,
 ): unit => {
     Promise.all([
-        updateGameKey(dbConnection, gameId, "slaveConfirmWitches", confirmWitches->decisionToJs),
-        updateGameKey(dbConnection, gameId, "slaveConfirmConstable", confirmConstable->decisionToJs)
+        updateGameKey(dbConnection, gameId, ConfirmWitchesSubject, confirmWitches->decisionToJs),
+        updateGameKey(dbConnection, gameId, ConfirmConstableSubject, confirmConstable->decisionToJs)
     ])
         ->Utils.catchLogAndIgnore([])
 }
@@ -213,7 +214,7 @@ let saveGamePhase = (
 ): unit => {
     let scenarioStep = maybeScenarioStep->Belt.Option.getWithDefault(Pause(0.))
     let phase = getPhase(page, scenarioStep)->PhaseCodec.phaseToJs
-    updateGameKey(dbConnection, gameId, "masterPhase", phase)
+    updateGameKey(dbConnection, gameId, MasterPhaseSubject, phase)
         ->Utils.catchLogAndIgnore()
 }
 
@@ -227,12 +228,7 @@ let listen = (
     subject: dbObservable,
     callback: (string) => unit
 ): unit => {
-    FirebaseAdapter.listen(
-        dbConnection,
-        gameId,
-        FirebaseAdapter.subjectKey(subject),
-        callback
-    )
+    FirebaseAdapter.listen(dbConnection, gameId, subject, callback)
 }
 
 let stopListening = (
@@ -240,9 +236,5 @@ let stopListening = (
     gameId: GameTypeCodec.gameId,
     subject: dbObservable,
 ): unit => {
-    FirebaseAdapter.stopListening(
-        dbConnection,
-        gameId,
-        FirebaseAdapter.subjectKey(subject)
-    )
+    FirebaseAdapter.stopListening(dbConnection, gameId, subject)
 }

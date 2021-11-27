@@ -1,4 +1,3 @@
-
 /** ****************************************************************************
  * SlavePage
  */
@@ -46,8 +45,6 @@ let make = (
                                 choiceConstable: dbRecord.slaveChoiceConstable === "" ? None : Some(dbRecord.slaveChoiceConstable)
                             }
                         })
-                        //slaveConfirmWitches: decision,
-                        //slaveConfirmConstable: decision,
                     }
                 }
             })
@@ -73,6 +70,15 @@ let make = (
                                                setTurnState(prevTurnState => {
                                                    { ...prevTurnState, choiceWitches: Some(player) }
                                                })
+                                               Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+                                                   FirebaseClient.saveGameTurnState(
+                                                       dbConnection,
+                                                       gameId,
+                                                       turnState.nrWitches->NumerusCodec.numerusToJs,
+                                                       player,
+                                                       turnState.choiceConstable->Belt.Option.getWithDefault(""),
+                                                   )
+                                               })
                                                goToPage(_prev => NightConfirmWitches)
                                            }
                                        }
@@ -84,6 +90,15 @@ let make = (
                                                setTurnState(prevTurnState => {
                                                    { ...prevTurnState, choiceConstable: Some(player) }
                                                })
+                                               Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+                                                   FirebaseClient.saveGameTurnState(
+                                                       dbConnection,
+                                                       gameId,
+                                                       turnState.nrWitches->NumerusCodec.numerusToJs,
+                                                       turnState.choiceWitches->Belt.Option.getWithDefault(""),
+                                                       player,
+                                                   )
+                                               })
                                                goToPage(_prev => NightConfirmConstable)
                                            }
                                        }
@@ -91,14 +106,34 @@ let make = (
         | NightConfirmWitches   => <NightConfirmPage
                                        addressed=witchOrWitches
                                        confirmationProcessor={
-                                           (_decision): unit => Utils.logDebug("confirmationProcessor for witches") // TODO
+                                           (decision) => {
+                                               Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+                                                   FirebaseClient.saveGameConfirmation(
+                                                       dbConnection,
+                                                       gameId,
+                                                       ConfirmWitchesSubject,
+                                                       decision,
+                                                   )
+                                               })
+                                               goToPage(_prev => NightWaiting)
+                                           }
                                        }
                                        goToPrevStep={ () => goToPage(_prev => NightChoiceWitches) }
                                    />
         | NightConfirmConstable => <NightConfirmPage
                                        addressed=Constable
                                        confirmationProcessor={
-                                           (_decision): unit => Utils.logDebug("confirmationProcessor for constable") // TODO
+                                           (decision) => {
+                                               Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+                                                   FirebaseClient.saveGameConfirmation(
+                                                       dbConnection,
+                                                       gameId,
+                                                       ConfirmConstableSubject,
+                                                       decision,
+                                                   )
+                                               })
+                                               goToPage(_prev => NightWaiting)
+                                           }
                                        }
                                        goToPrevStep={ () => goToPage(_prev => NightChoiceConstable) }
                                    />

@@ -32,8 +32,8 @@ let subjectKey = (subject) => switch subject {
     | MasterPlayersSubject       => "masterPlayers"
     | MasterSeatingSubject       => "masterSeating"
     | MasterNumberWitchesSubject => "masterNumberWitches"
-    | ChooseWitchesSubject       => "slaveChoiceWitches"
-    | ChooseConstableSubject     => "slaveChoiceConstable"
+    | ChoiceWitchesSubject       => "slaveChoiceWitches"
+    | ChoiceConstableSubject     => "slaveChoiceConstable"
     | ConfirmWitchesSubject      => "slaveConfirmWitches"
     | ConfirmConstableSubject    => "slaveConfirmConstable"
 }
@@ -108,9 +108,10 @@ let writeGame = (
 let writeGameKey = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId,
-    key: string,
+    subject: dbObservable,
     value: string,
 ): Promise.t<unit> => {
+    let key = subjectKey(subject)
     Promise.make((resolve, reject) => {
         try {
             let myGameRef = getRef(dbConnection.db, gameKey(gameId) ++ "/" ++ key)
@@ -185,10 +186,10 @@ let leaveGame = (
 let listen = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId,
-    subjectKey: string,
+    subject: dbObservable,
     callback: (string) => unit
 ): unit => {
-    let observableKey = gameKey(gameId) ++ "/" ++ subjectKey
+    let observableKey = gameKey(gameId) ++ "/" ++ subjectKey(subject)
     safeExec(
         // TODO What to do if this fails?
         () => getRef(dbConnection.db, observableKey)
@@ -197,8 +198,7 @@ let listen = (
         Utils.logDebug(p ++ "Listening on " ++ observableKey)
         onValue(observableRef, (snapshot) => {
             // We are going to get a snapshot immediately upon installing the listener.
-            // Since the observed key is always cleared in NightScenarioPage, we don't
-            // need to worry about this and we can let the observer deal with it.
+            // NightScenarioPage takes care of this, so we can ignore it here.
             let result: string = getValue(snapshot)
             Utils.logDebug(p ++ "Received data from " ++ observableKey ++ ": '" ++ result ++ "'")
             callback(result)
@@ -209,9 +209,9 @@ let listen = (
 let stopListening = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId,
-    subjectKey: string,
+    subject: dbObservable,
 ): unit => {
-    let observableKey = gameKey(gameId) ++ "/" ++ subjectKey
+    let observableKey = gameKey(gameId) ++ "/" ++ subjectKey(subject)
     safeExec(
         // TODO What to do if this fails?
         () => getRef(dbConnection.db, observableKey)

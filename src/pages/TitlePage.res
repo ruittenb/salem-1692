@@ -1,4 +1,3 @@
-
 /** ****************************************************************************
  * TitlePage
  */
@@ -24,7 +23,7 @@ let make = (
     <div id="title-page" className="page flex-vertical">
         <GearFloatingButton goToPage returnPage=currentPage />
         <Button label={t("Play Game")} onClick={ _event => goToPage(_prev => firstGamePage) } />
-        <Button label={t("Join Game")} onClick={ _event => goToPage(_prev => SetupSlave) } disabled=true />
+        <Button label={t("Join Game")} onClick={ _event => goToPage(_prev => SetupSlave) } />
         <Button label={t("Exit"     )} onClick={ _event => goToPage(_prev => Close) } className="last" />
     </div>
 }

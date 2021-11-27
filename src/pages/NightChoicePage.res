@@ -1,4 +1,3 @@
-
 /** ****************************************************************************
  * NightChoicePage
  */
@@ -35,7 +34,7 @@ let make = (
                                          ...turnState,
                                          choiceWitches: None,
                                      })
-                                     ChooseWitchesSubject
+                                     ChoiceWitchesSubject
                                  }
             | Constable       => {
                                      Utils.logDebug(p ++ "Clearing constable's choice from turn state...")
@@ -43,7 +42,7 @@ let make = (
                                          ...turnState,
                                          choiceConstable: None,
                                      })
-                                     ChooseConstableSubject
+                                     ChoiceConstableSubject
                                  }
         }
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
