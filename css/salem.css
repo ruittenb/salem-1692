@@ -28,6 +28,15 @@ body {
     font-size: 26px;
 }
 
+hr {
+    width: 80%;
+    height: 0px;
+    margin: 0;
+    border-color: #ad713a #ad713a black black;
+    border-width: 1px;
+    border-style: solid;
+}
+
 h1 {
     font-size: 64px;
     font-weight: bold;
