@@ -63,10 +63,6 @@ let make = (
             onClick={ _event => goToPage(_prev => SetupMusic) }
         />
         <Button
-            label={t("Host Game")}
-            onClick={ _event => goToPage(_prev => SetupMaster) }
-        />
-        <Button
             label={t("Credits")}
             onClick={ _event => goToPage(_prev => Credits) }
         />

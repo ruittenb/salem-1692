@@ -65,7 +65,6 @@ type page =
     | SetupPlayers
     | SetupPlayersForGame
     | SetupNetwork
-    | SetupMaster
     | SetupSlave
     | Credits
     // Master

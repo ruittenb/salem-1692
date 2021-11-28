@@ -88,7 +88,7 @@ let make = (
 
     let onBack = (_event) => {
         leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
-        goToPage(_prev => Title)
+        goToPage(_prev => SetupNetwork)
     }
 
     let onForward = (_event) => {
@@ -119,18 +119,18 @@ let make = (
     }
 
     let modusOperandi = switch gameState.gameType {
-        | Master =>
-            <>
-                <p className="left-aligned"> {React.string(t("You are currently hosting a game."))} </p>
-                <p> {React.string(t("If you want to join a running game, you should stop hosting first."))} </p>
-                <Spacer />
-                <Button
-                    label={t("Stop Hosting")}
-                    onClick={ _event => stopHosting(
-                        dbConnectionStatus, setDbConnectionStatus, gameState, setGameState
-                    ) }
-                />
-            </>
+        /* | Master => */
+        /*     <> */
+        /*         <p className="left-aligned"> {React.string(t("You are currently hosting a game."))} </p> */
+        /*         <p> {React.string(t("If you want to join a running game, you should stop hosting first."))} </p> */
+        /*         <Spacer /> */
+        /*         <Button */
+        /*             label={t("Stop Hosting")} */
+        /*             onClick={ _event => stopHosting( */
+        /*                 dbConnectionStatus, setDbConnectionStatus, gameState, setGameState */
+        /*             ) } */
+        /*         /> */
+        /*     </> */
         | Slave(_) | StandAlone =>
             <>
                 <p>

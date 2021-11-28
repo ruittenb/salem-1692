@@ -66,7 +66,7 @@ watch-css: ## Compile the css files; watch for changes
 		tput setaf $(CSS_COLOR);               \
 		echo '>>>> Minifying';                 \
 		tput sgr0;                             \
-		$(MAKE) compile-css mark;              \
+		$(MAKE) build-css mark;              \
 	done &
 
 .PHONY: watch-res

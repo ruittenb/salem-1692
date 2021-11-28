@@ -6,11 +6,13 @@
 
 open Types
 
+let p = "[Translator] "
+
 let lookup = (table: Js.Dict.t<string>, message: string, languageName: string) => {
     switch Js.Dict.get(table, message) {
         | Some(translation) => translation
         | None              => {
-            Js.log4("Warning: no translation found for", message, "in", languageName)
+            Js.log(p ++ "Warning: no translation found for " ++ message ++ " in " ++ languageName)
             message
         }
     }

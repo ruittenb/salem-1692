@@ -47,7 +47,7 @@ let make = (): React.element => {
                 setGameState(_prev => gameState)
                 Utils.ifMaster(
                     gameState.gameType,
-                    () => SetupMasterPage.startHosting(setDbConnectionStatus, gameState, setGameState)
+                    () => SetupNetworkPage.startHosting(gameState, setGameState, setDbConnectionStatus)
                 )
             })
         None // cleanup function
@@ -70,7 +70,6 @@ let make = (): React.element => {
         | SetupPlayers            => <SetupPlayersPage goToPage returnPage=Setup />
         | SetupPlayersForGame     => <SetupPlayersPage goToPage returnPage=Title />
         | SetupNetwork            => <SetupNetworkPage goToPage returnPage=Title />
-        | SetupMaster             => <SetupMasterPage goToPage />
         | SetupSlave              => <SetupSlavePage goToPage />
         | Credits                 => <CreditsPage goToPage />
         | Daytime                 => <DaytimePage goToPage />
