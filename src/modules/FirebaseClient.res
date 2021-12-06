@@ -23,7 +23,6 @@ let getPhase = (
         | (SetupPlayers,           _) => #DaytimeWaiting
         | (SetupPlayersForGame,    _) => #DaytimeWaiting
         | (SetupNetwork,           _) => #DaytimeWaiting
-        | (SetupSlave,             _) => #DaytimeWaiting
         | (Credits,                _) => #DaytimeWaiting
         | (Daytime,                _) => #DaytimeWaiting
         | (DaytimeWaiting,         _) => #DaytimeWaiting

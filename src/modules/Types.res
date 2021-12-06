@@ -25,6 +25,11 @@ type rotation =
     | RotOneHalf
     | RotThreeQuarters
 
+type codeValidity =
+    | InputHidden
+    | InputShown // validity unspecified
+    | InputShownAndInvalid
+
 @decco type player = string
 @decco type players = array<player>
 
@@ -65,7 +70,6 @@ type page =
     | SetupPlayers
     | SetupPlayersForGame
     | SetupNetwork
-    | SetupSlave
     | Credits
     // Master
     | Daytime

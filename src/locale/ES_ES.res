@@ -29,7 +29,7 @@ let table = Js.Dict.fromArray([
     ("Not connected", "No conectado"),
     ("Connecting...", "Conectando..."),
     ("Connected.", "Conectado."),
-    ("It is possible to join a game running on another smartphone.", `Es posible unirse a un juego en progreso en otro smartphone.`),
+    ("You can join a game running on another smartphone.", "Puedes unirte a un juego en progreso en otro smartphone."),
     (`Take the other smartphone and look in the app under Settings → Host Game. Then enter the game code here.`, `Tome el otro smartphone y busque en la aplicación en Configuración → Albergar juego. Luego ingrese el código aquí.`),
     ("It is possible to join this game from another smartphone.", `Es posible unirse a este juego desde otro smartphone.`),
     ("Take the other smartphone and look in the app under Join Game. Then enter the following game code there.", `Tome el otro smartphone y busque en la aplicación en Unirse a un juego. Luego ingrese el siguiente código allí.`),
