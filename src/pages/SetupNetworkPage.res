@@ -140,7 +140,7 @@ let getModusOperandi = (
     | (StandAlone, _, InputHidden) =>
                         <>
                             <h2> {React.string(t("Be a Host"))} </h2>
-                            <p> {React.string(t("You can host a game so that people can join from another smartphone."))} </p>
+                            <p> {React.string(t("You can host a game so that players can join from another smartphone."))} </p>
                             <Spacer />
                             <Button
                                 label={t("Start Hosting")}
