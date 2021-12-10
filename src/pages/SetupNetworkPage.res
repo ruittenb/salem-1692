@@ -198,9 +198,6 @@ let getModusOperandi = (
                                 className="icon-right icon-forw condensed-nl"
                                 onClick=(_event => goToPage(_prev => Daytime)) // TODO
                             />
-                            <Rule />
-                            <h2> {React.string(t("Be a Guest"))} </h2>
-                            <p> {React.string(t("If you want to join a running game, you should stop hosting first."))} </p>
                             <Button
                                 label={t("Stop Hosting")}
                                 className="condensed-nl"
@@ -209,6 +206,10 @@ let getModusOperandi = (
                                     gameState, setGameState,
                                 ) }
                             />
+                            <Rule />
+                            <h2> {React.string(t("Be a Guest"))} </h2>
+                            <p> {React.string(t("If you want to join a running game, you must stop hosting first."))} </p>
+                            <Spacer />
                         </>
     | (StandAlone, dbConnectionStatus, slaveGameIdValidity)
     | (Slave(_), dbConnectionStatus, slaveGameIdValidity) =>
@@ -250,13 +251,13 @@ let getModusOperandi = (
                                 gameState, setGameState,
                                 setSlaveGameIdValidity,
                             )} />
-                            <Rule />
-                            <h2> {React.string(t("Be a Host"))} </h2>
-                            <p> {React.string(t("If you want to host a game so that others can join, you should leave this screen first."))} </p>
                             <Button label={t("Back")} className="icon-left icon-back" onClick={(_event) => {
                                 leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
                                 goToPage(_prev => SetupNetwork)
                             }} />
+                            <Rule />
+                            <h2> {React.string(t("Be a Host"))} </h2>
+                            <p> {React.string(t("If you want to host a game so that others can join, you should leave this screen first."))} </p>
                         </>
 }
 
