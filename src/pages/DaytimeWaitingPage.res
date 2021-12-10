@@ -19,7 +19,7 @@ let make = (
         <Button
             label={t("Abort")}
             className="icon-left icon-abort"
-            onClick={ _event => goToPage(_prev => SetupSlave) }
+            onClick={ _event => goToPage(_prev => SetupNetwork) }
         />
     </div>
 }

@@ -200,7 +200,9 @@ let listen = (
             // We are going to get a snapshot immediately upon installing the listener.
             // NightScenarioPage takes care of this, so we can ignore it here.
             let result: string = getValue(snapshot)
-            Utils.logDebug(p ++ "Received data from " ++ observableKey ++ ": '" ++ result ++ "'")
+            if (Constants.debug) {
+                Js.log2(p ++ "Received data from " ++ observableKey ++ ":", result)
+            }
             callback(result)
         })
     })
