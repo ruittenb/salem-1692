@@ -293,6 +293,12 @@ input[type=text].id-input {
     width: 46%;
 }
 
+#canvas-hider {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
 /** ****************************************************************************
  * Title Page
  */
