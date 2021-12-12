@@ -614,5 +614,5 @@ var QRCode;
 
 // Addition René Uittenbogaard: for interop with ReScript
 window.QRCode = QRCode
-window.getQrCode = (domNode, params) => new window.QRCode(domNode, params);
+window.createQrCode = (domNode, params) => new window.QRCode(domNode, params);
 

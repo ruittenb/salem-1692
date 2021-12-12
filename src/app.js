@@ -1,4 +1,3 @@
-
 /** ****************************************************************************
  * App
  *
@@ -7,6 +6,7 @@
 
 // Main Salem Moderator code
 import * as Main from './Main.bs';
+import qrCodeParser from 'qrcode-parser';
 
 /** **********************************************************************
  * Register serviceworker if supported
@@ -32,6 +32,7 @@ if ('serviceWorker' in navigator) {
  */
 
 window.salemAppVersion = "0.42.1";
+window.qrCodeParser = qrCodeParser;
 
 /** **********************************************************************
  * Run the game. Specify the game's DOM node id.

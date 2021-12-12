@@ -2,11 +2,4 @@
  - rework night eyes
  - button "abort connecting"
 
- - take photo
-   - https://davidwalsh.name/browser-camera
- - get image from canvas canvas.toDataURL()
-   - https://stackoverflow.com/questions/10257781/can-i-get-image-from-canvas-element-and-use-it-in-img-src-tag
-   - https://www.w3schools.com/tags/canvas_getimagedata.asp
- - parse
-   - https://webcodeflow.com/online-qr-code-reader/
-
+ - reflect state in URL https://betterprogramming.pub/how-and-why-you-should-store-react-ui-state-in-the-url-f2013a204cb2

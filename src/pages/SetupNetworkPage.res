@@ -1,4 +1,3 @@
-
 /** ****************************************************************************
  * SetupNetworkPage
  */
@@ -232,6 +231,7 @@ let getModusOperandi = (
                                     setSlaveGameIdValidity(_prev => InputShownAndInvalid)
                                 }}
                             />
+                            <Capture size=150 callback={(_gameId) => ()} />
                             <p>
                                 {
                                     let slaveConnectionStatus = switch (dbConnectionStatus) {
