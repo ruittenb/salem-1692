@@ -187,10 +187,10 @@ let getModusOperandi = (
                                 ))}
                             </p>
                             <Spacer />
-                            <div className="id-input"> {React.string(gameState.gameId)} </div>
-                            <Spacer />
-                            <QR value=gameState.gameId />
-                            <Spacer />
+                            <div className="input-and-icon">
+                                <div className="id-input"> {React.string(gameState.gameId)} </div>
+                                <QrIcon value=gameState.gameId />
+                            </div>
                             <Spacer />
                             <Button
                                 label={t("Play Game")}
@@ -231,7 +231,7 @@ let getModusOperandi = (
                                     setSlaveGameIdValidity(_prev => InputShownAndInvalid)
                                 }}
                             />
-                            <Capture size=150 callback={(_gameId) => ()} />
+                            <Capture size=250 callback={(_gameId) => ()} />
                             <p>
                                 {
                                     let slaveConnectionStatus = switch (dbConnectionStatus) {

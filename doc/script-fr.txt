@@ -6,7 +6,7 @@ B. Quand tout le monde a fermé les yeux, la sorcière se réveille.
 
 E. La sorcière s'ouvre les yeux et sans faire de bruit, elle décide qui
    aura le chat noir.
-   Elle peut choisir elle-même.
+   Elle peut choisir soi-même.
 
 H. La sorcière a fait son choix et se referme les yeux.
 
@@ -27,7 +27,7 @@ J. Les sorcières ont fait leur choix et se referment les yeux.
 
 M. Quand les sorcières se sont refermés les yeux, le shérif se réveille.
    Le shérif décide qui va être protégé cette nuit.
-   Il ne peut pas choisir lui-même.
+   Il ne peut pas choisir soi-même.
 
 N. Le shérif a fait son choix et se referme les yeux.
 

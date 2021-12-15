@@ -67,10 +67,33 @@ img.sound-image {
 img.sound-image.greyed {
     filter: grayscale(1);
 }
-div#qr-code {
+img.qr-icon {
+    width: 32px;
+    height: 32px;
+    margin: 0 5px;
+    border: 1px solid #555;
+    background-color: white;
+}
+#qr-code {
+    display: block;
+    position: absolute;
     padding: 4px;
     border: 3px solid black;
     background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* center the QR code on the page */
+}
+
+#mask {
+    display: block;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 input[type=text] {
@@ -121,10 +144,12 @@ p.left-aligned {
 }
 
 div.id-input {
+    display: inline-block;
+    margin-left: 42px; /* obtained by trial and error */
     background-color: #eee;
 }
 div.id-input,
-input[type=text].id-input {
+input[type=text].id-input /* for higher priority */ {
     border: 3px solid #666;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
@@ -132,6 +157,11 @@ input[type=text].id-input {
     text-align: center;
     padding: 6px 0;
     width: 50%;
+}
+
+.input-and-icon {
+    width: 100%;
+    text-align: center;
 }
 
 .nl_NL .page .condensed-nl {
@@ -398,6 +428,13 @@ input[type=text].id-input {
     padding: 0 5px 0 25px;
     text-indent: -20px;
     line-height: 1.4;
+}
+
+#credits-page p.noblur {
+    /* necessary for correct positioning of the mask:
+     * the <p> containing the mask should have this style applied
+     */
+    backdrop-filter: none;
 }
 
 #credits-page p::first-line {

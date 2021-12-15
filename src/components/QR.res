@@ -64,6 +64,6 @@ let make = (
     })
 
     // component
-    <div id={elementId} style={style} />
+    <span id={elementId} style />
 }
 

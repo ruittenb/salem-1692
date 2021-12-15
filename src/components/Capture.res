@@ -66,26 +66,26 @@ let make = (
 
     let mediaFlags: mediaFlags = { video: true }
     let startRecording = (videoElement: Dom.htmlVideoElement): bool => {
-        switch (maybeGetUserMedia) {
-            | None               => false
-            | Some(getUserMedia) => getUserMedia(mediaFlags)
-                                        ->Promise.then((stream: stream) => {
-                                            videoElement->setSrcObject(stream)
-                                            videoElement->play
-                                            Promise.resolve()
-                                        })
-                                        ->replaceWith(true)
-        }
+        maybeGetUserMedia
+            ->Belt.Option.mapWithDefault(false, (getUserMedia) => {
+                getUserMedia(mediaFlags)
+                    ->Promise.then((stream: stream) => {
+                        videoElement->setSrcObject(stream)
+                        videoElement->play
+                        Promise.resolve()
+                    })
+                    ->replaceWith(true)
+            })
     }
     // Perform document.getElementsByTagName('video')[0].srcObject.getTracks()[0].stop()
     let stopRecording = (maybeVideoElement): unit => {
-        switch (maybeVideoElement) {
-            | None               => ()
-            | Some(videoElement) => videoElement
-                                        ->getSrcObject
-                                        ->getTracks
-                                        ->Belt.Array.forEach(stop)
-        }
+        maybeVideoElement
+            ->Belt.Option.mapWithDefault((), (videoElement) => {
+                videoElement
+                    ->getSrcObject
+                    ->getTracks
+                    ->Belt.Array.forEach(stop)
+            })
     }
 
     // only after mounting the component
