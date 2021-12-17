@@ -47,7 +47,12 @@ let make = (
         </p>
         <p>
             <span> {React.string(t("Voice actors: "))} </span>
-            {React.string("Helmi Megens, Mario Ruiz, Paul Scholey")}
+            {React.string("Helmi Megens, Mario Ruiz, Paul Scholey, ")}
+            <a href="https://www.fiverr.com/mrvoice/record-a-professional-german-voice-over">
+                {React.string("Christopher Badziong")}
+            </a> spacedComma
+            {React.string(t("Licensed under") ++ " ")}
+            <a href="http://creativecommons.org/licenses/by-sa/4.0/"> {React.string("CC BY-SA 4.0")} </a>
         </p>
         <p>
             <span> {React.string(t("Libraries: "))} </span>

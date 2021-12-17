@@ -30,7 +30,7 @@ let make = (
                 | #en_US => ("icon-left flag-us", t("English"))
                 | #es_ES => ("icon-left flag-es", t(`Español`))
                 | #fr_FR => ("icon-left flag-fr", t(`Français`) ++ " *")
-                | #de_DE => ("icon-left flag-de", t("Deutsch") ++ " *")
+                | #de_DE => ("icon-left flag-de", t("Deutsch"))
                 | #nl_NL => ("icon-left flag-nl", t("Nederlands"))
             }
             <Button key={label} label className onClick />
