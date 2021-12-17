@@ -1,6 +1,6 @@
 {
   "name": "salem-1692",
-  "version": "0.41.0",
+  "version": "0.42.0",
   "namespace": true,
   "reason": { "react-jsx": 3 },
   "bsc-flags": [ "-bs-super-errors" ],
