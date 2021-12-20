@@ -22,8 +22,8 @@ type stream
 type track
 type canvasContext
 
-external unsafeAsHtmlCanvasElement : Dom.element => Dom.htmlCanvasElement = "%identity"
 external unsafeAsHtmlVideoElement : Dom.element => Dom.htmlVideoElement = "%identity"
+external unsafeAsHtmlCanvasElement : Dom.element => Dom.htmlCanvasElement = "%identity"
 
 @send external createElement: (document, string) => Dom.htmlUnknownElement = "createElement"
 
@@ -65,16 +65,19 @@ let make = (
     }
 
     let mediaFlags: mediaFlags = { video: true }
-    let startRecording = (videoElement: Dom.htmlVideoElement): bool => {
-        maybeGetUserMedia
-            ->Belt.Option.mapWithDefault(false, (getUserMedia) => {
-                getUserMedia(mediaFlags)
-                    ->Promise.then((stream: stream) => {
-                        videoElement->setSrcObject(stream)
-                        videoElement->play
-                        Promise.resolve()
+    let startRecording = (maybeVideoElement: option<Dom.htmlVideoElement>): bool => {
+        maybeVideoElement
+            ->Belt.Option.mapWithDefault(false, (videoElement) => {
+                maybeGetUserMedia
+                    ->Belt.Option.mapWithDefault(false, (getUserMedia) => {
+                        getUserMedia(mediaFlags)
+                            ->Promise.then((stream: stream) => {
+                                videoElement->setSrcObject(stream)
+                                videoElement->play
+                                Promise.resolve()
+                            })
+                            ->replaceWith(true)
                     })
-                    ->replaceWith(true)
             })
     }
     // Perform document.getElementsByTagName('video')[0].srcObject.getTracks()[0].stop()
@@ -102,9 +105,7 @@ let make = (
         let maybeVideoElement: option<Dom.htmlVideoElement> = safeQuerySelector(videoElementId)
             ->Belt.Result.map(videoElement => videoElement->unsafeAsHtmlVideoElement)
             ->Belt.Result.mapWithDefault(None, x => Some(x))
-        let _maybeRecording: bool =
-            maybeVideoElement
-                ->Belt.Option.mapWithDefault(false, startRecording)
+        let _maybeRecording: bool = startRecording(maybeVideoElement)
 
         // Cleanup function
         Some(() => stopRecording(maybeVideoElement))
@@ -115,9 +116,10 @@ let make = (
         <video
             id={videoElementId}
             width={sizeString}
-            height={sizeString}
+            height="auto"
             // autoPlay=true
         />
+        // TODO add error message if recording was not granted
         <div id="canvas-hider">
             <canvas
                 id={canvasElementId}

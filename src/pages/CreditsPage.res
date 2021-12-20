@@ -35,7 +35,7 @@ let make = (
         <p className="noblur">
             <span> {React.string(t("App: "))} </span>
             <a href={Constants.siteUrl}> {React.string(t("website"))} </a>
-            <QrIcon value={Constants.siteUrl} />
+            <QrIcon mode={QrIcon.Scannable(Constants.siteUrl)} />
             {React.string(t("version") ++ " v" ++ salemAppVersion ++ ` René Uittenbogaard © 2021`)}
         </p>
         <p>
@@ -49,7 +49,7 @@ let make = (
         <p>
             <span> {React.string(t("Voice actors: "))} </span>
             {React.string("Helmi Megens, Mario Ruiz, Paul Scholey, ")}
-            <a href="https://www.fiverr.com/mrvoice/record-a-professional-german-voice-over">
+            <a href="https://www.fiverr.com/mrvoice">
                 {React.string("Christopher Badziong")}
             </a> spacedComma
             {React.string(t("Licensed under") ++ " ")}
