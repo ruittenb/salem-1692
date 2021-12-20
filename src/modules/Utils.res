@@ -145,6 +145,22 @@ let resultForEach = (
 }
 
 /**
+ * Reduce a tuple of maybes to a maybe of a tuple.
+ *
+ * Example:
+ *   (Some("string"), None)->optionTupleAnd
+ *   (Some("first"), Some("second"))->optionTupleAnd
+ */
+let optionTupleAnd = (
+    tupleOfMaybes: (option<'a>, option<'b>)
+): option<('a, 'b)> => {
+    switch (tupleOfMaybes) {
+        | (Some(a), Some(b)) => Some((a, b))
+        | _                  => None
+    }
+}
+
+/**
  * Call function if connection state reflects that we're connected to firebase
  */
 let ifConnected = (

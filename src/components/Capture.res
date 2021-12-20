@@ -15,6 +15,10 @@
 open Constants
 open Utils
 
+/** **********************************************************************
+ * External functions
+ */
+
 type mediaDevices
 type mediaFlags = { video: bool }
 type srcObject
@@ -36,16 +40,76 @@ external unsafeAsHtmlCanvasElement : Dom.element => Dom.htmlCanvasElement = "%id
 @send external getTracks: (srcObject) => array<track> = "getTracks"
 @send external stop: (track) => unit = "stop"
 
-// @set external setWidth: (Dom.htmlCanvasElement, int) => unit = "width"
-// @set external setHeight: (Dom.htmlCanvasElement, int) => unit = "height"
 @send external getContext: (Dom.htmlCanvasElement, string) => canvasContext = "getContext"
+@send external drawImage: (canvasContext, Dom.htmlVideoElement, int, int, int, int) => unit = "drawImage"
+@send external toDataURL: (Dom.htmlCanvasElement, string) => string = "toDataURL"
 
-@send external qrCodeParser: (string) => Promise.t<unit> = "qrCodeParser"
+@send external qrCodeParser: (Dom.window, string) => Promise.t<string> = "qrCodeParser"
+
+/** **********************************************************************
+ * Component
+ */
 
 let p = "[Capture] "
 
 let videoElementId = "qr-video"
 let canvasElementId = "qr-canvas"
+
+let mediaFlags: mediaFlags = { video: true }
+
+let startRecording = (
+    maybeVideoElement: option<Dom.htmlVideoElement>,
+    maybeGetUserMedia,
+): bool => {
+    maybeVideoElement
+        ->Belt.Option.mapWithDefault(false, (videoElement) => {
+            maybeGetUserMedia
+                ->Belt.Option.mapWithDefault(false, (getUserMedia) => {
+                    getUserMedia(mediaFlags)
+                        ->Promise.then((stream: stream) => {
+                            videoElement->setSrcObject(stream)
+                            videoElement->play
+                            Promise.resolve()
+                        })
+                        ->replaceWith(true)
+                })
+        })
+}
+
+// Perform document.getElementsById('qr-video').srcObject.getTracks()[0].stop()
+let stopRecording = (
+    maybeVideoElement: option<Dom.htmlVideoElement>,
+): unit => {
+    maybeVideoElement
+        ->Belt.Option.mapWithDefault((), (videoElement) => {
+            videoElement
+                ->getSrcObject
+                ->getTracks
+                ->Belt.Array.forEach(stop)
+        })
+}
+
+let captureAndParseFrame = (maybeVideoElement, maybeCanvasElement, callback): unit => {
+    (maybeVideoElement, maybeCanvasElement)
+        ->Utils.optionTupleAnd
+        ->Belt.Option.forEach(((videoElement, canvasElement)) => {
+            canvasElement
+                ->getContext("2d")
+                ->drawImage(videoElement, 0, 0, 640, 480)
+            window
+                ->qrCodeParser(canvasElement->toDataURL("image/png"))
+                ->Promise.then(res => {
+                    logDebug(p ++ "qrCodeParser returned: " ++ res);
+                    callback(res)
+                    Promise.resolve()
+                })
+                ->Promise.catch(error => {
+                    logDebug(p ++ "qrCodeParser returned: " ++ getExceptionMessage(error));
+                    Promise.resolve()
+                })
+                ->ignore
+        })
+}
 
 @react.component
 let make = (
@@ -64,51 +128,26 @@ let make = (
             None
     }
 
-    let mediaFlags: mediaFlags = { video: true }
-    let startRecording = (maybeVideoElement: option<Dom.htmlVideoElement>): bool => {
-        maybeVideoElement
-            ->Belt.Option.mapWithDefault(false, (videoElement) => {
-                maybeGetUserMedia
-                    ->Belt.Option.mapWithDefault(false, (getUserMedia) => {
-                        getUserMedia(mediaFlags)
-                            ->Promise.then((stream: stream) => {
-                                videoElement->setSrcObject(stream)
-                                videoElement->play
-                                Promise.resolve()
-                            })
-                            ->replaceWith(true)
-                    })
-            })
-    }
-    // Perform document.getElementsByTagName('video')[0].srcObject.getTracks()[0].stop()
-    let stopRecording = (maybeVideoElement): unit => {
-        maybeVideoElement
-            ->Belt.Option.mapWithDefault((), (videoElement) => {
-                videoElement
-                    ->getSrcObject
-                    ->getTracks
-                    ->Belt.Array.forEach(stop)
-            })
-    }
-
     // only after mounting the component
     React.useEffect0(() => {
         // Canvas context object for converting the snapshot to image
         let maybeCanvasElement: option<Dom.htmlCanvasElement> = safeQuerySelector(canvasElementId)
             ->Belt.Result.map(canvasElement => canvasElement->unsafeAsHtmlCanvasElement)
             ->Belt.Result.mapWithDefault(None, x => Some(x))
-        let _maybeCanvasContext: option<canvasContext> =
-            maybeCanvasElement
-                ->Belt.Option.map(canvasElement => canvasElement->getContext("2d"))
 
         // this is a Some() when the element node is found in the DOM
         let maybeVideoElement: option<Dom.htmlVideoElement> = safeQuerySelector(videoElementId)
             ->Belt.Result.map(videoElement => videoElement->unsafeAsHtmlVideoElement)
             ->Belt.Result.mapWithDefault(None, x => Some(x))
-        let _maybeRecording: bool = startRecording(maybeVideoElement)
+        let _maybeRecording: bool = startRecording(maybeVideoElement, maybeGetUserMedia)
+
+        // TODO install timer that snaps a picture every 0.5 s
 
         // Cleanup function
-        Some(() => stopRecording(maybeVideoElement))
+        Some(() => {
+            // TODO uninstall timer
+            stopRecording(maybeVideoElement)
+        })
     })
 
     // component
@@ -117,7 +156,7 @@ let make = (
             id={videoElementId}
             width={sizeString}
             height="auto"
-            // autoPlay=true
+            autoPlay=true
         />
         // TODO add error message if recording was not granted
         <div id="canvas-hider">

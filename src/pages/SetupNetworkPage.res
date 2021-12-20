@@ -94,12 +94,12 @@ let leaveGame = (dbConnectionStatus, setDbConnectionStatus, gameState, setGameSt
         Utils.logDebug(ps ++ "Leaving game " ++ gameId)
         FirebaseClient.leaveGame(dbConnection, gameId)
         FirebaseClient.disconnect(dbConnection)
-        setDbConnectionStatus(_prev => NotConnected)
     })
-        setGameState((prevGameState) => {
-            ...prevGameState,
-            gameType: StandAlone
-        })
+    setDbConnectionStatus(_prev => NotConnected)
+    setGameState((prevGameState) => {
+        ...prevGameState,
+        gameType: StandAlone
+    })
 }
 
 let tryPlayAsSlave = (goToPage, dbConnectionStatus, setDbConnectionStatus, gameState, setGameState, setSlaveGameIdValidity) => {

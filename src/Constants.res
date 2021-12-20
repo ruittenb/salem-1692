@@ -6,6 +6,7 @@ open Types
 
 type document
 type navigator
+@val external window: Dom.window = "window"
 @val external document: document = "document"
 @val external navigator: navigator = "navigator"
 @get external userAgent: (navigator) => string = "userAgent"
