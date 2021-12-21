@@ -42841,7 +42841,7 @@ if ('serviceWorker' in navigator) {
  */
 
 
-window.salemAppVersion = "0.42.1";
+window.salemAppVersion = "0.42.2";
 window.qrCodeParser = _qrcodeParser.default;
 /** **********************************************************************
  * Run the game. Specify the game's DOM node id.

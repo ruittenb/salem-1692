@@ -31,7 +31,7 @@ if ('serviceWorker' in navigator) {
  * Make some variables available for Rescript
  */
 
-window.salemAppVersion = "0.42.1";
+window.salemAppVersion = "0.42.2";
 window.qrCodeParser = qrCodeParser;
 
 /** **********************************************************************
