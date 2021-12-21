@@ -43230,7 +43230,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.startRecording = startRecording;
 exports.stopRecording = stopRecording;
 exports.captureAndParseFrame = captureAndParseFrame;
-exports.make = exports.mediaFlags = exports.canvasElementId = exports.videoElementId = exports.p = void 0;
+exports.make = exports.mediaFlags = exports.canvasElementId = exports.videoElementId = exports.snapInterval = exports.p = void 0;
 
 var Curry = _interopRequireWildcard(require("rescript/lib/es6/curry.js"));
 
@@ -43260,7 +43260,9 @@ exports.videoElementId = videoElementId;
 var canvasElementId = "qr-canvas";
 exports.canvasElementId = canvasElementId;
 var mediaFlags = {
-  video: true
+  video: {
+    facingMode: "environment"
+  }
 };
 exports.mediaFlags = mediaFlags;
 
@@ -43287,7 +43289,7 @@ function stopRecording(maybeVideoElement) {
 function captureAndParseFrame(maybeVideoElement, maybeCanvasElement, callback) {
   return Belt_Option.forEach(Utils$Salem1692.optionTupleAnd([maybeVideoElement, maybeCanvasElement]), function (param) {
     var canvasElement = param[1];
-    canvasElement.getContext("2d").drawImage(param[0], 0, 0, 640, 480);
+    canvasElement.getContext("2d").drawImage(param[0], 0, 0);
     $$Promise.$$catch(window.qrCodeParser(canvasElement.toDataURL("image/png")).then(function (res) {
       Utils$Salem1692.logDebug("[Capture] qrCodeParser returned: " + res);
 
@@ -43295,7 +43297,8 @@ function captureAndParseFrame(maybeVideoElement, maybeCanvasElement, callback) {
 
       return Promise.resolve(undefined);
     }), function (error) {
-      Utils$Salem1692.logDebug("[Capture] qrCodeParser returned: " + Utils$Salem1692.getExceptionMessage(error));
+      console.log("[Capture] qrCodeParser error: ", error);
+      Utils$Salem1692.logDebug("[Capture] qrCodeParser error: " + Utils$Salem1692.getExceptionMessage(error));
       return Promise.resolve(undefined);
     });
   });
@@ -43303,6 +43306,7 @@ function captureAndParseFrame(maybeVideoElement, maybeCanvasElement, callback) {
 
 function Capture(Props) {
   var size = Props.size;
+  var callback = Props.callback;
   var sizeString = String(size);
   var maybeGetUserMedia;
 
@@ -43318,7 +43322,7 @@ function Capture(Props) {
   }
 
   React.useEffect(function () {
-    Belt_Result.mapWithDefault(Belt_Result.map(Utils$Salem1692.safeQuerySelector(canvasElementId), function (canvasElement) {
+    var maybeCanvasElement = Belt_Result.mapWithDefault(Belt_Result.map(Utils$Salem1692.safeQuerySelector(canvasElementId), function (canvasElement) {
       return canvasElement;
     }), undefined, function (x) {
       return Caml_option.some(x);
@@ -43329,7 +43333,11 @@ function Capture(Props) {
       return Caml_option.some(x);
     });
     startRecording(maybeVideoElement, maybeGetUserMedia);
+    var snapTimer = setInterval(function (param) {
+      return captureAndParseFrame(maybeVideoElement, maybeCanvasElement, callback);
+    }, 800);
     return function (param) {
+      clearInterval(snapTimer);
       return stopRecording(maybeVideoElement);
     };
   }, []);
@@ -43347,6 +43355,8 @@ function Capture(Props) {
   })));
 }
 
+var snapInterval = 800;
+exports.snapInterval = snapInterval;
 var make = Capture;
 /* react Not a pure module */
 
@@ -47687,7 +47697,7 @@ function CreditsPage(Props) {
     href: "http://creativecommons.org/licenses/by-sa/4.0/"
   }, "CC BY-SA 4.0")), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Libraries: ")), React.createElement("a", {
     href: "https://github.com/davidshimjs/qrcodejs"
-  }, "QRCode.js"), React.createElement("a", {
+  }, "QRCode.js"), spacedComma, React.createElement("a", {
     href: "https://www.npmjs.com/package/qrcode-parser"
   }, "qrcode-parser")), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Music: ")), trackList, "© ", React.createElement("a", {
     href: "https://incompetech.com/music/royalty-free/music.html"
