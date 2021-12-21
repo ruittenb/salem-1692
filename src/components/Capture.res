@@ -20,7 +20,8 @@ open Utils
  */
 
 type mediaDevices
-type mediaFlags = { video: bool }
+type videoFlags = { facingMode: string }
+type mediaFlags = { video: videoFlags }
 type srcObject
 type stream
 type track
@@ -32,7 +33,7 @@ external unsafeAsHtmlCanvasElement : Dom.element => Dom.htmlCanvasElement = "%id
 @send external createElement: (document, string) => Dom.htmlUnknownElement = "createElement"
 
 @get external mediaDevices: (navigator) => mediaDevices = "mediaDevices"
-@send external getUserMedia: (mediaDevices, mediaFlags) => Js.Promise.t<stream> = "getUserMedia"
+@send external getUserMedia: (mediaDevices, mediaFlags) => Promise.t<stream> = "getUserMedia"
 
 @send external play: (Dom.htmlVideoElement) => unit = "play"
 @set external setSrcObject: (Dom.htmlVideoElement, stream) => unit = "srcObject"
@@ -41,7 +42,7 @@ external unsafeAsHtmlCanvasElement : Dom.element => Dom.htmlCanvasElement = "%id
 @send external stop: (track) => unit = "stop"
 
 @send external getContext: (Dom.htmlCanvasElement, string) => canvasContext = "getContext"
-@send external drawImage: (canvasContext, Dom.htmlVideoElement, int, int, int, int) => unit = "drawImage"
+@send external drawImage: (canvasContext, Dom.htmlVideoElement, int, int) => unit = "drawImage"
 @send external toDataURL: (Dom.htmlCanvasElement, string) => string = "toDataURL"
 
 @send external qrCodeParser: (Dom.window, string) => Promise.t<string> = "qrCodeParser"
@@ -52,10 +53,12 @@ external unsafeAsHtmlCanvasElement : Dom.element => Dom.htmlCanvasElement = "%id
 
 let p = "[Capture] "
 
+let snapInterval = 800 // milliseconds
+
 let videoElementId = "qr-video"
 let canvasElementId = "qr-canvas"
 
-let mediaFlags: mediaFlags = { video: true }
+let mediaFlags: mediaFlags = { video: { facingMode: "environment" } }
 
 let startRecording = (
     maybeVideoElement: option<Dom.htmlVideoElement>,
@@ -89,13 +92,17 @@ let stopRecording = (
         })
 }
 
-let captureAndParseFrame = (maybeVideoElement, maybeCanvasElement, callback): unit => {
+let captureAndParseFrame = (
+    maybeVideoElement,
+    maybeCanvasElement,
+    callback
+): unit => {
     (maybeVideoElement, maybeCanvasElement)
         ->Utils.optionTupleAnd
         ->Belt.Option.forEach(((videoElement, canvasElement)) => {
             canvasElement
                 ->getContext("2d")
-                ->drawImage(videoElement, 0, 0, 640, 480)
+                ->drawImage(videoElement, 0, 0)
             window
                 ->qrCodeParser(canvasElement->toDataURL("image/png"))
                 ->Promise.then(res => {
@@ -104,7 +111,8 @@ let captureAndParseFrame = (maybeVideoElement, maybeCanvasElement, callback): un
                     Promise.resolve()
                 })
                 ->Promise.catch(error => {
-                    logDebug(p ++ "qrCodeParser returned: " ++ getExceptionMessage(error));
+                    Js.log2(p ++ "qrCodeParser error: ", error)
+                    logDebug(p ++ "qrCodeParser error: " ++ getExceptionMessage(error))
                     Promise.resolve()
                 })
                 ->ignore
@@ -141,11 +149,14 @@ let make = (
             ->Belt.Result.mapWithDefault(None, x => Some(x))
         let _maybeRecording: bool = startRecording(maybeVideoElement, maybeGetUserMedia)
 
-        // TODO install timer that snaps a picture every 0.5 s
+        // Install timer that snaps a picture every 0.5 s
+        let snapTimer = Js.Global.setInterval(() => {
+            captureAndParseFrame(maybeVideoElement, maybeCanvasElement, callback)
+        }, snapInterval)
 
         // Cleanup function
         Some(() => {
-            // TODO uninstall timer
+            Js.Global.clearInterval(snapTimer)
             stopRecording(maybeVideoElement)
         })
     })
@@ -158,7 +169,7 @@ let make = (
             height="auto"
             autoPlay=true
         />
-        // TODO add error message if recording was not granted
+        // TODO add error message if recording auth was not granted
         <div id="canvas-hider">
             <canvas
                 id={canvasElementId}
