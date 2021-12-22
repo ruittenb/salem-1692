@@ -32,8 +32,6 @@ external unsafeAsHtmlVideoElement : Dom.element => Dom.htmlVideoElement = "%iden
 external unsafeAsHtmlCanvasElement : Dom.element => Dom.htmlCanvasElement = "%identity"
 
 @send external createElement: (document, string) => Dom.htmlUnknownElement = "createElement"
-//@send external getComputedStyle: (Dom.window, Dom.htmlVideoElement) => nodeStyle = "getComputedStyle"
-//@get external getStyleHeight: (nodeStyle) => string = "height"
 
 @get external mediaDevices: (navigator) => mediaDevices = "mediaDevices"
 @send external getUserMedia: (mediaDevices, mediaFlags) => Promise.t<stream> = "getUserMedia"
@@ -43,14 +41,10 @@ external unsafeAsHtmlCanvasElement : Dom.element => Dom.htmlCanvasElement = "%id
 @get external getSrcObject: (Dom.htmlVideoElement) => srcObject = "srcObject"
 @send external getTracks: (srcObject) => array<track> = "getTracks"
 @send external stop: (track) => unit = "stop"
-//@get external getVideoWidth: (Dom.htmlVideoElement) => int = "width"
-//@get external getVideoHeight: (Dom.htmlVideoElement) => int = "height"
 
 @send external getContext: (Dom.htmlCanvasElement, string) => canvasContext = "getContext"
 @send external drawImage: (canvasContext, Dom.htmlVideoElement, int, int, int, int) => unit = "drawImage"
 @send external toDataURL: (Dom.htmlCanvasElement, string) => string = "toDataURL"
-//@set external setCanvasWidth: (Dom.htmlCanvasElement, int) => unit = "width"
-//@set external setCanvasHeight: (Dom.htmlCanvasElement, int) => unit = "height"
 
 @send external qrCodeParser: (Dom.window, string) => Promise.t<string> = "qrCodeParser"
 

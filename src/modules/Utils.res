@@ -226,6 +226,19 @@ let ifSlave = (
 }
 
 /**
+ * Return gameId if game state reflects that we're Slave
+ */
+let ifSlaveGetGameId = (
+    gameType: GameTypeCodec.t
+): string => {
+    switch gameType {
+        | StandAlone    => ""
+        | Master        => ""
+        | Slave(gameId) => gameId
+    }
+}
+
+/**
  * Combine two functions above
  */
 let ifSlaveAndConnected = (

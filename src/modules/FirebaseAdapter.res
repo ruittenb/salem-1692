@@ -203,7 +203,7 @@ let listen = (
             if (Constants.debug) {
                 Js.log2(p ++ "Received data from " ++ observableKey ++ ":", result)
             }
-            callback(result)
+            callback(result) // TODO result might be null if the host disappears
         })
     })
 }

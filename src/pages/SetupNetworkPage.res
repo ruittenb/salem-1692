@@ -5,6 +5,7 @@
 open Types
 
 @get external getValue: (Dom.element) => string = "value"
+@set external setValue: (Dom.element, string) => unit = "value"
 
 let pm = "[SetupNetworkPage:Master] "
 let ps = "[SetupNetworkPage:Slave] "
@@ -224,15 +225,27 @@ let getModusOperandi = (
                             <Spacer />
                             <div className="input-and-icon">
                                 <input
-                                    type_="text" id={inputElementId} className="id-input"
+                                    type_="text"
+                                    id={inputElementId}
+                                    className="id-input"
                                     maxLength=15
                                     placeholder="x00-x00-x00-x00"
+                                    defaultValue={gameState.gameType->Utils.ifSlaveGetGameId}
                                     onChange={(_event) => {
                                         leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
                                         setSlaveGameIdValidity(_prev => InputShownAndInvalid)
                                     }}
                                 />
-                                <QrIcon mode={QrIcon.Scanner(value => Js.log(value))} /> // TODO
+                                <QrIcon
+                                    mode={QrIcon.Scanner(
+                                        (scannedGameId) => {
+                                            Utils.safeQuerySelector(inputElementId)
+                                                ->Utils.resultForEach(
+                                                    inputElement => inputElement->setValue(scannedGameId)
+                                                )
+                                        }
+                                    )}
+                                />
                             </div>
                             <p>
                                 {
@@ -253,12 +266,12 @@ let getModusOperandi = (
                                 gameState, setGameState,
                                 setSlaveGameIdValidity,
                             )} />
-                            <Button label={t("Back")} className="icon-left icon-back" onClick={(_event) => {
+                            <Button label={t("Leave guest mode")} onClick={(_event) => {
                                 leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
                             }} />
                             <Rule />
                             <h2> {React.string(t("Be a Host"))} </h2>
-                            <p> {React.string(t("If you want to host a game so that others can join, you should leave this screen first."))} </p>
+                            <p> {React.string(t("If you want to host a game so that others can join, you should leave guest mode first."))} </p>
                         </>
 }
 
