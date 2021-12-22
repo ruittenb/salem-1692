@@ -44285,14 +44285,27 @@ function QrIcon(Props) {
 
   if (match[0]) {
     var tmp;
-    tmp = mode.TAG ===
+
+    if (mode.TAG ===
     /* Scannable */
-    0 ? React.createElement(QR$Salem1692.make, {
-      value: mode._0
-    }) : React.createElement(Capture$Salem1692.make, {
-      size: 250,
-      callback: mode._0
-    });
+    0) {
+      tmp = React.createElement(QR$Salem1692.make, {
+        value: mode._0
+      });
+    } else {
+      var callback = mode._0;
+      tmp = React.createElement(Capture$Salem1692.make, {
+        size: 250,
+        callback: function (value) {
+          Curry._1(setMaskOpen, function (_prev) {
+            return false;
+          });
+
+          return Curry._1(callback, value);
+        }
+      });
+    }
+
     mask = React.createElement(Mask$Salem1692.make, {
       onClick: closeMask,
       children: tmp
