@@ -32,7 +32,10 @@ let make = (
             {
                 switch (mode) {
                     | Scannable(value) => <QR value />
-                    | Scanner(callback) => <Capture size=250 callback />
+                    | Scanner(callback) => <Capture size=250 callback={value => {
+                        setMaskOpen(_prev => false)
+                        callback(value)
+                    }} />
                 }
             }
         </Mask>
