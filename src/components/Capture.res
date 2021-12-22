@@ -19,6 +19,7 @@ open Utils
  * External functions
  */
 
+type nodeStyle
 type mediaDevices
 type videoFlags = { facingMode: string }
 type mediaFlags = { video: videoFlags }
@@ -31,6 +32,8 @@ external unsafeAsHtmlVideoElement : Dom.element => Dom.htmlVideoElement = "%iden
 external unsafeAsHtmlCanvasElement : Dom.element => Dom.htmlCanvasElement = "%identity"
 
 @send external createElement: (document, string) => Dom.htmlUnknownElement = "createElement"
+//@send external getComputedStyle: (Dom.window, Dom.htmlVideoElement) => nodeStyle = "getComputedStyle"
+//@get external getStyleHeight: (nodeStyle) => string = "height"
 
 @get external mediaDevices: (navigator) => mediaDevices = "mediaDevices"
 @send external getUserMedia: (mediaDevices, mediaFlags) => Promise.t<stream> = "getUserMedia"
@@ -40,10 +43,14 @@ external unsafeAsHtmlCanvasElement : Dom.element => Dom.htmlCanvasElement = "%id
 @get external getSrcObject: (Dom.htmlVideoElement) => srcObject = "srcObject"
 @send external getTracks: (srcObject) => array<track> = "getTracks"
 @send external stop: (track) => unit = "stop"
+//@get external getVideoWidth: (Dom.htmlVideoElement) => int = "width"
+//@get external getVideoHeight: (Dom.htmlVideoElement) => int = "height"
 
 @send external getContext: (Dom.htmlCanvasElement, string) => canvasContext = "getContext"
-@send external drawImage: (canvasContext, Dom.htmlVideoElement, int, int) => unit = "drawImage"
+@send external drawImage: (canvasContext, Dom.htmlVideoElement, int, int, int, int) => unit = "drawImage"
 @send external toDataURL: (Dom.htmlCanvasElement, string) => string = "toDataURL"
+//@set external setCanvasWidth: (Dom.htmlCanvasElement, int) => unit = "width"
+//@set external setCanvasHeight: (Dom.htmlCanvasElement, int) => unit = "height"
 
 @send external qrCodeParser: (Dom.window, string) => Promise.t<string> = "qrCodeParser"
 
@@ -57,6 +64,9 @@ let snapInterval = 800 // milliseconds
 
 let videoElementId = "qr-video"
 let canvasElementId = "qr-canvas"
+
+let canvasWidth = 640
+let canvasHeight = 480
 
 let mediaFlags: mediaFlags = { video: { facingMode: "environment" } }
 
@@ -95,14 +105,18 @@ let stopRecording = (
 let captureAndParseFrame = (
     maybeVideoElement,
     maybeCanvasElement,
-    callback
+    callback,
 ): unit => {
     (maybeVideoElement, maybeCanvasElement)
         ->Utils.optionTupleAnd
         ->Belt.Option.forEach(((videoElement, canvasElement)) => {
             canvasElement
                 ->getContext("2d")
-                ->drawImage(videoElement, 0, 0)
+                ->drawImage(
+                    videoElement,
+                    0, 0,
+                    canvasWidth, canvasHeight
+                )
             window
                 ->qrCodeParser(canvasElement->toDataURL("image/png"))
                 ->Promise.then(res => {
@@ -111,8 +125,10 @@ let captureAndParseFrame = (
                     Promise.resolve()
                 })
                 ->Promise.catch(error => {
-                    Js.log2(p ++ "qrCodeParser error: ", error)
-                    logDebug(p ++ "qrCodeParser error: " ++ getExceptionMessage(error))
+                    switch error {
+                        | Promise.JsError(errorObj) => Js.log2(p ++ "qrCodeParser error:", errorObj->Js.Exn.message)
+                        | _ => Js.log2(p ++ "Unknown error:", error)
+                    }
                     Promise.resolve()
                 })
                 ->ignore
@@ -125,7 +141,7 @@ let make = (
     ~callback: (string) => unit
 ): React.element => {
 
-    let sizeString = size->Belt.Int.toString
+    let sizeString = Belt.Int.toString(size)
 
     // See if getUserMedia is available
     let maybeGetUserMedia = try {
@@ -173,8 +189,8 @@ let make = (
         <div id="canvas-hider">
             <canvas
                 id={canvasElementId}
-                width={sizeString}
-                height={sizeString}
+                width={Belt.Int.toString(canvasWidth)}
+                height={Belt.Int.toString(canvasHeight)}
             />
         </div>
     </>

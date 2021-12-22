@@ -23,6 +23,14 @@ let logDebug = (msg: string): unit => {
 }
 
 /**
+ * Log a value to console. Then return it. For incorporating into pipelines.
+ */
+let logDebugAny = (x: 'a, msg: string): 'a => {
+    Js.log2(msg, x)
+    x
+}
+
+/**
  * Log a message to console with highlighting
  */
 let logDebugStyled = (msg: string, style: string): unit => {
