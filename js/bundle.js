@@ -43230,7 +43230,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.startRecording = startRecording;
 exports.stopRecording = stopRecording;
 exports.captureAndParseFrame = captureAndParseFrame;
-exports.make = exports.mediaFlags = exports.canvasElementId = exports.videoElementId = exports.snapInterval = exports.p = void 0;
+exports.make = exports.mediaFlags = exports.canvasHeight = exports.canvasWidth = exports.canvasElementId = exports.videoElementId = exports.snapInterval = exports.p = void 0;
 
 var Curry = _interopRequireWildcard(require("rescript/lib/es6/curry.js"));
 
@@ -43289,7 +43289,7 @@ function stopRecording(maybeVideoElement) {
 function captureAndParseFrame(maybeVideoElement, maybeCanvasElement, callback) {
   return Belt_Option.forEach(Utils$Salem1692.optionTupleAnd([maybeVideoElement, maybeCanvasElement]), function (param) {
     var canvasElement = param[1];
-    canvasElement.getContext("2d").drawImage(param[0], 0, 0);
+    canvasElement.getContext("2d").drawImage(param[0], 0, 0, 640, 480);
     $$Promise.$$catch(window.qrCodeParser(canvasElement.toDataURL("image/png")).then(function (res) {
       Utils$Salem1692.logDebug("[Capture] qrCodeParser returned: " + res);
 
@@ -43297,8 +43297,12 @@ function captureAndParseFrame(maybeVideoElement, maybeCanvasElement, callback) {
 
       return Promise.resolve(undefined);
     }), function (error) {
-      console.log("[Capture] qrCodeParser error: ", error);
-      Utils$Salem1692.logDebug("[Capture] qrCodeParser error: " + Utils$Salem1692.getExceptionMessage(error));
+      if (error.RE_EXN_ID === $$Promise.JsError) {
+        console.log("[Capture] qrCodeParser error:", error._1.message);
+      } else {
+        console.log("[Capture] Unknown error:", error);
+      }
+
       return Promise.resolve(undefined);
     });
   });
@@ -43350,13 +43354,17 @@ function Capture(Props) {
     id: "canvas-hider"
   }, React.createElement("canvas", {
     id: canvasElementId,
-    height: sizeString,
-    width: sizeString
+    height: String(480),
+    width: String(640)
   })));
 }
 
 var snapInterval = 800;
 exports.snapInterval = snapInterval;
+var canvasWidth = 640;
+exports.canvasWidth = canvasWidth;
+var canvasHeight = 480;
+exports.canvasHeight = canvasHeight;
 var make = Capture;
 /* react Not a pure module */
 
@@ -47391,6 +47399,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.identity = identity;
 exports.logError = logError;
 exports.logDebug = logDebug;
+exports.logDebugAny = logDebugAny;
 exports.logDebugStyled = logDebugStyled;
 exports.logDebugRed = logDebugRed;
 exports.logDebugGreen = logDebugGreen;
@@ -47442,6 +47451,11 @@ function logDebug(msg) {
     console.log(msg);
     return;
   }
+}
+
+function logDebugAny(x, msg) {
+  console.log(msg, x);
+  return x;
 }
 
 function logDebugStyled(msg, style) {
