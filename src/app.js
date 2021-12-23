@@ -34,7 +34,7 @@ import qrCodeParser from 'qrcode-parser';
  * Make some variables available for Rescript
  */
 
-window.salemAppVersion = "0.43.3";
+window.salemAppVersion = "0.43.4";
 
 // QR code generator
 window.QRCode = QRCode
