@@ -6,6 +6,9 @@
 
 // Main Salem Moderator code
 import * as Main from './Main.bs';
+
+// npm modules
+import QRCode from 'davidshimjs-qrcodejs';
 import qrCodeParser from 'qrcode-parser';
 
 /** **********************************************************************
@@ -32,6 +35,12 @@ if ('serviceWorker' in navigator) {
  */
 
 window.salemAppVersion = "0.42.2";
+
+// QR code generator
+window.QRCode = QRCode
+window.createQrCode = (domNode, params) => new window.QRCode(domNode, params);
+
+// QR code parser
 window.qrCodeParser = qrCodeParser;
 
 /** **********************************************************************
