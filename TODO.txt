@@ -4,5 +4,4 @@
 
  - reflect state in URL https://betterprogramming.pub/how-and-why-you-should-store-react-ui-state-in-the-url-f2013a204cb2
  - fix missing players when hosting
- - translations
  - page traversal history

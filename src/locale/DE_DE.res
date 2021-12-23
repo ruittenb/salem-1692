@@ -89,7 +89,6 @@ let table = Js.Dict.fromArray([
     ("The constable", "Der Sheriff"),
     ("The constable's turn", "Der Sheriff ist an der Reihe"),
     ("Choose someone to protect:", `Wählen Sie jemanden, den Sie beschützen möchten:`),
-    ("Rotate", "Drehen"),
     ("Abort", "Abbrechen"),
     ("Skip", `Überspringen`),
     ("Everybody is sound asleep... what about you?", "Alle schlafen tief und fest... und du?"),

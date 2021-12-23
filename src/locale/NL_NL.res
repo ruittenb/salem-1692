@@ -89,7 +89,6 @@ let table = Js.Dict.fromArray([
     ("The constable", "De schout"),
     ("The constable's turn", "De schout aan de beurt"),
     ("Choose someone to protect:", "Kies wie beschermd moet worden:"),
-    ("Rotate", "Draaien"),
     ("Abort", "Afbreken"),
     ("Skip", "Overslaan"),
     ("Everybody is sound asleep... what about you?", "Iedereen is in diepe slaap... en jij?"),

@@ -89,7 +89,6 @@ let table = Js.Dict.fromArray([
     ("The constable", "The constable"),
     ("The constable's turn", "The constable's turn"),
     ("Choose someone to protect:", "Choose someone to protect:"),
-    ("Rotate", "Rotate"),
     ("Abort", "Abort"),
     ("Skip", "Skip"),
     ("Everybody is sound asleep... what about you?", `Everybody is sound asleep... what about you?`), // contains non-breaking spaces
