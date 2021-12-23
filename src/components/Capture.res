@@ -5,11 +5,12 @@
  *   - https://davidwalsh.name/browser-camera
  *
  * - get image from canvas
- *   - https://stackoverflow.com/questions/10257781/can-i-get-image-from-canvas-element-and-use-it-in-img-src-tag
+ *   - https://stackoverflow.com/questions/10257781/
  *   - https://www.w3schools.com/tags/canvas_getimagedata.asp
  *
  * - parse QR code
  *   - https://webcodeflow.com/online-qr-code-reader/
+ *   - https://github.com/sinchang/qrcode-parser
  */
 
 open Constants
@@ -46,7 +47,7 @@ external unsafeAsHtmlCanvasElement : Dom.element => Dom.htmlCanvasElement = "%id
 @send external drawImage: (canvasContext, Dom.htmlVideoElement, int, int, int, int) => unit = "drawImage"
 @send external toDataURL: (Dom.htmlCanvasElement, string) => string = "toDataURL"
 
-@send external qrCodeParser: (Dom.window, string) => Promise.t<string> = "qrCodeParser"
+@send external parseQrCode: (Dom.window, string) => Promise.t<string> = "parseQrCode"
 
 /** **********************************************************************
  * Component
@@ -112,15 +113,15 @@ let captureAndParseFrame = (
                     canvasWidth, canvasHeight
                 )
             window
-                ->qrCodeParser(canvasElement->toDataURL("image/png"))
+                ->parseQrCode(canvasElement->toDataURL("image/png"))
                 ->Promise.then(res => {
-                    logDebug(p ++ "qrCodeParser returned: " ++ res);
+                    logDebug(p ++ "parseQrCode returned: " ++ res);
                     callback(res)
                     Promise.resolve()
                 })
                 ->Promise.catch(error => {
                     switch error {
-                        | Promise.JsError(errorObj) => Js.log2(p ++ "qrCodeParser error:", errorObj->Js.Exn.message)
+                        | Promise.JsError(errorObj) => Js.log2(p ++ "parseQrCode error:", errorObj->Js.Exn.message)
                         | _ => Js.log2(p ++ "Unknown error:", error)
                     }
                     Promise.resolve()
