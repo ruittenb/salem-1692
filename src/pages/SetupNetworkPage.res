@@ -266,9 +266,13 @@ let getModusOperandi = (
                                 gameState, setGameState,
                                 setSlaveGameIdValidity,
                             )} />
-                            <Button label={t("Leave guest mode")} onClick={(_event) => {
-                                leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
-                            }} />
+                            <Button
+                                label={t("Leave guest mode")}
+                                className="condensed-es"
+                                onClick={(_event) => {
+                                    leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
+                                }}
+                            />
                             <Rule />
                             <h2> {React.string(t("Be a Host"))} </h2>
                             <p> {React.string(t("If you want to host a game so that others can join, you should leave guest mode first."))} </p>
