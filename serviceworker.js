@@ -3,7 +3,7 @@
  * Serviceworker for Salem 1692 Moderator
  */
 
-const version = "0.42.2c";
+const version = "0.43.1";
 const cacheName = 'salem-1692-v' + version;
 let filesToCache;
 
@@ -63,6 +63,8 @@ function getFilesToCache(debug) {
         'images/overlay-scroll.png',
         'images/overlay-title.png',
         'images/overlay-village.png',
+        'images/qr-icon-32.png',
+        'images/qr-icon-44x36s.png',
         'images/tablelayout-1221.png',
         'images/tablelayout-1222.png',
         'images/tablelayout-2221.png',
