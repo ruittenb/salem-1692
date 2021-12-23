@@ -56,11 +56,6 @@ let make = (
             <a href="http://creativecommons.org/licenses/by-sa/4.0/"> {React.string("CC BY-SA 4.0")} </a>
         </p>
         <p>
-            <span> {React.string(t("Libraries: "))} </span>
-            <a href="https://github.com/davidshimjs/qrcodejs"> {React.string("QRCode.js")} </a> spacedComma
-            <a href="https://www.npmjs.com/package/qrcode-parser"> {React.string("qrcode-parser")} </a>
-        </p>
-        <p>
             <span> {React.string(t("Music: "))} </span>
             {trackList}
             {React.string(`© `)}

@@ -104,8 +104,8 @@ tag-%: ## Update the %:major:minor:patch:% version number and create git tag
 	which rpl 2>/dev/null
 	which jq
 	VERSION_FROM=$$(jq .version package.json) && \
-	npm version $* && \
-	VERSION_TO=$$(jq .version package.json) && \
+	npm version $*                            && \
+	VERSION_TO=$$(jq .version package.json)   && \
 	rpl $$VERSION_FROM $$VERSION_TO $(VERSION_FILES)
 	@read -p $$'\nPress ENTER to recompile to integrate the new version number:' ans
 	$(MAKE) finish-tag
@@ -113,10 +113,14 @@ tag-%: ## Update the %:major:minor:patch:% version number and create git tag
 .PHONY: move-tag
 move-tag: ## Move the tag for the current package.json version to this branch
 	VERSION=v$$(jq .version package.json | tr -d '"') && \
-	git tag -d $$VERSION && \
+	git tag -d $$VERSION                              && \
 	git tag $$VERSION
 
 .PHONY: finish-tag
 finish-tag: ## Recompile the new version number into the code, commit and push
-	$(MAKE) build-minify && git commit -a --amend && $(MAKE) move-tag && git push
+	$(MAKE) build-minify  && \
+	git commit -a --amend && \
+	$(MAKE) move-tag      && \
+	git push              && \
+	git push --tags
 
