@@ -109,6 +109,9 @@ img.qr-icon.scannable {
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.5);
 }
+#mask canvas {
+    display: none;
+}
 
 input[type=text] {
     background-color: #faf8ea;
@@ -189,6 +192,9 @@ input[type=text].id-input {
 }
 .fr_FR .page .condensed-fr {
     font-size: 22px;
+}
+.es_ES .page .condensed-es {
+    font-size: 24px;
 }
 .en_US .page h1.condensed-en,
 .es_ES .page h1.condensed-es {
