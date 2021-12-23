@@ -32,9 +32,10 @@ let make = (
         <BackFloatingButton onClick={ _event => goToPage(_prev => Setup) } />
         <h1> {React.string(t("Credits"))} </h1>
         <Spacer />
-        <p>
+        <p className="noblur">
             <span> {React.string(t("App: "))} </span>
-            <a href={Constants.siteUrl}> {React.string(t("website"))} </a> spacedComma
+            <a href={Constants.siteUrl}> {React.string(t("website"))} </a>
+            <QrIcon mode={QrIcon.Scannable(Constants.siteUrl)} />
             {React.string(t("version") ++ " v" ++ salemAppVersion ++ ` René Uittenbogaard © 2021`)}
         </p>
         <p>
@@ -48,7 +49,7 @@ let make = (
         <p>
             <span> {React.string(t("Voice actors: "))} </span>
             {React.string("Helmi Megens, Mario Ruiz, Paul Scholey, ")}
-            <a href="https://www.fiverr.com/mrvoice/record-a-professional-german-voice-over">
+            <a href="https://www.fiverr.com/mrvoice">
                 {React.string("Christopher Badziong")}
             </a> spacedComma
             {React.string(t("Licensed under") ++ " ")}
@@ -56,7 +57,8 @@ let make = (
         </p>
         <p>
             <span> {React.string(t("Libraries: "))} </span>
-            <a href="https://github.com/davidshimjs/qrcodejs"> {React.string("QRCode.js")} </a>
+            <a href="https://github.com/davidshimjs/qrcodejs"> {React.string("QRCode.js")} </a> spacedComma
+            <a href="https://www.npmjs.com/package/qrcode-parser"> {React.string("qrcode-parser")} </a>
         </p>
         <p>
             <span> {React.string(t("Music: "))} </span>

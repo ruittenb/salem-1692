@@ -1,15 +1,16 @@
 {
   "name": "salem-1692",
-  "version": "0.42.1",
+  "version": "0.42.2",
   "description": "Moderator PWA for the card game Salem 1692",
   "author": "René Uittenbogaard <ruittenb@gmail.com>",
   "homepage": "https://github.com/ruittenb/salem-1692",
   "keywords": [
     "rescript",
     "boardgame",
-    "cardgame"
+    "cardgame",
+    "witches"
   ],
-  "license": "GNU GPLv3",
+  "license": "GNU GPLv2",
   "main": "dist/index.html",
   "scripts": {
     "all": "make all",
@@ -27,7 +28,7 @@
     "esmify": "^2.1.1",
     "fswatch": "^0.1.4",
     "rescript": "^9.1.4",
-    "serve": "^12.0.1",
+    "serve": "^13.0.2",
     "uglify-js": "^3.14.1",
     "uglifyify": "^5.0.2"
   },
@@ -37,6 +38,7 @@
     "davidshimjs-qrcodejs": "^0.0.2",
     "decco": "^1.5.0",
     "firebase": "^9.0.1",
+    "qrcode-parser": "^2.0.0",
     "react": "^17.0.2"
   }
 }

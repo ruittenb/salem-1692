@@ -67,10 +67,43 @@ img.sound-image {
 img.sound-image.greyed {
     filter: grayscale(1);
 }
-div#qr-code {
+img.qr-icon {
+    margin: 0 5px;
+}
+img.qr-icon.scannable {
+    border: 1px solid #555;
+    background-color: white;
+}
+#qr-code {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     padding: 4px;
     border: 3px solid black;
     background-color: white;
+    transform: translate(-50%, -50%); /* center the QR code on the page */
+}
+#qr-video {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 4px;
+    border: 3px solid black;
+    background-color: white;
+    transform: translate(-50%, -50%); /* center the QR code on the page */
+}
+
+#mask {
+    display: block;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 input[type=text] {
@@ -120,18 +153,28 @@ p.left-aligned {
     text-align: left;
 }
 
-div.id-input {
-    background-color: #eee;
-}
 div.id-input,
 input[type=text].id-input {
+    display: inline-block;
     border: 3px solid #666;
+    background-color: #eee;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     font-size: 18px;
     text-align: center;
     padding: 6px 0;
     width: 50%;
+}
+div.id-input {
+    margin-left: 42px; /* obtained by trial and error */
+}
+input[type=text].id-input {
+    margin-left: 54px; /* obtained by trial and error */
+}
+
+.input-and-icon {
+    width: 100%;
+    text-align: center;
 }
 
 .nl_NL .page .condensed-nl {
@@ -143,6 +186,7 @@ input[type=text].id-input {
 .fr_FR .page .condensed-fr {
     font-size: 22px;
 }
+.en_US .page h1.condensed-en,
 .es_ES .page h1.condensed-es {
     font-size: 58px;
     margin-top: 30px;
@@ -293,6 +337,12 @@ input[type=text].id-input {
     width: 46%;
 }
 
+#canvas-hider {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
 /** ****************************************************************************
  * Title Page
  */
@@ -392,6 +442,13 @@ input[type=text].id-input {
     padding: 0 5px 0 25px;
     text-indent: -20px;
     line-height: 1.4;
+}
+
+#credits-page p.noblur {
+    /* necessary for correct positioning of the mask:
+     * the <p> containing the mask should have this style applied
+     */
+    backdrop-filter: none;
 }
 
 #credits-page p::first-line {

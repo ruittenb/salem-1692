@@ -23,6 +23,14 @@ let logDebug = (msg: string): unit => {
 }
 
 /**
+ * Log a value to console. Then return it. For incorporating into pipelines.
+ */
+let logDebugAny = (x: 'a, msg: string): 'a => {
+    Js.log2(msg, x)
+    x
+}
+
+/**
  * Log a message to console with highlighting
  */
 let logDebugStyled = (msg: string, style: string): unit => {
@@ -145,6 +153,22 @@ let resultForEach = (
 }
 
 /**
+ * Reduce a tuple of maybes to a maybe of a tuple.
+ *
+ * Example:
+ *   (Some("string"), None)->optionTupleAnd
+ *   (Some("first"), Some("second"))->optionTupleAnd
+ */
+let optionTupleAnd = (
+    tupleOfMaybes: (option<'a>, option<'b>)
+): option<('a, 'b)> => {
+    switch (tupleOfMaybes) {
+        | (Some(a), Some(b)) => Some((a, b))
+        | _                  => None
+    }
+}
+
+/**
  * Call function if connection state reflects that we're connected to firebase
  */
 let ifConnected = (
@@ -198,6 +222,19 @@ let ifSlave = (
         | StandAlone    => ()
         | Master        => ()
         | Slave(gameId) => func(gameId)
+    }
+}
+
+/**
+ * Return gameId if game state reflects that we're Slave
+ */
+let ifSlaveGetGameId = (
+    gameType: GameTypeCodec.t
+): string => {
+    switch gameType {
+        | StandAlone    => ""
+        | Master        => ""
+        | Slave(gameId) => gameId
     }
 }
 

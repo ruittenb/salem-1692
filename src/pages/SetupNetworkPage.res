@@ -1,4 +1,3 @@
-
 /** ****************************************************************************
  * SetupNetworkPage
  */
@@ -6,6 +5,7 @@
 open Types
 
 @get external getValue: (Dom.element) => string = "value"
+@set external setValue: (Dom.element, string) => unit = "value"
 
 let pm = "[SetupNetworkPage:Master] "
 let ps = "[SetupNetworkPage:Slave] "
@@ -95,11 +95,11 @@ let leaveGame = (dbConnectionStatus, setDbConnectionStatus, gameState, setGameSt
         Utils.logDebug(ps ++ "Leaving game " ++ gameId)
         FirebaseClient.leaveGame(dbConnection, gameId)
         FirebaseClient.disconnect(dbConnection)
-        setDbConnectionStatus(_prev => NotConnected)
-        setGameState((prevGameState) => {
-            ...prevGameState,
-            gameType: StandAlone
-        })
+    })
+    setDbConnectionStatus(_prev => NotConnected)
+    setGameState((prevGameState) => {
+        ...prevGameState,
+        gameType: StandAlone
     })
 }
 
@@ -188,10 +188,10 @@ let getModusOperandi = (
                                 ))}
                             </p>
                             <Spacer />
-                            <div className="id-input"> {React.string(gameState.gameId)} </div>
-                            <Spacer />
-                            <QR value=gameState.gameId />
-                            <Spacer />
+                            <div className="input-and-icon">
+                                <div className="id-input"> {React.string(gameState.gameId)} </div>
+                                <QrIcon mode={QrIcon.Scannable(gameState.gameId)} />
+                            </div>
                             <Spacer />
                             <Button
                                 label={t("Play Game")}
@@ -223,15 +223,30 @@ let getModusOperandi = (
                                 ))}
                             </p>
                             <Spacer />
-                            <input
-                                type_="text" id={inputElementId} className="id-input"
-                                maxLength=15
-                                placeholder="x00-x00-x00-x00"
-                                onChange={(_event) => {
-                                    leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
-                                    setSlaveGameIdValidity(_prev => InputShownAndInvalid)
-                                }}
-                            />
+                            <div className="input-and-icon">
+                                <input
+                                    type_="text"
+                                    id={inputElementId}
+                                    className="id-input"
+                                    maxLength=15
+                                    placeholder="x00-x00-x00-x00"
+                                    defaultValue={gameState.gameType->Utils.ifSlaveGetGameId}
+                                    onChange={(_event) => {
+                                        leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
+                                        setSlaveGameIdValidity(_prev => InputShownAndInvalid)
+                                    }}
+                                />
+                                <QrIcon
+                                    mode={QrIcon.Scanner(
+                                        (scannedGameId) => {
+                                            Utils.safeQuerySelector(inputElementId)
+                                                ->Utils.resultForEach(
+                                                    inputElement => inputElement->setValue(scannedGameId)
+                                                )
+                                        }
+                                    )}
+                                />
+                            </div>
                             <p>
                                 {
                                     let slaveConnectionStatus = switch (dbConnectionStatus) {
@@ -251,13 +266,12 @@ let getModusOperandi = (
                                 gameState, setGameState,
                                 setSlaveGameIdValidity,
                             )} />
-                            <Button label={t("Back")} className="icon-left icon-back" onClick={(_event) => {
+                            <Button label={t("Leave guest mode")} onClick={(_event) => {
                                 leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
-                                goToPage(_prev => SetupNetwork)
                             }} />
                             <Rule />
                             <h2> {React.string(t("Be a Host"))} </h2>
-                            <p> {React.string(t("If you want to host a game so that others can join, you should leave this screen first."))} </p>
+                            <p> {React.string(t("If you want to host a game so that others can join, you should leave guest mode first."))} </p>
                         </>
 }
 
@@ -290,7 +304,7 @@ let make = (
             goToPage(_prev => Title)
         }} />
         <GearFloatingButton goToPage returnPage />
-        <h1 className="condensed-es" >
+        <h1 className="condensed-es condensed-en" >
             {React.string(t("Multi-Telephone"))}
         </h1>
         {modusOperandi}

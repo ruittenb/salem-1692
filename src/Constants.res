@@ -1,14 +1,15 @@
-
 /** ****************************************************************************
  * Constants
  */
 
 open Types
 
+type document
 type navigator
+@val external window: Dom.window = "window"
+@val external document: document = "document"
 @val external navigator: navigator = "navigator"
 @get external userAgent: (navigator) => string = "userAgent"
-
 
 // Enable debug mode when the User-Agent string contains the text "Salem/1692".
 let debug = navigator->userAgent->Js.String2.includes("Salem/1692")

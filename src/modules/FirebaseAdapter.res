@@ -7,16 +7,16 @@
 open Types
 open Utils
 
-@module("firebase/app")      external initializeApp: (dbConfig)                    => dbApp           = "initializeApp"
-@module("firebase/database") external getDatabase:   (dbApp)                       => dbDatabase      = "getDatabase"
-@module("firebase/database") external getRef:        (dbDatabase, string)          => dbReference     = "ref"
-@module("firebase/database") external onConnect:     (dbDatabase, () => unit)      => unit            = "onConnect"
-@module("firebase/database") external goOffline:     (dbDatabase)                  => unit            = "goOffline"
-@module("firebase/database") external onValue: (dbReference, (dbSnapshot) => unit) => unit            = "onValue"
-@module("firebase/database") external off:           (dbReference)                 => unit            = "off"
-@module("firebase/database") external set:           (dbReference, 'data)          => Promise.t<unit> = "set"
-@module("firebase/database") external remove:        (dbReference)                 => unit            = "remove"
-@send                        external getValue:      (dbSnapshot)                  => 'data           = "val"
+@module("firebase/app") external initializeApp: (dbConfig) => dbApp = "initializeApp"
+@module("firebase/database") external getDatabase: (dbApp) => dbDatabase = "getDatabase"
+@module("firebase/database") external getRef: (dbDatabase, string) => dbReference = "ref"
+@module("firebase/database") external onConnect: (dbDatabase, () => unit) => unit = "onConnect"
+@module("firebase/database") external goOffline: (dbDatabase) => unit = "goOffline"
+@module("firebase/database") external onValue: (dbReference, (dbSnapshot) => unit) => unit = "onValue"
+@module("firebase/database") external off: (dbReference) => unit = "off"
+@module("firebase/database") external set: (dbReference, 'data) => Promise.t<unit> = "set"
+@module("firebase/database") external remove: (dbReference) => unit = "remove"
+@send external getValue: (dbSnapshot) => 'data = "val"
 
 let p = "[FirebaseAdapter] "
 
@@ -203,7 +203,7 @@ let listen = (
             if (Constants.debug) {
                 Js.log2(p ++ "Received data from " ++ observableKey ++ ":", result)
             }
-            callback(result)
+            callback(result) // TODO result might be null if the host disappears
         })
     })
 }

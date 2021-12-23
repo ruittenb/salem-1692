@@ -1,4 +1,3 @@
-
 /** ****************************************************************************
  * App
  *
@@ -7,7 +6,10 @@
 
 // Main Salem Moderator code
 import * as Main from './Main.bs';
+
+// npm modules
 import QRCode from 'davidshimjs-qrcodejs';
+import qrCodeParser from 'qrcode-parser';
 
 /** **********************************************************************
  * Register serviceworker if supported
@@ -32,11 +34,14 @@ if ('serviceWorker' in navigator) {
  * Make some variables available for Rescript
  */
 
-window.salemAppVersion = "0.42.1";
+window.salemAppVersion = "0.42.2";
 
-// QRCode generator
+// QR code generator
 window.QRCode = QRCode
 window.createQrCode = (domNode, params) => new window.QRCode(domNode, params);
+
+// QR code parser
+window.qrCodeParser = qrCodeParser;
 
 /** **********************************************************************
  * Run the game. Specify the game's DOM node id.
