@@ -16,7 +16,7 @@ type qrParams = {
 }
 
 @val external qrCodeClass: qrCodeClass = "QRCode"
-@val external getQrCode: (Dom.element, qrParams) => qrCode = "getQrCode"
+@val external createQrCode: (Dom.element, qrParams) => qrCode = "createQrCode"
 @send external clear: (qrCode) => unit = "clear"
 @send external makeCode: (qrCode, string) => unit = "makeCode"
 @get external correctLevel: (qrCodeClass) => qrCorrectLevel = "CorrectLevel"
@@ -43,7 +43,7 @@ let displayQrCode = (
         height: size,
         correctLevel : qrCodeClass->correctLevel->low
     }
-    getQrCode(qrElement, qrParams)
+    createQrCode(qrElement, qrParams)
 }
 
 @react.component

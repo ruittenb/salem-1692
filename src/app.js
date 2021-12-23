@@ -7,6 +7,7 @@
 
 // Main Salem Moderator code
 import * as Main from './Main.bs';
+import QRCode from 'davidshimjs-qrcodejs';
 
 /** **********************************************************************
  * Register serviceworker if supported
@@ -32,6 +33,10 @@ if ('serviceWorker' in navigator) {
  */
 
 window.salemAppVersion = "0.42.1";
+
+// QRCode generator
+window.QRCode = QRCode
+window.createQrCode = (domNode, params) => new window.QRCode(domNode, params);
 
 /** **********************************************************************
  * Run the game. Specify the game's DOM node id.
