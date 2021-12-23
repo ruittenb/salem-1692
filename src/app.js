@@ -11,7 +11,7 @@ import QRCode from 'davidshimjs-qrcodejs';
 import parseQrCode from 'qrcode-parser';
 
 // Make some variables available for Rescript
-window.salemAppVersion = "0.43.6";
+window.salemAppVersion = "0.43.7";
 
 // QR code generator
 window.QRCode = QRCode
