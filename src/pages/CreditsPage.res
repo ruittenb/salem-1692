@@ -52,6 +52,10 @@ let make = (
             <a href="https://www.fiverr.com/mrvoice">
                 {React.string("Christopher Badziong")}
             </a> spacedComma
+            <a href="https://www.fiverr.com/ruffer">
+                {React.string("Quentin ")}
+                <i> {React.string("(Ruffer)")} </i>
+            </a> spacedComma
             {React.string(t("Licensed under") ++ " ")}
             <a href="http://creativecommons.org/licenses/by-sa/4.0/"> {React.string("CC BY-SA 4.0")} </a>
         </p>

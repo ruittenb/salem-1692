@@ -29,7 +29,7 @@ let make = (
             let (className, label) = switch buttonLanguage {
                 | #en_US => ("icon-left flag-us", t("English"))
                 | #es_ES => ("icon-left flag-es", t(`Español`))
-                | #fr_FR => ("icon-left flag-fr", t(`Français`) ++ " *")
+                | #fr_FR => ("icon-left flag-fr", t(`Français`))
                 | #de_DE => ("icon-left flag-de", t("Deutsch"))
                 | #nl_NL => ("icon-left flag-nl", t("Nederlands"))
             }
@@ -39,7 +39,7 @@ let make = (
     // React component
     <>
         {React.array(buttons)}
-        <p>{React.string("* " ++ t("Interface only, no dialogue yet"))}</p>
+        // Incomplete languages may use React.string(t("Interface only, no dialogue yet"))
     </>
 }
 
