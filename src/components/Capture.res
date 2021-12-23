@@ -160,7 +160,7 @@ let make = (
             ->Belt.Result.mapWithDefault(None, x => Some(x))
         let _maybeRecording: bool = startRecording(maybeVideoElement, maybeGetUserMedia)
 
-        // Install timer that snaps a picture every 0.5 s
+        // Install timer that snaps a picture at every interval
         let snapTimer = Js.Global.setInterval(() => {
             captureAndParseFrame(maybeVideoElement, maybeCanvasElement, callback)
         }, snapInterval)

@@ -260,12 +260,16 @@ let getModusOperandi = (
                             </p>
                             <Spacer />
                             // Back/Forward buttons
-                            <Button label={t("Next")} className="icon-right icon-forw condensed-nl" onClick={(_event) => tryPlayAsSlave(
-                                goToPage,
-                                dbConnectionStatus, setDbConnectionStatus,
-                                gameState, setGameState,
-                                setSlaveGameIdValidity,
-                            )} />
+                            <Button
+                                label={t("Play Game")}
+                                className="icon-right icon-forw condensed-nl"
+                                onClick={(_event) => tryPlayAsSlave(
+                                    goToPage,
+                                    dbConnectionStatus, setDbConnectionStatus,
+                                    gameState, setGameState,
+                                    setSlaveGameIdValidity,
+                                )}
+                            />
                             <Button
                                 label={t("Leave guest mode")}
                                 className="condensed-es"
