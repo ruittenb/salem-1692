@@ -7,9 +7,10 @@
   "keywords": [
     "rescript",
     "boardgame",
-    "cardgame"
+    "cardgame",
+    "witches"
   ],
-  "license": "GNU GPLv3",
+  "license": "GNU GPLv2",
   "main": "dist/index.html",
   "scripts": {
     "all": "make all",
@@ -27,7 +28,7 @@
     "esmify": "^2.1.1",
     "fswatch": "^0.1.4",
     "rescript": "^9.1.4",
-    "serve": "^12.0.1",
+    "serve": "^13.0.2",
     "uglify-js": "^3.14.1",
     "uglifyify": "^5.0.2"
   },

@@ -186,6 +186,7 @@ input[type=text].id-input {
 .fr_FR .page .condensed-fr {
     font-size: 22px;
 }
+.en_US .page h1.condensed-en,
 .es_ES .page h1.condensed-es {
     font-size: 58px;
     margin-top: 30px;

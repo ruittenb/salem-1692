@@ -304,7 +304,7 @@ let make = (
             goToPage(_prev => Title)
         }} />
         <GearFloatingButton goToPage returnPage />
-        <h1 className="condensed-es" >
+        <h1 className="condensed-es condensed-en" >
             {React.string(t("Multi-Telephone"))}
         </h1>
         {modusOperandi}
