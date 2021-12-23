@@ -34,7 +34,7 @@ if ('serviceWorker' in navigator) {
  * Make some variables available for Rescript
  */
 
-window.salemAppVersion = "0.43.0";
+window.salemAppVersion = "0.43.1";
 
 // QR code generator
 window.QRCode = QRCode
