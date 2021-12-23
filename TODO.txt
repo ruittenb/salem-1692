@@ -5,6 +5,9 @@ BUGS:
 
 MISSING:
  - button "abort connecting"
+ - Error: Not an object when either
+   - host disappears
+	 - game not present
 
 NICE TO HAVE:
  - fade music out

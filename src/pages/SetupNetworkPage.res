@@ -110,11 +110,11 @@ let tryPlayAsSlave = (goToPage, dbConnectionStatus, setDbConnectionStatus, gameS
         // Code is not valid
         Utils.logDebug(ps ++ "Code " ++ newGameId ++ " is not valid")
         leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
-        setSlaveGameIdValidity(_prev => InputShownAndInvalid)
+        setSlaveGameIdValidity(_prev => SlaveInputShownAndInvalid)
     } else {
         // Code is valid
         Utils.logDebug(ps ++ "Code " ++ newGameId ++ " is valid")
-        setSlaveGameIdValidity(_prev => InputShown)
+        setSlaveGameIdValidity(_prev => SlaveInputShown)
         // We should always disconnect so that we won't have multiple listeners
         leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
         joinGame(setDbConnectionStatus, setGameState, newGameId, () =>
@@ -137,7 +137,7 @@ let getModusOperandi = (
     slaveGameIdValidity,
     setSlaveGameIdValidity,
 ) => switch (gameState.gameType, dbConnectionStatus, slaveGameIdValidity) {
-    | (StandAlone, _, InputHidden) =>
+    | (StandAlone, _, SlaveInputHidden) =>
                         <>
                             <h2> {React.string(t("Be a Host"))} </h2>
                             <p> {React.string(t("You can host a game so that players can join from another smartphone."))} </p>
@@ -155,7 +155,7 @@ let getModusOperandi = (
                             <Spacer />
                             <Button
                                 label={t("Join Game")}
-                                onClick={ _event => setSlaveGameIdValidity(_prev => InputShown) }
+                                onClick={ _event => setSlaveGameIdValidity(_prev => SlaveInputShown) }
                             />
                         </>
     | (Master, NotConnected, _) =>
@@ -233,7 +233,7 @@ let getModusOperandi = (
                                     defaultValue={gameState.gameType->Utils.ifSlaveGetGameId}
                                     onChange={(_event) => {
                                         leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
-                                        setSlaveGameIdValidity(_prev => InputShownAndInvalid)
+                                        setSlaveGameIdValidity(_prev => SlaveInputShownAndInvalid)
                                     }}
                                 />
                                 <QrIcon
@@ -250,7 +250,7 @@ let getModusOperandi = (
                             <p>
                                 {
                                     let slaveConnectionStatus = switch (dbConnectionStatus) {
-                                        | NotConnected if slaveGameIdValidity === InputShownAndInvalid => "Invalid code"
+                                        | NotConnected if slaveGameIdValidity === SlaveInputShownAndInvalid => "Invalid code"
                                         | NotConnected                => "Not connected"
                                         | Connecting                  => "Connecting..."
                                         | Connected(_)                => "Connected."
@@ -275,6 +275,7 @@ let getModusOperandi = (
                                 className="condensed-es"
                                 onClick={(_event) => {
                                     leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
+                                    setSlaveGameIdValidity(_prev => SlaveInputHidden)
                                 }}
                             />
                             <Rule />
@@ -295,7 +296,7 @@ let make = (
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let (slaveGameIdValidity, setSlaveGameIdValidity) = React.useState(_ => InputHidden)
+    let (slaveGameIdValidity, setSlaveGameIdValidity) = React.useState(_ => SlaveInputHidden)
 
     let modusOperandi = getModusOperandi(
         t,

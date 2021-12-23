@@ -25,10 +25,10 @@ type rotation =
     | RotOneHalf
     | RotThreeQuarters
 
-type codeValidity =
-    | InputHidden
-    | InputShown // validity unspecified
-    | InputShownAndInvalid
+type slaveCodeValidity =
+    | SlaveInputHidden
+    | SlaveInputShown // validity unspecified
+    | SlaveInputShownAndInvalid
 
 @decco type player = string
 @decco type players = array<player>
