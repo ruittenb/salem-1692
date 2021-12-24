@@ -34,7 +34,7 @@ let table = Js.Dict.fromArray([
     ("Leave guest mode", `Quitter mode invité`),
     ("You can host a game so that players can join from another smartphone.", `Vous pouvez héberger un jeu que d'autres joueurs peuvent rejoindre depuis un autre smartphone.`),
     ("You can join a game running on another smartphone.", `Vous pouvez rejoindre un jeu en cours sur un autre smartphone.`),
-    (`Take the other smartphone and look in the app under Multi-Telephone → Be a Host. Then enter the game code here.`, `Prenez l'autre smartphone et regardez dans l'application sous Configuration → Héberger jeu. Puis, saisissez le code du jeu ici.`),
+    (`Take the other smartphone and look in the app under Multi-Telephone → Be a Host. Then enter the game code here.`, `Prenez l'autre smartphone et regardez dans l'application sous Multi-téléphone → Jouer en tant qu'hôte. Puis, saisissez le code du jeu ici.`),
     ("It is possible to join this game from another smartphone.", `Il est possible de rejoindre ce jeu à partir d'un autre smartphone.`),
     (`Take the other smartphone and look in the app under Multi-Telephone → Be a Guest. Then enter the following game code there.`, `Prenez l'autre smartphone et regardez dans l'application sous Multi-téléphone → Jouer en tant qu'invité. Puis, saisissez le code du jeu suivant là-bas.`),
     ("You are currently hosting a game.", `Vous hébergez actuellement un jeu.`),

@@ -412,7 +412,7 @@ input[type=text].id-input {
 
 #setup-master-page,
 #setup-slave-page {
-    background: url(../images/overlay-old-phone.png) -220px 100px no-repeat;
+    background: url(../images/overlay-old-phone.png) -220px 80px no-repeat;
 }
 
 #layout-list {
