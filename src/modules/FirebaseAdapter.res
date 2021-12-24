@@ -53,7 +53,7 @@ let connect = (): Promise.t<dbConnection> => {
             onValue(connectionInfoRef, (snapshot) => {
                 let connected: bool = getValue(snapshot)
                 if (connected) {
-                    Utils.logDebug(p ++ "Connected")
+                    logDebug(p ++ "Connected")
                     resolve(. { app, db })
                 }
             })
@@ -71,7 +71,7 @@ let disconnect = (
     // We could go offline here, but then reconnecting would require a
     // different method than when connecting for the first time.
     //goOffline(dbConnection.db)
-    Utils.logDebug(p ++ "Disconnected")
+    logDebug(p ++ "Disconnected")
 }
 
 /** **********************************************************************
@@ -89,7 +89,7 @@ let writeGame = (
             let myGameRef = getRef(dbConnection.db, gameKey(gameId))
             set(myGameRef, dbRecord->dbRecord_encode)
                 ->Promise.then(() => {
-                    Utils.logDebug(p ++ action ++ " game " ++ gameId)
+                    logDebug(p ++ action ++ " game " ++ gameId)
                     resolve(. ignore()) // workaround to pass a unit argument
                     Promise.resolve()
                 })
@@ -117,7 +117,7 @@ let writeGameKey = (
             let myGameRef = getRef(dbConnection.db, gameKey(gameId) ++ "/" ++ key)
             set(myGameRef, value)
                 ->Promise.then(() => {
-                    Utils.logDebug(p ++ "Updated game key " ++ key ++ " with value " ++ value)
+                    logDebug(p ++ "Updated game key " ++ key ++ " with value " ++ value)
                     resolve(. ignore()) // workaround to pass a unit argument
                     Promise.resolve()
                 })
@@ -142,7 +142,7 @@ let deleteGame = (
     )
     ->Belt.Option.forEach(myGameRef => {
         remove(myGameRef)
-        Utils.logDebug(p ++ "Deleted game " ++ gameId)
+        logDebug(p ++ "Deleted game " ++ gameId)
     })
 }
 
@@ -153,17 +153,24 @@ let deleteGame = (
 let joinGame = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId
-): unit => {
-    safeExec(
+): bool => {
+    let maybeGameRef = safeExec(
         () => getRef(dbConnection.db, gameKey(gameId))
     )
-    ->Belt.Option.forEach(myGameRef => {
-        Utils.logDebug(p ++ "Joined game " ++ gameId)
-        onValue(myGameRef, (snapshot: dbSnapshot) => {
-            Utils.logDebug(p ++ "Received data")
-            let _data = getValue(snapshot)
-        })
-    })
+    switch maybeGameRef {
+        | Some(myGameRef) => {
+            logDebug(p ++ "Joined game " ++ gameId)
+            onValue(myGameRef, (snapshot: dbSnapshot) => {
+                logDebug(p ++ "Received data")
+                let _data = getValue(snapshot)
+            })
+            true
+        }
+        | None => {
+            logDebug(p ++ "Unable to join game " ++ gameId)
+            false
+        }
+    }
 }
 
 let leaveGame = (
@@ -175,7 +182,7 @@ let leaveGame = (
     )
     ->Belt.Option.forEach(myGameRef => {
         off(myGameRef)
-        Utils.logDebug(p ++ "Left game " ++ gameId)
+        logDebug(p ++ "Left game " ++ gameId)
     })
 }
 
@@ -195,7 +202,7 @@ let listen = (
         () => getRef(dbConnection.db, observableKey)
     )
     ->Belt.Option.forEach(observableRef => {
-        Utils.logDebug(p ++ "Listening on " ++ observableKey)
+        logDebug(p ++ "Listening on " ++ observableKey)
         onValue(observableRef, (snapshot) => {
             // We are going to get a snapshot immediately upon installing the listener.
             // NightScenarioPage takes care of this, so we can ignore it here.
@@ -219,7 +226,7 @@ let stopListening = (
         () => getRef(dbConnection.db, observableKey)
     )
     ->Belt.Option.forEach(observableRef => {
-        Utils.logDebug(p ++ "Stopping listening on " ++ observableKey)
+        logDebug(p ++ "Stopping listening on " ++ observableKey)
         off(observableRef)
     })
 }

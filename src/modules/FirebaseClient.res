@@ -90,7 +90,7 @@ let disconnect = (
 let joinGame = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId
-): unit => {
+): bool => {
     FirebaseAdapter.joinGame(dbConnection, gameId)
 }
 
