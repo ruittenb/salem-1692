@@ -3,7 +3,7 @@
  * Serviceworker for Salem 1692 Moderator
  */
 
-const version = "0.43.8";
+const version = "0.43.9";
 const cacheName = 'salem-1692-v' + version;
 let filesToCache;
 
