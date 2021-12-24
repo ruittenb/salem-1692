@@ -20,31 +20,39 @@ let make = (
         Utils.logDebugGreen(p ++ "Mounted")
         Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
             Utils.logDebug(p ++ "About to install game listener")
-            FirebaseClient.listen(dbConnection, gameId, GameSubject, (dbRecordStr: string) => {
-                switch (dbRecordStr->Js.Json.string->dbRecord_decode) {
-                    | Error(deccoError) => {
-                        Utils.logError(
-                            deccoError.path ++ ": " ++ deccoError.message ++ ": " ++
-                            deccoError.value->Js.Json.decodeString->Belt.Option.getWithDefault("<None>")
-                        )
+            FirebaseClient.listen(dbConnection, gameId, GameSubject, (maybeDbRecordStr: option<string>) => {
+                switch maybeDbRecordStr {
+                    | None => {
+                        Utils.logDebug(p ++ "Received null on listener")
+                        goToPage(_prev => SetupNetwork)
                     }
-                    | Ok(dbRecord) => {
-                        Utils.logDebug(p ++ "Received dbRecord")
-                        goToPage(_prev => dbRecord.masterPhase->FirebaseClient.getPage)
-                        setGameState(prevGameState => {
-                            {
-                                ...prevGameState,
-                                players: dbRecord.masterPlayers,
-                                seating: dbRecord.masterSeating
+                    | Some(dbRecordStr) => {
+                        switch (dbRecordStr->Js.Json.string->dbRecord_decode) {
+                            | Error(deccoError) => {
+                                Utils.logError(
+                                    deccoError.path ++ ": " ++ deccoError.message ++ ": " ++
+                                    deccoError.value->Js.Json.decodeString->Belt.Option.getWithDefault("<None>")
+                                )
                             }
-                        })
-                        setTurnState(_prevTurnState => {
-                            {
-                                nrWitches: dbRecord.masterNumberWitches,
-                                choiceWitches: dbRecord.slaveChoiceWitches === "" ? None : Some(dbRecord.slaveChoiceWitches),
-                                choiceConstable: dbRecord.slaveChoiceConstable === "" ? None : Some(dbRecord.slaveChoiceConstable)
+                            | Ok(dbRecord) => {
+                                Utils.logDebug(p ++ "Received dbRecord")
+                                goToPage(_prev => dbRecord.masterPhase->FirebaseClient.getPage)
+                                setGameState(prevGameState => {
+                                    {
+                                        ...prevGameState,
+                                        players: dbRecord.masterPlayers,
+                                        seating: dbRecord.masterSeating
+                                    }
+                                })
+                                setTurnState(_prevTurnState => {
+                                    {
+                                        nrWitches: dbRecord.masterNumberWitches,
+                                        choiceWitches: dbRecord.slaveChoiceWitches === "" ? None : Some(dbRecord.slaveChoiceWitches),
+                                        choiceConstable: dbRecord.slaveChoiceConstable === "" ? None : Some(dbRecord.slaveChoiceConstable)
+                                    }
+                                })
                             }
-                        })
+                        }
                     }
                 }
             })

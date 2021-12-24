@@ -162,7 +162,7 @@ let joinGame = (
             logDebug(p ++ "Joined game " ++ gameId)
             onValue(myGameRef, (snapshot: dbSnapshot) => {
                 logDebug(p ++ "Received data")
-                let _data = getValue(snapshot)
+                let _data = getValue(snapshot) // TODO
             })
             true
         }
@@ -194,25 +194,30 @@ let listen = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId,
     subject: dbObservable,
-    callback: (string) => unit
+    callback: (option<string>) => unit
 ): unit => {
     let observableKey = gameKey(gameId) ++ "/" ++ subjectKey(subject)
-    safeExec(
-        // TODO What to do if this fails?
+    let maybeGameRef = safeExec(
         () => getRef(dbConnection.db, observableKey)
     )
-    ->Belt.Option.forEach(observableRef => {
-        logDebug(p ++ "Listening on " ++ observableKey)
-        onValue(observableRef, (snapshot) => {
-            // We are going to get a snapshot immediately upon installing the listener.
-            // NightScenarioPage takes care of this, so we can ignore it here.
-            let result: string = getValue(snapshot)
-            if (Constants.debug) {
-                Js.log2(p ++ "Received data from " ++ observableKey ++ ":", result)
-            }
-            callback(result) // TODO result might be null if the host disappears
-        })
-    })
+    switch maybeGameRef {
+        | Some(observableRef) => {
+            logDebug(p ++ "Listening on " ++ observableKey)
+            onValue(observableRef, (snapshot) => {
+                // We are going to get a snapshot immediately upon installing the listener.
+                // NightScenarioPage takes care of this, so we can ignore it here.
+                let result: Js.Nullable.t<string> = getValue(snapshot)
+                if (Constants.debug) {
+                    Js.log2(p ++ "Received data from " ++ observableKey ++ ":", result)
+                }
+                callback(result->Js.Nullable.toOption)
+            })
+        }
+        | None => {
+            logDebug(p ++ "Unable to listen on " ++ observableKey)
+            callback(None)
+        }
+    }
 }
 
 let stopListening = (

@@ -45618,20 +45618,26 @@ function leaveGame(dbConnection, gameId) {
 
 function listen(dbConnection, gameId, subject, callback) {
   var observableKey = "/games/" + gameId + "/" + subjectKey(subject);
-  return Belt_Option.forEach(Utils$Salem1692.safeExec(function (param) {
+  var maybeGameRef = Utils$Salem1692.safeExec(function (param) {
     return Database.ref(dbConnection.db, observableKey);
-  }), function (observableRef) {
+  });
+
+  if (maybeGameRef !== undefined) {
     Utils$Salem1692.logDebug("[FirebaseAdapter] Listening on " + observableKey);
-    Database.onValue(observableRef, function (snapshot) {
+    Database.onValue(Caml_option.valFromOption(maybeGameRef), function (snapshot) {
       var result = snapshot.val();
 
       if (Constants$Salem1692.debug) {
         console.log("[FirebaseAdapter] Received data from " + observableKey + ":", result);
       }
 
-      return Curry._1(callback, result);
+      return Curry._1(callback, result == null ? undefined : Caml_option.some(result));
     });
-  });
+    return;
+  } else {
+    Utils$Salem1692.logDebug("[FirebaseAdapter] Unable to listen on " + observableKey);
+    return Curry._1(callback, undefined);
+  }
 }
 
 function stopListening(dbConnection, gameId, subject) {
@@ -48475,9 +48481,9 @@ function NightChoicePage(Props) {
     5);
     Utils$Salem1692.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection) {
       Utils$Salem1692.logDebug("[NightChoicePage] About to install choice listener");
-      return FirebaseClient$Salem1692.listen(dbConnection, gameState.gameId, subject, function (player) {
-        if (player !== "") {
-          return Curry._1(choiceProcessor, player);
+      return FirebaseClient$Salem1692.listen(dbConnection, gameState.gameId, subject, function (maybePlayer) {
+        if (maybePlayer !== undefined && maybePlayer !== "") {
+          return Curry._1(choiceProcessor, maybePlayer);
         }
       });
     });
@@ -48602,8 +48608,12 @@ function NightConfirmPage(Props) {
     Utils$Salem1692.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection) {
       FirebaseClient$Salem1692.saveGameConfirmation(dbConnection, gameState.gameId, subject, "Undecided");
       Utils$Salem1692.logDebug("[NightConfirmPage] About to install confirmation listener");
-      return FirebaseClient$Salem1692.listen(dbConnection, gameState.gameId, subject, function (decision) {
-        switch (decision) {
+      return FirebaseClient$Salem1692.listen(dbConnection, gameState.gameId, subject, function (maybeDecision) {
+        if (maybeDecision === undefined) {
+          return;
+        }
+
+        switch (maybeDecision) {
           case "No":
             return Curry._1(confirmationProcessor, "No");
 
@@ -50526,43 +50536,53 @@ function SlavePage(Props) {
       Utils$Salem1692.logDebug("[SlavePage] About to install game listener");
       return FirebaseClient$Salem1692.listen(dbConnection, gameId,
       /* GameSubject */
-      0, function (dbRecordStr) {
-        var deccoError = Types$Salem1692.dbRecord_decode(dbRecordStr);
+      0, function (maybeDbRecordStr) {
+        if (maybeDbRecordStr !== undefined) {
+          var deccoError = Types$Salem1692.dbRecord_decode(maybeDbRecordStr);
 
-        if (deccoError.TAG ===
-        /* Ok */
-        0) {
-          var dbRecord = deccoError._0;
-          Utils$Salem1692.logDebug("[SlavePage] Received dbRecord");
+          if (deccoError.TAG ===
+          /* Ok */
+          0) {
+            var dbRecord = deccoError._0;
+            Utils$Salem1692.logDebug("[SlavePage] Received dbRecord");
 
-          Curry._1(goToPage, function (_prev) {
-            return FirebaseClient$Salem1692.getPage(dbRecord.masterPhase);
-          });
+            Curry._1(goToPage, function (_prev) {
+              return FirebaseClient$Salem1692.getPage(dbRecord.masterPhase);
+            });
 
-          Curry._1(setGameState, function (prevGameState) {
-            return {
-              gameType: prevGameState.gameType,
-              gameId: prevGameState.gameId,
-              language: prevGameState.language,
-              players: dbRecord.masterPlayers,
-              seating: dbRecord.masterSeating,
-              doPlayEffects: prevGameState.doPlayEffects,
-              doPlaySpeech: prevGameState.doPlaySpeech,
-              backgroundMusic: prevGameState.backgroundMusic
-            };
-          });
+            Curry._1(setGameState, function (prevGameState) {
+              return {
+                gameType: prevGameState.gameType,
+                gameId: prevGameState.gameId,
+                language: prevGameState.language,
+                players: dbRecord.masterPlayers,
+                seating: dbRecord.masterSeating,
+                doPlayEffects: prevGameState.doPlayEffects,
+                doPlaySpeech: prevGameState.doPlaySpeech,
+                backgroundMusic: prevGameState.backgroundMusic
+              };
+            });
 
-          return Curry._1(setTurnState, function (_prevTurnState) {
-            return {
-              nrWitches: dbRecord.masterNumberWitches,
-              choiceWitches: dbRecord.slaveChoiceWitches === "" ? undefined : dbRecord.slaveChoiceWitches,
-              choiceConstable: dbRecord.slaveChoiceConstable === "" ? undefined : dbRecord.slaveChoiceConstable
-            };
-          });
+            return Curry._1(setTurnState, function (_prevTurnState) {
+              return {
+                nrWitches: dbRecord.masterNumberWitches,
+                choiceWitches: dbRecord.slaveChoiceWitches === "" ? undefined : dbRecord.slaveChoiceWitches,
+                choiceConstable: dbRecord.slaveChoiceConstable === "" ? undefined : dbRecord.slaveChoiceConstable
+              };
+            });
+          }
+
+          var deccoError$1 = deccoError._0;
+          return Utils$Salem1692.logError(deccoError$1.path + ": " + deccoError$1.message + ": " + Belt_Option.getWithDefault(Js_json.decodeString(deccoError$1.value), "<None>"));
         }
 
-        var deccoError$1 = deccoError._0;
-        return Utils$Salem1692.logError(deccoError$1.path + ": " + deccoError$1.message + ": " + Belt_Option.getWithDefault(Js_json.decodeString(deccoError$1.value), "<None>"));
+        Utils$Salem1692.logDebug("[SlavePage] Received null on listener");
+        return Curry._1(goToPage, function (_prev) {
+          return (
+            /* SetupNetwork */
+            6
+          );
+        });
       });
     });
     return function (param) {

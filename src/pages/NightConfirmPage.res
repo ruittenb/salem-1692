@@ -64,11 +64,12 @@ let make = (
 
             // install new listener
             Utils.logDebug(p ++ "About to install confirmation listener")
-            FirebaseClient.listen(dbConnection, gameState.gameId, subject, (decision) => {
-                switch decision {
-                    | "Yes" => confirmationProcessor(#Yes)
-                    | "No"  => confirmationProcessor(#No)
-                    | _     => ()
+            FirebaseClient.listen(dbConnection, gameState.gameId, subject, (maybeDecision) => {
+                switch maybeDecision {
+                    | Some("Yes") => confirmationProcessor(#Yes)
+                    | Some("No")  => confirmationProcessor(#No)
+                    | Some(_)     => ()
+                    | None        => ()
                 }
             })
         })

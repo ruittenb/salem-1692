@@ -224,7 +224,7 @@ let listen = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId,
     subject: dbObservable,
-    callback: (string) => unit
+    callback: (option<string>) => unit
 ): unit => {
     FirebaseAdapter.listen(dbConnection, gameId, subject, callback)
 }
