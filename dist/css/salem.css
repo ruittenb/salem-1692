@@ -79,7 +79,8 @@ img.qr-icon.scannable {
     background-color: white;
 }
 #qr-code {
-    display: block;
+    display: flex;
+    flex-direction: row-reverse;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -108,9 +109,6 @@ img.qr-icon.scannable {
     height: 100vh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.5);
-}
-#mask canvas {
-    display: none;
 }
 
 input[type=text] {

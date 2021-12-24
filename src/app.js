@@ -4,14 +4,20 @@
  * Bridges ReScript to JavaScript
  */
 
-// Main Salem Moderator code
-import * as Main from './Main.bs';
+/** **********************************************************************
+ * Imports
+ */
 
+import { version } from '../package.json';
 import QRCode from 'davidshimjs-qrcodejs';
 import parseQrCode from 'qrcode-parser';
+import * as Main from './Main.bs';
 
-// Make some variables available for Rescript
-window.salemAppVersion = "0.43.8";
+/** **********************************************************************
+ * Make some variables available for Rescript
+ */
+
+window.salemAppVersion = version;
 
 // QR code generator
 window.QRCode = QRCode
