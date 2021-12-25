@@ -26,7 +26,7 @@ let table = Js.Dict.fromArray([
     ("Be a Guest", `Jugar como invitado`),
     ("Start Hosting", "Empezar a albergar"),
     ("Stop Hosting", "Dejar de albergar"),
-    ("Malformed code", `Formato incorrecto`),
+    ("Malformed code", `Código con formato incorrecto`),
     ("Game not found", "Juego no encontrado"),
     ("Not connected", "No conectado"),
     ("Connecting...", "Conectando..."),

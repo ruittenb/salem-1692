@@ -259,13 +259,13 @@ let getModusOperandi = (
                             </div>
                             <p>
                                 {
-                                    let slaveConnectionStatus = switch (dbConnectionStatus) {
-                                        | NotConnected if slaveGameIdValidity === SlaveInputShownAndInvalid => "Malformed code"
-                                        | NotConnected if slaveGameIdValidity === SlaveInputShownAndAbsent  => "Game not found"
-                                        | NotConnected                                                      => "Not connected"
-                                        | Connecting                                                        => "Connecting..."
-                                        | Connected(_) if slaveGameIdValidity === SlaveInputShownAndAbsent  => "Game not found"
-                                        | Connected(_)                                                      => "Connected."
+                                    let slaveConnectionStatus = switch (dbConnectionStatus, slaveGameIdValidity) {
+                                        | (NotConnected, SlaveInputShownAndInvalid) => "Malformed code"
+                                        | (NotConnected, SlaveInputShownAndAbsent)  => "Game not found"
+                                        | (NotConnected, _)                         => "Not connected"
+                                        | (Connecting, _)                           => "Connecting..."
+                                        | (Connected(_), SlaveInputShownAndAbsent)  => "Game not found"
+                                        | (Connected(_), _)                         => "Connected."
                                     }
                                     React.string(t(slaveConnectionStatus))
                                 }
@@ -284,7 +284,7 @@ let getModusOperandi = (
                             />
                             <Button
                                 label={t("Leave guest mode")}
-                                className="condensed-es"
+                                className="condensed-es condensed-de"
                                 onClick={(_event) => {
                                     leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
                                     setSlaveGameIdValidity(_prev => SlaveInputHidden)
@@ -293,6 +293,7 @@ let getModusOperandi = (
                             <Rule />
                             <h2> {React.string(t("Be a Host"))} </h2>
                             <p> {React.string(t("If you want to host a game so that others can join, you should leave guest mode first."))} </p>
+                            <Spacer />
                         </>
 }
 
@@ -319,7 +320,7 @@ let make = (
     )
 
     // component
-    <div id="setup-slave-page" className="page flex-vertical">
+    <div id="setup-network-page" className="page flex-vertical">
         <BackFloatingButton onClick={(_event) => {
             leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
             goToPage(_prev => Title)

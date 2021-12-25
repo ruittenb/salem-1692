@@ -10,7 +10,7 @@ BUNDLE=$(DIST)/js/bundle.js
 JS_FILES=$(shell find $(SRC) -name *.js)
 CSS_FILES=$(DIST)/css/salem.css $(DIST)/css/normalize.css
 MIN_CSS_FILES=$(CSS_FILES:.css=.min.css)
-VERSION_FILES=bsconfig.json $(SRC)/app.js $(DIST)/serviceworker.js
+VERSION_FILES=bsconfig.json $(DIST)/serviceworker.js
 
 .DEFAULT_GOAL:=help
 
