@@ -69,7 +69,8 @@ let make = (): React.element => {
         | SetupMusic              => <SetupMusicPage goToPage />
         | SetupPlayers            => <SetupPlayersPage goToPage returnPage=Setup />
         | SetupPlayersForGame     => <SetupPlayersPage goToPage returnPage=Title />
-        | SetupNetwork            => <SetupNetworkPage goToPage returnPage=Title />
+        | SetupNetwork            => <SetupNetworkPage goToPage noGame=false />
+        | SetupNetworkNoGame      => <SetupNetworkPage goToPage noGame=true />
         | Credits                 => <CreditsPage goToPage />
         | Daytime                 => <DaytimePage goToPage />
         // Master

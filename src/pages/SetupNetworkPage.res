@@ -247,7 +247,11 @@ let getModusOperandi = (
                                         (scannedGameId) => {
                                             Utils.safeQuerySelector(inputElementId)
                                                 ->Utils.resultForEach(
-                                                    inputElement => inputElement->setValue(scannedGameId)
+                                                    inputElement => {
+                                                        inputElement->setValue(scannedGameId)
+                                                        setSlaveGameIdValidity(_prev => SlaveInputShown)
+                                                        setDbConnectionStatus(_prev => NotConnected)
+                                                    }
                                                 )
                                         }
                                     )}
@@ -258,9 +262,10 @@ let getModusOperandi = (
                                     let slaveConnectionStatus = switch (dbConnectionStatus) {
                                         | NotConnected if slaveGameIdValidity === SlaveInputShownAndInvalid => "Malformed code"
                                         | NotConnected if slaveGameIdValidity === SlaveInputShownAndAbsent  => "Game not found"
-                                        | NotConnected                => "Not connected"
-                                        | Connecting                  => "Connecting..."
-                                        | Connected(_)                => "Connected."
+                                        | NotConnected                                                      => "Not connected"
+                                        | Connecting                                                        => "Connecting..."
+                                        | Connected(_) if slaveGameIdValidity === SlaveInputShownAndAbsent  => "Game not found"
+                                        | Connected(_)                                                      => "Connected."
                                     }
                                     React.string(t(slaveConnectionStatus))
                                 }
@@ -297,13 +302,13 @@ let getModusOperandi = (
 @react.component
 let make = (
     ~goToPage,
-    ~returnPage: page,
+    ~noGame,
 ): React.element => {
     let (dbConnectionStatus, setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let (slaveGameIdValidity, setSlaveGameIdValidity) = React.useState(_ => SlaveInputHidden)
+    let (slaveGameIdValidity, setSlaveGameIdValidity) = React.useState(_ => noGame ? SlaveInputShownAndAbsent : SlaveInputHidden)
 
     let modusOperandi = getModusOperandi(
         t,
@@ -319,7 +324,7 @@ let make = (
             leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
             goToPage(_prev => Title)
         }} />
-        <GearFloatingButton goToPage returnPage />
+        <GearFloatingButton goToPage returnPage=SetupNetwork />
         <h1 className="condensed-es condensed-en condensed-fr" >
             {React.string(t("Multi-Telephone"))}
         </h1>

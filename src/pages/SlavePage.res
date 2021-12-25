@@ -24,7 +24,7 @@ let make = (
                 switch maybeDbRecordStr {
                     | None => {
                         Utils.logDebug(p ++ "Received null on listener")
-                        goToPage(_prev => SetupNetwork)
+                        goToPage(_prev => SetupNetworkNoGame)
                     }
                     | Some(dbRecordStr) => {
                         switch (dbRecordStr->Js.Json.string->dbRecord_decode) {

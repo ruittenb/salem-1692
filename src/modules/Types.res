@@ -71,6 +71,7 @@ type page =
     | SetupPlayers
     | SetupPlayersForGame
     | SetupNetwork
+    | SetupNetworkNoGame
     | Credits
     // Master
     | Daytime
