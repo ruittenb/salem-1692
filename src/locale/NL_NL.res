@@ -1,4 +1,3 @@
-
 /**
  * Locale: nl_NL
  */
@@ -27,7 +26,8 @@ let table = Js.Dict.fromArray([
     ("Be a Guest", "Als gast spelen"),
     ("Start Hosting", "Hosten starten"),
     ("Stop Hosting", "Hosten stoppen"),
-    ("Invalid code", "Ongeldige code"),
+    ("Malformed code", "Foutieve code"),
+    ("Game not found", "Spel niet gevonden"),
     ("Not connected", "Niet verbonden"),
     ("Connecting...", "Verbinden..."),
     ("Connected.", "Verbonden."),

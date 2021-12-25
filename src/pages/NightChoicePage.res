@@ -47,8 +47,12 @@ let make = (
         }
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
             Utils.logDebug(p ++ "About to install choice listener")
-            FirebaseClient.listen(dbConnection, gameState.gameId, subject, (player) => {
-                if player !== "" { choiceProcessor(player) } else { () }
+            FirebaseClient.listen(dbConnection, gameState.gameId, subject, (maybePlayer) => {
+                switch maybePlayer {
+                    | Some("")     => ()
+                    | Some(player) => choiceProcessor(player)
+                    | None         => ()
+                }
             })
         })
         Some(() => { // Cleanup: remove listener

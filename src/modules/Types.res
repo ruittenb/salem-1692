@@ -29,6 +29,7 @@ type slaveCodeValidity =
     | SlaveInputHidden
     | SlaveInputShown // validity unspecified
     | SlaveInputShownAndInvalid
+    | SlaveInputShownAndAbsent
 
 @decco type player = string
 @decco type players = array<player>
@@ -70,6 +71,7 @@ type page =
     | SetupPlayers
     | SetupPlayersForGame
     | SetupNetwork
+    | SetupNetworkNoGame
     | Credits
     // Master
     | Daytime

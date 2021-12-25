@@ -1,15 +1,12 @@
 
 BUGS:
- - page traversal history
  - missing players when hosting
 
-MISSING:
- - button "abort connecting"
- - Error: Not an object when either
-   - host disappears
-	 - game not present
+FEATURE:
+ - detect missing camera authorization
 
 NICE TO HAVE:
+ - button "abort connecting"
  - fade music out
  - rework night eyes
  - reflect state in URL https://betterprogramming.pub/how-and-why-you-should-store-react-ui-state-in-the-url-f2013a204cb2

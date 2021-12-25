@@ -3,6 +3,7 @@
  */
 
 open Types
+open Utils
 
 @get external getValue: (Dom.element) => string = "value"
 @set external setValue: (Dom.element, string) => unit = "value"
@@ -16,7 +17,7 @@ let inputElementId = "formGameId"
  * Master functions
  */
 let startHosting = (setDbConnectionStatus, gameState, setGameState) => {
-    Utils.logDebug(pm ++ "Starting hosting")
+    logDebug(pm ++ "Starting hosting")
     setDbConnectionStatus(_prev => Connecting)
     FirebaseClient.connect()
         ->Promise.then(dbConnection => {
@@ -48,7 +49,7 @@ let startHosting = (setDbConnectionStatus, gameState, setGameState) => {
 }
 
 let stopHosting = (dbConnectionStatus, setDbConnectionStatus, gameState, setGameState) => {
-    Utils.logDebug(pm ++ "Stopping hosting")
+    logDebug(pm ++ "Stopping hosting")
     Utils.ifConnected(dbConnectionStatus, (dbConnection) => {
         FirebaseClient.deleteGame(dbConnection, gameState.gameId)
         FirebaseClient.disconnect(dbConnection)
@@ -65,7 +66,7 @@ let stopHosting = (dbConnectionStatus, setDbConnectionStatus, gameState, setGame
  */
 
 let joinGame = (setDbConnectionStatus, setGameState, newGameId, callback) => {
-    Utils.logDebug(ps ++ "Joining game " ++ newGameId)
+    logDebug(ps ++ "Joining game " ++ newGameId)
     setDbConnectionStatus(_prev => Connecting)
     FirebaseClient.connect()
         ->Promise.then(dbConnection => {
@@ -74,8 +75,8 @@ let joinGame = (setDbConnectionStatus, setGameState, newGameId, callback) => {
                 gameType: Slave(newGameId)
             })
             setDbConnectionStatus(_prev => Connected(dbConnection))
-            FirebaseClient.joinGame(dbConnection, newGameId)
-            callback()
+            let connectSuccess: bool = FirebaseClient.joinGame(dbConnection, newGameId)
+            callback(connectSuccess)
             Promise.resolve()
         })
         ->Promise.catch(error => {
@@ -85,6 +86,7 @@ let joinGame = (setDbConnectionStatus, setGameState, newGameId, callback) => {
             })
             setDbConnectionStatus(_prev => NotConnected)
             error->Utils.getExceptionMessage->Utils.logError
+            callback(false)
             Promise.resolve()
         })
         ->ignore
@@ -92,7 +94,7 @@ let joinGame = (setDbConnectionStatus, setGameState, newGameId, callback) => {
 
 let leaveGame = (dbConnectionStatus, setDbConnectionStatus, gameState, setGameState) => {
     Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
-        Utils.logDebug(ps ++ "Leaving game " ++ gameId)
+        logDebug(ps ++ "Leaving game " ++ gameId)
         FirebaseClient.leaveGame(dbConnection, gameId)
         FirebaseClient.disconnect(dbConnection)
     })
@@ -108,17 +110,21 @@ let tryPlayAsSlave = (goToPage, dbConnectionStatus, setDbConnectionStatus, gameS
         ->Belt.Result.mapWithDefault("", getValue)
     if (!GameId.isValid(newGameId)) {
         // Code is not valid
-        Utils.logDebug(ps ++ "Code " ++ newGameId ++ " is not valid")
+        logDebug(ps ++ "Code " ++ newGameId ++ " is not valid")
         leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
         setSlaveGameIdValidity(_prev => SlaveInputShownAndInvalid)
     } else {
         // Code is valid
-        Utils.logDebug(ps ++ "Code " ++ newGameId ++ " is valid")
+        logDebug(ps ++ "Code " ++ newGameId ++ " is valid")
         setSlaveGameIdValidity(_prev => SlaveInputShown)
         // We should always disconnect so that we won't have multiple listeners
         leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
-        joinGame(setDbConnectionStatus, setGameState, newGameId, () =>
-            goToPage(_prev => DaytimeWaiting)
+        joinGame(setDbConnectionStatus, setGameState, newGameId, (isSuccess) =>
+            if isSuccess {
+                goToPage(_prev => DaytimeWaiting)
+            } else {
+                setSlaveGameIdValidity(_prev => SlaveInputShownAndAbsent)
+            }
         )
     }
 }
@@ -233,7 +239,7 @@ let getModusOperandi = (
                                     defaultValue={gameState.gameType->Utils.ifSlaveGetGameId}
                                     onChange={(_event) => {
                                         leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
-                                        setSlaveGameIdValidity(_prev => SlaveInputShownAndInvalid)
+                                        setSlaveGameIdValidity(_prev => SlaveInputShown)
                                     }}
                                 />
                                 <QrIcon
@@ -241,7 +247,11 @@ let getModusOperandi = (
                                         (scannedGameId) => {
                                             Utils.safeQuerySelector(inputElementId)
                                                 ->Utils.resultForEach(
-                                                    inputElement => inputElement->setValue(scannedGameId)
+                                                    inputElement => {
+                                                        inputElement->setValue(scannedGameId)
+                                                        setSlaveGameIdValidity(_prev => SlaveInputShown)
+                                                        setDbConnectionStatus(_prev => NotConnected)
+                                                    }
                                                 )
                                         }
                                     )}
@@ -250,10 +260,12 @@ let getModusOperandi = (
                             <p>
                                 {
                                     let slaveConnectionStatus = switch (dbConnectionStatus) {
-                                        | NotConnected if slaveGameIdValidity === SlaveInputShownAndInvalid => "Invalid code"
-                                        | NotConnected                => "Not connected"
-                                        | Connecting                  => "Connecting..."
-                                        | Connected(_)                => "Connected."
+                                        | NotConnected if slaveGameIdValidity === SlaveInputShownAndInvalid => "Malformed code"
+                                        | NotConnected if slaveGameIdValidity === SlaveInputShownAndAbsent  => "Game not found"
+                                        | NotConnected                                                      => "Not connected"
+                                        | Connecting                                                        => "Connecting..."
+                                        | Connected(_) if slaveGameIdValidity === SlaveInputShownAndAbsent  => "Game not found"
+                                        | Connected(_)                                                      => "Connected."
                                     }
                                     React.string(t(slaveConnectionStatus))
                                 }
@@ -290,13 +302,13 @@ let getModusOperandi = (
 @react.component
 let make = (
     ~goToPage,
-    ~returnPage: page,
+    ~noGame,
 ): React.element => {
     let (dbConnectionStatus, setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    let (slaveGameIdValidity, setSlaveGameIdValidity) = React.useState(_ => SlaveInputHidden)
+    let (slaveGameIdValidity, setSlaveGameIdValidity) = React.useState(_ => noGame ? SlaveInputShownAndAbsent : SlaveInputHidden)
 
     let modusOperandi = getModusOperandi(
         t,
@@ -312,7 +324,7 @@ let make = (
             leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
             goToPage(_prev => Title)
         }} />
-        <GearFloatingButton goToPage returnPage />
+        <GearFloatingButton goToPage returnPage=SetupNetwork />
         <h1 className="condensed-es condensed-en condensed-fr" >
             {React.string(t("Multi-Telephone"))}
         </h1>
