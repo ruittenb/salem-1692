@@ -91,17 +91,24 @@ img.qr-icon.scannable {
 }
 #qr-video {
     display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
     padding: 16px;
     border: 3px solid black;
     background-color: white;
-    transform: translate(-50%, -50%); /* center the QR code on the page */
+}
+#video-status {
+    width: 50%;
+    font-style: italic;
+    background: black;
+    color: white;
+    padding: 3px;
+    margin-top: 8px;
 }
 
 #mask {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     z-index: 99;
     left: 0;
@@ -245,6 +252,11 @@ input[type=text].id-input {
 
 .page button.spacer-top {
     margin-top: 25px;
+}
+
+.page button.ok-button {
+    font-size: 22px;
+    line-height: 1.5;
 }
 
 .page button.rot0   { transform: rotate(0deg);   }
