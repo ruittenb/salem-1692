@@ -15,6 +15,12 @@ type blurHandler   = ReactEvent.Focus.t => unit
  * Game Types
  */
 
+type permissionState =
+    | Granted
+    | Denied
+    | Prompt
+    | Dismissed
+
 type evenOdd =
     | Even
     | Odd

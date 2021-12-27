@@ -95,6 +95,7 @@ let make = (
         <div className="flex-vertical">
             <Button
                 label={t("OK")}
+                className="ok-button"
                 onClick={ _event => goToPage(_prev => Setup) }
             />
         </div>

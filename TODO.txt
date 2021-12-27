@@ -1,9 +1,11 @@
 
 BUGS:
  - missing players when hosting
+ - when loading serviceworker: Uncaught (in promise) TypeError: Failed to execute 'addAll' on 'Cache': Request failed
 
 FEATURE:
  - detect missing camera authorization
+ - prevent flicker in slave night pages
 
 NICE TO HAVE:
  - button "abort connecting"
