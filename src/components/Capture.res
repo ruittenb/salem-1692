@@ -161,13 +161,13 @@ let make = (
         let _maybeRecording: bool = startRecording(maybeVideoElement, maybeGetUserMedia)
 
         // Install timer that snaps a picture at every interval
-        let snapTimer = Js.Global.setInterval(() => {
+        let snapTimerId = Js.Global.setInterval(() => {
             captureAndParseFrame(maybeVideoElement, maybeCanvasElement, callback)
         }, snapInterval)
 
         // Cleanup function
         Some(() => {
-            Js.Global.clearInterval(snapTimer)
+            Js.Global.clearInterval(snapTimerId)
             stopRecording(maybeVideoElement)
         })
     })

@@ -35,8 +35,8 @@ let make = (
         className="icon-right icon-forw condensed-nl condensed-de"
         onClick={ (_event) => {
             timerId->Belt.Option.forEach(timerId => {
-                Utils.logDebug(p ++ "Clearing timer")
                 Js.Global.clearTimeout(timerId)
+                Utils.logDebug(p ++ "Clearing timer")
             })
             goToNextStep()
         } }

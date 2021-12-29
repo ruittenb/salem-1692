@@ -165,7 +165,10 @@ let make = (
     let makeTimer = (duration: float): Js.Global.timeoutId => {
         Utils.logDebug(p ++ "Setting timer")
         Js.Global.setTimeout(
-            goToNextStep,
+            () => {
+                Utils.logDebug(p ++ "Timer went off")
+                goToNextStep()
+            },
             Belt.Float.toInt(1000. *. duration)
         )
     }
