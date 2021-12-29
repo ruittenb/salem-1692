@@ -4,32 +4,32 @@ A. La nuit tombe. Les villageois vont se coucher; chacun ferme les yeux.
 
 B. Quand tout le monde a fermé les yeux, la sorcière se réveille.
 
-E. La sorcière s'ouvre les yeux et sans faire de bruit, elle décide qui
+E. La sorcière ouvre les yeux et sans faire un bruit, elle décide qui
    aura le chat noir.
-   Elle peut choisir soi-même.
+   Elle peut s'auto-désigner.
 
-H. La sorcière a fait son choix et se referme les yeux.
+H. La sorcière a fait son choix et ferme les yeux.
 
 
 D. Quand tout le monde a fermé les yeux, les sorcières se réveillent.
-   Les sorcières s'ouvrent les yeux et établissent un contact visuel.
+   Les sorcières ouvrent les yeux et établissent un contact visuel.
 
 F. Sans faire de bruit, et seulement en faisant des gestes,
    elles conviennent qui aura le chat noir.
-   Elles peuvent choisir l'une d'eux-mêmes.
+   Elles peuvent choisir l'une d'elles.
 
 G. Sans faire de bruit, et seulement en faisant des gestes,
    elles conviennent qui sera assassiné.
-   Elles peuvent choisir l'une d'eux-mêmes.
+   Elles peuvent choisir l'une d'elles.
 
-J. Les sorcières ont fait leur choix et se referment les yeux.
+J. Les sorcières ont fait leur choix et ferment les yeux.
 
 
-M. Quand les sorcières se sont refermés les yeux, le shérif se réveille.
+M. Quand les sorcières ont fermés les yeux, le shérif se réveille.
    Le shérif décide qui va être protégé cette nuit.
-   Il ne peut pas choisir soi-même.
+   Il ne peut pas se désigner.
 
-N. Le shérif a fait son choix et se referme les yeux.
+N. Le shérif a fait son choix et referme les yeux.
 
 Z. L'aube se lève. Tout le monde se réveille et ouvre les yeux.
 
