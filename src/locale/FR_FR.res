@@ -39,7 +39,7 @@ let table = Js.Dict.fromArray([
     (`Take the other smartphone and look in the app under Multi-Telephone → Be a Guest. Then enter the following game code there.`, `Prenez l'autre smartphone et regardez dans l'application sous Multi-téléphone → Jouer en tant qu'invité. Puis, saisissez le code du jeu suivant là-bas.`),
     ("You are currently hosting a game.", `Vous hébergez actuellement un jeu.`),
     ("If you want to join a running game, you must stop hosting first.", `Si vous souhaitez rejoindre un jeu en cours, il faut d'abord arrêter d'héberger.`),
-    ("If you want to host a game so that others can join, you should leave guest mode first.", `Si vous souhaitez héberger un jeu que afin que d'autres joueurs puissent le rejoindre, if faut d'abord quitter le mode invité.`),
+    ("If you want to host a game so that others can join, you should leave guest mode first.", `Si vous souhaitez héberger un jeu afin que d'autres joueurs puissent le rejoindre, if faut d'abord quitter le mode invité.`),
     ("Seating layout", `Disposition des sièges`),
     ("How are the players seated around the table?", "Comment les joueurs sont-ils assis autour de la table?"),
     ("Language", "Langue"),

@@ -7,12 +7,12 @@ open Utils
 type qrCodeClass
 type qrCode
 type qrCorrectLevel
-type qrCorrectLevelLow
+type qrCorrectLevelMedium
 type qrParams = {
     text: string,
     width: string,
     height: string,
-    correctLevel: qrCorrectLevelLow
+    correctLevel: qrCorrectLevelMedium
 }
 
 @val external qrCodeClass: qrCodeClass = "QRCode"
@@ -20,20 +20,16 @@ type qrParams = {
 @send external clear: (qrCode) => unit = "clear"
 @send external makeCode: (qrCode, string) => unit = "makeCode"
 @get external correctLevel: (qrCodeClass) => qrCorrectLevel = "CorrectLevel"
-@get external low: (qrCorrectLevel) => qrCorrectLevelLow = "L"
+@get external medium: (qrCorrectLevel) => qrCorrectLevelMedium = "M"
 
 let p = "[QR] "
 
 let elementId = "qr-code"
-let size = "150"
-let style = ReactDOM.Style.make(
-    ~width = size ++ "px",
-    ~height = size ++ "px",
-    ()
-)
 
 let displayQrCode = (
-    qrElement: Dom.element, value: string
+    qrElement: Dom.element,
+    size: string,
+    value: string,
 ): qrCode => {
     logDebug(p ++ "Creating QR code for " ++ value)
 
@@ -41,22 +37,30 @@ let displayQrCode = (
         text: value,
         width: size,
         height: size,
-        correctLevel : qrCodeClass->correctLevel->low
+        correctLevel : qrCodeClass->correctLevel->medium
     }
     createQrCode(qrElement, qrParams)
 }
 
 @react.component
 let make = (
-    ~value: string
+    ~value: string,
+    ~size: int = 175,
 ): React.element => {
+
+    let sizeString = Belt.Int.toString(size)
+    let style = ReactDOM.Style.make(
+        ~width  = sizeString ++ "px",
+        ~height = sizeString ++ "px",
+        ()
+    )
 
     // only after mounting the component
     React.useEffect0(() => {
         // this is a Some() when the element node is found in the DOM
         let maybeQrCode: option<qrCode> =
             switch (safeQuerySelector(elementId)) {
-                | Ok(qrElement) => displayQrCode(qrElement, value)->Some
+                | Ok(qrElement) => displayQrCode(qrElement, sizeString, value)->Some
                 | Error(msg)    => logError(msg)->replaceWith(None)
             }
         // cleanup: if we have the DOM node, clear it
