@@ -5,8 +5,9 @@
   "start_url": "index.html?utm_source=pwa",
   "manifest_version": 2,
   "version": "1.0",
+  "lang": "en-US",
   "display": "standalone",
-  "orientation": "any",
+  "orientation": "portrait",
   "background_color": "#BF9986",
   "theme_color": "#472B1D",
   "icons": [
