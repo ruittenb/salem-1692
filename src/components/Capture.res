@@ -11,8 +11,13 @@
  * - parse QR code
  *   - https://webcodeflow.com/online-qr-code-reader/
  *   - https://github.com/sinchang/qrcode-parser
+ *
+ * - permissions
+ *   - https://developer.mozilla.org/en-US/docs/Web/API/Navigator/permissions
+ *   - https://w3c.github.io/permissions/#permissions-interface
  */
 
+open Types
 open Constants
 open Utils
 
@@ -20,34 +25,47 @@ open Utils
  * External functions
  */
 
-type nodeStyle
 type mediaDevices
 type videoFlags = { facingMode: string }
-type mediaFlags = { video: videoFlags }
-type srcObject
+type mediaConstraints = { video: videoFlags }
 type stream
+type permissions
+type permissionDescriptor = { name: string }
+type permissionStatus = { name: string, state: string }
+type changeEvent = { target: permissionStatus }
+type srcObject
 type track
 type canvasContext
 
 external unsafeAsHtmlVideoElement : Dom.element => Dom.htmlVideoElement = "%identity"
 external unsafeAsHtmlCanvasElement : Dom.element => Dom.htmlCanvasElement = "%identity"
 
+// window
+@send external parseQrCode: (Dom.window, string) => Promise.t<string> = "parseQrCode"
+
+// document
 @send external createElement: (document, string) => Dom.htmlUnknownElement = "createElement"
 
+// navigator
 @get external mediaDevices: (navigator) => mediaDevices = "mediaDevices"
-@send external getUserMedia: (mediaDevices, mediaFlags) => Promise.t<stream> = "getUserMedia"
+@send external getUserMedia: (mediaDevices, mediaConstraints) => Promise.t<stream> = "getUserMedia"
+@get external permissions: (navigator) => permissions = "permissions"
+@send external permissionsQuery: (permissions, permissionDescriptor) => Promise.t<permissionStatus> = "query"
 
+@send external addEventListener: (permissionStatus, string, (changeEvent) => unit) => unit = "addEventListener"
+@send external removeEventListener: (permissionStatus, string, (changeEvent) => unit) => unit = "removeEventListener"
+
+// video
 @send external play: (Dom.htmlVideoElement) => unit = "play"
 @set external setSrcObject: (Dom.htmlVideoElement, stream) => unit = "srcObject"
-@get external getSrcObject: (Dom.htmlVideoElement) => srcObject = "srcObject"
+@get external getSrcObject: (Dom.htmlVideoElement) => Js.Nullable.t<srcObject> = "srcObject"
 @send external getTracks: (srcObject) => array<track> = "getTracks"
 @send external stop: (track) => unit = "stop"
 
+// canvas
 @send external getContext: (Dom.htmlCanvasElement, string) => canvasContext = "getContext"
 @send external drawImage: (canvasContext, Dom.htmlVideoElement, int, int, int, int) => unit = "drawImage"
 @send external toDataURL: (Dom.htmlCanvasElement, string) => string = "toDataURL"
-
-@send external parseQrCode: (Dom.window, string) => Promise.t<string> = "parseQrCode"
 
 /** **********************************************************************
  * Component
@@ -55,7 +73,7 @@ external unsafeAsHtmlCanvasElement : Dom.element => Dom.htmlCanvasElement = "%id
 
 let p = "[Capture] "
 
-let snapInterval = 800 // milliseconds
+let snapInterval = 500 // milliseconds
 
 let videoElementId = "qr-video"
 let canvasElementId = "qr-canvas"
@@ -63,7 +81,13 @@ let canvasElementId = "qr-canvas"
 let canvasWidth = 640
 let canvasHeight = 480
 
-let mediaFlags: mediaFlags = { video: { facingMode: "environment" } }
+let mediaConstraints: mediaConstraints = { video: { facingMode: "environment" } }
+
+let getCameraPermissions = (): Promise.t<permissionStatus> => {
+    navigator
+        ->permissions
+        ->permissionsQuery({ name: "camera" })
+}
 
 let startRecording = (
     maybeVideoElement: option<Dom.htmlVideoElement>,
@@ -73,7 +97,7 @@ let startRecording = (
         ->Belt.Option.mapWithDefault(false, (videoElement) => {
             maybeGetUserMedia
                 ->Belt.Option.mapWithDefault(false, (getUserMedia) => {
-                    getUserMedia(mediaFlags)
+                    getUserMedia(mediaConstraints)
                         ->Promise.then((stream: stream) => {
                             videoElement->setSrcObject(stream)
                             videoElement->play
@@ -84,7 +108,7 @@ let startRecording = (
         })
 }
 
-// Perform document.getElementsById('qr-video').srcObject.getTracks()[0].stop()
+// Perform document.getElementById('qr-video').srcObject.getTracks().forEach(track => track.stop())
 let stopRecording = (
     maybeVideoElement: option<Dom.htmlVideoElement>,
 ): unit => {
@@ -92,8 +116,12 @@ let stopRecording = (
         ->Belt.Option.mapWithDefault((), (videoElement) => {
             videoElement
                 ->getSrcObject
-                ->getTracks
-                ->Belt.Array.forEach(stop)
+                ->Js.Nullable.toOption
+                ->Belt.Option.forEach(srcObject => {
+                    srcObject
+                        ->getTracks
+                        ->Belt.Array.forEach(stop)
+                })
         })
 }
 
@@ -136,7 +164,11 @@ let make = (
     ~callback: (string) => unit
 ): React.element => {
 
-    let sizeString = Belt.Int.toString(size)
+    let (gameState, _setGameState) = React.useContext(GameStateContext.context)
+    let t = Translator.getTranslator(gameState.language)
+
+    // Assume we're prompting for camera permission
+    let (cameraAvailability, setCameraAvailability) = React.useState(_ => Prompt)
 
     // See if getUserMedia is available
     let maybeGetUserMedia = try {
@@ -145,6 +177,31 @@ let make = (
         | _error =>
             logError(p ++ "Cannot access camera")
             None
+    }
+
+    let permissionStateHandler = (
+        state: string,
+        // maybeVideoElement,
+        // maybeGetUserMedia,
+    ): unit => {
+        logDebug(p ++ "camera permissions: " ++ state)
+        switch state {
+            | "granted" => {
+                setCameraAvailability(_prev => Granted)
+                // might give error: "The play() request was interrupted by a new load"
+                //let _isRecording = startRecording(maybeVideoElement, maybeGetUserMedia)
+            }
+            | "denied"  => {
+                setCameraAvailability(_prev => Denied)
+                //stopRecording(maybeVideoElement)
+            }
+            | "prompt"  => setCameraAvailability(_prev => Prompt)
+            | _         => ()
+        }
+    }
+
+    let permissionStatusChangeHandler = (event) => {
+        permissionStateHandler(event.target.state) // , maybeVideoElement, maybeGetUserMedia
     }
 
     // only after mounting the component
@@ -158,29 +215,61 @@ let make = (
         let maybeVideoElement: option<Dom.htmlVideoElement> = safeQuerySelector(videoElementId)
             ->Belt.Result.map(videoElement => videoElement->unsafeAsHtmlVideoElement)
             ->Belt.Result.mapWithDefault(None, x => Some(x))
-        let _maybeRecording: bool = startRecording(maybeVideoElement, maybeGetUserMedia)
+        let _isRecording: bool = startRecording(maybeVideoElement, maybeGetUserMedia)
 
         // Install timer that snaps a picture at every interval
         let snapTimerId = Js.Global.setInterval(() => {
             captureAndParseFrame(maybeVideoElement, maybeCanvasElement, callback)
         }, snapInterval)
 
+        // Find out camera recording permissions and react to a change in them
+        // JS: navigator.permissions.query({ name: 'camera' }).then(res => console.log(res.state))
+        let cameraPermissionsPromise = getCameraPermissions()
+        cameraPermissionsPromise
+            ->Promise.then(status => {
+                permissionStateHandler(status.state) // , maybeVideoElement, maybeGetUserMedia
+                status->addEventListener("change", permissionStatusChangeHandler)
+                Promise.resolve()
+            })
+            ->Promise.catch(_error => {
+                logDebug(p ++ "camera permissions: dismissed")
+                setCameraAvailability(_prev => Dismissed)
+                Promise.resolve()
+            })
+            ->ignore
+
         // Cleanup function
         Some(() => {
             Js.Global.clearInterval(snapTimerId)
+            cameraPermissionsPromise
+                ->Promise.then(status => {
+                    logDebug(p ++ "Clearing permission status change handler")
+                    status->removeEventListener("change", permissionStatusChangeHandler)
+                    Promise.resolve()
+                })
+                ->ignore
             stopRecording(maybeVideoElement)
         })
     })
+
+    let statusString = switch cameraAvailability {
+        | Dismissed
+        | Denied  => "No authorization to use the camera"
+        | Prompt  => "Please authorize the use of the camera to scan a QR code"
+        | Granted => ""
+    }
 
     // component
     <>
         <video
             id={videoElementId}
-            width={sizeString}
+            width={Belt.Int.toString(size)}
             height="auto"
             autoPlay=true
         />
-        // TODO add error message if recording auth was not granted
+        <div id="video-status">
+            {React.string(t(statusString))}
+        </div>
         <div id="canvas-hider">
             <canvas
                 id={canvasElementId}
