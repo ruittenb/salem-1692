@@ -75,7 +75,6 @@ type page =
     | SetupLanguage
     | SetupMusic
     | SetupPlayers
-    | SetupPlayersForGame
     | SetupNetwork
     | SetupNetworkNoGame
     | Credits

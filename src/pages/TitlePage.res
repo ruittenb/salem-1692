@@ -14,15 +14,9 @@ let make = (
 
     let currentPage = Title
 
-    let firstGamePage = if gameState.players->Js.Array.length >= 2 {
-        Daytime
-    } else {
-        SetupPlayersForGame
-    }
-
     <div id="title-page" className="page flex-vertical">
         <GearFloatingButton goToPage returnPage=currentPage />
-        <Button label={t("Play Game"      )} onClick={ _event => goToPage(_prev => firstGamePage) } />
+        <Button label={t("Play Game"      )} onClick={ _event => goToPage(_prev => Daytime) } />
         <Button label={t("Multi-Telephone")} onClick={ _event => goToPage(_prev => SetupNetwork) } />
         <Button label={t("Exit"           )} onClick={ _event => goToPage(_prev => Close) } className="last" />
     </div>
