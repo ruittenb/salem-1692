@@ -101,7 +101,11 @@ let startRecording = (
                         ->Promise.then((stream: stream) => {
                             videoElement->setSrcObject(stream)
                             videoElement->play
-                            Promise.resolve()
+                            Promise.resolve(true)
+                        })
+                        ->Promise.catch(_error => {
+                            logDebugRed(p ++ "Unable to get camera stream")
+                            Promise.resolve(false)
                         })
                         ->replaceWith(true)
                 })
@@ -252,11 +256,11 @@ let make = (
         })
     })
 
-    let statusString = switch cameraAvailability {
+    let statusElement = switch cameraAvailability {
         | Dismissed
-        | Denied  => "No authorization to use the camera"
-        | Prompt  => "Please authorize the use of the camera to scan a QR code"
-        | Granted => ""
+        | Denied  => <div id="video-status">{React.string(t("No authorization to use the camera"))}</div>
+        | Prompt  => <div id="video-status">{React.string(t("Please authorize the use of the camera to scan a QR code"))}</div>
+        | Granted => React.null
     }
 
     // component
@@ -267,9 +271,7 @@ let make = (
             height="auto"
             autoPlay=true
         />
-        <div id="video-status">
-            {React.string(t(statusString))}
-        </div>
+        {statusElement}
         <div id="canvas-hider">
             <canvas
                 id={canvasElementId}

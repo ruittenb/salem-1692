@@ -4,11 +4,11 @@ BUGS:
  - when loading serviceworker: Uncaught (in promise) TypeError: Failed to execute 'addAll' on 'Cache': Request failed
 
 FEATURE:
- - detect missing camera authorization
  - prevent flicker in slave night pages
 
 NICE TO HAVE:
  - button "abort connecting"
  - fade music out
+ - error/status messages in balloon
  - rework night eyes
  - reflect state in URL https://betterprogramming.pub/how-and-why-you-should-store-react-ui-state-in-the-url-f2013a204cb2

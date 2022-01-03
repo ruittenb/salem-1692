@@ -48,19 +48,12 @@ let make = (
     ~size: int = 175,
 ): React.element => {
 
-    let sizeString = Belt.Int.toString(size)
-    let style = ReactDOM.Style.make(
-        ~width  = sizeString ++ "px",
-        ~height = sizeString ++ "px",
-        ()
-    )
-
     // only after mounting the component
     React.useEffect0(() => {
         // this is a Some() when the element node is found in the DOM
         let maybeQrCode: option<qrCode> =
             switch (safeQuerySelector(elementId)) {
-                | Ok(qrElement) => displayQrCode(qrElement, sizeString, value)->Some
+                | Ok(qrElement) => displayQrCode(qrElement, Belt.Int.toString(size), value)->Some
                 | Error(msg)    => logError(msg)->replaceWith(None)
             }
         // cleanup: if we have the DOM node, clear it
@@ -68,6 +61,6 @@ let make = (
     })
 
     // component
-    <span id={elementId} style />
+    <span id={elementId} />
 }
 
