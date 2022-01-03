@@ -3,7 +3,6 @@ SEVERE:
  -
 
 IMPORTANT:
- - update drawio diagram
  - prevent flicker in slave night pages
 
 NICE TO HAVE:
