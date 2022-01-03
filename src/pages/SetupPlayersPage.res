@@ -25,7 +25,7 @@ let make = (
         <Button
             label={t("OK")}
             onClick={ _event => goToPage(_prev => Setup) }
-            className="spacer-top"
+            className="spacer-top ok-button"
         />
 
     <div id="setup-players-page" className="page flex-vertical">
