@@ -26,6 +26,18 @@ let arrayConcat3 = (items1, items2, items3) => {
     items1->Js.Array2.concatMany([ items2, items3 ])
 }
 
+/**
+ * "respace" a string: if it doesn't end in a space, add one; else remove it
+ */
+let respace = (str: string): string => {
+    let finalSpace = Js.Re.fromString(" $")
+    if (finalSpace->Js.Re.test_(str)) {
+        str->Js.String2.replaceByRe(finalSpace, "")
+    } else {
+        str ++ " "
+    }
+}
+
 @react.component
 let make = (): React.element => {
 
@@ -34,8 +46,15 @@ let make = (): React.element => {
 
     // change a player on leaving the field
     let blurHandler: (int => blurHandler) = (playerIndex, event) => {
-        let newValue: player = ReactEvent.Focus.currentTarget(event)["value"]
-        let newPlayer = newValue->Js.String2.length > 0 ? [ newValue ] : []
+        let newValue: player = ReactEvent.Focus.target(event)["value"]
+        let oldValue: player = ReactEvent.Focus.target(event)["defaultValue"]
+        let isNewValueEmpty = newValue->Js.String2.length === 0
+        let isLastPlayer = gameState.players->Js.Array2.length < 2
+        let newPlayer = switch (isNewValueEmpty, isLastPlayer) {
+            | (false, _)    => [ newValue ]          // accept the new name if it is not empty
+            | (true, false) => []                    // delete the name if it is empty
+            | (true, true)  => [ respace(oldValue) ] // refuse to delete name if it is the last one
+        }
         let players =
             arrayConcat3(
                 gameState.players->sliceFirst(playerIndex - 1),
@@ -59,7 +78,7 @@ let make = (): React.element => {
         })
     }
     // swap two players
-    let moveHandler: (int => clickHandler) = (playerIndex, _event) => {
+    let swapHandler: (int => clickHandler) = (playerIndex, _event) => {
         let firstSwapPlayer : option<player> = gameState.players->Belt.Array.get(playerIndex)
         let secondSwapPlayer: option<player> = gameState.players->Belt.Array.get(playerIndex + 1)
 
@@ -79,10 +98,8 @@ let make = (): React.element => {
         })
     }
     // add a new player
-    //let addHandler: changeHandler = (event) => {
     let addHandler: blurHandler = (event) => {
-        //let newPlayer: player = ReactEvent.Form.currentTarget(event)["value"]
-        let newPlayer: player = ReactEvent.Focus.currentTarget(event)["value"]
+        let newPlayer: player = ReactEvent.Focus.target(event)["value"]
         let newPlayers = if newPlayer->Js.String.length > 0 {
             [ newPlayer ]
         } else {
@@ -96,15 +113,19 @@ let make = (): React.element => {
     }
 
     // create buttons for every player
+    let numPlayers = gameState.players->Js.Array.length
     let playerItems = gameState.players->Js.Array2.mapi(
         (player, index) => {
-            let showMoveButton = index + 1 < gameState.players->Js.Array.length
+            // hide the swap button on the last player
+            let showSwapButton = numPlayers > index + 1
+            // hide the remove button if there is only one player
+            let showRemoveButton = numPlayers > 1
             <PlayerFormLine
                 key={Belt.Int.toString(index) ++ "/" ++ player} // make key unique
                 value=player
-                showMoveButton
-                showRemoveButton=true
-                onMove=moveHandler(index)
+                showSwapButton
+                showRemoveButton
+                onSwap=swapHandler(index)
                 onRemove=removeHandler(index)
                 onBlur=blurHandler(index)
             />
@@ -122,7 +143,7 @@ let make = (): React.element => {
             key={gameState.players->Belt.Array.length->Belt.Int.toString} // make key unique
             value=""
             placeholder={t("(add one)")}
-            showMoveButton=false
+            showSwapButton=false
             showRemoveButton=false
             onBlur=addHandler
         />

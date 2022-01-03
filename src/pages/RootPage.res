@@ -13,7 +13,7 @@ let initialGameState = {
     gameType: StandAlone,
     gameId: GameId.getGameId(),
     language: #en_US,
-    players: [],
+    players: [ "Anastasia", "Agatha", "Ambrosia" ],
     seating: #OneAtTop,
     doPlayEffects: true,
     doPlaySpeech: true,

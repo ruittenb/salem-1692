@@ -44550,6 +44550,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.sliceFirst = sliceFirst;
 exports.sliceLast = sliceLast;
 exports.arrayConcat3 = arrayConcat3;
+exports.respace = respace;
 exports.make = void 0;
 
 var Curry = _interopRequireWildcard(require("rescript/lib/es6/curry.js"));
@@ -44581,6 +44582,16 @@ function arrayConcat3(items1, items2, items3) {
   return items1.concat(items2, items3);
 }
 
+function respace(str) {
+  var finalSpace = new RegExp(" $");
+
+  if (finalSpace.test(str)) {
+    return str.replace(finalSpace, "");
+  } else {
+    return str + " ";
+  }
+}
+
 function PlayerForm(Props) {
   var match = React.useContext(GameStateContext$Salem1692.context);
   var setGameState = match[1];
@@ -44592,7 +44603,7 @@ function PlayerForm(Props) {
   };
 
   var addHandler = function ($$event) {
-    var newPlayer = $$event.currentTarget.value;
+    var newPlayer = $$event.target.value;
     var newPlayers = newPlayer.length > 0 ? [newPlayer] : [];
     var players = gameState.players.concat(newPlayers);
     return Curry._1(setGameState, function (prevGameState) {
@@ -44609,12 +44620,14 @@ function PlayerForm(Props) {
     });
   };
 
+  var numPlayers = gameState.players.length;
   var playerItems = gameState.players.map(function (player, index) {
-    var showMoveButton = (index + 1 | 0) < gameState.players.length;
+    var showSwapButton = numPlayers > (index + 1 | 0);
+    var showRemoveButton = numPlayers > 1;
     return React.createElement(PlayerFormLine$Salem1692.make, {
       value: player,
-      showMoveButton: showMoveButton,
-      showRemoveButton: true,
+      showSwapButton: showSwapButton,
+      showRemoveButton: showRemoveButton,
       onRemove: function (param) {
         var players = sliceFirst(gameState.players, index - 1 | 0).concat(gameState.players.slice(index + 1 | 0));
         return Curry._1(setGameState, function (prevGameState) {
@@ -44630,7 +44643,7 @@ function PlayerForm(Props) {
           };
         });
       },
-      onMove: function (param) {
+      onSwap: function (param) {
         var firstSwapPlayer = Belt_Array.get(gameState.players, index);
         var secondSwapPlayer = Belt_Array.get(gameState.players, index + 1 | 0);
         var players = firstSwapPlayer !== undefined && secondSwapPlayer !== undefined ? arrayConcat3(sliceFirst(gameState.players, index - 1 | 0), [secondSwapPlayer, firstSwapPlayer], gameState.players.slice(index + 2 | 0)) : gameState.players;
@@ -44648,8 +44661,11 @@ function PlayerForm(Props) {
         });
       },
       onBlur: function (param) {
-        var newValue = param.currentTarget.value;
-        var newPlayer = newValue.length > 0 ? [newValue] : [];
+        var newValue = param.target.value;
+        var oldValue = param.target.defaultValue;
+        var isNewValueEmpty = newValue.length === 0;
+        var isLastPlayer = gameState.players.length < 2;
+        var newPlayer = isNewValueEmpty ? isLastPlayer ? [respace(oldValue)] : [] : [newValue];
         var players = arrayConcat3(sliceFirst(gameState.players, index - 1 | 0), newPlayer, gameState.players.slice(index + 1 | 0));
         return Curry._1(setGameState, function (prevGameState) {
           return {
@@ -44670,7 +44686,7 @@ function PlayerForm(Props) {
   return React.createElement(React.Fragment, undefined, React.createElement("h2", undefined, Curry._1(t, "Names")), React.createElement("p", undefined, Curry._1(t, "Enter the names of the players in clockwise order, starting at the head of the table.")), playerItems, React.createElement(PlayerFormLine$Salem1692.make, {
     value: "",
     placeholder: Curry._1(t, "(add one)"),
-    showMoveButton: false,
+    showSwapButton: false,
     showRemoveButton: false,
     onBlur: addHandler,
     key: String(gameState.players.length)
@@ -44702,15 +44718,15 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function PlayerFormLine(Props) {
   var value = Props.value;
   var placeholderOpt = Props.placeholder;
-  var showMoveButton = Props.showMoveButton;
+  var showSwapButton = Props.showSwapButton;
   var showRemoveButton = Props.showRemoveButton;
   var onRemoveOpt = Props.onRemove;
-  var onMoveOpt = Props.onMove;
+  var onSwapOpt = Props.onSwap;
   var onBlurOpt = Props.onBlur;
   var onChangeOpt = Props.onChange;
   var placeholder = placeholderOpt !== undefined ? placeholderOpt : "";
   var onRemove = onRemoveOpt !== undefined ? onRemoveOpt : function (param) {};
-  var onMove = onMoveOpt !== undefined ? onMoveOpt : function (param) {};
+  var onSwap = onSwapOpt !== undefined ? onSwapOpt : function (param) {};
   var onBlur = onBlurOpt !== undefined ? onBlurOpt : function (param) {};
   var onChange = onChangeOpt !== undefined ? onChangeOpt : function (param) {};
   var inputField = React.createElement("input", {
@@ -44722,9 +44738,9 @@ function PlayerFormLine(Props) {
   });
   return React.createElement("div", {
     className: "player-entry-item"
-  }, showMoveButton ? React.createElement(Button$Salem1692.make, {
+  }, showSwapButton ? React.createElement(Button$Salem1692.make, {
     className: "icon-only icon-left icon-move staggered",
-    onClick: onMove
+    onClick: onSwap
   }) : React.createElement("div", {
     className: "button-sized"
   }), inputField, showRemoveButton ? React.createElement(Button$Salem1692.make, {
@@ -46052,7 +46068,7 @@ function getGameId(param) {
 }
 
 function isValid(id) {
-  return /^([a-z][0-9][0-9]-){3}[a-z][0-9][0-9]$/.test(id);
+  return new RegExp("^([a-z][0-9][0-9]-){3}[a-z][0-9][0-9]$").test(id);
 }
 
 var lowercaseA = 97;
@@ -49452,7 +49468,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
 var initialGameState_gameId = GameId$Salem1692.getGameId(undefined);
-var initialGameState_players = [];
+var initialGameState_players = ["Anastasia", "Agatha", "Ambrosia"];
 var initialGameState = {
   gameType:
   /* StandAlone */
@@ -50615,28 +50631,22 @@ function SetupPlayersPage(Props) {
   var goToPage = Props.goToPage;
   var returnPage = Props.returnPage;
   var match = React.useContext(GameStateContext$Salem1692.context);
-  var gameState = match[0];
-  var partial_arg = gameState.language;
+  var partial_arg = match[0].language;
 
   var t = function (param) {
     return Translator$Salem1692.getTranslator(partial_arg, param);
   };
 
-  var hasEnoughPlayers = gameState.players.length >= 2;
-  var forwardButton = React.createElement(Button$Salem1692.make, {
-    label: Curry._1(t, "Play"),
-    className: "icon-left icon-forw spacer-top condensed-nl",
-    disabled: !hasEnoughPlayers,
+  return React.createElement("div", {
+    className: "page flex-vertical",
+    id: "setup-players-page"
+  }, React.createElement(BackFloatingButton$Salem1692.make, {
     onClick: function (_event) {
       return Curry._1(goToPage, function (_prev) {
-        return (
-          /* Daytime */
-          9
-        );
+        return returnPage;
       });
     }
-  });
-  var okButton = React.createElement(Button$Salem1692.make, {
+  }), React.createElement("h1", undefined, Curry._1(t, "Players")), React.createElement(PlayerForm$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}), React.createElement(SeatingForm$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
     label: Curry._1(t, "OK"),
     className: "spacer-top ok-button",
     onClick: function (_event) {
@@ -50647,19 +50657,7 @@ function SetupPlayersPage(Props) {
         );
       });
     }
-  });
-  return React.createElement("div", {
-    className: "page flex-vertical",
-    id: "setup-players-page"
-  }, React.createElement(BackFloatingButton$Salem1692.make, {
-    onClick: function (_event) {
-      return Curry._1(goToPage, function (_prev) {
-        return returnPage;
-      });
-    }
-  }), React.createElement("h1", undefined, Curry._1(t, "Players")), React.createElement(PlayerForm$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}), React.createElement(SeatingForm$Salem1692.make, {}), returnPage ===
-  /* Title */
-  0 ? forwardButton : okButton);
+  }));
 }
 
 var make = SetupPlayersPage;

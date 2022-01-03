@@ -1,9 +1,9 @@
 
-BUGS:
- - missing players when hosting
- - when loading serviceworker: Uncaught (in promise) TypeError: Failed to execute 'addAll' on 'Cache': Request failed
+SEVERE:
+ -
 
-FEATURE:
+IMPORTANT:
+ - update drawio diagram
  - prevent flicker in slave night pages
 
 NICE TO HAVE:
