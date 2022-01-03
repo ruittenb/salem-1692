@@ -8,10 +8,10 @@ open Types
 let make = (
     ~value: string,
     ~placeholder: string = "",
-    ~showMoveButton: bool,
+    ~showSwapButton: bool,
     ~showRemoveButton: bool,
     ~onRemove: clickHandler = (_) => (),
-    ~onMove: clickHandler = (_) => (),
+    ~onSwap: clickHandler = (_) => (),
     ~onBlur: blurHandler = (_) => (),
     ~onChange: changeHandler = (_) => (),
 ): React.element => {
@@ -20,8 +20,8 @@ let make = (
 
     <div className="player-entry-item">
         {
-            if showMoveButton {
-                <Button className="icon-only icon-left icon-move staggered" onClick=onMove />
+            if showSwapButton {
+                <Button className="icon-only icon-left icon-move staggered" onClick=onSwap />
             } else {
                 <div className="button-sized" />
             }

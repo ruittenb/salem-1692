@@ -22,5 +22,6 @@ let getGameId = (): string => {
 }
 
 let isValid = (id: string): bool => {
-    Js.Re.test_(%re("/^([a-z][0-9][0-9]-){3}[a-z][0-9][0-9]$/"), id)
+    Js.Re.fromString("^([a-z][0-9][0-9]-){3}[a-z][0-9][0-9]$")
+        ->Js.Re.test_(id)
 }
