@@ -9,5 +9,4 @@ NICE TO HAVE:
  - button "abort connecting"
  - fade music out
  - error/status messages in balloon
- - rework night eyes
  - reflect state in URL https://betterprogramming.pub/how-and-why-you-should-store-react-ui-state-in-the-url-f2013a204cb2

@@ -8,6 +8,7 @@ open Types
 
 let nnbsp = ` ` // U+202F Narrow No-Break Space
 let note  = `♪` // U+266A Eighth Note (quaver)
+let year = "2022"
 
 @react.component
 let make = (
@@ -36,7 +37,7 @@ let make = (
             <span> {React.string(t("App: "))} </span>
             <a href={Constants.siteUrl}> {React.string(t("website"))} </a>
             <QrIcon mode={QrIcon.Scannable(Constants.siteUrl)} />
-            {React.string(t("version") ++ " v" ++ salemAppVersion ++ ` René Uittenbogaard © 2021`)}
+            {React.string(t("version") ++ " v" ++ salemAppVersion ++ ` René Uittenbogaard © ` ++ year)}
         </p>
         <p>
             <span> {React.string(t("For use with the game: "))} </span>
