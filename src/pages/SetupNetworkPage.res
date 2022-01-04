@@ -260,14 +260,15 @@ let getModusOperandi = (
                             <p>
                                 {
                                     let slaveConnectionStatus = switch (dbConnectionStatus, slaveGameIdValidity) {
+                                        | (NotConnected, SlaveInputHidden)          // should not happen
+                                        | (NotConnected, SlaveInputShown)           => "Not connected"
                                         | (NotConnected, SlaveInputShownAndInvalid) => "Malformed code"
                                         | (NotConnected, SlaveInputShownAndAbsent)  => "Game not found"
-                                        | (NotConnected, _)                         => "Not connected"
                                         | (Connecting, _)                           => "Connecting..."
                                         | (Connected(_), SlaveInputShownAndAbsent)  => "Game not found"
                                         | (Connected(_), _)                         => "Connected."
                                     }
-                                    React.string(t(slaveConnectionStatus))
+                                    <span className="bubble north">{React.string(t(slaveConnectionStatus))}</span>
                                 }
                             </p>
                             <Spacer />

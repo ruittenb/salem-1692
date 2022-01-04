@@ -44,7 +44,7 @@ let table = Js.Dict.fromArray([
     ("Stop Hosting", `Arrêter d'héberger`),
     ("Malformed code", `Code mal formé`),
     ("Game not found", `Jeu non trouvé`),
-    ("Not connected", `Pas connecté`),
+    ("Not connected", `Non connecté`),
     ("Connecting...", `En train de connecter…`),
     ("Connected.", `Connecté.`),
     ("Leave guest mode", `Quitter mode invité`),
