@@ -257,21 +257,18 @@ let getModusOperandi = (
                                     )}
                                 />
                             </div>
-                            <p>
-                                {
-                                    let slaveConnectionStatus = switch (dbConnectionStatus, slaveGameIdValidity) {
-                                        | (NotConnected, SlaveInputHidden)          // should not happen
-                                        | (NotConnected, SlaveInputShown)           => "Not connected"
-                                        | (NotConnected, SlaveInputShownAndInvalid) => "Malformed code"
-                                        | (NotConnected, SlaveInputShownAndAbsent)  => "Game not found"
-                                        | (Connecting, _)                           => "Connecting..."
-                                        | (Connected(_), SlaveInputShownAndAbsent)  => "Game not found"
-                                        | (Connected(_), _)                         => "Connected."
-                                    }
-                                    <span className="bubble north">{React.string(t(slaveConnectionStatus))}</span>
+                            {
+                                let slaveConnectionStatus = switch (dbConnectionStatus, slaveGameIdValidity) {
+                                    | (NotConnected, SlaveInputHidden)          // should not happen
+                                    | (NotConnected, SlaveInputShown)           => "Not connected"
+                                    | (NotConnected, SlaveInputShownAndInvalid) => "Malformed code"
+                                    | (NotConnected, SlaveInputShownAndAbsent)  => "Game not found"
+                                    | (Connecting, _)                           => "Connecting..."
+                                    | (Connected(_), SlaveInputShownAndAbsent)  => "Game not found"
+                                    | (Connected(_), _)                         => "Connected."
                                 }
-                            </p>
-                            <Spacer />
+                                <div className="bubble north">{React.string(t(slaveConnectionStatus))}</div>
+                            }
                             // Back/Forward buttons
                             <Button
                                 label={t("Play Game")}

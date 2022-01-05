@@ -258,8 +258,8 @@ let make = (
 
     let statusElement = switch cameraAvailability {
         | Dismissed
-        | Denied  => <div id="video-status">{React.string(t("No authorization to use the camera"))}</div>
-        | Prompt  => <div id="video-status">{React.string(t("Please authorize the use of the camera to scan a QR code"))}</div>
+        | Denied  => <div className="bubble">{React.string(t("No authorization to use the camera"))}</div>
+        | Prompt  => <div className="bubble">{React.string(t("Please authorize the use of the camera to scan a QR code"))}</div>
         | Granted => React.null
     }
 

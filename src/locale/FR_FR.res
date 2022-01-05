@@ -57,7 +57,7 @@ let table = Js.Dict.fromArray([
     ("If you want to join a running game, you must stop hosting first.", `Si vous souhaitez rejoindre un jeu en cours, il faut d'abord arrêter d'héberger.`),
     ("If you want to host a game so that others can join, you should leave guest mode first.", `Si vous souhaitez héberger un jeu afin que d'autres joueurs puissent le rejoindre, if faut d'abord quitter le mode invité.`),
     ("", ""),
-    ("No authorization to use the camera", `Pas autorisé à utiliser la caméra`),
+    ("No authorization to use the camera", `Pas autorisé à utiliser la caméra`), // contains nbsp
     ("Please authorize the use of the camera to scan a QR code", `Veuillez autoriser l'utilisation de la caméra pour scanner un code QR`),
     // Credits
     ("Credits", `Crédits`),

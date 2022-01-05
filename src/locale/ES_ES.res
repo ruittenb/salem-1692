@@ -57,7 +57,7 @@ let table = Js.Dict.fromArray([
     ("If you want to join a running game, you must stop hosting first.", `Si deseas unirse a un juego en progreso, primero debes dejar de albergar.`),
     ("If you want to host a game so that others can join, you should leave guest mode first.", `Si deseas albergar un juego para que otros jugadores puedan unirse, primero debes dejar del modo de invitado.`),
     ("", ""),
-    ("No authorization to use the camera", `No autorización para usar la cámara`),
+    ("No authorization to use the camera", `No autorización para usar la cámara`), // contains nbsp
     ("Please authorize the use of the camera to scan a QR code", `Autorice el uso de la cámara para escanear un código QR`),
     // Credits
     ("Credits", `Créditos`),
@@ -95,7 +95,7 @@ let table = Js.Dict.fromArray([
     ("Choose someone to protect:", `Elige a quién quieres proteger:`),
     ("Abort", "Abortar"),
     ("Skip", "Saltar"),
-    ("Everybody is sound asleep... what about you?", `Todos duermen profundamente... ¿y tú?`), // contains non-breaking space
+    ("Everybody is sound asleep... what about you?", `Todos duermen profundamente... ¿y tú?`), // contains nbsp
     // Confirm
     ("Witch, are you sure?", `Bruja, ¿estás segura?`),
     ("Witches, are you sure?", `Brujas, ¿estáis seguras?`), // están?
