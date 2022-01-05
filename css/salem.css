@@ -82,13 +82,9 @@ img.qr-icon.scannable {
 #qr-code {
     display: flex;
     flex-direction: row-reverse;
-    position: absolute;
-    top: 50%;
-    left: 50%;
     padding: 16px;
     border: 3px solid black;
     background-color: white;
-    transform: translate(-50%, -50%); /* center the QR code on the page */
 }
 
 #qr-video {
@@ -96,15 +92,6 @@ img.qr-icon.scannable {
     padding: 16px;
     border: 3px solid black;
     background-color: white;
-}
-
-#video-status {
-    width: 80%;
-    font-style: italic;
-    background: black;
-    color: white;
-    padding: 3px;
-    margin-top: 8px;
 }
 
 #mask {
@@ -206,9 +193,8 @@ input[type=text].id-input {
     position: relative;
     display: block;
     width: 270px;
-    margin-top: 5px;
+    margin: 10px auto 20px auto;
     padding: 4px;
-    /* border: 1px solid #333; */
     border-radius: 10px;
     background-color: #333;
     color: #fff;
@@ -224,6 +210,10 @@ input[type=text].id-input {
     border-bottom-color: #333;
     left: 50%;
     top: -22px;
+}
+
+video + .bubble {
+    margin-top: 0;
 }
 
 /** ****************************************************************************
