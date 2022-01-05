@@ -1,0 +1,100 @@
+
+/* Bubble body */
+
+.bubble {
+    position: relative;
+    display: block;
+    width: 270px;
+    margin-top: 5px;
+    padding: 4px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    text-align: center;
+    /* box-shadow: 1px 1px 3px #aaa; */
+    box-shadow: 0 10px 20px #00000030, 0 6px 6px #0000003b;
+}
+.bubble.error {
+    background-color: #ffbabc;
+    border-color: #a90f1b;
+    color: #a90f1b;
+}
+.bubble.warning {
+    background-color: #fef0b3;
+    border-color: #a97722;
+    color: #a97722;
+}
+.bubble.success {
+    background-color: #dff3c0;
+    border-color: #617f1d;
+    color: #617f1d;
+}
+.bubble.debug {
+    background-color: #bee4f7;
+    border-color: #345485;
+    color: #345485;
+}
+.bubble.info {
+    background-color: #eee;
+    border-color: black;
+    color: black;
+}
+
+/* Bubble speech tip outline */
+
+.bubble.northwest:before {
+    content: "";
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid transparent;
+    left: 75px;
+    top: -18px;
+}
+.bubble.northwest.error:before {
+    border-bottom: 8px solid #a90f1b;
+}
+.bubble.northwest.warning:before {
+    border-bottom: 8px solid #a97722;
+}
+.bubble.northwest.success:before {
+    border-bottom: 8px solid #617f1d;
+}
+.bubble.northwest.debug:before {
+    border-bottom: 8px solid #345485;
+}
+.bubble.northwest.info:before {
+    border-bottom: 8px solid black;
+}
+
+/* Bubble speech tip fill */
+
+.bubble.northwest:after {
+    content: "";
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+    border-top: 7px solid transparent;
+    left: 76px;
+    top: -13px;
+}
+.bubble.northwest.error:after {
+    border-bottom: 7px solid #ffbabc;
+}
+.bubble.northwest.warning:after {
+    border-bottom: 7px solid #fef0b3;
+}
+.bubble.northwest.success:after {
+    border-bottom: 7px solid #dff3c0;
+}
+.bubble.northwest.debug:after {
+    border-bottom: 7px solid #bee4f7;
+}
+.bubble.northwest.info:after {
+    border-bottom: 7px solid #eee;
+}
+

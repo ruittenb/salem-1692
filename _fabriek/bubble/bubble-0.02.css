@@ -1,0 +1,88 @@
+
+/* Bubble body */
+
+.bubble {
+    width: 300px;
+    margin: 50px auto;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 4px;
+    text-align: center;
+    position: relative;
+    /* box-shadow: 1px 1px 3px #aaa; */
+    box-shadow: 0 10px 20px #00000030, 0 6px 6px #0000003b;
+}
+.bubble.error {
+    background-color: #ffbabc;
+    border-color: #a90f1b;
+    color: #a90f1b;
+}
+.bubble.warning {
+    background-color: #fef0b3;
+    border-color: #a97722;
+    color: #a97722;
+}
+.bubble.success {
+    background-color: #dff3c0;
+    border-color: #617f1d;
+    color: #617f1d;
+}
+.bubble.debug {
+    background-color: #bee4f7;
+    border-color: #345485;
+    color: #345485;
+}
+
+/* Bubble speech tip outline */
+
+.bubble.northwest:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid transparent;
+    left: 22px;
+    top: -18px;
+}
+.bubble.northwest.error:before {
+    border-bottom: 8px solid #a90f1b;
+}
+.bubble.northwest.warning:before {
+    border-bottom: 8px solid #a97722;
+}
+.bubble.northwest.success:before {
+    border-bottom: 8px solid #617f1d;
+}
+.bubble.northwest.debug:before {
+    border-bottom: 8px solid #345485;
+}
+/* Bubble speech tip fill */
+
+.bubble.northwest:after {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+    border-top: 7px solid transparent;
+    left: 23px;
+    top: -14px;
+}
+.bubble.northwest.error:after {
+    border-bottom: 7px solid #ffbabc;
+}
+.bubble.northwest.warning:after {
+    border-bottom: 7px solid #fef0b3;
+}
+.bubble.northwest.success:after {
+    border-bottom: 7px solid #dff3c0;
+}
+.bubble.northwest.debug:after {
+    border-bottom: 7px solid #bee4f7;
+}
+
+

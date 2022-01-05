@@ -78,30 +78,20 @@ img.qr-icon.scannable {
     border: 1px solid #555;
     background-color: white;
 }
+
 #qr-code {
     display: flex;
     flex-direction: row-reverse;
-    position: absolute;
-    top: 50%;
-    left: 50%;
     padding: 16px;
     border: 3px solid black;
     background-color: white;
-    transform: translate(-50%, -50%); /* center the QR code on the page */
 }
+
 #qr-video {
     display: block;
     padding: 16px;
     border: 3px solid black;
     background-color: white;
-}
-#video-status {
-    width: 80%;
-    font-style: italic;
-    background: black;
-    color: white;
-    padding: 3px;
-    margin-top: 8px;
 }
 
 #mask {
@@ -116,6 +106,12 @@ img.qr-icon.scannable {
     height: 100vh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+#canvas-hider {
+    width: 0;
+    height: 0;
+    overflow: hidden;
 }
 
 input[type=text] {
@@ -188,6 +184,41 @@ input[type=text].id-input {
     width: 100%;
     text-align: center;
 }
+
+/** ****************************************************************************
+ * Dialog bubble
+ */
+
+.bubble {
+    position: relative;
+    display: block;
+    width: 270px;
+    margin: 10px auto 20px auto;
+    padding: 4px;
+    border-radius: 10px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+}
+
+.bubble.north:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 11px solid transparent;
+    border-bottom-color: #333;
+    left: 50%;
+    top: -22px;
+}
+
+video + .bubble {
+    margin-top: 0;
+}
+
+/** ****************************************************************************
+ * Page elements
+ */
 
 .nl_NL .page .condensed-nl {
     font-size: 24px;
@@ -360,12 +391,6 @@ input[type=text].id-input {
 }
 .buttonpair button {
     width: 46%;
-}
-
-#canvas-hider {
-    width: 0;
-    height: 0;
-    overflow: hidden;
 }
 
 /** ****************************************************************************
