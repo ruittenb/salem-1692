@@ -22,11 +22,11 @@ let startHosting = (setDbConnectionStatus, gameState, setGameState) => {
     FirebaseClient.connect()
         ->Promise.then(dbConnection => {
             let newGameId = if gameState.gameType === Master {
-                // We already are Master. This happens when the Master state
-                // was read from localstorage. Reuse the old gameId.
+                // We already are Master. This should not happen,
+                // but if it does, reuse the old gameId.
                 gameState.gameId
             } else {
-                GameId.getGameId()
+                GameId.generateGameId()
             }
             let newGameState = {
                 ...gameState,
@@ -179,7 +179,7 @@ let getModusOperandi = (
     | (Master, Connecting, _) =>
                         <>
                             <Spacer />
-                            {React.string(t("Connecting..."))}
+                            <div className="bubble">{React.string(t("Connecting..."))}</div>
                             // TODO add abort connecting button
                         </>
     | (Master, Connected(_), _) =>
@@ -197,12 +197,12 @@ let getModusOperandi = (
                             <div className="input-and-icon">
                                 <div className="id-input"> {React.string(gameState.gameId)} </div>
                                 <QrIcon mode={QrIcon.Scannable(gameState.gameId)} />
+                                <div className="bubble north">{React.string(t("Connected."))}</div>
                             </div>
-                            <Spacer />
                             <Button
                                 label={t("Play Game")}
                                 className="icon-right icon-forw condensed-nl"
-                                onClick=(_event => goToPage(_prev => Daytime)) // TODO
+                                onClick=(_event => goToPage(_prev => Daytime))
                             />
                             <Button
                                 label={t("Stop Hosting")}

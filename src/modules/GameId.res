@@ -17,7 +17,7 @@ let getGameIdUnit = (): string => {
     getChar() ++ getDigit() ++ getDigit()
 }
 
-let getGameId = (): string => {
+let generateGameId = (): string => {
     [ getGameIdUnit(), getGameIdUnit(), getGameIdUnit(), getGameIdUnit() ]->Js.Array2.joinWith("-")
 }
 
