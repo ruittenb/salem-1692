@@ -155,12 +155,16 @@ let make = (
     let soundImage       = <img src="images/gramophone.png" className="sound-image" />
     let soundImageGreyed = <img src="images/gramophone.png" className="sound-image greyed" />
 
-    let backgroundMusicElement = gameState.backgroundMusic
-        ->Belt.Array.get(0)
-        ->Belt.Option.mapWithDefault(
-            React.null,
-            track => <AudioBackground track />
-        )
+    let backgroundMusicElement = if gameState.doPlayMusic {
+        gameState.backgroundMusic
+            ->Belt.Array.get(0)
+            ->Belt.Option.mapWithDefault(
+                React.null,
+                track => <AudioBackground track />
+            )
+    } else {
+        React.null
+    }
 
     let makeTimer = (duration: float): Js.Global.timeoutId => {
         Utils.logDebug(p ++ "Setting timer")

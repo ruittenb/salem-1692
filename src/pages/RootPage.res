@@ -17,6 +17,7 @@ let initialGameState = {
     seating: #OneAtTop,
     doPlayEffects: true,
     doPlaySpeech: true,
+    doPlayMusic: true,
     backgroundMusic: defaultSelectedMusicTracks,
 }
 

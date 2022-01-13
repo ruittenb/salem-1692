@@ -58,6 +58,7 @@ let playersFromJson = (playerArrayJson: Js.Json.t): option<array<string>> => {
     seating: SeatingCodec.t,
     doPlayEffects: bool,
     doPlaySpeech: bool,
+    doPlayMusic: bool,
     backgroundMusic: array<string>,
 }
 type gameStateSetter = (gameState => gameState) => unit

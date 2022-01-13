@@ -78,7 +78,7 @@ let make = (
                 Utils.logDebug(p ++ "About to remove confirmation listener")
                 FirebaseClient.stopListening(dbConnection, gameState.gameId, subject)
             })
-            Utils.logDebugRed(p ++ "Unmounted")
+            Utils.logDebugBlue(p ++ "Unmounted")
         })
     })
 
