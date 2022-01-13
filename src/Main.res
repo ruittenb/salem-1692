@@ -6,7 +6,7 @@
  * ReactDOMServer      : Bindings to the ReactDOMServer
  * ReactEvent          : Bindings to React's synthetic events
  * ReactDOMStyle       : Bindings to the inline style API
- * RescriptReactRouter : A simple, yet fully featured router with minimal memory allocations
+ * RescriptReactRouter : A simple, yet fully featured router
  */
 
 let run = (elementId: string) => {

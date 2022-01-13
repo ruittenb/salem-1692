@@ -42,6 +42,8 @@ h1 {
     font-weight: bold;
     margin-top: 20px;
     margin-bottom: 10px;
+    text-align: center;
+    line-height: 1;
 }
 h2 {
     margin-top: 10px;
@@ -72,10 +74,9 @@ img.sound-image.greyed {
     filter: grayscale(1);
 }
 img.qr-icon {
-    margin: 0 5px;
+    margin: 0 3px 0 6px;
 }
 img.qr-icon.scannable {
-    border: 1px solid #555;
     background-color: white;
 }
 
@@ -208,7 +209,7 @@ input[type=text].id-input {
     height: 0;
     border: 11px solid transparent;
     border-bottom-color: #333;
-    left: 50%;
+    left: calc(50% - 11px);
     top: -22px;
 }
 
@@ -236,11 +237,19 @@ video + .bubble {
 .es_ES .page .condensed-es {
     font-size: 24px;
 }
+.de_DE .page h1.condensed-de,
 .en_US .page h1.condensed-en,
+.es_ES .page h1.condensed-es,
 .fr_FR .page h1.condensed-fr,
-.es_ES .page h1.condensed-es {
+.nl_NL .page h1.condensed-nl {
     font-size: 58px;
     margin-top: 30px;
+}
+#root .page h1.condensed {
+    font-size: 58px;
+    max-width: 245px;
+    margin-bottom: 20px;
+    line-height: 0.8;
 }
 
 .page {

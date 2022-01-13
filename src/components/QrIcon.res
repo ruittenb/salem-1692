@@ -24,8 +24,8 @@ let make = (
 
     // composing elements
     let icon = switch (mode) {
-        | Scannable(_) => <img src="images/qr-icon-32.png" className="qr-icon scannable" onClick=openMask />
-        | Scanner(_)   => <img src="images/qr-icon-44x36s.png" className="qr-icon" onClick=openMask />
+        | Scannable(_) => <img src="images/qr-icon-28.png" className="qr-icon scannable" onClick=openMask />
+        | Scanner(_)   => <img src="images/qr-icon-40x28s.png" className="qr-icon" onClick=openMask />
     }
     let mask = if (maskOpen) {
         <Mask onClick=closeMask>

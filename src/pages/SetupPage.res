@@ -52,7 +52,7 @@ let make = (
                 goToPage(_prev => navigation->Belt.Option.getWithDefault(Title))
             } }
         />
-        <h1> {React.string(t("Settings"))} </h1>
+        <h1 className="condensed-fr condensed-es condensed-de"> {React.string(t("Settings"))} </h1>
         <Spacer />
         <Button
             label={t("Players")}

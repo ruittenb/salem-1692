@@ -89,7 +89,7 @@ let make = (
     // component
     <div id="daytime-reveal-page" className="page flex-vertical">
         <GearFloatingButton goToPage returnPage=returnPage />
-        <h1> {React.string(t("The Reveal"))} </h1>
+        <h1 className="condensed-de"> {React.string(t("The Reveal"))} </h1>
         <Spacer />
         {witchesRevealButton}
         {constableRevealButton}

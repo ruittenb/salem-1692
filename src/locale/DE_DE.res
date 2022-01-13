@@ -86,12 +86,12 @@ let table = Js.Dict.fromArray([
     ("Night with constable", "Nacht mit Sheriff"),
     ("Night without constable", "Nacht ohne Sheriff"),
     ("The witches", "Die Hexen"),
-    ("The witch's turn", "Die Hexe ist an der Reihe"),
-    ("The witches' turn", "Die Hexen sind an der Reihe"),
+    ("The witch's turn", `Die Hexe ist an der Reihe`), // contains nbsp
+    ("The witches' turn", `Die Hexen sind an der Reihe`), // contains nbsp
     ("Choose-SG a victim:", `Wählen Sie ein Opfer:`),
     ("Choose-PL a victim:", `Wählen Sie ein Opfer:`),
     ("The constable", "Der Sheriff"),
-    ("The constable's turn", "Der Sheriff ist an der Reihe"),
+    ("The constable's turn", ` Der Sheriff ist an der Reihe `), // contains nbsp
     ("Choose someone to protect:", `Wählen Sie jemanden, den Sie beschützen möchten:`),
     ("Abort", "Abbrechen"),
     ("Skip", `Überspringen`),
@@ -119,7 +119,7 @@ let table = Js.Dict.fromArray([
     ("The witch attacked-POST", " angegriffen"),
     ("The witches attacked-PRE", "Die Hexen haben"),
     ("The witches attacked-POST", " angegriffen"),
-    ("Reveal constable's protection", `Schützling des Sheriffs enthüllen`),
+    ("Reveal constable's protection", ` Schützling des Sheriffs enthüllen `), // contains nbsp
     ("The constable protected-PRE", "Der Sheriff hat"),
     ("The constable protected-POST", ` beschützt`),
 ])
