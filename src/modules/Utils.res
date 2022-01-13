@@ -42,9 +42,9 @@ let logDebugStyled = (msg: string, style: string): unit => {
 /**
  * Log a message to console with highlighting
  */
-let logDebugRed = (msg: string): unit => {
+let logDebugBlue = (msg: string): unit => {
     if (Constants.debug) {
-        Js.log2("%c" ++ msg, "color: red")
+        Js.log2("%c" ++ msg, "color: blue")
     }
 }
 

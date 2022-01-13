@@ -104,7 +104,7 @@ let startRecording = (
                             Promise.resolve(true)
                         })
                         ->Promise.catch(_error => {
-                            logDebugRed(p ++ "Unable to get camera stream")
+                            logDebugBlue(p ++ "Unable to get camera stream")
                             Promise.resolve(false)
                         })
                         ->replaceWith(true)

@@ -13,6 +13,7 @@ let defaultValue: gameState = {
     seating: #TwoAtTop,
     doPlayEffects: true,
     doPlaySpeech: true,
+    doPlayMusic: true,
     backgroundMusic: [],
 }
 let context = React.createContext(

@@ -27,7 +27,23 @@ let make = (
         })
     }
 
-    let hasBackgroundMusic = gameState.backgroundMusic->Js.Array2.length > 0
+    let togglePlayMusic = () => {
+        setGameState(prevGameState => {
+            ...prevGameState,
+            doPlayMusic: !prevGameState.doPlayMusic
+        })
+    }
+
+    React.useEffect0(() => {
+        if (gameState.backgroundMusic->Js.Array2.length === 0) {
+            setGameState(prevGameState => {
+                ...prevGameState,
+                doPlayMusic: false
+            })
+        }
+        // Cleanup function
+        None
+    })
 
     <div id="setup-page" className="page flex-vertical">
         <BackFloatingButton
@@ -59,8 +75,15 @@ let make = (
         />
         <Button
             label={t("Music")}
-            className={"icon-left " ++ if hasBackgroundMusic { "icon-checked" } else { "icon-unchecked" }}
-            onClick={ _event => goToPage(_prev => SetupMusic) }
+            className={"icon-left " ++ if gameState.doPlayMusic { "icon-checked" } else { "icon-unchecked" }}
+            onClick={ _event => {
+                if gameState.doPlayMusic {
+                    togglePlayMusic()
+                } else {
+                    togglePlayMusic()
+                    goToPage(_prev => SetupMusic)
+                }
+            } }
         />
         <Button
             label={t("Credits")}
