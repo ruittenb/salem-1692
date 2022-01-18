@@ -9,7 +9,7 @@ let table = Js.Dict.fromArray([
     ("Play Game", "Jouer"),
     ("Join Game", "Joindre un jeu"),
     ("Play", "Jouer"),
-    ("Settings", "Configuration"),
+    ("Settings", `Configu­ration`), // soft hyphen
     ("Exit", "Fermer"),
     // Setup
     ("Players", "Joueurs"),
@@ -108,7 +108,7 @@ let table = Js.Dict.fromArray([
     ("Unable to load audio", `Impossible de télécharger le fichier audio`),
     ("Index out of bounds", `Index hors de portée`),
     // Confess
-    ("Confess", "Avouer"),
+    ("Confess", "L'aveu"),
     ("Everyone,", "Les joueurs,"),
     ("decide whether you want to confess", `décidez si vous voulez avouer`),
     // Reveal

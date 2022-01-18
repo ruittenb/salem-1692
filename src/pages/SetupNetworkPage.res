@@ -324,7 +324,7 @@ let make = (
             goToPage(_prev => Title)
         }} />
         <GearFloatingButton goToPage returnPage=SetupNetwork />
-        <h1 className="condensed" >
+        <h1>
             {React.string(t("Multi-Telephone"))}
         </h1>
         {modusOperandi}

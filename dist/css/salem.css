@@ -38,12 +38,12 @@ hr {
 }
 
 h1 {
-    font-size: 64px;
+    font-size: 62px;
     font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin: 20px 5px;
+    max-width: calc(100vw - 110px);
     text-align: center;
-    line-height: 1;
+    line-height: 0.8;
 }
 h2 {
     margin-top: 10px;
@@ -221,35 +221,21 @@ video + .bubble {
  * Page elements
  */
 
-.nl_NL .page .condensed-nl {
+.nl_NL .page button.condensed-nl {
     font-size: 24px;
 }
-.de_DE .page .condensed-de {
+.de_DE .page button.condensed-de {
     font-size: 20px;
 }
-.de_DE #setup-network-page .condensed-de {
+.de_DE #setup-network-page button.condensed-de {
     font-size: 24px;
     line-height: 36px;
 }
-.fr_FR .page .condensed-fr {
+.fr_FR .page button.condensed-fr {
     font-size: 22px;
 }
-.es_ES .page .condensed-es {
+.es_ES .page button.condensed-es {
     font-size: 24px;
-}
-.de_DE .page h1.condensed-de,
-.en_US .page h1.condensed-en,
-.es_ES .page h1.condensed-es,
-.fr_FR .page h1.condensed-fr,
-.nl_NL .page h1.condensed-nl {
-    font-size: 58px;
-    margin-top: 30px;
-}
-#root .page h1.condensed {
-    font-size: 58px;
-    max-width: 245px;
-    margin-bottom: 20px;
-    line-height: 0.8;
 }
 
 .page {
@@ -489,10 +475,6 @@ video + .bubble {
 #credits-page {
     background: url(../images/overlay-scroll.png) -290px 120px no-repeat;
     width: 100%;
-}
-
-#credits-page h1 {
-    text-align: center;
 }
 
 #credits-page p {

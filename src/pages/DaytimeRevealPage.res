@@ -88,6 +88,15 @@ let make = (
 
     // component
     <div id="daytime-reveal-page" className="page flex-vertical">
+        {
+            if allowBackToConfess {
+                <BackFloatingButton onClick={
+                    _event => goToPage(_prev => DaytimeConfess)
+                } />
+            } else {
+                React.null
+            }
+        }
         <GearFloatingButton goToPage returnPage=returnPage />
         <h1 className="condensed-de"> {React.string(t("The Reveal"))} </h1>
         <Spacer />

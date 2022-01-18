@@ -29,7 +29,7 @@ let make = (
         })
     )
 
-    <div id="credits-page" className="page">
+    <div id="credits-page" className="page flex-vertical">
         <BackFloatingButton onClick={ _event => goToPage(_prev => Setup) } />
         <h1> {React.string(t("Credits"))} </h1>
         <Spacer />
@@ -93,13 +93,11 @@ let make = (
             <a href="http://www.famfamfam.com/lab/icons/silk/"> {React.string("FamFamFam")} </a>
         </p>
         <Spacer />
-        <div className="flex-vertical">
-            <Button
-                label={t("OK")}
-                className="ok-button"
-                onClick={ _event => goToPage(_prev => Setup) }
-            />
-        </div>
+        <Button
+            label={t("OK")}
+            className="ok-button"
+            onClick={ _event => goToPage(_prev => Setup) }
+        />
         <Spacer />
     </div>
 }

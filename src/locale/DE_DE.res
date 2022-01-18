@@ -9,7 +9,7 @@ let table = Js.Dict.fromArray([
     ("Play Game", "Spielen"),
     ("Join Game", "Spiel beitreten"),
     ("Play", "Spielen"),
-    ("Settings", "Einstellungen"),
+    ("Settings", `Einstel­lungen`), // soft hyphen
     ("Exit", `Schließen`),
     // Setup
     ("Players", "Spieler"),
