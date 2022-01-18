@@ -6,9 +6,10 @@ open Types
 
 @react.component
 let make = (
-    ~onClick: clickHandler
+    ~onClick: clickHandler,
+    ~masterMode: bool = false,
 ): React.element => {
-
-    <div className="floating-button floating-left icon-back" onClick ></div>
+    let modeClass = masterMode ? "icon-host" : "icon-back"
+    <div className={"floating-button floating-left " ++ modeClass} onClick ></div>
 }
 

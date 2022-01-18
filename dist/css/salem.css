@@ -370,6 +370,7 @@ video + .bubble {
 .page button.icon-abort { background-image: url(../images/icon-cross.png); }
 .page    div.icon-gear  { background-image: url(../images/icon-gear.png); }
 .page    div.icon-back  { background-image: url(../images/icon-back-32.png); }
+.page    div.icon-host  { background-image: url(../images/icon-back-host-32.png); }
 
 .page button.icon-checked   { background-image: url(../images/icon-checked.png); }
 .page button.icon-unchecked { background-image: url(../images/icon-unchecked.png); }

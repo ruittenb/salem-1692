@@ -18,11 +18,12 @@ let make = (
         choiceConstable: None,
     }
 
+    let masterMode = gameState.gameType === Master
     let returnPage = gameState.gameType === Master ? SetupNetwork : Title
 
     // Page element
     <div id="daytime-page" className="page flex-vertical">
-        <BackFloatingButton onClick={ _event => goToPage(_prev => returnPage) } />
+        <BackFloatingButton onClick={ _event => goToPage(_prev => returnPage) } masterMode />
         <GearFloatingButton goToPage returnPage=Daytime />
         <h1> {React.string(t("Daytime"))} </h1>
         <Spacer />
