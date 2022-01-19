@@ -479,10 +479,11 @@ video + .bubble {
 }
 
 #credits-page p {
-    margin: 0 15px;
-    padding: 0 5px 0 25px;
+    margin: 0;
+    padding: 0 20px 0 40px;
     text-indent: -20px;
     line-height: 1.4;
+    width: 100%;
 }
 
 #credits-page p.noblur {

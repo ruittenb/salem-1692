@@ -7,6 +7,7 @@ open Types
 @val external salemAppVersion: string = "salemAppVersion"
 
 let nnbsp = ` ` // U+202F Narrow No-Break Space
+let nbsp  = ` ` // U+00A0 No-Break Space
 let note  = `♪` // U+266A Eighth Note (quaver)
 let year = "2022"
 

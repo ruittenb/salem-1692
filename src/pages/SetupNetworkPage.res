@@ -49,8 +49,8 @@ let startHosting = (setDbConnectionStatus, gameState, setGameState) => {
 }
 
 let stopHosting = (dbConnectionStatus, setDbConnectionStatus, gameState, setGameState) => {
-    logDebug(pm ++ "Stopping hosting")
     Utils.ifConnected(dbConnectionStatus, (dbConnection) => {
+        logDebug(pm ++ "Stopping hosting")
         FirebaseClient.deleteGame(dbConnection, gameState.gameId)
         FirebaseClient.disconnect(dbConnection)
     })
@@ -321,6 +321,7 @@ let make = (
     <div id="setup-network-page" className="page flex-vertical">
         <BackFloatingButton onClick={(_event) => {
             leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
+            stopHosting(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
             goToPage(_prev => Title)
         }} />
         <GearFloatingButton goToPage returnPage=SetupNetwork />
