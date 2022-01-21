@@ -45,9 +45,9 @@ let make = (
                                      ChoiceConstableSubject
                                  }
         }
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
             Utils.logDebug(p ++ "About to install choice listener")
-            FirebaseClient.listen(dbConnection, gameState.gameId, subject, (maybePlayer) => {
+            FirebaseClient.listen(dbConnection, gameId, subject, (maybePlayer) => {
                 switch maybePlayer {
                     | Some("")     => ()
                     | Some(player) => choiceProcessor(player)
@@ -56,9 +56,9 @@ let make = (
             })
         })
         Some(() => { // Cleanup: remove listener
-            Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+            Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
                 Utils.logDebug(p ++ "About to remove choice listener")
-                FirebaseClient.stopListening(dbConnection, gameState.gameId, subject)
+                FirebaseClient.stopListening(dbConnection, gameId, subject)
             })
             Utils.logDebugBlue(p ++ "Unmounted")
         })

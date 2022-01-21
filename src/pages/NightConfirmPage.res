@@ -58,13 +58,13 @@ let make = (
                                      Types.ConfirmConstableSubject
                                  }
         }
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
             // clear any previous confirmation that was recorded
-            FirebaseClient.saveGameConfirmation(dbConnection, gameState.gameId, subject, #Undecided)
+            FirebaseClient.saveGameConfirmation(dbConnection, gameId, subject, #Undecided)
 
             // install new listener
             Utils.logDebug(p ++ "About to install confirmation listener")
-            FirebaseClient.listen(dbConnection, gameState.gameId, subject, (maybeDecision) => {
+            FirebaseClient.listen(dbConnection, gameId, subject, (maybeDecision) => {
                 switch maybeDecision {
                     | Some("Yes") => confirmationProcessor(#Yes)
                     | Some("No")  => confirmationProcessor(#No)
@@ -74,9 +74,9 @@ let make = (
             })
         })
         Some(() => { // Cleanup: remove listener
-            Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+            Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
                 Utils.logDebug(p ++ "About to remove confirmation listener")
-                FirebaseClient.stopListening(dbConnection, gameState.gameId, subject)
+                FirebaseClient.stopListening(dbConnection, gameId, subject)
             })
             Utils.logDebugBlue(p ++ "Unmounted")
         })

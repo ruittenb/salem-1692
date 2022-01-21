@@ -56,7 +56,7 @@ let transformToDbRecord = (
     turnState: turnState,
     scenarioStep: scenarioStep,
 ): dbRecord => {
-    masterGameId: gameState.gameId,
+    masterGameId: gameState.gameType->Utils.ifMasterGetGameId,
     masterPhase: getPhase(currentPage, scenarioStep),
     masterPlayers: gameState.players,
     masterSeating: gameState.seating,

@@ -18,29 +18,24 @@ let inputElementId = "formGameId"
  */
 let startHosting = (setDbConnectionStatus, gameState, setGameState) => {
     logDebug(pm ++ "Starting hosting")
-    setDbConnectionStatus(_prev => Connecting)
+    setDbConnectionStatus(_prev => ConnectingAsMaster)
+    let oldGameState = gameState
     FirebaseClient.connect()
         ->Promise.then(dbConnection => {
-            let newGameId = if gameState.gameType === Master {
-                // We already are Master. This should not happen,
-                // but if it does, reuse the old gameId.
-                gameState.gameId
-            } else {
-                GameId.generateGameId()
-            }
+            let newGameId = GameId.generateGameId()
             let newGameState = {
                 ...gameState,
-                gameType: Master,
-                gameId: newGameId
+                gameType: Master(newGameId)
             }
+            setGameState(_prev => newGameState)
             FirebaseClient.createGame(dbConnection, newGameState)
                 ->Promise.then(() => {
-                    setGameState(_prev => newGameState)
                     setDbConnectionStatus(_prev => Connected(dbConnection))
                     Promise.resolve()
                 })
         })
         ->Promise.catch(error => {
+            setGameState(_prev => oldGameState)
             setDbConnectionStatus(_prev => NotConnected)
             error->Utils.getExceptionMessage->Utils.logError
             Promise.resolve()
@@ -49,9 +44,9 @@ let startHosting = (setDbConnectionStatus, gameState, setGameState) => {
 }
 
 let stopHosting = (dbConnectionStatus, setDbConnectionStatus, gameState, setGameState) => {
-    Utils.ifConnected(dbConnectionStatus, (dbConnection) => {
+    Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
         logDebug(pm ++ "Stopping hosting")
-        FirebaseClient.deleteGame(dbConnection, gameState.gameId)
+        FirebaseClient.deleteGame(dbConnection, gameId)
         FirebaseClient.disconnect(dbConnection)
     })
     setDbConnectionStatus(_prev => NotConnected)
@@ -67,7 +62,7 @@ let stopHosting = (dbConnectionStatus, setDbConnectionStatus, gameState, setGame
 
 let joinGame = (setDbConnectionStatus, setGameState, newGameId, callback) => {
     logDebug(ps ++ "Joining game " ++ newGameId)
-    setDbConnectionStatus(_prev => Connecting)
+    setDbConnectionStatus(_prev => ConnectingAsSlave)
     FirebaseClient.connect()
         ->Promise.then(dbConnection => {
             setGameState(prevGameState => {
@@ -164,7 +159,7 @@ let getModusOperandi = (
                                 onClick={ _event => setSlaveGameIdValidity(_prev => SlaveInputShown) }
                             />
                         </>
-    | (Master, NotConnected, _) =>
+    | (Master(_), NotConnected, _) =>
                         <>
                             // Should never happen: we should be connected before we set the game type to Master
                             <Spacer />
@@ -176,13 +171,14 @@ let getModusOperandi = (
                                 ) }
                             />
                         </>
-    | (Master, Connecting, _) =>
+    | (Master(_), ConnectingAsSlave, _) // should not happen
+    | (_, ConnectingAsMaster, _) =>
                         <>
                             <Spacer />
                             <div className="bubble">{React.string(t("Connecting..."))}</div>
                             // TODO add abort connecting button
                         </>
-    | (Master, Connected(_), _) =>
+    | (Master(gameId), Connected(_), _) =>
                         <>
                             <h2> {React.string(t("Be a Host"))} </h2>
                             <p>
@@ -195,8 +191,8 @@ let getModusOperandi = (
                             </p>
                             <Spacer />
                             <div className="input-and-icon">
-                                <div className="id-input"> {React.string(gameState.gameId)} </div>
-                                <QrIcon mode={QrIcon.Scannable(gameState.gameId)} />
+                                <div className="id-input"> {React.string(gameId)} </div>
+                                <QrIcon mode={QrIcon.Scannable(gameId)} />
                                 <div className="bubble north">{React.string(t("Connected."))}</div>
                             </div>
                             <Button
@@ -263,7 +259,8 @@ let getModusOperandi = (
                                     | (NotConnected, SlaveInputShown)           => "Not connected"
                                     | (NotConnected, SlaveInputShownAndInvalid) => "Malformed code"
                                     | (NotConnected, SlaveInputShownAndAbsent)  => "Game not found"
-                                    | (Connecting, _)                           => "Connecting..."
+                                    | (ConnectingAsMaster, _)                   // should not happen
+                                    | (ConnectingAsSlave, _)                    => "Connecting..."
                                     | (Connected(_), SlaveInputShownAndAbsent)  => "Game not found"
                                     | (Connected(_), _)                         => "Connected."
                                 }
