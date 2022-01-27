@@ -113,10 +113,10 @@ tag-%: ## Update the %:major:minor:patch:% version number and create git tag
 .PHONY: finish-tag
 finish-tag: ## Recompile the new version number into the code, commit and push
 	VERSION=v$$(jq .version package.json | tr -d '"') && \
-	$(MAKE) build-minify  && \
-	git commit -a --amend && \
-	$(MAKE) move-tag      && \
-	git push              && \
+	$(MAKE) build-minify            && \
+	git commit -a --amend --no-edit && \
+	$(MAKE) move-tag                && \
+	git push                        && \
 	git push origin tag $$VERSION
 
 .PHONY: move-tag
