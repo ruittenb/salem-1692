@@ -56,16 +56,18 @@ let transformToDbRecord = (
     turnState: turnState,
     scenarioStep: scenarioStep,
 ): dbRecord => {
-    masterGameId: gameState.gameId,
-    masterPhase: getPhase(currentPage, scenarioStep),
-    masterPlayers: gameState.players,
-    masterSeating: gameState.seating,
-    masterNumberWitches: turnState.nrWitches,
-    slaveChoiceWitches: turnState.choiceWitches->Belt.Option.getWithDefault(""),
-    slaveChoiceConstable: turnState.choiceConstable->Belt.Option.getWithDefault(""),
-    slaveConfirmWitches: #Undecided,
-    slaveConfirmConstable: #Undecided,
-    updatedAt: Js.Date.make()->Js.Date.toISOString
+    {
+        masterGameId: gameState.gameType->Utils.ifMasterGetGameId,
+        masterPhase: getPhase(currentPage, scenarioStep),
+        masterPlayers: gameState.players,
+        masterSeating: gameState.seating,
+        masterNumberWitches: turnState.nrWitches,
+        slaveChoiceWitches: turnState.choiceWitches->Belt.Option.getWithDefault(""),
+        slaveChoiceConstable: turnState.choiceConstable->Belt.Option.getWithDefault(""),
+        slaveConfirmWitches: #Undecided,
+        slaveConfirmConstable: #Undecided,
+        updatedAt: Js.Date.make()->Js.Date.toISOString
+    }
 }
 
 /** **********************************************************************

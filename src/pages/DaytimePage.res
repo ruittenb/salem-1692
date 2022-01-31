@@ -18,8 +18,11 @@ let make = (
         choiceConstable: None,
     }
 
-    let masterMode = gameState.gameType === Master
-    let returnPage = gameState.gameType === Master ? SetupNetwork : Title
+    let (masterMode, returnPage) = switch gameState.gameType {
+        | Master(_) => (true, SetupNetwork)
+        | Slave(_)
+        | StandAlone => (false, Title)
+    }
 
     // Page element
     <div id="daytime-page" className="page flex-vertical">

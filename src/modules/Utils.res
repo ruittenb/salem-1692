@@ -177,7 +177,8 @@ let ifConnected = (
 ) => {
     switch dbConnectionStatus {
         | NotConnected            => ()
-        | Connecting              => ()
+        | ConnectingAsMaster      => ()
+        | ConnectingAsSlave       => ()
         | Connected(dbConnection) => func(dbConnection)
     }
 }
@@ -187,26 +188,39 @@ let ifConnected = (
  */
 let ifMaster = (
     gameType: GameTypeCodec.t,
-    func: () => unit
+    func: (GameTypeCodec.gameId) => unit
 ) => {
     switch gameType {
-        | StandAlone => ()
-        | Master     => func()
-        | Slave(_)   => ()
+        | StandAlone     => ()
+        | Master(gameId) => func(gameId)
+        | Slave(_)       => ()
     }
 }
 
 /**
- * Combine two functions above
+ * Return gameId if game state reflects that we're Master
+ */
+let ifMasterGetGameId = (
+    gameType: GameTypeCodec.t
+): string => {
+    switch gameType {
+        | StandAlone     => ""
+        | Master(gameId) => gameId
+        | Slave(_)       => ""
+    }
+}
+
+/**
+ * Convenience: combine ifMaster and ifConnected
  */
 let ifMasterAndConnected = (
     dbConnectionStatus: dbConnectionStatus,
     gameType: GameTypeCodec.t,
-    func: (dbConnection) => unit
+    func: (dbConnection, GameTypeCodec.gameId) => unit
 ) => {
-    ifMaster(gameType, () => {
+    ifMaster(gameType, (gameId) => {
         ifConnected(dbConnectionStatus, (dbConnection) => {
-            func(dbConnection)
+            func(dbConnection, gameId)
         })
     })
 }
@@ -220,7 +234,7 @@ let ifSlave = (
 ) => {
     switch gameType {
         | StandAlone    => ()
-        | Master        => ()
+        | Master(_)     => ()
         | Slave(gameId) => func(gameId)
     }
 }
@@ -233,7 +247,7 @@ let ifSlaveGetGameId = (
 ): string => {
     switch gameType {
         | StandAlone    => ""
-        | Master        => ""
+        | Master(_)     => ""
         | Slave(gameId) => gameId
     }
 }

@@ -11,7 +11,6 @@ let initialNavigation: option<page> = None
 
 let initialGameState = {
     gameType: StandAlone,
-    gameId: GameId.generateGameId(),
     language: #en_US,
     players: [ "Anastasia", "Agatha", "Ambrosia" ],
     seating: #OneAtTop,
@@ -48,7 +47,7 @@ let make = (): React.element => {
                 setGameState(_prev => gameState)
                 Utils.ifMaster(
                     gameState.gameType,
-                    () => SetupNetworkPage.startHosting(setDbConnectionStatus, gameState, setGameState)
+                    (_gameId) => SetupNetworkPage.startHosting(setDbConnectionStatus, gameState, setGameState)
                 )
             })
         None // cleanup function
@@ -57,7 +56,7 @@ let make = (): React.element => {
     // save game state to localstorage after every change; and to firebase if we're hosting
     React.useEffect1(() => {
         LocalStorage.saveGameState(gameState)
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
+        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, _gameId) => {
             FirebaseClient.saveGameState(dbConnection, gameState, currentPage, initialTurnState, None)
         })
         None // cleanup function

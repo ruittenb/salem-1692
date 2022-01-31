@@ -90,8 +90,8 @@ let make = (
             " witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
             "font-weight: bold"
         )
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
-            FirebaseClient.saveGameTurnState(dbConnection, gameState.gameId, nrWitches, choiceWitches, choiceConstable)
+        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+            FirebaseClient.saveGameTurnState(dbConnection, gameId, nrWitches, choiceWitches, choiceConstable)
         })
         None // cleanup function
     }, [ turnState ])
@@ -104,12 +104,12 @@ let make = (
             p ++ "Detected scenarioStep change; witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
             "font-weight: bold"
         )
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
-            FirebaseClient.saveGamePhase(dbConnection, gameState.gameId, subPage, maybeScenarioStep)
+        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+            FirebaseClient.saveGamePhase(dbConnection, gameId, subPage, maybeScenarioStep)
         })
         Some(() => { // cleanup function
-            Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
-                FirebaseClient.saveGamePhase(dbConnection, gameState.gameId, DaytimeWaiting, None)
+            Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+                FirebaseClient.saveGamePhase(dbConnection, gameId, DaytimeWaiting, None)
             })
         })
     }, [ maybeScenarioStep ])
@@ -131,8 +131,8 @@ let make = (
 
     // Store confirmation in db
     let continueFromWitchDecision = (decision: DecisionCodec.t): unit => {
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
-            FirebaseClient.saveGameConfirmations(dbConnection, gameState.gameId, decision, #Undecided)
+        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+            FirebaseClient.saveGameConfirmations(dbConnection, gameId, decision, #Undecided)
         })
         switch decision {
             | #Yes       => goToNextStep()
@@ -141,8 +141,8 @@ let make = (
         }
     }
     let continueFromConstableDecision = (decision: DecisionCodec.t): unit => {
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection) => {
-            FirebaseClient.saveGameConfirmations(dbConnection, gameState.gameId, #Yes, decision)
+        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+            FirebaseClient.saveGameConfirmations(dbConnection, gameId, #Yes, decision)
         })
         switch decision {
             | #Yes       => goToNextStep()

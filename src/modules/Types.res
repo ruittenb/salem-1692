@@ -52,7 +52,6 @@ let playersFromJson = (playerArrayJson: Js.Json.t): option<array<string>> => {
 
 @decco type gameState = {
     gameType: GameTypeCodec.t,
-    gameId: GameTypeCodec.gameId,
     language: LanguageCodec.t,
     players: players,
     seating: SeatingCodec.t,
@@ -166,7 +165,8 @@ type dbConnection = {
 
 type dbConnectionStatus =
     | NotConnected
-    | Connecting
+    | ConnectingAsMaster
+    | ConnectingAsSlave
     | Connected(dbConnection)
 
 type dbConnectionSetter = (dbConnectionStatus => dbConnectionStatus) => unit

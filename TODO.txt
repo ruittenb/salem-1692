@@ -4,6 +4,7 @@ SEVERE:
 
 IMPORTANT:
  - prevent flicker in slave night pages
+ - right after mounting: preserve slave/master status? in localstorage?
 
 NICE TO HAVE:
  - show "connecting" in text bubble when starting master mode
