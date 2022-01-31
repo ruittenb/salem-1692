@@ -12,8 +12,6 @@ let make = (
     ~choiceProcessor: (player, ~skipConfirmation: bool) => unit,
 ): React.element => {
 
-    // db connection status
-    let (dbConnectionStatus, _setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
     // turn state
     let (turnState, setTurnState) = React.useContext(TurnStateContext.context)
     // translator, game state
@@ -46,7 +44,7 @@ let make = (
                                 ChoiceConstableSubject
                             }
         }
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+        Utils.ifMaster(gameState.gameType, (dbConnection, gameId) => {
             Utils.logDebug(p ++ "About to install choice listener")
             FirebaseClient.listen(dbConnection, gameId, subject, (maybePlayer) => {
                 switch maybePlayer {
@@ -57,7 +55,7 @@ let make = (
             })
         })
         Some(() => { // Cleanup: remove listener
-            Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+            Utils.ifMaster(gameState.gameType, (dbConnection, gameId) => {
                 Utils.logDebug(p ++ "About to remove choice listener")
                 FirebaseClient.stopListening(dbConnection, gameId, subject)
             })

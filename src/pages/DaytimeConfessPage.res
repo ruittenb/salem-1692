@@ -8,9 +8,8 @@ open Types
 let make = (
     ~goToPage,
 ): React.element => {
-    let (dbConnectionStatus, _) = React.useContext(DbConnectionContext.context)
-    let (turnState, _)          = React.useContext(TurnStateContext.context)
-    let (gameState, _)          = React.useContext(GameStateContext.context)
+    let (turnState, _setTurnState) = React.useContext(TurnStateContext.context)
+    let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
     let (constableTargetRevealed, setConstableTargetRevealed) = React.useState(_ => false)
@@ -35,7 +34,7 @@ let make = (
     // Runs only once right after mounting the component
     React.useEffect0(() => {
         // Clear turn data from database and revert to DaytimeWaiting
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, _gameId) => {
+        Utils.ifMaster(gameState.gameType, (dbConnection, _gameId) => {
             FirebaseClient.saveGameState(dbConnection, gameState, DaytimeConfess, Constants.initialTurnState, None)
         })
         None // cleanup

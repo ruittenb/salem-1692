@@ -5,6 +5,7 @@
 @@warning("-33") // Unused 'open Types'
 
 open Types
+open TypesComposite
 open Utils
 
 let setItem = (key: string, value: string): unit => {
@@ -17,18 +18,21 @@ let getItem = (key: string): option<string> => {
 
 let gameStateKey = Constants.localStoragePrefix ++ Constants.localStorageGameStateKey
 
-let loadGameState = (): option<gameState> => {
+let loadGameState = (
+    startMasterFn,
+    startSlaveFn,
+): option<gameState> => {
     Dom.Storage2.localStorage
-        ->Dom.Storage2.getItem(gameStateKey)             // this yields an option<string>
+        ->Dom.Storage2.getItem(gameStateKey) // this yields an option<string>
         ->Belt.Option.flatMap(
             jsonString => safeExec(
                 () => jsonString->Js.Json.parseExn
             )
-        )                                                // this yields an option<Js.Json.t>
+        )                                    // this yields an option<Js.Json.t>
         ->Belt.Option.flatMap(
             str => str
-                ->gameState_decode                       // this yields a Result<gameState, Decco.decodeError>
-                ->Belt.Result.mapWithDefault(None, Js.Option.some)
+                ->gameStateDecodeAndReconnect(startMasterFn, startSlaveFn) // this yields a Result<gameState, Decco.decodeError>
+                ->Belt.Result.mapWithDefault(None, Js.Option.some)         // this yields an option<gameState>
         )
 }
 
@@ -40,6 +44,4 @@ let saveGameState = (gameState: gameState): unit => {
             jsonGameState => setItem(gameStateKey, jsonGameState)
         )
 }
-
-
 

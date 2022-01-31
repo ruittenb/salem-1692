@@ -3,6 +3,7 @@
  */
 
 open Types
+open TypesComposite
 
 type document
 type navigator

@@ -2,7 +2,10 @@
  * DaytimePage
  */
 
+@@warning("-33") // Unused 'open Types'
+
 open Types
+open TypesComposite
 
 @react.component
 let make = (
@@ -22,6 +25,8 @@ let make = (
     let (masterMode, returnPage) = switch gameState.gameType {
         | Master(_) => (true, SetupNetwork)
         | Slave(_)
+        | ConnectingAsMaster
+        | ConnectingAsSlave
         | StandAlone => (false, Title)
     }
 

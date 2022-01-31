@@ -6,14 +6,18 @@
 
 type gameType =
     | StandAlone
-    | Master(gameId)
-    | Slave(gameId)
+    | ConnectingAsMaster
+    | ConnectingAsSlave
+    | Master(gameId, Types.dbConnection)
+    | Slave(gameId, Types.dbConnection)
 
 let encoder: Decco.encoder<gameType> = (gameType: gameType): Js.Json.t => {
     let gameTypeString = switch gameType {
-        | StandAlone     => "StandAlone"
-        | Master(gameId) => "Master:" ++ gameId
-        | Slave(gameId)  => "Slave:" ++ gameId
+        | StandAlone
+        | ConnectingAsMaster
+        | ConnectingAsSlave  => "StandAlone"
+        | Master(gameId, _)  => "Master:" ++ gameId
+        | Slave(gameId, _)   => "Slave:" ++ gameId
     }
     gameTypeString->Decco.stringToJson
 }
@@ -24,13 +28,13 @@ let gameTypeFromString = (value: string): option<gameType> => {
     let gameId: option<gameId>   = segments->Belt.Array.get(1)
 
     switch (mainType, gameId) {
-        | (Some("StandAlone"), _)    => Some(StandAlone)
-        | (Some("Master"), Some(id)) => Some(Master(id))
-        | (Some("Slave"), Some(id))  => Some(Slave(id))
+        | (Some("StandAlone"), _)     => Some(StandAlone)
+        | (Some("Master"), Some(_id)) => Some(StandAlone) // Some(Master(id)) // FIXME
+        | (Some("Slave"), Some(_id))  => Some(StandAlone) // Some(Slave(id)) // FIXME
         | (Some("Master"), None)
         | (Some("Slave"), None)
         | (Some(_), _)
-        | (None, _)                  => None
+        | (None, _)                   => None
     }
 }
 

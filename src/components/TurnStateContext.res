@@ -2,7 +2,10 @@
  * TurnStateContext
  */
 
+@@warning("-33") // Unused 'open Types'
+
 open Types
+open TypesComposite
 
 let defaultSetter: turnStateSetter = (_: turnState => turnState) => ()
 let defaultValue: turnState = {

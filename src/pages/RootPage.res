@@ -3,9 +3,9 @@
  */
 
 open Types
+open TypesComposite
 open Constants
 
-let initialDbConnectionStatus = NotConnected
 let initialPage: page = Title
 let initialNavigation: option<page> = None
 
@@ -20,8 +20,6 @@ let cleanupGameState = (gameState): gameState => {
 @react.component
 let make = (): React.element => {
 
-    let (dbConnectionStatus, setDbConnectionStatus)
-                                    = React.useState(_ => initialDbConnectionStatus)
     let (currentPage, goToPage)     = React.useState(_ => initialPage)
     let (gameState, setGameState)   = React.useState(_ => initialGameState)
     let (navigation, setNavigation) = React.useState(_ => initialNavigation)
@@ -30,14 +28,13 @@ let make = (): React.element => {
     // run once after mounting: read localstorage.
     // if we're master, then connect to firebase.
     React.useEffect0(() => {
-        LocalStorage.loadGameState()
+        LocalStorage.loadGameState(
+            SetupNetworkPage.startHosting,
+            SetupNetworkPage.joinGame,
+        )
             ->Belt.Option.map(cleanupGameState)
             ->Belt.Option.forEach(gameState => {
                 setGameState(_prev => gameState)
-                Utils.ifMaster(
-                    gameState.gameType,
-                    (_gameId) => SetupNetworkPage.startHosting(setDbConnectionStatus, gameState, setGameState)
-                )
             })
         None // cleanup function
     })
@@ -45,7 +42,7 @@ let make = (): React.element => {
     // save game state to localstorage after every change; and to firebase if we're hosting
     React.useEffect1(() => {
         LocalStorage.saveGameState(gameState)
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, _gameId) => {
+        Utils.ifMaster(gameState.gameType, (dbConnection, _gameId) => {
             FirebaseClient.saveGameState(dbConnection, gameState, currentPage, initialTurnState, None)
         })
         None // cleanup function
@@ -80,19 +77,17 @@ let make = (): React.element => {
         | Close                   => <ClosePage />
     }
 
-    <DbConnectionContext.Provider value=(dbConnectionStatus, setDbConnectionStatus)>
-        <GameStateContext.Provider value=(gameState, setGameState)>
-            <div
-                lang={LanguageCodec.getHtmlLanguage(gameState.language)}
-                className={LanguageCodec.languageToJs(gameState.language)}
-            >
-                <NavigationContext.Provider value=(navigation, setNavigation)>
-                    <TurnStateContext.Provider value=(turnState, setTurnState)>
-                        {currentPageElement}
-                    </TurnStateContext.Provider>
-                </NavigationContext.Provider>
-            </div>
-        </GameStateContext.Provider>
-    </DbConnectionContext.Provider>
+    <GameStateContext.Provider value=(gameState, setGameState)>
+        <div
+            lang={LanguageCodec.getHtmlLanguage(gameState.language)}
+            className={LanguageCodec.languageToJs(gameState.language)}
+        >
+            <NavigationContext.Provider value=(navigation, setNavigation)>
+                <TurnStateContext.Provider value=(turnState, setTurnState)>
+                    {currentPageElement}
+                </TurnStateContext.Provider>
+            </NavigationContext.Provider>
+        </div>
+    </GameStateContext.Provider>
 }
 

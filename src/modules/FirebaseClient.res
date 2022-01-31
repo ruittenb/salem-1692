@@ -3,6 +3,7 @@
  */
 
 open Types
+open TypesComposite
 
 let gamesKeyPrefix = "/games/"
 

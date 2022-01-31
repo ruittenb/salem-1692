@@ -15,8 +15,6 @@ let make = (
     ~goToPrevStep,
 ): React.element => {
 
-    // db connection status
-    let (dbConnectionStatus, _setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
     // turn state
     let (turnState, _setTurnState) = React.useContext(TurnStateContext.context)
     // translator, game state
@@ -58,7 +56,7 @@ let make = (
                                      Types.ConfirmConstableSubject
                                  }
         }
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+        Utils.ifMaster(gameState.gameType, (dbConnection, gameId) => {
             // clear any previous confirmation that was recorded
             FirebaseClient.saveGameConfirmation(dbConnection, gameId, subject, #Undecided)
 
@@ -74,7 +72,7 @@ let make = (
             })
         })
         Some(() => { // Cleanup: remove listener
-            Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+            Utils.ifMaster(gameState.gameType, (dbConnection, gameId) => {
                 Utils.logDebug(p ++ "About to remove confirmation listener")
                 FirebaseClient.stopListening(dbConnection, gameId, subject)
             })

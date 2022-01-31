@@ -5,6 +5,7 @@
 @@warning("-33") // Unused 'open Types'
 
 open Types
+open TypesComposite
 open Utils
 
 @module("firebase/app") external initializeApp: (dbConfig) => dbApp = "initializeApp"

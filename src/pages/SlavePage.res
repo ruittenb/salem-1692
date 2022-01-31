@@ -3,6 +3,7 @@
  */
 
 open Types
+open TypesComposite
 
 let p = "[SlavePage] "
 
@@ -11,14 +12,13 @@ let make = (
     ~goToPage,
     ~subPage: page,
 ): React.element => {
-    let (dbConnectionStatus, _setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     // turn state
     let (turnState, setTurnState) = React.useContext(TurnStateContext.context)
 
     React.useEffect0(() => {
         Utils.logDebugGreen(p ++ "Mounted")
-        Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+        Utils.ifSlave(gameState.gameType, (dbConnection, gameId) => {
             Utils.logDebug(p ++ "About to install game listener")
             FirebaseClient.listen(dbConnection, gameId, GameSubject, (maybeDbRecordStr: option<string>) => {
                 switch maybeDbRecordStr {
@@ -60,7 +60,7 @@ let make = (
             })
         })
         Some(() => { // Cleanup: remove listener
-            Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+            Utils.ifSlave(gameState.gameType, (dbConnection, gameId) => {
                 Utils.logDebug(p ++ "About to remove remove game listener")
                 FirebaseClient.stopListening(dbConnection, gameId, GameSubject)
             })
@@ -81,7 +81,7 @@ let make = (
         setTurnState(prevTurnState => {
             { ...prevTurnState, choiceWitches: Some(player) }
         })
-        Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+        Utils.ifSlave(gameState.gameType, (dbConnection, gameId) => {
             FirebaseClient.saveGameTurnState(
                 dbConnection,
                 gameId,
@@ -98,7 +98,7 @@ let make = (
         setTurnState(prevTurnState => {
             { ...prevTurnState, choiceConstable: Some(player) }
         })
-        Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+        Utils.ifSlave(gameState.gameType, (dbConnection, gameId) => {
             FirebaseClient.saveGameTurnState(
                 dbConnection,
                 gameId,
@@ -125,7 +125,7 @@ let make = (
                                        addressed=witchOrWitches
                                        confirmationProcessor={
                                            (decision) => {
-                                               Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+                                               Utils.ifSlave(gameState.gameType, (dbConnection, gameId) => {
                                                    FirebaseClient.saveGameConfirmation(
                                                        dbConnection,
                                                        gameId,
@@ -142,7 +142,7 @@ let make = (
                                        addressed=Constable
                                        confirmationProcessor={
                                            (decision) => {
-                                               Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+                                               Utils.ifSlave(gameState.gameType, (dbConnection, gameId) => {
                                                    FirebaseClient.saveGameConfirmation(
                                                        dbConnection,
                                                        gameId,

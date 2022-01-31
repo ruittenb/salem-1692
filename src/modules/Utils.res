@@ -169,31 +169,19 @@ let optionTupleAnd = (
 }
 
 /**
- * Call function if connection state reflects that we're connected to firebase
- */
-let ifConnected = (
-    dbConnectionStatus: dbConnectionStatus,
-    func: (dbConnection) => unit
-) => {
-    switch dbConnectionStatus {
-        | NotConnected            => ()
-        | ConnectingAsMaster      => ()
-        | ConnectingAsSlave       => ()
-        | Connected(dbConnection) => func(dbConnection)
-    }
-}
-
-/**
  * Call function if game state reflects that we're Master
+ * (which implies connected to Firebase)
  */
 let ifMaster = (
     gameType: GameTypeCodec.t,
-    func: (GameTypeCodec.gameId) => unit
+    func: (dbConnection, GameTypeCodec.gameId) => unit,
 ) => {
     switch gameType {
-        | StandAlone     => ()
-        | Master(gameId) => func(gameId)
-        | Slave(_)       => ()
+        | StandAlone                   => ()
+        | ConnectingAsMaster           => ()
+        | Master(gameId, dbConnection) => func(dbConnection, gameId)
+        | ConnectingAsSlave            => ()
+        | Slave(_, _)                  => ()
     }
 }
 
@@ -204,38 +192,28 @@ let ifMasterGetGameId = (
     gameType: GameTypeCodec.t
 ): string => {
     switch gameType {
-        | StandAlone     => ""
-        | Master(gameId) => gameId
-        | Slave(_)       => ""
+        | StandAlone         => ""
+        | ConnectingAsMaster => ""
+        | Master(gameId, _)  => gameId
+        | ConnectingAsSlave  => ""
+        | Slave(_, _)        => ""
     }
 }
 
 /**
- * Convenience: combine ifMaster and ifConnected
- */
-let ifMasterAndConnected = (
-    dbConnectionStatus: dbConnectionStatus,
-    gameType: GameTypeCodec.t,
-    func: (dbConnection, GameTypeCodec.gameId) => unit
-) => {
-    ifMaster(gameType, (gameId) => {
-        ifConnected(dbConnectionStatus, (dbConnection) => {
-            func(dbConnection, gameId)
-        })
-    })
-}
-
-/**
  * Call function if game state reflects that we're Slave
+ * (which implies connected to Firebase)
  */
 let ifSlave = (
     gameType: GameTypeCodec.t,
-    func: (GameTypeCodec.gameId) => unit
+    func: (dbConnection, GameTypeCodec.gameId) => unit,
 ) => {
     switch gameType {
-        | StandAlone    => ()
-        | Master(_)     => ()
-        | Slave(gameId) => func(gameId)
+        | StandAlone                  => ()
+        | ConnectingAsMaster          => ()
+        | Master(_, _)                => ()
+        | ConnectingAsSlave           => ()
+        | Slave(gameId, dbConnection) => func(dbConnection, gameId)
     }
 }
 
@@ -246,30 +224,13 @@ let ifSlaveGetGameId = (
     gameType: GameTypeCodec.t
 ): string => {
     switch gameType {
-        | StandAlone    => ""
-        | Master(_)     => ""
-        | Slave(gameId) => gameId
+        | StandAlone         => ""
+        | ConnectingAsMaster => ""
+        | Master(_, _)       => ""
+        | ConnectingAsSlave  => ""
+        | Slave(gameId, _)   => gameId
     }
 }
-
-/**
- * Combine two functions above
- */
-let ifSlaveAndConnected = (
-    dbConnectionStatus: dbConnectionStatus,
-    gameType: GameTypeCodec.t,
-    func: (
-        dbConnection,
-        GameTypeCodec.gameId
-    ) => unit
-) => {
-    ifSlave(gameType, (gameId) => {
-        ifConnected(dbConnectionStatus, (dbConnection) => {
-            func(dbConnection, gameId)
-        })
-    })
-}
-
 
 /**
  * Convert [ Some(3), Some(6), None, Some(-1), None ] into [ 3, 6, -1 ]:

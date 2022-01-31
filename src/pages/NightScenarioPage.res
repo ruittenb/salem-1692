@@ -12,8 +12,6 @@ let make = (
     ~goToPage,
 ): React.element => {
 
-    // connection status
-    let (dbConnectionStatus, _setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
     // turn state
     let (turnState, setTurnState) = React.useContext(TurnStateContext.context)
 
@@ -76,7 +74,7 @@ let make = (
             ` ◇ witches:` ++ choiceWitches ++ ` ◇ constable:` ++ choiceConstable,
             "font-weight: bold"
         )
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+        Utils.ifMaster(gameState.gameType, (dbConnection, gameId) => {
             FirebaseClient.saveGameTurnState(dbConnection, gameId, nightType, nrWitches, choiceWitches, choiceConstable)
         })
         None // cleanup function
@@ -89,7 +87,7 @@ let make = (
         Utils.logDebug(
             p ++ "Detected scenarioStep change" // ++ `; ◇ witches:` ++ choiceWitches ++ ` ◇ constable:` ++ choiceConstable
         )
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+        Utils.ifMaster(gameState.gameType, (dbConnection, gameId) => {
             FirebaseClient.saveGamePhase(dbConnection, gameId, subPage, maybeScenarioStep)
         })
         None // cleanup function

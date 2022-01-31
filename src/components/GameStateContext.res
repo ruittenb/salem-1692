@@ -2,7 +2,10 @@
  * GameStateContext
  */
 
+@@warning("-33") // Unused 'open Types'
+
 open Types
+open TypesComposite
 
 let defaultSetter: gameStateSetter = (_: gameState => gameState) => ()
 let defaultValue: gameState = {

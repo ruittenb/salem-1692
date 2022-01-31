@@ -3,6 +3,7 @@
  */
 
 open Types
+open TypesComposite
 open Utils
 
 @get external getValue: (Dom.element) => string = "value"
@@ -16,40 +17,43 @@ let inputElementId = "formGameId"
 /** ****************************************************************************
  * Master functions
  */
-let startHosting = (setDbConnectionStatus, gameState, setGameState) => {
+let startHosting = (gameState, setGameState) => {
     logDebug(pm ++ "Starting hosting")
-    setDbConnectionStatus(_prev => ConnectingAsMaster)
-    let oldGameState = gameState
+    setGameState(prevGameState => {
+        ...prevGameState,
+        gameType: ConnectingAsMaster
+    })
     FirebaseClient.connect()
         ->Promise.then(dbConnection => {
             let newGameId = GameId.generateGameId()
             let newGameState = {
                 ...gameState,
-                gameType: Master(newGameId)
+                gameType: Master(newGameId, dbConnection)
             }
             setGameState(_prev => newGameState)
             FirebaseClient.createGame(dbConnection, newGameState)
                 ->Promise.then(() => {
-                    setDbConnectionStatus(_prev => Connected(dbConnection))
+                    //setDbConnectionStatus(_prev => Connected(dbConnection))
                     Promise.resolve()
                 })
         })
         ->Promise.catch(error => {
-            setGameState(_prev => oldGameState)
-            setDbConnectionStatus(_prev => NotConnected)
+            setGameState(prevGameState => {
+                ...prevGameState,
+                gameType: StandAlone
+            })
             error->Utils.getExceptionMessage->Utils.logError
             Promise.resolve()
         })
         ->ignore
 }
 
-let stopHosting = (dbConnectionStatus, setDbConnectionStatus, gameState, setGameState) => {
-    Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+let stopHosting = (gameState, setGameState) => {
+    Utils.ifMaster(gameState.gameType, (dbConnection, gameId) => {
         logDebug(pm ++ "Stopping hosting")
         FirebaseClient.deleteGame(dbConnection, gameId)
         FirebaseClient.disconnect(dbConnection)
     })
-    setDbConnectionStatus(_prev => NotConnected)
     setGameState((prevGameState) => {
         ...prevGameState,
         gameType: StandAlone
@@ -60,16 +64,18 @@ let stopHosting = (dbConnectionStatus, setDbConnectionStatus, gameState, setGame
  * Slave functions
  */
 
-let joinGame = (setDbConnectionStatus, setGameState, newGameId, callback) => {
+let joinGame = (setGameState, newGameId, callback) => {
     logDebug(ps ++ "Joining game " ++ newGameId)
-    setDbConnectionStatus(_prev => ConnectingAsSlave)
+    setGameState(prevGameState => {
+        ...prevGameState,
+        gameType: ConnectingAsSlave
+    })
     FirebaseClient.connect()
         ->Promise.then(dbConnection => {
             setGameState(prevGameState => {
                 ...prevGameState,
-                gameType: Slave(newGameId)
+                gameType: Slave(newGameId, dbConnection)
             })
-            setDbConnectionStatus(_prev => Connected(dbConnection))
             let connectSuccess: bool = FirebaseClient.joinGame(dbConnection, newGameId)
             callback(connectSuccess)
             Promise.resolve()
@@ -79,7 +85,6 @@ let joinGame = (setDbConnectionStatus, setGameState, newGameId, callback) => {
                 ...prevGameState,
                 gameType: StandAlone
             })
-            setDbConnectionStatus(_prev => NotConnected)
             error->Utils.getExceptionMessage->Utils.logError
             callback(false)
             Promise.resolve()
@@ -87,34 +92,33 @@ let joinGame = (setDbConnectionStatus, setGameState, newGameId, callback) => {
         ->ignore
 }
 
-let leaveGame = (dbConnectionStatus, setDbConnectionStatus, gameState, setGameState) => {
-    Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+let leaveGame = (gameState, setGameState) => {
+    Utils.ifSlave(gameState.gameType, (dbConnection, gameId) => {
         logDebug(ps ++ "Leaving game " ++ gameId)
         FirebaseClient.leaveGame(dbConnection, gameId)
         FirebaseClient.disconnect(dbConnection)
     })
-    setDbConnectionStatus(_prev => NotConnected)
     setGameState((prevGameState) => {
         ...prevGameState,
         gameType: StandAlone
     })
 }
 
-let tryPlayAsSlave = (goToPage, dbConnectionStatus, setDbConnectionStatus, gameState, setGameState, setSlaveGameIdValidity) => {
+let tryPlayAsSlave = (goToPage, gameState, setGameState, setSlaveGameIdValidity) => {
     let newGameId = Utils.safeQuerySelector(inputElementId)
         ->Belt.Result.mapWithDefault("", getValue)
     if (!GameId.isValid(newGameId)) {
         // Code is not valid
         logDebug(ps ++ "Code " ++ newGameId ++ " is not valid")
-        leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
+        leaveGame(gameState, setGameState)
         setSlaveGameIdValidity(_prev => SlaveInputShownAndInvalid)
     } else {
         // Code is valid
         logDebug(ps ++ "Code " ++ newGameId ++ " is valid")
         setSlaveGameIdValidity(_prev => SlaveInputShown)
         // We should always disconnect so that we won't have multiple listeners
-        leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
-        joinGame(setDbConnectionStatus, setGameState, newGameId, (isSuccess) =>
+        leaveGame(gameState, setGameState)
+        joinGame(setGameState, newGameId, (isSuccess) =>
             if isSuccess {
                 goToPage(_prev => DaytimeWaiting)
             } else {
@@ -133,12 +137,10 @@ let getModusOperandi = (
     goToPage,
     gameState,
     setGameState,
-    dbConnectionStatus,
-    setDbConnectionStatus,
     slaveGameIdValidity,
     setSlaveGameIdValidity,
-) => switch (gameState.gameType, dbConnectionStatus, slaveGameIdValidity) {
-    | (StandAlone, _, SlaveInputHidden) =>
+) => switch (gameState.gameType, slaveGameIdValidity) {
+    | (StandAlone, SlaveInputHidden) =>
                         <>
                             <h2> {React.string(t("Play as Host"))} </h2>
                             <p> {React.string(t("You can host a game so that players can join from another smartphone."))} </p>
@@ -146,9 +148,7 @@ let getModusOperandi = (
                             <Button
                                 label={t("Start Hosting")}
                                 className="condensed-fr"
-                                onClick={ _event => startHosting(
-                                    setDbConnectionStatus, gameState, setGameState,
-                                ) }
+                                onClick={ _event => startHosting(gameState, setGameState) }
                             />
                             <Rule />
                             <h2> {React.string(t("Play as Guest"))} </h2>
@@ -159,26 +159,13 @@ let getModusOperandi = (
                                 onClick={ _event => setSlaveGameIdValidity(_prev => SlaveInputShown) }
                             />
                         </>
-    | (Master(_), NotConnected, _) =>
-                        <>
-                            // Should never happen: we should be connected before we set the game type to Master
-                            <Spacer />
-                            <Button
-                                label={t("Start Hosting")}
-                                className="condensed-fr"
-                                onClick={ _event => startHosting(
-                                    setDbConnectionStatus, gameState, setGameState,
-                                ) }
-                            />
-                        </>
-    | (Master(_), ConnectingAsSlave, _) // should not happen
-    | (_, ConnectingAsMaster, _) =>
+    | (ConnectingAsMaster, _) =>
                         <>
                             <Spacer />
                             <div className="bubble">{React.string(t("Connecting..."))}</div>
                             // TODO add abort connecting button
                         </>
-    | (Master(gameId), Connected(_), _) =>
+    | (Master(gameId, _dbConnection), _) =>
                         <>
                             <h2> {React.string(t("Play as Host"))} </h2>
                             <p>
@@ -204,7 +191,6 @@ let getModusOperandi = (
                                 label={t("Stop Hosting")}
                                 className="condensed-nl"
                                 onClick={ _event => stopHosting(
-                                    dbConnectionStatus, setDbConnectionStatus,
                                     gameState, setGameState,
                                 ) }
                             />
@@ -213,8 +199,9 @@ let getModusOperandi = (
                             <p> {React.string(t("If you want to join a running game, you must stop hosting first."))} </p>
                             <Spacer />
                         </>
-    | (StandAlone, dbConnectionStatus, slaveGameIdValidity)
-    | (Slave(_), dbConnectionStatus, slaveGameIdValidity) =>
+    | (StandAlone, slaveGameIdValidity)
+    | (ConnectingAsSlave, slaveGameIdValidity)
+    | (Slave(_, _), slaveGameIdValidity) =>
                         <>
                             <h2> {React.string(t("Play as Guest"))} </h2>
                             <p>
@@ -234,7 +221,7 @@ let getModusOperandi = (
                                     placeholder="x00-x00-x00-x00"
                                     defaultValue={gameState.gameType->Utils.ifSlaveGetGameId}
                                     onChange={(_event) => {
-                                        leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
+                                        leaveGame(gameState, setGameState)
                                         setSlaveGameIdValidity(_prev => SlaveInputShown)
                                     }}
                                 />
@@ -246,7 +233,6 @@ let getModusOperandi = (
                                                     inputElement => {
                                                         inputElement->setValue(scannedGameId)
                                                         setSlaveGameIdValidity(_prev => SlaveInputShown)
-                                                        setDbConnectionStatus(_prev => NotConnected)
                                                     }
                                                 )
                                         }
@@ -254,15 +240,16 @@ let getModusOperandi = (
                                 />
                             </div>
                             {
-                                let slaveConnectionStatus = switch (dbConnectionStatus, slaveGameIdValidity) {
-                                    | (NotConnected, SlaveInputHidden)          // should not happen
-                                    | (NotConnected, SlaveInputShown)           => "Not connected"
-                                    | (NotConnected, SlaveInputShownAndInvalid) => "Malformed code"
-                                    | (NotConnected, SlaveInputShownAndAbsent)  => "Game not found"
+                                let slaveConnectionStatus = switch (gameState.gameType, slaveGameIdValidity) { // FIXME
+                                    | (Master(_,_), _)                               // should not happen
                                     | (ConnectingAsMaster, _)                   // should not happen
+                                    | (StandAlone, SlaveInputHidden)          // should not happen
+                                    | (StandAlone, SlaveInputShown)             => "Not connected"
+                                    | (StandAlone, SlaveInputShownAndAbsent)  => "Game not found"
+                                    | (_, SlaveInputShownAndInvalid) => "Malformed code"
+                                    | (ConnectingAsSlave, SlaveInputShownAndAbsent)  => "Game not found"
                                     | (ConnectingAsSlave, _)                    => "Connecting..."
-                                    | (Connected(_), SlaveInputShownAndAbsent)  => "Game not found"
-                                    | (Connected(_), _)                         => "Connected."
+                                    | (Slave(_, _), _)                         => "Connected."
                                 }
                                 <div className="bubble north">{React.string(t(slaveConnectionStatus))}</div>
                             }
@@ -272,7 +259,6 @@ let getModusOperandi = (
                                 className="icon-right icon-forw condensed-nl"
                                 onClick={(_event) => tryPlayAsSlave(
                                     goToPage,
-                                    dbConnectionStatus, setDbConnectionStatus,
                                     gameState, setGameState,
                                     setSlaveGameIdValidity,
                                 )}
@@ -281,7 +267,7 @@ let getModusOperandi = (
                                 label={t("Leave guest mode")}
                                 className="condensed-es condensed-de"
                                 onClick={(_event) => {
-                                    leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
+                                    leaveGame(gameState, setGameState)
                                     setSlaveGameIdValidity(_prev => SlaveInputHidden)
                                 }}
                             />
@@ -300,7 +286,6 @@ let make = (
     ~goToPage,
     ~noGame,
 ): React.element => {
-    let (dbConnectionStatus, setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
     let (gameState, setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
@@ -310,15 +295,14 @@ let make = (
         t,
         goToPage,
         gameState, setGameState,
-        dbConnectionStatus, setDbConnectionStatus,
         slaveGameIdValidity, setSlaveGameIdValidity,
     )
 
     // component
     <div id="setup-network-page" className="page justify-start">
         <BackFloatingButton onClick={(_event) => {
-            leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
-            stopHosting(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
+            leaveGame(gameState, setGameState)
+            stopHosting(gameState, setGameState)
             goToPage(_prev => Title)
         }} />
         <GearFloatingButton goToPage returnPage=SetupNetwork />
