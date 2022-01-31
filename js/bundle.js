@@ -45926,7 +45926,7 @@ function getPage(phase) {
 
 function transformToDbRecord(gameState, currentPage, turnState, scenarioStep) {
   return {
-    masterGameId: gameState.gameId,
+    masterGameId: Utils$Salem1692.ifMasterGetGameId(gameState.gameType),
     masterPhase: getPhase(currentPage, scenarioStep),
     masterPlayers: gameState.players,
     masterSeating: gameState.seating,
