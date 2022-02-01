@@ -43465,7 +43465,7 @@ function run(elementId) {
 }
 /* react Not a pure module */
 
-},{"./modules/Utils.bs.js":116,"./pages/RootPage.bs.js":129,"react":37,"react-dom":34}],71:[function(require,module,exports){
+},{"./modules/Utils.bs.js":117,"./pages/RootPage.bs.js":130,"react":37,"react-dom":34}],71:[function(require,module,exports){
 "use strict";
 
 var _package = require("../package.json");
@@ -43715,7 +43715,7 @@ var make = $$Audio;
 
 exports.make = make;
 
-},{"../modules/LanguageCodec.bs.js":107,"./GameStateContext.bs.js":80,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/caml_option.js":53}],73:[function(require,module,exports){
+},{"../modules/LanguageCodec.bs.js":108,"./GameStateContext.bs.js":80,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/caml_option.js":53}],73:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44159,7 +44159,7 @@ var make = Capture;
 
 exports.make = make;
 
-},{"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"./GameStateContext.bs.js":80,"@ryyppy/rescript-promise/src/Promise.bs.js":6,"react":37,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/belt_Result.js":41,"rescript/lib/es6/caml_option.js":53,"rescript/lib/es6/curry.js":54}],79:[function(require,module,exports){
+},{"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"./GameStateContext.bs.js":80,"@ryyppy/rescript-promise/src/Promise.bs.js":6,"react":37,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/belt_Result.js":41,"rescript/lib/es6/caml_option.js":53,"rescript/lib/es6/curry.js":54}],79:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44393,7 +44393,7 @@ var make = LanguageList;
 
 exports.make = make;
 
-},{"../modules/Translator.bs.js":114,"./Button.bs.js":76,"./GameStateContext.bs.js":80,"react":37,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/curry.js":54}],83:[function(require,module,exports){
+},{"../modules/Translator.bs.js":115,"./Button.bs.js":76,"./GameStateContext.bs.js":80,"react":37,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/curry.js":54}],83:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44698,7 +44698,7 @@ var make = PlayerForm;
 
 exports.make = make;
 
-},{"../modules/Translator.bs.js":114,"./GameStateContext.bs.js":80,"./PlayerFormLine.bs.js":88,"react":37,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/curry.js":54}],88:[function(require,module,exports){
+},{"../modules/Translator.bs.js":115,"./GameStateContext.bs.js":80,"./PlayerFormLine.bs.js":88,"react":37,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/curry.js":54}],88:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44958,7 +44958,7 @@ var make = PlayerList;
 
 exports.make = make;
 
-},{"../modules/Translator.bs.js":114,"./Button.bs.js":76,"./GameStateContext.bs.js":80,"./Spacer.bs.js":94,"./SquareButton.bs.js":95,"react":37,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/belt_SetInt.js":42,"rescript/lib/es6/curry.js":54,"rescript/lib/es6/js_option.js":59}],90:[function(require,module,exports){
+},{"../modules/Translator.bs.js":115,"./Button.bs.js":76,"./GameStateContext.bs.js":80,"./Spacer.bs.js":94,"./SquareButton.bs.js":95,"react":37,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/belt_SetInt.js":42,"rescript/lib/es6/curry.js":54,"rescript/lib/es6/js_option.js":59}],90:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45023,7 +45023,7 @@ var make = QR;
 
 exports.make = make;
 
-},{"../modules/Utils.bs.js":116,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/caml_option.js":53}],91:[function(require,module,exports){
+},{"../modules/Utils.bs.js":117,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/caml_option.js":53}],91:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45256,7 +45256,7 @@ var make = SeatingForm;
 
 exports.make = make;
 
-},{"../modules/Translator.bs.js":114,"./GameStateContext.bs.js":80,"./SquareButton.bs.js":95,"react":37,"rescript/lib/es6/curry.js":54}],94:[function(require,module,exports){
+},{"../modules/Translator.bs.js":115,"./GameStateContext.bs.js":80,"./SquareButton.bs.js":95,"react":37,"rescript/lib/es6/curry.js":54}],94:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45331,6 +45331,97 @@ exports.make = make;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.make = exports.containerWidth = exports.deadSpace = exports.zeroTime = exports.containerFraction = exports.p = void 0;
+
+var Curry = _interopRequireWildcard(require("rescript/lib/es6/curry.js"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var Js_math = _interopRequireWildcard(require("rescript/lib/es6/js_math.js"));
+
+var Utils$Salem1692 = _interopRequireWildcard(require("../modules/Utils.bs.js"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+// Generated by ReScript, PLEASE EDIT WITH CARE
+var p = "[Timer] ";
+exports.p = p;
+var containerWidth = window.innerWidth * 0.8 - 75;
+exports.containerWidth = containerWidth;
+
+function Timer(Props) {
+  var onAlarmOpt = Props.onAlarm;
+  var onAlarm = onAlarmOpt !== undefined ? onAlarmOpt : function (param) {};
+  var match = React.useState(function () {
+    return 100;
+  });
+  var setRemainingTime = match[1];
+  var remainingTime = match[0];
+  var delay = React.useRef(Js_math.random_int(60, 120));
+
+  var tick = function (param) {
+    if (remainingTime > 5) {
+      return Curry._1(setRemainingTime, function (prevRemainingTime) {
+        return prevRemainingTime - 1 | 0;
+      });
+    } else if (remainingTime === 5) {
+      Curry._1(setRemainingTime, function (prevRemainingTime) {
+        return prevRemainingTime - 1 | 0;
+      });
+
+      Utils$Salem1692.logDebug("[Timer] Alarm goes off");
+      return Curry._1(onAlarm, undefined);
+    } else {
+      return;
+    }
+  };
+
+  React.useEffect(function () {
+    Utils$Salem1692.logDebug("[Timer] Setting tick time to " + String(delay.current) + "ms");
+  }, []);
+  React.useEffect(function () {
+    var timerId = setTimeout(tick, delay.current);
+    return function (param) {
+      clearTimeout(timerId);
+    };
+  }, [remainingTime]);
+  var fuseLength = containerWidth * remainingTime / 100;
+  var style = {
+    width: String(fuseLength) + "px"
+  };
+  return React.createElement("div", {
+    className: "timer-container"
+  }, React.createElement("img", {
+    className: "barrel",
+    src: "images/timer-barrel-60.png"
+  }), React.createElement("div", {
+    className: "rope",
+    style: style
+  }), React.createElement("img", {
+    className: "flame",
+    src: "images/timer-flame-40.webp"
+  }));
+}
+
+var containerFraction = 0.8;
+exports.containerFraction = containerFraction;
+var zeroTime = 5;
+exports.zeroTime = zeroTime;
+var deadSpace = 75;
+exports.deadSpace = deadSpace;
+var make = Timer;
+/* containerWidth Not a pure module */
+
+exports.make = make;
+
+},{"../modules/Utils.bs.js":117,"react":37,"rescript/lib/es6/curry.js":54,"rescript/lib/es6/js_math.js":58}],97:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.defaultSetter = defaultSetter;
 exports.Provider = exports.context = exports.defaultValue = void 0;
 
@@ -45372,7 +45463,7 @@ var Provider = {
 
 exports.Provider = Provider;
 
-},{"react":37}],97:[function(require,module,exports){
+},{"react":37}],98:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45392,7 +45483,7 @@ var table = Js_dict.fromArray([["New Game", "Neues Spiel"], ["Start Game", "Spie
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":55}],98:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":55}],99:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45412,7 +45503,7 @@ var table = Js_dict.fromArray([["New Game", "New Game"], ["Start Game", "Start G
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":55}],99:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":55}],100:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45432,7 +45523,7 @@ var table = Js_dict.fromArray([["New Game", "Nuevo juego"], ["Start Game", "Come
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":55}],100:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":55}],101:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45452,7 +45543,7 @@ var table = Js_dict.fromArray([["New Game", "Nouveau jeu"], ["Start Game", "Dém
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":55}],101:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":55}],102:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45472,7 +45563,7 @@ var table = Js_dict.fromArray([["New Game", "Nieuw spel"], ["Start Game", "Spel 
 
 exports.table = table;
 
-},{"rescript/lib/es6/js_dict.js":55}],102:[function(require,module,exports){
+},{"rescript/lib/es6/js_dict.js":55}],103:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45540,7 +45631,7 @@ var t_decode = decoder;
 
 exports.t_decode = t_decode;
 
-},{"decco/src/Decco.bs.js":8}],103:[function(require,module,exports){
+},{"decco/src/Decco.bs.js":8}],104:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45788,7 +45879,7 @@ function stopListening(dbConnection, gameId, subject) {
 }
 /* firebase/app Not a pure module */
 
-},{"../Constants.bs.js":69,"./Types.bs.js":115,"./Utils.bs.js":116,"@ryyppy/rescript-promise/src/Promise.bs.js":6,"firebase/app":10,"firebase/database":11,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/caml_js_exceptions.js":51,"rescript/lib/es6/caml_option.js":53,"rescript/lib/es6/curry.js":54}],104:[function(require,module,exports){
+},{"../Constants.bs.js":69,"./Types.bs.js":116,"./Utils.bs.js":117,"@ryyppy/rescript-promise/src/Promise.bs.js":6,"firebase/app":10,"firebase/database":11,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/caml_js_exceptions.js":51,"rescript/lib/es6/caml_option.js":53,"rescript/lib/es6/curry.js":54}],105:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46031,7 +46122,7 @@ var gamesKeyPrefix = "/games/";
 
 exports.gamesKeyPrefix = gamesKeyPrefix;
 
-},{"./DecisionCodec.bs.js":102,"./FirebaseAdapter.bs.js":103,"./PhaseCodec.bs.js":111,"./Utils.bs.js":116,"rescript/lib/es6/belt_Option.js":40}],105:[function(require,module,exports){
+},{"./DecisionCodec.bs.js":103,"./FirebaseAdapter.bs.js":104,"./PhaseCodec.bs.js":112,"./Utils.bs.js":117,"rescript/lib/es6/belt_Option.js":40}],106:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46078,7 +46169,7 @@ var lowercaseZ = 122;
 
 exports.lowercaseZ = lowercaseZ;
 
-},{"rescript/lib/es6/js_math.js":58}],106:[function(require,module,exports){
+},{"rescript/lib/es6/js_math.js":58}],107:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46189,7 +46280,7 @@ var t_decode = decoder;
 
 exports.t_decode = t_decode;
 
-},{"decco/src/Decco.bs.js":8,"rescript/lib/es6/belt_Array.js":39}],107:[function(require,module,exports){
+},{"decco/src/Decco.bs.js":8,"rescript/lib/es6/belt_Array.js":39}],108:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46259,7 +46350,7 @@ var t_decode = decoder;
 
 exports.t_decode = t_decode;
 
-},{"decco/src/Decco.bs.js":8}],108:[function(require,module,exports){
+},{"decco/src/Decco.bs.js":8}],109:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46318,7 +46409,7 @@ function saveGameState(gameState) {
 }
 /* Utils-Salem1692 Not a pure module */
 
-},{"../Constants.bs.js":69,"./Types.bs.js":115,"./Utils.bs.js":116,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/belt_Result.js":41,"rescript/lib/es6/caml_option.js":53,"rescript/lib/es6/js_option.js":59}],109:[function(require,module,exports){
+},{"../Constants.bs.js":69,"./Types.bs.js":116,"./Utils.bs.js":117,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/belt_Result.js":41,"rescript/lib/es6/caml_option.js":53,"rescript/lib/es6/js_option.js":59}],110:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46697,7 +46788,7 @@ function getScenario(subPage) {
 }
 /* No side effect */
 
-},{}],110:[function(require,module,exports){
+},{}],111:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46855,7 +46946,7 @@ var t_decode = decoder;
 
 exports.t_decode = t_decode;
 
-},{"decco/src/Decco.bs.js":8,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/js_json.js":57}],111:[function(require,module,exports){
+},{"decco/src/Decco.bs.js":8,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/js_json.js":57}],112:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47053,7 +47144,7 @@ var t_decode = decoder;
 
 exports.t_decode = t_decode;
 
-},{"decco/src/Decco.bs.js":8,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/js_json.js":57}],112:[function(require,module,exports){
+},{"decco/src/Decco.bs.js":8,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/js_json.js":57}],113:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47120,7 +47211,7 @@ var t_decode = decoder;
 
 exports.t_decode = t_decode;
 
-},{"decco/src/Decco.bs.js":8}],113:[function(require,module,exports){
+},{"decco/src/Decco.bs.js":8}],114:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47167,7 +47258,7 @@ Belt_Option.forEach(maybeNavServiceWorker, function (navServiceWorker) {
 });
 /* maybeNavServiceWorker Not a pure module */
 
-},{"../Constants.bs.js":69,"@ryyppy/rescript-promise/src/Promise.bs.js":6,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/caml_option.js":53}],114:[function(require,module,exports){
+},{"../Constants.bs.js":69,"@ryyppy/rescript-promise/src/Promise.bs.js":6,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/caml_option.js":53}],115:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47223,7 +47314,7 @@ function getTranslator(language, message) {
 }
 /* DE_DE-Salem1692 Not a pure module */
 
-},{"../locale/DE_DE.bs.js":97,"../locale/EN_US.bs.js":98,"../locale/ES_ES.bs.js":99,"../locale/FR_FR.bs.js":100,"../locale/NL_NL.bs.js":101,"rescript/lib/es6/js_dict.js":55}],115:[function(require,module,exports){
+},{"../locale/DE_DE.bs.js":98,"../locale/EN_US.bs.js":99,"../locale/ES_ES.bs.js":100,"../locale/FR_FR.bs.js":101,"../locale/NL_NL.bs.js":102,"rescript/lib/es6/js_dict.js":55}],116:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47683,7 +47774,7 @@ function dbRecord_decode(v) {
 }
 /* No side effect */
 
-},{"./DecisionCodec.bs.js":102,"./GameTypeCodec.bs.js":106,"./LanguageCodec.bs.js":107,"./NumerusCodec.bs.js":110,"./PhaseCodec.bs.js":111,"./SeatingCodec.bs.js":112,"decco/src/Decco.bs.js":8,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/js_dict.js":55,"rescript/lib/es6/js_json.js":57}],116:[function(require,module,exports){
+},{"./DecisionCodec.bs.js":103,"./GameTypeCodec.bs.js":107,"./LanguageCodec.bs.js":108,"./NumerusCodec.bs.js":111,"./PhaseCodec.bs.js":112,"./SeatingCodec.bs.js":113,"decco/src/Decco.bs.js":8,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/js_dict.js":55,"rescript/lib/es6/js_json.js":57}],117:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47923,7 +48014,7 @@ function ifSlaveAndConnected(dbConnectionStatus, gameType, func) {
 }
 /* Constants-Salem1692 Not a pure module */
 
-},{"../Constants.bs.js":69,"@ryyppy/rescript-promise/src/Promise.bs.js":6,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/caml_js_exceptions.js":51,"rescript/lib/es6/caml_option.js":53,"rescript/lib/es6/curry.js":54,"rescript/lib/es6/js_math.js":58}],117:[function(require,module,exports){
+},{"../Constants.bs.js":69,"@ryyppy/rescript-promise/src/Promise.bs.js":6,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/caml_js_exceptions.js":51,"rescript/lib/es6/caml_option.js":53,"rescript/lib/es6/curry.js":54,"rescript/lib/es6/js_math.js":58}],118:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47947,7 +48038,7 @@ var make = ClosePage;
 
 exports.make = make;
 
-},{"react":37}],118:[function(require,module,exports){
+},{"react":37}],119:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48095,7 +48186,7 @@ var make = CreditsPage;
 
 exports.make = make;
 
-},{"../Constants.bs.js":69,"../components/BackFloatingButton.bs.js":75,"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/QrIcon.bs.js":91,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":114,"react":37,"rescript/lib/es6/curry.js":54}],119:[function(require,module,exports){
+},{"../Constants.bs.js":69,"../components/BackFloatingButton.bs.js":75,"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/QrIcon.bs.js":91,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":115,"react":37,"rescript/lib/es6/curry.js":54}],120:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48198,7 +48289,7 @@ var make = DaytimeConfessPage;
 
 exports.make = make;
 
-},{"../Constants.bs.js":69,"../components/Button.bs.js":76,"../components/DbConnectionContext.bs.js":79,"../components/GameStateContext.bs.js":80,"../components/GearFloatingButton.bs.js":81,"../components/LargeRevealButton.bs.js":84,"../components/Spacer.bs.js":94,"../components/TurnStateContext.bs.js":96,"../modules/FirebaseClient.bs.js":104,"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"react":37,"rescript/lib/es6/curry.js":54}],120:[function(require,module,exports){
+},{"../Constants.bs.js":69,"../components/Button.bs.js":76,"../components/DbConnectionContext.bs.js":79,"../components/GameStateContext.bs.js":80,"../components/GearFloatingButton.bs.js":81,"../components/LargeRevealButton.bs.js":84,"../components/Spacer.bs.js":94,"../components/TurnStateContext.bs.js":97,"../modules/FirebaseClient.bs.js":105,"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"react":37,"rescript/lib/es6/curry.js":54}],121:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48343,7 +48434,7 @@ var make = DaytimePage;
 
 exports.make = make;
 
-},{"../components/BackFloatingButton.bs.js":75,"../components/GameStateContext.bs.js":80,"../components/GearFloatingButton.bs.js":81,"../components/LargeButton.bs.js":83,"../components/Spacer.bs.js":94,"../components/TurnStateContext.bs.js":96,"../modules/Translator.bs.js":114,"react":37,"rescript/lib/es6/curry.js":54}],121:[function(require,module,exports){
+},{"../components/BackFloatingButton.bs.js":75,"../components/GameStateContext.bs.js":80,"../components/GearFloatingButton.bs.js":81,"../components/LargeButton.bs.js":83,"../components/Spacer.bs.js":94,"../components/TurnStateContext.bs.js":97,"../modules/Translator.bs.js":115,"react":37,"rescript/lib/es6/curry.js":54}],122:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48488,7 +48579,7 @@ var make = DaytimeRevealPage;
 
 exports.make = make;
 
-},{"../components/BackFloatingButton.bs.js":75,"../components/Button.bs.js":76,"../components/ButtonPair.bs.js":77,"../components/GameStateContext.bs.js":80,"../components/GearFloatingButton.bs.js":81,"../components/LargeRevealButton.bs.js":84,"../components/Spacer.bs.js":94,"../components/TurnStateContext.bs.js":96,"../modules/Translator.bs.js":114,"react":37,"rescript/lib/es6/curry.js":54}],122:[function(require,module,exports){
+},{"../components/BackFloatingButton.bs.js":75,"../components/Button.bs.js":76,"../components/ButtonPair.bs.js":77,"../components/GameStateContext.bs.js":80,"../components/GearFloatingButton.bs.js":81,"../components/LargeRevealButton.bs.js":84,"../components/Spacer.bs.js":94,"../components/TurnStateContext.bs.js":97,"../modules/Translator.bs.js":115,"react":37,"rescript/lib/es6/curry.js":54}],123:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48546,7 +48637,7 @@ var make = DaytimeWaitingPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":114,"react":37,"rescript/lib/es6/curry.js":54}],123:[function(require,module,exports){
+},{"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":115,"react":37,"rescript/lib/es6/curry.js":54}],124:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48637,7 +48728,7 @@ var make = NightAudioPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":76,"../components/ButtonPair.bs.js":77,"../components/GameStateContext.bs.js":80,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/curry.js":54}],124:[function(require,module,exports){
+},{"../components/Button.bs.js":76,"../components/ButtonPair.bs.js":77,"../components/GameStateContext.bs.js":80,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/curry.js":54}],125:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48741,7 +48832,7 @@ var make = NightChoicePage;
 
 exports.make = make;
 
-},{"../components/DbConnectionContext.bs.js":79,"../components/GameStateContext.bs.js":80,"../components/PlayerList.bs.js":89,"../components/Spacer.bs.js":94,"../components/TurnStateContext.bs.js":96,"../modules/FirebaseClient.bs.js":104,"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"react":37,"rescript/lib/es6/curry.js":54}],125:[function(require,module,exports){
+},{"../components/DbConnectionContext.bs.js":79,"../components/GameStateContext.bs.js":80,"../components/PlayerList.bs.js":89,"../components/Spacer.bs.js":94,"../components/TurnStateContext.bs.js":97,"../modules/FirebaseClient.bs.js":105,"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"react":37,"rescript/lib/es6/curry.js":54}],126:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48886,7 +48977,7 @@ var make = NightConfirmPage;
 
 exports.make = make;
 
-},{"../components/DbConnectionContext.bs.js":79,"../components/GameStateContext.bs.js":80,"../components/LargeButton.bs.js":83,"../components/Spacer.bs.js":94,"../components/TurnStateContext.bs.js":96,"../modules/FirebaseClient.bs.js":104,"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/curry.js":54}],126:[function(require,module,exports){
+},{"../components/DbConnectionContext.bs.js":79,"../components/GameStateContext.bs.js":80,"../components/LargeButton.bs.js":83,"../components/Spacer.bs.js":94,"../components/TurnStateContext.bs.js":97,"../modules/FirebaseClient.bs.js":105,"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/curry.js":54}],127:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48920,7 +49011,7 @@ var make = NightErrorPage;
 
 exports.make = make;
 
-},{"../components/AudioError.bs.js":74,"./NightAudioPage.bs.js":123,"react":37}],127:[function(require,module,exports){
+},{"../components/AudioError.bs.js":74,"./NightAudioPage.bs.js":124,"react":37}],128:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -49392,7 +49483,7 @@ var make = NightScenarioPage;
 
 exports.make = make;
 
-},{"../components/Audio.bs.js":72,"../components/AudioBackground.bs.js":73,"../components/DbConnectionContext.bs.js":79,"../components/GameStateContext.bs.js":80,"../components/TurnStateContext.bs.js":96,"../modules/FirebaseClient.bs.js":104,"../modules/NightScenarios.bs.js":109,"../modules/NumerusCodec.bs.js":110,"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"./NightAudioPage.bs.js":123,"./NightChoicePage.bs.js":124,"./NightConfirmPage.bs.js":125,"./NightErrorPage.bs.js":126,"react":37,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/curry.js":54}],128:[function(require,module,exports){
+},{"../components/Audio.bs.js":72,"../components/AudioBackground.bs.js":73,"../components/DbConnectionContext.bs.js":79,"../components/GameStateContext.bs.js":80,"../components/TurnStateContext.bs.js":97,"../modules/FirebaseClient.bs.js":105,"../modules/NightScenarios.bs.js":110,"../modules/NumerusCodec.bs.js":111,"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"./NightAudioPage.bs.js":124,"./NightChoicePage.bs.js":125,"./NightConfirmPage.bs.js":126,"./NightErrorPage.bs.js":127,"react":37,"rescript/lib/es6/belt_Array.js":39,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/curry.js":54}],129:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -49453,7 +49544,7 @@ var make = NightWaitingPage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":114,"react":37,"rescript/lib/es6/curry.js":54}],129:[function(require,module,exports){
+},{"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":115,"react":37,"rescript/lib/es6/curry.js":54}],130:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -49786,7 +49877,7 @@ var make = RootPage;
 
 exports.make = make;
 
-},{"../Constants.bs.js":69,"../components/DbConnectionContext.bs.js":79,"../components/GameStateContext.bs.js":80,"../components/NavigationContext.bs.js":86,"../components/TurnStateContext.bs.js":96,"../modules/FirebaseClient.bs.js":104,"../modules/LanguageCodec.bs.js":107,"../modules/LocalStorage.bs.js":108,"../modules/Utils.bs.js":116,"./ClosePage.bs.js":117,"./CreditsPage.bs.js":118,"./DaytimeConfessPage.bs.js":119,"./DaytimePage.bs.js":120,"./DaytimeRevealPage.bs.js":121,"./NightScenarioPage.bs.js":127,"./SetupLanguagePage.bs.js":130,"./SetupMusicPage.bs.js":131,"./SetupNetworkPage.bs.js":132,"./SetupPage.bs.js":133,"./SetupPlayersPage.bs.js":134,"./SlavePage.bs.js":135,"./TitlePage.bs.js":136,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/curry.js":54}],130:[function(require,module,exports){
+},{"../Constants.bs.js":69,"../components/DbConnectionContext.bs.js":79,"../components/GameStateContext.bs.js":80,"../components/NavigationContext.bs.js":86,"../components/TurnStateContext.bs.js":97,"../modules/FirebaseClient.bs.js":105,"../modules/LanguageCodec.bs.js":108,"../modules/LocalStorage.bs.js":109,"../modules/Utils.bs.js":117,"./ClosePage.bs.js":118,"./CreditsPage.bs.js":119,"./DaytimeConfessPage.bs.js":120,"./DaytimePage.bs.js":121,"./DaytimeRevealPage.bs.js":122,"./NightScenarioPage.bs.js":128,"./SetupLanguagePage.bs.js":131,"./SetupMusicPage.bs.js":132,"./SetupNetworkPage.bs.js":133,"./SetupPage.bs.js":134,"./SetupPlayersPage.bs.js":135,"./SlavePage.bs.js":136,"./TitlePage.bs.js":137,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/curry.js":54}],131:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -49857,7 +49948,7 @@ var make = SetupLanguagePage;
 
 exports.make = make;
 
-},{"../components/BackFloatingButton.bs.js":75,"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/LanguageList.bs.js":82,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":114,"react":37,"rescript/lib/es6/curry.js":54}],131:[function(require,module,exports){
+},{"../components/BackFloatingButton.bs.js":75,"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/LanguageList.bs.js":82,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":115,"react":37,"rescript/lib/es6/curry.js":54}],132:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -49991,7 +50082,7 @@ var make = SetupMusicPage;
 
 exports.make = make;
 
-},{"../Constants.bs.js":69,"../components/Audio.bs.js":72,"../components/BackFloatingButton.bs.js":75,"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":114,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/caml_obj.js":52,"rescript/lib/es6/curry.js":54}],132:[function(require,module,exports){
+},{"../Constants.bs.js":69,"../components/Audio.bs.js":72,"../components/BackFloatingButton.bs.js":75,"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":115,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/caml_obj.js":52,"rescript/lib/es6/curry.js":54}],133:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -50518,7 +50609,7 @@ var make = SetupNetworkPage;
 
 exports.make = make;
 
-},{"../components/BackFloatingButton.bs.js":75,"../components/Button.bs.js":76,"../components/DbConnectionContext.bs.js":79,"../components/GameStateContext.bs.js":80,"../components/GearFloatingButton.bs.js":81,"../components/QrIcon.bs.js":91,"../components/Rule.bs.js":92,"../components/Spacer.bs.js":94,"../modules/FirebaseClient.bs.js":104,"../modules/GameId.bs.js":105,"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"@ryyppy/rescript-promise/src/Promise.bs.js":6,"react":37,"rescript/lib/es6/belt_Result.js":41,"rescript/lib/es6/curry.js":54}],133:[function(require,module,exports){
+},{"../components/BackFloatingButton.bs.js":75,"../components/Button.bs.js":76,"../components/DbConnectionContext.bs.js":79,"../components/GameStateContext.bs.js":80,"../components/GearFloatingButton.bs.js":81,"../components/QrIcon.bs.js":91,"../components/Rule.bs.js":92,"../components/Spacer.bs.js":94,"../modules/FirebaseClient.bs.js":105,"../modules/GameId.bs.js":106,"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"@ryyppy/rescript-promise/src/Promise.bs.js":6,"react":37,"rescript/lib/es6/belt_Result.js":41,"rescript/lib/es6/curry.js":54}],134:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -50698,7 +50789,7 @@ var make = SetupPage;
 
 exports.make = make;
 
-},{"../components/BackFloatingButton.bs.js":75,"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/NavigationContext.bs.js":86,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":114,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/curry.js":54}],134:[function(require,module,exports){
+},{"../components/BackFloatingButton.bs.js":75,"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/NavigationContext.bs.js":86,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":115,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/curry.js":54}],135:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -50769,7 +50860,7 @@ var make = SetupPlayersPage;
 
 exports.make = make;
 
-},{"../components/BackFloatingButton.bs.js":75,"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/PlayerForm.bs.js":87,"../components/SeatingForm.bs.js":93,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":114,"react":37,"rescript/lib/es6/curry.js":54}],135:[function(require,module,exports){
+},{"../components/BackFloatingButton.bs.js":75,"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/PlayerForm.bs.js":87,"../components/SeatingForm.bs.js":93,"../components/Spacer.bs.js":94,"../modules/Translator.bs.js":115,"react":37,"rescript/lib/es6/curry.js":54}],136:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51090,7 +51181,7 @@ var make = SlavePage;
 
 exports.make = make;
 
-},{"../components/DbConnectionContext.bs.js":79,"../components/GameStateContext.bs.js":80,"../components/TurnStateContext.bs.js":96,"../modules/FirebaseClient.bs.js":104,"../modules/NumerusCodec.bs.js":110,"../modules/Types.bs.js":115,"../modules/Utils.bs.js":116,"./DaytimeWaitingPage.bs.js":122,"./NightChoicePage.bs.js":124,"./NightConfirmPage.bs.js":125,"./NightWaitingPage.bs.js":128,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/curry.js":54,"rescript/lib/es6/js_json.js":57}],136:[function(require,module,exports){
+},{"../components/DbConnectionContext.bs.js":79,"../components/GameStateContext.bs.js":80,"../components/TurnStateContext.bs.js":97,"../modules/FirebaseClient.bs.js":105,"../modules/NumerusCodec.bs.js":111,"../modules/Types.bs.js":116,"../modules/Utils.bs.js":117,"./DaytimeWaitingPage.bs.js":123,"./NightChoicePage.bs.js":125,"./NightConfirmPage.bs.js":126,"./NightWaitingPage.bs.js":129,"react":37,"rescript/lib/es6/belt_Option.js":40,"rescript/lib/es6/curry.js":54,"rescript/lib/es6/js_json.js":57}],137:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51171,4 +51262,4 @@ var make = TitlePage;
 
 exports.make = make;
 
-},{"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/GearFloatingButton.bs.js":81,"../modules/Translator.bs.js":114,"react":37,"rescript/lib/es6/curry.js":54}]},{},[100,99,101,98,97,69,91,93,86,82,89,78,81,94,73,87,83,76,88,79,75,72,80,77,84,92,74,90,96,85,95,70,111,114,103,106,102,110,112,107,115,113,116,105,109,104,108,126,123,125,124,119,118,128,121,133,127,136,134,131,117,130,135,120,132,129,122,71]);
+},{"../components/Button.bs.js":76,"../components/GameStateContext.bs.js":80,"../components/GearFloatingButton.bs.js":81,"../modules/Translator.bs.js":115,"react":37,"rescript/lib/es6/curry.js":54}]},{},[101,100,102,99,98,69,96,91,93,86,82,89,78,81,94,73,87,83,76,88,79,75,72,80,77,84,92,74,90,97,85,95,70,112,115,104,107,103,111,113,108,116,114,117,106,110,105,109,127,124,126,125,120,119,129,122,134,128,137,135,132,118,131,136,121,133,130,123,71]);
