@@ -89,6 +89,7 @@ let make = (
             {React.string("Freepik: ")}
             <a href="https://www.freepik.com/free-vector/magic-set_3886841.htm"> {React.string("macrovector")} </a> spacedComma
             <a href="https://www.freepik.com/free-vector/old-town_11575329.htm"> {React.string("brgfx")} </a> spacedComma
+            <a href="https://www.freepik.com/free-vector/realistic-wooden-barrel-wine-beer_7773530.htm"> {React.string("upklyak")} </a> spacedComma
             <a href="https://flagpedia.net"> {React.string("Flagpedia")} </a> spacedComma
             <a href="https://icons8.com"> {React.string("Icons8")} </a> spacedComma
             <a href="http://www.famfamfam.com/lab/icons/silk/"> {React.string("FamFamFam")} </a>
