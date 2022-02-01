@@ -221,6 +221,39 @@ video + .bubble {
 }
 
 /** ****************************************************************************
+ * Fuse timer
+ */
+
+.timer-container {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.barrel {
+    z-index: 10;
+}
+
+.rope {
+    display: block;
+    position: relative;
+    left: -8px;
+    margin-top: 20px;
+    float: left;
+    width: 400px;
+    height: 6px;
+    background: url(../images/timer-rope-6.png) left repeat;
+}
+
+.flame {
+    display: block;
+    position: relative;
+    left: -18px;
+    z-index: 20;
+}
+
+/** ****************************************************************************
  * Page elements
  */
 

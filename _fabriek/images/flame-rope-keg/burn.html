@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <style>
+.fuse-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+.barrel {
+    z-index: 10;
+}
+.barrel + .rope {
+    display: block;
+    position: relative;
+    left: -8px;
+}
+.rope {
+    margin-top: 20px;
+    display: inline-block;
+    float: left;
+    width: 400px;
+    height: 6px;
+    background: url(rope-6.png) left repeat;
+}
+.rope + .flame {
+    display: block;
+    position: relative;
+    left: -18px;
+    z-index: 20;
+}
+        </style>
+    </head>
+    <body>
+        <div class="fuse-container">
+            <img src="barrel-60.png" class="barrel">
+            <div class="rope"></div>
+            <img src="flame-40.webp" class="flame">
+        </div>
+    </body>
+</html>

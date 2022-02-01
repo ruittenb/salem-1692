@@ -70,6 +70,9 @@ function getFilesToCache(debug) {
         'images/tablelayout-1222.png',
         'images/tablelayout-2221.png',
         'images/tablelayout-2222.png',
+        'images/timer-barrel-60.png',
+        'images/timer-flame-40.webp',
+        'images/timer-rope-6.png',
     ].map(filename => `${rootDir}/${filename}`);
 }
 
