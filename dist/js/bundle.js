@@ -48205,26 +48205,29 @@ function CreditsPage(Props) {
     href: "https://openclipart.org/detail/10065/lute-1",
     text: "papapishu"
   }), spacedComma, React.createElement(Link$Salem1692.make, {
-    href: "https://clipartmag.com/download-clipart-image#paper-scrolls-clipart-38.jpg",
-    text: "ClipArtMag"
-  }), spacedComma, React.createElement(Link$Salem1692.make, {
-    href: "https://cliparts.zone/clipart/541458",
-    text: "ClipArtsZone"
-  }), spacedComma, "FlatIcon: ", React.createElement(Link$Salem1692.make, {
     href: "https://www.flaticon.com/free-icon/chess-piece_891932",
     text: "Pixel perfect"
   }), spacedComma, React.createElement(Link$Salem1692.make, {
     href: "https://www.flaticon.com/authors/gregor-cresnar",
     text: "Gregor Cresnar"
-  }), spacedComma, "Freepik: ", React.createElement(Link$Salem1692.make, {
+  }), spacedComma, React.createElement(Link$Salem1692.make, {
+    href: "https://www.freepik.com/free-vector/realistic-wooden-barrel-wine-beer_7773530.htm",
+    text: "upklyak"
+  }), spacedComma, React.createElement(Link$Salem1692.make, {
     href: "https://www.freepik.com/free-vector/magic-set_3886841.htm",
     text: "macrovector"
   }), spacedComma, React.createElement(Link$Salem1692.make, {
     href: "https://www.freepik.com/free-vector/old-town_11575329.htm",
     text: "brgfx"
   }), spacedComma, React.createElement(Link$Salem1692.make, {
-    href: "https://www.freepik.com/free-vector/realistic-wooden-barrel-wine-beer_7773530.htm",
-    text: "upklyak"
+    href: "https://clipartmag.com/download-clipart-image#paper-scrolls-clipart-38.jpg",
+    text: "ClipArtMag"
+  }), spacedComma, React.createElement(Link$Salem1692.make, {
+    href: "https://cliparts.zone/clipart/541458",
+    text: "ClipArtsZone"
+  }), spacedComma, React.createElement(Link$Salem1692.make, {
+    href: "https://pixabay.com/",
+    text: "Pixabay"
   }), spacedComma, React.createElement(Link$Salem1692.make, {
     href: "https://flagpedia.net",
     text: "Flagpedia"
