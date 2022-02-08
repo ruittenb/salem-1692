@@ -75,19 +75,20 @@ let table = Js.Dict.fromArray([
     ("Licensed under", "Lizenziert unter"),
     // Day
     ("Daytime", "Der Tag"),
-    ("First night,", "Die erste Nacht,"),
+    ("Dawn,", "Morgengrauen,"),
     ("one witch", "eine Hexe"),
-    ("more witches", "mehrere Hexen"),
-    ("Other nights,", `Folgenden Nächte,`),
+    ("several witches", "mehrere Hexen"),
+    ("Night,", `Nacht,`),
     ("with constable", "mit Sheriff"),
     ("without constable", "ohne Sheriff"),
-    ("Waiting for the host to announce nighttime...", `Warten bis der Gastgeber die Nacht ankündigt...`),
-    // Dawn
-    ("Dawn", `Morgengrauen`),
-    // Night
-    ("Night", "Die Nacht"),
+    ("Dawn, one witch", "Morgengrauen, eine Hexe"),
+    ("Dawn, several witches", "Morgengrauen, mehrere Hexen"),
     ("Night with constable", "Nacht mit Sheriff"),
     ("Night without constable", "Nacht ohne Sheriff"),
+    ("Waiting for the host to announce nighttime...", `Warten bis der Gastgeber die Nacht ankündigt...`),
+    // Dawn / Night
+    ("Dawn", `Morgengrauen`),
+    ("Night", "Die Nacht"),
     ("The witches", "Die Hexen"),
     ("The witch's turn", `Die Hexe ist an der Reihe`), // contains nbsp
     ("The witches' turn", `Die Hexen sind an der Reihe`), // contains nbsp

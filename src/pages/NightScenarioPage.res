@@ -28,7 +28,9 @@ let make = (
     // Scenario: getter and setter, get current step
     let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
     let scenario: scenario = NightScenarios.getScenario(subPage)
-    let witchOrWitches: addressed = if subPage === NightFirstOneWitch { Witch } else { Witches }
+    let witchOrWitches: addressed = (subPage === NightFirstOneWitch) ? Witch : Witches
+    let nightType: nightType = (subPage === NightFirstOneWitch || subPage === NightFirstMoreWitches) ? Dawn : Night
+    let pageId: string = (nightType === Dawn) ? "dawn-page" : "night-page"
 
     let resolveEffectSet = (step): scenarioStep => {
         switch step {
@@ -51,13 +53,12 @@ let make = (
 
     // After every render: check if there is still a next scenario step
     React.useEffect(() => {
-        switch (maybeScenarioStep, subPage) {
+        switch (maybeScenarioStep, nightType) {
             // There are still steps in the scenario
             | (Some(_), _)                  => ()
             // The scenario is exhausted: find the correct next page
-            | (None, NightFirstOneWitch)
-            | (None, NightFirstMoreWitches) => goToPage(_page => DaytimeRevealNoConfess)
-            | (None, _)                     => goToPage(_page => DaytimeConfess)
+            | (None, Dawn)  => goToPage(_page => DaytimeRevealNoConfess)
+            | (None, Night) => goToPage(_page => DaytimeConfess)
         }
         None // no cleanup function
     })
@@ -227,9 +228,9 @@ let make = (
     }
 
     // render the page
-    <>
+    <div id=pageId className="page">
         {backgroundMusicElement}
         {pageElement}
-    </>
+    </div>
 }
 

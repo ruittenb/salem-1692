@@ -69,6 +69,10 @@ type turnState = {
 }
 type turnStateSetter = (turnState => turnState) => unit
 
+type nightType =
+    | Dawn
+    | Night
+
 type page =
     | Title
     | Setup

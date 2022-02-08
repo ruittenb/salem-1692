@@ -43,26 +43,24 @@ let make = (
     />
 
     // Construct the core element for this page
-    <div id="night-page" className="page">
-        <div id="night-subpage" className="page flex-vertical">
-            <h1> {React.string(t(title))} </h1>
-            // vertically step past background eyes
-            <Spacer />
-            <Spacer />
-            <Spacer />
-            {children}
-            <Spacer />
-            { if error {
+    <div className="night-subpage page flex-vertical">
+        <h1> {React.string(t(title))} </h1>
+        // vertically step past background eyes
+        <Spacer />
+        <Spacer />
+        <Spacer />
+        {children}
+        <Spacer />
+        { if error {
+            {abortButton}
+        } else if showNavButtons {
+            <ButtonPair>
                 {abortButton}
-            } else if showNavButtons {
-                <ButtonPair>
-                    {abortButton}
-                    {skipButton}
-                </ButtonPair>
-            } else {
-                React.null
-            }}
-        </div>
+                {skipButton}
+            </ButtonPair>
+        } else {
+            React.null
+        }}
     </div>
 }
 
