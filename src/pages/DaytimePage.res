@@ -14,6 +14,7 @@ let make = (
     let (_, setTurnState) = React.useContext(TurnStateContext.context)
     let defaultNextState = {
         nrWitches: More,
+        nightType: Dawn,
         choiceWitches: None,
         choiceConstable: None,
     }
@@ -45,14 +46,14 @@ let make = (
             {React.string(t("several witches"))}
         </LargeButton>
         <LargeButton onClick={ _event => {
-            setTurnState(_prev => defaultNextState)
+            setTurnState(_prev => { ...defaultNextState, nightType: Night })
             goToPage(_prev => NightOtherWithConstable)
         } } >
             {React.string(t("Night,"))} <br />
             {React.string(t("with constable"))}
         </LargeButton>
         <LargeButton onClick={ _event => {
-            setTurnState(_prev => defaultNextState)
+            setTurnState(_prev => { ...defaultNextState, nightType: Night })
             goToPage(_prev => NightOtherNoConstable)
         } } >
             {React.string(t("Night,"))} <br />

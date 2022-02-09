@@ -29,8 +29,7 @@ let make = (
     let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
     let scenario: scenario = NightScenarios.getScenario(subPage)
     let witchOrWitches: addressed = (subPage === NightFirstOneWitch) ? Witch : Witches
-    let nightType: nightType = (subPage === NightFirstOneWitch || subPage === NightFirstMoreWitches) ? Dawn : Night
-    let pageId: string = (nightType === Dawn) ? "dawn-page" : "night-page"
+    let pageId: string = (turnState.nightType === Dawn) ? "dawn-page" : "night-page"
 
     let resolveEffectSet = (step): scenarioStep => {
         switch step {
@@ -53,7 +52,7 @@ let make = (
 
     // After every render: check if there is still a next scenario step
     React.useEffect(() => {
-        switch (maybeScenarioStep, nightType) {
+        switch (maybeScenarioStep, turnState.nightType) {
             // There are still steps in the scenario
             | (Some(_), _)                  => ()
             // The scenario is exhausted: find the correct next page

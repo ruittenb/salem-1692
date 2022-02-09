@@ -37,6 +37,10 @@ type slaveCodeValidity =
     | SlaveInputShownAndInvalid
     | SlaveInputShownAndAbsent
 
+@decco type nightType =
+    | Dawn
+    | Night
+
 @decco type player = string
 @decco type players = array<player>
 
@@ -64,14 +68,11 @@ type gameStateSetter = (gameState => gameState) => unit
 
 type turnState = {
     nrWitches: NumerusCodec.t,
+    nightType: nightType,
     choiceWitches: option<player>,
     choiceConstable: option<player>,
 }
 type turnStateSetter = (turnState => turnState) => unit
-
-type nightType =
-    | Dawn
-    | Night
 
 type page =
     | Title
@@ -202,6 +203,7 @@ type dbObservable =
     masterPlayers: array<player>,
     masterSeating: SeatingCodec.t,
     masterNumberWitches: NumerusCodec.t,
+    masterNightType: nightType,
     slaveChoiceWitches: player,
     slaveChoiceConstable: player,
     slaveConfirmWitches: DecisionCodec.t,

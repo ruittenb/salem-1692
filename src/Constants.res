@@ -65,6 +65,7 @@ let defaultSelectedMusicTracks = [
 
 let initialTurnState: turnState = {
     nrWitches: One,
+    nightType: Dawn,
     choiceWitches: None,
     choiceConstable: None,
 }

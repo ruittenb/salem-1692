@@ -22,8 +22,15 @@ let make = (
     // Language and translator
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
+    let (turnState, _setTurnState) = React.useContext(TurnStateContext.context)
 
-    let title = error ? "Error" : "Night"
+    let title = if error {
+        "Error"
+    } else if (turnState.nightType === Dawn) {
+        "Dawn"
+    } else {
+        "Night"
+    }
 
     let abortButton = <Button
         label={t("Abort")}

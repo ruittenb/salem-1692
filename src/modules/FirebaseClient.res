@@ -62,6 +62,7 @@ let transformToDbRecord = (
         masterPlayers: gameState.players,
         masterSeating: gameState.seating,
         masterNumberWitches: turnState.nrWitches,
+        masterNightType: turnState.nightType,
         slaveChoiceWitches: turnState.choiceWitches->Belt.Option.getWithDefault(""),
         slaveChoiceConstable: turnState.choiceConstable->Belt.Option.getWithDefault(""),
         slaveConfirmWitches: #Undecided,
@@ -112,6 +113,7 @@ let createGame = (
 ): Promise.t<unit> => {
     let emptyTurnState: turnState = {
         nrWitches: One,
+        nightType: Dawn,
         choiceWitches: None,
         choiceConstable: None,
     }

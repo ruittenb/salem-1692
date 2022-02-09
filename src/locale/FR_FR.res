@@ -103,7 +103,7 @@ let table = Js.Dict.fromArray([
     // Confirm
     ("Witch, are you sure?", `Sorcière, tu es sûre?`),
     ("Witches, are you sure?", `Les sorcières, vous êtes sûres?`),
-    ("Constable, are you sure?", `Gendarme, tu es sûr?`),
+    ("Constable, are you sure?", `ShérIf, tu es sûr?`),
     ("Confirm", "Confirmer"),
     ("Yes", "Oui"),
     ("No", "Non"),

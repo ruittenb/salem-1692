@@ -47,6 +47,7 @@ let make = (
                                 setTurnState(_prevTurnState => {
                                     {
                                         nrWitches: dbRecord.masterNumberWitches,
+                                        nightType: dbRecord.masterNightType,
                                         choiceWitches: dbRecord.slaveChoiceWitches === "" ? None : Some(dbRecord.slaveChoiceWitches),
                                         choiceConstable: dbRecord.slaveChoiceConstable === "" ? None : Some(dbRecord.slaveChoiceConstable)
                                     }
