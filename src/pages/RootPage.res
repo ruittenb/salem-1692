@@ -93,7 +93,10 @@ let make = (): React.element => {
 
     <DbConnectionContext.Provider value=(dbConnectionStatus, setDbConnectionStatus)>
         <GameStateContext.Provider value=(gameState, setGameState)>
-            <div className=LanguageCodec.languageToJs(gameState.language)>
+            <div
+                lang={LanguageCodec.getHtmlLanguage(gameState.language)}
+                className={LanguageCodec.languageToJs(gameState.language)}
+            >
                 <NavigationContext.Provider value=(navigation, setNavigation)>
                     <TurnStateContext.Provider value=(turnState, setTurnState)>
                         {currentPageElement}

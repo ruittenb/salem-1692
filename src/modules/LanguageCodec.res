@@ -12,8 +12,8 @@ type language = [
     | #nl_NL
 ]
 
-let encoder: Decco.encoder<language> = (lanugage: language): Js.Json.t => {
-    lanugage->languageToJs->Decco.stringToJson
+let encoder: Decco.encoder<language> = (language: language): Js.Json.t => {
+    language->languageToJs->Decco.stringToJson
 }
 
 // note: type Decco.decodeError has members
@@ -36,4 +36,14 @@ let decoder: Decco.decoder<language> = (
 let codec: Decco.codec<language> = (encoder, decoder)
 
 @decco type t = @decco.codec(codec) language
+
+let getHtmlLanguage = (language: t): string => {
+    switch (language) {
+        | #en_US
+        | #es_ES
+        | #fr_FR
+        | #de_DE
+        | #nl_NL => language->languageToJs->Js.String2.substring(~from = 0, ~to_ = 2)
+    }
+}
 

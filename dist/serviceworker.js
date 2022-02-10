@@ -17,7 +17,7 @@ function getFilesToCache(debug) {
         'css/salem.min.css',
         'fonts/CaslonAntique.ttf',
         'fonts/CaslonAntique-Bold.ttf',
-        'images/background-daytime.png',
+        'images/background-daytime.webp',
         'images/background-night.png',
         'images/confirm-no.png',
         'images/confirm-yes.png',
