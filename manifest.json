@@ -2,6 +2,7 @@
   "name": "Salem 1692 Moderator",
   "short_name": "Salem 1692",
   "description": "Moderator app for the cardgame Salem 1692",
+  "id": "index.html?utm_source=pwa",
   "start_url": "index.html?utm_source=pwa",
   "manifest_version": 2,
   "version": "1.0",
@@ -12,39 +13,45 @@
   "theme_color": "#472B1D",
   "icons": [
     {
-      "src": "images/favicon-96x96.png",
+      "src": "images/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "images/favicon-96.png",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "images/favicon-114x114.png",
-      "sizes": "114x114",
+      "src": "images/favicon-128.png",
+      "sizes": "128x128",
       "type": "image/png"
     },
     {
-      "src": "images/favicon-144x144.png",
-      "sizes": "144x144",
-      "type": "image/png"
-    },
-    {
-      "src": "images/favicon-152x152.png",
+      "src": "images/favicon-152.png",
       "sizes": "152x152",
       "type": "image/png"
     },
     {
-      "src": "images/favicon-180x180.png",
+      "src": "images/favicon-180.png",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "images/favicon-192x192.png",
+      "src": "images/favicon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "images/favicon-300x300.png",
+      "src": "images/favicon-300.png",
       "sizes": "300x300",
       "type": "image/png"
+    },
+    {
+      "src": "images/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
