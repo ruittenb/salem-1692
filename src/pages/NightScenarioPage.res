@@ -152,8 +152,8 @@ let make = (
     }
 
     // prepare components
-    let soundImage       = <img src="images/gramophone.png" className="sound-image" />
-    let soundImageGreyed = <img src="images/gramophone.png" className="sound-image greyed" />
+    let soundImage       = <img src="images/gramophone.webp" className="sound-image" />
+    let soundImageGreyed = <img src="images/gramophone.webp" className="sound-image greyed" />
 
     let backgroundMusicElement = if gameState.doPlayMusic {
         gameState.backgroundMusic

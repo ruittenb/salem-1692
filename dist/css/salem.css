@@ -443,7 +443,7 @@ video + .bubble {
  */
 
 #title-page {
-    background: url(../images/overlay-title.png) center / contain no-repeat;
+    background: url(../images/overlay-title.webp) center / contain no-repeat;
     justify-content: flex-end; /* prio over flex-vertical */
 }
 
@@ -468,7 +468,7 @@ video + .bubble {
 }
 
 #setup-music-page {
-    background: url(../images/overlay-lute.png) -100px 120px no-repeat;
+    background: url(../images/overlay-lute.webp) -100px 120px no-repeat;
 }
 
 #setup-music-page .playing {
