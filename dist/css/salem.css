@@ -460,11 +460,11 @@ video + .bubble {
  */
 
 #setup-page {
-    background: url(../images/overlay-gear.png) -190px 120px no-repeat;
+    background: url(../images/overlay-gear.webp) -190px 120px no-repeat;
 }
 
 #setup-language-page {
-    background: url(../images/overlay-language.png) -130px 120px no-repeat;
+    background: url(../images/overlay-language.webp) -130px 120px no-repeat;
 }
 
 #setup-music-page {
@@ -524,7 +524,7 @@ video + .bubble {
 }
 
 #setup-network-page {
-    background: url(../images/overlay-old-phone.png) -220px 80px no-repeat;
+    background: url(../images/overlay-old-phone.webp) -220px 80px no-repeat;
 }
 
 #layout-list {
@@ -590,7 +590,7 @@ video + .bubble {
  */
 
 #dawn-page {
-    background: url(../images/overlay-dawn.png) 50% 0 / auto 100% no-repeat;
+    background: url(../images/background-dawn.webp) 50% 0 / auto 100% no-repeat;
 }
 
 /** ****************************************************************************
@@ -598,7 +598,7 @@ video + .bubble {
  */
 
 #night-page {
-    background: url(../images/background-night.png) repeat;
+    background: url(../images/background-night.webp) repeat;
 }
 
 #night-subpage {
@@ -630,10 +630,10 @@ video + .bubble {
  */
 
 #daytime-confess-page {
-    background: url(../images/overlay-hourglass.png) -20vw / 70vw no-repeat;
+    background: url(../images/overlay-hourglass.webp) -20vw / 70vw no-repeat;
 }
 
 #daytime-reveal-page {
-    background: url(../images/overlay-broom.png) left -70px top 50% no-repeat;
+    background: url(../images/overlay-broom.webp) left -70px top 50% no-repeat;
 }
 
