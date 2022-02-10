@@ -547,7 +547,7 @@ video + .bubble {
  */
 
 #credits-page {
-    background: url(../images/overlay-scroll.png) -290px 120px no-repeat;
+    background: url(../images/overlay-scroll.webp) -290px 120px no-repeat;
     width: 100%;
 }
 
