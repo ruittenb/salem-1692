@@ -7,12 +7,14 @@
     font-family: CaslonAntique;
     src: url(../fonts/CaslonAntique.ttf);
     font-weight: 500;
+    /* font-display: swap; */
 }
 
 @font-face {
     font-family: CaslonAntique;
     src: url(../fonts/CaslonAntique-Bold.ttf);
     font-weight: 800;
+    /* font-display: swap; */
 }
 
 * {
@@ -580,7 +582,7 @@ video + .bubble {
 
 #daytime-page,
 #daytime-waiting-page {
-    background: url(../images/overlay-village.png) 90% 20vh / auto 80vh no-repeat;
+    background: url(../images/overlay-village.webp) 90% 20vh / auto 80vh no-repeat;
 }
 
 /** ****************************************************************************
@@ -600,7 +602,7 @@ video + .bubble {
 }
 
 #night-subpage {
-    background: url(../images/overlay-night.png) top / 375px no-repeat;
+    background: url(../images/overlay-night.webp) top / 375px no-repeat;
     color: #eee;
 }
 

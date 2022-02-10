@@ -54,7 +54,7 @@ function getFilesToCache(debug) {
         'images/overlay-gear.png',
         'images/overlay-hourglass.png',
         'images/overlay-lute.png',
-        'images/overlay-night.png',
+        'images/overlay-night.webp',
         'images/overlay-old-phone.png',
         'images/overlay-pawn.png',
         'images/overlay-scroll.webp',
