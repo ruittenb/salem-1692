@@ -62,7 +62,7 @@ let table = Js.Dict.fromArray([
     // Credits
     ("Credits", "Credits"),
     ("Game:", "Spiel:"),
-    ("(Rulebook)", "(Spielregeln)"),
+    ("Rulebook", "Spielregeln"),
     ("website", "Webseite"),
     ("version", "Version"),
     ("For use with the game: ", "Zur Verwendung mit dem Spiel: "),
@@ -82,6 +82,8 @@ let table = Js.Dict.fromArray([
     ("with constable", "mit Sheriff"),
     ("without constable", "ohne Sheriff"),
     ("Waiting for the host to announce nighttime...", `Warten bis der Gastgeber die Nacht ankündigt...`),
+    // Dawn
+    ("Dawn", `Morgengrauen`),
     // Night
     ("Night", "Die Nacht"),
     ("Night with constable", "Nacht mit Sheriff"),
@@ -109,9 +111,9 @@ let table = Js.Dict.fromArray([
     ("Unable to load audio", "Audio kann nicht geladen werden"),
     ("Index out of bounds", `Index außerhalb der Grenzen`),
     // Confess
-    ("Confess", "Bekennen"),
+    ("Confess", "Gestehen"),
     ("Everyone,", "Spieler,"),
-    ("decide whether you want to confess", `entscheiden Sie, ob Sie bekennen möchten`),
+    ("decide whether you want to confess", `entscheiden Sie, ob Sie gestehen möchten`),
     // Reveal
     ("The Reveal", `Die Enthüllung`),
     ("Reveal witch's victim", `Opfer der Hexe enthüllen`),

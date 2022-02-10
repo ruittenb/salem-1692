@@ -62,7 +62,7 @@ let table = Js.Dict.fromArray([
     // Credits
     ("Credits", `Crédits`),
     ("Game:", "Jeu:"),
-    ("(Rulebook)", `(Règles du jeu)`),
+    ("Rulebook", `Règles du jeu`),
     ("website", "site web"),
     ("version", "version"),
     ("For use with the game: ", "Pour utiliser avec le jeu: "),
@@ -82,6 +82,8 @@ let table = Js.Dict.fromArray([
     ("with constable", `avec shérif`),
     ("without constable", `sans shérif`),
     ("Waiting for the host to announce nighttime...", `En attendant que l'hôte annonce la nuit...`),
+    // Dawn
+    ("Dawn", "L'aube"),
     // Night
     ("Night", "La nuit"),
     ("Night with constable", `Nuit avec shérif`),
