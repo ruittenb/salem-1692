@@ -54,7 +54,7 @@ function getFilesToCache(debug) {
         'images/overlay-broom.webp',
         'images/overlay-gear.webp',
         'images/overlay-hourglass.webp',
-        'images/overlay-languge.webp',
+        'images/overlay-language.webp',
         'images/overlay-lute.webp',
         'images/overlay-night.webp',
         'images/overlay-old-phone.webp',
