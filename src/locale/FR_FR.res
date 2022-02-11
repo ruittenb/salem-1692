@@ -92,6 +92,8 @@ let table = Js.Dict.fromArray([
     ("The witches", `Les sorcières`),
     ("The witch's turn", `Le tour de la sorcière`),
     ("The witches' turn", `Le tour des sorcières`),
+    ("Decide-SG who should get the black cat:", `Décide qui devrait avoir le chat noir:`), // contains nbsp
+    ("Decide-PL who should get the black cat:", `Décidez qui devrait avoir le chat noir:`), // contains nbsp
     ("Choose-SG a victim:", "Choisis une victime:"),
     ("Choose-PL a victim:", "Choisissez une victime:"),
     ("The constable", `Le shérif`),
@@ -99,7 +101,7 @@ let table = Js.Dict.fromArray([
     ("Choose someone to protect:", `Choisis un protégé:`),
     ("Abort", `Arrêter`),
     ("Skip", "Sauter"),
-    ("Everybody is sound asleep... what about you?", `Tout le monde dort profondément... et tu?`), // contains non-breaking spaces
+    ("Everybody is sound asleep... what about you?", `Tout le monde dort profondément... et tu?`), // contains nbsp
     // Confirm
     ("Witch, are you sure?", `Sorcière, tu es sûre?`),
     ("Witches, are you sure?", `Les sorcières, vous êtes sûres?`),

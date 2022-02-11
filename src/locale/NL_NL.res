@@ -92,6 +92,8 @@ let table = Js.Dict.fromArray([
     ("The witches", "De heksen"),
     ("The witch's turn", "De heks aan de beurt"),
     ("The witches' turn", "De heksen aan de beurt"),
+    ("Decide-SG who should get the black cat:", `Beslis wie de zwarte kat moet krijgen:`), // contains nbsp
+    ("Decide-PL who should get the black cat:", `Beslis wie de zwarte kat moet krijgen:`), // contains nbsp
     ("Choose-SG a victim:", "Kies een slachtoffer:"),
     ("Choose-PL a victim:", "Kies een slachtoffer:"),
     ("The constable", "De schout"),

@@ -1,6 +1,0 @@
-Enter a Game Code
-Malformed Code
-No connection
-No game with this Code
-Game joined
-
