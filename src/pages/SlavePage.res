@@ -83,6 +83,7 @@ let make = (
                                                    FirebaseClient.saveGameTurnState(
                                                        dbConnection,
                                                        gameId,
+                                                       turnState.nightType->NightTypeCodec.nightTypeToString,
                                                        turnState.nrWitches->NumerusCodec.numerusToJs,
                                                        player,
                                                        turnState.choiceConstable->Belt.Option.getWithDefault(""),
@@ -103,6 +104,7 @@ let make = (
                                                    FirebaseClient.saveGameTurnState(
                                                        dbConnection,
                                                        gameId,
+                                                       turnState.nightType->NightTypeCodec.nightTypeToString,
                                                        turnState.nrWitches->NumerusCodec.numerusToJs,
                                                        turnState.choiceWitches->Belt.Option.getWithDefault(""),
                                                        player,

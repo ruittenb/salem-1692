@@ -82,16 +82,17 @@ let make = (
 
     // if we're hosting, save turn state to firebase after every change
     React.useEffect1(() => {
+        let nightType = turnState.nightType->NightTypeCodec.nightTypeToString
         let nrWitches = turnState.nrWitches->NumerusCodec.numerusToJs
         let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
         let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
         Utils.logDebugStyled(
-            p ++ "Detected turnState change; nr. of witches:" ++ nrWitches ++
+            p ++ "Detected turnState change; nightType:" ++ nightType ++ " witchesNumerus:" ++ nrWitches ++
             " witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
             "font-weight: bold"
         )
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
-            FirebaseClient.saveGameTurnState(dbConnection, gameId, nrWitches, choiceWitches, choiceConstable)
+            FirebaseClient.saveGameTurnState(dbConnection, gameId, nightType, nrWitches, choiceWitches, choiceConstable)
         })
         None // cleanup function
     }, [ turnState ])

@@ -9,7 +9,6 @@ IMPORTANT:
 NICE TO HAVE:
  - show "connecting" in text bubble when starting master mode
  - add button "abort connecting"
- - Dawn background
  - nicer wifi icon
  - fade music out
  - reflect state in URL https://betterprogramming.pub/how-and-why-you-should-store-react-ui-state-in-the-url-f2013a204cb2

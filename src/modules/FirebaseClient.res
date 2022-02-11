@@ -3,7 +3,6 @@
  */
 
 open Types
-open DecisionCodec
 
 let gamesKeyPrefix = "/games/"
 
@@ -172,16 +171,27 @@ let saveGameState = (
 let saveGameTurnState = (
     dbConnection: dbConnection,
     gameId: GameTypeCodec.gameId,
+    nightType: string,
     nrWitches: string,
     choiceWitches: string,
     choiceConstable: string,
 ): unit => {
     Promise.all([
+        updateGameKey(dbConnection, gameId, MasterNightTypeSubject, nightType),
         updateGameKey(dbConnection, gameId, MasterNumberWitchesSubject, nrWitches),
         updateGameKey(dbConnection, gameId, ChoiceWitchesSubject, choiceWitches),
         updateGameKey(dbConnection, gameId, ChoiceConstableSubject, choiceConstable)
     ])
         ->Utils.catchLogAndIgnore([])
+}
+
+let saveGameNightType = (
+    dbConnection: dbConnection,
+    gameId: GameTypeCodec.gameId,
+    nightType: NightTypeCodec.t,
+) => {
+    updateGameKey(dbConnection, gameId, MasterNightTypeSubject, nightType->NightTypeCodec.nightTypeToString)
+        ->Utils.catchLogAndIgnore()
 }
 
 let saveGameConfirmation = (
@@ -190,7 +200,7 @@ let saveGameConfirmation = (
     subject: dbObservable,
     confirmation: DecisionCodec.t,
 ) => {
-    updateGameKey(dbConnection, gameId, subject, confirmation->decisionToJs)
+    updateGameKey(dbConnection, gameId, subject, confirmation->DecisionCodec.decisionToJs)
         ->Utils.catchLogAndIgnore()
 }
 
@@ -201,8 +211,8 @@ let saveGameConfirmations = (
     confirmConstable: DecisionCodec.t,
 ): unit => {
     Promise.all([
-        updateGameKey(dbConnection, gameId, ConfirmWitchesSubject, confirmWitches->decisionToJs),
-        updateGameKey(dbConnection, gameId, ConfirmConstableSubject, confirmConstable->decisionToJs)
+        updateGameKey(dbConnection, gameId, ConfirmWitchesSubject, confirmWitches->DecisionCodec.decisionToJs),
+        updateGameKey(dbConnection, gameId, ConfirmConstableSubject, confirmConstable->DecisionCodec.decisionToJs)
     ])
         ->Utils.catchLogAndIgnore([])
 }

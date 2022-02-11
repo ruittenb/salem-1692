@@ -31,6 +31,7 @@ let subjectKey = (subject) => switch subject {
     | MasterPhaseSubject         => "masterPhase"
     | MasterPlayersSubject       => "masterPlayers"
     | MasterSeatingSubject       => "masterSeating"
+    | MasterNightTypeSubject     => "masterNightType"
     | MasterNumberWitchesSubject => "masterNumberWitches"
     | ChoiceWitchesSubject       => "slaveChoiceWitches"
     | ChoiceConstableSubject     => "slaveChoiceConstable"
