@@ -9,17 +9,6 @@ let initialDbConnectionStatus = NotConnected
 let initialPage: page = Title
 let initialNavigation: option<page> = None
 
-let initialGameState = {
-    gameType: StandAlone,
-    language: #en_US,
-    players: [ "Anastasia", "Agatha", "Ambrosia" ],
-    seating: #OneAtTop,
-    doPlayEffects: true,
-    doPlaySpeech: true,
-    doPlayMusic: true,
-    backgroundMusic: defaultSelectedMusicTracks,
-}
-
 let cleanupGameState = (gameState): gameState => {
     let knownMusicTracksInclude = musicTracks->Js.Array2.includes // curried
     {

@@ -64,6 +64,7 @@ type gameStateSetter = (gameState => gameState) => unit
 
 type turnState = {
     nrWitches: NumerusCodec.t,
+    nightType: NightTypeCodec.t,
     choiceWitches: option<player>,
     choiceConstable: option<player>,
 }
@@ -186,6 +187,7 @@ type dbObservable =
     | MasterPhaseSubject
     | MasterPlayersSubject
     | MasterSeatingSubject
+    | MasterNightTypeSubject
     | MasterNumberWitchesSubject
     | ChoiceWitchesSubject
     | ChoiceConstableSubject
@@ -198,6 +200,7 @@ type dbObservable =
     masterPlayers: array<player>,
     masterSeating: SeatingCodec.t,
     masterNumberWitches: NumerusCodec.t,
+    masterNightType: NightTypeCodec.t,
     slaveChoiceWitches: player,
     slaveChoiceConstable: player,
     slaveConfirmWitches: DecisionCodec.t,

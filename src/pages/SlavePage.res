@@ -47,6 +47,7 @@ let make = (
                                 setTurnState(_prevTurnState => {
                                     {
                                         nrWitches: dbRecord.masterNumberWitches,
+                                        nightType: dbRecord.masterNightType,
                                         choiceWitches: dbRecord.slaveChoiceWitches === "" ? None : Some(dbRecord.slaveChoiceWitches),
                                         choiceConstable: dbRecord.slaveChoiceConstable === "" ? None : Some(dbRecord.slaveChoiceConstable)
                                     }
@@ -82,6 +83,7 @@ let make = (
                                                    FirebaseClient.saveGameTurnState(
                                                        dbConnection,
                                                        gameId,
+                                                       turnState.nightType->NightTypeCodec.nightTypeToString,
                                                        turnState.nrWitches->NumerusCodec.numerusToJs,
                                                        player,
                                                        turnState.choiceConstable->Belt.Option.getWithDefault(""),
@@ -102,6 +104,7 @@ let make = (
                                                    FirebaseClient.saveGameTurnState(
                                                        dbConnection,
                                                        gameId,
+                                                       turnState.nightType->NightTypeCodec.nightTypeToString,
                                                        turnState.nrWitches->NumerusCodec.numerusToJs,
                                                        turnState.choiceWitches->Belt.Option.getWithDefault(""),
                                                        player,

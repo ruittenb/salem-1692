@@ -63,8 +63,20 @@ let defaultSelectedMusicTracks = [
 
 // Initialization values
 
+let initialGameState = {
+    gameType: StandAlone,
+    language: #en_US,
+    players: [ "Anastasia", "Agatha", "Ambrosia" ],
+    seating: #OneAtTop,
+    doPlayEffects: true,
+    doPlaySpeech: true,
+    doPlayMusic: true,
+    backgroundMusic: defaultSelectedMusicTracks,
+}
+
 let initialTurnState: turnState = {
     nrWitches: One,
+    nightType: Dawn,
     choiceWitches: None,
     choiceConstable: None,
 }

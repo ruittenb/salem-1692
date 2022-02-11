@@ -64,16 +64,22 @@ let make = (
         })
     })
 
-    // Construct the core element for this page
-    <div id="night-page" className="page">
-        <div id="night-subpage" className="page flex-vertical">
+    let titleAndSpacer = if (turnState.nightType === Dawn) {
+        <h1> {React.string(t("Dawn"))} </h1>
+    } else {
+        <>
             <h1> {React.string(t("Night"))} </h1>
             // vertically step past background eyes
             <Spacer />
             <Spacer />
             <Spacer />
-            <PlayerList addressed choiceProcessor />
-        </div>
+        </>
+    }
+
+    // Construct the core element for this page
+    <div className="night-subpage page flex-vertical">
+        {titleAndSpacer}
+        <PlayerList addressed choiceProcessor />
     </div>
 }
 

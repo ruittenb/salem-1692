@@ -83,22 +83,20 @@ let make = (
     })
 
     // component
-    <div id="night-page" className="page">
-        <div id="night-subpage" className="page flex-vertical">
-            <h1> {React.string(t("Confirm"))} </h1>
-            <Spacer />
-            <Spacer />
-            <Spacer />
-            {React.string(question)}
-            <div />
-            <h2> {React.string(choice)} </h2>
-            <Spacer />
-            <Spacer />
-            <LargeButton className="confirm-yes" onClick={ (_event) => confirmationProcessor(#Yes) } ></LargeButton>
-            <Spacer />
-            <LargeButton className="confirm-no" onClick={ (_event) => confirmationProcessor(#No) } ></LargeButton>
-            <Spacer />
-        </div>
+    <div className="night-subpage page flex-vertical">
+        <h1> {React.string(t("Confirm"))} </h1>
+        <Spacer />
+        <Spacer />
+        <Spacer />
+        {React.string(question)}
+        <div />
+        <h2> {React.string(choice)} </h2>
+        <Spacer />
+        <Spacer />
+        <LargeButton className="confirm-yes" onClick={ (_event) => confirmationProcessor(#Yes) } ></LargeButton>
+        <Spacer />
+        <LargeButton className="confirm-no" onClick={ (_event) => confirmationProcessor(#No) } ></LargeButton>
+        <Spacer />
     </div>
 }
 

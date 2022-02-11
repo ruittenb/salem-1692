@@ -28,7 +28,8 @@ let make = (
     // Scenario: getter and setter, get current step
     let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
     let scenario: scenario = NightScenarios.getScenario(subPage)
-    let witchOrWitches: addressed = if subPage === NightFirstOneWitch { Witch } else { Witches }
+    let witchOrWitches: addressed = (subPage === NightFirstOneWitch) ? Witch : Witches
+    let pageId: string = (turnState.nightType === Dawn) ? "dawn-page" : "night-page"
 
     let resolveEffectSet = (step): scenarioStep => {
         switch step {
@@ -51,13 +52,12 @@ let make = (
 
     // After every render: check if there is still a next scenario step
     React.useEffect(() => {
-        switch (maybeScenarioStep, subPage) {
+        switch (maybeScenarioStep, turnState.nightType) {
             // There are still steps in the scenario
             | (Some(_), _)                  => ()
             // The scenario is exhausted: find the correct next page
-            | (None, NightFirstOneWitch)
-            | (None, NightFirstMoreWitches) => goToPage(_page => DaytimeRevealNoConfess)
-            | (None, _)                     => goToPage(_page => DaytimeConfess)
+            | (None, Dawn)  => goToPage(_page => DaytimeRevealNoConfess)
+            | (None, Night) => goToPage(_page => DaytimeConfess)
         }
         None // no cleanup function
     })
@@ -82,16 +82,17 @@ let make = (
 
     // if we're hosting, save turn state to firebase after every change
     React.useEffect1(() => {
+        let nightType = turnState.nightType->NightTypeCodec.nightTypeToString
         let nrWitches = turnState.nrWitches->NumerusCodec.numerusToJs
         let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
         let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
         Utils.logDebugStyled(
-            p ++ "Detected turnState change; nr. of witches:" ++ nrWitches ++
+            p ++ "Detected turnState change; nightType:" ++ nightType ++ " witchesNumerus:" ++ nrWitches ++
             " witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
             "font-weight: bold"
         )
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
-            FirebaseClient.saveGameTurnState(dbConnection, gameId, nrWitches, choiceWitches, choiceConstable)
+            FirebaseClient.saveGameTurnState(dbConnection, gameId, nightType, nrWitches, choiceWitches, choiceConstable)
         })
         None // cleanup function
     }, [ turnState ])
@@ -227,9 +228,9 @@ let make = (
     }
 
     // render the page
-    <>
+    <div id=pageId className="page">
         {backgroundMusicElement}
         {pageElement}
-    </>
+    </div>
 }
 

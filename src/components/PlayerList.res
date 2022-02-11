@@ -90,6 +90,8 @@ let make = (
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
+    let (turnState, _setTurnState) = React.useContext(TurnStateContext.context)
+
     let (rotation, setRotation) = React.useState(_ => RotNone)
     let rotatedClass = switch rotation {
         | RotNone          => "rot0"
@@ -98,10 +100,12 @@ let make = (
         | RotThreeQuarters => "rot270"
     }
 
-    let (title, subtitle) = switch addressed {
-        | Witch     => (t("The witch's turn"),     t("Choose-SG a victim:"))
-        | Witches   => (t("The witches' turn"),    t("Choose-PL a victim:"))
-        | Constable => (t("The constable's turn"), t("Choose someone to protect:"))
+    let (title, subtitle) = switch (addressed, turnState.nightType) {
+        | (Witch, Dawn)     => (t("The witch's turn"),     t("Decide-SG who should get the black cat:"))
+        | (Witch, Night)    => (t("The witch's turn"),     t("Choose-SG a victim:"))
+        | (Witches, Dawn)   => (t("The witches' turn"),    t("Decide-PL who should get the black cat:"))
+        | (Witches, Night)  => (t("The witches' turn"),    t("Choose-PL a victim:"))
+        | (Constable, _)    => (t("The constable's turn"), t("Choose someone to protect:"))
     }
 
     // determine order in which players must be traversed
@@ -135,7 +139,7 @@ let make = (
     // component
     <>
         <h2> {React.string(title)} </h2>
-        <div className="text-centered"> {React.string(subtitle)} </div>
+        <p className="text-centered"> {React.string(subtitle)} </p>
         <div id="player-list">
             {React.array(buttons)}
         </div>

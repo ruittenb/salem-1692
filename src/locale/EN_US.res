@@ -75,22 +75,25 @@ let table = Js.Dict.fromArray([
     ("Licensed under", "Licensed under"),
     // Day
     ("Daytime", "Daytime"),
-    ("First night,", "First night,"),
+    ("Dawn,", "Dawn,"),
     ("one witch", "one witch"),
-    ("more witches", "more witches"),
-    ("Other nights,", "Other nights,"),
+    ("several witches", "several witches"),
+    ("Night,", "Night,"),
     ("with constable", "with constable"),
     ("without constable", "without constable"),
-    ("Waiting for the host to announce nighttime...", "Waiting for the host to announce nighttime..."),
-    // Dawn
-    ("Dawn", "Dawn"),
-    // Night
-    ("Night", "Night"),
+    ("Dawn, one witch", "Dawn, one witch"),
+    ("Dawn, several witches", "Dawn, several witches"),
     ("Night with constable", "Night with constable"),
     ("Night without constable", "Night without constable"),
+    ("Waiting for the host to announce nighttime...", "Waiting for the host to announce nighttime..."),
+    // Dawn / Night
+    ("Dawn", "Dawn"),
+    ("Night", "Night"),
     ("The witches", "The witches"),
     ("The witch's turn", "The witch's turn"),
     ("The witches' turn", "The witches' turn"),
+    ("Decide-SG who should get the black cat:", `Decide who should get the black cat:`), // contains nbsp
+    ("Decide-PL who should get the black cat:", `Decide who should get the black cat:`), // contains nbsp
     ("Choose-SG a victim:", "Choose a victim:"),
     ("Choose-PL a victim:", "Choose a victim:"),
     ("The constable", "The constable"),
@@ -98,7 +101,7 @@ let table = Js.Dict.fromArray([
     ("Choose someone to protect:", "Choose someone to protect:"),
     ("Abort", "Abort"),
     ("Skip", "Skip"),
-    ("Everybody is sound asleep... what about you?", `Everybody is sound asleep... what about you?`), // contains non-breaking spaces
+    ("Everybody is sound asleep... what about you?", `Everybody is sound asleep... what about you?`), // contains nbsp
     // Confirm
     ("Witch, are you sure?", "Witch, are you sure?"),
     ("Witches, are you sure?", "Witches, are you sure?"),

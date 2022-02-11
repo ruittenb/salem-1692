@@ -75,22 +75,25 @@ let table = Js.Dict.fromArray([
     ("Licensed under", "Sous licence"),
     // Day
     ("Daytime", `La journée`),
-    ("First night,", `Première nuit,`),
+    ("Dawn,", "L'aube,"),
     ("one witch", `une sorcière`),
-    ("more witches", `plusieurs sorcières`),
-    ("Other nights,", "Autres nuits,"),
+    ("several witches", `plusieurs sorcières`),
+    ("Night,", "La nuit,"),
     ("with constable", `avec shérif`),
     ("without constable", `sans shérif`),
-    ("Waiting for the host to announce nighttime...", `En attendant que l'hôte annonce la nuit...`),
-    // Dawn
-    ("Dawn", "L'aube"),
-    // Night
-    ("Night", "La nuit"),
+    ("Dawn, one witch", `L'aube, une sorcière`),
+    ("Dawn, several witches", `L'aube, plusieurs sorcières`),
     ("Night with constable", `Nuit avec shérif`),
     ("Night without constable", `Nuit sans shérif`),
+    ("Waiting for the host to announce nighttime...", `En attendant que l'hôte annonce la nuit...`),
+    // Dawn / Night
+    ("Dawn", "L'aube"),
+    ("Night", "La nuit"),
     ("The witches", `Les sorcières`),
     ("The witch's turn", `Le tour de la sorcière`),
     ("The witches' turn", `Le tour des sorcières`),
+    ("Decide-SG who should get the black cat:", `Décide qui devrait avoir le chat noir:`), // contains nbsp
+    ("Decide-PL who should get the black cat:", `Décidez qui devrait avoir le chat noir:`), // contains nbsp
     ("Choose-SG a victim:", "Choisis une victime:"),
     ("Choose-PL a victim:", "Choisissez une victime:"),
     ("The constable", `Le shérif`),
@@ -98,11 +101,11 @@ let table = Js.Dict.fromArray([
     ("Choose someone to protect:", `Choisis un protégé:`),
     ("Abort", `Arrêter`),
     ("Skip", "Sauter"),
-    ("Everybody is sound asleep... what about you?", `Tout le monde dort profondément... et tu?`), // contains non-breaking spaces
+    ("Everybody is sound asleep... what about you?", `Tout le monde dort profondément... et tu?`), // contains nbsp
     // Confirm
     ("Witch, are you sure?", `Sorcière, tu es sûre?`),
     ("Witches, are you sure?", `Les sorcières, vous êtes sûres?`),
-    ("Constable, are you sure?", `Gendarme, tu es sûr?`),
+    ("Constable, are you sure?", `ShérIf, tu es sûr?`),
     ("Confirm", "Confirmer"),
     ("Yes", "Oui"),
     ("No", "Non"),
