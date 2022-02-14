@@ -47,7 +47,7 @@ let table = Js.Dict.fromArray([
     ("Not connected", "No conectado"),
     ("Connecting...", "Conectando..."),
     ("Connected.", "Conectado."),
-    ("Leave guest mode", "Dejar como invidado"),
+    ("Leave guest mode", "Dejar como invitado"),
     ("You can host a game so that players can join from another smartphone.", `Puedes albergar un juego al que otros jugadores pueden unirse desde otro smartphone.`),
     ("You can join a game running on another smartphone.", "Puedes unirte a un juego en progreso en otro smartphone."),
     (`Take the other smartphone and look in the app under Multi-Telephone → Be a Host. Then enter the game code here.`, `Tome el otro smartphone y busque en la aplicación en Multi-teléfono → Jugar como anfitrión. Luego ingrese el código aquí.`),
