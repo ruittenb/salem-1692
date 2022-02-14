@@ -603,7 +603,7 @@ video + .bubble {
  */
 
 #night-page {
-    background: url(../images/background-night.webp) repeat;
+    background: url(../images/background-night.webp) center bottom / auto 100vh repeat;
 }
 
 #night-page .night-subpage {
