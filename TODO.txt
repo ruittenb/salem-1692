@@ -1,10 +1,10 @@
 
 SEVERE:
- -
+ - in master mode, during dawn, one line of speech is skipped (witch-go-to-sleep)
 
 IMPORTANT:
- - prevent flicker in slave night pages
  - right after mounting: preserve slave/master status? in localstorage?
+ - ghost players
 
 NICE TO HAVE:
  - show "connecting" in text bubble when starting master mode

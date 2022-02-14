@@ -9,6 +9,7 @@ E. Die Hexe öffnet die Augen. Geräuschlos entscheidet sie wer die schwarze Kat
 
 H. Die Hexe hat ihre Entscheidung gemacht und schliesst die Augen wieder.
 
+
 D. Wenn alle die Augen geschlossen haben, wachen die Hexen auf.
    Die Hexen öffnen die Augen und nehmen Blickkontakt auf.
 
@@ -18,12 +19,14 @@ F. Geräuschlos und nur mit Gesten kommen sie überein wer die schwarze Katze be
 G. Geräuschlos und nur mit Gesten kommen sie überein wer ermordet wird.
    Sie dürfen eine von sich selbst wählen.
 
+
 J. Die Hexen haben ihre Entscheidung gemacht und schliessen die Augen wieder.
 
 
 M. Wenn die Hexen die Augen wieder geschlossen haben, wacht der Sheriff auf.
    Der Sheriff entscheidet wer diese Nacht geschützt wird.
    Er darf nicht sich selbst wählen.
+
 
 N. Der Sheriff hat eine Entscheidung gemacht und schliesst die Augen wieder.
 
