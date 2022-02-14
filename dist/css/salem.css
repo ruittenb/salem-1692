@@ -591,7 +591,7 @@ video + .bubble {
  */
 
 #dawn-page {
-    background: url(../images/background-dawn.webp) 50% center / auto 120% no-repeat;
+    background: url(../images/background-dawn.webp) 20% center / auto 100% no-repeat;
 }
 
 #dawn-page .night-subpage {

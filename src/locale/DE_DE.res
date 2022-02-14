@@ -87,7 +87,7 @@ let table = Js.Dict.fromArray([
     ("Night without constable", "Nacht ohne Sheriff"),
     ("Waiting for the host to announce nighttime...", `Warten bis der Gastgeber die Nacht ankündigt...`),
     // Dawn / Night
-    ("Dawn", `Morgengrauen`),
+    ("Dawn", `Morgen­grauen`), // contains soft hyphen
     ("Night", "Die Nacht"),
     ("The witches", "Die Hexen"),
     ("The witch's turn", `Die Hexe ist an der Reihe`), // contains nbsp

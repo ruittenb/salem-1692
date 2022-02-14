@@ -82,12 +82,19 @@ let make = (
         })
     })
 
+    let spacing = switch turnState.nightType {
+        | Dawn  => <Spacer />
+        | Night => <>
+                        <Spacer />
+                        <Spacer />
+                        <Spacer />
+                   </>
+    }
+
     // component
     <div className="night-subpage page flex-vertical">
         <h1> {React.string(t("Confirm"))} </h1>
-        <Spacer />
-        <Spacer />
-        <Spacer />
+        {spacing}
         {React.string(question)}
         <div />
         <h2> {React.string(choice)} </h2>

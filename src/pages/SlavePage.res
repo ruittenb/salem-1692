@@ -67,7 +67,13 @@ let make = (
         })
     })
 
-    let witchOrWitches: addressed = if (turnState.nrWitches === One) { Witch } else { Witches }
+    let witchOrWitches: addressed = (turnState.nrWitches === One) ? Witch : Witches
+
+    let pageWrapperId = switch (subPage, turnState.nightType) {
+        | (DaytimeWaiting, _) => "daytime-waiting-page"
+        | (_, Dawn)           => "dawn-page"
+        | (_, Night)          => "night-page"
+    }
 
     let pageElement = switch subPage {
         | DaytimeWaiting        => <DaytimeWaitingPage goToPage />
@@ -152,6 +158,8 @@ let make = (
     }
 
     // component
-    {pageElement}
+    <div id={pageWrapperId} className="page flex-vertical">
+        {pageElement}
+    </div>
 }
 
