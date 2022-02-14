@@ -14,7 +14,9 @@ let make = (
     // component
     <>
         <h1> {React.string(t("Daytime"))} </h1>
+        <Spacer />
         <p className="text-centered"> {React.string(t("Waiting for the host to announce nighttime..."))} </p>
+        <Spacer />
         <Spacer />
         <Button
             label={t("Abort")}

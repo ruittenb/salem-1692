@@ -82,13 +82,14 @@ let make = (
         })
     })
 
-    let spacing = switch turnState.nightType {
-        | Dawn  => <Spacer />
-        | Night => <>
-                        <Spacer />
-                        <Spacer />
-                        <Spacer />
-                   </>
+    let spacing = if (turnState.nightType === Dawn) {
+        <Spacer />
+    } else {
+        <>
+            <Spacer />
+            <Spacer />
+            <Spacer />
+        </>
     }
 
     // component

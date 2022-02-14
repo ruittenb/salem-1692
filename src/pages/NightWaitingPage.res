@@ -12,16 +12,26 @@ let make = (
     let t = Translator.getTranslator(gameState.language)
     let (turnState, _setTurnState) = React.useContext(TurnStateContext.context)
 
-    let title: string = (turnState.nightType === Dawn) ? "Dawn" : "Night"
+    let titleAndSpacer = if (turnState.nightType === Dawn) {
+        <>
+            <h1> {React.string(t("Dawn"))} </h1>
+            <Spacer />
+        </>
+    } else {
+        <>
+            <h1> {React.string(t("Night"))} </h1>
+            // vertically step past background eyes
+            <Spacer />
+            <Spacer />
+            <Spacer />
+        </>
+    }
 
     // Construct the core element for this page
     <div className="night-subpage page flex-vertical">
-        <h1> {React.string(t(title))} </h1>
-        // vertically step past background eyes
-        <Spacer />
-        <Spacer />
-        <Spacer />
+        {titleAndSpacer}
         <p className="text-centered"> {React.string(t("Everybody is sound asleep... what about you?"))} </p>
+        <Spacer />
         <Spacer />
         <Button
             label={t("Abort")}
