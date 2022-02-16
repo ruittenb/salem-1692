@@ -62,6 +62,7 @@ let transformToDbRecord = (
         masterSeating: gameState.seating,
         masterNumberWitches: turnState.nrWitches,
         masterNightType: turnState.nightType,
+        masterHasGhostPlayers: gameState.hasGhostPlayers,
         slaveChoiceWitches: turnState.choiceWitches->Belt.Option.getWithDefault(""),
         slaveChoiceConstable: turnState.choiceConstable->Belt.Option.getWithDefault(""),
         slaveConfirmWitches: #Undecided,

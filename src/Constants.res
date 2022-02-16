@@ -68,6 +68,7 @@ let initialGameState = {
     language: #en_US,
     players: [ "Anastasia", "Agatha", "Ambrosia" ],
     seating: #OneAtTop,
+    hasGhostPlayers: false,
     doPlayEffects: true,
     doPlaySpeech: true,
     doPlayMusic: true,

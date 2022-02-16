@@ -10,6 +10,7 @@ let defaultValue: gameState = {
     language: #en_US,
     players: [],
     seating: #TwoAtTop,
+    hasGhostPlayers: false,
     doPlayEffects: true,
     doPlaySpeech: true,
     doPlayMusic: true,
