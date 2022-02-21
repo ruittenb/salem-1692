@@ -16,6 +16,7 @@ open Utils
 @module("firebase/database") external off: (dbReference) => unit = "off"
 @module("firebase/database") external set: (dbReference, 'data) => Promise.t<unit> = "set"
 @module("firebase/database") external remove: (dbReference) => unit = "remove"
+@module("firebase/analytics") external getAnalytics: (dbApp) => dbAnalytics = "getAnalytics"
 @send external getValue: (dbSnapshot) => 'data = "val"
 
 let p = "[FirebaseAdapter] "
@@ -48,6 +49,7 @@ let connect = (): Promise.t<dbConnection> => {
         try {
             let app = initializeApp(Constants.firebaseConfig)
             let db = getDatabase(app)
+            let _analytics = getAnalytics(app)
             let connectionInfoRef = getRef(db, connectionInfoKey)
             // We will immediately receive a snapshot upon attaching the listener;
             // and then upon every change.

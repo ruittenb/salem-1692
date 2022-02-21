@@ -159,6 +159,7 @@ type dbApp
 type dbDatabase
 type dbReference
 type dbSnapshot
+type dbAnalytics
 
 type dbConnection = {
     app: dbApp,
@@ -181,6 +182,7 @@ type dbConfig = {
     storageBucket     : string,
     messagingSenderId : string,
     appId             : string,
+    measurementId     : string,
 }
 
 type dbObservable =

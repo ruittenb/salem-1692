@@ -24,6 +24,7 @@ let firebaseConfig: dbConfig = {
     storageBucket     : "salem-1692-moderator.appspot.com",
     messagingSenderId : "910714101001",
     appId             : "1:910714101001:web:1a9d4882f11f07376807d8",
+    measurementId     : "G-GWZ2V2C15M",
 }
 
 let siteUrl = "https://ruittenb.github.io/salem-1692/dist/"
