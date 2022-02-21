@@ -325,6 +325,9 @@ video + .bubble {
 .page button.spacer-top:active {
     margin-top: 27px;
 }
+.page button.last {
+    margin-bottom: 100px;
+}
 
 .page button.ok-button {
     font-size: 22px;
@@ -448,10 +451,11 @@ video + .bubble {
     justify-content: flex-end; /* prio over flex-vertical */
 }
 
+/* Custom (non-standard) button spacing for title page */
+
 #title-page button {
     margin-bottom: 25px;
 }
-
 #title-page button.last {
     margin-bottom: 100px;
 }
@@ -586,6 +590,10 @@ video + .bubble {
     background: url(../images/overlay-village.webp) 90% 20vh / auto 80vh no-repeat;
 }
 
+#daytime-waiting-page {
+    justify-content: space-between;
+}
+
 /** ****************************************************************************
  * Dawn Page
  */
@@ -595,6 +603,7 @@ video + .bubble {
 }
 
 #dawn-page .night-subpage {
+    justify-content: space-between;
     color: inherit;
 }
 
@@ -607,6 +616,7 @@ video + .bubble {
 }
 
 #night-page .night-subpage {
+    justify-content: space-between;
     background: url(../images/overlay-night.webp) top / 375px no-repeat;
     color: #eee;
 }

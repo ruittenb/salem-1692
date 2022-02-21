@@ -51967,11 +51967,11 @@ function DaytimeWaitingPage(Props) {
     return Translator$Salem1692.getTranslator(partial_arg, param);
   };
 
-  return React.createElement(React.Fragment, undefined, React.createElement("h1", undefined, Curry._1(t, "Daytime")), React.createElement(Spacer$Salem1692.make, {}), React.createElement("p", {
+  return React.createElement(React.Fragment, undefined, React.createElement("h1", undefined, Curry._1(t, "Daytime")), React.createElement("p", {
     className: "text-centered"
-  }, Curry._1(t, "Waiting for the host to announce nighttime...")), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
+  }, Curry._1(t, "Waiting for the host to announce nighttime...")), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
     label: Curry._1(t, "Abort"),
-    className: "icon-left icon-abort",
+    className: "icon-left icon-abort last",
     onClick: function (_event) {
       return Curry._1(goToPage, function (_prev) {
         return (
@@ -52589,13 +52589,6 @@ function NightScenarioPage(Props) {
     Utils$Salem1692.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
       return FirebaseClient$Salem1692.saveGamePhase(dbConnection, gameId, subPage, maybeScenarioStep);
     });
-    return function (param) {
-      return Utils$Salem1692.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
-        return FirebaseClient$Salem1692.saveGamePhase(dbConnection, gameId,
-        /* DaytimeWaiting */
-        13, undefined);
-      });
-    };
   }, [maybeScenarioStep]);
 
   var goToPrevStep = function (param) {
@@ -52647,6 +52640,7 @@ function NightScenarioPage(Props) {
   };
 
   var continueFromWitchDecision = function (decision) {
+    Utils$Salem1692.logDebug("[NightScenarioPage] Received decision");
     Utils$Salem1692.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
       return FirebaseClient$Salem1692.saveGameConfirmations(dbConnection, gameId, decision, "Undecided");
     });
@@ -52889,14 +52883,14 @@ function NightWaitingPage(Props) {
   var match$1 = React.useContext(TurnStateContext$Salem1692.context);
   var titleAndSpacer = match$1[0].nightType ===
   /* Dawn */
-  0 ? React.createElement(React.Fragment, undefined, React.createElement("h1", undefined, Curry._1(t, "Dawn")), React.createElement(Spacer$Salem1692.make, {})) : React.createElement(React.Fragment, undefined, React.createElement("h1", undefined, Curry._1(t, "Night")), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}));
+  0 ? React.createElement(React.Fragment, undefined, React.createElement("h1", undefined, Curry._1(t, "Dawn"))) : React.createElement(React.Fragment, undefined, React.createElement("h1", undefined, Curry._1(t, "Night")), React.createElement(Spacer$Salem1692.make, {}));
   return React.createElement("div", {
     className: "night-subpage page flex-vertical"
   }, titleAndSpacer, React.createElement("p", {
     className: "text-centered"
-  }, Curry._1(t, "Everybody is sound asleep... what about you?")), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
+  }, Curry._1(t, "Everybody is sound asleep... what about you?")), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
     label: Curry._1(t, "Abort"),
-    className: "icon-left icon-abort",
+    className: "icon-left icon-abort last",
     onClick: function (_event) {
       return Curry._1(goToPage, function (_prev) {
         return (
