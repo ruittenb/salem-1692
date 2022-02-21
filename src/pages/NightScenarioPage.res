@@ -108,11 +108,7 @@ let make = (
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
             FirebaseClient.saveGamePhase(dbConnection, gameId, subPage, maybeScenarioStep)
         })
-        Some(() => { // cleanup function
-            Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
-                FirebaseClient.saveGamePhase(dbConnection, gameId, DaytimeWaiting, None)
-            })
-        })
+        None // cleanup function
     }, [ maybeScenarioStep ])
 
     // Event handlers for stepping through scenario
@@ -132,6 +128,7 @@ let make = (
 
     // Store confirmation in db
     let continueFromWitchDecision = (decision: DecisionCodec.t): unit => {
+        Utils.logDebug(p ++ "Received decision") // TODO
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
             FirebaseClient.saveGameConfirmations(dbConnection, gameId, decision, #Undecided)
         })

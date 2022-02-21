@@ -14,13 +14,13 @@ let make = (
     // component
     <>
         <h1> {React.string(t("Daytime"))} </h1>
-        <Spacer />
         <p className="text-centered"> {React.string(t("Waiting for the host to announce nighttime..."))} </p>
+        <Spacer />
         <Spacer />
         <Spacer />
         <Button
             label={t("Abort")}
-            className="icon-left icon-abort"
+            className="icon-left icon-abort last"
             onClick={ _event => goToPage(_prev => SetupNetwork) }
         />
     </>
