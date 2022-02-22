@@ -126,12 +126,7 @@ let make = (
         goToNextStep()
     }
 
-    // Store confirmation in db
     let continueFromWitchDecision = (decision: DecisionCodec.t): unit => {
-        Utils.logDebug(p ++ "Received decision") // TODO
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
-            FirebaseClient.saveGameConfirmations(dbConnection, gameId, decision, #Undecided)
-        })
         switch decision {
             | #Yes       => goToNextStep()
             | #No        => goToPrevStep()
@@ -139,9 +134,6 @@ let make = (
         }
     }
     let continueFromConstableDecision = (decision: DecisionCodec.t): unit => {
-        Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
-            FirebaseClient.saveGameConfirmations(dbConnection, gameId, #Yes, decision)
-        })
         switch decision {
             | #Yes       => goToNextStep()
             | #No        => goToPrevStep()

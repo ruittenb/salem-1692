@@ -34,7 +34,7 @@ let make = (
 
     let abortButton = <Button
         label={t("Abort")}
-        className="icon-left icon-abort condensed-nl condensed-de"
+        className="icon-left icon-abort condensed-nl condensed-de last"
         onClick={ (_event) => goToPage(_prev => Daytime) }
     />
     let skipButton = <Button
@@ -53,8 +53,6 @@ let make = (
     <div className="night-subpage page flex-vertical">
         <h1> {React.string(t(title))} </h1>
         // vertically step past background eyes
-        <Spacer />
-        <Spacer />
         <Spacer />
         {children}
         <Spacer />

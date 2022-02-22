@@ -1,6 +1,5 @@
 
 SEVERE:
- - in master mode, during dawn, one line of speech is skipped (witch-go-to-sleep)
 
 IMPORTANT:
  - right after mounting: preserve slave/master status? in localstorage?
@@ -8,6 +7,7 @@ IMPORTANT:
 
 NICE TO HAVE:
  - show "connecting" in text bubble when starting master mode
+ - layout confirm page: button spacing
  - add button "abort connecting"
  - nicer wifi icon
  - fade music out
