@@ -126,14 +126,7 @@ let make = (
         goToNextStep()
     }
 
-    let continueFromWitchDecision = (decision: DecisionCodec.t): unit => {
-        switch decision {
-            | #Yes       => goToNextStep()
-            | #No        => goToPrevStep()
-            | #Undecided => ()
-        }
-    }
-    let continueFromConstableDecision = (decision: DecisionCodec.t): unit => {
+    let confirmationProcessor = (decision: DecisionCodec.t): unit => {
         switch decision {
             | #Yes       => goToNextStep()
             | #No        => goToPrevStep()
@@ -206,12 +199,12 @@ let make = (
                                            />
         | Some(ConfirmWitches)          => <NightConfirmPage
                                                addressed=witchOrWitches
-                                               confirmationProcessor=continueFromWitchDecision
+                                               confirmationProcessor
                                                goToPrevStep
                                            />
         | Some(ConfirmConstable)        => <NightConfirmPage
                                                addressed=Constable
-                                               confirmationProcessor=continueFromConstableDecision
+                                               confirmationProcessor
                                                goToPrevStep
                                            />
     }

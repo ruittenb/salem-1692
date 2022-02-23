@@ -38,34 +38,28 @@ let make = (
         switch turnState.choiceWitches {
             | None => React.null
             | Some(witchTargetName) =>
-                <>
-                    <LargeRevealButton
-                        revealPrompt=witchesRevealPrompt
-                        revelationPromptPre=witchesRevelationPromptPre
-                        revelationPromptPost=witchesRevelationPromptPost
-                        secret=witchTargetName
-                        revealed=witchTargetRevealed
-                        onClick={_event => setWitchTargetRevealed(prev => !prev)}
-                    />
-                    <Spacer />
-                </>
+                <LargeRevealButton
+                    revealPrompt=witchesRevealPrompt
+                    revelationPromptPre=witchesRevelationPromptPre
+                    revelationPromptPost=witchesRevelationPromptPost
+                    secret=witchTargetName
+                    revealed=witchTargetRevealed
+                    onClick={_event => setWitchTargetRevealed(prev => !prev)}
+                />
         }
 
     let constableRevealButton =
         switch turnState.choiceConstable {
             | None => React.null
             | Some(constableTargetName) =>
-                <>
-                    <LargeRevealButton
-                        revealPrompt=t("Reveal constable's protection")
-                        revelationPromptPre=t("The constable protected-PRE")
-                        revelationPromptPost=t("The constable protected-POST")
-                        secret=constableTargetName
-                        revealed=constableTargetRevealed
-                        onClick={_event => setConstableTargetRevealed(prev => !prev)}
-                    />
-                    <Spacer />
-                </>
+                <LargeRevealButton
+                    revealPrompt=t("Reveal constable's protection")
+                    revelationPromptPre=t("The constable protected-PRE")
+                    revelationPromptPost=t("The constable protected-POST")
+                    secret=constableTargetName
+                    revealed=constableTargetRevealed
+                    onClick={_event => setConstableTargetRevealed(prev => !prev)}
+                />
         }
 
     let freeToProceed = witchTargetRevealed && (constableTargetRevealed || turnState.choiceConstable === None)
@@ -80,14 +74,14 @@ let make = (
         <Button
             label={t("Next")}
             disabled={!freeToProceed}
-            className="icon-right icon-forw condensed-nl"
+            className="icon-right icon-forw condensed-nl last"
             onClick={ _event => goToPage(_prev => Daytime) }
         />
 
     let returnPage = allowBackToConfess ? DaytimeReveal : DaytimeRevealNoConfess
 
     // component
-    <div id="daytime-reveal-page" className="page flex-vertical">
+    <div id="daytime-reveal-page" className="page flex-vertical spread-vertical">
         {
             if allowBackToConfess {
                 <BackFloatingButton onClick={
@@ -99,9 +93,12 @@ let make = (
         }
         <GearFloatingButton goToPage returnPage=returnPage />
         <h1 className="condensed-de"> {React.string(t("The Reveal"))} </h1>
-        <Spacer />
         {witchesRevealButton}
         {constableRevealButton}
+        <Spacer />
+        <Spacer />
+        <Spacer />
+        <Spacer />
         // Back/Forward buttons
         {
             if allowBackToConfess {

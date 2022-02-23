@@ -88,7 +88,7 @@ let pickRandomElement = (set: array<'a>, default: 'a): 'a => {
 
 /**
  * Calls a function that may throw an exception.
- * The result is converted into an option.
+ * The result is converted to an option.
  */
 let safeExec = (
     functionThatMayThrow: () => 'a

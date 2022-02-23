@@ -50,7 +50,7 @@ let make = (
     />
 
     // Construct the core element for this page
-    <div className="night-subpage page flex-vertical">
+    <div className="night-subpage page flex-vertical spread-vertical">
         <h1> {React.string(t(title))} </h1>
         // vertically step past background eyes
         <Spacer />

@@ -25,7 +25,7 @@ let make = (
     }
 
     // Construct the core element for this page
-    <div className="night-subpage page flex-vertical">
+    <div className="night-subpage page flex-vertical spread-vertical">
         {titleAndSpacer}
         <p className="text-centered"> {React.string(t("Everybody is sound asleep... what about you?"))} </p>
         <Spacer />

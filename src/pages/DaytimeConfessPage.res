@@ -41,16 +41,19 @@ let make = (
         None // cleanup
     })
 
-    <div id="daytime-confess-page" className="page flex-vertical">
+    <div id="daytime-confess-page" className="page flex-vertical spread-vertical">
         <GearFloatingButton goToPage returnPage=DaytimeConfess />
         <h1> {React.string(t("Confess"))} </h1>
         <h2> {React.string(t("Everyone,"))} </h2>
         <p> {React.string(t("decide whether you want to confess"))} </p>
         <Spacer />
         {constableRevealButton}
+        <Spacer />
+        <Spacer />
+        <Spacer />
         <Button
             label={t("Next")}
-            className="icon-right icon-forw"
+            className="icon-right icon-forw last"
             onClick={ _event => goToPage(_prev => DaytimeReveal) }
         />
     </div>
