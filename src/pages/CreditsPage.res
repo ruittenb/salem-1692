@@ -8,7 +8,7 @@ open Constants
 @val external salemAppVersion: string = "salemAppVersion"
 
 let nnbsp = ` ` // U+202F Narrow No-Break Space
-let nbsp  = ` ` // U+00A0 No-Break Space
+let _nbsp = ` ` // U+00A0 No-Break Space
 let note  = `♪` // U+266A Eighth Note (quaver)
 let year = "2022"
 let spacedComma = React.string(", ")
@@ -56,7 +56,7 @@ let make = (
             <span> {React.string(t("For use with the game: "))} </span>
             <Link href="https://facadegames.com/products/salem-1692" text="Salem 1692" />
             openParen <Link href=rulebookUrl text={t("Rulebook")} /> closeParenAndComma
-            {React.string(`Travis Hancock ©` ++ nbsp ++ " 2015")} spacedComma
+            {React.string(`Travis Hancock ©` ++ nnbsp ++ " 2015")} spacedComma
             <Link href="https://facadegames.com/" text=`Façade Games` />
         </p>
         <p>
