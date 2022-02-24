@@ -136,6 +136,14 @@ let make = (
         0 // default sort order
     )
 
+    let onAlarm = () => {
+        let randomPlayer = gameState.players->Utils.pickRandomElement("")
+        choiceProcessor(randomPlayer)
+    }
+
+    // TODO if slave mode, then do nothing when time runs out
+    let timer = gameState.hasGhostPlayers ? <Timer onAlarm /> : React.null
+
     // component
     <>
         <h2> {React.string(title)} </h2>
@@ -144,6 +152,7 @@ let make = (
             {React.array(buttons)}
         </div>
         <Spacer />
+        {timer}
         <Button
             className="icon-rot spacer-top realsquarebutton"
             onClick={ (_event) => setRotation(prevRotation => rotateMore(prevRotation)) }

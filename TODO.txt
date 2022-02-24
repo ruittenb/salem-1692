@@ -7,7 +7,6 @@ IMPORTANT:
 
 NICE TO HAVE:
  - show "connecting" in text bubble when starting master mode
- - layout confirm page: button spacing
  - add button "abort connecting"
  - nicer wifi icon
  - fade music out
