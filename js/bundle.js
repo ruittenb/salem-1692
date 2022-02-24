@@ -47952,6 +47952,10 @@ var Belt_Array = _interopRequireWildcard(require("rescript/lib/es6/belt_Array.js
 
 var Belt_SetInt = _interopRequireWildcard(require("rescript/lib/es6/belt_SetInt.js"));
 
+var Timer$Salem1692 = _interopRequireWildcard(require("./Timer.bs.js"));
+
+var Utils$Salem1692 = _interopRequireWildcard(require("../modules/Utils.bs.js"));
+
 var Button$Salem1692 = _interopRequireWildcard(require("./Button.bs.js"));
 
 var Spacer$Salem1692 = _interopRequireWildcard(require("./Spacer.bs.js"));
@@ -48120,11 +48124,19 @@ function PlayerList(Props) {
       key: String(index) + "/" + player
     });
   }, 0);
+
+  var onAlarm = function (param) {
+    return Curry._1(choiceProcessor, Utils$Salem1692.pickRandomElement(gameState.players, ""));
+  };
+
+  var timer = gameState.hasGhostPlayers ? React.createElement(Timer$Salem1692.make, {
+    onAlarm: onAlarm
+  }) : null;
   return React.createElement(React.Fragment, undefined, React.createElement("h2", undefined, match$4[0]), React.createElement("p", {
     className: "text-centered"
   }, match$4[1]), React.createElement("div", {
     id: "player-list"
-  }, buttons), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
+  }, buttons), React.createElement(Spacer$Salem1692.make, {}), timer, React.createElement(Button$Salem1692.make, {
     className: "icon-rot spacer-top realsquarebutton",
     onClick: function (_event) {
       return Curry._1(setRotation, rotateMore);
@@ -48137,7 +48149,7 @@ var make = PlayerList;
 
 exports.make = make;
 
-},{"../modules/Translator.bs.js":122,"./Button.bs.js":80,"./GameStateContext.bs.js":84,"./Spacer.bs.js":100,"./SquareButton.bs.js":101,"./TurnStateContext.bs.js":103,"react":41,"rescript/lib/es6/belt_Array.js":43,"rescript/lib/es6/belt_SetInt.js":46,"rescript/lib/es6/curry.js":58,"rescript/lib/es6/js_option.js":63}],96:[function(require,module,exports){
+},{"../modules/Translator.bs.js":122,"../modules/Utils.bs.js":124,"./Button.bs.js":80,"./GameStateContext.bs.js":84,"./Spacer.bs.js":100,"./SquareButton.bs.js":101,"./Timer.bs.js":102,"./TurnStateContext.bs.js":103,"react":41,"rescript/lib/es6/belt_Array.js":43,"rescript/lib/es6/belt_SetInt.js":46,"rescript/lib/es6/curry.js":58,"rescript/lib/es6/js_option.js":63}],96:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
