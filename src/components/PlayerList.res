@@ -86,7 +86,7 @@ let rotateMore = (rotation: rotation) => {
 @react.component
 let make = (
     ~addressed: addressed,
-    ~choiceProcessor: (player) => unit,
+    ~choiceProcessor: (player, ~skipConfirmation: bool) => unit,
 ): React.element => {
 
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
@@ -132,7 +132,7 @@ let make = (
                 label=player
                 className={rotatedClass ++ wideClass}
                 style=ReactDOM.Style.make(~order=Belt.Int.toString(index), ())
-                onClick={_event => choiceProcessor(player)}
+                onClick={_event => choiceProcessor(player, ~skipConfirmation = false)}
             />
         },
         0 // default sort order
@@ -148,7 +148,7 @@ let make = (
             | StandAlone => {
                 let randomPlayer = gameState.players->Utils.pickRandomElement("")
                 Utils.logDebug(p ++ "Picked a random target: " ++ randomPlayer)
-                choiceProcessor(randomPlayer)
+                choiceProcessor(randomPlayer, ~skipConfirmation = true)
             }
         }
     }

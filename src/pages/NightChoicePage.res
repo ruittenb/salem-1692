@@ -9,7 +9,7 @@ let p = "[NightChoicePage] "
 @react.component
 let make = (
     ~addressed: addressed,
-    ~choiceProcessor: (player) => unit,
+    ~choiceProcessor: (player, ~skipConfirmation: bool) => unit,
 ): React.element => {
 
     // db connection status
@@ -50,7 +50,7 @@ let make = (
             FirebaseClient.listen(dbConnection, gameId, subject, (maybePlayer) => {
                 switch maybePlayer {
                     | Some("")     => ()
-                    | Some(player) => choiceProcessor(player)
+                    | Some(player) => choiceProcessor(player: player, ~skipConfirmation = false)
                     | None         => ()
                 }
             })

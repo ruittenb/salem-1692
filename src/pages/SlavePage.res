@@ -75,7 +75,8 @@ let make = (
         | (_, Night)          => "night-page"
     }
 
-    let continueFromWitchChoice = (player) => {
+    let choiceWitchProcessor = (player: player, ~skipConfirmation: bool) => {
+        let _dummy = skipConfirmation
         setTurnState(prevTurnState => {
             { ...prevTurnState, choiceWitches: Some(player) }
         })
@@ -89,10 +90,10 @@ let make = (
                 turnState.choiceConstable->Belt.Option.getWithDefault(""),
             )
         })
-        goToPage(_prev => NightConfirmWitches)
     }
 
-    let continueFromConstableChoice = (player) => {
+    let choiceConstableProcessor = (player: player, ~skipConfirmation: bool) => {
+        let _dummy = skipConfirmation
         setTurnState(prevTurnState => {
             { ...prevTurnState, choiceConstable: Some(player) }
         })
@@ -106,7 +107,6 @@ let make = (
                 player,
             )
         })
-        goToPage(_prev => NightConfirmConstable)
     }
 
     let pageElement = switch subPage {
@@ -114,11 +114,11 @@ let make = (
         | NightWaiting          => <NightWaitingPage goToPage />
         | NightChoiceWitches    => <NightChoicePage
                                        addressed=witchOrWitches
-                                       choiceProcessor=continueFromWitchChoice
+                                       choiceProcessor=choiceWitchProcessor
                                    />
         | NightChoiceConstable  => <NightChoicePage
                                        addressed=Constable
-                                       choiceProcessor=continueFromConstableChoice
+                                       choiceProcessor=choiceConstableProcessor
                                    />
         | NightConfirmWitches   => <NightConfirmPage
                                        addressed=witchOrWitches
