@@ -48122,7 +48122,7 @@ function PlayerList(Props) {
         order: String(index)
       },
       onClick: function (_event) {
-        return Curry._1(choiceProcessor, player);
+        return Curry._2(choiceProcessor, player, false);
       },
       key: String(index) + "/" + player
     });
@@ -48139,7 +48139,7 @@ function PlayerList(Props) {
 
     var randomPlayer = Utils$Salem1692.pickRandomElement(gameState.players, "");
     Utils$Salem1692.logDebug("[PlayerList] Picked a random target: " + randomPlayer);
-    return Curry._1(choiceProcessor, randomPlayer);
+    return Curry._2(choiceProcessor, randomPlayer, true);
   };
 
   var timer = gameState.hasGhostPlayers ? React.createElement(Timer$Salem1692.make, {
@@ -52250,7 +52250,7 @@ function NightChoicePage(Props) {
       Utils$Salem1692.logDebug("[NightChoicePage] About to install choice listener");
       return FirebaseClient$Salem1692.listen(dbConnection, gameId, subject, function (maybePlayer) {
         if (maybePlayer !== undefined && maybePlayer !== "") {
-          return Curry._1(choiceProcessor, maybePlayer);
+          return Curry._2(choiceProcessor, maybePlayer, false);
         }
       });
     });
@@ -52670,7 +52670,7 @@ function NightScenarioPage(Props) {
     var nrWitches = NumerusCodec$Salem1692.numerusToJs(turnState.nrWitches);
     var choiceWitches = Belt_Option.getWithDefault(turnState.choiceWitches, "");
     var choiceConstable = Belt_Option.getWithDefault(turnState.choiceConstable, "");
-    Utils$Salem1692.logDebugStyled("[NightScenarioPage] Detected turnState change; nightType:" + nightType + " witchesNumerus:" + nrWitches + " witches:" + choiceWitches + " constable:" + choiceConstable, "font-weight: bold");
+    Utils$Salem1692.logDebugStyled("[NightScenarioPage] Detected turnState change; nightType:" + nightType + " witchesNumerus:" + nrWitches + " choiceWitches:" + choiceWitches + " choiceConstable:" + choiceConstable, "font-weight: bold");
     Utils$Salem1692.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
       return FirebaseClient$Salem1692.saveGameTurnState(dbConnection, gameId, nightType, nrWitches, choiceWitches, choiceConstable);
     });
@@ -52702,7 +52702,9 @@ function NightScenarioPage(Props) {
     });
   };
 
-  var goFromWitchChoiceToNextStep = function (player) {
+  var goFromWitchChoiceToNextStep = function (player, skipConfirmation) {
+    Utils$Salem1692.logDebug("[NightScenarioPage] Witch choice:" + player + " skipConfirmation:" + (skipConfirmation ? "true" : "false"));
+
     Curry._1(setTurnState, function (prevTurnState) {
       return {
         nrWitches: prevTurnState.nrWitches,
@@ -52712,12 +52714,20 @@ function NightScenarioPage(Props) {
       };
     });
 
-    return Curry._1(goToScenarioIndex, function (scenarioIndex) {
+    Curry._1(goToScenarioIndex, function (scenarioIndex) {
       return scenarioIndex + 1 | 0;
     });
+
+    if (skipConfirmation) {
+      return Curry._1(goToScenarioIndex, function (scenarioIndex) {
+        return scenarioIndex + 1 | 0;
+      });
+    }
   };
 
-  var goFromConstableChoiceToNextStep = function (player) {
+  var goFromConstableChoiceToNextStep = function (player, skipConfirmation) {
+    Utils$Salem1692.logDebug("[NightScenarioPage] Constable choice:" + player + " skipConfirmation:" + (skipConfirmation ? "true" : "false"));
+
     Curry._1(setTurnState, function (prevTurnState) {
       return {
         nrWitches: prevTurnState.nrWitches,
@@ -52727,9 +52737,15 @@ function NightScenarioPage(Props) {
       };
     });
 
-    return Curry._1(goToScenarioIndex, function (scenarioIndex) {
+    Curry._1(goToScenarioIndex, function (scenarioIndex) {
       return scenarioIndex + 1 | 0;
     });
+
+    if (skipConfirmation) {
+      return Curry._1(goToScenarioIndex, function (scenarioIndex) {
+        return scenarioIndex + 1 | 0;
+      });
+    }
   };
 
   var confirmationProcessor = function (decision) {
@@ -54431,7 +54447,7 @@ function SlavePage(Props) {
   var match$3 = turnState.nightType;
   var pageWrapperId = subPage !== 13 ? match$3 ? "night-page" : "dawn-page" : "daytime-waiting-page";
 
-  var continueFromWitchChoice = function (player) {
+  var choiceWitchProcessor = function (player, skipConfirmation) {
     Curry._1(setTurnState, function (prevTurnState) {
       return {
         nrWitches: prevTurnState.nrWitches,
@@ -54441,18 +54457,12 @@ function SlavePage(Props) {
       };
     });
 
-    Utils$Salem1692.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
+    return Utils$Salem1692.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
       return FirebaseClient$Salem1692.saveGameTurnState(dbConnection, gameId, NightTypeCodec$Salem1692.nightTypeToString(turnState.nightType), NumerusCodec$Salem1692.numerusToJs(turnState.nrWitches), player, Belt_Option.getWithDefault(turnState.choiceConstable, ""));
-    });
-    return Curry._1(goToPage, function (_prev) {
-      return (
-        /* NightConfirmWitches */
-        16
-      );
     });
   };
 
-  var continueFromConstableChoice = function (player) {
+  var choiceConstableProcessor = function (player, skipConfirmation) {
     Curry._1(setTurnState, function (prevTurnState) {
       return {
         nrWitches: prevTurnState.nrWitches,
@@ -54462,14 +54472,8 @@ function SlavePage(Props) {
       };
     });
 
-    Utils$Salem1692.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
+    return Utils$Salem1692.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
       return FirebaseClient$Salem1692.saveGameTurnState(dbConnection, gameId, NightTypeCodec$Salem1692.nightTypeToString(turnState.nightType), NumerusCodec$Salem1692.numerusToJs(turnState.nrWitches), Belt_Option.getWithDefault(turnState.choiceWitches, ""), player);
-    });
-    return Curry._1(goToPage, function (_prev) {
-      return (
-        /* NightConfirmConstable */
-        18
-      );
     });
   };
 
@@ -54498,7 +54502,7 @@ function SlavePage(Props) {
     15:
       pageElement = React.createElement(NightChoicePage$Salem1692.make, {
         addressed: witchOrWitches,
-        choiceProcessor: continueFromWitchChoice
+        choiceProcessor: choiceWitchProcessor
       });
       break;
 
@@ -54538,7 +54542,7 @@ function SlavePage(Props) {
         addressed:
         /* Constable */
         2,
-        choiceProcessor: continueFromConstableChoice
+        choiceProcessor: choiceConstableProcessor
       });
       break;
 
