@@ -4,6 +4,8 @@
 
 open Types
 
+let p = "[PlayerList] "
+
 /**
  * apply a function to consecutive elements from two arrays
  * to form a new array with the results:
@@ -137,11 +139,20 @@ let make = (
     )
 
     let onAlarm = () => {
-        let randomPlayer = gameState.players->Utils.pickRandomElement("")
-        choiceProcessor(randomPlayer)
+        // In Slave mode, we do display the timer, but when the alarm times out,
+        // we don't select a random player or proceed to a next step.
+        // These are tasks for the Master instance.
+        switch gameState.gameType {
+            | Slave(_)   => ()
+            | Master(_)
+            | StandAlone => {
+                let randomPlayer = gameState.players->Utils.pickRandomElement("")
+                Utils.logDebug(p ++ "Picked a random target: " ++ randomPlayer)
+                choiceProcessor(randomPlayer)
+            }
+        }
     }
 
-    // TODO if slave mode, then do nothing when time runs out
     let timer = gameState.hasGhostPlayers ? <Timer onAlarm /> : React.null
 
     // component
