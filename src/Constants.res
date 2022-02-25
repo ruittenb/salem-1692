@@ -67,7 +67,7 @@ let defaultSelectedMusicTracks = [
 let initialGameState = {
     gameType: StandAlone,
     language: #en_US,
-    players: [ "Anastasia", "Agatha", "Ambrosia" ],
+    players: [ "Anastasia", "Agatha", "Ambrosia", "Alvina" ],
     seating: #OneAtTop,
     hasGhostPlayers: false,
     doPlayEffects: true,
