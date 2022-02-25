@@ -46391,7 +46391,7 @@ function __classPrivateFieldSet(receiver, state, value, kind, f) {
 },{"_process":34,"pako":18}],72:[function(require,module,exports){
 module.exports={
   "name": "salem-1692",
-  "version": "0.52.1",
+  "version": "0.52.1-ghost-2",
   "description": "Moderator PWA for the card game Salem 1692",
   "author": "René Uittenbogaard <ruittenb@gmail.com>",
   "homepage": "https://github.com/ruittenb/salem-1692",
