@@ -90,7 +90,7 @@ watch-stop: ## Stop watching for changes
 .PHONY: merge-repair
 merge-repair: ## repair bundle.js after merging
 	$(MAKE) build && \
-		git add dist/js/bumdle.js
+		git add dist/js/bundle.js
 
 ##@ Serving the page:
 
