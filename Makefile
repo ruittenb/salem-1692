@@ -87,6 +87,11 @@ watch-stop: ## Stop watching for changes
 	ps -fu `whoami` | awk '/[f]swatch/ { print $$2 }' | tee /dev/tty | xargs kill
 	rm .bsb.lock 2>/dev/null || true
 
+.PHONY: merge-repair
+merge-repair: ## repair bundle.js after merging
+	$(MAKE) build && \
+		git add dist/js/bumdle.js
+
 ##@ Serving the page:
 
 .PHONY: serve
