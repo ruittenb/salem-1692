@@ -265,9 +265,11 @@ video + .bubble {
 
 .nl_NL .page button.condensed-nl {
     font-size: 24px;
+    line-height: 36px;
 }
 .de_DE .page button.condensed-de {
     font-size: 20px;
+    line-height: 36px;
 }
 .de_DE #setup-network-page button.condensed-de {
     font-size: 24px;
@@ -275,9 +277,11 @@ video + .bubble {
 }
 .fr_FR .page button.condensed-fr {
     font-size: 22px;
+    line-height: 40px;
 }
 .es_ES .page button.condensed-es {
     font-size: 24px;
+    line-height: 40px;
 }
 
 .page {
@@ -377,12 +381,12 @@ video + .bubble {
 }
 
 .page button.icon-left {
-    padding-left: 20px;
-    background-position: 16px center;
+    padding-left: 22px;
+    background-position: 14px center;
 }
 .page button.icon-right {
-    padding-right: 20px;
-    background-position: calc(100% - 16px) center;
+    padding-right: 22px;
+    background-position: calc(100% - 14px) center;
 }
 .page button.icon-only,
 .page div.button-sized {
@@ -433,10 +437,12 @@ video + .bubble {
 .page button.icon-checked   { background-image: url(../images/icon-checked.png); }
 .page button.icon-unchecked { background-image: url(../images/icon-unchecked.png); }
 
+/*
 .page button.icon-left.icon-checked,
 .page button.icon-left.icon-unchecked {
     background-position: 16px center;
 }
+*/
 
 .buttonpair {
     width: 80%;

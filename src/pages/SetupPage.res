@@ -56,6 +56,7 @@ let make = (
         <Spacer />
         <Button
             label={t("Players")}
+            className="icon-left icon-pawn"
             onClick={ _event => goToPage(_prev => SetupPlayers) }
         />
         <Button
