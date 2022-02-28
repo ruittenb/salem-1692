@@ -54119,6 +54119,7 @@ function SetupPage(Props) {
     className: "condensed-fr condensed-es condensed-de"
   }, Curry._1(t, "Settings")), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
     label: Curry._1(t, "Players"),
+    className: "icon-left icon-pawn",
     onClick: function (_event) {
       return Curry._1(goToPage, function (_prev) {
         return (
