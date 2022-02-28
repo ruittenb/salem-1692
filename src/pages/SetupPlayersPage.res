@@ -16,6 +16,7 @@ let make = (
         <h1> {React.string(t("Players"))} </h1>
         <PlayerForm />
         <Spacer />
+        <GhostForm />
         <SeatingForm />
         <Button
             label={t("OK")}

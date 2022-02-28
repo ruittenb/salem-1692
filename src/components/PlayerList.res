@@ -4,6 +4,8 @@
 
 open Types
 
+let p = "[PlayerList] "
+
 /**
  * apply a function to consecutive elements from two arrays
  * to form a new array with the results:
@@ -84,7 +86,7 @@ let rotateMore = (rotation: rotation) => {
 @react.component
 let make = (
     ~addressed: addressed,
-    ~choiceProcessor: (player) => unit,
+    ~choiceProcessor: (player, ~skipConfirmation: bool) => unit,
 ): React.element => {
 
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
@@ -130,11 +132,28 @@ let make = (
                 label=player
                 className={rotatedClass ++ wideClass}
                 style=ReactDOM.Style.make(~order=Belt.Int.toString(index), ())
-                onClick={_event => choiceProcessor(player)}
+                onClick={_event => choiceProcessor(player, ~skipConfirmation = false)}
             />
         },
         0 // default sort order
     )
+
+    let onAlarm = () => {
+        // In Slave mode, we do display the timer, but when the alarm times out,
+        // we don't select a random player or proceed to a next step.
+        // These are tasks for the Master instance.
+        switch gameState.gameType {
+            | Slave(_)   => ()
+            | Master(_)
+            | StandAlone => {
+                let randomPlayer = gameState.players->Utils.pickRandomElement("")
+                Utils.logDebug(p ++ "Picked a random target: " ++ randomPlayer)
+                choiceProcessor(randomPlayer, ~skipConfirmation = true)
+            }
+        }
+    }
+
+    let timer = gameState.hasGhostPlayers ? <Timer onAlarm /> : React.null
 
     // component
     <>
@@ -144,6 +163,7 @@ let make = (
             {React.array(buttons)}
         </div>
         <Spacer />
+        {timer}
         <Button
             className="icon-rot spacer-top realsquarebutton"
             onClick={ (_event) => setRotation(prevRotation => rotateMore(prevRotation)) }

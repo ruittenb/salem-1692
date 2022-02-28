@@ -88,7 +88,7 @@ let make = (
         let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
         Utils.logDebugStyled(
             p ++ "Detected turnState change; nightType:" ++ nightType ++ " witchesNumerus:" ++ nrWitches ++
-            " witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
+            " victims: witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
             "font-weight: bold"
         )
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
@@ -102,7 +102,7 @@ let make = (
         let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
         let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
         Utils.logDebugStyled(
-            p ++ "Detected scenarioStep change; witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
+            p ++ "Detected scenarioStep change; victims: witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
             "font-weight: bold"
         )
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
@@ -117,13 +117,21 @@ let make = (
     let onEnded = (_event): unit => goToNextStep()
 
     // Store chosen players (killed and saved) in context
-    let goFromWitchChoiceToNextStep = (player: player): unit => {
+    let goFromWitchChoiceToNextStep = (player: player, ~skipConfirmation: bool): unit => {
+        Utils.logDebug(p ++ "Witch choice:" ++ player ++ " skipConfirmation:" ++ (skipConfirmation ? "true" : "false"))
         setTurnState(prevTurnState => { ...prevTurnState, choiceWitches: Some(player) })
         goToNextStep()
+        if (skipConfirmation) {
+            goToNextStep()
+        }
     }
-    let goFromConstableChoiceToNextStep = (player: player): unit => {
+    let goFromConstableChoiceToNextStep = (player: player, ~skipConfirmation: bool): unit => {
+        Utils.logDebug(p ++ "Constable choice:" ++ player ++ " skipConfirmation:" ++ (skipConfirmation ? "true" : "false"))
         setTurnState(prevTurnState => { ...prevTurnState, choiceConstable: Some(player) })
         goToNextStep()
+        if (skipConfirmation) {
+            goToNextStep()
+        }
     }
 
     let confirmationProcessor = (decision: DecisionCodec.t): unit => {

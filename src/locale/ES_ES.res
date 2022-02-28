@@ -16,6 +16,12 @@ let table = Js.Dict.fromArray([
     ("Names", "Nombres"),
     ("Enter the names of the players in clockwise order, starting at the head of the table.", "Introduzca los nombres de los jugadores en el orden de las agujas del reloj, comenzando por la cabecera de la mesa."),
     ("(add one)", `(añadir uno)`),
+    ("Ghost Players", "Jugadores fantasmas"),
+    (`In a two- or three-player game, nicknames for "ghost" players should be added to the list above up to a total of four players.`, `En un juego de dos o tres juga­dores, los apodos para los jugadores "fantasmas" deben agregarse a la lista anterior hasta un total de cuatro jugadores.`), // soft hyphen
+    ("Please consult the ", "Por favor consulta las "),
+    ("rules for 2-3 players.", `reglas para 2-3 jugadores.`),
+    ("Also check the box below.", `También marca la casilla de abajo.`),
+    ("With Ghosts", "Con fantasmas"),
     ("Sound effects", "Sonidos"),
     ("Speech", `Diálogo`),
     ("Music", `Música`),
@@ -33,7 +39,7 @@ let table = Js.Dict.fromArray([
     ("Next", "Avanzar"),
     ("Done", "Listo"),
     ("OK", "OK"),
-    ("Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played.", `Marque las pistas para crear una lista de reproducción para las noches. Cada noche sucesiva, se reproducirá la siguiente pista de la lista de reproducción.`),
+    ("Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played.", `Marca las pistas para crear una lista de reproducción para las noches. Cada noche sucesiva, se reproducirá la siguiente pista de la lista de reproducción.`),
     // Multi-Telephone
     ("Multi-Telephone", `Multi-teléfono`),
     ("Host Game", "Albergar juego"),

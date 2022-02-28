@@ -75,50 +75,50 @@ let make = (
         | (_, Night)          => "night-page"
     }
 
+    let choiceWitchProcessor = (player: player, ~skipConfirmation: bool) => {
+        let _dummy = skipConfirmation
+        setTurnState(prevTurnState => {
+            { ...prevTurnState, choiceWitches: Some(player) }
+        })
+        Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+            FirebaseClient.saveGameTurnState(
+                dbConnection,
+                gameId,
+                turnState.nightType->NightTypeCodec.nightTypeToString,
+                turnState.nrWitches->NumerusCodec.numerusToJs,
+                player,
+                turnState.choiceConstable->Belt.Option.getWithDefault(""),
+            )
+        })
+    }
+
+    let choiceConstableProcessor = (player: player, ~skipConfirmation: bool) => {
+        let _dummy = skipConfirmation
+        setTurnState(prevTurnState => {
+            { ...prevTurnState, choiceConstable: Some(player) }
+        })
+        Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
+            FirebaseClient.saveGameTurnState(
+                dbConnection,
+                gameId,
+                turnState.nightType->NightTypeCodec.nightTypeToString,
+                turnState.nrWitches->NumerusCodec.numerusToJs,
+                turnState.choiceWitches->Belt.Option.getWithDefault(""),
+                player,
+            )
+        })
+    }
+
     let pageElement = switch subPage {
         | DaytimeWaiting        => <DaytimeWaitingPage goToPage />
         | NightWaiting          => <NightWaitingPage goToPage />
         | NightChoiceWitches    => <NightChoicePage
                                        addressed=witchOrWitches
-                                       choiceProcessor={
-                                           (player) => {
-                                               setTurnState(prevTurnState => {
-                                                   { ...prevTurnState, choiceWitches: Some(player) }
-                                               })
-                                               Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
-                                                   FirebaseClient.saveGameTurnState(
-                                                       dbConnection,
-                                                       gameId,
-                                                       turnState.nightType->NightTypeCodec.nightTypeToString,
-                                                       turnState.nrWitches->NumerusCodec.numerusToJs,
-                                                       player,
-                                                       turnState.choiceConstable->Belt.Option.getWithDefault(""),
-                                                   )
-                                               })
-                                               goToPage(_prev => NightConfirmWitches)
-                                           }
-                                       }
+                                       choiceProcessor=choiceWitchProcessor
                                    />
         | NightChoiceConstable  => <NightChoicePage
                                        addressed=Constable
-                                       choiceProcessor={
-                                           (player) => {
-                                               setTurnState(prevTurnState => {
-                                                   { ...prevTurnState, choiceConstable: Some(player) }
-                                               })
-                                               Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
-                                                   FirebaseClient.saveGameTurnState(
-                                                       dbConnection,
-                                                       gameId,
-                                                       turnState.nightType->NightTypeCodec.nightTypeToString,
-                                                       turnState.nrWitches->NumerusCodec.numerusToJs,
-                                                       turnState.choiceWitches->Belt.Option.getWithDefault(""),
-                                                       player,
-                                                   )
-                                               })
-                                               goToPage(_prev => NightConfirmConstable)
-                                           }
-                                       }
+                                       choiceProcessor=choiceConstableProcessor
                                    />
         | NightConfirmWitches   => <NightConfirmPage
                                        addressed=witchOrWitches
