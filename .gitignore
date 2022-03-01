@@ -1,12 +1,9 @@
 .DS_Store
 /.bsb.lock
 /.merlin
-/_fabriek/firebase/quickstart-js/
 /_fabriek/famfamfam/
-/_fabriek/audio/mail*
-/_fabriek/audio/raw/
+/_fabriek/audio/mail/
 /_fabriek/audio/speech-*
-/_fabriek/music/
 /lib/
 node_modules/
 *.swp
