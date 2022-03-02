@@ -111,7 +111,7 @@ let table = Js.Dict.fromArray([
     // Confirm
     ("Witch, are you sure?", `Sorcière, tu es sûre?`),
     ("Witches, are you sure?", `Les sorcières, vous êtes sûres?`),
-    ("Constable, are you sure?", `ShérIf, tu es sûr?`),
+    ("Constable, are you sure?", `Shérif, tu es sûr?`),
     ("Confirm", "Confirmer"),
     ("Yes", "Oui"),
     ("No", "Non"),
@@ -131,6 +131,7 @@ let table = Js.Dict.fromArray([
     ("The witch attacked-POST", ""),
     ("The witches attacked-PRE", `Les sorcières ont attaqué`),
     ("The witches attacked-POST", ""),
+    (" got the black cat", " a eu le chat noir"),
     ("Reveal constable's protection", `Révéler protégé du shérif`),
     ("The constable protected-PRE", `Le shérif a protégé`),
     ("The constable protected-POST", ""),
