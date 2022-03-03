@@ -48,7 +48,8 @@ bundle: ## Bundle the js files
 
 .PHONY: bundle-minify
 bundle-minify: ## Bundle and minify the js files
-	browserify -g uglifyify $(JS_FILES) -p esmify | uglifyjs > $(BUNDLE)
+	@# --mangle seems to be safe, but --compress breaks the bundle
+	browserify -g uglifyify $(JS_FILES) -p esmify | uglifyjs - $(UGLYOPTS) > $(BUNDLE)
 
 .PHONY: build
 build: build-css build-res ## Compile the res and css files; bundle the js files

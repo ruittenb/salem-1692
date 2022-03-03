@@ -137,6 +137,8 @@ let make = (): React.element => {
         <h2> {React.string(t("Names"))} </h2>
         <p>
             {React.string(t("Enter the names of the players in clockwise order, starting at the head of the table."))}
+            {React.string(" ")}
+            {React.string(t("During the night, player buttons will be shown in this order."))}
         </p>
         {React.array(playerItems)}
         <PlayerFormLine

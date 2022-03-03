@@ -15,6 +15,7 @@ let table = Js.Dict.fromArray([
     ("Players", "Spelers"),
     ("Names", "Namen"),
     ("Enter the names of the players in clockwise order, starting at the head of the table.", "Voer de namen van de spelers in, vanaf het hoofd van de tafel en met de klok mee."),
+    ("During the night, player buttons will be shown in this order.", "Tijdens de nacht worden de spelerknoppen in deze volgorde getoond."),
     ("(add one)", "(toevoegen)"),
     ("Ghost Players", "Spookspelers"),
     (`In a two- or three-player game, nicknames for "ghost" players should be added to the list above up to a total of four players.`, `Wanneer slechts twee of drie spelers meedoen moeten er namen voor "spookspelers" worden toegevoegd aan de lijst hierboven, tot een totaal van vier spelers.`),
@@ -27,6 +28,7 @@ let table = Js.Dict.fromArray([
     ("Music", "Muziek"),
     ("Seating layout", "Indeling zitplaatsen"),
     ("How are the players seated around the table?", "Hoe zitten de spelers rond de tafel?"),
+    ("This affects the positioning of the player buttons at night.", `Dit beïnvloedt het plaatsen van spelerknoppen tijdens de nacht.`),
     ("Language", "Taal"),
     ("English", "English"),
     ("Nederlands", "Nederlands"),
@@ -132,6 +134,7 @@ let table = Js.Dict.fromArray([
     ("The witches attacked-PRE", "De heksen hebben"),
     ("The witches attacked-POST", " aangevallen"),
     ("Reveal constable's protection", "Beschermeling van de schout onthullen"),
+    (" got the black cat", ` heeft de zwarte kat gekregen`), // contains nbsp
     ("The constable protected-PRE", "De schout heeft"),
     ("The constable protected-POST", " beschermd"),
 ])
