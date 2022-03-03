@@ -25,6 +25,8 @@ let make = (): React.element => {
         <h2> {React.string(t("Seating layout"))} </h2>
         <p>
             {React.string(t("How are the players seated around the table?"))}
+            {React.string(" ")}
+            {React.string(t("This affects the positioning of the player buttons at night."))}
         </p>
         <div id="layout-list">
             {

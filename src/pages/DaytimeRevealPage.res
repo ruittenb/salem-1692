@@ -20,14 +20,23 @@ let make = (
         witchesRevealPrompt,
         witchesRevelationPromptPre,
         witchesRevelationPromptPost
-    ) = if turnState.nrWitches === One {
-        (
+    ) = switch (turnState.nrWitches, turnState.nightType) {
+        | (One, Dawn) => (
+            t("Reveal witch's victim"),
+            "",
+            t(" got the black cat"),
+        )
+        | (More, Dawn) => (
+            t("Reveal witches' victim"),
+            "",
+            t(" got the black cat"),
+        )
+        | (One, Night) => (
             t("Reveal witch's victim"),
             t("The witch attacked-PRE"),
             t("The witch attacked-POST"),
         )
-    } else {
-        (
+        | (More, Night) => (
             t("Reveal witches' victim"),
             t("The witches attacked-PRE"),
             t("The witches attacked-POST"),

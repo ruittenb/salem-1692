@@ -15,6 +15,7 @@ let table = Js.Dict.fromArray([
     ("Players", "Jugadores"),
     ("Names", "Nombres"),
     ("Enter the names of the players in clockwise order, starting at the head of the table.", "Introduzca los nombres de los jugadores en el orden de las agujas del reloj, comenzando por la cabecera de la mesa."),
+    ("During the night, player buttons will be shown in this order.", `Por la noche, los botones de los jugadores se mostrarán en este orden.`),
     ("(add one)", `(añadir uno)`),
     ("Ghost Players", "Jugadores fantasmas"),
     (`In a two- or three-player game, nicknames for "ghost" players should be added to the list above up to a total of four players.`, `En un juego de dos o tres juga­dores, los apodos para los jugadores "fantasmas" deben agregarse a la lista anterior hasta un total de cuatro jugadores.`), // soft hyphen
@@ -27,6 +28,7 @@ let table = Js.Dict.fromArray([
     ("Music", `Música`),
     ("Seating layout", `Posición de los jugadores`),
     ("How are the players seated around the table?", `¿Cómo están sentados los jugadores alrededor de la mesa?`),
+    ("This affects the positioning of the player buttons at night.", `Esto afecta la posición de los botones de los jugadores por la noche.`),
     ("Language", "Idioma"),
     ("English", "English"),
     ("Nederlands", "Nederlands"),
@@ -131,6 +133,7 @@ let table = Js.Dict.fromArray([
     ("The witch attacked-POST", ""),
     ("The witches attacked-PRE", `Las brujas atacaron a`),
     ("The witches attacked-POST", ""),
+    (" got the black cat", ` consiguió el gato negro`), // contains nbsp
     ("Reveal constable's protection", `Revelar protección del alguacil`), // contains nbsp
     ("The constable protected-PRE", `El alguacil protegió a`),
     ("The constable protected-POST", ""),
