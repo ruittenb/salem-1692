@@ -8,7 +8,7 @@ const cacheName = 'salem-1692-v' + version;
 let filesToCache;
 
 function getFilesToCache(debug) {
-    const rootDir = debug ? '.' : '/salem-1692/dist';
+    const rootDir = debug ? '.' : '/salem-1692';
     return [
         'index.html',
         'index.html?utm_source=pwa',
