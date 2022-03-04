@@ -11,7 +11,7 @@ A web app for fulfilling the moderator role in the Salem 1692 card game
 ## PWA Hosting
 
 - [Project on GitHub](https://github.com/ruittenb/salem-1692)
-- [See this web app in action](https://ruittenb.github.io/salem-1692/dist/)
+- [See this web app in action](https://ruittenb.github.io/salem-1692/)
 - [Firebase Console](https://console.firebase.google.com/u/1/project/salem-1692-moderator/overview)
 
 ## Technologies Used

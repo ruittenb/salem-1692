@@ -131,3 +131,7 @@ move-tag: ## Move the tag for the current package.json version to this branch
 	git tag -d $$VERSION                     && \
 	git tag $$VERSION
 
+.PHONY: publish
+publish: ## Publish the master branch on Github Pages
+	git subtree push --prefix dist origin master:github-pages
+
