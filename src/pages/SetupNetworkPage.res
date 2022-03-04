@@ -140,7 +140,7 @@ let getModusOperandi = (
 ) => switch (gameState.gameType, dbConnectionStatus, slaveGameIdValidity) {
     | (StandAlone, _, SlaveInputHidden) =>
                         <>
-                            <h2> {React.string(t("Be a Host"))} </h2>
+                            <h2> {React.string(t("Play as Host"))} </h2>
                             <p> {React.string(t("You can host a game so that players can join from another smartphone."))} </p>
                             <Spacer />
                             <Button
@@ -151,7 +151,7 @@ let getModusOperandi = (
                                 ) }
                             />
                             <Rule />
-                            <h2> {React.string(t("Be a Guest"))} </h2>
+                            <h2> {React.string(t("Play as Guest"))} </h2>
                             <p> {React.string(t("You can join a game running on another smartphone."))} </p>
                             <Spacer />
                             <Button
@@ -180,12 +180,12 @@ let getModusOperandi = (
                         </>
     | (Master(gameId), Connected(_), _) =>
                         <>
-                            <h2> {React.string(t("Be a Host"))} </h2>
+                            <h2> {React.string(t("Play as Host"))} </h2>
                             <p>
                                 {React.string(t("You are currently hosting a game.") ++ " ")}
                                 {React.string(t(
                                     // needs backticks for unicode arrow
-                                    `Take the other smartphone and look in the app under Multi-Telephone → Be a Guest. ` ++
+                                    `Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. ` ++
                                     "Then enter the following game code there."
                                 ))}
                             </p>
@@ -209,18 +209,18 @@ let getModusOperandi = (
                                 ) }
                             />
                             <Rule />
-                            <h2> {React.string(t("Be a Guest"))} </h2>
+                            <h2> {React.string(t("Play as Guest"))} </h2>
                             <p> {React.string(t("If you want to join a running game, you must stop hosting first."))} </p>
                             <Spacer />
                         </>
     | (StandAlone, dbConnectionStatus, slaveGameIdValidity)
     | (Slave(_), dbConnectionStatus, slaveGameIdValidity) =>
                         <>
-                            <h2> {React.string(t("Be a Guest"))} </h2>
+                            <h2> {React.string(t("Play as Guest"))} </h2>
                             <p>
                                 {React.string(t(
                                     // needs backticks for unicode arrow
-                                    `Take the other smartphone and look in the app under Multi-Telephone → Be a Host. ` ++
+                                    `Take the other smartphone and look in the app under Multi-Telephone → Play as Host. ` ++
                                     "Then enter the game code here."
                                 ))}
                             </p>
@@ -286,7 +286,7 @@ let getModusOperandi = (
                                 }}
                             />
                             <Rule />
-                            <h2> {React.string(t("Be a Host"))} </h2>
+                            <h2> {React.string(t("Play as Host"))} </h2>
                             <p> {React.string(t("If you want to host a game so that others can join, you should leave guest mode first."))} </p>
                             <Spacer />
                         </>
