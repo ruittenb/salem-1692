@@ -27,7 +27,7 @@ let firebaseConfig: dbConfig = {
     measurementId     : "G-GWZ2V2C15M",
 }
 
-let siteUrl = "https://ruittenb.github.io/salem-1692/dist/"
+let siteUrl = "https://ruittenb.github.io/salem-1692/"
 
 let localStoragePrefix = "salem1692"
 let localStorageGameStateKey = ".gameState"
