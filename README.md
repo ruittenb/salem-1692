@@ -5,7 +5,7 @@ A web app for fulfilling the moderator role in the Salem 1692 card game
 
 ## The Game
 
-- [Salem 1692](https://facadegames.com/products/salem-1692)
+- [Façade Games](https://facadegames.com/products/salem-1692)
 - [BoardGameGeek](https://www.boardgamegeek.com/boardgame/175549/salem-1692)
 
 ## PWA Hosting
