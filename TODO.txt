@@ -1,11 +1,12 @@
 
 SEVERE:
+ - with ghost players, the constable is allowed to choose themselves
 
 IMPORTANT:
  - right after mounting: preserve slave/master status? in localstorage?
 
 NICE TO HAVE:
- - show "connecting" in text bubble when starting master mode
+ - cleanup "connecting" bubble when hosting
  - add button "abort connecting"
  - nicer wifi icon
  - fade music out
