@@ -4,6 +4,12 @@
 
 open Types
 
+let getConstableRestrictionSpeech = (gameState) => if gameState.hasGhostPlayers {
+    PlaySpeech(ConstableDecideAny)
+} else {
+    PlaySpeech(ConstableDecideOther)
+}
+
 let getScenario = (subPage: page): scenario => {
     switch subPage {
         | NightFirstOneWitch      => [
@@ -45,6 +51,7 @@ let getScenario = (subPage: page): scenario => {
             PlayRandomEffect([ CatMeowing, DogBarking, Footsteps, Thunderstrike ]),
             Pause(1.0),
             PlaySpeech(ConstableWakeUp),
+            ConditionalStep(getConstableRestrictionSpeech),
             ChooseConstable,
             ConfirmConstable,
             PlaySpeech(ConstableGoToSleep),
