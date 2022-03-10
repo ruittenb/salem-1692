@@ -41,16 +41,14 @@ let make = (
         None // cleanup
     })
 
-    <div id="daytime-confess-page" className="page flex-vertical spread-vertical">
+    <div id="daytime-confess-page" className="page justify-spread">
         <GearFloatingButton goToPage returnPage=DaytimeConfess />
         <h1> {React.string(t("Confess"))} </h1>
         <h2> {React.string(t("Everyone,"))} </h2>
         <p className="text-centered"> {React.string(t("decide whether you want to confess"))} </p>
         <Spacer />
         {constableRevealButton}
-        <Spacer />
-        <Spacer />
-        <Spacer />
+        <Spacer verticalFill=true />
         <Button
             label={t("Next")}
             className="icon-right icon-forw last"

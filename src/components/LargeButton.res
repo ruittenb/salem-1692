@@ -8,10 +8,11 @@ open Types
 let make = (
     ~label: string = "",
     ~className: string = "",
+    ~title: string = "",
     ~children: React.element = React.null,
     ~onClick: clickHandler,
 ): React.element => {
-    <Button label className={className ++ " largebutton"} onClick>
+    <Button label title className={className ++ " largebutton"} onClick>
         {children}
     </Button>
 }

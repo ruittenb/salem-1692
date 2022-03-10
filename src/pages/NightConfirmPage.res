@@ -82,28 +82,20 @@ let make = (
         })
     })
 
-    let spacing = if (turnState.nightType === Dawn) {
-        <Spacer />
-    } else {
-        <>
-            <Spacer />
-            <Spacer />
-            <Spacer />
-        </>
-    }
+    let eyesImage = (turnState.nightType === Dawn) ? React.null : <Eyes />
 
     // component
-    <div className="night-subpage page flex-vertical">
+    <div id="night-confirm-page" className="page justify-start">
         <h1> {React.string(t("Confirm"))} </h1>
-        {spacing}
+        {eyesImage}
         {React.string(question)}
-        <div />
+        <br />
         <h2> {React.string(choice)} </h2>
         <Spacer />
         <Spacer />
-        <LargeButton className="confirm-yes" onClick={ (_event) => confirmationProcessor(#Yes) } ></LargeButton>
+        <LargeButton className="confirm-yes" title={t("Yes")} onClick={ (_event) => confirmationProcessor(#Yes) } ></LargeButton>
         <Spacer />
-        <LargeButton className="confirm-no" onClick={ (_event) => confirmationProcessor(#No) } ></LargeButton>
+        <LargeButton className="confirm-no" title={t("No")} onClick={ (_event) => confirmationProcessor(#No) } ></LargeButton>
         <Spacer />
     </div>
 }

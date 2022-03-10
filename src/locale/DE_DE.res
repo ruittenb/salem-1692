@@ -127,6 +127,7 @@ let table = Js.Dict.fromArray([
     ("decide whether you want to confess", `entscheiden Sie, ob Sie gestehen möchten`),
     // Reveal
     ("The Reveal", `Die Enthüllung`),
+    ("Click to show:", "Klicken Sie, um zu zeigen:"),
     ("Reveal witch's victim", `Opfer der Hexe enthüllen`),
     ("Reveal witches' victim", `Opfer der Hexen enthüllen`),
     ("The witch attacked-PRE", "Die Hexe hat"),

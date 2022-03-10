@@ -26,7 +26,7 @@ let make = (
     }
 
     // Page element
-    <div id="daytime-page" className="page flex-vertical">
+    <div id="daytime-page" className="page justify-start">
         <BackFloatingButton onClick={ _event => goToPage(_prev => returnPage) } masterMode />
         <GearFloatingButton goToPage returnPage=Daytime />
         <h1> {React.string(t("Daytime"))} </h1>

@@ -315,7 +315,7 @@ let make = (
     )
 
     // component
-    <div id="setup-network-page" className="page flex-vertical">
+    <div id="setup-network-page" className="page justify-start">
         <BackFloatingButton onClick={(_event) => {
             leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
             stopHosting(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
