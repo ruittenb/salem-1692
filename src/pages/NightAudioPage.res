@@ -32,6 +32,10 @@ let make = (
         "Night"
     }
 
+    let eyesImage = (turnState.nightType === Dawn)
+        ? <Spacer verticalFill=true />
+        : <Eyes verticalFill=true />
+
     let abortButton = <Button
         label={t("Abort")}
         className="icon-left icon-abort condensed-nl condensed-de last"
@@ -50,12 +54,11 @@ let make = (
     />
 
     // Construct the core element for this page
-    <div className="night-subpage page flex-vertical spread-vertical">
+    <>
         <h1> {React.string(t(title))} </h1>
-        // vertically step past background eyes
-        <Spacer />
+        {eyesImage}
         {children}
-        <Spacer />
+        <Spacer verticalFill=true />
         { if error {
             {abortButton}
         } else if showNavButtons {
@@ -66,6 +69,6 @@ let make = (
         } else {
             React.null
         }}
-    </div>
+    </>
 }
 

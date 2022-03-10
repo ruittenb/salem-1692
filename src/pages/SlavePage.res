@@ -158,7 +158,7 @@ let make = (
     }
 
     // component
-    <div id={pageWrapperId} className="page flex-vertical">
+    <div id={pageWrapperId} className="page justify-start">
         {pageElement}
     </div>
 }

@@ -89,9 +89,9 @@ watch-stop: ## Stop watching for changes
 	rm .bsb.lock 2>/dev/null || true
 
 .PHONY: merge-repair
-merge-repair: ## repair bundle.js after merging
+merge-repair: ## Repair bundle.js after merging
 	$(MAKE) build && \
-		git add dist/js/bundle.js
+		git add $(BUNDLE)
 
 ##@ Serving the page:
 

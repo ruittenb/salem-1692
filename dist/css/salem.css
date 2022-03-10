@@ -73,11 +73,18 @@ a[href]:focus {
 }
 
 img.sound-image {
-    margin: 50px 0 60px 0;
+    margin: 0 0 auto 0;
 }
 img.sound-image.greyed {
     filter: grayscale(1);
 }
+
+img.eyes-image {
+    width: 100%;
+    max-width: 550px;
+    margin-top: -24px;
+}
+
 img.qr-icon {
     margin: 0 3px 0 6px;
 }
@@ -138,14 +145,11 @@ input[type=text]::placeholder {
     white-space: nowrap;
 }
 
-.flex-vertical {
-    display: flex;
+.justify-start {
     justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
 }
 
-.spread-vertical {
+.justify-spread {
     justify-content: space-between;
 }
 
@@ -153,11 +157,15 @@ input[type=text]::placeholder {
     height: 25px;
     min-height: 25px;
 }
+.vertical-fill {
+    margin-bottom: auto;
+}
 
 #root {
     background: url(../images/background-daytime.webp) center / cover no-repeat;
     width: 100%;
     height: 100%;
+    color: #361807;
 }
 
 p {
@@ -285,13 +293,15 @@ video + .bubble {
 }
 
 .page {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    color: #361807;
 }
 
 .page button {
@@ -325,6 +335,13 @@ video + .bubble {
 }
 .page button.widebutton:active {
     margin-bottom: 22px;
+}
+
+.page button.realsquarebutton {
+    background-position: center center;
+    width: 125px;
+    height: 125px;
+    min-height: 125px;
 }
 
 .page button.spacer-top {
@@ -437,13 +454,6 @@ video + .bubble {
 .page button.icon-checked   { background-image: url(../images/icon-checked.png); }
 .page button.icon-unchecked { background-image: url(../images/icon-unchecked.png); }
 
-/*
-.page button.icon-left.icon-checked,
-.page button.icon-left.icon-unchecked {
-    background-position: 16px center;
-}
-*/
-
 .buttonpair {
     width: 80%;
     display: flex;
@@ -459,7 +469,7 @@ video + .bubble {
 
 #title-page {
     background: url(../images/overlay-title.webp) center / contain no-repeat;
-    justify-content: flex-end; /* prio over flex-vertical */
+    justify-content: flex-end;
 }
 
 /* Custom (non-standard) button spacing for title page */
@@ -499,7 +509,7 @@ video + .bubble {
     100% { background-color: #90783b }
 }
 
-@keyframes RollingGradientBackground {
+@keyframes RollingGradientBackground { /* {{{ */
     0%   { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b   0%, #90783b  10%, #e2d286  50%, #e2d286  60%, #90783b 100%); }
     5%   { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b  -5%, #90783b   5%, #e2d286  45%, #e2d286  55%, #90783b  95%, #90783b 105%); }
     10%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b   0%, #e2d286  40%, #e2d286  50%, #90783b  90%, #90783b 100%); }
@@ -522,6 +532,7 @@ video + .bubble {
     95%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #e2d286 -35%, #90783b   5%, #90783b  15%, #e2d286  55%, #e2d286  65%, #90783b 105%); }
     100% { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b   0%, #90783b  10%, #e2d286  50%, #e2d286  60%, #90783b 100%); }
 }
+/* }}} */
 
 #setup-players-page {
     background: url(../images/overlay-pawn.webp) -190px 120px no-repeat;
@@ -611,9 +622,6 @@ video + .bubble {
 
 #dawn-page {
     background: url(../images/background-dawn.webp) 20% center / auto 100% no-repeat;
-}
-
-#dawn-page .night-subpage {
     color: inherit;
 }
 
@@ -623,18 +631,7 @@ video + .bubble {
 
 #night-page {
     background: url(../images/background-night.webp) center bottom / auto 100vh repeat;
-}
-
-#night-page .night-subpage {
-    background: url(../images/overlay-night.webp) top / 375px no-repeat;
     color: #eee;
-}
-
-.night-subpage button.realsquarebutton {
-    background-position: center center;
-    width: 125px;
-    height: 125px;
-    min-height: 125px;
 }
 
 #player-list {
@@ -661,3 +658,4 @@ video + .bubble {
     background: url(../images/overlay-broom.webp) left -70px bottom 70% no-repeat;
 }
 
+/* vim: set foldmethod=marker: */

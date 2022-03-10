@@ -1,10 +1,10 @@
 /** ****************************************************************************
- * Spacer
+ * Eyes
  */
 
 @react.component
 let make = (
     ~verticalFill: bool = false
 ): React.element =>
-    <div className={verticalFill ? "spacer vertical-fill" : "spacer"} />
+    <img src="images/overlay-night.webp" className={verticalFill ? "eyes-image vertical-fill" : "eyes-image"} />
 

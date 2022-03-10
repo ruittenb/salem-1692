@@ -45,7 +45,7 @@ let make = (
         None
     })
 
-    <div id="setup-page" className="page flex-vertical">
+    <div id="setup-page" className="page justify-start">
         <BackFloatingButton
             onClick={ _event => {
                 setNavigation(_prev => None)

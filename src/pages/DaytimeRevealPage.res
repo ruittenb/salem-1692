@@ -90,7 +90,7 @@ let make = (
     let returnPage = allowBackToConfess ? DaytimeReveal : DaytimeRevealNoConfess
 
     // component
-    <div id="daytime-reveal-page" className="page flex-vertical spread-vertical">
+    <div id="daytime-reveal-page" className="page justify-spread">
         {
             if allowBackToConfess {
                 <BackFloatingButton onClick={
@@ -102,12 +102,11 @@ let make = (
         }
         <GearFloatingButton goToPage returnPage=returnPage />
         <h1 className="condensed-de"> {React.string(t("The Reveal"))} </h1>
+        <p>{React.string(t("Click to show:"))}</p>
+        <Spacer />
         {witchesRevealButton}
         {constableRevealButton}
-        <Spacer />
-        <Spacer />
-        <Spacer />
-        <Spacer />
+        <Spacer verticalFill=true />
         // Back/Forward buttons
         {
             if allowBackToConfess {

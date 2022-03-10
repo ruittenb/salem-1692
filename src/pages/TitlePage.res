@@ -14,7 +14,7 @@ let make = (
 
     let currentPage = Title
 
-    <div id="title-page" className="page flex-vertical">
+    <div id="title-page" className="page justify-start">
         <GearFloatingButton goToPage returnPage=currentPage />
         <Button label={t("Play Game"      )} onClick={ _event => goToPage(_prev => Daytime) } />
         <Button label={t("Multi-Telephone")} onClick={ _event => goToPage(_prev => SetupNetwork) } />

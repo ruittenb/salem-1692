@@ -13,7 +13,7 @@ let make = (
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
     let t = Translator.getTranslator(gameState.language)
 
-    <div id="setup-language-page" className="page flex-vertical">
+    <div id="setup-language-page" className="page justify-start">
         <BackFloatingButton onClick={ _event => goToPage(_prev => Setup) } />
         <h1> {React.string(t("Language"))} </h1>
         <Spacer />

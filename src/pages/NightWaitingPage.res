@@ -15,23 +15,21 @@ let make = (
     let titleAndSpacer = if (turnState.nightType === Dawn) {
         <>
             <h1> {React.string(t("Dawn"))} </h1>
+            <Spacer />
+            <Spacer />
         </>
     } else {
         <>
             <h1> {React.string(t("Night"))} </h1>
-            // vertically step past background eyes
-            <Spacer />
+            <Eyes />
         </>
     }
 
     // Construct the core element for this page
-    <div className="night-subpage page flex-vertical spread-vertical">
+    <div className="page justify-spread">
         {titleAndSpacer}
         <p className="text-centered"> {React.string(t("Everybody is sound asleep... what about you?"))} </p>
-        <Spacer />
-        <Spacer />
-        <Spacer />
-        <Spacer />
+        <Spacer verticalFill=true />
         <Button
             label={t("Abort")}
             className="icon-left icon-abort last"
