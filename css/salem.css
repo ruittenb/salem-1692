@@ -73,7 +73,7 @@ a[href]:focus {
 }
 
 img.sound-image {
-    margin: 50px 0 auto 0;
+    margin: 0 0 auto 0;
 }
 img.sound-image.greyed {
     filter: grayscale(1);
