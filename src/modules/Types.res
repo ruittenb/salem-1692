@@ -82,8 +82,8 @@ type page =
     | Credits
     // Master
     | Daytime
-    | NightFirstOneWitch
-    | NightFirstMoreWitches
+    | NightDawnOneWitch
+    | NightDawnMoreWitches
     | NightOtherWithConstable
     | NightOtherNoConstable
     // Slave

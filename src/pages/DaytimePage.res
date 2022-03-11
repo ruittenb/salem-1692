@@ -33,14 +33,14 @@ let make = (
         <Spacer />
         <LargeButton onClick={ _event => {
             setTurnState(_prev => { ...defaultNextState, nrWitches: One })
-            goToPage(_prev => NightFirstOneWitch)
+            goToPage(_prev => NightDawnOneWitch)
         } } >
             {React.string(t("Dawn,"))} <br />
             {React.string(t("one witch"))}
         </LargeButton>
         <LargeButton onClick={ _event => {
             setTurnState(_prev => defaultNextState)
-            goToPage(_prev => NightFirstMoreWitches)
+            goToPage(_prev => NightDawnMoreWitches)
         } } >
             {React.string(t("Dawn,"))} <br />
             {React.string(t("several witches"))}

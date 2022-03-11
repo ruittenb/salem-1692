@@ -28,7 +28,7 @@ let make = (
     // Scenario: getter and setter, get current step
     let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
     let scenario: scenario = NightScenarios.getScenario(subPage)
-    let witchOrWitches: addressed = (subPage === NightFirstOneWitch) ? Witch : Witches
+    let witchOrWitches: addressed = (subPage === NightDawnOneWitch) ? Witch : Witches
     let pageId: string = (turnState.nightType === Dawn) ? "dawn-page" : "night-page"
 
     // Convert complex steps to simpler ones.
