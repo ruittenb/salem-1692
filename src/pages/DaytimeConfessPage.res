@@ -20,6 +20,7 @@ let make = (
             | None => React.null
             | Some(constableTargetName) =>
                 <>
+                    <Spacer />
                     <LargeRevealButton
                         revealPrompt=t("Reveal constable's protection")
                         revelationPromptPre=t("The constable protected-PRE")
@@ -28,7 +29,6 @@ let make = (
                         revealed=constableTargetRevealed
                         onClick={_event => setConstableTargetRevealed(prev => !prev)}
                     />
-                    <Spacer />
                 </>
         }
 
@@ -46,7 +46,6 @@ let make = (
         <h1> {React.string(t("Confess"))} </h1>
         <h2> {React.string(t("Everyone,"))} </h2>
         <p className="text-centered"> {React.string(t("decide whether you want to confess"))} </p>
-        <Spacer />
         {constableRevealButton}
         <Spacer verticalFill=true />
         <Button
