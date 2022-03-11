@@ -25,6 +25,7 @@ A web app for fulfilling the moderator role in the Salem 1692 card game
 - [Firebase Realtime Database](https://firebase.google.com/docs/database)
   - [Getting Started (documentation)](https://firebase.google.com/docs/database/web/start)
   - [Getting Started (video)](https://www.youtube.com/watch?v=rQvOAnNvcNQ)
+- [Git Subtree](https://www.atlassian.com/git/tutorials/git-subtree)
 
 ## Directory Structure
 
