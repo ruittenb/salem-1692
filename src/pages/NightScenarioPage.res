@@ -23,7 +23,10 @@ let make = (
 
     // Audio error handler
     let (hasError, setError) = React.useState(_ => false)
-    let onError = (_event): unit => setError(_ => true)
+    let onError = () => setError(_ => true)
+
+    // When the scenario gets exhausted
+    let (exitFn: () => (), setExitFn) = React.useState(_ => () => ())
 
     // Scenario: getter and setter, get current step
     let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
@@ -36,13 +39,11 @@ let make = (
     let maybeScenarioStep: option<scenarioStep> = NightScenarios.getScenarioStep(subPage, scenarioIndex, gameState)
 
     // After every render: check if there is still a next scenario step
+    let exitPage = turnState.nightType === Dawn ? DaytimeRevealNoConfess : DaytimeConfess
     React.useEffect(() => {
-        switch (maybeScenarioStep, turnState.nightType) {
-            // There are still steps in the scenario
-            | (Some(_), _)  => ()
-            // The scenario is exhausted: find the correct next page
-            | (None, Dawn)  => goToPage(_page => DaytimeRevealNoConfess)
-            | (None, Night) => goToPage(_page => DaytimeConfess)
+        if (maybeScenarioStep === None) {
+            // The scenario is exhausted
+            setExitFn(_prevFn => () => goToPage(_ => exitPage))
         }
         None // no cleanup function
     })
@@ -96,9 +97,9 @@ let make = (
     }, [ maybeScenarioStep ])
 
     // Event handlers for stepping through scenario
-    let goToPrevStep  = (): unit => goToScenarioIndex(scenarioIndex => scenarioIndex - 1)
-    let goToNextStep  = (): unit => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
-    let onEnded = (_event): unit => goToNextStep()
+    let goToPrevStep  = () => goToScenarioIndex(scenarioIndex => scenarioIndex - 1)
+    let goToNextStep  = () => goToScenarioIndex(scenarioIndex => scenarioIndex + 1)
+    let onEnded       = () => goToNextStep()
 
     // Store chosen players (killed and saved) in context
     let goFromWitchChoiceToNextStep = (player: player, ~skipConfirmation: bool): unit => {
@@ -133,13 +134,15 @@ let make = (
     let soundImageGreyed = <img src="images/gramophone.webp" className="sound-image greyed" />
 
     let backgroundMusicElement = if gameState.doPlayMusic {
+        let loop = maybeScenarioStep !== None
         gameState.backgroundMusic
             ->Belt.Array.get(0)
             ->Belt.Option.mapWithDefault(
                 React.null,
-                track => <AudioBackground track />
+                track => <AudioBackground track loop onEnded=exitFn />
             )
     } else {
+        // goToPage(_ => exitPage)
         React.null
     }
 
@@ -157,17 +160,23 @@ let make = (
     // Construct the page
     let pageElement = switch maybeScenarioStep {
         | _ if hasError                 => <NightErrorPage message=t("Unable to load audio") goToPage />
-        | None                          => React.null // apparently always happens right before changing page
+
+        | None                          => <NightAudioPage goToPage goToNextStep >
+                                               {soundImageGreyed}
+                                           </NightAudioPage>
 
         | Some(ConditionalStep(_))      => {   Utils.logError(p ++ "ConditionalStep should have been evaluated")
                                                React.null
                                            }
+
         | Some(PlayRandomEffect(_))     => {   Utils.logError(p ++ "PlayRandomEffect should have been replaced with PlayEffect")
                                                React.null
                                            }
+
         | Some(Pause(duration))         => <NightAudioPage goToPage goToNextStep timerId={makeTimer(duration)} >
                                                {soundImageGreyed}
                                            </NightAudioPage>
+
         | Some(PlayEffect(effect))
              if gameState.doPlayEffects => <NightAudioPage goToPage goToNextStep>
                                                {soundImage}

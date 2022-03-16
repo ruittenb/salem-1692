@@ -23,16 +23,17 @@ let make = (
     ~track: audioType,
     ~volume: float = 1.0,
     ~loop: bool = false,
-    ~onEnded: mediaHandler = _ => (),
-    ~onError: mediaHandler = _ => (),
+    ~fadeOut: bool = false,
+    ~onEnded = () => (),
+    ~onError = () => (),
 ): React.element => {
 
     let (gameState, _setGameState) = React.useContext(GameStateContext.context)
 
     let audioRef = React.useRef(Js.Nullable.null)
+    let volumeAdjustRef = React.useRef(1.0);
 
-    // run after mounting
-    React.useEffect0(() => {
+    let setVolume = (volume) => {
         audioRef.current
             ->Js.Nullable.toOption
             ->Belt.Option.forEach(
@@ -40,7 +41,32 @@ let make = (
                     ->unsafeAsHtmlAudioElement
                     ->setVolume(volume)
             )
-        None // cleanup function
+    }
+
+    // run after mounting
+    React.useEffect0(() => {
+        let fadeTimerId = if (fadeOut) {
+            Js.Global.setInterval(() => {
+                volumeAdjustRef.current = volumeAdjustRef.current -. fadeStep
+                if (volumeAdjustRef.current >= 0.) {
+                    Utils.logDebug(p ++ "volume " ++ Js.Float.toFixed(10. *. volumeAdjustRef.current))
+                    setVolume(volume *. volumeAdjustRef.current)
+                } else {
+                    onEnded()
+                }
+            }, fadeInterval)->Some
+        } else {
+            setVolume(volume)
+            None
+        }
+
+        // cleanup function
+        Some(() => {
+            fadeTimerId
+                ->Belt.Option.forEach(timerId => {
+                    Js.Global.clearInterval(timerId)
+                })
+        })
     })
 
     let musicDirectory  = "audio/music/"
@@ -76,8 +102,8 @@ let make = (
         | Music(fileName)                => musicDirectory ++ fileName
     }
     <audio src loop autoPlay=true
-        onEnded
-        onError
+        onEnded={ _event => onEnded() }
+        onError={ _event => onError() }
         ref={ReactDOM.Ref.domRef(audioRef)}
     />
 }
