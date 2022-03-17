@@ -34,8 +34,8 @@ let make = (
     ~onAlarm: unit => unit = () => (),
 ): React.element => {
     let (remainingTime, setRemainingTime) = React.useState(_ => 100) // percent
-    // total available time lies somewhere between 6 and 12 seconds
-    let delay = React.useRef(Js.Math.random_int(60, 120))
+    // total available time lies somewhere between 6 and 10 seconds
+    let delay = Js.Math.random_int(60, 100)
 
     let tick = () => {
         if (remainingTime > zeroTime) {
@@ -51,12 +51,12 @@ let make = (
 
     // Runs only once right after mounting the component
     React.useEffect0(() => {
-        Utils.logDebug(p ++ "Setting tick time to " ++ Belt.Int.toString(delay.current) ++ "ms")
+        Utils.logDebug(p ++ "Setting tick time to " ++ Belt.Int.toString(delay) ++ "ms")
         None // Cleanup
     })
     // Run every tick
     React.useEffect1(() => {
-        let timerId = Js.Global.setTimeout(tick, delay.current)
+        let timerId = Js.Global.setTimeout(tick, delay)
         // Cleanup
         Some(() => {
             Js.Global.clearTimeout(timerId)
