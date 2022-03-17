@@ -28,27 +28,37 @@ let make = (
     // Scenario: getter and setter, get current step
     let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
     let scenario: scenario = NightScenarios.getScenario(subPage)
-    let witchOrWitches: addressed = (subPage === NightFirstOneWitch) ? Witch : Witches
+    let witchOrWitches: addressed = (subPage === NightDawnOneWitch) ? Witch : Witches
     let pageId: string = (turnState.nightType === Dawn) ? "dawn-page" : "night-page"
 
-    let resolveEffectSet = (step): scenarioStep => {
+    // Convert complex steps to simpler ones.
+    let convertConditionals = (step): scenarioStep => {
         switch step {
-            // should effectSet be empty: use 1s of silence as default
+            | ConditionalStep(getStep) => getStep(gameState) // or convertConditionals(getStep(gameState)) if needed
+            | _                        => step
+        }
+    }
+    let convertEffectSet = (step): scenarioStep => {
+        switch step {
+            // Should effectSet be empty: use 1s of silence as default
             | PlayRandomEffect(effectSet) => Utils.pickRandomElement(effectSet, Silence1s)->PlayEffect
             | _                           => step
         }
     }
-    let resolveSilences = (step): scenarioStep => {
+    let convertSilences = (step): scenarioStep => {
         switch step {
+            // Replace 'play silence' with actual pause. This ensures that the gramophone image is inactive
             | PlayEffect(Silence2s) => Pause(2.0)
             | PlayEffect(Silence1s) => Pause(1.0)
             | _                     => step
         }
     }
 
+    // Order of conversions is important here
     let maybeScenarioStep: option<scenarioStep> = Belt.Array.get(scenario, scenarioIndex)
-        ->Belt.Option.map(resolveEffectSet)
-        ->Belt.Option.map(resolveSilences)
+        ->Belt.Option.map(convertConditionals)
+        ->Belt.Option.map(convertEffectSet)
+        ->Belt.Option.map(convertSilences)
 
     // After every render: check if there is still a next scenario step
     React.useEffect(() => {
@@ -88,7 +98,7 @@ let make = (
         let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
         Utils.logDebugStyled(
             p ++ "Detected turnState change; nightType:" ++ nightType ++ " witchesNumerus:" ++ nrWitches ++
-            " victims: witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
+            " witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
             "font-weight: bold"
         )
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
@@ -102,7 +112,7 @@ let make = (
         let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
         let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
         Utils.logDebugStyled(
-            p ++ "Detected scenarioStep change; victims: witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
+            p ++ "Detected scenarioStep change; witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
             "font-weight: bold"
         )
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
@@ -171,14 +181,18 @@ let make = (
     // Construct the page
     let pageElement = switch maybeScenarioStep {
         | _ if hasError                 => <NightErrorPage message=t("Unable to load audio") goToPage />
-        | None                          => React.null // catch this situation in useEffect above
+        | None                          => {   Utils.logError(p ++ "No current step found, should have changed page")
+                                               React.null
+                                           }
+        | Some(ConditionalStep(_))      => {   Utils.logError(p ++ "ConditionalStep should have been evaluated")
+                                               React.null
+                                           }
+        | Some(PlayRandomEffect(_))     => {   Utils.logError(p ++ "PlayRandomEffect should have been replaced with PlayEffect")
+                                               React.null
+                                           }
         | Some(Pause(duration))         => <NightAudioPage goToPage goToNextStep timerId={makeTimer(duration)} >
                                                {soundImageGreyed}
                                            </NightAudioPage>
-
-        | Some(PlayRandomEffect(_))     => {   Utils.logDebug(p ++ "This step should have been replaced with PlayEffect")
-                                               React.null // has been resolved above
-                                           }
         | Some(PlayEffect(effect))
              if gameState.doPlayEffects => <NightAudioPage goToPage goToNextStep>
                                                {soundImage}

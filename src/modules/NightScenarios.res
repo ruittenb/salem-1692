@@ -4,9 +4,16 @@
 
 open Types
 
+// If there are ghost players, the constable is also allowed to choose himself.
+let getConstableInstructionSpeech = (gameState) => if gameState.hasGhostPlayers {
+    PlaySpeech(ConstableDecideAny)
+} else {
+    PlaySpeech(ConstableDecideOther)
+}
+
 let getScenario = (subPage: page): scenario => {
     switch subPage {
-        | NightFirstOneWitch      => [
+        | NightDawnOneWitch => [
             PlayEffect(ChurchBell),
             PlaySpeech(TownGoToSleep),
             PlayRandomEffect([ Silence2s, Crickets ]),
@@ -19,7 +26,7 @@ let getScenario = (subPage: page): scenario => {
             PlayEffect(Rooster),
             PlaySpeech(TownWakeUp),
         ]
-        | NightFirstMoreWitches   => [
+        | NightDawnMoreWitches => [
             PlayEffect(ChurchBell),
             PlaySpeech(TownGoToSleep),
             PlayRandomEffect([ Silence2s, Crickets ]),
@@ -45,6 +52,7 @@ let getScenario = (subPage: page): scenario => {
             PlayRandomEffect([ CatMeowing, DogBarking, Footsteps, Thunderstrike ]),
             Pause(1.0),
             PlaySpeech(ConstableWakeUp),
+            ConditionalStep(getConstableInstructionSpeech),
             ChooseConstable,
             ConfirmConstable,
             PlaySpeech(ConstableGoToSleep),
@@ -52,7 +60,7 @@ let getScenario = (subPage: page): scenario => {
             PlayEffect(Rooster),
             PlaySpeech(TownWakeUp),
         ]
-        | NightOtherNoConstable   => [
+        | NightOtherNoConstable => [
             PlayEffect(ChurchBell),
             PlaySpeech(TownGoToSleep),
             PlayRandomEffect([ Silence2s, Crickets ]),

@@ -82,8 +82,8 @@ type page =
     | Credits
     // Master
     | Daytime
-    | NightFirstOneWitch
-    | NightFirstMoreWitches
+    | NightDawnOneWitch
+    | NightDawnMoreWitches
     | NightOtherWithConstable
     | NightOtherNoConstable
     // Slave
@@ -111,6 +111,8 @@ type audioSpeech =
     | WitchGoToSleep
     | WitchesGoToSleep
     | ConstableWakeUp
+    | ConstableDecideAny
+    | ConstableDecideOther
     | ConstableGoToSleep
     | TownWakeUp
 
@@ -133,15 +135,18 @@ type audioType =
     | Effect(audioEffect)
     | Music(audioMusic)
 
-type scenarioStep =
+type rec getConditionalStep = (gameState) => scenarioStep
+and scenarioStep =
     | PlaySpeech(audioSpeech)
     | PlayEffect(audioEffect)
     | PlayRandomEffect(array<audioEffect>)
     | Pause(float)
+    | ConditionalStep(getConditionalStep)
     | ChooseWitches
     | ConfirmWitches
     | ChooseConstable
     | ConfirmConstable
+
 
 type scenario = array<scenarioStep>
 

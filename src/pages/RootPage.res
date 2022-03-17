@@ -62,8 +62,8 @@ let make = (): React.element => {
         | Credits                 => <CreditsPage goToPage />
         | Daytime                 => <DaytimePage goToPage />
         // Master
-        | NightFirstOneWitch      => <NightScenarioPage goToPage subPage=currentPage />
-        | NightFirstMoreWitches   => <NightScenarioPage goToPage subPage=currentPage />
+        | NightDawnOneWitch      => <NightScenarioPage goToPage subPage=currentPage />
+        | NightDawnMoreWitches   => <NightScenarioPage goToPage subPage=currentPage />
         | NightOtherNoConstable   => <NightScenarioPage goToPage subPage=currentPage />
         | NightOtherWithConstable => <NightScenarioPage goToPage subPage=currentPage />
         // Slave
