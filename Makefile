@@ -115,7 +115,6 @@ tag-%: ## Update the %:major:minor:patch:% version number and create git tag
 	npm version $*                            && \
 	VERSION_TO=$$(jq .version package.json)   && \
 	rpl $$VERSION_FROM $$VERSION_TO $(VERSION_FILES)
-	@read -p $$'\nPress ENTER to recompile and integrate the new version number:' ans
 	$(MAKE) finish-tag
 
 .PHONY: finish-tag
@@ -138,12 +137,10 @@ publish: ## Publish the master branch on Github Pages
 	git subtree push --prefix dist origin master:github-pages
 
 .PHONY: publish-f
+# git subtree split --prefix dist -b github-pages # create a local github-pages branch containing the splitted output folder
+# git push -f origin github-pages:github-pages    # force push the github-pages branch to origin
+# git branch -D github-pages                      # delete the local github-pages because you will need it (?)
 publish-f: ## Publish the master branch on Github Pages (force push)
-	@# create a local github-pages branch containing the splitted output folder
-	@#git subtree split --prefix dist -b github-pages && \
-	@# force push the github-pages branch to origin
-	@#git push -f origin github-pages:github-pages && \
-	@# delete the local github-pages because you will need it (?)
-	@#git branch -D github-pages
 	git checkout master && \
 	git push --force origin `git subtree split --prefix dist master`:github-pages
+
