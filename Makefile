@@ -4,6 +4,8 @@ export PATH:=$(PATH):$(shell npm bin)
 JS_COLOR=10 # bold green
 CSS_COLOR=15 # bold yellow
 
+PORT=3001
+
 SRC=src
 DIST=dist
 BUNDLE=$(DIST)/js/bundle.js
@@ -97,7 +99,7 @@ merge-repair: ## Repair bundle.js after merging
 
 .PHONY: serve
 serve: ## Serve the page over http
-	serve $(DIST) &
+	serve -l $(PORT) $(DIST) &
 
 .PHONY: serve-stop
 serve-stop: ## Stop serving the page
@@ -135,3 +137,13 @@ move-tag: ## Move the tag for the current package.json version to this branch
 publish: ## Publish the master branch on Github Pages
 	git subtree push --prefix dist origin master:github-pages
 
+.PHONY: publish-f
+publish-f: ## Publish the master branch on Github Pages (force push)
+	@# create a local github-pages branch containing the splitted output folder
+	@#git subtree split --prefix dist -b github-pages && \
+	@# force push the github-pages branch to origin
+	@#git push -f origin github-pages:github-pages && \
+	@# delete the local github-pages because you will need it (?)
+	@#git branch -D github-pages
+	git checkout master && \
+	git push --force origin `git subtree split --prefix dist master`:github-pages
