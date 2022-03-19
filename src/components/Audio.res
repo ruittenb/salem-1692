@@ -12,6 +12,12 @@ open Types
 @set external setVolume: (Dom.htmlAudioElement, float) => unit = "volume"
 external unsafeAsHtmlAudioElement : Dom.element => Dom.htmlAudioElement = "%identity"
 
+let p = "[Audio] "
+
+// Fade out over 1s
+let fadeInterval = 100 // milliseconds
+let fadeStep = 0.1
+
 @react.component
 let make = (
     ~track: audioType,

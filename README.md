@@ -53,5 +53,9 @@ make serve
 
 ## Debugging
 
-Debugging output (in the browser console) can be obtained by [changing the User-Agent string](https://www.alphr.com/change-user-agent-string-google-chrome/) to contain the text "Salem/1692".
+Debugging output (in the browser console) can be obtained by changing the User-Agent string
+[Chrome](https://www.alphr.com/change-user-agent-string-google-chrome/)
+[Safari](https://www.technipages.com/how-to-change-user-agent-in-safari)
+to contain the text "Salem/1692".
+
 

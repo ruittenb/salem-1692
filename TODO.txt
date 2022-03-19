@@ -1,5 +1,13 @@
 
 SEVERE:
+ - dawn background: stretch horizontally
+ - Version: 15.4
+ - Safari: backgroundmusic sometimes(?) too loud (as loud as speech)
+ - Safari: scan camera does not work
+ - Timer/ghostplayers does not sync between master and slave
+ - Safari/slave: 
+ - Safari/master: speech does not continue automatically
+ - Safari/night confirm page: buttons not high enough
  - with ghost players, the constable is allowed to choose themselves
    - done: FR, DE, EN, ES
 	 - todo: NL
