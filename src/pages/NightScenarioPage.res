@@ -27,38 +27,13 @@ let make = (
 
     // Scenario: getter and setter, get current step
     let (scenarioIndex, goToScenarioIndex) = React.useState(_ => 0)
-    let scenario: scenario = NightScenarios.getScenario(subPage)
+
+    // What kind of night is this?
     let witchOrWitches: addressed = (subPage === NightDawnOneWitch) ? Witch : Witches
     let pageId: string = (turnState.nightType === Dawn) ? "dawn-page" : "night-page"
 
-    // Convert complex steps to simpler ones.
-    let convertConditionals = (step): scenarioStep => {
-        switch step {
-            | ConditionalStep(getStep) => getStep(gameState) // or convertConditionals(getStep(gameState)) if needed
-            | _                        => step
-        }
-    }
-    let convertEffectSet = (step): scenarioStep => {
-        switch step {
-            // Should effectSet be empty: use 1s of silence as default
-            | PlayRandomEffect(effectSet) => Utils.pickRandomElement(effectSet, Silence1s)->PlayEffect
-            | _                           => step
-        }
-    }
-    let convertSilences = (step): scenarioStep => {
-        switch step {
-            // Replace 'play silence' with actual pause. This ensures that the gramophone image is inactive
-            | PlayEffect(Silence2s) => Pause(2.0)
-            | PlayEffect(Silence1s) => Pause(1.0)
-            | _                     => step
-        }
-    }
-
-    // Order of conversions is important here
-    let maybeScenarioStep: option<scenarioStep> = Belt.Array.get(scenario, scenarioIndex)
-        ->Belt.Option.map(convertConditionals)
-        ->Belt.Option.map(convertEffectSet)
-        ->Belt.Option.map(convertSilences)
+    // Get the current scenario step. Convert complex ones to simple ones.
+    let maybeScenarioStep: option<scenarioStep> = NightScenarios.getScenarioStep(subPage, scenarioIndex, gameState)
 
     // After every render: check if there is still a next scenario step
     React.useEffect(() => {
@@ -181,9 +156,8 @@ let make = (
     // Construct the page
     let pageElement = switch maybeScenarioStep {
         | _ if hasError                 => <NightErrorPage message=t("Unable to load audio") goToPage />
-        | None                          => {   Utils.logError(p ++ "No current step found, should have changed page")
-                                               React.null
-                                           }
+        | None                          => React.null // apparently always happens right before changing page
+
         | Some(ConditionalStep(_))      => {   Utils.logError(p ++ "ConditionalStep should have been evaluated")
                                                React.null
                                            }

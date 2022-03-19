@@ -136,7 +136,8 @@ type audioType =
     | Music(audioMusic)
 
 type rec getConditionalStep = (gameState) => scenarioStep
-and scenarioStep =
+
+and /* type */ scenarioStep =
     | PlaySpeech(audioSpeech)
     | PlayEffect(audioEffect)
     | PlayRandomEffect(array<audioEffect>)
