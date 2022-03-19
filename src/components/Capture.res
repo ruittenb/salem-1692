@@ -12,7 +12,7 @@
  *   - https://webcodeflow.com/online-qr-code-reader/
  *   - https://github.com/sinchang/qrcode-parser
  *
- * - permissions
+ * - permissions (N.B. permissions API is not supported on Safari <= 15.4)
  *   - https://developer.mozilla.org/en-US/docs/Web/API/Navigator/permissions
  *   - https://w3c.github.io/permissions/#permissions-interface
  */
@@ -49,7 +49,7 @@ external unsafeAsHtmlCanvasElement : Dom.element => Dom.htmlCanvasElement = "%id
 // navigator
 @get external mediaDevices: (navigator) => mediaDevices = "mediaDevices"
 @send external getUserMedia: (mediaDevices, mediaConstraints) => Promise.t<stream> = "getUserMedia"
-@get external permissions: (navigator) => permissions = "permissions"
+@get external permissions: (navigator) => Js.Nullable.t<permissions> = "permissions"
 @send external permissionsQuery: (permissions, permissionDescriptor) => Promise.t<permissionStatus> = "query"
 
 @send external addEventListener: (permissionStatus, string, (changeEvent) => unit) => unit = "addEventListener"
@@ -83,10 +83,13 @@ let canvasHeight = 480
 
 let mediaConstraints: mediaConstraints = { video: { facingMode: "environment" } }
 
+let unsupportedStatus: permissionStatus = { name: "camera", state: "unsupported" }
+
 let getCameraPermissions = (): Promise.t<permissionStatus> => {
-    navigator
-        ->permissions
-        ->permissionsQuery({ name: "camera" })
+    switch navigator->permissions->Js.Nullable.toOption {
+        | None       => Promise.resolve(unsupportedStatus)
+        | Some(perm) => perm->permissionsQuery({ name: "camera" })
+    }
 }
 
 let startRecording = (
@@ -190,17 +193,18 @@ let make = (
     ): unit => {
         logDebug(p ++ "camera permissions: " ++ state)
         switch state {
-            | "granted" => {
+            | "granted"     => {
                 setCameraAvailability(_prev => Granted)
-                // might give error: "The play() request was interrupted by a new load"
+                // next line might give error: "The play() request was interrupted by a new load"
                 //let _isRecording = startRecording(maybeVideoElement, maybeGetUserMedia)
             }
-            | "denied"  => {
+            | "denied"      => {
                 setCameraAvailability(_prev => Denied)
                 //stopRecording(maybeVideoElement)
             }
-            | "prompt"  => setCameraAvailability(_prev => Prompt)
-            | _         => ()
+            | "prompt"      => setCameraAvailability(_prev => Prompt)
+            | "unsupported" => setCameraAvailability(_prev => Unsupported) // probably never invoked because of lack of support
+            | _             => ()
         }
     }
 
@@ -226,29 +230,35 @@ let make = (
             captureAndParseFrame(maybeVideoElement, maybeCanvasElement, callback)
         }, snapInterval)
 
-        // Find out camera recording permissions and react to a change in them
+        // Find out camera recording permissions and react to a change in them.
         // JS: navigator.permissions.query({ name: 'camera' }).then(res => console.log(res.state))
+        // N.B. not all browsers support the Permissions API
         let cameraPermissionsPromise = getCameraPermissions()
-        cameraPermissionsPromise
             ->Promise.then(status => {
+                logDebug(p ++ "camera permissions: " ++ status.state)
                 permissionStateHandler(status.state) // , maybeVideoElement, maybeGetUserMedia
-                status->addEventListener("change", permissionStatusChangeHandler)
-                Promise.resolve()
+                if (status.state === "unsupported") {
+                    setCameraAvailability(_prev => Unsupported)
+                } else {
+                    status->addEventListener("change", permissionStatusChangeHandler)
+                }
+                Promise.resolve(status)
             })
             ->Promise.catch(_error => {
                 logDebug(p ++ "camera permissions: dismissed")
                 setCameraAvailability(_prev => Dismissed)
-                Promise.resolve()
+                Promise.resolve(unsupportedStatus)
             })
-            ->ignore
 
         // Cleanup function
         Some(() => {
             Js.Global.clearInterval(snapTimerId)
             cameraPermissionsPromise
                 ->Promise.then(status => {
-                    logDebug(p ++ "Clearing permission status change handler")
-                    status->removeEventListener("change", permissionStatusChangeHandler)
+                    if (status.state !== "unsupported") {
+                        logDebug(p ++ "Clearing permission status change handler")
+                        status->removeEventListener("change", permissionStatusChangeHandler)
+                    }
                     Promise.resolve()
                 })
                 ->ignore
@@ -257,10 +267,11 @@ let make = (
     })
 
     let statusElement = switch cameraAvailability {
-        | Dismissed
-        | Denied  => <div className="bubble">{React.string(t("No authorization to use the camera"))}</div>
-        | Prompt  => <div className="bubble">{React.string(t("Please authorize the use of the camera to scan a QR code"))}</div>
-        | Granted => React.null
+        | Denied
+        | Dismissed   => <div className="bubble">{React.string(t("No authorization to use the camera"))}</div>
+        | Prompt      => <div className="bubble">{React.string(t("Please authorize the use of the camera to scan a QR code"))}</div>
+        | Granted
+        | Unsupported => React.null
     }
 
     // component

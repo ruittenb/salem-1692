@@ -20,6 +20,7 @@ type permissionState =
     | Denied
     | Prompt
     | Dismissed
+    | Unsupported
 
 type evenOdd =
     | Even
