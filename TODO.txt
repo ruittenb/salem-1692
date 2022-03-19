@@ -1,8 +1,8 @@
 
 SEVERE:
  - with ghost players, the constable is allowed to choose themselves
-   - done: FR, DE
-	 - todo: NL, EN, ES
+   - done: FR, DE, EN, ES
+	 - todo: NL
 
 IMPORTANT:
  - right after mounting: preserve slave/master status? in localstorage?

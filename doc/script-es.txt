@@ -25,8 +25,10 @@ J. Las brujas han elegido a su víctima y cierran de nuevo sus ojos.
 
 M. Cuando las brujas cierran sus ojos, el alguacil despierta.
    El alguacil decide quién será protegido esta noche.
-   Pero no puede elegirse a si mismo.
 
+P. Pero no puede elegirse a si mismo.
+
+Q. También puede elegirse a si mismo.
 
 N. El alguacil ha tomado su decisión y cierra sus ojos de nuevo.
 

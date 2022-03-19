@@ -25,8 +25,10 @@ J. Die Hexen haben ihre Entscheidung gemacht und schliessen die Augen wieder.
 
 M. Wenn die Hexen die Augen wieder geschlossen haben, wacht der Sheriff auf.
    Der Sheriff entscheidet wer diese Nacht geschützt wird.
-   Er darf nicht sich selbst wählen.
 
+P. Er darf nicht sich selbst wählen.
+
+Q. Er darf sich selbst wählen.
 
 N. Der Sheriff hat eine Entscheidung gemacht und schliesst die Augen wieder.
 

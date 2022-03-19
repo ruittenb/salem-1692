@@ -64,7 +64,7 @@ let make = (
     React.useEffect(() => {
         switch (maybeScenarioStep, turnState.nightType) {
             // There are still steps in the scenario
-            | (Some(_), _)                  => ()
+            | (Some(_), _)  => ()
             // The scenario is exhausted: find the correct next page
             | (None, Dawn)  => goToPage(_page => DaytimeRevealNoConfess)
             | (None, Night) => goToPage(_page => DaytimeConfess)

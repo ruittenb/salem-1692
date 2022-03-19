@@ -25,8 +25,10 @@ J. Les sorcières ont fait leur choix et ferment les yeux.
 
 M. Quand les sorcières ont fermés les yeux, le shérif se réveille.
    Le shérif décide qui va être protégé cette nuit.
-   Il ne peut pas se désigner.
 
+P. Il ne peut pas se désigner.
+
+Q. Il peut s'auto-désigner.
 
 N. Le shérif a fait son choix et referme les yeux.
 

@@ -5,7 +5,7 @@ A. De nacht valt. Het dorp gaat slapen; iedereen doet de ogen dicht.
 B. Als iedereen de ogen dicht heeft, wordt de heks wakker.
 
 E. De heks opent de ogen en zonder geluid te maken beslist ze wie de zwarte kat krijgt.
-   Ze mag óók zichzelf kiezen.
+   Ze mag ook zichzelf kiezen.
 
 H. De heks heeft haar keuze gemaakt en doet de ogen weer dicht.
 
@@ -14,19 +14,21 @@ D. Als iedereen de ogen dicht heeft, worden de heksen wakker.
    De heksen openen de ogen en maken oogcontact.
 
 F. Geluidloos en alleen met gebaren komen ze overeen wie de zwarte kat krijgt.
-   Ze mógen een van henzelf kiezen.
+   Ze mogen een van henzelf kiezen.
 
 G. Geluidloos en alleen met gebaren komen de heksen overeen wie ze willen vermoorden.
-   Ze mógen een van henzelf kiezen.
+   Ze mogen een van henzelf kiezen.
 
 
 J. De heksen hebben hun keuze gemaakt en doen de ogen weer dicht.
 
 
-M. Als de heksen de ogen weer dícht hebben, wordt de schout wakker.
+M. Als de heksen de ogen weer dicht hebben, wordt de schout wakker.
    De schout beslist wie deze nacht beschermd gaat worden.
-   Hij mag níet zichzelf kiezen.
 
+P. Hij mag niet zichzelf kiezen.
+
+Q. Hij mag ook zichzelf kiezen.
 
 N. De schout heeft een keuze gemaakt en doet de ogen weer dicht.
 
