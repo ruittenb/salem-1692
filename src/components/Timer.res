@@ -51,7 +51,8 @@ let make = (
 
     // Runs only once right after mounting the component
     React.useEffect0(() => {
-        Utils.logDebug(p ++ "Setting tick time to " ++ Belt.Int.toString(delay) ++ "ms")
+        let delayFloat = Belt.Int.toFloat(delay) /. 10.
+        Utils.logDebug(p ++ "Setting timeout to " ++ Belt.Float.toString(delayFloat) ++ "s")
         None // Cleanup
     })
     // Run every tick
@@ -63,7 +64,7 @@ let make = (
         })
     }, [ remainingTime ])
 
-    let fuseLength = containerWidth *. remainingTime->Belt.Int.toFloat /. 100.
+    let fuseLength = containerWidth *. Belt.Int.toFloat(remainingTime) /. 100.
     let style = ReactDOM.Style.make(
         ~width=Belt.Float.toString(fuseLength) ++ "px", ()
     )

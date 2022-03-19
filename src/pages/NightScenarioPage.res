@@ -72,8 +72,8 @@ let make = (
         let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
         let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
         Utils.logDebugStyled(
-            p ++ "Detected turnState change; nightType:" ++ nightType ++ " witchesNumerus:" ++ nrWitches ++
-            " witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
+            p ++ `Detected turnState change; ◇ nightType:` ++ nightType ++ ` ◇ numerus:` ++ nrWitches ++
+            ` ◇ witches:` ++ choiceWitches ++ ` ◇ constable:` ++ choiceConstable,
             "font-weight: bold"
         )
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
@@ -84,11 +84,10 @@ let make = (
 
     // if we're hosting, save game page+step (= phase) to firebase after every change
     React.useEffect1(() => {
-        let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
-        let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
-        Utils.logDebugStyled(
-            p ++ "Detected scenarioStep change; witches:" ++ choiceWitches ++ " constable:" ++ choiceConstable,
-            "font-weight: bold"
+        //let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
+        //let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
+        Utils.logDebug(
+            p ++ "Detected scenarioStep change" // ++ `; ◇ witches:` ++ choiceWitches ++ ` ◇ constable:` ++ choiceConstable
         )
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
             FirebaseClient.saveGamePhase(dbConnection, gameId, subPage, maybeScenarioStep)
