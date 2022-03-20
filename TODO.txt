@@ -1,16 +1,13 @@
 
 SEVERE:
- - Version: 15.4
- - Safari: backgroundmusic sometimes(?) too loud (as loud as speech)
  - Timer/ghostplayers does not sync between master and slave
- - Safari/slave: 
  - Safari/master: speech does not continue automatically
- - Safari/night confirm page: buttons not tall enough
  - with ghost players, the constable is allowed to choose themselves
    - done: FR, DE, EN, ES
 	 - todo: NL
 
 IMPORTANT:
+ - Safari: backgroundmusic sometimes(?) as loud as speech
  - right after mounting: preserve slave/master status? in localstorage?
 
 NICE TO HAVE:
