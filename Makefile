@@ -136,11 +136,11 @@ move-tag: ## Move the tag for the current package.json version to this branch
 publish: ## Publish the master branch on Github Pages
 	git subtree push --prefix dist origin master:github-pages
 
-.PHONY: publish-f
+.PHONY: publish-force
 # git subtree split --prefix dist -b github-pages # create a local github-pages branch containing the splitted output folder
 # git push -f origin github-pages:github-pages    # force push the github-pages branch to origin
 # git branch -D github-pages                      # delete the local github-pages because you will need it (?)
-publish-f: ## Publish the master branch on Github Pages (force push)
+publish-force: ## Publish the master branch on Github Pages (force push)
 	git checkout master && \
 	git push --force origin `git subtree split --prefix dist master`:github-pages
 
