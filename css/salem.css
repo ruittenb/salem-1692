@@ -665,7 +665,7 @@ video + .bubble {
  */
 
 #daytime-confess-page {
-    background: url(../images/overlay-hourglass.webp) -20vw / 70vw no-repeat;
+    background: url(../images/overlay-hourglass.webp) -90px / 40vh no-repeat;
 }
 
 #daytime-reveal-page {
