@@ -609,7 +609,14 @@ video + .bubble {
 
 #daytime-page,
 #daytime-waiting-page {
-    background: url(../images/overlay-village.webp) 90% 20vh / auto 80vh no-repeat;
+    background: url(../images/overlay-village.webp) 50% 20vh / auto 80vh no-repeat;
+}
+
+@media (min-aspect-ratio: 1186 / 625) /* 100% width, 125% height (=100%/80vh) overlay-village.webp */ {
+    #daytime-page,
+    #daytime-waiting-page {
+        background-size: 100% 80vh; /* instead of "auto 80vh" */
+    }
 }
 
 #daytime-waiting-page {
@@ -623,6 +630,13 @@ video + .bubble {
 #dawn-page {
     background: url(../images/background-dawn.webp) 20% center / auto 100% no-repeat;
     color: inherit;
+}
+
+@media (min-aspect-ratio: 750 / 500) /* width, height of background-dawn.webp */ {
+    #dawn-page {
+        background-size: 100% 100%; /* instead of "auto 100%" */
+        background-position: 0% center;
+    }
 }
 
 /** ****************************************************************************
