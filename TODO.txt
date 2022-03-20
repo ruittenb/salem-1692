@@ -5,7 +5,7 @@ SEVERE:
  - Timer/ghostplayers does not sync between master and slave
  - Safari/slave: 
  - Safari/master: speech does not continue automatically
- - Safari/night confirm page: buttons not high enough
+ - Safari/night confirm page: buttons not tall enough
  - with ghost players, the constable is allowed to choose themselves
    - done: FR, DE, EN, ES
 	 - todo: NL
