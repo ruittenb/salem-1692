@@ -498,7 +498,7 @@ video + .bubble {
 }
 
 #setup-music-page .playing {
-    background: url(../images/icon-checked.png);
+    background: url(../images/icon-checked.png) no-repeat, #90783b; /* color code necessary for Safari */
     animation: RollingGradientBackground 3s ease-in-out infinite;
     text-shadow: 1px 1px 12px #bb994b; /* compromising in-between color */
 }
@@ -510,27 +510,27 @@ video + .bubble {
 }
 
 @keyframes RollingGradientBackground { /* {{{ */
-    0%   { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b   0%, #90783b  10%, #e2d286  50%, #e2d286  60%, #90783b 100%); }
-    5%   { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b  -5%, #90783b   5%, #e2d286  45%, #e2d286  55%, #90783b  95%, #90783b 105%); }
-    10%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b   0%, #e2d286  40%, #e2d286  50%, #90783b  90%, #90783b 100%); }
-    15%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b  -5%, #e2d286  35%, #e2d286  45%, #90783b  85%, #90783b  95%, #e2d286 135%); }
-    20%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b -10%, #e2d286  30%, #e2d286  40%, #90783b  80%, #90783b  90%, #e2d286 130%); }
-    25%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b -15%, #e2d286  25%, #e2d286  35%, #90783b  75%, #90783b  85%, #e2d286 125%); }
-    30%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b -20%, #e2d286  20%, #e2d286  30%, #90783b  70%, #90783b  80%, #e2d286 120%); }
-    35%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b -25%, #e2d286  15%, #e2d286  25%, #90783b  65%, #90783b  75%, #e2d286 115%); }
-    40%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b -30%, #e2d286  10%, #e2d286  20%, #90783b  60%, #90783b  70%, #e2d286 110%); }
-    45%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b -35%, #e2d286   5%, #e2d286  15%, #90783b  55%, #90783b  65%, #e2d286 105%); }
-    50%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #e2d286   0%, #e2d286  10%, #90783b  50%, #90783b  60%, #e2d286 100%); }
-    55%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #e2d286  -5%, #e2d286   5%, #90784b  45%, #90783b  55%, #e2d286  95%, #e2d286 105%); }
-    60%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #e2d286   0%, #90783b  40%, #90783b  50%, #e2d286  90%, #e2d286 100%); }
-    65%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #e2d286  -5%, #90783b  35%, #90783b  45%, #e2d286  85%, #e2d286  95%, #90783b 135%); }
-    70%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #e2d286 -10%, #90783b  30%, #90783b  40%, #e2d286  80%, #e2d286  90%, #90783b 130%); }
-    75%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #e2d286 -15%, #90783b  25%, #90783b  35%, #e2d286  75%, #e2d286  85%, #90783b 125%); }
-    80%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #e2d286 -20%, #90783b  20%, #90783b  30%, #e2d286  70%, #e2d286  80%, #90783b 120%); }
-    85%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #e2d286 -25%, #90783b  15%, #90783b  25%, #e2d286  65%, #e2d286  75%, #90783b 115%); }
-    90%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #e2d286 -30%, #90783b  10%, #90783b  20%, #e2d286  60%, #e2d286  70%, #90783b 110%); }
-    95%  { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #e2d286 -35%, #90783b   5%, #90783b  15%, #e2d286  55%, #e2d286  65%, #90783b 105%); }
-    100% { background: url(../images/icon-checked.png) no-repeat 16px center, linear-gradient(90deg, #90783b   0%, #90783b  10%, #e2d286  50%, #e2d286  60%, #90783b 100%); }
+    0%   { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #90783b   0%, #90783b  10%, #e2d286  50%, #e2d286  60%, #90783b 100%); }
+    5%   { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #90783b  -5%, #90783b   5%, #e2d286  45%, #e2d286  55%, #90783b  95%, #90783b 105%); }
+    10%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #90783b   0%, #e2d286  40%, #e2d286  50%, #90783b  90%, #90783b 100%); }
+    15%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #90783b  -5%, #e2d286  35%, #e2d286  45%, #90783b  85%, #90783b  95%, #e2d286 135%); }
+    20%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #90783b -10%, #e2d286  30%, #e2d286  40%, #90783b  80%, #90783b  90%, #e2d286 130%); }
+    25%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #90783b -15%, #e2d286  25%, #e2d286  35%, #90783b  75%, #90783b  85%, #e2d286 125%); }
+    30%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #90783b -20%, #e2d286  20%, #e2d286  30%, #90783b  70%, #90783b  80%, #e2d286 120%); }
+    35%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #90783b -25%, #e2d286  15%, #e2d286  25%, #90783b  65%, #90783b  75%, #e2d286 115%); }
+    40%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #90783b -30%, #e2d286  10%, #e2d286  20%, #90783b  60%, #90783b  70%, #e2d286 110%); }
+    45%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #90783b -35%, #e2d286   5%, #e2d286  15%, #90783b  55%, #90783b  65%, #e2d286 105%); }
+    50%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #e2d286   0%, #e2d286  10%, #90783b  50%, #90783b  60%, #e2d286 100%); }
+    55%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #e2d286  -5%, #e2d286   5%, #90784b  45%, #90783b  55%, #e2d286  95%, #e2d286 105%); }
+    60%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #e2d286   0%, #90783b  40%, #90783b  50%, #e2d286  90%, #e2d286 100%); }
+    65%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #e2d286  -5%, #90783b  35%, #90783b  45%, #e2d286  85%, #e2d286  95%, #90783b 135%); }
+    70%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #e2d286 -10%, #90783b  30%, #90783b  40%, #e2d286  80%, #e2d286  90%, #90783b 130%); }
+    75%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #e2d286 -15%, #90783b  25%, #90783b  35%, #e2d286  75%, #e2d286  85%, #90783b 125%); }
+    80%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #e2d286 -20%, #90783b  20%, #90783b  30%, #e2d286  70%, #e2d286  80%, #90783b 120%); }
+    85%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #e2d286 -25%, #90783b  15%, #90783b  25%, #e2d286  65%, #e2d286  75%, #90783b 115%); }
+    90%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #e2d286 -30%, #90783b  10%, #90783b  20%, #e2d286  60%, #e2d286  70%, #90783b 110%); }
+    95%  { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #e2d286 -35%, #90783b   5%, #90783b  15%, #e2d286  55%, #e2d286  65%, #90783b 105%); }
+    100% { background: url(../images/icon-checked.png) no-repeat 14px center, linear-gradient(90deg, #90783b   0%, #90783b  10%, #e2d286  50%, #e2d286  60%, #90783b 100%); }
 }
 /* }}} */
 
