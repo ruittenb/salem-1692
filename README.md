@@ -51,6 +51,19 @@ For running locally, a webserver may be started with:
 make serve
 ```
 
+## Supported Browsers
+
+- Chrome 99
+- Chrome for Android 99
+- Firefox 98
+- Firefox for Android 96
+- Safari 15.4
+- Safari on iOS 15.4
+- Edge 99
+- Android Browser 99
+- Samsung Internet 16
+- Opera 83
+
 ## Debugging
 
 Debugging output (in the browser console) can be obtained by changing the User-Agent string

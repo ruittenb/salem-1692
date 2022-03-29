@@ -367,7 +367,7 @@ video + .bubble {
 .page button.largebutton {
     width: 80%;
     height: 100px;
-    min-height: 100px;
+    min-height: 100px; /* needed for Safari */
     font-size: 28px;
     padding: 0 4px;
 }
