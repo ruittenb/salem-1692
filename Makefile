@@ -108,7 +108,7 @@ serve-stop: ## Stop serving the page
 ##@ Source code control:
 
 .PHONY: tag-%
-tag-%: ## Update the %:major:minor:patch:% version number and create git tag
+tag-%: ## Update the %:major:minor:patch:% version number, recompile, create git tag and push it
 	which rpl 2>/dev/null
 	which jq
 	VERSION_FROM=$$(jq .version package.json) && \
@@ -118,7 +118,7 @@ tag-%: ## Update the %:major:minor:patch:% version number and create git tag
 	$(MAKE) finish-tag
 
 .PHONY: finish-tag
-finish-tag: ## Recompile the new version number into the code, commit and push
+finish-tag: # Recompile the new version number into the code, commit and push
 	VERSION=v$$(jq -r .version package.json) && \
 	$(MAKE) build-minify            && \
 	git commit -a --amend --no-edit && \
@@ -127,7 +127,7 @@ finish-tag: ## Recompile the new version number into the code, commit and push
 	git push origin tag $$VERSION
 
 .PHONY: move-tag
-move-tag: ## Move the tag for the current package.json version to this branch
+move-tag: # Move the tag for the current package.json version to this branch
 	VERSION=v$$(jq -r .version package.json) && \
 	git tag -d $$VERSION                     && \
 	git tag $$VERSION
