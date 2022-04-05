@@ -28,16 +28,17 @@ let gameKey = (id: GameTypeCodec.gameId): string => {
 }
 
 let subjectKey = (subject) => switch subject {
-    | GameSubject                => ""
-    | MasterPhaseSubject         => "masterPhase"
-    | MasterPlayersSubject       => "masterPlayers"
-    | MasterSeatingSubject       => "masterSeating"
-    | MasterNightTypeSubject     => "masterNightType"
-    | MasterNumberWitchesSubject => "masterNumberWitches"
-    | ChoiceWitchesSubject       => "slaveChoiceWitches"
-    | ChoiceConstableSubject     => "slaveChoiceConstable"
-    | ConfirmWitchesSubject      => "slaveConfirmWitches"
-    | ConfirmConstableSubject    => "slaveConfirmConstable"
+    | GameSubject                  => ""
+    | MasterPhaseSubject           => "masterPhase"
+    | MasterPlayersSubject         => "masterPlayers"
+    | MasterSeatingSubject         => "masterSeating"
+    | MasterNumberWitchesSubject   => "masterNumberWitches"
+    | MasterNightTypeSubject       => "masterNightType"
+    | MasterHasGhostPlayersSubject => "masterHasGhostPlayers"
+    | ChoiceWitchesSubject         => "slaveChoiceWitches"
+    | ChoiceConstableSubject       => "slaveChoiceConstable"
+    | ConfirmWitchesSubject        => "slaveConfirmWitches"
+    | ConfirmConstableSubject      => "slaveConfirmConstable"
 }
 
 /** **********************************************************************
@@ -90,6 +91,7 @@ let writeGame = (
         try {
             let gameId = dbRecord.masterGameId
             let myGameRef = getRef(dbConnection.db, gameKey(gameId))
+            // Utils.logDebug(p ++ "Saving: " ++ dbRecord->dbRecord_encode->Js.Json.stringify)
             set(myGameRef, dbRecord->dbRecord_encode)
                 ->Promise.then(() => {
                     logDebug(p ++ action ++ " game " ++ gameId)
