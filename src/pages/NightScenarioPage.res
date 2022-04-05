@@ -104,16 +104,18 @@ let make = (
     let goFromWitchChoiceToNextStep = (player: player, ~skipConfirmation: bool): unit => {
         Utils.logDebug(p ++ "Witch choice:" ++ player ++ " skipConfirmation:" ++ (skipConfirmation ? "true" : "false"))
         setTurnState(prevTurnState => { ...prevTurnState, choiceWitches: Some(player) })
-        goToNextStep()
-        if (skipConfirmation) {
+        goToNextStep() // to confirmation page
+        // in Master mode, the feedback from firebase will trigger skipping confirmation
+        if (gameState.gameType === StandAlone && skipConfirmation) {
             goToNextStep()
         }
     }
     let goFromConstableChoiceToNextStep = (player: player, ~skipConfirmation: bool): unit => {
         Utils.logDebug(p ++ "Constable choice:" ++ player ++ " skipConfirmation:" ++ (skipConfirmation ? "true" : "false"))
         setTurnState(prevTurnState => { ...prevTurnState, choiceConstable: Some(player) })
-        goToNextStep()
-        if (skipConfirmation) {
+        goToNextStep() // to confirmation page
+        // in Master mode, the feedback from firebase will trigger skipping confirmation
+        if (gameState.gameType === StandAlone && skipConfirmation) {
             goToNextStep()
         }
     }
