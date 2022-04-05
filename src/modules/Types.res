@@ -197,8 +197,9 @@ type dbObservable =
     | MasterPhaseSubject
     | MasterPlayersSubject
     | MasterSeatingSubject
-    | MasterNightTypeSubject
     | MasterNumberWitchesSubject
+    | MasterNightTypeSubject
+    | MasterHasGhostPlayersSubject
     | ChoiceWitchesSubject
     | ChoiceConstableSubject
     | ConfirmWitchesSubject

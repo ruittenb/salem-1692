@@ -41,7 +41,8 @@ let make = (
                                     {
                                         ...prevGameState,
                                         players: dbRecord.masterPlayers,
-                                        seating: dbRecord.masterSeating
+                                        seating: dbRecord.masterSeating,
+                                        hasGhostPlayers: dbRecord.masterHasGhostPlayers,
                                     }
                                 })
                                 setTurnState(_prevTurnState => {
