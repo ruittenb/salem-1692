@@ -1,7 +1,6 @@
 
 SEVERE:
  - Timer/ghostplayers does not sync between master and slave
- - Safari/master: speech does not continue automatically
  - with ghost players, the constable is allowed to choose themselves
    - done: FR, DE, EN, ES
 	 - todo: NL

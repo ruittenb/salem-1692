@@ -28,22 +28,23 @@ let make = (
         // 2. clear any previous choice that was recorded. (NightScenarioPage
         // has an effect hook that saves it to the database).
         let subject = switch addressed {
-            | Witch | Witches => {
-                                     Utils.logDebug(p ++ "Clearing witches' choice from turn state...")
-                                     setTurnState(_prevTurnState => {
-                                         ...turnState,
-                                         choiceWitches: None,
-                                     })
-                                     ChoiceWitchesSubject
-                                 }
-            | Constable       => {
-                                     Utils.logDebug(p ++ "Clearing constable's choice from turn state...")
-                                     setTurnState(_prevTurnState => {
-                                         ...turnState,
-                                         choiceConstable: None,
-                                     })
-                                     ChoiceConstableSubject
-                                 }
+            | Witch
+            | Witches    => {
+                                Utils.logDebug(p ++ "Clearing witches' choice from turn state...")
+                                setTurnState(_prevTurnState => {
+                                    ...turnState,
+                                    choiceWitches: None,
+                                })
+                                ChoiceWitchesSubject
+                            }
+            | Constable  => {
+                                Utils.logDebug(p ++ "Clearing constable's choice from turn state...")
+                                setTurnState(_prevTurnState => {
+                                    ...turnState,
+                                    choiceConstable: None,
+                                })
+                                ChoiceConstableSubject
+                            }
         }
         Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
             Utils.logDebug(p ++ "About to install choice listener")
