@@ -67,8 +67,10 @@ make serve
 ## Debugging
 
 Debugging output (in the browser console) can be obtained by changing the User-Agent string
-[Chrome](https://www.alphr.com/change-user-agent-string-google-chrome/)
-[Safari](https://www.technipages.com/how-to-change-user-agent-in-safari)
 to contain the text "Salem/1692".
+
+How to do this on: [Chrome](https://www.alphr.com/change-user-agent-string-google-chrome/),
+[Firefox/Edge](https://geekflare.com/change-user-agent-in-browser/),
+[Safari](https://www.technipages.com/how-to-change-user-agent-in-safari).
 
 
