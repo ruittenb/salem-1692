@@ -139,7 +139,7 @@ publish: ## Publish the master branch on Github Pages
 .PHONY: publish-force
 # git subtree split --prefix dist -b github-pages # create a local github-pages branch containing the splitted output folder
 # git push -f origin github-pages:github-pages    # force push the github-pages branch to origin
-# git branch -D github-pages                      # delete the local github-pages because you will need it (?)
+# git branch -D github-pages                      # delete the local github-pages
 publish-force: ## Publish the master branch on Github Pages (force push)
 	git checkout master && \
 	git push --force origin `git subtree split --prefix dist master`:github-pages
