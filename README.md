@@ -12,7 +12,7 @@ A web app for fulfilling the moderator role in the Salem 1692 card game
 
 - [Project on GitHub](https://github.com/ruittenb/salem-1692)
 - [See this web app in action](https://ruittenb.github.io/salem-1692/)
-- [Firebase Console](https://console.firebase.google.com/u/1/project/salem-1692-moderator/overview)
+- [Firebase Console](https://console.firebase.google.com/u/0/project/salem-1692-moderator-new/overview)
 
 ## Technologies Used
 
