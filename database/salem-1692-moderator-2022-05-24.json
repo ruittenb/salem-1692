@@ -1,0 +1,149 @@
+{
+  "games": {
+    "_keep": true,
+    "b60-l05-v67-k12": {
+      "masterGameId": "b60-l05-v67-k12",
+      "masterHasGhostPlayers": false,
+      "masterNightType": "Dawn",
+      "masterNumberWitches": "One",
+      "masterPhase": "DaytimeWaiting",
+      "masterPlayers": [
+        "Jordyn",
+        "Trevor",
+        "Tamra",
+        "Jeff",
+        "Dan",
+        "Lisa",
+        "Whitney",
+        "Corbin",
+        "Landon"
+      ],
+      "masterSeating": "OneAtTop",
+      "slaveChoiceConstable": "",
+      "slaveChoiceWitches": "",
+      "slaveConfirmConstable": "Undecided",
+      "slaveConfirmWitches": "Undecided",
+      "updatedAt": "2022-05-21T02:15:52.589Z"
+    },
+    "d54-o00-i65-f99": {
+      "masterGameId": "d54-o00-i65-f99",
+      "masterHasGhostPlayers": false,
+      "masterNightType": "Dawn",
+      "masterNumberWitches": "One",
+      "masterPhase": "DaytimeWaiting",
+      "masterPlayers": [
+        "Trevor",
+        "Jordyn",
+        "Jeff",
+        "Tamra",
+        "Dan",
+        "Lisa",
+        "Corbin",
+        "Whitney",
+        "Landon"
+      ],
+      "masterSeating": "OneAtTop",
+      "slaveChoiceConstable": "",
+      "slaveChoiceWitches": "",
+      "slaveConfirmConstable": "Undecided",
+      "slaveConfirmWitches": "Undecided",
+      "updatedAt": "2022-05-20T00:26:19.091Z"
+    },
+    "n62-r04-e75-v52": {
+      "masterGameId": "n62-r04-e75-v52",
+      "masterHasGhostPlayers": false,
+      "masterNightType": "Dawn",
+      "masterNumberWitches": "One",
+      "masterPhase": "DaytimeWaiting",
+      "masterPlayers": [
+        "Trevor",
+        "Jordyn",
+        "Jeff",
+        "Tamra",
+        "Dan",
+        "Lisa",
+        "Corbin",
+        "Whitney",
+        "Landon"
+      ],
+      "masterSeating": "OneAtTop",
+      "slaveChoiceConstable": "",
+      "slaveChoiceWitches": "",
+      "slaveConfirmConstable": "Undecided",
+      "slaveConfirmWitches": "Undecided",
+      "updatedAt": "2022-05-20T00:51:59.031Z"
+    },
+    "n82-w79-m37-y59": {
+      "masterGameId": "n82-w79-m37-y59",
+      "masterHasGhostPlayers": false,
+      "masterNightType": "Dawn",
+      "masterNumberWitches": "One",
+      "masterPhase": "DaytimeWaiting",
+      "masterPlayers": [
+        "Jordyn",
+        "Trevor",
+        "Tamra",
+        "Jeff",
+        "Dan",
+        "Lisa",
+        "Whitney",
+        "Corbin",
+        "Landon"
+      ],
+      "masterSeating": "OneAtTop",
+      "slaveChoiceConstable": "",
+      "slaveChoiceWitches": "",
+      "slaveConfirmConstable": "Undecided",
+      "slaveConfirmWitches": "Undecided",
+      "updatedAt": "2022-05-21T05:09:28.069Z"
+    },
+    "p22-q80-i97-x64": {
+      "masterGameId": "p22-q80-i97-x64",
+      "masterHasGhostPlayers": false,
+      "masterNightType": "Dawn",
+      "masterNumberWitches": "One",
+      "masterPhase": "DaytimeWaiting",
+      "masterPlayers": [
+        "Trevor",
+        "Jordyn",
+        "Jeff",
+        "Tamra",
+        "Dan",
+        "Lisa",
+        "Corbin",
+        "Whitney",
+        "Landon"
+      ],
+      "masterSeating": "OneAtTop",
+      "slaveChoiceConstable": "",
+      "slaveChoiceWitches": "",
+      "slaveConfirmConstable": "Undecided",
+      "slaveConfirmWitches": "Undecided",
+      "updatedAt": "2022-05-20T00:52:43.987Z"
+    },
+    "y01-f98-v28-l83": {
+      "masterGameId": "y01-f98-v28-l83",
+      "masterHasGhostPlayers": false,
+      "masterNightType": "Dawn",
+      "masterNumberWitches": "One",
+      "masterPhase": "DaytimeWaiting",
+      "masterPlayers": [
+        "Jordyn",
+        "Trevor",
+        "Tamra",
+        "Jeff",
+        "Dan",
+        "Lisa",
+        "Whitney",
+        "Corbin",
+        "Landon"
+      ],
+      "masterSeating": "OneAtTop",
+      "slaveChoiceConstable": "",
+      "slaveChoiceWitches": "",
+      "slaveConfirmConstable": "Undecided",
+      "slaveConfirmWitches": "Undecided",
+      "updatedAt": "2022-05-21T03:59:10.608Z"
+    }
+  }
+}
