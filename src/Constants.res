@@ -17,14 +17,14 @@ let debug = navigator->userAgent->Js.String2.includes("Salem/1692")
 // firebase, url, localstorage
 
 let firebaseConfig: dbConfig = {
-    apiKey            : "AIzaSyD_SDDuyHYXcj_xiw8V_BXmWb_X9TUWpK8",
-    authDomain        : "salem-1692-moderator.firebaseapp.com",
-    databaseURL       : "https://salem-1692-moderator-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId         : "salem-1692-moderator",
-    storageBucket     : "salem-1692-moderator.appspot.com",
-    messagingSenderId : "910714101001",
-    appId             : "1:910714101001:web:1a9d4882f11f07376807d8",
-    measurementId     : "G-GWZ2V2C15M",
+    apiKey            : "AIzaSyBnFx8hLeg1ufuuLmtp_WEI0XfxxwCBh1w",
+    authDomain        : "salem-1692-moderator-new.firebaseapp.com",
+    databaseURL       : "https://salem-1692-moderator-new-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId         : "salem-1692-moderator-new",
+    storageBucket     : "salem-1692-moderator-new.appspot.com",
+    messagingSenderId : "146234537609",
+    appId             : "1:146234537609:web:f3808996d1f9066ea7b858",
+    measurementId     : "G-5Y56FM31Q6",
 }
 
 let siteUrl = "https://ruittenb.github.io/salem-1692/"
