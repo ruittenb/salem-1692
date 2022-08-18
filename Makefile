@@ -33,7 +33,7 @@ mark: # Put "ready" in corner of terminal
 
 %.min.css: %.css
 	@# descend into the directory in order to prevent corrupting URLs in CSS
-	cd $(<D); cleancss $(<F) > $(@F)
+	cd $(<D) && cleancss $(<F) > $(@F)
 
 ##@ Build process:
 
@@ -115,19 +115,19 @@ tag-%: ## Update the %:major:minor:patch:% version number, recompile, create git
 	npm version $*                            && \
 	VERSION_TO=$$(jq .version package.json)   && \
 	rpl $$VERSION_FROM $$VERSION_TO $(VERSION_FILES)
-	$(MAKE) finish-tag
+	$(MAKE) -- -finish-tag
 
-.PHONY: finish-tag
-finish-tag: # Recompile the new version number into the code, commit and push
+.PHONY: -finish-tag
+-finish-tag: # Recompile the new version number into the code, commit and push
 	VERSION=v$$(jq -r .version package.json) && \
 	$(MAKE) build-minify            && \
 	git commit -a --amend --no-edit && \
-	$(MAKE) move-tag                && \
+	$(MAKE) -- -move-tag            && \
 	git push                        && \
 	git push origin tag $$VERSION
 
-.PHONY: move-tag
-move-tag: # Move the tag for the current package.json version to this branch
+.PHONY: -move-tag
+-move-tag: # Move the tag for the current package.json version to this branch
 	VERSION=v$$(jq -r .version package.json) && \
 	git tag -d $$VERSION                     && \
 	git tag $$VERSION
