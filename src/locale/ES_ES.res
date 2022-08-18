@@ -62,7 +62,7 @@ let table = Js.Dict.fromArray([
     ("It is possible to join this game from another smartphone.", `Es posible unirse a este juego desde otro smartphone.`),
     (`Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. Then enter the following game code there.`, `Tome el otro smartphone y busque en la aplicación en Multi-teléfono → Jugar como invitado. Luego ingrese el siguiente código allí.`),
     ("You are currently hosting a game.", `Actualmente estás albergando un juego.`),
-    ("If you want to join a running game, you must stop hosting first.", `Si deseas unirse a un juego en progreso, primero debes dejar de albergar.`),
+    ("If you want to join a running game, you must stop hosting first.", `Si deseas unirte a un juego en progreso, primero debes dejar de albergar.`),
     ("If you want to host a game so that others can join, you should leave guest mode first.", `Si deseas albergar un juego para que otros jugadores puedan unirse, primero debes dejar del modo de invitado.`),
     ("", ""),
     ("No authorization to use the camera", `No autorización para usar la cámara`), // contains nbsp
