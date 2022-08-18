@@ -28,6 +28,7 @@ let firebaseConfig: dbConfig = {
 }
 
 let siteUrl = "https://ruittenb.github.io/salem-1692/"
+let codeUrl = "https://github.com/ruittenb/salem-1692/"
 
 let localStoragePrefix = "salem1692"
 let localStorageGameStateKey = ".gameState"

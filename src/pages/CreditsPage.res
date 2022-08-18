@@ -50,7 +50,9 @@ let make = (
             <span> {React.string(t("App: "))} </span>
             <Link href=siteUrl text={t("website")} />
             <QrIcon mode={QrIcon.Scannable(siteUrl)} />
-            {React.string(t("version") ++ " v" ++ salemAppVersion ++ ` René Uittenbogaard © ` ++ year)}
+            {React.string(" " ++ t("version") ++ " ")}
+            <Link href=codeUrl text={"v" ++ salemAppVersion} />
+            {React.string(` René Uittenbogaard © ` ++ year)}
         </p>
         <p>
             <span> {React.string(t("For use with the game: "))} </span>
