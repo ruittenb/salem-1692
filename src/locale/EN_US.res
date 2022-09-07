@@ -55,7 +55,7 @@ let table = Js.Dict.fromArray([
     ("Not connected", "Not connected"),
     ("Connecting...", "Connecting..."),
     ("Connected.", "Connected."),
-    ("Leave guest mode", "Leave guest mode"),
+    ("Leave guest mode", "Leave Guest Mode"),
     ("You can host a game so that players can join from another smartphone.", "You can host a game so that players can join from another smartphone."),
     ("You can join a game running on another smartphone.", "You can join a game running on another smartphone."),
     (`Take the other smartphone and look in the app under Multi-Telephone → Play as Host. Then enter the game code here.`, `Take the other smartphone and look in the app under Multi-Telephone → Play as Host. Then enter the game code here.`),
