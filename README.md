@@ -3,6 +3,8 @@
 
 A web app for fulfilling the moderator role in the Salem 1692 card game
 
+![Screenshots](doc/screenshots.png)
+
 ## The Game
 
 - [Façade Games](https://facadegames.com/products/salem-1692)
