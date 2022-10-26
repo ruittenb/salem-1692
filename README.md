@@ -21,7 +21,7 @@ A web app for fulfilling the moderator role in the Salem 1692 card game
 - [ReScript](https://rescript-lang.org/docs/manual/latest/overview)
   - [ReScript Forum](https://www.reddit.com/r/rescript/)
 - [Decco](https://github.com/reasonml-labs/decco)
-  - [How To Encode/Decode with Decco](https://blog.thomasdeconinck.fr/articles/decoder-une-enumeration-depuis-une-api-en-rescript-avec-decco)
+  - [How To Encode/Decode with Decco](doc/Decoder%20une%20enumeration%20depuis%20une%20API%20en%20ReScript%20avec%20decco.pdf) [.](https://blog.thomasdeconinck.fr/articles/decoder-une-enumeration-depuis-une-api-en-rescript-avec-decco)
 - [React](https://reactjs.org/docs/getting-started.html)
   - [ReScript-React](https://rescript-lang.org/docs/react/latest/introduction)
 - [Firebase Realtime Database](https://firebase.google.com/docs/database)
