@@ -215,14 +215,24 @@ let make = (
     // only after mounting the component
     React.useEffect0(() => {
         // Canvas context object for converting the snapshot to image
+        // this is a Some() when the element node is found in the DOM and the tagName is CANVAS
         let maybeCanvasElement: option<Dom.htmlCanvasElement> = safeQuerySelector(canvasElementId)
-            ->Belt.Result.map(canvasElement => canvasElement->unsafeAsHtmlCanvasElement)
             ->Belt.Result.mapWithDefault(None, x => Some(x))
+            ->Belt.Option.flatMap(
+                domNode => domNode
+                    ->Utils.ifTagName("CANVAS")
+                    ->Belt.Option.map(unsafeAsHtmlCanvasElement)
+            )
 
-        // this is a Some() when the element node is found in the DOM
+        // this is a Some() when the element node is found in the DOM and the tagName is VIDEO
         let maybeVideoElement: option<Dom.htmlVideoElement> = safeQuerySelector(videoElementId)
-            ->Belt.Result.map(videoElement => videoElement->unsafeAsHtmlVideoElement)
             ->Belt.Result.mapWithDefault(None, x => Some(x))
+            ->Belt.Option.flatMap(
+                domNode => domNode
+                    ->Utils.ifTagName("VIDEO")
+                    ->Belt.Option.map(unsafeAsHtmlVideoElement)
+            )
+
         let _isRecording: bool = startRecording(maybeVideoElement, maybeGetUserMedia)
 
         // Install timer that snaps a picture at every interval

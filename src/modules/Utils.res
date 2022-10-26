@@ -4,6 +4,8 @@
 
 open Types
 
+@get external getTagName: (Dom.element) => string = "tagName"
+
 let identity = (arg: 'a): 'a => arg
 
 /**
@@ -121,6 +123,18 @@ let safeQuerySelector = (
                 ->getExceptionMessage
                 ->Error
     }
+}
+
+/**
+ * Return the DOM node only if it is of a specific type.
+ */
+let ifTagName = (
+    element: Dom.element,
+    tagName: string,
+): option<Dom.element> => {
+    (element->getTagName === tagName)
+        ? Some(element)
+        : None
 }
 
 /**
