@@ -37,8 +37,12 @@ let make = (
             ->Js.Nullable.toOption
             ->Belt.Option.forEach(
                 domNode => domNode
-                    ->unsafeAsHtmlAudioElement
-                    ->setVolume(volume)
+                    ->Utils.ifTagName("AUDIO")
+                    ->Belt.Option.forEach(
+                        domNode => domNode
+                            ->unsafeAsHtmlAudioElement
+                            ->setVolume(volume)
+                    )
             )
         None // cleanup function
     })
