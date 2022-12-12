@@ -4,13 +4,26 @@
   "description": "Moderator app for the cardgame Salem 1692",
   "id": "index.html?utm_source=pwa",
   "start_url": "index.html?utm_source=pwa",
+  "scope": ".",
   "manifest_version": 2,
   "version": "1.0",
   "lang": "en-US",
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "categories": [
+    "entertainment",
+    "games"
+  ],
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#BF9986",
   "theme_color": "#472B1D",
+  "shortcuts" : [
+    {
+      "name": "Open",
+      "url": "index.html?utm_source=pwa"
+    }
+  ],
   "icons": [
     {
       "src": "images/favicon-32.png",
@@ -52,6 +65,42 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "images/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots" : [
+    {
+      "src": "images/screenshot-1.jpg",
+      "sizes": "1080x2340",
+      "type": "image/jpg",
+      "platform": "narrow",
+      "label": "Main Menu"
+    },
+    {
+      "src": "images/screenshot-2.jpg",
+      "sizes": "1080x2340",
+      "type": "image/jpg",
+      "platform": "narrow",
+      "label": "Player Configuration"
+    },
+    {
+      "src": "images/screenshot-3.jpg",
+      "sizes": "1080x2340",
+      "type": "image/jpg",
+      "platform": "narrow",
+      "label": "Connect Multiple Players to the same Game"
+    },
+    {
+      "src": "images/screenshot-4.jpg",
+      "sizes": "1080x2340",
+      "type": "image/jpg",
+      "platform": "narrow",
+      "label": "Night Screen"
     }
   ]
 }
