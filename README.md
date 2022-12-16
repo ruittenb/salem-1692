@@ -5,10 +5,23 @@ A web app for fulfilling the moderator role in the Salem 1692 card game
 
 ![Screenshots](doc/screenshots.png)
 
-## The Game
+## Rationale for this App
 
-- [Façade Games](https://facadegames.com/products/salem-1692)
-- [BoardGameGeek](https://www.boardgamegeek.com/boardgame/175549/salem-1692)
+The game [Salem 1692](https://www.boardgamegeek.com/boardgame/175549/salem-1692),
+published by [Façade Games](https://facadegames.com/products/salem-1692)
+is a game in which some of the players are witches, plotting to murder the
+innocent villagers.
+
+The game has day and night phases. During the night phase, all players
+need to close their eyes so that the witches can secretly choose a
+victim.  Ideally, the night phase makes use of a moderator. However,
+this moderator cannot also be player.
+
+This app takes on the role of moderator, so that all human participants
+can be players. It also allows to connect to the game with multiple
+smartphones, so that players don't have to reach across the table to
+take a vote.
+
 
 ## PWA Hosting
 
