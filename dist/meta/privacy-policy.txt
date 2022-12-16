@@ -1,0 +1,26 @@
+
+Privacy Policy for Salem 1692 Moderator Web App
+
+
+This app can be run in two modes, which this document will call 'standalone' and 'multi-telephone' mode.
+
+
+* What information is collected?
+
+In standalone mode, no data is collected or shared with third parties.
+
+In multi-telephone mode, per game the following data is sent to a (Google-hosted) Firebase Database:
+ - The players' names, as entered in the app
+ - Game state data, such as the players for which was voted
+ - The date and time when the information was last updated.
+
+This data is automatically removed when the multi-telephone mode is ended using the app button "Stop Hosting".  If the app is closed forcibly, the data is not removed.
+
+
+* How is this information used?
+
+The players' names and game state data are strictly used for synchronizing the host- and guest-phones during the moderation of the game.
+
+The date and time of the last update is only used for deciding when game data may be removed from the database. Periodically, data that is not used in a running game any more is removed.
+
+
