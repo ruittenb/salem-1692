@@ -15,5 +15,5 @@ cleanup: ## Decide whether the json file can be cleaned up.
 list: ## List all users in the datafile
 	cat $(FILENAME) | \
 		jq -r '.games | del(._keep) | .[] | .masterPlayers | sort | tostring' | \
-		sort -u >> names.log
+		sort -u
 

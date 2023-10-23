@@ -1,8 +1,9 @@
 
 let fs = require('fs');
 
-const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
-const MILLISECONDS_IN_WEEK = 7 * MILLISECONDS_IN_DAY;
+const MILLISECONDS_IN_DAY      = 24 * 60 * 60 * 1000;
+const MILLISECONDS_IN_TWO_DAYS = 2 * MILLISECONDS_IN_DAY;
+const MILLISECONDS_IN_WEEK     = 7 * MILLISECONDS_IN_DAY;
 
 function getFilename() {
     return process.argv.length > 2 ? process.argv[2] : 'salem.json';
@@ -46,7 +47,7 @@ function main() {
         }
         const mostRecentGame = getMostRecentGame(games);
         console.log(`Most recent game date: ${mostRecentGame.updatedAt}`);
-        if (new Date() - new Date(mostRecentGame.updatedAt) < MILLISECONDS_IN_DAY) {
+        if (new Date() - new Date(mostRecentGame.updatedAt) < MILLISECONDS_IN_TWO_DAYS) {
             return console.error('Abort: this game may still be in progress');
         }
         console.log('Go ahead and purge');
