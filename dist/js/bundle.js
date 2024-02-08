@@ -46804,7 +46804,7 @@ var nnbsp = " ";
 exports.nnbsp = nnbsp;
 var note = "♪";
 exports.note = note;
-var year = "2022";
+var year = "2022-2024";
 exports.year = year;
 var spacedComma = ", ";
 exports.spacedComma = spacedComma;
@@ -46862,7 +46862,10 @@ function CreditsPage(Props) {
   }), closeParenAndComma, "Travis Hancock ©" + nnbsp + " 2015", spacedComma, React.createElement(Link$Salem1692.make, {
     href: "https://facadegames.com/",
     text: "Façade Games"
-  })), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Voice actors: ")), "Helmi Megens, Mario Ruiz, Paul Scholey, ", React.createElement(Link$Salem1692.make, {
+  })), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Voice actors: ")), "Helmi Megens, ", React.createElement(Link$Salem1692.make, {
+    href: "https://www.marioruizphotography.com/",
+    text: "Mario Ruiz"
+  }), spacedComma, "Paul Scholey, ", React.createElement(Link$Salem1692.make, {
     href: "https://www.fiverr.com/mrvoice",
     text: "Christopher Badziong"
   }), spacedComma, React.createElement(Link$Salem1692.make, {
@@ -46932,8 +46935,8 @@ function CreditsPage(Props) {
     href: "https://icons8.com",
     text: "Icons8"
   }), spacedComma, React.createElement(Link$Salem1692.make, {
-    href: "http://www.famfamfam.com/lab/icons/silk/",
-    text: "FamFamFam"
+    href: "https://github.com/legacy-icons/famfamfam-silk",
+    text: "FamFamFam Silk"
   })), React.createElement(Spacer$Salem1692.make, {}), React.createElement(Button$Salem1692.make, {
     label: Curry._1(t, "OK"),
     className: "ok-button",
