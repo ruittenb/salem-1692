@@ -1,7 +1,7 @@
 {
   "_keep" : 1,
-  "d19-a28-p62-t42" : {
-    "masterGameId" : "d19-a28-p62-t42",
+  "z00-z00-z00-z00" : {
+    "masterGameId" : "z00-z00-z00-z00",
     "masterNumberWitches" : "One",
     "masterPhase" : "DaytimeWaiting",
     "masterPlayers" : [ "Albert", "Bernadette", "Cédric", "Désirée", "Édouard", "Fabienne" ],
@@ -10,6 +10,6 @@
     "slaveChoiceWitches" : "",
     "slaveConfirmConstable" : "Undecided",
     "slaveConfirmWitches" : "Undecided",
-    "updatedAt" : "2021-12-29T22:59:39.698Z"
+    "updatedAt" : "2001-01-01T00:00:00.000Z"
   }
 }
