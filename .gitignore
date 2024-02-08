@@ -4,6 +4,7 @@
 /_fabriek/famfamfam/
 /_fabriek/audio/mail/
 /_fabriek/audio/speech-*
+/_correspondence/
 /lib/
 node_modules/
 *.swp

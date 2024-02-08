@@ -1,5 +1,6 @@
 
-export PATH:=$(PATH):$(shell npm bin)
+# `npm bin` has been deprecated
+export PATH:=$(PATH):$(shell pwd)/node_modules/.bin
 
 JS_COLOR=10 # bold green
 CSS_COLOR=15 # bold yellow
@@ -9,9 +10,11 @@ PORT=3001
 SRC=src
 DIST=dist
 BUNDLE=$(DIST)/js/bundle.js
+
 JS_FILES=$(shell find $(SRC) -name *.js)
 CSS_FILES=$(DIST)/css/salem.css $(DIST)/css/normalize.css
 MIN_CSS_FILES=$(CSS_FILES:.css=.min.css)
+
 VERSION_FILES=bsconfig.json $(DIST)/serviceworker.js
 
 .DEFAULT_GOAL:=help
@@ -37,19 +40,23 @@ mark: # Put "ready" in corner of terminal
 
 ##@ Build process:
 
+node_modules: package.json package-lock.json
+	npm install
+	touch node_modules
+
 .PHONY: build-css
 build-css: $(MIN_CSS_FILES) ## Compile the css files
 
 .PHONY: build-res
-build-res: ## Compile the res files to js
+build-res: node_modules ## Compile the res files to js
 	rescript
 
 .PHONY: bundle
-bundle: ## Bundle the js files
+bundle: node_modules ## Bundle the js files
 	browserify $(JS_FILES) -p esmify -o $(BUNDLE)
 
 .PHONY: bundle-minify
-bundle-minify: ## Bundle and minify the js files
+bundle-minify: node_modules ## Bundle and minify the js files
 	@# --mangle seems to be safe, but --compress breaks the bundle
 	browserify -g uglifyify $(JS_FILES) -p esmify | uglifyjs - $(UGLYOPTS) > $(BUNDLE)
 
