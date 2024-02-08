@@ -130,7 +130,7 @@ img.qr-icon.scannable {
     z-index: 99;
     left: 0;
     top: 0;
-    height: 100vh;
+    height: 100dvh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.5);
 }
@@ -666,7 +666,7 @@ video + .bubble {
  */
 
 #night-page {
-    background: url(../images/background-night.webp) center bottom / auto 100vh repeat;
+    background: url(../images/background-night.webp) center bottom / auto 100dvh repeat;
     color: var(--snow);
 }
 
