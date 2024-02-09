@@ -43935,7 +43935,8 @@ function Link(Props) {
   var text = textOpt !== undefined ? textOpt : "";
   var children = childrenOpt !== undefined ? Caml_option.valFromOption(childrenOpt) : null;
   return React.createElement("a", {
-    href: href
+    href: href,
+    rel: "noreferrer"
   }, text === "" ? children : text);
 }
 var make = Link;
