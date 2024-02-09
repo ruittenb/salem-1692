@@ -50,6 +50,10 @@ take a vote.
 - [doc/](doc/) Dialogue scripts
 - [database/](database/) Firebase rules and example data
 
+## Prerequisites
+
+- GNU make
+
 ## Building
 
 ```
@@ -66,7 +70,7 @@ For running locally, a webserver may be started with:
 make serve
 ```
 
-## Supported Browsers
+## Supported Browsers (minimal versions)
 
 - Chrome 99
 - Chrome for Android 99
