@@ -1,9 +1,11 @@
 .DS_Store
 /.bsb.lock
 /.merlin
+/.idea
 /_fabriek/famfamfam/
 /_fabriek/audio/mail/
 /_fabriek/audio/speech-*
+/_correspondence/
 /lib/
 node_modules/
 *.swp

@@ -46,7 +46,7 @@ body {
 
 hr {
     width: 80%;
-    height: 0px;
+    height: 0;
     margin: 0;
     border-color: var(--mid-brown) var(--mid-brown) black black;
     border-width: 1px;
@@ -130,7 +130,7 @@ img.qr-icon.scannable {
     z-index: 99;
     left: 0;
     top: 0;
-    height: 100vh;
+    height: 100dvh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.5);
 }
@@ -238,10 +238,10 @@ input[type=text].id-input {
     position: absolute;
     width: 0;
     height: 0;
-    border: 11px solid transparent;
+    border: 14px solid transparent;
     border-bottom-color: var(--dark-gray);
-    left: calc(50% - 11px);
-    top: -22px;
+    left: calc(50% - 14px);
+    top: -24px;
 }
 
 video + .bubble {
@@ -328,7 +328,7 @@ video + .bubble {
     background-repeat: no-repeat;
     border-width: 2px;
     border-color: var(--dark-brown);
-    box-shadow: 0px 10px 20px #00000030, 0px 6px 6px #0000003b;
+    box-shadow: 0 10px 20px #00000030, 0 6px 6px #0000003b;
     -webkit-tap-highlight-color: transparent; /* suppress background color when active (Chrome on Android) */
 }
 .page button:focus {
@@ -657,7 +657,7 @@ video + .bubble {
 @media (min-aspect-ratio: 750 / 500) /* width, height of background-dawn.webp */ {
     #dawn-page {
         background-size: 100% 100%; /* instead of "auto 100%" */
-        background-position: 0% center;
+        background-position: 0 center;
     }
 }
 
@@ -666,7 +666,7 @@ video + .bubble {
  */
 
 #night-page {
-    background: url(../images/background-night.webp) center bottom / auto 100vh repeat;
+    background: url(../images/background-night.webp) center bottom / auto 100dvh repeat;
     color: var(--snow);
 }
 
