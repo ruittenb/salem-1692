@@ -309,6 +309,10 @@ video + .bubble {
     font-size: 24px;
     line-height: 40px;
 }
+.pt_BR .page button.ultra-condensed-pt {
+    font-size: 22px;
+    line-height: 40px;
+}
 
 .page {
     display: flex;
