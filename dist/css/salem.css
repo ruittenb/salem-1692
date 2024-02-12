@@ -305,6 +305,14 @@ video + .bubble {
     font-size: 24px;
     line-height: 40px;
 }
+.pt_BR .page button.condensed-pt {
+    font-size: 24px;
+    line-height: 40px;
+}
+.pt_BR .page button.ultra-condensed-pt {
+    font-size: 22px;
+    line-height: 40px;
+}
 
 .page {
     display: flex;
@@ -446,11 +454,12 @@ video + .bubble {
     /* opacity: 0.75; */
 }
 
-.page button.flag-nl { background-image: url(../images/flag-nl.png); }
-.page button.flag-de { background-image: url(../images/flag-de.png); }
 .page button.flag-us { background-image: url(../images/flag-us.png); }
-.page button.flag-fr { background-image: url(../images/flag-fr.png); }
 .page button.flag-es { background-image: url(../images/flag-es.png); }
+.page button.flag-br { background-image: url(../images/flag-br.png); }
+.page button.flag-fr { background-image: url(../images/flag-fr.png); }
+.page button.flag-de { background-image: url(../images/flag-de.png); }
+.page button.flag-nl { background-image: url(../images/flag-nl.png); }
 .page button.flag-it { background-image: url(../images/flag-it.png); }
 
 .page button.icon-back  { background-image: url(../images/icon-back.png); }
