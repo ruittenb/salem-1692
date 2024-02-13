@@ -1,6 +1,0 @@
-[{
-        "relation": ["delegate_permission/common.handle_all_urls"],
-        "target" : { "namespace": "android_app", "package_name": "io.github.ruittenb.salem_1692_moderator",
-                     "sha256_cert_fingerprints": ["AA:2B:C3:F6:BE:C0:BD:CB:4E:46:16:C5:2E:F9:A6:FC:20:2F:51:B1:15:E6:21:50:EC:A8:A7:F6:2F:66:9B:C5"] }
-      }
-]
