@@ -171,9 +171,12 @@ let table = Js.Dict.fromArray([
   ("Unable to load audio", "Audio kann nicht geladen werden"),
   ("Index out of bounds", `Index außerhalb der Grenzen`),
   // Confess
-  ("Confess", "Gestehen"),
-  ("Everyone,", "Spieler,"),
-  ("decide whether you want to confess", `entscheiden Sie, ob Sie gestehen möchten`),
+  ("Confess", "Beichten"),
+  ("Everyone,", `Einwohner von Salem,`),
+  (
+    "decide whether you want to confess",
+    `diejenigen unter Ihnen, die beichten möchten, können dies jetzt tun`,
+  ),
   // Reveal
   ("The Reveal", `Die Enthüllung`),
   ("Click to show:", "Klicken Sie, um zu zeigen:"),
