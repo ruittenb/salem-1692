@@ -149,6 +149,7 @@ let table = Js.Dict.fromArray([
   ("Choose-PL a victim:", `Escolham uma vítima:`),
   ("The constable", "O xerife"),
   ("The constable's turn", "A vez do xerife"),
+  ("Choose another player to protect:", "Escolha outro jogador para proteger:"),
   ("Choose someone to protect:", `Escolha alguém para proteger`),
   ("Abort", "Abortar"),
   ("Skip", "Pular"),
@@ -166,8 +167,8 @@ let table = Js.Dict.fromArray([
   ("Index out of bounds", `Índice fora dos limites`),
   // Confess
   ("Confess", "Confess"),
-  ("Everyone,", "Todos,"),
-  ("decide whether you want to confess", "decidam se querem confessar"),
+  ("Everyone,", `Cidadãos de Salém,`),
+  ("decide whether you want to confess", `aqueles entre vocês que desejam, podem agora confessar`),
   // Reveal
   ("The Reveal", `A revelação`),
   ("Click to show:", `Clique para mostrar:`),

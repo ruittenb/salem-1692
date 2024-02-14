@@ -155,7 +155,11 @@ let table = Js.Dict.fromArray([
   ("Choose-PL a victim:", `Wählen Sie ein Opfer:`),
   ("The constable", "Der Sheriff"),
   ("The constable's turn", ` Der Sheriff ist an der Reihe `), // contains nbsp
-  ("Choose someone to protect:", `Wählen Sie jemanden, den Sie beschützen möchten:`),
+  (
+    "Choose another player to protect:",
+    `Wählen Sie einen anderen Spieler aus, den Sie beschützen möchten:`,
+  ),
+  ("Choose someone to protect:", `Wählen Sie jemanden, den Sie beschützen möchten:`),
   ("Abort", "Abbrechen"),
   ("Skip", `Überspringen`),
   ("Everybody is sound asleep... what about you?", "Alle schlafen tief und fest... und du?"),
@@ -171,9 +175,12 @@ let table = Js.Dict.fromArray([
   ("Unable to load audio", "Audio kann nicht geladen werden"),
   ("Index out of bounds", `Index außerhalb der Grenzen`),
   // Confess
-  ("Confess", "Gestehen"),
-  ("Everyone,", "Spieler,"),
-  ("decide whether you want to confess", `entscheiden Sie, ob Sie gestehen möchten`),
+  ("Confess", "Beichten"),
+  ("Everyone,", `Einwohner von Salem,`),
+  (
+    "decide whether you want to confess",
+    `diejenigen unter Ihnen, die beichten möchten, können dies jetzt tun`,
+  ),
   // Reveal
   ("The Reveal", `Die Enthüllung`),
   ("Click to show:", "Klicken Sie, um zu zeigen:"),
