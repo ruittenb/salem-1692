@@ -25,14 +25,11 @@ let table = Js.Dict.fromArray([
   ("Ghost Players", `Joueurs fantômes`),
   (
     `In a two- or three-player game, nicknames for "ghost" players should be added to the list above up to a total of four players.`,
-    `Lors d'une partie à deux ou trois joueurs, donnez des noms aux « fantômes » et ajoutez-les à la liste ci-dessus, jusqu'à atteindre un total de quatre joueurs.`,
+    `Lors d’une partie à 2 ou 3 joueurs, ajoutez des « fantômes » jusqu'à atteindre un total de 4 joueurs et entrez leurs noms dans la liste.`,
   ),
-  ("Please consult the ", "Veuillez consulter les "),
-  ("rules for 2-3 players.", `règles pour 2-3 joueurs.`),
-  (
-    "Also check the box below.",
-    `Si vous jouez avec des fantômes, cochez également la case ci-dessous.`,
-  ),
+  ("Also check the box below.", `Veuillez également cocher la case ci-dessous `),
+  ("Please consult the ", "et lire les "),
+  ("rules for 2-3 players.", `Règles pour 2-3 joueurs.`),
   ("With Ghosts", `Avec fantômes`),
   ("Sound effects", "Effets sonores"),
   ("Speech", "Discours"),
