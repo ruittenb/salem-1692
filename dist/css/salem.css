@@ -297,8 +297,9 @@ video + .bubble {
     font-size: 24px;
     line-height: 36px;
 }
-.fr_FR .page button.condensed-fr {
-    font-size: 22px;
+.fr_FR .page button.condensed-fr,
+.fr_FR .page input[type="text"].condensed-fr::placeholder {
+    font-size: 23px;
     line-height: 40px;
 }
 .es_ES .page button.condensed-es {
