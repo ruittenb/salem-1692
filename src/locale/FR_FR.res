@@ -74,7 +74,7 @@ let table = Js.Dict.fromArray([
   ("Malformed code", `Code erroné`),
   ("Game not found", `Partie non trouvée`),
   ("Not connected", `Non connecté`),
-  ("Connecting...", `Connexion en cours?`), // ellipsis
+  ("Connecting...", `Connexion en cours…`), // ellipsis
   ("Connected.", `Connecté`),
   ("Leave guest mode", `Quitter le mode invité`),
   (
