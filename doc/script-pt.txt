@@ -8,7 +8,7 @@ B. Assim que todos os olhos estiverem fechados, o feiticeiro acorda.
 E. O feiticeiro abre os olhos. Sem fazer barulho, ela decide quem ficará com o gato preto.
    Se ela quiser, ela pode escolher a si mesma.
 
-H. O feiticeiro fez sua escolha. Ela agora fecha os olhos.
+H. O feiticeiro fez a sua escolha. Ela agora fecha os olhos.
 
 
 D. Assim que todos os olhos estiverem fechados, os feiticeiros acordam.
@@ -21,7 +21,7 @@ G. Apenas com gestos, eles decidem silenciosamente quem querem matar.
    Eles podem escolher um deles.
 
 
-J. Os feiticeiros fizeram sua escolha. Eles agora fecham os olhos.
+J. Os feiticeiros fizeram a sua escolha. Eles agora fecham os olhos.
 
 
 M. Assim que os feiticeiros fecham os olhos, o xerife acorda.
@@ -31,7 +31,7 @@ P. Ele pode não escolher a si mesmo.
 
 Q. Ele também pode escolher a si mesmo.
 
-N. O xerife fez sua escolha. Ele agora fecha os olhos.
+N. O xerife fez a sua escolha. Ele agora fecha os olhos.
 
-Z. O amanhecer está surgindo. A cidade acorda. Todos, abram os olhos.
+Z. O amanhecer está a surgir. A cidade acorda. Todos, abram os olhos.
 

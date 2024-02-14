@@ -28,9 +28,9 @@ let table = Js.Dict.fromArray([
     `In a two- or three-player game, nicknames for "ghost" players should be added to the list above up to a total of four players.`,
     `En un juego de dos o tres juga­dores, los apodos para los jugadores "fantasmas" deben agregarse a la lista anterior hasta un total de cuatro jugadores.`,
   ), // soft hyphen
+  ("Also check the box below.", `También marca la casilla de abajo.`),
   ("Please consult the ", "Por favor consulta las "),
   ("rules for 2-3 players.", `reglas para 2-3 jugadores.`),
-  ("Also check the box below.", `También marca la casilla de abajo.`),
   ("With Ghosts", "Con fantasmas"),
   ("Sound effects", "Sonidos"),
   ("Speech", `Diálogo`),
@@ -125,7 +125,7 @@ let table = Js.Dict.fromArray([
   ("Music: ", `Música: `),
   ("Licensed under", "Licencia"),
   // Day
-  ("Daytime", `El día`),
+  ("Daytime", `Un día en Salem`),
   ("Dawn,", "El amanecer,"),
   ("one witch", "una bruja"),
   ("several witches", "varias brujas"),
