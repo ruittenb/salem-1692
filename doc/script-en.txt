@@ -1,6 +1,7 @@
 
 A. Night has fallen. The town goes to sleep. Everybody, close your eyes.
 
+A1. Night is coming to an end. The town is still asleep. Everybody, close your eyes.
 
 B. Once all eyes are closed, the witch now wakes up.
 
