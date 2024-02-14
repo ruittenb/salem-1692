@@ -157,9 +157,9 @@ let table = Js.Dict.fromArray([
   ("The constable's turn", ` Der Sheriff ist an der Reihe `), // contains nbsp
   (
     "Choose another player to protect:",
-    `Wählen Sie einen anderen Spieler aus, den Sie beschützen möchten:`,
+    `Wählen Sie einen anderen Spieler aus, den Sie beschützen möchten:`,
   ),
-  ("Choose someone to protect:", `Wählen Sie jemanden, den Sie beschützen möchten:`),
+  ("Choose someone to protect:", `Wählen Sie jemanden, den Sie beschützen möchten:`),
   ("Abort", "Abbrechen"),
   ("Skip", `Überspringen`),
   ("Everybody is sound asleep... what about you?", "Alle schlafen tief und fest... und du?"),
