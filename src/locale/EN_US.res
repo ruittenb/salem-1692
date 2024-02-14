@@ -149,6 +149,7 @@ let table = Js.Dict.fromArray([
   ("Choose-PL a victim:", "Choose a victim:"),
   ("The constable", "The constable"),
   ("The constable's turn", "The constable's turn"),
+  ("Choose another player to protect:", "Choose any other player to protect:"),
   ("Choose someone to protect:", "Choose someone to protect:"),
   ("Abort", "Abort"),
   ("Skip", "Skip"),
