@@ -179,11 +179,11 @@ let table = Js.Dict.fromArray([
   ("Everyone,", `Einwohner von Salem,`),
   (
     "decide whether you want to confess",
-    `diejenigen unter Ihnen, die beichten möchten, können dies jetzt tun`,
+    `diejenigen unter Ihnen, die beichten möchten, können dies jetzt tun.`,
   ),
   // Reveal
   ("The Reveal", `Die Enthüllung`),
-  ("Click to show:", "Klicken Sie, um zu zeigen:"),
+  ("Click to show:", `Finden Sie heraus, was passiert ist, während Sie geschlafen haben.`),
   ("Reveal witch's victim", `Opfer der Hexe enthüllen`),
   ("Reveal witches' victim", `Opfer der Hexen enthüllen`),
   ("The witch attacked-PRE", "Die Hexe hat"),
