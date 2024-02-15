@@ -11,6 +11,12 @@ let make = (): React.element => {
   let (gameState, setGameState) = React.useContext(GameStateContext.context)
   let t = Translator.getTranslator(gameState.language)
 
+  let documentUrl = switch gameState.language {
+  | #fr_FR => `doc/Salem 1692 - Rules for 2-3 Players French.pdf`
+  | #en_US => "doc/Salem 1692 - Rules for 2-3 Players English.pdf"
+  | _ => "doc/Salem 1692 - Rules for 2-3 Players English.pdf"
+  }
+
   let onClick: clickHandler = _event => {
     setGameState(prevGameState => {
       ...prevGameState,
@@ -28,9 +34,7 @@ let make = (): React.element => {
       {React.string(t("Also check the box below."))}
       {React.string(" ")}
       {React.string(t("Please consult the "))}
-      <Link
-        href={"doc/Salem 1692 - Rules for 2-3 Players.pdf"} text={t("rules for 2-3 players.")}
-      />
+      <Link href=documentUrl text={t("rules for 2-3 players.")} />
     </p>
     <Spacer />
     <Button
