@@ -4,7 +4,7 @@ SEVERE:
    - done: FR, DE, EN, ES
      - todo: NL
  - add players form: font size condensed for placeholder
- - title for daytime page
+ - town-still-asleep recordings
 
 IMPORTANT:
  - Safari: backgroundmusic sometimes(?) as loud as speech
