@@ -12,8 +12,9 @@ let make = (): React.element => {
   let t = Translator.getTranslator(gameState.language)
 
   let documentUrl = switch gameState.language {
-  | #fr_FR => `doc/Salem 1692 - Règles pour 2-3 joueurs Français.pdf`
-  | _ => "doc/Salem 1692 - Rules for 2-3 Players.pdf"
+  | #fr_FR => `doc/Salem 1692 - Rules for 2-3 Players French.pdf`
+  | #en_US => "doc/Salem 1692 - Rules for 2-3 Players English.pdf"
+  | _ => "doc/Salem 1692 - Rules for 2-3 Players English.pdf"
   }
 
   let onClick: clickHandler = _event => {
