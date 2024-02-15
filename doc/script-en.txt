@@ -1,12 +1,13 @@
 
 A. Night has fallen. The town goes to sleep. Everybody, close your eyes.
 
-A1. Night is coming to an end. The town is still asleep. Everybody, close your eyes.
+B. Night is coming to an end. The town is still asleep. Everybody, close your eyes.
 
-B. Once all eyes are closed, the witch now wakes up.
+
+C. Once all eyes are closed, the witch now wakes up.
 
 E. The witch opens her eyes. Without a sound, she decides who will get the black cat.
-  If she wants, she may choose herself.
+   If she wants, she may choose herself.
 
 H. The witch has made her choice. She now closes her eyes.
 
@@ -20,7 +21,6 @@ F. Using gestures only, they silently decide who will get the black cat.
 G. With gestures only, they silently decide who they want to kill.
    They may choose one of themselves.
 
-
 J. The witches have made their choice. They now close their eyes.
 
 
@@ -33,5 +33,5 @@ Q. He may also choose himself.
 
 N. The constable has made his choice. He now closes his eyes.
 
-Z. Dawn is breaking. The town wakes up.  Everybody, open your eyes.
 
+Z. Dawn is breaking. The town wakes up.  Everybody, open your eyes.

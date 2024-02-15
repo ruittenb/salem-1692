@@ -73,8 +73,8 @@ let make = (~goToPage): React.element => {
       {React.string("Paul Scholey, ")}
       <Link href="https://www.fiverr.com/mrvoice" text="Christopher Badziong" />
       spacedComma
-      <Link href="https://www.fiverr.com/ruffer">
-        {React.string("Quentin ")} <i> {React.string("(Ruffer)")} </i>
+      <Link href="https://voice123.com/voice-actor/fredericmaltesse">
+        {React.string("Frederic Maltesse ")} <i> {React.string("(Namprod)")} </i>
       </Link>
       spacedComma
       {React.string(t("Licensed under") ++ " ")}
