@@ -1,36 +1,37 @@
 
-A. La nuit tombe. Les villageois vont se coucher; chacun ferme les yeux.
+A. La nuit tombe. Les citoyens de Salem vont se coucher : fermez tous les yeux.
+
+B. La nuit touche à sa fin. Les citoyens de Salem dorment encore : fermez tous les yeux.
 
 
-B. Quand tout le monde a fermé les yeux, la sorcière se réveille.
+C. Une fois que toutes les paupières sont closes, la Sorcière se réveille.
 
-E. La sorcière ouvre les yeux et sans faire un bruit, elle décide qui aura le chat noir.
-   Elle peut s'auto-désigner.
+E. Sorcière, ouvrez les yeux et désignez sans faire de bruit la personne qui recevra le Chat noir.
+   Il peut s'agir de vous-même.
 
-H. La sorcière a fait son choix et ferme les yeux.
-
-
-D. Quand tout le monde a fermé les yeux, les sorcières se réveillent.
-   Les sorcières ouvrent les yeux et établissent un contact visuel.
-
-F. Sans faire de bruit, et seulement en faisant des gestes, elles conviennent qui aura le chat noir.
-   Elles peuvent choisir l'une d'elles.
-
-G. Sans faire de bruit, et seulement en faisant des gestes, elles conviennent qui sera assassiné.
-   Elles peuvent choisir l'une d'elles.
+H. Sorcière, vous avez fait votre choix : refermez les yeux.
 
 
-J. Les sorcières ont fait leur choix et ferment les yeux.
+D. Une fois que toutes les paupières sont closes, les Sorcières se réveillent.
+   Sorcières, ouvrez les yeux et découvrez qui est membre de votre assemblée.
+
+F. En communiquant par gestes, désignez sans faire de bruit la personne qui recevra le Chat noir.
+   Il peut s'agir de l'une d'entre vous.
+
+G. En communiquant par gestes, désignez sans faire de bruit la personne qui sera assassinée.
+   Il peut s'agir de l'une d'entre vous.
+
+J. Sorcières, vous avez fait votre choix : refermez les yeux.
 
 
-M. Quand les sorcières ont fermé les yeux, le shérif se réveille.
-   Le shérif décide qui va être protégé cette nuit.
+M. Dès que les Sorcières sont endormies, le Prévôt se réveille.
+   Prévôt, décidez qui sera protégé cette nuit.
 
-P. Il ne peut pas se désigner.
+P. Il ne peut pas s'agir de vous-même.
 
-Q. Il peut s'auto-désigner.
+Q. Il peut s'agir de vous-même.
 
-N. Le shérif a fait son choix et referme les yeux.
+N. Prévôt, vous avez fait votre choix : refermez les yeux.
 
-Z. L'aube se lève. Tout le monde se réveille et ouvre les yeux.
 
+Z. L'aube se lève et le village se réveille : ouvrez tous les yeux.

@@ -1,8 +1,10 @@
 
 A. Cae la noche. Los habitantes del pueblo van a dormir; todos cierran los ojos.
 
+B. La noche está llegando a su fin. Los habitantes del pueblo siguen durmiendo. Todos, cierren los ojos.
 
-B. Mientras los habitantes duermen, la bruja se despierta.
+
+C. Mientras los habitantes duermen, la bruja se despierta.
 
 E. La bruja abre los ojos y en silencio decide a quién le da el gato negro.
    Puede elegirse a ella misma.
@@ -19,7 +21,6 @@ F. En silencio y solamente con gestos deciden a quién le dan el gato negro.
 G. En silencio y solamente con gestos deciden a quién quieren asesinar.
    Pueden elegir también a una de ellas mismas.
 
-
 J. Las brujas han elegido a su víctima y cierran de nuevo sus ojos.
 
 
@@ -32,5 +33,5 @@ Q. También puede elegirse a si mismo.
 
 N. El alguacil ha tomado su decisión y cierra sus ojos de nuevo.
 
-Z. Ha llegado la mañana. Todos en el pueblo se despiertan y abren sus ojos.
 
+Z. Ha llegado la mañana. Todos en el pueblo se despiertan y abren sus ojos.
