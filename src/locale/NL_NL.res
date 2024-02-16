@@ -169,7 +169,7 @@ let table = Js.Dict.fromArray([
   ("Confess", "Opbiechten"),
   ("Citizens of Salem,", "Inwoners van Salem,"),
   (
-    "decide whether you want to confess",
+    "those among you who wish to confess may now do so.",
     "degenen onder jullie die dat willen, mogen nu opbiechten.",
   ),
   // Reveal
