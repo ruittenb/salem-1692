@@ -1,6 +1,5 @@
 
 SEVERE:
- - add players form: font size condensed for placeholder
  - town-still-asleep recordings
 
 IMPORTANT:
