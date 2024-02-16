@@ -102,7 +102,7 @@ let make = (
         }
         <GearFloatingButton goToPage returnPage=returnPage />
         <h1 className="condensed-de"> {React.string(t("The Reveal"))} </h1>
-        <p>{React.string(t("Click to show:"))}</p>
+        <p>{React.string(t("Find out what happened while you were sleeping."))}</p>
         <Spacer />
         {witchesRevealButton}
         {constableRevealButton}

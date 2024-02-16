@@ -177,7 +177,7 @@ let table = Js.Dict.fromArray([
   ),
   // Reveal
   ("The Reveal", `La revelación`),
-  ("Click to show:", `Descubran qué pasó mientras dormían.`),
+  ("Find out what happened while you were sleeping.", `Descubran qué pasó mientras dormían.`),
   ("Reveal witch's victim", `Revelar víctima de la bruja`),
   ("Reveal witches' victim", `Revelar víctima de las brujas`),
   ("The witch attacked-PRE", `La bruja atacó a`),
