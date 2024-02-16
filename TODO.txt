@@ -1,8 +1,5 @@
 
 SEVERE:
- - with ghost players, the constable is allowed to choose themselves
-   - done: FR, DE, EN, ES
-     - todo: NL
  - add players form: font size condensed for placeholder
  - town-still-asleep recordings
 
@@ -11,8 +8,8 @@ IMPORTANT:
  - right after mounting: preserve slave/master status? in localstorage?
 
 NICE TO HAVE:
- - cleanup "connecting" bubble when hosting
  - add button "abort connecting"
  - nicer wifi icon
  - fade music out
  - reflect state in URL https://betterprogramming.pub/how-and-why-you-should-store-react-ui-state-in-the-url-f2013a204cb2
+
