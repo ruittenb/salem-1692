@@ -11,14 +11,7 @@ let make = (~goToPage): React.element => {
   let (gameState, setGameState) = React.useContext(GameStateContext.context)
   let t = Translator.getTranslator(gameState.language)
 
-  let offeredLanguages: array<LanguageCodec.t> = [
-    #en_US,
-    #es_ES,
-    /* #pt_BR, */
-    #fr_FR,
-    #de_DE,
-    #nl_NL,
-  ]
+  let offeredLanguages: array<LanguageCodec.t> = [#en_US, #es_ES, #pt_BR, #fr_FR, #de_DE, #nl_NL]
 
   let buttons: array<React.element> = offeredLanguages->Belt.Array.map(buttonLanguage => {
     let onClick: clickHandler = _event => {
