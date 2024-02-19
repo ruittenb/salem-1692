@@ -6,10 +6,10 @@ B. A noite está chegando ao fim. A cidade ainda está dormindo. Todos, fechem o
 
 C. Assim que todos os olhos estiverem fechados, o feiticeiro acorda.
 
-E. O feiticeiro abre os olhos. Sem fazer barulho, ela decide quem ficará com o gato preto.
-   Se ela quiser, ela pode escolher a si mesma.
+E. O feiticeiro abre os olhos. Sem fazer barulho, ele decide quem ficará com o gato preto.
+   Se ele quiser, ele pode escolher a si mesmo.
 
-H. O feiticeiro fez a sua escolha. Ela agora fecha os olhos.
+H. O feiticeiro fez a sua escolha. Ele agora fecha os olhos.
 
 
 D. Assim que todos os olhos estiverem fechados, os feiticeiros acordam.
@@ -25,7 +25,7 @@ J. Os feiticeiros fizeram a sua escolha. Eles agora fecham os olhos.
 
 
 M. Assim que os feiticeiros fecham os olhos, o xerife acorda.
-   O xerife decide quem será protegido esta noite.
+   O xerife decide quem será protegido está noite.
 
 P. Ele pode não escolher a si mesmo.
 
