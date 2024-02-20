@@ -15,7 +15,6 @@
     "games"
   ],
   "display": "standalone",
-  "display_override": [ "standalone", "fullscreen" ],
   "orientation": "portrait",
   "background_color": "#BF9986",
   "theme_color": "#472B1D",
