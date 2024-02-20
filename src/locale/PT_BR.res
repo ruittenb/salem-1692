@@ -7,7 +7,7 @@ let table = Js.Dict.fromArray([
   ("New Game", "Novo jogo"),
   ("Start Game", `Começar jogo`),
   ("Play Game", "Jogar"),
-  ("Join Game", "Entrar jogo"),
+  ("Join Game", "Entrar no jogo"),
   ("Play", "Jogar"),
   ("Settings", `Configu­rações`), // soft hyphen
   ("Exit", "Sair"),
@@ -16,7 +16,7 @@ let table = Js.Dict.fromArray([
   ("Names", "Nomes"),
   (
     "Enter the names of the players in clockwise order, starting at the head of the table.",
-    `Por favor, insira os nomes dos jogadores em sentido horário, começando na cabeceira da mesa.`,
+    `Insira os nomes dos jogadores em sentido horário, começando pela cabeça da mesa.`,
   ),
   (
     "During the night, player buttons will be shown in this order.",
@@ -29,7 +29,7 @@ let table = Js.Dict.fromArray([
     `Em um jogo para dois ou três jogadores, apelidos para jogadores “fantasmas” devem ser adicionados à lista acima, até um total de quatro jogadores.`,
   ),
   ("Also check the box below.", `Marque também a caixa abaixo.`),
-  ("Please consult the ", "Por favor consulte as "),
+  ("Please consult the ", "Consulte as "),
   ("rules for 2-3 players.", "regras para 2-3 jogadores."),
   ("With Ghosts", "Com fantasmas"),
   ("Sound effects", "Efeitos sonoros"),
@@ -38,7 +38,7 @@ let table = Js.Dict.fromArray([
   ("Seating layout", `Disposição dos assentos`),
   (
     "How are the players seated around the table?",
-    `Como estão os jogadores sentados à volta da mesa?`,
+    `Como os jogadores estão sentados em volta da mesa?`,
   ),
   (
     "This affects the positioning of the player buttons at night.",
@@ -77,7 +77,7 @@ let table = Js.Dict.fromArray([
   ("Leave guest mode", "Sair do modo visitante"),
   (
     "You can host a game so that players can join from another smartphone.",
-    `Você pode hospedar um jogo para que os jogadores possam participar de outro smartphone`,
+    `Você pode hospedar um jogo para que os jogadores possam participar usando outro smartphone`,
   ),
   (
     "You can join a game running on another smartphone.",
@@ -108,7 +108,7 @@ let table = Js.Dict.fromArray([
   ("No authorization to use the camera", `Não autorização para usar a câmera`), // contains nbsp
   (
     "Please authorize the use of the camera to scan a QR code",
-    `Por favor, autorize o uso da câmera para ler um código QR`, // contains nbsp
+    `Autorize o uso da câmera para ler um código QR`, // contains nbsp
   ),
   // Credits
   ("Credits", `Créditos`),
@@ -157,7 +157,7 @@ let table = Js.Dict.fromArray([
   // Confirm
   ("Witch, are you sure?", `Feiticeiro, você tem certeza?`),
   ("Witches, are you sure?", `Feiticeiros, vocês têm certeza?`),
-  ("Constable, are you sure?", `Xerife, você tem certexa?`),
+  ("Constable, are you sure?", `Xerife, você tem certeza?`),
   ("Confirm", "Confirmar"),
   ("Yes", "Sim"),
   ("No", `Não`),
@@ -174,7 +174,10 @@ let table = Js.Dict.fromArray([
   ),
   // Reveal
   ("The Reveal", `A revelação`),
-  ("Find out what happened while you were sleeping.", `Descubram o que aconteceu enquanto vocês dormiam.`),
+  (
+    "Find out what happened while you were sleeping.",
+    `Descubram o que aconteceu enquanto vocês dormiam.`,
+  ),
   ("Reveal witch's victim", `Revelar a vítima do feiticeiro`),
   ("Reveal witches' victim", `Revelar a vítima dos feiticeiros`),
   ("The witch attacked-PRE", "O feiticeiro atacou"),
