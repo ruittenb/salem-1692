@@ -77,6 +77,10 @@ let make = (~goToPage): React.element => {
         {React.string("Frederic Maltesse ")} <i> {React.string("(Namprod)")} </i>
       </Link>
       spacedComma
+      <Link href="https://www.fiverr.com/sacciotto">
+        {React.string("Adriana ")} <i> {React.string("(Sacciotto)")} </i>
+      </Link>
+      spacedComma
       {React.string(t("Licensed under") ++ " ")}
       <Link href="http://creativecommons.org/licenses/by-sa/4.0/" text="CC BY-SA 4.0" />
     </p>
