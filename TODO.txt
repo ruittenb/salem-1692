@@ -1,6 +1,8 @@
 
 SEVERE:
  - town-still-asleep recordings
+   - done: fr, pt, de
+	 - todo: nl, en, es
 
 IMPORTANT:
  - Safari: backgroundmusic sometimes(?) as loud as speech
