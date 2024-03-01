@@ -68,7 +68,7 @@ function getFilesToCache(debug) {
         'images/overlay-title.webp',
         'images/overlay-village.webp',
         'images/qr-icon-28.png',
-        'images/qr-icon-40x28s.png',
+        'images/qr-icon-40x36s.png',
         'images/tablelayout-1221.png',
         'images/tablelayout-1222.png',
         'images/tablelayout-2221.png',
