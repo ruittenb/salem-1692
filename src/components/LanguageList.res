@@ -18,7 +18,7 @@ let make = (~goToPage): React.element => {
     #fr_FR,
     #de_DE,
     #nl_NL,
-    #uk_UA,
+    /* #uk_UA, */
   ]
 
   let buttons: array<React.element> = offeredLanguages->Belt.Array.map(buttonLanguage => {

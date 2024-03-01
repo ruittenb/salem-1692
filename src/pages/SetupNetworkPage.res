@@ -204,7 +204,7 @@ let getModusOperandi = (
       />
       <Button
         label={t("Stop Hosting")}
-        className="condensed-nl"
+        className="condensed-nl condensed-ua"
         onClick={_event =>
           stopHosting(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)}
       />

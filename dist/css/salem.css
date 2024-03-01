@@ -51,6 +51,9 @@ h1 {
     text-align: center;
     line-height: 0.8;
 }
+.uk_UA h1 {
+    transform: scaleX(0.9);
+}
 h2 {
     margin-top: 10px;
     margin-bottom: 0;
