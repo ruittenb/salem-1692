@@ -49,6 +49,7 @@ let table = Js.Dict.fromArray([
   (`Español`, `Español`),
   (`Português`, `Português`),
   ("Italiano", "Italiano"),
+  (`Українська`, `Українська`),
   ("Interface only, no dialogue yet", "Alleen interface, nog geen dialoog"),
   ("Back", "Terug"),
   ("Next", "Volgende"),
@@ -174,7 +175,10 @@ let table = Js.Dict.fromArray([
   ),
   // Reveal
   ("The Reveal", "De onthulling"),
-  ("Find out what happened while you were sleeping.", "Ontdek wat er is gebeurd terwijl jullie sliepen."),
+  (
+    "Find out what happened while you were sleeping.",
+    "Ontdek wat er is gebeurd terwijl jullie sliepen.",
+  ),
   ("Reveal witch's victim", "Slachtoffer van de heks onthullen"),
   ("Reveal witches' victim", "Slachtoffer van de heksen onthullen"),
   ("The witch attacked-PRE", "De heks heeft"),

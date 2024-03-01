@@ -11,6 +11,7 @@ type language = [
   | #fr_FR
   | #de_DE
   | #nl_NL
+  | #uk_UA
 ]
 
 let encoder: Decco.encoder<language> = (language: language): Js.Json.t => {
@@ -47,7 +48,8 @@ let getHtmlLanguage = (language: t): string => {
   | #pt_BR
   | #fr_FR
   | #de_DE
-  | #nl_NL =>
+  | #nl_NL
+  | #uk_UA =>
     language->languageToJs->Js.String2.substring(~from=0, ~to_=2)
   }
 }

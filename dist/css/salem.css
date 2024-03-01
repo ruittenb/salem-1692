@@ -3,20 +3,6 @@
  * Stylesheet for Salem 1692 moderator PWA
  */
 
-@font-face {
-    font-family: CaslonAntique;
-    src: url(../fonts/CaslonAntique.ttf);
-    font-weight: 500;
-    /* font-display: swap; */
-}
-
-@font-face {
-    font-family: CaslonAntique;
-    src: url(../fonts/CaslonAntique-Bold.ttf);
-    font-weight: 800;
-    /* font-display: swap; */
-}
-
 :root {
     /* grays */
     --dark-gray : #333;
@@ -40,7 +26,11 @@ body {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    font-family: CaslonAntique, 'Times New Roman', Times, serif;
+    /**
+     * Caslon Antique is very beautiful, but does not support Cyrillic characters.
+     * For this latter script, we will fall back to Alfios, which is also quite nice.
+     */
+    font-family: CaslonAntique, Alfios, 'Times New Roman', Times, serif;
     font-size: 26px;
 }
 
@@ -61,9 +51,13 @@ h1 {
     text-align: center;
     line-height: 0.8;
 }
+.uk_UA h1 {
+    transform: scaleX(0.9);
+}
 h2 {
     margin-top: 10px;
     margin-bottom: 0;
+    backdrop-filter: blur(3px);
 }
 h2,
 .text-centered {
@@ -146,8 +140,9 @@ input[type=text] {
     border: 2px solid black;
     padding-left: 5px;
     font-family: inherit;
-    font-size: 28px;
+    font-size: inherit;
     width: 50%;
+    line-height: 1.5;
 }
 
 input[type=text]::placeholder {
@@ -287,35 +282,33 @@ video + .bubble {
 
 .nl_NL .page button.condensed-nl {
     font-size: 24px;
-    line-height: 36px;
 }
 .de_DE .page button.condensed-de {
     font-size: 20px;
-    line-height: 36px;
 }
 .de_DE #setup-network-page button.condensed-de {
     font-size: 24px;
-    line-height: 36px;
 }
 .fr_FR .page button.condensed-fr {
     font-size: 23px;
-    line-height: 40px;
 }
 .fr_FR .page .player-entry-item input[type="text"].condensed-fr::placeholder {
     font-size: 21px;
-    line-height: 40px;
 }
 .es_ES .page button.condensed-es {
     font-size: 24px;
-    line-height: 40px;
 }
 .pt_BR .page button.condensed-pt {
     font-size: 24px;
-    line-height: 40px;
 }
 .pt_BR .page button.ultra-condensed-pt {
     font-size: 22px;
-    line-height: 40px;
+}
+.uk_UA .page button.condensed-ua {
+    font-size: 24px;
+}
+.uk_UA .page button.ultra-condensed-ua {
+    font-size: 22px;
 }
 
 .page {
@@ -336,12 +329,16 @@ video + .bubble {
     margin-bottom: 32px;
     font-family: inherit;
     font-size: 26px;
+    line-height: 40px;
     background-color: var(--gold);
     background-repeat: no-repeat;
     border-width: 2px;
     border-color: var(--dark-brown);
     box-shadow: 0 10px 20px #00000030, 0 6px 6px #0000003b;
     -webkit-tap-highlight-color: transparent; /* suppress background color when active (Chrome on Android) */
+}
+.page button.compact {
+    margin-bottom: 30px;
 }
 .page button:focus {
     outline: revert;
@@ -382,7 +379,9 @@ video + .bubble {
 
 .page button.ok-button {
     font-size: 22px;
-    line-height: 1.5;
+}
+.uk_UA .page button.ok-button {
+    font-size: inherit;
 }
 
 .page button.rot0   { transform: rotate(0deg);   }
@@ -463,6 +462,7 @@ video + .bubble {
 .page button.flag-br { background-image: url(../images/flag-br.png); }
 .page button.flag-fr { background-image: url(../images/flag-fr.png); }
 .page button.flag-de { background-image: url(../images/flag-de.png); }
+.page button.flag-ua { background-image: url(../images/flag-ua.png); }
 .page button.flag-nl { background-image: url(../images/flag-nl.png); }
 .page button.flag-it { background-image: url(../images/flag-it.png); }
 

@@ -1,0 +1,58 @@
+
+/** ****************************************************************************
+ * Font Definitions for Salem 1692 moderator PWA
+ */
+
+@font-face {
+    font-family: CaslonAntique;
+    src: url(../fonts/CaslonAntique.ttf);
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: CaslonAntique;
+    src: url(../fonts/CaslonAntique-Bold.ttf);
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: CaslonAntique;
+    src: url(../fonts/CaslonAntique-Italic.ttf);
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: CaslonAntique;
+    src: url(../fonts/CaslonAntique-BoldItalic.ttf);
+    font-weight: 800;
+    font-style: italic;
+}
+
+/** ****************************************************************************
+ */
+
+@font-face {
+    font-family: Alfios;
+    src: url(../fonts/Alfios.otf);
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: Alfios;
+    src: url(../fonts/Alfios-Bold.otf);
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: Alfios;
+    src: url(../fonts/Alfios-Italic.otf);
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: Alfios;
+    src: url(../fonts/Alfios-BoldItalic.otf);
+    font-weight: 800;
+    font-style: italic;
+}
+

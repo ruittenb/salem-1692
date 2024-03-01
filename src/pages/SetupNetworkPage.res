@@ -160,7 +160,9 @@ let getModusOperandi = (
       <p> {React.string(t("You can join a game running on another smartphone."))} </p>
       <Spacer />
       <Button
-        label={t("Join Game")} onClick={_event => setSlaveGameIdValidity(_prev => SlaveInputShown)}
+        label={t("Join Game")}
+        className="condensed-ua"
+        onClick={_event => setSlaveGameIdValidity(_prev => SlaveInputShown)}
       />
     </>
   | (Master(_), NotConnected, _) => <>
@@ -202,7 +204,7 @@ let getModusOperandi = (
       />
       <Button
         label={t("Stop Hosting")}
-        className="condensed-nl"
+        className="condensed-nl condensed-ua"
         onClick={_event =>
           stopHosting(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)}
       />
@@ -277,7 +279,7 @@ let getModusOperandi = (
       />
       <Button
         label={t("Leave guest mode")}
-        className="condensed-es condensed-fr ultra-condensed-pt condensed-de"
+        className="condensed-es condensed-fr ultra-condensed-pt condensed-de ultra-condensed-ua"
         onClick={_event => {
           leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
           setSlaveGameIdValidity(_prev => SlaveInputHidden)
