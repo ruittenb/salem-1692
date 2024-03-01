@@ -43805,7 +43805,7 @@ function LanguageList(Props) {
   var t = function (param) {
     return Translator$Salem1692.getTranslator(partial_arg, param);
   };
-  var offeredLanguages = ["en_US", "es_ES", "pt_BR", "fr_FR", "de_DE", "nl_NL", "uk_UA"];
+  var offeredLanguages = ["en_US", "es_ES", "pt_BR", "fr_FR", "de_DE", "nl_NL"];
   var buttons = Belt_Array.map(offeredLanguages, function (buttonLanguage) {
     var onClick = function (_event) {
       var newGameState_gameType = gameState.gameType;
@@ -48674,7 +48674,7 @@ function getModusOperandi(t, goToPage, gameState, setGameState, dbConnectionStat
         }
       }), React.createElement(Button$Salem1692.make, {
         label: Curry._1(t, "Stop Hosting"),
-        className: "condensed-nl",
+        className: "condensed-nl condensed-ua",
         onClick: function (_event) {
           return stopHosting(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState);
         }
@@ -48889,7 +48889,7 @@ function SetupPage(Props) {
     }
   }), React.createElement(Button$Salem1692.make, {
     label: Curry._1(t, "Sound effects"),
-    className: "condensed-nl condensed-pt condensed-ua icon-left " + (gameState.doPlayEffects ? "icon-checked" : "icon-unchecked"),
+    className: "condensed-nl condensed-pt ultra-condensed-ua icon-left " + (gameState.doPlayEffects ? "icon-checked" : "icon-unchecked"),
     onClick: function (_event) {
       return Curry._1(setGameState, function (prevGameState) {
         return {
