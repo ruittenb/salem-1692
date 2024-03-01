@@ -18,6 +18,8 @@ function getFilesToCache(debug) {
         'css/salem.min.css',
         'fonts/CaslonAntique.ttf',
         'fonts/CaslonAntique-Bold.ttf',
+        'fonts/CaslonAntique-Italic.ttf',
+        'fonts/CaslonAntique-BoldItalic.ttf',
         'images/background-dawn.webp',
         'images/background-daytime.webp',
         'images/background-night.webp',

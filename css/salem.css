@@ -26,20 +26,12 @@ body {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-}
-
-.en_US,
-.es_ES,
-.pt_BR,
-.fr_FR,
-.de_DE,
-.nl_NL {
-    font-family: CaslonAntique, 'Times New Roman', Times, serif;
+    /**
+     * Caslon Antique is very beautiful, but does not support Cyrillic characters.
+     * For this latter script, we will fall back to Alfios, which is also quite nice.
+     */
+    font-family: CaslonAntique, Alfios, 'Times New Roman', Times, serif;
     font-size: 26px;
-}
-.uk_UA {
-    font-family: Alfios, 'Times New Roman', Times, serif;
-    font-size: 24px;
 }
 
 hr {
@@ -62,6 +54,7 @@ h1 {
 h2 {
     margin-top: 10px;
     margin-bottom: 0;
+    backdrop-filter: blur(3px);
 }
 h2,
 .text-centered {
@@ -144,8 +137,9 @@ input[type=text] {
     border: 2px solid black;
     padding-left: 5px;
     font-family: inherit;
-    font-size: 28px;
+    font-size: inherit;
     width: 50%;
+    line-height: 1.5;
 }
 
 input[type=text]::placeholder {
@@ -285,35 +279,33 @@ video + .bubble {
 
 .nl_NL .page button.condensed-nl {
     font-size: 24px;
-    line-height: 36px;
 }
 .de_DE .page button.condensed-de {
     font-size: 20px;
-    line-height: 36px;
 }
 .de_DE #setup-network-page button.condensed-de {
     font-size: 24px;
-    line-height: 36px;
 }
 .fr_FR .page button.condensed-fr {
     font-size: 23px;
-    line-height: 40px;
 }
 .fr_FR .page .player-entry-item input[type="text"].condensed-fr::placeholder {
     font-size: 21px;
-    line-height: 40px;
 }
 .es_ES .page button.condensed-es {
     font-size: 24px;
-    line-height: 40px;
 }
 .pt_BR .page button.condensed-pt {
     font-size: 24px;
-    line-height: 40px;
 }
 .pt_BR .page button.ultra-condensed-pt {
     font-size: 22px;
-    line-height: 40px;
+}
+.uk_UA .page button.condensed-ua {
+    font-size: 24px;
+}
+.uk_UA .page button.ultra-condensed-ua {
+    font-size: 22px;
 }
 
 .page {
@@ -334,6 +326,7 @@ video + .bubble {
     margin-bottom: 32px;
     font-family: inherit;
     font-size: 26px;
+    line-height: 40px;
     background-color: var(--gold);
     background-repeat: no-repeat;
     border-width: 2px;
@@ -383,7 +376,9 @@ video + .bubble {
 
 .page button.ok-button {
     font-size: 22px;
-    line-height: 1.5;
+}
+.uk_UA .page button.ok-button {
+    font-size: inherit;
 }
 
 .page button.rot0   { transform: rotate(0deg);   }
