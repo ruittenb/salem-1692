@@ -25,6 +25,7 @@ let getTranslator = (language: LanguageCodec.t, message: string): string => {
   | #es_ES => lookup(ES_ES.table, message, "Spanish")
   | #pt_BR => lookup(PT_BR.table, message, "Portuguese")
   | #fr_FR => lookup(FR_FR.table, message, "French")
+  | #it_IT => lookup(IT_IT.table, message, "Italian")
   | #de_DE => lookup(DE_DE.table, message, "German")
   | #nl_NL => lookup(NL_NL.table, message, "Dutch")
   | #uk_UA => lookup(UK_UA.table, message, "Ukrainian")
