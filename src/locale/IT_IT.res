@@ -7,7 +7,7 @@ let table = Js.Dict.fromArray([
   ("New Game", "Nuova partita"),
   ("Start Game", "Iniziare partita"),
   ("Play Game", "Giocare partita"),
-  ("Join Game", "Unisciti a una partita"),
+  ("Join Game", "Unirsi a una partita"),
   ("Play", "Giocare"),
   ("Settings", "Impostazioni"),
   ("Exit", "Uscire"),
@@ -33,7 +33,7 @@ let table = Js.Dict.fromArray([
   ("rules for 2-3 players.", "regole per 2-3 giocatori."),
   ("With Ghosts", "Con i fantasmi"),
   ("Sound effects", "Effetti sonori"),
-  ("Speech", "Dialogue"),
+  ("Speech", "Discorso"),
   ("Music", "Musica"),
   ("Seating layout", "Disposizione dei posti a sedere"),
   (
@@ -112,7 +112,7 @@ let table = Js.Dict.fromArray([
     `Si prega di autorizzare l'uso della fotocamera per scansionare un codice QR`,
   ), // contains nbsp
   // Credits
-  ("Credits", "Credits"),
+  ("Credits", "Crediti"),
   ("Game:", "Gioco:"),
   ("Rulebook", "Regole"),
   ("website", "sito web"),
