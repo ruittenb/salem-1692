@@ -33,7 +33,7 @@ let table = Js.Dict.fromArray([
   ("rules for 2-3 players.", "rules for 2-3 players."),
   ("With Ghosts", "With Ghosts"),
   ("Sound effects", "Sound FX"),
-  ("Speech", "Dialogue"),
+  ("Speech", "Discourse"),
   ("Music", "Music"),
   ("Seating layout", "Seating Layout"),
   ("How are the players seated around the table?", "How are the players seated around the table?"),

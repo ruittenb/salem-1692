@@ -5,12 +5,12 @@
 let table = Js.Dict.fromArray([
   // TitlePage
   ("New Game", "Nuova partita"),
-  ("Start Game", "Iniziare partita"),
-  ("Play Game", "Giocare partita"),
-  ("Join Game", "Unirsi a una partita"),
-  ("Play", "Giocare"),
+  ("Start Game", "Inizia partita"),
+  ("Play Game", "Gioca partita"),
+  ("Join Game", "Unisciti a una partita"),
+  ("Play", "Gioca"),
   ("Settings", "Impostazioni"),
-  ("Exit", "Uscire"),
+  ("Exit", "Esci"),
   // Setup
   ("Players", "Giocatori"),
   ("Names", "Nomi"),
@@ -66,16 +66,16 @@ let table = Js.Dict.fromArray([
   ("Multi-Telephone", "Multi-telefono"),
   ("Host Game", "Ospita una partita"),
   ("Game Code", "Codice di partita"),
-  ("Play as Host", "Giocare come anfitrione"),
-  ("Play as Guest", "Giocare come ospite"),
-  ("Start Hosting", "Iniziare a ospitare"),
-  ("Stop Hosting", "Smettere di ospitare"),
+  ("Play as Host", "Gioca come Host"),
+  ("Play as Guest", "Gioca come ospite"),
+  ("Start Hosting", "Inizia a ospitare"),
+  ("Stop Hosting", "Smetti di ospitare"),
   ("Malformed code", "Codice non valido"),
   ("Game not found", "Partita non trovata"),
   ("Not connected", "Non connesso"),
   ("Connecting...", "Connettendo..."),
   ("Connected.", "Connesso."),
-  ("Leave guest mode", `Uscire modalità ospite`), // Esci dalla ...
+  ("Leave guest mode", `Esci dalla modalità ospite`),
   (
     "You can host a game so that players can join from another smartphone.",
     `Puoi ospitare una partita in modo che i giocatori possano partecipare da un altro smartphone.`,
@@ -86,7 +86,7 @@ let table = Js.Dict.fromArray([
   ),
   (
     `Take the other smartphone and look in the app under Multi-Telephone → Play as Host. Then enter the game code here.`,
-    `Prendi l'altro smartphone e cerca nell'app in Multi-telefono → Giocare come anfitrione. Quindi inserisci qui il codice della partita.`,
+    `Prendi l'altro smartphone e cerca nell'app in Multi-telefono → Gioca come Host. Poi inserisci qui il codice della partita.`,
   ),
   (
     "It is possible to join this game from another smartphone.",
@@ -94,7 +94,7 @@ let table = Js.Dict.fromArray([
   ),
   (
     `Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. Then enter the following game code there.`,
-    `Prendi l'altro smartphone e guarda nell'app in Multi-telefono → Giocare come ospite. Quindi inserisci lì il seguente codice della partita.`,
+    `Prendi l'altro smartphone e cerca nell'app in Multi-telefono → Gioca come ospite. Poi inserisci lì il seguente codice della partita.`,
   ),
   ("You are currently hosting a game.", "Attualmente stai ospitando una partita."),
   (
@@ -119,7 +119,7 @@ let table = Js.Dict.fromArray([
   ("version", "versione"),
   ("For use with the game: ", "Per l'utilizzo con il gioco: "),
   ("App: ", "App: "),
-  ("Libraries: ", "Biblioteche: "),
+  ("Libraries: ", "Librerie: "),
   ("Sound effects: ", "Effetti sonori: "),
   ("Voice actors: ", "Doppiatori: "),
   ("Images: ", "Immagini: "),
@@ -130,20 +130,17 @@ let table = Js.Dict.fromArray([
   ("Dawn,", "L'alba,"),
   ("one witch", "una strega"),
   ("several witches", "diverse streghe"),
-  ("Night,", "La notte,"),
+  ("Night,", "Notte,"),
   ("with constable", "con sceriffo"),
   ("without constable", "senza sceriffo"),
   ("Dawn, one witch", "L'alba, una strega"),
   ("Dawn, several witches", "L'alba, diverse streghe"),
-  ("Night with constable", "La notte con sceriffo"),
-  ("Night without constable", "La notte senza sceriffo"),
-  (
-    "Waiting for the host to announce nighttime...",
-    `In attesa che l'anfitrione annunci la notte...`,
-  ),
+  ("Night with constable", "Notte con sceriffo"),
+  ("Night without constable", "Notte senza sceriffo"),
+  ("Waiting for the host to announce nighttime...", `In attesa che l'Host annunci la notte...`),
   // Dawn / Night
   ("Dawn", "L'alba"),
-  ("Night", "La notte"),
+  ("Night", "Notte"),
   ("The witches", "Le streghe"),
   ("The witch's turn", "Il turno della strega"),
   ("The witches' turn", "Il turno delle streghe"),
@@ -161,14 +158,14 @@ let table = Js.Dict.fromArray([
   ("The constable's turn", "Il turno dello sceriffo"),
   ("Choose another player to protect:", "Sceriffo, scegli un altro giocatore da proteggere:"),
   ("Choose someone to protect:", "Sceriffo, scegli qualcuno da proteggere:"),
-  ("Abort", "Interrompere"),
-  ("Skip", "Saltare"),
+  ("Abort", "Interrompi"),
+  ("Skip", "Salta"),
   ("Everybody is sound asleep... what about you?", "Tutti dormono profondamente... e tu?"), // contains nbsp
   // Confirm
   ("Witch, are you sure?", "Strega, sei sicura?"),
   ("Witches, are you sure?", "Streghe, siete sicure?"),
-  ("Constable, are you sure?", `Sceriffo, è sicuro?`),
-  ("Confirm", "Confermare"),
+  ("Constable, are you sure?", `Sceriffo, sei sicuro?`),
+  ("Confirm", "Conferma"),
   ("Yes", `Sì`),
   ("No", "No"),
   // Error
@@ -176,7 +173,7 @@ let table = Js.Dict.fromArray([
   ("Unable to load audio", `Impossibile caricare l'audio`),
   ("Index out of bounds", "Indice fuori limite"),
   // Confess
-  ("Confess", "Confessare"),
+  ("Confess", "Confessa"),
   ("Citizens of Salem,", "Cittadini di Salem,"),
   (
     "those among you who wish to confess may now do so.",
