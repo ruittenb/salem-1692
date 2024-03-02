@@ -13,7 +13,7 @@ let make = (
 
     // component
     <>
-        <h1> {React.string(t("Daytime"))} </h1>
+        <h1> {React.string(t("A day in Salem"))} </h1>
         <Spacer />
         <Spacer />
         <p className="text-centered"> {React.string(t("Waiting for the host to announce nighttime..."))} </p>

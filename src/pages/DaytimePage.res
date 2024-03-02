@@ -29,7 +29,7 @@ let make = (
     <div id="daytime-page" className="page justify-start">
         <BackFloatingButton onClick={ _event => goToPage(_prev => returnPage) } masterMode />
         <GearFloatingButton goToPage returnPage=Daytime />
-        <h1> {React.string(t("Daytime"))} </h1>
+        <h1> {React.string(t("A day in Salem"))} </h1>
         <Spacer />
         <LargeButton onClick={ _event => {
             setTurnState(_prev => { ...defaultNextState, nrWitches: One })
