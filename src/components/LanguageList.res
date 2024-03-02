@@ -16,10 +16,10 @@ let make = (~goToPage): React.element => {
     #es_ES,
     #pt_BR,
     #fr_FR,
-    #it_IT,
+    //#it_IT,
     #de_DE,
     #nl_NL,
-    #uk_UA,
+    //#uk_UA,
   ]
 
   let buttons: array<React.element> = offeredLanguages->Belt.Array.map(buttonLanguage => {

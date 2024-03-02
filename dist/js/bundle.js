@@ -43805,7 +43805,7 @@ function LanguageList(Props) {
   var t = function (param) {
     return Translator$Salem1692.getTranslator(partial_arg, param);
   };
-  var offeredLanguages = ["en_US", "es_ES", "pt_BR", "fr_FR", "it_IT", "de_DE", "nl_NL", "uk_UA"];
+  var offeredLanguages = ["en_US", "es_ES", "pt_BR", "fr_FR", "de_DE", "nl_NL"];
   var buttons = Belt_Array.map(offeredLanguages, function (buttonLanguage) {
     var onClick = function (_event) {
       var newGameState_gameType = gameState.gameType;
