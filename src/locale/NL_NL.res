@@ -121,7 +121,7 @@ let table = Js.Dict.fromArray([
   ("Voice actors: ", "Stemacteurs: "),
   ("Images: ", "Afbeeldingen: "),
   ("Music: ", "Muziek: "),
-  ("Licensed under", "Gelicentieerd onder"),
+  ("Licensed under ", "Gelicentieerd onder "),
   // Day
   ("A day in Salem", "Een dag in Salem"),
   ("Dawn,", "Dageraad,"),
