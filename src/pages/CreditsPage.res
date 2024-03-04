@@ -69,10 +69,12 @@ let make = (~goToPage): React.element => {
     </p>
     <p>
       <span> {React.string(t("Voice actors: "))} </span>
-      {React.string("Helmi Megens, ")}
+      {React.string("Helmi Megens")}
+      spacedComma
       <Link href="https://www.marioruizphotography.com/" text="Mario Ruiz" />
       spacedComma
-      {React.string("Paul Scholey, ")}
+      {React.string("Paul Scholey")}
+      spacedComma
       <Link href="https://www.fiverr.com/mrvoice" text="Christopher Badziong" />
       spacedComma
       <Link href="https://voice123.com/voice-actor/fredericmaltesse">
