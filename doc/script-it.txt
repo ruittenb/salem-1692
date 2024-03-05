@@ -4,10 +4,10 @@ A. È scesa la notte. La città va a dormire. Tutti quanti, chiudete gli occhi.
 B. La notte sta per finire. La città dorme ancora. Tutti quanti, chiudete gli occhi.
 
 
-C. Una volta che tutti gli occhi sono chiusi, la strega si sveglia.
+C. Quando tutti gli occhi sono chiusi, la strega si sveglia.
 
 E. La strega apre gli occhi. Senza fare rumore decide chi prenderà il gatto nero.
-   Se vuole, può scegliere lei stessa.
+   Se vuole, può scegliere se stessa.
 
 H. La strega ha fatto la sua scelta. Ora chiude gli occhi.
 
@@ -16,22 +16,23 @@ D. Una volta chiusi tutti gli occhi, le streghe si svegliano.
    Le streghe aprono gli occhi. Stabiliscono un contatto visivo per riconoscersi.
 
 F. Usando solo i gesti, decidono silenziosamente chi prenderà il gatto nero.
-   Se vogliono, possono sceglierne uno tra loro.
+   Se vogliono, possono scegliere una di loro stesse.
 
 G. Solo a gesti decidono in silenzio chi vogliono uccidere.
-   Possono sceglierne uno tra loro.
+   Possono scegliere una di loro stesse.
 
 J. Le streghe hanno fatto la loro scelta. Ora chiudono gli occhi.
 
 
 M. Una volta che le streghe hanno chiuso gli occhi, lo sceriffo si sveglia.
-   Lo sceriffo decide chi sarà protetto questa notte.
+   Lo sceriffo decide chi verrà protetto questa notte.
 
-P. Può non scegliere lui stesso.
+P. Può non scegliere se stesso.
 
 Q. Può anche scegliere se stesso.
 
 N. Lo sceriffo ha fatto la sua scelta. Adesso chiude gli occhi.
 
 
-Z. L'alba sta sorgendo. La città si sveglia. Tutti, aprite gli occhi.
+Z. L'alba sta sorgendo. La città si sveglia. Tutti quanti, aprite gli occhi.
+
