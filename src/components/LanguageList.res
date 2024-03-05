@@ -14,9 +14,9 @@ let make = (~goToPage): React.element => {
   let offeredLanguages: array<LanguageCodec.t> = [
     #en_US,
     #es_ES,
-    #pt_BR,
     #fr_FR,
-    //#it_IT,
+    #it_IT,
+    #pt_BR,
     #de_DE,
     #nl_NL,
     //#uk_UA,

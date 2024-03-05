@@ -49,7 +49,7 @@ h1 {
     margin: 20px 5px;
     max-width: calc(100vw - 110px);
     text-align: center;
-    line-height: 0.8;
+    line-height: 1;
 }
 .uk_UA h1 {
     transform: scaleX(0.9);
@@ -280,13 +280,13 @@ video + .bubble {
  * Page elements
  */
 
-.nl_NL .page button.condensed-nl {
-    font-size: 24px;
-}
 .de_DE .page button.condensed-de {
     font-size: 20px;
 }
 .de_DE #setup-network-page button.condensed-de {
+    font-size: 24px;
+}
+.es_ES .page button.condensed-es {
     font-size: 24px;
 }
 .fr_FR .page button.condensed-fr {
@@ -295,7 +295,13 @@ video + .bubble {
 .fr_FR .page .player-entry-item input[type="text"].condensed-fr::placeholder {
     font-size: 21px;
 }
-.es_ES .page button.condensed-es {
+.it_IT .page button.condensed-it {
+    font-size: 24px;
+}
+.it_IT .page button.ultra-condensed-it {
+    font-size: 21px;
+}
+.nl_NL .page button.condensed-nl {
     font-size: 24px;
 }
 .pt_BR .page button.condensed-pt {
@@ -450,11 +456,10 @@ video + .bubble {
     background-position: center center;
     background-repeat: no-repeat;
     position: absolute;
-    top: 20px;
+    top: 26px;
     width: 32px;
     height: 32px;
     z-index: 10;
-    /* opacity: 0.75; */
 }
 
 .page button.flag-us { background-image: url(../images/flag-us.png); }
