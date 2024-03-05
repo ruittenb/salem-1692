@@ -46933,37 +46933,19 @@ function CreditsPage(Props) {
   }), openParen, React.createElement(Link$Salem1692.make, {
     href: rulebookUrl,
     text: Curry._1(t, "Rulebook")
-  }), closeParenAndComma, "Travis Hancock ©" + nnbsp + " 2015", spacedComma, React.createElement(Link$Salem1692.make, {
+  }), closeParenAndComma, "Travis Hancock © 2015", spacedComma, React.createElement(Link$Salem1692.make, {
     href: "https://facadegames.com/",
     text: "Façade Games"
-  })), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Voice actors: ")), React.createElement("img", {
-    className: "flag",
-    src: "images/flag-nl.png"
-  }), "Helmi Megens", spacedComma, React.createElement("img", {
-    className: "flag",
-    src: "images/flag-es.png"
-  }), React.createElement(Link$Salem1692.make, {
+  })), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Voice actors: ")), "Helmi Megens", spacedComma, React.createElement(Link$Salem1692.make, {
     href: "https://www.marioruizphotography.com/",
     text: "Mario Ruiz"
-  }), spacedComma, React.createElement("img", {
-    className: "flag",
-    src: "images/flag-gb.png"
-  }), "Paul Scholey", spacedComma, React.createElement("img", {
-    className: "flag",
-    src: "images/flag-de.png"
-  }), React.createElement(Link$Salem1692.make, {
+  }), spacedComma, "Paul Scholey", spacedComma, React.createElement(Link$Salem1692.make, {
     href: "https://www.fiverr.com/mrvoice",
     text: "Christopher Badziong"
-  }), spacedComma, React.createElement("img", {
-    className: "flag",
-    src: "images/flag-fr.png"
-  }), React.createElement(Link$Salem1692.make, {
+  }), spacedComma, React.createElement(Link$Salem1692.make, {
     href: "https://voice123.com/voice-actor/fredericmaltesse",
     children: null
-  }, "Frederic Maltesse ", React.createElement("i", undefined, "(Namprod)")), spacedComma, React.createElement("img", {
-    className: "flag",
-    src: "images/flag-br.png"
-  }), React.createElement(Link$Salem1692.make, {
+  }, "Frederic Maltesse ", React.createElement("i", undefined, "(Namprod)")), spacedComma, React.createElement(Link$Salem1692.make, {
     href: "https://www.fiverr.com/sacciotto",
     children: null
   }, "Adriana ", React.createElement("i", undefined, "(Sacciotto)")), spacedComma, Curry._1(t, "Licensed under "), React.createElement(Link$Salem1692.make, {
