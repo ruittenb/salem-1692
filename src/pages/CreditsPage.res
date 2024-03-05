@@ -69,18 +69,24 @@ let make = (~goToPage): React.element => {
     </p>
     <p>
       <span> {React.string(t("Voice actors: "))} </span>
+      <img src="images/flag-nl.png" className="flag" />
       {React.string("Helmi Megens")}
       spacedComma
+      <img src="images/flag-es.png" className="flag" />
       <Link href="https://www.marioruizphotography.com/" text="Mario Ruiz" />
       spacedComma
+      <img src="images/flag-gb.png" className="flag" />
       {React.string("Paul Scholey")}
       spacedComma
+      <img src="images/flag-de.png" className="flag" />
       <Link href="https://www.fiverr.com/mrvoice" text="Christopher Badziong" />
       spacedComma
+      <img src="images/flag-fr.png" className="flag" />
       <Link href="https://voice123.com/voice-actor/fredericmaltesse">
         {React.string("Frederic Maltesse ")} <i> {React.string("(Namprod)")} </i>
       </Link>
       spacedComma
+      <img src="images/flag-br.png" className="flag" />
       <Link href="https://www.fiverr.com/sacciotto">
         {React.string("Adriana ")} <i> {React.string("(Sacciotto)")} </i>
       </Link>

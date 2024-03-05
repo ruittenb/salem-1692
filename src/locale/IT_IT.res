@@ -26,7 +26,7 @@ let table = Js.Dict.fromArray([
   ("Ghost Players", "Giocatori fantasma"),
   (
     `In a two- or three-player game, nicknames for "ghost" players should be added to the list above up to a total of four players.`,
-    `In una partita a due o tre giocatori, i soprannomi per i giocatori "fantasma" dovrebbero essere aggiunti all'elenco sopra fino a un totale di quattro giocatori.`,
+    `In una partita a due o tre giocatori, i sopran­nomi per i giocatori "fantasma" dovrebbero essere aggiunti all'elenco sopra fino a un totale di quattro giocatori.`,
   ),
   ("Also check the box below.", "Seleziona anche la casella qui sotto."),
   ("Please consult the ", "Si prega di consultare le "),
