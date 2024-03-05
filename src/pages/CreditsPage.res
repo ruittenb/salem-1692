@@ -7,9 +7,7 @@ open Constants
 
 @val external salemAppVersion: string = "salemAppVersion"
 
-let nnbsp = ` ` // U+202F Narrow No-Break Space
 let _nbsp = ` ` // U+00A0 No-Break Space
-let note = `♪` // U+266A Eighth Note (quaver)
 let year = "2022-2024"
 let spacedComma = React.string(", ")
 let openParen = React.string(" (")
@@ -32,18 +30,6 @@ let make = (~goToPage): React.element => {
     | #uk_UA
     | #en_US => "Salem 1692 - Rulebook English (6th Edition).pdf"
     }
-
-  let trackList = React.array(
-    Constants.musicTracks->Js.Array2.mapi((track, index) => {
-      <React.Fragment key={Belt.Int.toString(index) ++ "/" ++ track}>
-        <Link
-          href={"https://incompetech.com/music/royalty-free/mp3-royaltyfree/" ++ track ++ ".mp3"}
-          text={track ++ nnbsp ++ note}
-        />
-        spacedComma
-      </React.Fragment>
-    }),
-  )
 
   <div id="credits-page" className="page justify-start">
     <BackFloatingButton onClick={_event => goToPage(_prev => Setup)} />
@@ -90,8 +76,8 @@ let make = (~goToPage): React.element => {
     </p>
     <p>
       <span> {React.string(t("Music: "))} </span>
-      {trackList}
-      {React.string(`© `)}
+      <TrackList />
+      {React.string(`, © `)}
       <Link href="https://incompetech.com/music/royalty-free/music.html" text="Kevin MacLeod" />
       spacedComma
       {React.string(t("Licensed under") ++ " ")}
