@@ -638,6 +638,10 @@ video + .bubble {
     font-style: italic;
 }
 
+#credits-page img.flag {
+    margin-right: 6px;
+}
+
 /** ****************************************************************************
  * Daytime Page
  */
