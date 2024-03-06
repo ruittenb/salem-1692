@@ -85,7 +85,9 @@ let make = (~goToPage, ~allowBackToConfess: bool=true): React.element => {
     }}
     <GearFloatingButton goToPage returnPage />
     <h1 className="condensed-de"> {React.string(t("The Reveal"))} </h1>
-    <p> {React.string(t("Find out what happened while you were sleeping."))} </p>
+    <p className="text-centered">
+      {React.string(t("Find out what happened while you were sleeping."))}
+    </p>
     <Spacer />
     {witchesRevealButton}
     {constableRevealButton}

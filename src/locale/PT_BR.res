@@ -167,7 +167,7 @@ let table = Js.Dict.fromArray([
   ("Unable to load audio", `Não foi possível carregar o áudio`),
   ("Index out of bounds", `Índice fora dos limites`),
   // Confess
-  ("Confess", "Confess"),
+  ("Confess", `A confissão`),
   ("Citizens of Salem,", `Cidadãos de Salém,`),
   (
     "those among you who wish to confess may now do so.",
