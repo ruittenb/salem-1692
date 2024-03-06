@@ -7,7 +7,7 @@ open Constants
 
 @val external salemAppVersion: string = "salemAppVersion"
 
-let _nbsp = ` ` // U+00A0 No-Break Space
+let nbsp = ` ` // U+00A0 No-Break Space
 let year = "2022-2024"
 let spacedComma = React.string(", ")
 let openParen = React.string(" (")
@@ -77,7 +77,7 @@ let make = (~goToPage): React.element => {
     <p>
       <span> {React.string(t("Music: "))} </span>
       <TrackList />
-      {React.string(`, © `)}
+      {React.string(`©` ++ nbsp)}
       <Link href="https://incompetech.com/music/royalty-free/music.html" text="Kevin MacLeod" />
       spacedComma
       {React.string(t("Licensed under") ++ " ")}
