@@ -32,14 +32,14 @@ let make = (~goToPage): React.element => {
       goToPage(_prev => Setup)
     }
     let (className, label) = switch buttonLanguage {
-    | #en_US => ("icon-left compact flag-us", t("English"))
-    | #es_ES => ("icon-left compact flag-es", t(`Español`))
-    | #pt_BR => ("icon-left compact flag-br", t(`Português`))
-    | #fr_FR => ("icon-left compact flag-fr", t(`Français`))
-    | #it_IT => ("icon-left compact flag-it", t("Italiano"))
-    | #de_DE => ("icon-left compact flag-de", t("Deutsch"))
-    | #nl_NL => ("icon-left compact flag-nl", t("Nederlands"))
-    | #uk_UA => ("icon-left compact flag-ua uk_UA", t(`Українська`))
+    | #en_US => ("icon-left compact flag flag-us-gb", t("English"))
+    | #es_ES => ("icon-left compact flag flag-es", t(`Español`))
+    | #pt_BR => ("icon-left compact flag flag-br", t(`Português`))
+    | #fr_FR => ("icon-left compact flag flag-fr", t(`Français`))
+    | #it_IT => ("icon-left compact flag flag-it", t("Italiano"))
+    | #de_DE => ("icon-left compact flag flag-de", t("Deutsch"))
+    | #nl_NL => ("icon-left compact flag flag-nl", t("Nederlands"))
+    | #uk_UA => ("icon-left compact flag flag-ua uk_UA", t(`Українська`))
     }
     <Button key={label} label className onClick />
   })

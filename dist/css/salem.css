@@ -463,6 +463,8 @@ video + .bubble {
     z-index: 10;
 }
 
+.page button.flag { background-size: 28px; }
+.page button.flag-us-gb { background-image: url(../images/flag-us-gb.png); }
 .page button.flag-us { background-image: url(../images/flag-us.png); }
 .page button.flag-es { background-image: url(../images/flag-es.png); }
 .page button.flag-br { background-image: url(../images/flag-br.png); }
@@ -471,6 +473,7 @@ video + .bubble {
 .page button.flag-ua { background-image: url(../images/flag-ua.png); }
 .page button.flag-nl { background-image: url(../images/flag-nl.png); }
 .page button.flag-it { background-image: url(../images/flag-it.png); }
+.page button.flag-jp { background-image: url(../images/flag-jp.png); }
 
 .page button.icon-back  { background-image: url(../images/icon-back.png); }
 .page button.icon-pawn  { background-image: url(../images/icon-pawn.png); }
