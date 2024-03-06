@@ -50,6 +50,7 @@ let table = Js.Dict.fromArray([
   (`Português`, `Português`),
   ("Italiano", "Italiano"),
   (`Українська`, `Українська`),
+  (`日本語`, `日本語`),
   ("Interface only, no dialogue yet", "Interface only, no dialogue yet"),
   ("Back", "Back"),
   ("Next", "Next"),
@@ -189,7 +190,7 @@ let table = Js.Dict.fromArray([
   ("The witches attacked-PRE", "The witches attacked"),
   ("The witches attacked-POST", ""),
   (" got the black cat", ` got the black cat`), // contains nbsp
-  ("Reveal constable's protégé", `Reveal the constable's protégé`),
+  (`Reveal constable's protégé`, `Reveal the constable's protégé`),
   ("The constable protected-PRE", "The constable protected"),
   ("The constable protected-POST", ""),
 ])

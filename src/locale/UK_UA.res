@@ -204,7 +204,7 @@ let table = Js.Dict.fromArray([
   ("The witches attacked-PRE", `Відьми напали на`),
   ("The witches attacked-POST", ""),
   (" got the black cat", ` отримав чорного кота`), // contains nbsp
-  ("Reveal constable's protégé", `Покажіть, кого захищав констебль`),
+  (`Reveal constable's protégé`, `Покажіть, кого захищав констебль`),
   ("The constable protected-PRE", `Констебль захистив`),
   ("The constable protected-POST", ""),
 ])

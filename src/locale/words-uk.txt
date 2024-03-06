@@ -120,5 +120,5 @@
   "The witch attacked", `Відьма напала на`
   "The witches attacked", `Відьми напали на`
   " got the black cat", ` отримав чорного кота`
-  "Reveal constable's protection", `Покажіть, кого захищав констебль`
+  `Reveal constable's protégé`, `Покажіть, кого захищав констебль`
   "The constable protected", `Констебль захистив`

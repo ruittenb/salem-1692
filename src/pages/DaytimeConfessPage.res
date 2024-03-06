@@ -18,7 +18,7 @@ let make = (~goToPage): React.element => {
   | Some(constableTargetName) => <>
       <Spacer />
       <LargeRevealButton
-        revealPrompt={t("Reveal constable's protection")}
+        revealPrompt={t(`Reveal constable's protégé`)}
         revelationPromptPre={t("The constable protected-PRE")}
         revelationPromptPost={t("The constable protected-POST")}
         secret=constableTargetName

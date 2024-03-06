@@ -53,6 +53,7 @@ let table = Js.Dict.fromArray([
   (`Português`, `Português`),
   ("Italiano", "Italiano"),
   (`Українська`, `Українська`),
+  (`日本語`, `日本語`),
   ("Interface only, no dialogue yet", `Interfaz solamente, sin diálogo todavía`),
   ("Back", "Regresar"),
   ("Next", "Avanzar"),
@@ -186,7 +187,7 @@ let table = Js.Dict.fromArray([
   ("The witches attacked-PRE", `Las brujas atacaron a`),
   ("The witches attacked-POST", ""),
   (" got the black cat", ` consiguió el gato negro`), // contains nbsp
-  ("Reveal constable's protégé", `Revelar el protegido del alguacil`), // contains nbsp
+  (`Reveal constable's protégé`, `Revelar el protegido del alguacil`), // contains nbsp
   ("The constable protected-PRE", `El alguacil protegió a`),
   ("The constable protected-POST", ""),
 ])
