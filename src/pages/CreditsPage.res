@@ -64,12 +64,12 @@ let make = (~goToPage): React.element => {
       <Link href="https://www.fiverr.com/mrvoice" text="Christopher Badziong" />
       spacedComma
       <Link href="https://voice123.com/voice-actor/fredericmaltesse">
-        {React.string("Frederic Maltesse ")} <i> {React.string("(Namprod)")} </i>
+        {React.string(`Frédéric Maltesse`)}
       </Link>
       spacedComma
-      <Link href="https://www.fiverr.com/sacciotto">
-        {React.string("Adriana ")} <i> {React.string("(Sacciotto)")} </i>
-      </Link>
+      <Link href="https://www.fiverr.com/sacciotto"> {React.string("Adriana Sacciotto")} </Link>
+      spacedComma
+      <Link href="https://www.fiverr.com/alexmartinelli"> {React.string("Alex Martinelli")} </Link>
       spacedComma
       {React.string(t("Licensed under "))}
       <Link href="http://creativecommons.org/licenses/by-sa/4.0/" text="CC BY-SA 4.0" />
