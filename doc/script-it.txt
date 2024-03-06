@@ -24,14 +24,14 @@ G. Solo a gesti decidono in silenzio chi vogliono uccidere.
 J. Le streghe hanno fatto la loro scelta. Ora chiudono gli occhi.
 
 
-M. Una volta che le streghe hanno chiuso gli occhi, lo sceriffo si sveglia.
-   Lo sceriffo decide chi verrà protetto questa notte.
+M. Una volta che le streghe hanno chiuso gli occhi, lo guardia si sveglia.
+   Lo guardia decide chi verrà protetto questa notte.
 
 P. Può non scegliere se stesso.
 
 Q. Può anche scegliere se stesso.
 
-N. Lo sceriffo ha fatto la sua scelta. Adesso chiude gli occhi.
+N. Lo guardia ha fatto la sua scelta. Adesso chiude gli occhi.
 
 
 Z. L'alba sta sorgendo. La città si sveglia. Tutti quanti, aprite gli occhi.

@@ -131,12 +131,12 @@ let table = Js.Dict.fromArray([
   ("one witch", "una strega"),
   ("several witches", "varie streghe"),
   ("Night,", "Notte,"),
-  ("with constable", "con sceriffo"),
-  ("without constable", "senza sceriffo"),
+  ("with constable", "con guardia"),
+  ("without constable", "senza guardia"),
   ("Dawn, one witch", "L'alba, una strega"),
   ("Dawn, several witches", "L'alba, varie streghe"),
-  ("Night with constable", "Notte con sceriffo"),
-  ("Night without constable", "Notte senza sceriffo"),
+  ("Night with constable", "Notte con guardia"),
+  ("Night without constable", "Notte senza guardia"),
   ("Waiting for the host to announce nighttime...", `In attesa che l'Host annunci la notte...`),
   // Dawn / Night
   ("Dawn", "L'alba"),
@@ -146,10 +146,10 @@ let table = Js.Dict.fromArray([
   ("The witches' turn", "Il turno delle streghe"),
   ("Decide-SG who should get the black cat:", `Decidi chi dovrebbe prendersi il gatto nero:`), // contains nbsp
   ("Decide-PL who should get the black cat:", `Decidete chi dovrebbe prendersi il gatto nero:`), // contains nbsp
-  ("Choose-SG a victim:", "Strega, scegli una vittima:"),
-  ("Choose-PL a victim:", "Streghe, scegliete una vittima:"),
-  ("The constable", "Lo sceriffo"),
-  ("The constable's turn", "Il turno dello sceriffo"),
+  ("Choose-SG a victim:", "Scegli una vittima:"),
+  ("Choose-PL a victim:", "Scegliete una vittima:"),
+  ("The constable", "Lo guardia"),
+  ("The constable's turn", "Il turno dello guardia"),
   ("Choose another player to protect:", "Scegli un altro giocatore da proteggere:"),
   ("Choose someone to protect:", "Scegli qualcuno da proteggere:"),
   ("Abort", "Interrompi"),
@@ -158,7 +158,7 @@ let table = Js.Dict.fromArray([
   // Confirm
   ("Witch, are you sure?", "Strega, sei sicura?"),
   ("Witches, are you sure?", "Streghe, siete sicure?"),
-  ("Constable, are you sure?", `Sceriffo, sei sicuro?`),
+  ("Constable, are you sure?", `Guardia, sei sicuro?`),
   ("Confirm", "Conferma"),
   ("Yes", `Sì`),
   ("No", "No"),
@@ -186,7 +186,7 @@ let table = Js.Dict.fromArray([
   ("The witches attacked-PRE", "Le streghe hanno attaccato"),
   ("The witches attacked-POST", ""),
   (" got the black cat", ` ha preso il gatto nero.`), // contains nbsp
-  ("Reveal constable's protection", "Rivelare la protezione dello sceriffo"),
-  ("The constable protected-PRE", "Lo sceriffo ha protetto"),
+  ("Reveal constable's protégé", "Rivelare il protetto dello guardia"),
+  ("The constable protected-PRE", "Lo guardia ha protetto"),
   ("The constable protected-POST", ""),
 ])
