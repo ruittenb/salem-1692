@@ -14,10 +14,13 @@
     "entertainment",
     "games"
   ],
+  "android": {
+    "target_sdk_version": "33"
+  },
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#BF9986",
   "theme_color": "#472B1D",
+  "background_color": "#BF9986",
   "shortcuts" : [
     {
       "name": "Open",
