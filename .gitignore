@@ -12,6 +12,10 @@ node_modules/
 *.swo
 *.bs.js
 bundle.js.tmp-browserify-*
+
+# Android SDK
+local.properties
+
 # Yarn logfiles
 yarn-debug.log*
 yarn-error.log*
@@ -26,6 +30,7 @@ yarn-error.log*
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
 # only when using pnp
 #!.yarn/cache
 #!.yarn/unplugged
