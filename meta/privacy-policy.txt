@@ -12,7 +12,8 @@ In standalone mode, no data is collected or shared with third parties.
 In multi-telephone mode, per game the following data is sent to a (Google-hosted) Firebase Database:
  - The players' names, as entered in the app
  - Game state data, such as the players for which was voted
- - The date and time when the information was last updated.
+ - The date and time when the information was last updated
+ - The language selected.
 
 This data is automatically removed when the multi-telephone mode is ended using the app button "Stop Hosting".  If the app is closed forcibly, the data is not removed.
 
@@ -23,4 +24,5 @@ The players' names and game state data are strictly used for synchronizing the h
 
 The date and time of the last update is only used for deciding when game data may be removed from the database. Periodically, data that is not used in a running game any more is removed.
 
+The language is saved for analytical purposes.
 
