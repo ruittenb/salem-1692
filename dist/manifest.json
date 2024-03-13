@@ -2,26 +2,31 @@
   "name": "Salem 1692 Moderator",
   "short_name": "Salem 1692",
   "description": "Moderator app for the cardgame Salem 1692",
+  "categories": [
+    "entertainment",
+    "games"
+  ],
+  "lang": "en-US",
+  "dir": "auto",
+  "iarc_rating_id": "6e8c25a6-88cd-4ef7-a9d7-bc361240487e",
   "id": "index.html?utm_source=pwa",
   "start_url": "index.html?utm_source=pwa",
   "scope": ".",
   "manifest_version": 2,
   "version": "1.0",
-  "lang": "en-US",
   "related_applications": [],
   "prefer_related_applications": false,
-  "categories": [
-    "entertainment",
-    "games"
-  ],
+  "launch_handler": {
+    "client_mode": ["focus-existing", "auto"]
+  },
   "android": {
     "target_sdk_version": "33"
   },
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#472B1D",
   "background_color": "#BF9986",
-  "shortcuts" : [
+  "theme_color": "#472B1D",
+  "shortcuts": [
     {
       "name": "Open",
       "url": "index.html?utm_source=pwa",
@@ -81,7 +86,7 @@
       "purpose": "any"
     }
   ],
-  "screenshots" : [
+  "screenshots": [
     {
       "src": "images/screenshot-1.jpg",
       "sizes": "1080x2340",
