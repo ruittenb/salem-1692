@@ -1,4 +1,4 @@
-/** ****************************************************************************
+/* *****************************************************************************
  * Main
  *
  * React               : Bindings to React
@@ -10,9 +10,8 @@
  */
 
 let run = (elementId: string) => {
-    switch (Utils.safeQuerySelector(elementId)) {
-        | Ok(rootElement) => ReactDOM.render(<RootPage />, rootElement)
-        | Error(msg) => Utils.logError(msg)
-    }
+  switch Utils.safeQuerySelector(elementId) {
+  | Ok(rootElement) => ReactDOM.render(<RootPage />, rootElement)
+  | Error(msg) => Utils.logError(msg)
+  }
 }
-

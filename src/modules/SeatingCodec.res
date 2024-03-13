@@ -1,4 +1,4 @@
-/** ****************************************************************************
+/* *****************************************************************************
  * SeatingCodec
  */
 
@@ -18,27 +18,28 @@
 // generates the functions seatingToJs() and seatingFromJs()
 @deriving(jsConverter)
 type seating = [
-    | #OneAtTop
-    | #TwoAtTop
+  | #OneAtTop
+  | #TwoAtTop
 ]
 
 let encoder: Decco.encoder<seating> = (seating: seating): Js.Json.t => {
-    seating->seatingToJs->Decco.stringToJson
+  seating->seatingToJs->Decco.stringToJson
 }
 
-let decoder: Decco.decoder<seating> = (
-    json: Js.Json.t
-): Belt.Result.t<seating, Decco.decodeError> => {
-    switch (json->Decco.stringFromJson) {
-        | Belt.Result.Ok(v) => switch (v->seatingFromJs) {
-            | None => Decco.error(~path="", "Invalid enum " ++ v, json)
-            | Some(v) => v->Ok
-        }
-        | Belt.Result.Error(_) as err => err
+let decoder: Decco.decoder<seating> = (json: Js.Json.t): Belt.Result.t<
+  seating,
+  Decco.decodeError,
+> => {
+  switch json->Decco.stringFromJson {
+  | Belt.Result.Ok(v) =>
+    switch v->seatingFromJs {
+    | None => Decco.error(~path="", "Invalid enum " ++ v, json)
+    | Some(v) => v->Ok
     }
+  | Belt.Result.Error(_) as err => err
+  }
 }
 
 let codec: Decco.codec<seating> = (encoder, decoder)
 
 @decco type t = @decco.codec(codec) seating
-
