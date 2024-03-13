@@ -207,6 +207,7 @@ type dbObservable =
 @decco
 type dbRecord = {
   masterGameId: GameTypeCodec.gameId,
+  masterLanguage: LanguageCodec.t,
   masterPhase: PhaseCodec.t,
   masterPlayers: array<player>,
   masterSeating: SeatingCodec.t,
