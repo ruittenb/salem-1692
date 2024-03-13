@@ -26,6 +26,8 @@ help: ## Print help for each target
 .PHONY: all
 all: build-minify ## Compile, bundle and minify everything. Identical to 'make build-minify'
 
+##@ Development:
+
 .PHONY: mark
 mark: # Put "ready" in corner of terminal
 	@echo
@@ -37,6 +39,10 @@ mark: # Put "ready" in corner of terminal
 %.min.css: %.css
 	@# descend into the directory in order to prevent corrupting URLs in CSS
 	cd $(<D) && cleancss $(<F) > $(@F)
+
+.PHONY: reformat
+reformat: ## Reformat all source code files according to the rescript standard
+	rescript format -all
 
 ##@ Build process:
 

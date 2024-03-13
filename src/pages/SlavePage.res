@@ -25,8 +25,10 @@ let make = (~goToPage, ~subPage: page): React.element => {
             Utils.logDebug(p ++ "Received null on listener")
             goToPage(_prev => SetupNetworkNoGame)
           }
-        | Some(dbRecordStr) => switch dbRecordStr->Js.Json.string->dbRecord_decode {
-          | Error(deccoError) => Utils.logError(
+        | Some(dbRecordStr) =>
+          switch dbRecordStr->Js.Json.string->dbRecord_decode {
+          | Error(deccoError) =>
+            Utils.logError(
               deccoError.path ++
               ": " ++
               deccoError.message ++
