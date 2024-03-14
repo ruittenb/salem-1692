@@ -180,8 +180,8 @@ let table = Js.Dict.fromArray([
   // Reveal
   ("The Reveal", `La revelación`),
   ("Find out what happened while you were sleeping.", `Descubran qué pasó mientras dormían.`),
-  ("Reveal witch's victim", `Revelar víctima de la bruja`),
-  ("Reveal witches' victim", `Revelar víctima de las brujas`),
+  ("Reveal witch's victim", `Revelar la víctima de la bruja`),
+  ("Reveal witches' victim", `Revelar la víctima de las brujas`),
   ("The witch attacked-PRE", `La bruja atacó a`),
   ("The witch attacked-POST", ""),
   ("The witches attacked-PRE", `Las brujas atacaron a`),
