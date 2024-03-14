@@ -74,6 +74,12 @@
       "type": "image/png"
     },
     {
+      "src": "images/favicon-196-monochrome.png",
+      "sizes": "196x196",
+      "type": "image/png",
+      "purpose": "monochrome"
+    },
+    {
       "src": "images/favicon-512-maskable.png",
       "sizes": "512x512",
       "type": "image/png",
