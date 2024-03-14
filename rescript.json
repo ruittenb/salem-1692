@@ -2,24 +2,30 @@
   "name": "salem-1692",
   "version": "0.72.2",
   "namespace": true,
-  "reason": {"react-jsx": 3},
-  "bsc-flags": ["-bs-super-errors"],
+  "reason": {
+    "react-jsx": 3
+  },
+  "bsc-flags": [
+    "-bs-super-errors",
+    "-open RescriptCore"
+  ],
   "sources": [{
     "dir": "src",
     "subdirs": true
   }],
   "package-specs": [{
-    "module": "es6",
+    "module": "esmodule",
     "in-source": true
   }],
-  "suffix": ".bs.js",
+  "suffix": ".res.js",
   "bs-dependencies": [
+    "@rescript/core",
     "@ryyppy/rescript-promise",
     "@rescript/react",
     "@greenlabs/ppx-spice"
   ],
   "ppx-flags": [
-    ["@greenlabs/ppx-spice/ppx"]
+    ["@greenlabs/ppx-spice/ppx", "-uncurried"]
   ],
   "jsx": {
     "version": 4,

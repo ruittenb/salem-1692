@@ -30,7 +30,7 @@ let setDefaultLanguage = (gameState): gameState => {
 }
 
 let cleanupGameStateMusic = (gameState): gameState => {
-  let knownMusicTracksInclude = musicTracks->Js.Array2.includes // curried
+  let knownMusicTracksInclude = musicTracks->Js.Array2.includes(...) // curried
   {
     ...gameState,
     backgroundMusic: gameState.backgroundMusic->Js.Array2.filter(knownMusicTracksInclude),
