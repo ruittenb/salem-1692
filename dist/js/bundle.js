@@ -36620,7 +36620,7 @@ module.exports={
     "esmify": "^2.1.1",
     "fswatch": "^0.1.4",
     "only-allow": "^1.2.1",
-    "rescript": "10.1",
+    "rescript": "^10.1.0",
     "serve": "^14.2.1",
     "uglify-js": "^3.14.1",
     "uglifyify": "^5.0.2"
@@ -36628,7 +36628,7 @@ module.exports={
   "dependencies": {
     "@rescript/react": "^0.11.0",
     "@ryyppy/rescript-promise": "^2.1.0",
-    "bs-platform": "9",
+    "bs-platform": "^9.0.0",
     "davidshimjs-qrcodejs": "^0.0.2",
     "decco": "^1.6.0",
     "firebase": "^9.0.1",
@@ -36636,9 +36636,6 @@ module.exports={
     "react": "^18.2.0",
     "react-client": "^1.0.1",
     "react-dom": "^18.2.0"
-  },
-  "peerDependencies": {
-    "bs-platform": "9"
   }
 }
 
