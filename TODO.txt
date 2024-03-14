@@ -1,7 +1,7 @@
 
 SEVERE:
  - town-still-asleep recordings
-   - done: fr, pt, de
+   - done: fr, pt, it, de
 	 - todo: nl, en, es
 
 IMPORTANT:
@@ -13,4 +13,5 @@ NICE TO HAVE:
  - nicer wifi icon
  - fade music out
  - reflect state in URL https://betterprogramming.pub/how-and-why-you-should-store-react-ui-state-in-the-url-f2013a204cb2
+ - swipe: https://www.npmjs.com/package/react-swipeable
 
