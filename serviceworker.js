@@ -157,3 +157,22 @@ function cacheThenNetwork(event) {
     );
 }
 
+/**
+ * Push notifications
+ */
+/*
+self.addEventListener('push', (event) => {
+  event.waitUntil(
+    self.registration.showNotification('Notification Title', {
+      body: 'Notification Body Text',
+      icon: 'custom-notification-icon.png',
+    });
+  );
+});
+
+self.addEventListener('notificationclick', (event) => {
+    event.notification.close();
+    var fullPath = self.location.origin + event.notification.data.path;
+    clients.openWindow(fullPath);
+});
+*/
