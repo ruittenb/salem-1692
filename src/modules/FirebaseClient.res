@@ -52,6 +52,7 @@ let transformToDbRecord = (
 ): dbRecord => {
   {
     masterGameId: gameState.gameType->Utils.ifMasterGetGameId,
+    masterLanguage: gameState.language,
     masterPhase: getPhase(currentPage, scenarioStep),
     masterPlayers: gameState.players,
     masterSeating: gameState.seating,

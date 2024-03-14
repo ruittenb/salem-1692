@@ -45299,6 +45299,7 @@ function getPage(phase) {
 function transformToDbRecord(gameState, currentPage, turnState, scenarioStep) {
   return {
     masterGameId: Utils$Salem1692.ifMasterGetGameId(gameState.gameType),
+    masterLanguage: gameState.language,
     masterPhase: getPhase(currentPage, scenarioStep),
     masterPlayers: gameState.players,
     masterSeating: gameState.seating,
@@ -46495,7 +46496,7 @@ function gameState_decode(v) {
   };
 }
 function dbRecord_encode(v) {
-  return Js_dict.fromArray([["masterGameId", GameTypeCodec$Salem1692.gameId_encode(v.masterGameId)], ["masterPhase", PhaseCodec$Salem1692.t_encode(v.masterPhase)], ["masterPlayers", Decco.arrayToJson(player_encode, v.masterPlayers)], ["masterSeating", SeatingCodec$Salem1692.t_encode(v.masterSeating)], ["masterNumberWitches", NumerusCodec$Salem1692.t_encode(v.masterNumberWitches)], ["masterNightType", NightTypeCodec$Salem1692.t_encode(v.masterNightType)], ["masterHasGhostPlayers", Decco.boolToJson(v.masterHasGhostPlayers)], ["slaveChoiceWitches", Decco.stringToJson(v.slaveChoiceWitches)], ["slaveChoiceConstable", Decco.stringToJson(v.slaveChoiceConstable)], ["slaveConfirmWitches", DecisionCodec$Salem1692.t_encode(v.slaveConfirmWitches)], ["slaveConfirmConstable", DecisionCodec$Salem1692.t_encode(v.slaveConfirmConstable)], ["updatedAt", Decco.stringToJson(v.updatedAt)]]);
+  return Js_dict.fromArray([["masterGameId", GameTypeCodec$Salem1692.gameId_encode(v.masterGameId)], ["masterLanguage", LanguageCodec$Salem1692.t_encode(v.masterLanguage)], ["masterPhase", PhaseCodec$Salem1692.t_encode(v.masterPhase)], ["masterPlayers", Decco.arrayToJson(player_encode, v.masterPlayers)], ["masterSeating", SeatingCodec$Salem1692.t_encode(v.masterSeating)], ["masterNumberWitches", NumerusCodec$Salem1692.t_encode(v.masterNumberWitches)], ["masterNightType", NightTypeCodec$Salem1692.t_encode(v.masterNightType)], ["masterHasGhostPlayers", Decco.boolToJson(v.masterHasGhostPlayers)], ["slaveChoiceWitches", Decco.stringToJson(v.slaveChoiceWitches)], ["slaveChoiceConstable", Decco.stringToJson(v.slaveChoiceConstable)], ["slaveConfirmWitches", DecisionCodec$Salem1692.t_encode(v.slaveConfirmWitches)], ["slaveConfirmConstable", DecisionCodec$Salem1692.t_encode(v.slaveConfirmConstable)], ["updatedAt", Decco.stringToJson(v.updatedAt)]]);
 }
 function dbRecord_decode(v) {
   var dict = Js_json.classify(v);
@@ -46508,163 +46509,176 @@ function dbRecord_decode(v) {
   var dict$1 = dict._0;
   var masterGameId = GameTypeCodec$Salem1692.gameId_decode(Belt_Option.getWithDefault(Js_dict.get(dict$1, "masterGameId"), null));
   if (masterGameId.TAG === /* Ok */0) {
-    var masterPhase = PhaseCodec$Salem1692.t_decode(Belt_Option.getWithDefault(Js_dict.get(dict$1, "masterPhase"), null));
-    if (masterPhase.TAG === /* Ok */0) {
-      var masterPlayers = Decco.arrayFromJson(player_decode, Belt_Option.getWithDefault(Js_dict.get(dict$1, "masterPlayers"), null));
-      if (masterPlayers.TAG === /* Ok */0) {
-        var masterSeating = SeatingCodec$Salem1692.t_decode(Belt_Option.getWithDefault(Js_dict.get(dict$1, "masterSeating"), null));
-        if (masterSeating.TAG === /* Ok */0) {
-          var masterNumberWitches = NumerusCodec$Salem1692.t_decode(Belt_Option.getWithDefault(Js_dict.get(dict$1, "masterNumberWitches"), null));
-          if (masterNumberWitches.TAG === /* Ok */0) {
-            var masterNightType = NightTypeCodec$Salem1692.t_decode(Belt_Option.getWithDefault(Js_dict.get(dict$1, "masterNightType"), null));
-            if (masterNightType.TAG === /* Ok */0) {
-              var masterHasGhostPlayers = Decco.boolFromJson(Belt_Option.getWithDefault(Js_dict.get(dict$1, "masterHasGhostPlayers"), null));
-              if (masterHasGhostPlayers.TAG === /* Ok */0) {
-                var slaveChoiceWitches = Decco.stringFromJson(Belt_Option.getWithDefault(Js_dict.get(dict$1, "slaveChoiceWitches"), null));
-                if (slaveChoiceWitches.TAG === /* Ok */0) {
-                  var slaveChoiceConstable = Decco.stringFromJson(Belt_Option.getWithDefault(Js_dict.get(dict$1, "slaveChoiceConstable"), null));
-                  if (slaveChoiceConstable.TAG === /* Ok */0) {
-                    var slaveConfirmWitches = DecisionCodec$Salem1692.t_decode(Belt_Option.getWithDefault(Js_dict.get(dict$1, "slaveConfirmWitches"), null));
-                    if (slaveConfirmWitches.TAG === /* Ok */0) {
-                      var slaveConfirmConstable = DecisionCodec$Salem1692.t_decode(Belt_Option.getWithDefault(Js_dict.get(dict$1, "slaveConfirmConstable"), null));
-                      if (slaveConfirmConstable.TAG === /* Ok */0) {
-                        var updatedAt = Decco.stringFromJson(Belt_Option.getWithDefault(Js_dict.get(dict$1, "updatedAt"), null));
-                        if (updatedAt.TAG === /* Ok */0) {
+    var masterLanguage = LanguageCodec$Salem1692.t_decode(Belt_Option.getWithDefault(Js_dict.get(dict$1, "masterLanguage"), null));
+    if (masterLanguage.TAG === /* Ok */0) {
+      var masterPhase = PhaseCodec$Salem1692.t_decode(Belt_Option.getWithDefault(Js_dict.get(dict$1, "masterPhase"), null));
+      if (masterPhase.TAG === /* Ok */0) {
+        var masterPlayers = Decco.arrayFromJson(player_decode, Belt_Option.getWithDefault(Js_dict.get(dict$1, "masterPlayers"), null));
+        if (masterPlayers.TAG === /* Ok */0) {
+          var masterSeating = SeatingCodec$Salem1692.t_decode(Belt_Option.getWithDefault(Js_dict.get(dict$1, "masterSeating"), null));
+          if (masterSeating.TAG === /* Ok */0) {
+            var masterNumberWitches = NumerusCodec$Salem1692.t_decode(Belt_Option.getWithDefault(Js_dict.get(dict$1, "masterNumberWitches"), null));
+            if (masterNumberWitches.TAG === /* Ok */0) {
+              var masterNightType = NightTypeCodec$Salem1692.t_decode(Belt_Option.getWithDefault(Js_dict.get(dict$1, "masterNightType"), null));
+              if (masterNightType.TAG === /* Ok */0) {
+                var masterHasGhostPlayers = Decco.boolFromJson(Belt_Option.getWithDefault(Js_dict.get(dict$1, "masterHasGhostPlayers"), null));
+                if (masterHasGhostPlayers.TAG === /* Ok */0) {
+                  var slaveChoiceWitches = Decco.stringFromJson(Belt_Option.getWithDefault(Js_dict.get(dict$1, "slaveChoiceWitches"), null));
+                  if (slaveChoiceWitches.TAG === /* Ok */0) {
+                    var slaveChoiceConstable = Decco.stringFromJson(Belt_Option.getWithDefault(Js_dict.get(dict$1, "slaveChoiceConstable"), null));
+                    if (slaveChoiceConstable.TAG === /* Ok */0) {
+                      var slaveConfirmWitches = DecisionCodec$Salem1692.t_decode(Belt_Option.getWithDefault(Js_dict.get(dict$1, "slaveConfirmWitches"), null));
+                      if (slaveConfirmWitches.TAG === /* Ok */0) {
+                        var slaveConfirmConstable = DecisionCodec$Salem1692.t_decode(Belt_Option.getWithDefault(Js_dict.get(dict$1, "slaveConfirmConstable"), null));
+                        if (slaveConfirmConstable.TAG === /* Ok */0) {
+                          var updatedAt = Decco.stringFromJson(Belt_Option.getWithDefault(Js_dict.get(dict$1, "updatedAt"), null));
+                          if (updatedAt.TAG === /* Ok */0) {
+                            return {
+                              TAG: /* Ok */0,
+                              _0: {
+                                masterGameId: masterGameId._0,
+                                masterLanguage: masterLanguage._0,
+                                masterPhase: masterPhase._0,
+                                masterPlayers: masterPlayers._0,
+                                masterSeating: masterSeating._0,
+                                masterNumberWitches: masterNumberWitches._0,
+                                masterNightType: masterNightType._0,
+                                masterHasGhostPlayers: masterHasGhostPlayers._0,
+                                slaveChoiceWitches: slaveChoiceWitches._0,
+                                slaveChoiceConstable: slaveChoiceConstable._0,
+                                slaveConfirmWitches: slaveConfirmWitches._0,
+                                slaveConfirmConstable: slaveConfirmConstable._0,
+                                updatedAt: updatedAt._0
+                              }
+                            };
+                          }
+                          var e = updatedAt._0;
                           return {
-                            TAG: /* Ok */0,
+                            TAG: /* Error */1,
                             _0: {
-                              masterGameId: masterGameId._0,
-                              masterPhase: masterPhase._0,
-                              masterPlayers: masterPlayers._0,
-                              masterSeating: masterSeating._0,
-                              masterNumberWitches: masterNumberWitches._0,
-                              masterNightType: masterNightType._0,
-                              masterHasGhostPlayers: masterHasGhostPlayers._0,
-                              slaveChoiceWitches: slaveChoiceWitches._0,
-                              slaveChoiceConstable: slaveChoiceConstable._0,
-                              slaveConfirmWitches: slaveConfirmWitches._0,
-                              slaveConfirmConstable: slaveConfirmConstable._0,
-                              updatedAt: updatedAt._0
+                              path: ".updatedAt" + e.path,
+                              message: e.message,
+                              value: e.value
                             }
                           };
                         }
-                        var e = updatedAt._0;
+                        var e$1 = slaveConfirmConstable._0;
                         return {
                           TAG: /* Error */1,
                           _0: {
-                            path: ".updatedAt" + e.path,
-                            message: e.message,
-                            value: e.value
+                            path: ".slaveConfirmConstable" + e$1.path,
+                            message: e$1.message,
+                            value: e$1.value
                           }
                         };
                       }
-                      var e$1 = slaveConfirmConstable._0;
+                      var e$2 = slaveConfirmWitches._0;
                       return {
                         TAG: /* Error */1,
                         _0: {
-                          path: ".slaveConfirmConstable" + e$1.path,
-                          message: e$1.message,
-                          value: e$1.value
+                          path: ".slaveConfirmWitches" + e$2.path,
+                          message: e$2.message,
+                          value: e$2.value
                         }
                       };
                     }
-                    var e$2 = slaveConfirmWitches._0;
+                    var e$3 = slaveChoiceConstable._0;
                     return {
                       TAG: /* Error */1,
                       _0: {
-                        path: ".slaveConfirmWitches" + e$2.path,
-                        message: e$2.message,
-                        value: e$2.value
+                        path: ".slaveChoiceConstable" + e$3.path,
+                        message: e$3.message,
+                        value: e$3.value
                       }
                     };
                   }
-                  var e$3 = slaveChoiceConstable._0;
+                  var e$4 = slaveChoiceWitches._0;
                   return {
                     TAG: /* Error */1,
                     _0: {
-                      path: ".slaveChoiceConstable" + e$3.path,
-                      message: e$3.message,
-                      value: e$3.value
+                      path: ".slaveChoiceWitches" + e$4.path,
+                      message: e$4.message,
+                      value: e$4.value
                     }
                   };
                 }
-                var e$4 = slaveChoiceWitches._0;
+                var e$5 = masterHasGhostPlayers._0;
                 return {
                   TAG: /* Error */1,
                   _0: {
-                    path: ".slaveChoiceWitches" + e$4.path,
-                    message: e$4.message,
-                    value: e$4.value
+                    path: ".masterHasGhostPlayers" + e$5.path,
+                    message: e$5.message,
+                    value: e$5.value
                   }
                 };
               }
-              var e$5 = masterHasGhostPlayers._0;
+              var e$6 = masterNightType._0;
               return {
                 TAG: /* Error */1,
                 _0: {
-                  path: ".masterHasGhostPlayers" + e$5.path,
-                  message: e$5.message,
-                  value: e$5.value
+                  path: ".masterNightType" + e$6.path,
+                  message: e$6.message,
+                  value: e$6.value
                 }
               };
             }
-            var e$6 = masterNightType._0;
+            var e$7 = masterNumberWitches._0;
             return {
               TAG: /* Error */1,
               _0: {
-                path: ".masterNightType" + e$6.path,
-                message: e$6.message,
-                value: e$6.value
+                path: ".masterNumberWitches" + e$7.path,
+                message: e$7.message,
+                value: e$7.value
               }
             };
           }
-          var e$7 = masterNumberWitches._0;
+          var e$8 = masterSeating._0;
           return {
             TAG: /* Error */1,
             _0: {
-              path: ".masterNumberWitches" + e$7.path,
-              message: e$7.message,
-              value: e$7.value
+              path: ".masterSeating" + e$8.path,
+              message: e$8.message,
+              value: e$8.value
             }
           };
         }
-        var e$8 = masterSeating._0;
+        var e$9 = masterPlayers._0;
         return {
           TAG: /* Error */1,
           _0: {
-            path: ".masterSeating" + e$8.path,
-            message: e$8.message,
-            value: e$8.value
+            path: ".masterPlayers" + e$9.path,
+            message: e$9.message,
+            value: e$9.value
           }
         };
       }
-      var e$9 = masterPlayers._0;
+      var e$10 = masterPhase._0;
       return {
         TAG: /* Error */1,
         _0: {
-          path: ".masterPlayers" + e$9.path,
-          message: e$9.message,
-          value: e$9.value
+          path: ".masterPhase" + e$10.path,
+          message: e$10.message,
+          value: e$10.value
         }
       };
     }
-    var e$10 = masterPhase._0;
+    var e$11 = masterLanguage._0;
     return {
       TAG: /* Error */1,
       _0: {
-        path: ".masterPhase" + e$10.path,
-        message: e$10.message,
-        value: e$10.value
+        path: ".masterLanguage" + e$11.path,
+        message: e$11.message,
+        value: e$11.value
       }
     };
   }
-  var e$11 = masterGameId._0;
+  var e$12 = masterGameId._0;
   return {
     TAG: /* Error */1,
     _0: {
-      path: ".masterGameId" + e$11.path,
-      message: e$11.message,
-      value: e$11.value
+      path: ".masterGameId" + e$12.path,
+      message: e$12.message,
+      value: e$12.value
     }
   };
 }

@@ -2,6 +2,7 @@
   "_keep" : 1,
   "z00-z00-z00-z00" : {
     "masterGameId" : "z00-z00-z00-z00",
+    "masterLanguage" : "fr_FR",
     "masterNumberWitches" : "One",
     "masterPhase" : "DaytimeWaiting",
     "masterPlayers" : [ "Albert", "Bernadette", "Cédric", "Désirée", "Édouard", "Fabienne" ],
