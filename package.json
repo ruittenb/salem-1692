@@ -13,6 +13,7 @@
   "license": "GNU GPLv2",
   "main": "dist/index.html",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "all": "make all",
     "build": "make build",
     "watch": "make watch",
@@ -22,11 +23,12 @@
     "browserify": "^17.0.0",
     "clean-css": "^5.3.3",
     "clean-css-cli": "^5.6.3",
-    "eslint": "^7.31.0",
+    "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "esmify": "^2.1.1",
     "fswatch": "^0.1.4",
+    "only-allow": "^1.2.1",
     "rescript": "10.1",
     "serve": "^14.2.1",
     "uglify-js": "^3.14.1",
@@ -35,6 +37,7 @@
   "dependencies": {
     "@rescript/react": "^0.11.0",
     "@ryyppy/rescript-promise": "^2.1.0",
+    "bs-platform": "9",
     "davidshimjs-qrcodejs": "^0.0.2",
     "decco": "^1.6.0",
     "firebase": "^9.0.1",
@@ -42,5 +45,8 @@
     "react": "^18.2.0",
     "react-client": "^1.0.1",
     "react-dom": "^18.2.0"
+  },
+  "peerDependencies": {
+    "bs-platform": "9"
   }
 }
