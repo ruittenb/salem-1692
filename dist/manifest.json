@@ -11,7 +11,7 @@
   "iarc_rating_id": "6e8c25a6-88cd-4ef7-a9d7-bc361240487e",
   "id": "index.html?utm_source=pwa",
   "start_url": "index.html?utm_source=pwa",
-  "scope": ".",
+  "scope": "https://ruittenb.github.io/salem-1692/",
   "manifest_version": 2,
   "version": "1.0",
   "related_applications": [],
