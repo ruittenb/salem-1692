@@ -245,7 +245,7 @@ let ifSlaveAndConnected = (
   })
 }
 
-/**
+/*
  * Convert [ Some(3), Some(6), None, Some(-1), None ] into [ 3, 6, -1 ]:
  * use Belt.Array.keepMap(identity)
  *

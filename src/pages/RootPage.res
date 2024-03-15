@@ -10,10 +10,16 @@ let initialPage: page = Title
 let initialNavigation: option<page> = None
 
 let cleanupGameState = (gameState): gameState => {
+  let language =
+    QueryString.getQueryParam("lang")
+    ->Belt.Option.flatMap(LanguageCodec.languageFromJs)
+    ->Belt.Option.getWithDefault(gameState.language)
   let knownMusicTracksInclude = musicTracks->Js.Array2.includes // curried
+  let backgroundMusic = gameState.backgroundMusic->Js.Array2.filter(knownMusicTracksInclude)
   {
     ...gameState,
-    backgroundMusic: gameState.backgroundMusic->Js.Array2.filter(knownMusicTracksInclude),
+    language: language,
+    backgroundMusic: backgroundMusic,
   }
 }
 

@@ -70,6 +70,13 @@ For running locally, a webserver may be started with:
 make serve
 ```
 
+## Features
+
+It is possible to add the desired language setting in the query string
+using any of the language codes from [LanguageCodec](src/modules/LanguageCodec.res):
+
+- http://localhost:3001/?lang=pt_BR
+
 ## Supported Browsers (minimal versions)
 
 - Chrome 99
@@ -91,5 +98,3 @@ to contain the text "Salem/1692".
 How to do this on: [Chrome](https://www.alphr.com/change-user-agent-string-google-chrome/),
 [Firefox/Edge](https://geekflare.com/change-user-agent-in-browser/),
 [Safari](https://www.technipages.com/how-to-change-user-agent-in-safari).
-
-
