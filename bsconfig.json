@@ -1,6 +1,6 @@
 {
   "name": "salem-1692",
-  "version": "0.52.1",
+  "version": "0.65.0",
   "namespace": true,
   "reason": { "react-jsx": 3 },
   "bsc-flags": [ "-bs-super-errors" ],
@@ -20,6 +20,5 @@
   ],
   "ppx-flags": [
     "decco/ppx"
-  ],
-  "refmt": 3
+  ]
 }
