@@ -10,13 +10,13 @@ let make = (): React.element => {
   // Component
   React.array(
     Constants.musicTracks->Js.Array2.mapi((track, index) => {
-      <React.Fragment key={Belt.Int.toString(index) ++ "/" ++ track}>
+      <span key={Belt.Int.toString(index) ++ "/" ++ track}>
         <Link
           href={"https://incompetech.com/music/royalty-free/mp3-royaltyfree/" ++ track ++ ".mp3"}
           text={note ++ nnbsp ++ track}
         />
         {React.string(", ")}
-      </React.Fragment>
+      </span>
     }),
   )
 }
