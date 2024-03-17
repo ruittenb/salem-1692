@@ -87,7 +87,7 @@
       "purpose": "maskable"
     },
     {
-      "src": "images/favicon-512.png",
+      "src": "images/favicon-512-rounded.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
@@ -99,6 +99,7 @@
       "sizes": "1080x2340",
       "type": "image/jpg",
       "platform": "narrow",
+      "form_factor": "narrow",
       "label": "Main Menu"
     },
     {
@@ -106,6 +107,7 @@
       "sizes": "1080x2340",
       "type": "image/jpg",
       "platform": "narrow",
+      "form_factor": "narrow",
       "label": "Player Configuration"
     },
     {
@@ -113,6 +115,7 @@
       "sizes": "1080x2340",
       "type": "image/jpg",
       "platform": "narrow",
+      "form_factor": "narrow",
       "label": "Connect Multiple Players to the same Game"
     },
     {
@@ -120,7 +123,24 @@
       "sizes": "1080x2340",
       "type": "image/jpg",
       "platform": "narrow",
+      "form_factor": "narrow",
       "label": "Night Screen"
+    },
+    {
+      "src": "images/screenshot-A.png",
+      "sizes": "2048x1360",
+      "type": "image/png",
+      "platform": "wide",
+      "form_factor": "wide",
+      "label": "Night Screen"
+    },
+    {
+      "src": "images/screenshot-B.png",
+      "sizes": "2048x1360",
+      "type": "image/png",
+      "platform": "wide",
+      "form_factor": "wide",
+      "label": "Daytime Screen"
     }
   ]
 }
