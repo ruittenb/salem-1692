@@ -48558,6 +48558,7 @@ var FirebaseClient$Salem1692 = _interopRequireWildcard(require("../modules/Fireb
 var GameStateContext$Salem1692 = _interopRequireWildcard(require("../components/GameStateContext.bs.js"));
 var BackFloatingButton$Salem1692 = _interopRequireWildcard(require("../components/BackFloatingButton.bs.js"));
 var GearFloatingButton$Salem1692 = _interopRequireWildcard(require("../components/GearFloatingButton.bs.js"));
+var MasterFloatingIcon$Salem1692 = _interopRequireWildcard(require("../components/MasterFloatingIcon.bs.js"));
 var DbConnectionContext$Salem1692 = _interopRequireWildcard(require("../components/DbConnectionContext.bs.js"));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -48894,6 +48895,9 @@ function SetupNetworkPage(Props) {
     }
   });
   var modusOperandi = getModusOperandi(t, goToPage, gameState, setGameState, dbConnectionStatus, setDbConnectionStatus, match$2[0], match$2[1]);
+  var match$3 = gameState.gameType;
+  var masterMode;
+  masterMode = typeof match$3 === "number" || match$3.TAG !== /* Master */0 ? false : true;
   return React.createElement("div", {
     className: "page justify-start",
     id: "setup-network-page"
@@ -48908,6 +48912,8 @@ function SetupNetworkPage(Props) {
   }), React.createElement(GearFloatingButton$Salem1692.make, {
     goToPage: goToPage,
     returnPage: /* SetupNetwork */5
+  }), React.createElement(MasterFloatingIcon$Salem1692.make, {
+    masterMode: masterMode
   }), React.createElement("h1", undefined, Curry._1(t, "Multi-Telephone")), modusOperandi);
 }
 var make = SetupNetworkPage;
@@ -48915,7 +48921,7 @@ var make = SetupNetworkPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/BackFloatingButton.bs.js":77,"../components/Button.bs.js":78,"../components/DbConnectionContext.bs.js":81,"../components/GameStateContext.bs.js":83,"../components/GearFloatingButton.bs.js":84,"../components/QrIcon.bs.js":97,"../components/Rule.bs.js":98,"../components/Spacer.bs.js":100,"../modules/FirebaseClient.bs.js":115,"../modules/GameId.bs.js":116,"../modules/Translator.bs.js":127,"../modules/Utils.bs.js":129,"@ryyppy/rescript-promise/src/Promise.bs.js":8,"react":40,"rescript/lib/es6/belt_Result.js":44,"rescript/lib/es6/curry.js":57}],146:[function(require,module,exports){
+},{"../components/BackFloatingButton.bs.js":77,"../components/Button.bs.js":78,"../components/DbConnectionContext.bs.js":81,"../components/GameStateContext.bs.js":83,"../components/GearFloatingButton.bs.js":84,"../components/MasterFloatingIcon.bs.js":91,"../components/QrIcon.bs.js":97,"../components/Rule.bs.js":98,"../components/Spacer.bs.js":100,"../modules/FirebaseClient.bs.js":115,"../modules/GameId.bs.js":116,"../modules/Translator.bs.js":127,"../modules/Utils.bs.js":129,"@ryyppy/rescript-promise/src/Promise.bs.js":8,"react":40,"rescript/lib/es6/belt_Result.js":44,"rescript/lib/es6/curry.js":57}],146:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
