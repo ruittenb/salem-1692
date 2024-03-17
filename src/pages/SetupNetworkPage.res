@@ -322,6 +322,12 @@ let make = (~goToPage, ~noGame): React.element => {
     setSlaveGameIdValidity,
   )
 
+  let masterMode = switch gameState.gameType {
+  | Master(_) => true
+  | Slave(_)
+  | StandAlone => false
+  }
+
   // component
   <div id="setup-network-page" className="page justify-start">
     <BackFloatingButton
@@ -332,6 +338,7 @@ let make = (~goToPage, ~noGame): React.element => {
       }}
     />
     <GearFloatingButton goToPage returnPage=SetupNetwork />
+    <MasterFloatingIcon masterMode />
     <h1> {React.string(t("Multi-Telephone"))} </h1>
     {modusOperandi}
   </div>
