@@ -81,6 +81,7 @@ function getFilesToCache(debug) {
         'images/timer-barrel-60.png',
         'images/timer-flame-40.webp',
         'images/timer-rope-6.png',
+        'images/wifi-32.webp',
     ].map(filename => `${rootDir}/${filename}`);
 }
 
