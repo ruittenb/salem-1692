@@ -10,8 +10,8 @@ IMPORTANT:
 
 NICE TO HAVE:
  - add button "abort connecting"
- - nicer wifi icon
  - fade music out
  - reflect state in URL https://betterprogramming.pub/how-and-why-you-should-store-react-ui-state-in-the-url-f2013a204cb2
  - swipe: https://www.npmjs.com/package/react-swipeable
+ - top bar in layout with buttons
 
