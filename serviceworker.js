@@ -36,6 +36,7 @@ function getFilesToCache(debug) {
         'images/favicon-300.png',
         'images/favicon-512.png',
         'images/favicon-512-maskable.png',
+        'images/favicon-512-rounded.png',
         'images/flag-br.png',
         'images/flag-de.png',
         'images/flag-es.png',
