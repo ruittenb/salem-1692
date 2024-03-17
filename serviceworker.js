@@ -50,12 +50,12 @@ function getFilesToCache(debug) {
         'images/flag-us-gb.png',
         'images/gramophone.webp',
         'images/icon-back-32.png',
-        'images/icon-back-host-32.png',
         'images/icon-checked.png',
         'images/icon-cross.png',
         'images/icon-exit.png',
         'images/icon-forw.png',
         'images/icon-gear.png',
+        'images/icon-host-32.webp',
         'images/icon-lang.png',
         'images/icon-move.png',
         'images/icon-pawn.png',
@@ -81,7 +81,6 @@ function getFilesToCache(debug) {
         'images/timer-barrel-60.png',
         'images/timer-flame-40.webp',
         'images/timer-rope-6.png',
-        'images/wifi-32.webp',
     ].map(filename => `${rootDir}/${filename}`);
 }
 

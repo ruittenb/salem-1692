@@ -447,12 +447,6 @@ video + .bubble {
     margin-bottom: 0;
 }
 
-.page div.floating-right {
-    right: 20px;
-}
-.page div.floating-left {
-    left: 20px;
-}
 .page div.floating-button {
     background-position: center center;
     background-repeat: no-repeat;
@@ -461,6 +455,16 @@ video + .bubble {
     width: 32px;
     height: 32px;
     z-index: 10;
+}
+.page div.floating-right {
+    right: 20px;
+}
+.page div.floating-left {
+    left: 20px;
+}
+.page div.floating-right-down {
+    right: 20px;
+    top: 64px;
 }
 
 .page button.flag { background-size: 28px; }
@@ -486,7 +490,7 @@ video + .bubble {
 .page button.icon-abort { background-image: url(../images/icon-cross.png); }
 .page    div.icon-gear  { background-image: url(../images/icon-gear.png); }
 .page    div.icon-back  { background-image: url(../images/icon-back-32.png); }
-.page    div.icon-host  { background-image: url(../images/icon-back-host-32.png); }
+.page    div.icon-host  { background-image: url(../images/icon-host-32.webp); }
 
 .page button.icon-checked   { background-image: url(../images/icon-checked.png); }
 .page button.icon-unchecked { background-image: url(../images/icon-unchecked.png); }
