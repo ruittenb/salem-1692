@@ -36,14 +36,14 @@ body {
 }
 
 #topbar {
-    z-index: 100;
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     height: 44px;
     color: white;
-    background-color: var(--light-brown);
+    background-color: var(--dark-brown);
+    z-index: 50;
 }
 #topbar .topbar {
     display: flex;
@@ -474,6 +474,9 @@ video + .bubble {
     width: 32px;
     height: 32px;
 }
+.page div.topbar-button.floating-right {
+    margin-left: auto;
+}
 
 .page button.flag { background-size: 28px; }
 .page button.flag-us-gb { background-image: url(../images/flag-us-gb.png); }
@@ -496,7 +499,7 @@ video + .bubble {
 .page button.icon-rot   { background-image: url(../images/icon-rot.png); }
 .page button.icon-trash { background-image: url(../images/icon-cross.png); }
 .page button.icon-abort { background-image: url(../images/icon-cross.png); }
-.page    div.icon-gear  { background-image: url(../images/icon-gear.png); }
+.page    div.icon-gear  { background-image: url(../images/icon-gear-32.png); }
 .page    div.icon-back  { background-image: url(../images/icon-back-32.png); }
 .page    div.icon-host  { background-image: url(../images/icon-host-32.webp); }
 
@@ -531,6 +534,7 @@ video + .bubble {
 }
 
 #title-page div.floating-right {
+    background-image: url(../images/icon-gear-32-dark.png); }
     position: absolute;
     right: 18px;
     top: 14px;
