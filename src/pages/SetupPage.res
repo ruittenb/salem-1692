@@ -44,12 +44,14 @@ let make = (~goToPage): React.element => {
   })
 
   <div id="setup-page" className="page justify-start">
-    <BackFloatingButton
-      onClick={_event => {
-        setNavigation(_prev => None)
-        goToPage(_prev => navigation->Belt.Option.getWithDefault(Title))
-      }}
-    />
+    <TopBar>
+      <BackFloatingButton
+        onClick={_event => {
+          setNavigation(_prev => None)
+          goToPage(_prev => navigation->Belt.Option.getWithDefault(Title))
+        }}
+      />
+    </TopBar>
     <h1 className="condensed-fr condensed-es condensed-de"> {React.string(t("Settings"))} </h1>
     <Spacer />
     <Button

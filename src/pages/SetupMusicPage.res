@@ -60,7 +60,9 @@ let make = (~goToPage): React.element => {
   )
 
   <div id="setup-music-page" className="page justify-start">
-    <BackFloatingButton onClick={_event => goToPage(_prev => Setup)} />
+    <TopBar>
+      <BackFloatingButton onClick={_event => goToPage(_prev => Setup)} />
+    </TopBar>
     <h1> {React.string(t("Music"))} </h1>
     {previewNode}
     <p> {React.string(t(intro))} </p>

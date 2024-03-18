@@ -32,7 +32,9 @@ let make = (~goToPage): React.element => {
     }
 
   <div id="credits-page" className="page justify-start">
-    <BackFloatingButton onClick={_event => goToPage(_prev => Setup)} />
+    <TopBar>
+      <BackFloatingButton onClick={_event => goToPage(_prev => Setup)} />
+    </TopBar>
     <h1> {React.string(t("Credits"))} </h1>
     <Spacer />
     <p className="noblur">

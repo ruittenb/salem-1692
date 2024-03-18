@@ -12,7 +12,9 @@ let make = (~goToPage): React.element => {
   let t = Translator.getTranslator(gameState.language)
 
   <div id="setup-language-page" className="page justify-start">
-    <BackFloatingButton onClick={_event => goToPage(_prev => Setup)} />
+    <TopBar>
+      <BackFloatingButton onClick={_event => goToPage(_prev => Setup)} />
+    </TopBar>
     <h1> {React.string(t("Language"))} </h1>
     <Spacer />
     <LanguageList goToPage />
