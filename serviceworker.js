@@ -5,7 +5,7 @@
 
 const version = "0.66.0";
 const cacheName = 'salem-1692-v' + version;
-let filesToCache;
+let filesToCache = [];
 
 function getFilesToCache(debug) {
     const rootDir = debug ? '.' : '/salem-1692';
