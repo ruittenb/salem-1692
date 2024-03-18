@@ -15,7 +15,8 @@ let make = (~goToPage): React.element => {
 
   let constableRevealButton = switch turnState.choiceConstable {
   | None => React.null
-  | Some(constableTargetName) => <>
+  | Some(constableTargetName) =>
+    <>
       <Spacer />
       <LargeRevealButton
         revealPrompt={t(`Reveal constable's protégé`)}

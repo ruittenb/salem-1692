@@ -44,5 +44,8 @@ let make = (~mode: mode): React.element => {
   }
 
   // main component
-  <> {icon} {mask} </>
+  <>
+    {icon}
+    {mask}
+  </>
 }

@@ -1,7 +1,6 @@
 /**
  * Locale: uk_UA
  */
-
 let table = Js.Dict.fromArray([
   // TitlePage
   ("New Game", `Нова гра`),

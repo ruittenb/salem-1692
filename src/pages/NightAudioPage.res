@@ -62,7 +62,10 @@ let make = (
     {if error {
       abortButton
     } else if showNavButtons {
-      <ButtonPair> {abortButton} {skipButton} </ButtonPair>
+      <ButtonPair>
+        {abortButton}
+        {skipButton}
+      </ButtonPair>
     } else {
       React.null
     }}

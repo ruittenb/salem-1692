@@ -11,6 +11,7 @@ open Types
 let make = (~message: string, ~goToPage): React.element => {
   // Construct the core element for this page
   <NightAudioPage error=true goToPage>
-    <div> {React.string(message)} </div> <AudioError />
+    <div> {React.string(message)} </div>
+    <AudioError />
   </NightAudioPage>
 }

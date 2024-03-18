@@ -144,7 +144,8 @@ let getModusOperandi = (
   setSlaveGameIdValidity,
 ) =>
   switch (gameState.gameType, dbConnectionStatus, slaveGameIdValidity) {
-  | (StandAlone, _, SlaveInputHidden) => <>
+  | (StandAlone, _, SlaveInputHidden) =>
+    <>
       <h2> {React.string(t("Play as Host"))} </h2>
       <p>
         {React.string(t("You can host a game so that players can join from another smartphone."))}
@@ -165,7 +166,8 @@ let getModusOperandi = (
         onClick={_event => setSlaveGameIdValidity(_prev => SlaveInputShown)}
       />
     </>
-  | (Master(_), NotConnected, _) => <>
+  | (Master(_), NotConnected, _) =>
+    <>
       // Should never happen: we should be connected before we set the game type to Master
       <Spacer />
       <Button
@@ -175,12 +177,14 @@ let getModusOperandi = (
       />
     </>
   | (Master(_), ConnectingAsSlave, _) // should not happen
-  | (_, ConnectingAsMaster, _) => <>
+  | (_, ConnectingAsMaster, _) =>
+    <>
       <Spacer />
       <div className="bubble"> {React.string(t("Connecting..."))} </div>
       // TODO add abort connecting button
     </>
-  | (Master(gameId), Connected(_), _) => <>
+  | (Master(gameId), Connected(_), _) =>
+    <>
       <h2> {React.string(t("Play as Host"))} </h2>
       <p>
         {React.string(t("You are currently hosting a game.") ++ " ")}
@@ -214,7 +218,8 @@ let getModusOperandi = (
       <Spacer />
     </>
   | (StandAlone, dbConnectionStatus, slaveGameIdValidity)
-  | (Slave(_), dbConnectionStatus, slaveGameIdValidity) => <>
+  | (Slave(_), dbConnectionStatus, slaveGameIdValidity) =>
+    <>
       <h2> {React.string(t("Play as Guest"))} </h2>
       <p>
         {React.string(

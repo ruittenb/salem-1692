@@ -11,9 +11,16 @@ let make = (~goToPage): React.element => {
   let (turnState, _setTurnState) = React.useContext(TurnStateContext.context)
 
   let titleAndSpacer = if turnState.nightType === Dawn {
-    <> <h1> {React.string(t("Dawn"))} </h1> <Spacer /> <Spacer /> </>
+    <>
+      <h1> {React.string(t("Dawn"))} </h1>
+      <Spacer />
+      <Spacer />
+    </>
   } else {
-    <> <h1> {React.string(t("Night"))} </h1> <Eyes /> </>
+    <>
+      <h1> {React.string(t("Night"))} </h1>
+      <Eyes />
+    </>
   }
 
   // Construct the core element for this page

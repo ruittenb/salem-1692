@@ -96,7 +96,10 @@ let make = (~goToPage, ~allowBackToConfess: bool=true): React.element => {
       // Back/Forward buttons
 
       if allowBackToConfess {
-        <ButtonPair> {backToConfessButton} {forwardToDaytimeButton} </ButtonPair>
+        <ButtonPair>
+          {backToConfessButton}
+          {forwardToDaytimeButton}
+        </ButtonPair>
       } else {
         {forwardToDaytimeButton}
       }

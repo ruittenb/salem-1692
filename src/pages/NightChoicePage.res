@@ -47,13 +47,18 @@ let make = (
     }
     Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
       Utils.logDebug(p ++ "About to install choice listener")
-      FirebaseClient.listen(dbConnection, gameId, subject, maybePlayer => {
-        switch maybePlayer {
-        | Some("") => ()
-        | Some(player) => choiceProcessor((player: player), ~skipConfirmation=false)
-        | None => ()
-        }
-      })
+      FirebaseClient.listen(
+        dbConnection,
+        gameId,
+        subject,
+        maybePlayer => {
+          switch maybePlayer {
+          | Some("") => ()
+          | Some(player) => choiceProcessor((player: player), ~skipConfirmation=false)
+          | None => ()
+          }
+        },
+      )
     })
     Some(
       () => {
@@ -73,9 +78,15 @@ let make = (
   let titleAndEyes = if turnState.nightType === Dawn {
     <h1> {React.string(t("Dawn"))} </h1>
   } else {
-    <> <h1> {React.string(t("Night"))} </h1> <Eyes /> </>
+    <>
+      <h1> {React.string(t("Night"))} </h1>
+      <Eyes />
+    </>
   }
 
   // Construct the core element for this page
-  <> {titleAndEyes} <PlayerList addressed choiceProcessor /> </>
+  <>
+    {titleAndEyes}
+    <PlayerList addressed choiceProcessor />
+  </>
 }

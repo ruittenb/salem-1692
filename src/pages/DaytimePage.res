@@ -35,28 +35,36 @@ let make = (~goToPage): React.element => {
         setTurnState(_prev => {...defaultNextState, nrWitches: One})
         goToPage(_prev => NightDawnOneWitch)
       }}>
-      {React.string(t("Dawn,"))} <br /> {React.string(t("one witch"))}
+      {React.string(t("Dawn,"))}
+      <br />
+      {React.string(t("one witch"))}
     </LargeButton>
     <LargeButton
       onClick={_event => {
         setTurnState(_prev => defaultNextState)
         goToPage(_prev => NightDawnMoreWitches)
       }}>
-      {React.string(t("Dawn,"))} <br /> {React.string(t("several witches"))}
+      {React.string(t("Dawn,"))}
+      <br />
+      {React.string(t("several witches"))}
     </LargeButton>
     <LargeButton
       onClick={_event => {
         setTurnState(_prev => {...defaultNextState, nightType: Night})
         goToPage(_prev => NightOtherWithConstable)
       }}>
-      {React.string(t("Night,"))} <br /> {React.string(t("with constable"))}
+      {React.string(t("Night,"))}
+      <br />
+      {React.string(t("with constable"))}
     </LargeButton>
     <LargeButton
       onClick={_event => {
         setTurnState(_prev => {...defaultNextState, nightType: Night})
         goToPage(_prev => NightOtherNoConstable)
       }}>
-      {React.string(t("Night,"))} <br /> {React.string(t("without constable"))}
+      {React.string(t("Night,"))}
+      <br />
+      {React.string(t("without constable"))}
     </LargeButton>
   </div>
 }

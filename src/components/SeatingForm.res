@@ -20,7 +20,7 @@ let make = (): React.element => {
   let onClick: SeatingCodec.t => clickHandler = (seating, _event) => {
     let newGameState = {
       ...gameState,
-      seating: seating,
+      seating,
     }
     setGameState(_prevGameState => newGameState)
   }
@@ -34,7 +34,8 @@ let make = (): React.element => {
     </p>
     <div id="layout-list">
       {switch (evenOdd, gameState.seating) {
-      | (Odd, #OneAtTop) => <>
+      | (Odd, #OneAtTop) =>
+        <>
           <SquareButton
             className="layout-1222 icon-left icon-checked" onClick={onClick(#OneAtTop)}
           />
@@ -42,7 +43,8 @@ let make = (): React.element => {
             className="layout-2221 icon-left icon-unchecked" onClick={onClick(#TwoAtTop)}
           />
         </>
-      | (Odd, #TwoAtTop) => <>
+      | (Odd, #TwoAtTop) =>
+        <>
           <SquareButton
             className="layout-1222 icon-left icon-unchecked" onClick={onClick(#OneAtTop)}
           />
@@ -50,7 +52,8 @@ let make = (): React.element => {
             className="layout-2221 icon-left icon-checked" onClick={onClick(#TwoAtTop)}
           />
         </>
-      | (Even, #OneAtTop) => <>
+      | (Even, #OneAtTop) =>
+        <>
           <SquareButton
             className="layout-1221 icon-left icon-checked" onClick={onClick(#OneAtTop)}
           />
@@ -58,7 +61,8 @@ let make = (): React.element => {
             className="layout-2222 icon-left icon-unchecked" onClick={onClick(#TwoAtTop)}
           />
         </>
-      | (Even, #TwoAtTop) => <>
+      | (Even, #TwoAtTop) =>
+        <>
           <SquareButton
             className="layout-1221 icon-left icon-unchecked" onClick={onClick(#OneAtTop)}
           />

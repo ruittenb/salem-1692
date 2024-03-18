@@ -124,6 +124,7 @@ let make = (~subPage: page, ~goToPage): React.element => {
     )
     setTurnState(prevTurnState => {...prevTurnState, choiceWitches: Some(player)})
     goToNextStep() // to confirmation page
+
     // in Master mode, the feedback from firebase will trigger skipping confirmation
     if gameState.gameType === StandAlone && skipConfirmation {
       goToNextStep()
@@ -138,6 +139,7 @@ let make = (~subPage: page, ~goToPage): React.element => {
     )
     setTurnState(prevTurnState => {...prevTurnState, choiceConstable: Some(player)})
     goToNextStep() // to confirmation page
+
     // in Master mode, the feedback from firebase will trigger skipping confirmation
     if gameState.gameType === StandAlone && skipConfirmation {
       goToNextStep()
@@ -191,11 +193,13 @@ let make = (~subPage: page, ~goToPage): React.element => {
     </NightAudioPage>
   | Some(PlayEffect(effect)) if gameState.doPlayEffects =>
     <NightAudioPage goToPage goToNextStep>
-      {soundImage} <Audio track=Effect(effect) onEnded onError />
+      {soundImage}
+      <Audio track=Effect(effect) onEnded onError />
     </NightAudioPage>
   | Some(PlaySpeech(speech)) if gameState.doPlaySpeech =>
     <NightAudioPage goToPage goToNextStep>
-      {soundImage} <Audio track=Speech(speech) onEnded onError />
+      {soundImage}
+      <Audio track=Speech(speech) onEnded onError />
     </NightAudioPage>
 
   | Some(PlayEffect(_)) => {
@@ -218,5 +222,8 @@ let make = (~subPage: page, ~goToPage): React.element => {
   }
 
   // render the page
-  <div id=pageId className="page"> {backgroundMusicElement} {pageElement} </div>
+  <div id=pageId className="page">
+    {backgroundMusicElement}
+    {pageElement}
+  </div>
 }

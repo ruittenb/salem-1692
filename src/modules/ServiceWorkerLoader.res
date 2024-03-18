@@ -26,14 +26,18 @@ maybeNavServiceWorker->Belt.Option.forEach(navServiceWorker => {
   window->addEventListener("load", () => {
     navServiceWorker
     ->register("serviceworker.js" ++ queryString)
-    ->Promise.then((registration: registration) => {
-      Js.log2(p ++ "ServiceWorker registered with scope", registration.scope)
-      Promise.resolve()
-    })
-    ->Promise.catch(error => {
-      Js.log2(p ++ "ServiceWorker registration failed:", error)
-      Promise.resolve()
-    })
+    ->Promise.then(
+      (registration: registration) => {
+        Js.log2(p ++ "ServiceWorker registered with scope", registration.scope)
+        Promise.resolve()
+      },
+    )
+    ->Promise.catch(
+      error => {
+        Js.log2(p ++ "ServiceWorker registration failed:", error)
+        Promise.resolve()
+      },
+    )
     ->ignore
   })
 })

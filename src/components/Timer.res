@@ -12,7 +12,7 @@ let zeroTime = 5 // when to stop the timer, leaving some room for the barrel
 let deadSpace = 75. // width of the barrel and flame together
 let containerWidth = window->innerWidth *. containerFraction -. deadSpace
 
-/* *                                                            *
+/*
  * <--------------------- innerWidth ------------------------> *
  *         <---- containerFraction * innerWidth ----->         *
  *                                                             *

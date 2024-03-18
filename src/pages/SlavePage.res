@@ -17,51 +17,58 @@ let make = (~goToPage, ~subPage: page): React.element => {
     Utils.logDebugGreen(p ++ "Mounted")
     Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
       Utils.logDebug(p ++ "About to install game listener")
-      FirebaseClient.listen(dbConnection, gameId, GameSubject, (
-        maybeDbRecordStr: option<string>,
-      ) => {
-        switch maybeDbRecordStr {
-        | None => {
-            Utils.logDebug(p ++ "Received null on listener")
-            goToPage(_prev => SetupNetworkNoGame)
-          }
-        | Some(dbRecordStr) =>
-          switch dbRecordStr->Js.Json.string->dbRecord_decode {
-          | Error(deccoError) =>
-            Utils.logError(
-              deccoError.path ++
-              ": " ++
-              deccoError.message ++
-              ": " ++
-              deccoError.value->Js.Json.decodeString->Belt.Option.getWithDefault("<None>"),
-            )
-          | Ok(dbRecord) => {
-              Utils.logDebug(p ++ "Received dbRecord")
-              goToPage(_prev => dbRecord.masterPhase->FirebaseClient.getPage)
-              setGameState(prevGameState => {
-                {
-                  ...prevGameState,
-                  players: dbRecord.masterPlayers,
-                  seating: dbRecord.masterSeating,
-                  hasGhostPlayers: dbRecord.masterHasGhostPlayers,
-                }
-              })
-              setTurnState(_prevTurnState => {
-                {
-                  nrWitches: dbRecord.masterNumberWitches,
-                  nightType: dbRecord.masterNightType,
-                  choiceWitches: dbRecord.slaveChoiceWitches === ""
-                    ? None
-                    : Some(dbRecord.slaveChoiceWitches),
-                  choiceConstable: dbRecord.slaveChoiceConstable === ""
-                    ? None
-                    : Some(dbRecord.slaveChoiceConstable),
-                }
-              })
+      FirebaseClient.listen(
+        dbConnection,
+        gameId,
+        GameSubject,
+        (maybeDbRecordStr: option<string>) => {
+          switch maybeDbRecordStr {
+          | None => {
+              Utils.logDebug(p ++ "Received null on listener")
+              goToPage(_prev => SetupNetworkNoGame)
+            }
+          | Some(dbRecordStr) =>
+            switch dbRecordStr->Js.Json.string->dbRecord_decode {
+            | Error(deccoError) =>
+              Utils.logError(
+                deccoError.path ++
+                ": " ++
+                deccoError.message ++
+                ": " ++
+                deccoError.value->Js.Json.decodeString->Belt.Option.getWithDefault("<None>"),
+              )
+            | Ok(dbRecord) => {
+                Utils.logDebug(p ++ "Received dbRecord")
+                goToPage(_prev => dbRecord.masterPhase->FirebaseClient.getPage)
+                setGameState(
+                  prevGameState => {
+                    {
+                      ...prevGameState,
+                      players: dbRecord.masterPlayers,
+                      seating: dbRecord.masterSeating,
+                      hasGhostPlayers: dbRecord.masterHasGhostPlayers,
+                    }
+                  },
+                )
+                setTurnState(
+                  _prevTurnState => {
+                    {
+                      nrWitches: dbRecord.masterNumberWitches,
+                      nightType: dbRecord.masterNightType,
+                      choiceWitches: dbRecord.slaveChoiceWitches === ""
+                        ? None
+                        : Some(dbRecord.slaveChoiceWitches),
+                      choiceConstable: dbRecord.slaveChoiceConstable === ""
+                        ? None
+                        : Some(dbRecord.slaveChoiceConstable),
+                    }
+                  },
+                )
+              }
             }
           }
-        }
-      })
+        },
+      )
     })
     Some(
       () => {

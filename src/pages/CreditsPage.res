@@ -51,7 +51,7 @@ let make = (~goToPage): React.element => {
       closeParenAndComma
       {React.string(`Travis Hancock © 2015`)}
       spacedComma
-      <Link href="https://facadegames.com/" text=`Façade Games` />
+      <Link href="https://facadegames.com/" text={`Façade Games`} />
     </p>
     <p>
       <span> {React.string(t("Voice actors: "))} </span>

@@ -2,7 +2,7 @@
  * SeatingCodec
  */
 
-/**
+/*
  * How are the players seated around the table?
  *
  *           even nr. players          odd nr. players
@@ -15,7 +15,9 @@
  *          o   o          o          o   o          o
  */
 
-// generates the functions seatingToJs() and seatingFromJs()
+/**
+ * generates the functions seatingToJs() and seatingFromJs()
+ */
 @deriving(jsConverter)
 type seating = [
   | #OneAtTop

@@ -103,15 +103,19 @@ let startRecording = (maybeVideoElement: option<Dom.htmlVideoElement>, maybeGetU
   maybeVideoElement->Belt.Option.mapWithDefault(false, videoElement => {
     maybeGetUserMedia->Belt.Option.mapWithDefault(false, getUserMedia => {
       getUserMedia(mediaConstraints)
-      ->Promise.then((stream: stream) => {
-        videoElement->setSrcObject(stream)
-        videoElement->play
-        Promise.resolve(true)
-      })
-      ->Promise.catch(_error => {
-        logDebugBlue(p ++ "Unable to get camera stream")
-        Promise.resolve(false)
-      })
+      ->Promise.then(
+        (stream: stream) => {
+          videoElement->setSrcObject(stream)
+          videoElement->play
+          Promise.resolve(true)
+        },
+      )
+      ->Promise.catch(
+        _error => {
+          logDebugBlue(p ++ "Unable to get camera stream")
+          Promise.resolve(false)
+        },
+      )
       ->replaceWith(true)
     })
   })

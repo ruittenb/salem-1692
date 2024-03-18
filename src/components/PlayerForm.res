@@ -61,7 +61,7 @@ let make = (): React.element => {
     )
     setGameState(prevGameState => {
       ...prevGameState,
-      players: players,
+      players,
     })
   }
   // remove a player on button click
@@ -72,7 +72,7 @@ let make = (): React.element => {
     )
     setGameState(prevGameState => {
       ...prevGameState,
-      players: players,
+      players,
     })
   }
   // swap two players
@@ -91,7 +91,7 @@ let make = (): React.element => {
     }
     setGameState(prevGameState => {
       ...prevGameState,
-      players: players,
+      players,
     })
   }
   // add a new player
@@ -105,7 +105,7 @@ let make = (): React.element => {
     let players = Js.Array2.concat(gameState.players, newPlayers)
     setGameState(prevGameState => {
       ...prevGameState,
-      players: players,
+      players,
     })
   }
 
