@@ -82,7 +82,7 @@ let make = (~goToPage): React.element => {
       {React.string(`©` ++ nbsp)}
       <Link href="https://incompetech.com/music/royalty-free/music.html" text="Kevin MacLeod" />
       spacedComma
-      {React.string(t("Licensed under") ++ " ")}
+      {React.string(t("Licensed under "))}
       <Link href="http://creativecommons.org/licenses/by/4.0/" text="CC BY 4.0" />
     </p>
     <p>

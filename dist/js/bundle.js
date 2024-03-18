@@ -40145,7 +40145,7 @@ function CreditsPage(props) {
   })), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Music: ")), React.createElement(TrackList$Salem1692.make, {}), "©" + nbsp, React.createElement(Link$Salem1692.make, {
     href: "https://incompetech.com/music/royalty-free/music.html",
     text: "Kevin MacLeod"
-  }), spacedComma, Curry._1(t, "Licensed under") + " ", React.createElement(Link$Salem1692.make, {
+  }), spacedComma, Curry._1(t, "Licensed under "), React.createElement(Link$Salem1692.make, {
     href: "http://creativecommons.org/licenses/by/4.0/",
     text: "CC BY 4.0"
   })), React.createElement("p", undefined, React.createElement("span", undefined, Curry._1(t, "Sound effects: ")), React.createElement(Link$Salem1692.make, {
@@ -40434,6 +40434,7 @@ var React = _interopRequireWildcard(require("react"));
 var Caml_option = _interopRequireWildcard(require("rescript/lib/es6/caml_option.js"));
 var Button$Salem1692 = _interopRequireWildcard(require("../components/Button.bs.js"));
 var Spacer$Salem1692 = _interopRequireWildcard(require("../components/Spacer.bs.js"));
+var TopBar$Salem1692 = _interopRequireWildcard(require("../components/TopBar.bs.js"));
 var ButtonPair$Salem1692 = _interopRequireWildcard(require("../components/ButtonPair.bs.js"));
 var Translator$Salem1692 = _interopRequireWildcard(require("../modules/Translator.bs.js"));
 var GameStateContext$Salem1692 = _interopRequireWildcard(require("../components/GameStateContext.bs.js"));
@@ -40519,6 +40520,8 @@ function DaytimeRevealPage(props) {
   return React.createElement("div", {
     className: "page justify-spread",
     id: "daytime-reveal-page"
+  }, React.createElement(TopBar$Salem1692.make, {
+    children: null
   }, allowBackToConfess$1 ? React.createElement(BackFloatingButton$Salem1692.make, {
     onClick: function (_event) {
       Curry._1(goToPage, function (_prev) {
@@ -40528,7 +40531,7 @@ function DaytimeRevealPage(props) {
   }) : null, React.createElement(GearFloatingButton$Salem1692.make, {
     goToPage: goToPage,
     returnPage: returnPage
-  }), React.createElement("h1", {
+  })), React.createElement("h1", {
     className: "condensed-de"
   }, Curry._1(t, "The Reveal")), React.createElement("p", {
     className: "text-centered"
@@ -40543,7 +40546,7 @@ var make = DaytimeRevealPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/ButtonPair.bs.js":64,"../components/GameStateContext.bs.js":68,"../components/GearFloatingButton.bs.js":69,"../components/LargeRevealButton.bs.js":74,"../components/Spacer.bs.js":85,"../components/TurnStateContext.bs.js":90,"../modules/Translator.bs.js":113,"react":24,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],121:[function(require,module,exports){
+},{"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/ButtonPair.bs.js":64,"../components/GameStateContext.bs.js":68,"../components/GearFloatingButton.bs.js":69,"../components/LargeRevealButton.bs.js":74,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../components/TurnStateContext.bs.js":90,"../modules/Translator.bs.js":113,"react":24,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],121:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
