@@ -474,7 +474,7 @@ video + .bubble {
     width: 32px;
     height: 32px;
 }
-.page div.topbar-button.floating-right {
+.page div.topbar-button.float-right {
     margin-left: auto;
 }
 
@@ -534,7 +534,7 @@ video + .bubble {
 }
 
 #title-page div.floating-right {
-    background-image: url(../images/icon-gear-32-dark.png); }
+    background-image: url(../images/icon-gear-32-dark.png);
     position: absolute;
     right: 18px;
     top: 14px;
