@@ -59,7 +59,7 @@ let connect = (): Promise.t<dbConnection> => {
         let connected: bool = getValue(snapshot)
         if connected {
           logDebug(p ++ "Connected")
-          resolve(. {app: app, db: db})
+          resolve(. {app, db})
         }
       })
     } catch {

@@ -2,8 +2,8 @@
   "name": "salem-1692",
   "version": "0.65.1",
   "namespace": true,
-  "reason": { "react-jsx": 3 },
-  "bsc-flags": [ "-bs-super-errors" ],
+  "reason": {"react-jsx": 3},
+  "bsc-flags": ["-bs-super-errors"],
   "sources": [{
     "dir": "src",
     "subdirs": true
@@ -18,7 +18,9 @@
     "@ryyppy/rescript-promise",
     "decco"
   ],
-  "ppx-flags": [
-    "decco/ppx"
-  ]
+  "ppx-flags": ["decco/ppx"],
+  "jsx": {
+    "version": 4,
+    "mode": "classic"
+  }
 }

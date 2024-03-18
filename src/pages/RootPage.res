@@ -18,8 +18,8 @@ let cleanupGameState = (gameState): gameState => {
   let backgroundMusic = gameState.backgroundMusic->Js.Array2.filter(knownMusicTracksInclude)
   {
     ...gameState,
-    language: language,
-    backgroundMusic: backgroundMusic,
+    language,
+    backgroundMusic,
   }
 }
 
@@ -38,8 +38,9 @@ let make = (): React.element => {
     ->Belt.Option.map(cleanupGameState)
     ->Belt.Option.forEach(gameState => {
       setGameState(_prev => gameState)
-      Utils.ifMaster(gameState.gameType, _gameId =>
-        SetupNetworkPage.startHosting(setDbConnectionStatus, gameState, setGameState)
+      Utils.ifMaster(
+        gameState.gameType,
+        _gameId => SetupNetworkPage.startHosting(setDbConnectionStatus, gameState, setGameState),
       )
     })
     None // cleanup function
