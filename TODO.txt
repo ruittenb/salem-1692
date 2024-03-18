@@ -5,10 +5,11 @@ SEVERE:
 	 - todo: nl, en, es
 
 IMPORTANT:
- - Safari: backgroundmusic sometimes(?) as loud as speech
  - right after mounting: preserve slave/master status? in localstorage?
+ - the "choose no one" option for the constable (and witches?) in ghost mode
 
 NICE TO HAVE:
+ - Safari: backgroundmusic sometimes(?) as loud as speech
  - add button "abort connecting"
  - fade music out
  - reflect state in URL https://betterprogramming.pub/how-and-why-you-should-store-react-ui-state-in-the-url-f2013a204cb2
