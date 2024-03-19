@@ -75,5 +75,6 @@ let make = (
 
   | Music(fileName) => musicDirectory ++ fileName
   }
+
   <audio src loop autoPlay=true onEnded onError ref={ReactDOM.Ref.domRef(audioRef)} />
 }
