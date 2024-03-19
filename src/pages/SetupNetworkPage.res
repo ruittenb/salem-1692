@@ -335,15 +335,17 @@ let make = (~goToPage, ~noGame): React.element => {
 
   // component
   <div id="setup-network-page" className="page justify-start">
-    <BackFloatingButton
-      onClick={_event => {
-        leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
-        stopHosting(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
-        goToPage(_prev => Title)
-      }}
-    />
-    <GearFloatingButton goToPage returnPage=SetupNetwork />
-    <MasterFloatingIcon masterMode />
+    <TopBar>
+      <BackFloatingButton
+        onClick={_event => {
+          leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
+          stopHosting(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
+          goToPage(_prev => Title)
+        }}
+      />
+      <HostingIcon masterMode />
+      <GearFloatingButton goToPage returnPage=SetupNetwork />
+    </TopBar>
     <h1> {React.string(t("Multi-Telephone"))} </h1>
     {modusOperandi}
   </div>

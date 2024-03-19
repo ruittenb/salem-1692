@@ -13,5 +13,5 @@ let make = (~goToPage, ~returnPage: page): React.element => {
     goToPage(_prev => Setup)
   }
 
-  <div className="floating-button floating-right icon-gear" onClick />
+  <div className="topbar-button floating-right icon-gear" onClick />
 }

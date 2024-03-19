@@ -102,7 +102,7 @@ let make = (~subPage: page, ~goToPage): React.element => {
   React.useEffect1(() => {
     //let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
     //let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
-    Utils.logDebug(p ++ "Detected scenarioStep change") // ++ `; ◇ witches:` ++ choiceWitches ++ ` ◇ constable:` ++ choiceConstable
+    Utils.logDebug(p ++ "Detected scenarioStep change")
     Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
       FirebaseClient.saveGamePhase(dbConnection, gameId, subPage, maybeScenarioStep)
     })

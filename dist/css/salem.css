@@ -5,16 +5,17 @@
 
 :root {
     /* grays */
-    --dark-gray : #333;
-    --mid-gray  : #666;
-    --light-gray: #bbb;
-    --snow      : #eee;
+    --dark-gray  : #333;
+    --mid-gray   : #666;
+    --light-gray : #bbb;
+    --snow       : #eee;
     /* colors */
-    --dark-brown: #503010;
-    --mid-brown : #ad713a;
-    --dark-gold : #90783b;
-    --gold      : #eac672;
-    --light-gold: #e2d286;
+    --dark-brown : #503010;
+    --mid-brown  : #ad713a;
+    --light-brown: #d99c66;
+    --dark-gold  : #90783b;
+    --mid-gold   : #eac672;
+    --light-gold : #e2d286;
 }
 
 * {
@@ -34,6 +35,26 @@ body {
     font-size: 26px;
 }
 
+#topbar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 44px;
+    color: white;
+    background-color: var(--dark-brown);
+    z-index: 50;
+}
+#topbar .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 18px;
+    padding-right: 18px;
+    width: 100%;
+    height: 100%;
+}
+
 hr {
     width: 80%;
     height: 0;
@@ -46,14 +67,18 @@ hr {
 h1 {
     font-size: 62px;
     font-weight: bold;
-    margin: 20px 5px;
-    max-width: calc(100vw - 110px);
+    margin: 32px 5px 18px 5px;
+    max-width: 90%;
     text-align: center;
     line-height: 1;
+}
+#topbar + h1 {
+    margin-top: 72px;
 }
 .uk_UA h1 {
     transform: scaleX(0.9);
 }
+
 h2 {
     margin-top: 10px;
     margin-bottom: 0;
@@ -337,7 +362,7 @@ video + .bubble {
     font-family: inherit;
     font-size: 26px;
     line-height: 40px;
-    background-color: var(--gold);
+    background-color: var(--mid-gold);
     background-repeat: no-repeat;
     border-width: 2px;
     border-color: var(--dark-brown);
@@ -447,36 +472,26 @@ video + .bubble {
     margin-bottom: 0;
 }
 
-.page div.floating-button {
+.page div.topbar-button {
     background-position: center center;
     background-repeat: no-repeat;
-    position: absolute;
-    top: 26px;
     width: 32px;
     height: 32px;
-    z-index: 10;
 }
-.page div.floating-right {
-    right: 20px;
-}
-.page div.floating-left {
-    left: 20px;
-}
-.page div.floating-right-down {
-    right: 20px;
-    top: 64px;
+.page div.topbar-button.icon-host,
+.page div.topbar-button.floating-right {
+    margin-left: auto;
 }
 
 .page button.flag { background-size: 28px; }
 .page button.flag-us-gb { background-image: url(../images/flag-us-gb.png); }
-.page button.flag-us { background-image: url(../images/flag-us.png); }
 .page button.flag-es { background-image: url(../images/flag-es.png); }
 .page button.flag-br { background-image: url(../images/flag-br.png); }
 .page button.flag-fr { background-image: url(../images/flag-fr.png); }
-.page button.flag-de { background-image: url(../images/flag-de.png); }
-.page button.flag-ua { background-image: url(../images/flag-ua.png); }
-.page button.flag-nl { background-image: url(../images/flag-nl.png); }
 .page button.flag-it { background-image: url(../images/flag-it.png); }
+.page button.flag-de { background-image: url(../images/flag-de.png); }
+.page button.flag-nl { background-image: url(../images/flag-nl.png); }
+.page button.flag-ua { background-image: url(../images/flag-ua.png); }
 .page button.flag-kr { background-image: url(../images/flag-kr.png); }
 .page button.flag-jp { background-image: url(../images/flag-jp.png); }
 
@@ -489,7 +504,7 @@ video + .bubble {
 .page button.icon-rot   { background-image: url(../images/icon-rot.png); }
 .page button.icon-trash { background-image: url(../images/icon-cross.png); }
 .page button.icon-abort { background-image: url(../images/icon-cross.png); }
-.page    div.icon-gear  { background-image: url(../images/icon-gear.png); }
+.page    div.icon-gear  { background-image: url(../images/icon-gear-32.png); }
 .page    div.icon-back  { background-image: url(../images/icon-back-32.png); }
 .page    div.icon-host  { background-image: url(../images/icon-host-32.webp); }
 
@@ -523,20 +538,27 @@ video + .bubble {
     margin-bottom: 100px;
 }
 
+#title-page div.floating-right {
+    background-image: url(../images/icon-gear-32-dark.png);
+    position: absolute;
+    right: 18px;
+    top: 14px;
+}
+
 /** ****************************************************************************
  * Setup Pages
  */
 
 #setup-page {
-    background: url(../images/overlay-gear.webp) -190px 120px no-repeat;
+    background: url(../images/overlay-gear.webp) -190px 176px no-repeat;
 }
 
 #setup-language-page {
-    background: url(../images/overlay-language.webp) -130px 120px no-repeat;
+    background: url(../images/overlay-language.webp) -130px 176px no-repeat;
 }
 
 #setup-music-page {
-    background: url(../images/overlay-lute.webp) -100px 120px no-repeat;
+    background: url(../images/overlay-lute.webp) -100px 176px no-repeat;
 }
 
 #setup-music-page .playing {
@@ -584,7 +606,7 @@ video + .bubble {
 /* }}} */
 
 #setup-players-page {
-    background: url(../images/overlay-pawn.webp) -190px 120px no-repeat;
+    background: url(../images/overlay-pawn.webp) -190px 176px no-repeat;
 }
 
 #setup-players-page .player-entry-item {
@@ -600,7 +622,7 @@ video + .bubble {
 }
 
 #setup-network-page {
-    background: url(../images/overlay-old-phone.webp) -220px 80px no-repeat;
+    background: url(../images/overlay-old-phone.webp) -220px 176px no-repeat;
 }
 
 #layout-list {
