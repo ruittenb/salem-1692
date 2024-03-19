@@ -67,14 +67,18 @@ hr {
 h1 {
     font-size: 62px;
     font-weight: bold;
-    margin: 72px 5px 18px 5px;
+    margin: 32px 5px 18px 5px;
     max-width: 90%;
     text-align: center;
     line-height: 1;
 }
+#topbar + h1 {
+    margin-top: 72px;
+}
 .uk_UA h1 {
     transform: scaleX(0.9);
 }
+
 h2 {
     margin-top: 10px;
     margin-bottom: 0;
@@ -474,7 +478,8 @@ video + .bubble {
     width: 32px;
     height: 32px;
 }
-.page div.topbar-button.float-right {
+.page div.topbar-button.icon-host,
+.page div.topbar-button.floating-right {
     margin-left: auto;
 }
 
@@ -617,7 +622,7 @@ video + .bubble {
 }
 
 #setup-network-page {
-    background: url(../images/overlay-old-phone.webp) -220px 80px no-repeat;
+    background: url(../images/overlay-old-phone.webp) -220px 176px no-repeat;
 }
 
 #layout-list {
