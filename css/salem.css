@@ -477,6 +477,7 @@ video + .bubble {
 .page button.flag-ua { background-image: url(../images/flag-ua.png); }
 .page button.flag-nl { background-image: url(../images/flag-nl.png); }
 .page button.flag-it { background-image: url(../images/flag-it.png); }
+.page button.flag-kr { background-image: url(../images/flag-kr.png); }
 .page button.flag-jp { background-image: url(../images/flag-jp.png); }
 
 .page button.icon-back  { background-image: url(../images/icon-back.png); }
