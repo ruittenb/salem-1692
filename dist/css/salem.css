@@ -76,7 +76,7 @@ h1 {
     margin-top: 72px;
 }
 .uk_UA h1 {
-    transform: scaleX(0.9);
+    /*transform: scaleX(0.9); */
 }
 
 h2 {

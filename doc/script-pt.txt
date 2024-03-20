@@ -4,16 +4,16 @@ A. A noite caiu. A cidade vai dormir. Todos, fechem os olhos.
 B. A noite está chegando ao fim. A cidade ainda está dormindo. Todos, fechem os olhos.
 
 
-C. Assim que todos os olhos estiverem fechados, o feiticeiro acorda.
+C. Assim que todos os olhos estiverem fechados, a bruxa acorda.
 
-E. O feiticeiro abre os olhos. Sem fazer barulho, ele decide quem ficará com o gato preto.
+E. A bruxa abre os olhos. Sem fazer barulho, ele decide quem ficará com o gato preto.
    Se ele quiser, ele pode escolher a si mesmo.
 
-H. O feiticeiro fez a sua escolha. Ele agora fecha os olhos.
+H. A bruxa fez a sua escolha. Ele agora fecha os olhos.
 
 
-D. Assim que todos os olhos estiverem fechados, os feiticeiros acordam.
-   Os feiticeiros abrem os olhos. Eles fazem contato visual para se reconhecerem.
+D. Assim que todos os olhos estiverem fechados, as bruxas acordam.
+   As bruxas abrem os olhos. Eles fazem contato visual para se reconhecerem.
 
 F. Apenas com gestos, eles decidem silenciosamente quem ficará com o gato preto.
    Eles podem escolher um deles.
@@ -21,17 +21,17 @@ F. Apenas com gestos, eles decidem silenciosamente quem ficará com o gato preto
 G. Apenas com gestos, eles decidem silenciosamente quem querem matar.
    Eles podem escolher um deles.
 
-J. Os feiticeiros fizeram a sua escolha. Eles agora fecham os olhos.
+J. As bruxas fizeram a sua escolha. Eles agora fecham os olhos.
 
 
-M. Assim que os feiticeiros fecham os olhos, o xerife acorda.
-   O xerife decide quem será protegido está noite.
+M. Assim que as bruxas fecham os olhos, o vigilante acorda.
+   O vigilante decide quem será protegido está noite.
 
 P. Ele pode não escolher a si mesmo.
 
 Q. Ele também pode escolher a si mesmo.
 
-N. O xerife fez a sua escolha. Ele agora fecha os olhos.
+N. O vigilante fez a sua escolha. Ele agora fecha os olhos.
 
 
 Z. O amanhecer está a surgir. A cidade acorda. Todos, abram os olhos.
