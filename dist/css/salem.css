@@ -314,7 +314,8 @@ video + .bubble {
 .es_ES .page button.condensed-es {
     font-size: 24px;
 }
-.fr_FR .page button.condensed-fr {
+.fr_FR .page button.condensed-fr,
+.fr_FR .page button .condensed-fr {
     font-size: 23px;
 }
 .fr_FR .page .player-entry-item input[type="text"].condensed-fr::placeholder {
@@ -550,7 +551,7 @@ video + .bubble {
  */
 
 #setup-page {
-    background: url(../images/overlay-gear.webp) -190px 176px no-repeat;
+    background: url(../images/overlay-gear.webp) -190px 190px no-repeat;
 }
 
 #setup-language-page {
@@ -647,7 +648,7 @@ video + .bubble {
  */
 
 #credits-page {
-    background: url(../images/overlay-scroll.webp) -290px 120px no-repeat;
+    background: url(../images/overlay-scroll.webp) -290px 140px no-repeat;
     width: 100%;
 }
 
