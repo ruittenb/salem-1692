@@ -49,8 +49,8 @@ let table = Js.Dict.fromArray([
   (`Português`, `Português`),
   ("Italiano", "Italiano"),
   (`Українська`, `Українська`),
-  (`한국어`, `한국어`),
   (`日本語`, `日本語`),
+  (`한국어`, `한국어`),
   ("Interface only, no dialogue yet", "Interface only, no dialogue yet"),
   ("Back", "Back"),
   ("Next", "Next"),
@@ -123,7 +123,7 @@ let table = Js.Dict.fromArray([
   ("Images: ", "Images: "),
   ("Music: ", "Music: "),
   ("Licensed under ", "Licensed under "),
-  // Day
+  // Daytime
   ("A day in Salem", "A day in Salem"),
   ("Dawn,", "Dawn,"),
   ("one witch", "one witch"),

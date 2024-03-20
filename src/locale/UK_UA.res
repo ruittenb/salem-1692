@@ -1,5 +1,7 @@
 /**
  * Locale: uk_UA
+ *
+ * Note: this is a machine translation that needs to be reviewed
  */
 let table = Js.Dict.fromArray([
   // TitlePage
@@ -52,8 +54,8 @@ let table = Js.Dict.fromArray([
   (`Português`, `Português`),
   ("Italiano", "Italiano"),
   (`Українська`, `Українська`),
-  (`한국어`, `한국어`),
   (`日本語`, `日本語`),
+  (`한국어`, `한국어`),
   (
     "Interface only, no dialogue yet",
     `Лише інтерфейс, поки що немає діалогу`,
