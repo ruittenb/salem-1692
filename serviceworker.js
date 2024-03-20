@@ -51,6 +51,7 @@ function getFilesToCache(debug) {
         'images/icon-back-32.png',
         'images/icon-checked.png',
         'images/icon-cross.png',
+        'images/icon-dish-32.webp',
         'images/icon-exit.png',
         'images/icon-forw.png',
         'images/icon-gear-32.png',
