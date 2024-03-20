@@ -327,23 +327,14 @@ let make = (~goToPage, ~noGame): React.element => {
     setSlaveGameIdValidity,
   )
 
-  let masterMode = switch gameState.gameType {
-  | Master(_) => true
-  | Slave(_)
-  | StandAlone => false
-  }
-
   // component
   <div id="setup-network-page" className="page justify-start">
-    <TopBar>
-      <BackFloatingButton
-        onClick={_event => {
-          leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
-          stopHosting(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
-          goToPage(_prev => Title)
-        }}
-      />
-      <HostingIcon masterMode />
+    <TopBar
+      onBack={_event => {
+        leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
+        stopHosting(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
+        goToPage(_prev => Title)
+      }}>
       <GearFloatingButton goToPage returnPage=SetupNetwork />
     </TopBar>
     <h1> {React.string(t("Multi-Telephone"))} </h1>

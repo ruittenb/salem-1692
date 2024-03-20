@@ -11,7 +11,7 @@ let make = (~goToPage): React.element => {
 
   // component
   <>
-    <TopBar />
+    <TopBar onBack={_event => goToPage(_prev => SetupNetwork)} />
     <h1> {React.string(t("A day in Salem"))} </h1>
     <Spacer />
     <Spacer />

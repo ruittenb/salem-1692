@@ -25,9 +25,7 @@ let make = (~goToPage): React.element => {
 
   // Page element
   <div id="daytime-page" className="page justify-start">
-    <TopBar>
-      <BackFloatingButton onClick={_event => goToPage(_prev => returnPage)} />
-      <HostingIcon masterMode />
+    <TopBar onBack={_event => goToPage(_prev => returnPage)}>
       <GearFloatingButton goToPage returnPage=Daytime />
     </TopBar>
     <h1> {React.string(t("A day in Salem"))} </h1>
