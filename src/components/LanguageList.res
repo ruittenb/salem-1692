@@ -19,7 +19,9 @@ let make = (~goToPage): React.element => {
     #pt_BR,
     #de_DE,
     #nl_NL,
-    //#uk_UA,
+    #uk_UA,
+    #ja_JP,
+    #ko_KR,
   ]
 
   let buttons: array<React.element> = offeredLanguages->Belt.Array.map(buttonLanguage => {
@@ -40,6 +42,8 @@ let make = (~goToPage): React.element => {
     | #de_DE => ("icon-left compact flag flag-de", t("Deutsch"))
     | #nl_NL => ("icon-left compact flag flag-nl", t("Nederlands"))
     | #uk_UA => ("icon-left compact flag flag-ua uk_UA", t(`Українська`))
+    | #ja_JP => ("icon-left compact flag flag-jp ja_JP", t(`日本語`))
+    | #ko_KR => ("icon-left compact flag flag-kr ko_KR", t(`한국어`))
     }
     <Button key={label} label className onClick />
   })
