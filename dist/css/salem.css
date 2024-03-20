@@ -16,6 +16,8 @@
     --dark-gold  : #90783b;
     --mid-gold   : #eac672;
     --light-gold : #e2d286;
+    /* rounded corners */
+    --border-radius: 6px;
 }
 
 * {
@@ -168,6 +170,7 @@ img.qr-icon.scannable {
 
 input[type=text] {
     background-color: var(--snow);
+    border-radius: var(--border-radius);
     border: 2px solid black;
     padding-left: 5px;
     font-family: inherit;
@@ -223,6 +226,7 @@ div.id-input,
 input[type=text].id-input {
     display: inline-block;
     border: 3px solid var(--mid-gray);
+    border-radius: var(--border-radius);
     background-color: var(--snow);
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
@@ -379,6 +383,7 @@ video + .bubble {
     background-repeat: no-repeat;
     border-width: 2px;
     border-color: var(--dark-brown);
+    border-radius: var(--border-radius);
     box-shadow: 0 10px 20px #00000030, 0 6px 6px #0000003b;
     -webkit-tap-highlight-color: transparent; /* suppress background color when active (Chrome on Android) */
 }
