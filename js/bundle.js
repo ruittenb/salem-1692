@@ -37027,7 +37027,9 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function LargeRevealButton(props) {
   return React.createElement(LargeButton$Salem1692.make, {
     label: "",
-    children: Caml_option.some(props.revealed ? React.createElement(React.Fragment, undefined, React.createElement("div", undefined, props.revelationPromptPre), React.createElement("div", undefined, React.createElement("span", {
+    children: Caml_option.some(props.revealed ? React.createElement(React.Fragment, undefined, React.createElement("div", {
+      className: "condensed-fr"
+    }, props.revelationPromptPre), React.createElement("div", undefined, React.createElement("span", {
       className: "font-large"
     }, props.secret), React.createElement("span", undefined, props.revelationPromptPost))) : props.revealPrompt),
     onClick: props.onClick
