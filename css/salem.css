@@ -505,6 +505,7 @@ video + .bubble {
     height: 32px;
 }
 .page div.topbar-button.icon-host,
+.page div.topbar-button.icon-guest,
 .page div.topbar-button.floating-right {
     margin-left: auto;
 }
@@ -533,6 +534,7 @@ video + .bubble {
 .page    div.icon-gear  { background-image: url(../images/icon-gear-32.png); }
 .page    div.icon-back  { background-image: url(../images/icon-back-32.png); }
 .page    div.icon-host  { background-image: url(../images/icon-host-32.webp); }
+.page    div.icon-guest { background-image: url(../images/icon-guest-32.webp); }
 
 .page button.icon-checked   { background-image: url(../images/icon-checked.png); }
 .page button.icon-unchecked { background-image: url(../images/icon-unchecked.png); }
