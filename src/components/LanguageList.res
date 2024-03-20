@@ -20,7 +20,7 @@ let make = (~goToPage): React.element => {
     #de_DE,
     #nl_NL,
     #uk_UA,
-    #ja_JP,
+    //#ja_JP,
     #ko_KR,
   ]
 
