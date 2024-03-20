@@ -1,4 +1,3 @@
-
 /** ****************************************************************************
  * Stylesheet for Salem 1692 moderator PWA
  */
@@ -10,7 +9,7 @@
     --light-gray : #bbb;
     --snow       : #eee;
     /* colors */
-    --dark-brown : #503010;
+    --dark-brown : #472b1d;
     --mid-brown  : #ad713a;
     --light-brown: #d99c66;
     --dark-gold  : #90783b;
@@ -61,9 +60,10 @@ body button.ko_KR {
     z-index: 50;
 }
 #topbar .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 32px 1fr 32px;
+    grid-template-areas: "back network setup";
+    place-items: center;
     padding-left: 18px;
     padding-right: 18px;
     width: 100%;
@@ -504,40 +504,36 @@ video + .bubble {
     width: 32px;
     height: 32px;
 }
-.page div.topbar-button.icon-host,
-.page div.topbar-button.icon-guest,
-.page div.topbar-button.floating-right {
-    margin-left: auto;
-}
 
-.page button.flag { background-size: 28px; }
-.page button.flag-us-gb { background-image: url(../images/flag-us-gb.png); }
-.page button.flag-es { background-image: url(../images/flag-es.png); }
-.page button.flag-br { background-image: url(../images/flag-br.png); }
-.page button.flag-fr { background-image: url(../images/flag-fr.png); }
-.page button.flag-it { background-image: url(../images/flag-it.png); }
-.page button.flag-de { background-image: url(../images/flag-de.png); }
-.page button.flag-nl { background-image: url(../images/flag-nl.png); }
-.page button.flag-ua { background-image: url(../images/flag-ua.png); }
-.page button.flag-kr { background-image: url(../images/flag-kr.png); }
-.page button.flag-jp { background-image: url(../images/flag-jp.png); }
+.page button.flag           { background-size: 28px; }
+.page button.flag-us-gb     { background-image: url(../images/flag-us-gb.png); }
+.page button.flag-es        { background-image: url(../images/flag-es.png); }
+.page button.flag-br        { background-image: url(../images/flag-br.png); }
+.page button.flag-fr        { background-image: url(../images/flag-fr.png); }
+.page button.flag-it        { background-image: url(../images/flag-it.png); }
+.page button.flag-de        { background-image: url(../images/flag-de.png); }
+.page button.flag-nl        { background-image: url(../images/flag-nl.png); }
+.page button.flag-ua        { background-image: url(../images/flag-ua.png); }
+.page button.flag-kr        { background-image: url(../images/flag-kr.png); }
+.page button.flag-jp        { background-image: url(../images/flag-jp.png); }
 
-.page button.icon-back  { background-image: url(../images/icon-back.png); }
-.page button.icon-pawn  { background-image: url(../images/icon-pawn.png); }
-.page button.icon-lang  { background-image: url(../images/icon-lang.png); }
-.page button.icon-forw  { background-image: url(../images/icon-forw.png); }
-.page button.icon-move  { background-image: url(../images/icon-move.png); }
-.page button.icon-exit  { background-image: url(../images/icon-exit.png); }
-.page button.icon-rot   { background-image: url(../images/icon-rot.png); }
-.page button.icon-trash { background-image: url(../images/icon-cross.png); }
-.page button.icon-abort { background-image: url(../images/icon-cross.png); }
-.page    div.icon-gear  { background-image: url(../images/icon-gear-32.png); }
-.page    div.icon-back  { background-image: url(../images/icon-back-32.png); }
-.page    div.icon-host  { background-image: url(../images/icon-host-32.webp); }
-.page    div.icon-guest { background-image: url(../images/icon-guest-32.webp); }
+.page button.icon-back      { background-image: url(../images/icon-back.png); }
+.page button.icon-pawn      { background-image: url(../images/icon-pawn.png); }
+.page button.icon-lang      { background-image: url(../images/icon-lang.png); }
+.page button.icon-forw      { background-image: url(../images/icon-forw.png); }
+.page button.icon-move      { background-image: url(../images/icon-move.png); }
+.page button.icon-exit      { background-image: url(../images/icon-exit.png); }
+.page button.icon-rot       { background-image: url(../images/icon-rot.png); }
+.page button.icon-trash     { background-image: url(../images/icon-cross.png); }
+.page button.icon-abort     { background-image: url(../images/icon-cross.png); }
 
 .page button.icon-checked   { background-image: url(../images/icon-checked.png); }
 .page button.icon-unchecked { background-image: url(../images/icon-unchecked.png); }
+
+.page    div.icon-back      { background-image: url(../images/icon-back-32.png); grid-area: back; }
+.page    div.icon-host      { background-image: url(../images/icon-host-32.webp); grid-area: network; }
+.page    div.icon-guest     { background-image: url(../images/icon-guest-32.webp); grid-area: network; }
+.page    div.icon-gear      { background-image: url(../images/icon-gear-32.png); grid-area: setup; }
 
 .buttonpair {
     width: 80%;
@@ -566,7 +562,7 @@ video + .bubble {
     margin-bottom: 100px;
 }
 
-#title-page div.floating-right {
+#title-page div.icon-gear {
     background-image: url(../images/icon-gear-32-dark.png);
     position: absolute;
     right: 18px;
