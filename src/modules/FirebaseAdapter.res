@@ -14,7 +14,7 @@ open Utils
 @module("firebase/database") external goOffline: dbDatabase => unit = "goOffline"
 @module("firebase/database") external onValue: (dbReference, dbSnapshot => unit) => unit = "onValue"
 @module("firebase/database") external off: dbReference => unit = "off"
-@module("firebase/database") external set: (dbReference, 'data) => Promise.t<unit> = "set"
+@module("firebase/database") external set: (dbReference, 'data) => promise<unit> = "set"
 @module("firebase/database") external remove: dbReference => unit = "remove"
 @module("firebase/analytics") external getAnalytics: dbApp => dbAnalytics = "getAnalytics"
 @send external getValue: dbSnapshot => 'data = "val"
@@ -46,7 +46,7 @@ let subjectKey = subject =>
  * connect/disconnect
  */
 
-let connect = (): Promise.t<dbConnection> => {
+let connect = (): promise<dbConnection> => {
   Promise.make((resolve, reject) => {
     try {
       let app = initializeApp(Constants.firebaseConfig)
@@ -86,7 +86,7 @@ let writeGame = (
   dbRecord: dbRecord,
   action: string,
 ): // "created" or "updated"
-Promise.t<unit> => {
+promise<unit> => {
   Promise.make((resolve, reject) => {
     try {
       let gameId = dbRecord.masterGameId
@@ -115,7 +115,7 @@ let writeGameKey = (
   gameId: GameTypeCodec.gameId,
   subject: dbObservable,
   value: string,
-): Promise.t<unit> => {
+): promise<unit> => {
   let key = subjectKey(subject)
   Promise.make((resolve, reject) => {
     try {

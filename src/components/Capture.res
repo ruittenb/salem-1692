@@ -41,17 +41,17 @@ external unsafeAsHtmlVideoElement: Dom.element => Dom.htmlVideoElement = "%ident
 external unsafeAsHtmlCanvasElement: Dom.element => Dom.htmlCanvasElement = "%identity"
 
 // window
-@send external parseQrCode: (Dom.window, string) => Promise.t<string> = "parseQrCode"
+@send external parseQrCode: (Dom.window, string) => promise<string> = "parseQrCode"
 
 // document
 @send external createElement: (document, string) => Dom.htmlUnknownElement = "createElement"
 
 // navigator
 @get external mediaDevices: navigator => mediaDevices = "mediaDevices"
-@send external getUserMedia: (mediaDevices, mediaConstraints) => Promise.t<stream> = "getUserMedia"
+@send external getUserMedia: (mediaDevices, mediaConstraints) => promise<stream> = "getUserMedia"
 @get external permissions: navigator => Js.Nullable.t<permissions> = "permissions"
 @send
-external permissionsQuery: (permissions, permissionDescriptor) => Promise.t<permissionStatus> =
+external permissionsQuery: (permissions, permissionDescriptor) => promise<permissionStatus> =
   "query"
 
 @send
@@ -92,9 +92,9 @@ let mediaConstraints: mediaConstraints = {video: {facingMode: "environment"}}
 
 let unsupportedStatus: permissionStatus = {name: "camera", state: "unsupported"}
 
-let getCameraPermissions = (): Promise.t<permissionStatus> => {
+let getCameraPermissions = (): promise<permissionStatus> => {
   switch navigator->permissions->Js.Nullable.toOption {
-  | None => Promise.resolve(unsupportedStatus)
+  | None => Js.Promise.resolve(unsupportedStatus)
   | Some(perm) => perm->permissionsQuery({name: "camera"})
   }
 }

@@ -10,7 +10,7 @@ type registration = {scope: scope}
 
 @send external addEventListener: (Dom.window, string, unit => unit) => unit = "addEventListener"
 @get external getServiceWorker: navigator => navServiceWorker = "serviceWorker"
-@send external register: (navServiceWorker, string) => Promise.t<registration> = "register"
+@send external register: (navServiceWorker, string) => promise<registration> = "register"
 
 let p = "[ServiceWorkerLoader] "
 

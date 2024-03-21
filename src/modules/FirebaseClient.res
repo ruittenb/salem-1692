@@ -71,7 +71,7 @@ let transformToDbRecord = (
  * connect/disconnect: forward to adapter
  */
 
-let connect = (): Promise.t<dbConnection> => {
+let connect = (): promise<dbConnection> => {
   FirebaseAdapter.connect()
 }
 
@@ -95,7 +95,7 @@ let leaveGame = (dbConnection: dbConnection, gameId: GameTypeCodec.gameId): unit
  * create/update/delete (Master)
  */
 
-let createGame = (dbConnection: dbConnection, gameState: gameState): Promise.t<unit> => {
+let createGame = (dbConnection: dbConnection, gameState: gameState): promise<unit> => {
   let emptyTurnState: turnState = {
     nrWitches: One,
     nightType: Dawn,
@@ -112,7 +112,7 @@ let updateGame = (
   currentPage: page,
   turnState: turnState,
   maybeScenarioStep: option<scenarioStep>,
-): Promise.t<unit> => {
+): promise<unit> => {
   let dbRecord = transformToDbRecord(
     gameState,
     currentPage,
@@ -127,7 +127,7 @@ let updateGameKey = (
   gameId: GameTypeCodec.gameId,
   subject: dbObservable,
   value: string,
-): Promise.t<unit> => {
+): promise<unit> => {
   FirebaseAdapter.writeGameKey(dbConnection, gameId, subject, value)
 }
 
