@@ -16,5 +16,4 @@ NICE TO HAVE:
  - swipe: https://www.npmjs.com/package/react-swipeable
  - top bar in layout with buttons
 
- - use navigator.language
  - get rid of passing goToPage as prop?

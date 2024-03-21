@@ -9,17 +9,31 @@ let initialDbConnectionStatus = NotConnected
 let initialPage: page = Title
 let initialNavigation: option<page> = None
 
-let cleanupGameState = (gameState): gameState => {
-  let language =
+let setOverrideLanguage = (gameState): gameState => {
+  let queryStringLanguage =
     QueryString.getQueryParam("lang")
     ->Belt.Option.flatMap(LanguageCodec.languageFromJs)
     ->Belt.Option.getWithDefault(gameState.language)
-  let knownMusicTracksInclude = musicTracks->Js.Array2.includes // curried
-  let backgroundMusic = gameState.backgroundMusic->Js.Array2.filter(knownMusicTracksInclude)
   {
     ...gameState,
-    language,
-    backgroundMusic,
+    language: queryStringLanguage,
+  }
+}
+
+let setDefaultLanguage = (gameState): gameState => {
+  let browserLanguage =
+    BrowserLanguage.getLanguage()->Belt.Option.getWithDefault(gameState.language)
+  {
+    ...gameState,
+    language: browserLanguage,
+  }
+}
+
+let cleanupGameStateMusic = (gameState): gameState => {
+  let knownMusicTracksInclude = musicTracks->Js.Array2.includes // curried
+  {
+    ...gameState,
+    backgroundMusic: gameState.backgroundMusic->Js.Array2.filter(knownMusicTracksInclude),
   }
 }
 
@@ -27,7 +41,7 @@ let cleanupGameState = (gameState): gameState => {
 let make = (): React.element => {
   let (dbConnectionStatus, setDbConnectionStatus) = React.useState(_ => initialDbConnectionStatus)
   let (currentPage, goToPage) = React.useState(_ => initialPage)
-  let (gameState, setGameState) = React.useState(_ => initialGameState)
+  let (gameState, setGameState) = React.useState(_ => initialGameState->setDefaultLanguage)
   let (navigation, setNavigation) = React.useState(_ => initialNavigation)
   let (turnState, setTurnState) = React.useState(_ => initialTurnState)
 
@@ -35,7 +49,8 @@ let make = (): React.element => {
   // if we're master, then connect to firebase.
   React.useEffect0(() => {
     LocalStorage.loadGameState()
-    ->Belt.Option.map(cleanupGameState)
+    ->Belt.Option.map(cleanupGameStateMusic)
+    ->Belt.Option.map(setOverrideLanguage)
     ->Belt.Option.forEach(gameState => {
       setGameState(_prev => gameState)
       Utils.ifMaster(

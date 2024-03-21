@@ -10,6 +10,7 @@ type navigator
 @val external document: document = "document"
 @val external navigator: navigator = "navigator"
 @get external userAgent: navigator => string = "userAgent"
+@get external language: navigator => string = "language"
 
 // Enable debug mode when the User-Agent string contains the text "Salem/1692".
 let debug = navigator->userAgent->Js.String2.includes("Salem/1692")
@@ -60,13 +61,14 @@ let musicTracks =
   ]->Js.Array2.sortInPlace
 
 let defaultSelectedMusicTracks = ["Myst on the Moor", "Some Amount of Evil"]
+let defaultPlayers = ["Ambrosia", "Bellatrix", "Cassandra", "Drizella"]
 
 // Initialization values
 
 let initialGameState = {
   gameType: StandAlone,
   language: #en_US,
-  players: ["Ambrosia", "Bellatrix", "Cassandra", "Drizella"],
+  players: defaultPlayers,
   seating: #OneAtTop,
   hasGhostPlayers: false,
   doPlayEffects: true,
