@@ -452,7 +452,7 @@ video + .bubble {
     height: 100px;
     min-height: 100px; /* needed for Safari */
     font-size: 28px;
-    padding: 0 4px;
+    padding: 0 8px;
 }
 
 .page button.squarebutton {
