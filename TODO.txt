@@ -17,3 +17,4 @@ NICE TO HAVE:
  - top bar in layout with buttons
 
  - use navigator.language
+ - get rid of passing goToPage as prop?
