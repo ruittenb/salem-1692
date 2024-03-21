@@ -18,12 +18,12 @@ let lookup = (table: Js.Dict.t<string>, message: string, languageName: string) =
   }
 }
 
-//const formatString = (template, ...args) => {
-//  return template.replace(/{([0-9]+)}/g, function (match, index) {
-//    return typeof args[index] === 'undefined' ? match : args[index];
-//  });
-//}
-//console.log(formatString('Hello {0}, your order {1} has been shipped.', 'John', 10001));
+// formatString('Hello {0}, your order {1} has been shipped.', ['John', '1022'])
+let formatString = (template: string, args: Js.Array.t<string>) => {
+  args->Js.Array2.reducei((acc: string, item: string, index: int) => {
+    acc->Js.String2.replace("{" ++ index->Belt.Int.toString ++ "}", item)
+  }, template)
+}
 
 let getTranslator = (language: LanguageCodec.t, message: string): string => {
   switch language {
