@@ -16,4 +16,4 @@ NICE TO HAVE:
  - swipe: https://www.npmjs.com/package/react-swipeable
  - top bar in layout with buttons
 
- - reveal buttons: combine PRE and POST parts and use templates {1} etc.
+ - use navigator.language

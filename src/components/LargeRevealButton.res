@@ -18,8 +18,8 @@ let make = (
   <LargeButton label="" className="condensed-ko" onClick>
     {if revealed {
       <>
-        <div className="condensed-fr"> {React.string(revelationPromptPre)} </div>
-        <div>
+        <div className="condensed-fr">
+          <span> {React.string(revelationPromptPre)} </span>
           <span className="font-large"> {React.string(secret)} </span>
           <span> {React.string(revelationPromptPost)} </span>
         </div>

@@ -185,12 +185,12 @@ let table = Js.Dict.fromArray([
   ),
   ("Reveal witch's victim", "Reveal the witch's victim"),
   ("Reveal witches' victim", "Reveal the witches' victim"),
-  ("The witch attacked-PRE", "The witch attacked"),
+  ("The witch attacked-PRE", "The witch attacked "),
   ("The witch attacked-POST", ""),
-  ("The witches attacked-PRE", "The witches attacked"),
+  ("The witches attacked-PRE", "The witches attacked "),
   ("The witches attacked-POST", ""),
   (" got the black cat", ` got the black cat`), // contains nbsp
   (`Reveal constable's protégé`, `Reveal the constable's protégé`),
-  ("The constable protected-PRE", "The constable protected"),
+  ("The constable protected-PRE", "The constable protected "),
   ("The constable protected-POST", ""),
 ])
