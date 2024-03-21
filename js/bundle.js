@@ -39454,6 +39454,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.lookup = lookup;
+exports.formatString = formatString;
 exports.getTranslator = getTranslator;
 exports.p = void 0;
 var Js_dict = _interopRequireWildcard(require("rescript/lib/es6/js_dict.js"));
@@ -39481,6 +39482,11 @@ function lookup(table, message, languageName) {
     console.log(p + "Warning: no translation found for " + message + " in " + languageName);
     return message;
   }
+}
+function formatString(template, args) {
+  return args.reduce(function (acc, item, index) {
+    return acc.replace("{" + String(index) + "}", item);
+  }, template);
 }
 function getTranslator(language, message) {
   if (language === "ja_JP") {
