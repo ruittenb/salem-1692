@@ -532,7 +532,7 @@ video + .bubble {
 
 .page    div.icon-back      { background-image: url(../images/icon-back-32.png); grid-area: back; }
 .page    div.icon-host      { background-image: url(../images/icon-host-32.webp); grid-area: network; }
-.page    div.icon-guest     { background-image: url(../images/icon-guest-32.webp); grid-area: network; }
+.page    div.icon-guest     { background-image: url(../images/icon-hands-32.png); grid-area: network; }
 .page    div.icon-gear      { background-image: url(../images/icon-gear-32.png); grid-area: setup; }
 
 .buttonpair {
