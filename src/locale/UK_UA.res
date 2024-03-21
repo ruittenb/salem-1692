@@ -1,5 +1,7 @@
 /**
  * Locale: uk_UA
+ *
+ * Note: this is a machine translation that needs to be reviewed
  */
 let table = Js.Dict.fromArray([
   // TitlePage
@@ -52,8 +54,8 @@ let table = Js.Dict.fromArray([
   (`Português`, `Português`),
   ("Italiano", "Italiano"),
   (`Українська`, `Українська`),
-  (`한국어`, `한국어`),
   (`日本語`, `日本語`),
+  (`한국어`, `한국어`),
   (
     "Interface only, no dialogue yet",
     `Лише інтерфейс, поки що немає діалогу`,
@@ -200,12 +202,12 @@ let table = Js.Dict.fromArray([
   ),
   ("Reveal witch's victim", `Розкрийте жертву відьми`),
   ("Reveal witches' victim", `Розкрийте жертву відьом`),
-  ("The witch attacked-PRE", `Відьма напала на`),
+  ("The witch attacked-PRE", `Відьма напала на `),
   ("The witch attacked-POST", ""),
-  ("The witches attacked-PRE", `Відьми напали на`),
+  ("The witches attacked-PRE", `Відьми напали на `),
   ("The witches attacked-POST", ""),
   (" got the black cat", ` отримав чорного кота`), // contains nbsp
   (`Reveal constable's protégé`, `Покажіть, кого захищав констебль`),
-  ("The constable protected-PRE", `Констебль захистив`),
+  ("The constable protected-PRE", `Констебль захистив `),
   ("The constable protected-POST", ""),
 ])

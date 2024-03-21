@@ -18,6 +18,13 @@ let lookup = (table: Js.Dict.t<string>, message: string, languageName: string) =
   }
 }
 
+// formatString('Hello {0}, your order {1} has been shipped.', ['John', '1022'])
+let formatString = (template: string, args: Js.Array.t<string>) => {
+  args->Js.Array2.reducei((acc: string, item: string, index: int) => {
+    acc->Js.String2.replace("{" ++ index->Belt.Int.toString ++ "}", item)
+  }, template)
+}
+
 let getTranslator = (language: LanguageCodec.t, message: string): string => {
   switch language {
   // modules EN_US etc. need to start with capital letters
@@ -29,5 +36,7 @@ let getTranslator = (language: LanguageCodec.t, message: string): string => {
   | #de_DE => lookup(DE_DE.table, message, "German")
   | #nl_NL => lookup(NL_NL.table, message, "Dutch")
   | #uk_UA => lookup(UK_UA.table, message, "Ukrainian")
+  | #ja_JP => lookup(JA_JP.table, message, "Japanese")
+  | #ko_KR => lookup(KO_KR.table, message, "Korean")
   }
 }

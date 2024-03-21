@@ -1,5 +1,5 @@
 /**
- * Locale: en_US
+ * Locale: ja_JP (WIP)
  */
 let table = Js.Dict.fromArray([
   // TitlePage
