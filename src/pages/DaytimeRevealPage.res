@@ -78,12 +78,7 @@ let make = (~goToPage, ~allowBackToConfess: bool=true): React.element => {
 
   // component
   <div id="daytime-reveal-page" className="page justify-spread">
-    <TopBar>
-      {if allowBackToConfess {
-        <BackFloatingButton onClick={_event => goToPage(_prev => DaytimeConfess)} />
-      } else {
-        React.null
-      }}
+    <TopBar onBack={allowBackToConfess ? Some(_event => goToPage(_prev => DaytimeConfess)) : None}>
       <GearFloatingButton goToPage returnPage />
     </TopBar>
     <h1 className="condensed-de"> {React.string(t("The Reveal"))} </h1>

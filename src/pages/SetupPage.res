@@ -45,10 +45,12 @@ let make = (~goToPage): React.element => {
 
   <div id="setup-page" className="page justify-start">
     <TopBar
-      onBack={_event => {
-        setNavigation(_prev => None)
-        goToPage(_prev => navigation->Belt.Option.getWithDefault(Title))
-      }}
+      onBack={Some(
+        _event => {
+          setNavigation(_prev => None)
+          goToPage(_prev => navigation->Belt.Option.getWithDefault(Title))
+        },
+      )}
     />
     <h1 className="condensed-fr condensed-es condensed-de"> {React.string(t("Settings"))} </h1>
     <Spacer />
