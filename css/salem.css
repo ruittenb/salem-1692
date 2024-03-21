@@ -37,6 +37,19 @@ body {
     font-size: 26px;
 }
 
+/* for the entire page */
+body div.ja_JP,
+body div.ko_KR,
+/* for the language buttons */
+body button.ja_JP,
+body button.ko_KR {
+    /**
+     * Both Caslon Antique and Alfios don't support Korean characters, but
+     * leaving Caslon Antique triggers rendering a sans-serif font (?)
+     */
+    font-family: Alfios, 'Times New Roman', Times, serif;
+}
+
 #topbar {
     position: fixed;
     left: 0;
@@ -347,6 +360,12 @@ video + .bubble {
 .uk_UA .page button.ultra-condensed-ua {
     font-size: 22px;
 }
+.ko_KR .page button.condensed-ko {
+    font-size: 23px;
+}
+.ko_KR .page button.ultra-condensed-ko {
+    font-size: 21px;
+}
 
 .page {
     display: flex;
@@ -418,7 +437,8 @@ video + .bubble {
 .page button.ok-button {
     font-size: 22px;
 }
-.uk_UA .page button.ok-button {
+.uk_UA .page button.ok-button,
+.ko_KR .page button.ok-button {
     font-size: inherit;
 }
 
@@ -432,7 +452,7 @@ video + .bubble {
     height: 100px;
     min-height: 100px; /* needed for Safari */
     font-size: 28px;
-    padding: 0 4px;
+    padding: 0 8px;
 }
 
 .page button.squarebutton {
