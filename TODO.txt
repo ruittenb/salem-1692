@@ -16,4 +16,4 @@ NICE TO HAVE:
  - swipe: https://www.npmjs.com/package/react-swipeable
  - top bar in layout with buttons
 
- - Les sorcieres s'en sont prises a Gerard => does not fit on two lines
+ - reveal buttons: combine PRE and POST parts and use templates {1} etc.

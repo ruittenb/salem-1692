@@ -37,9 +37,16 @@ body {
     font-size: 26px;
 }
 
-body div.uk_UA,
+/* for the entire page */
 body div.ja_JP,
-body div.ko_KR {
+body div.ko_KR,
+/* for the language buttons */
+body button.ja_JP,
+body button.ko_KR {
+    /**
+     * Both Caslon Antique and Alfios don't support Korean characters, but
+     * leaving Caslon Antique triggers rendering a sans-serif font (?)
+     */
     font-family: Alfios, 'Times New Roman', Times, serif;
 }
 
@@ -84,7 +91,7 @@ h1 {
     margin-top: 72px;
 }
 .uk_UA h1 {
-    /*transform: scaleX(0.9); */
+    transform: scaleX(0.9);
 }
 
 h2 {

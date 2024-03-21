@@ -18,6 +18,13 @@ let lookup = (table: Js.Dict.t<string>, message: string, languageName: string) =
   }
 }
 
+//const formatString = (template, ...args) => {
+//  return template.replace(/{([0-9]+)}/g, function (match, index) {
+//    return typeof args[index] === 'undefined' ? match : args[index];
+//  });
+//}
+//console.log(formatString('Hello {0}, your order {1} has been shipped.', 'John', 10001));
+
 let getTranslator = (language: LanguageCodec.t, message: string): string => {
   switch language {
   // modules EN_US etc. need to start with capital letters
@@ -29,7 +36,7 @@ let getTranslator = (language: LanguageCodec.t, message: string): string => {
   | #de_DE => lookup(DE_DE.table, message, "German")
   | #nl_NL => lookup(NL_NL.table, message, "Dutch")
   | #uk_UA => lookup(UK_UA.table, message, "Ukrainian")
-  //| #ja_JP => lookup(JA_JP.table, message, "Japanese")
+  | #ja_JP => lookup(JA_JP.table, message, "Japanese")
   | #ko_KR => lookup(KO_KR.table, message, "Korean")
   }
 }

@@ -36127,7 +36127,7 @@ function run(elementId) {
 
 /* react Not a pure module */
 
-},{"./modules/Utils.bs.js":116,"./pages/RootPage.bs.js":129,"react":24,"react-dom/client":20}],58:[function(require,module,exports){
+},{"./modules/Utils.bs.js":117,"./pages/RootPage.bs.js":130,"react":24,"react-dom/client":20}],58:[function(require,module,exports){
 "use strict";
 
 var _package = require("../package.json");
@@ -36310,7 +36310,7 @@ var make = $$Audio;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../modules/LanguageCodec.bs.js":105,"../modules/Utils.bs.js":116,"./GameStateContext.bs.js":68,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_option.js":40}],60:[function(require,module,exports){
+},{"../modules/LanguageCodec.bs.js":106,"../modules/Utils.bs.js":117,"./GameStateContext.bs.js":68,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_option.js":40}],60:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36692,7 +36692,7 @@ var make = Capture;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"./GameStateContext.bs.js":68,"@ryyppy/rescript-promise/src/Promise.bs.js":8,"react":24,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/belt_Result.js":28,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],66:[function(require,module,exports){
+},{"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"./GameStateContext.bs.js":68,"@ryyppy/rescript-promise/src/Promise.bs.js":8,"react":24,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/belt_Result.js":28,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],66:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36875,7 +36875,7 @@ var make = GhostForm;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../modules/Translator.bs.js":114,"./Button.bs.js":63,"./GameStateContext.bs.js":68,"./Link.bs.js":75,"./Spacer.bs.js":85,"react":24,"rescript/lib/es6/curry.js":42}],71:[function(require,module,exports){
+},{"../modules/Translator.bs.js":115,"./Button.bs.js":63,"./GameStateContext.bs.js":68,"./Link.bs.js":75,"./Spacer.bs.js":85,"react":24,"rescript/lib/es6/curry.js":42}],71:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36930,7 +36930,7 @@ function LanguageList(props) {
   var t = function (param) {
     return Translator$Salem1692.getTranslator(partial_arg, param);
   };
-  var offeredLanguages = ["en_US", "es_ES", "fr_FR", "it_IT", "pt_BR", "de_DE", "nl_NL", "uk_UA", "ko_KR"];
+  var offeredLanguages = ["en_US", "es_ES", "fr_FR", "it_IT", "pt_BR", "de_DE", "nl_NL"];
   var buttons = Belt_Array.map(offeredLanguages, function (buttonLanguage) {
     var onClick = function (_event) {
       var newGameState_gameType = gameState.gameType;
@@ -36974,7 +36974,7 @@ var make = LanguageList;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../modules/Translator.bs.js":114,"./Button.bs.js":63,"./GameStateContext.bs.js":68,"react":24,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/curry.js":42,"rescript/lib/es6/jsxPPXReactSupport.js":50}],73:[function(require,module,exports){
+},{"../modules/Translator.bs.js":115,"./Button.bs.js":63,"./GameStateContext.bs.js":68,"react":24,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/curry.js":42,"rescript/lib/es6/jsxPPXReactSupport.js":50}],73:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37027,6 +37027,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function LargeRevealButton(props) {
   return React.createElement(LargeButton$Salem1692.make, {
     label: "",
+    className: "condensed-ko",
     children: Caml_option.some(props.revealed ? React.createElement(React.Fragment, undefined, React.createElement("div", {
       className: "condensed-fr"
     }, props.revelationPromptPre), React.createElement("div", undefined, React.createElement("span", {
@@ -37261,7 +37262,7 @@ var make = PlayerForm;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../modules/Translator.bs.js":114,"./GameStateContext.bs.js":68,"./PlayerFormLine.bs.js":79,"react":24,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/curry.js":42,"rescript/lib/es6/jsxPPXReactSupport.js":50}],79:[function(require,module,exports){
+},{"../modules/Translator.bs.js":115,"./GameStateContext.bs.js":68,"./PlayerFormLine.bs.js":79,"react":24,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/curry.js":42,"rescript/lib/es6/jsxPPXReactSupport.js":50}],79:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37464,7 +37465,7 @@ var make = PlayerList;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"./Button.bs.js":63,"./GameStateContext.bs.js":68,"./Spacer.bs.js":85,"./SquareButton.bs.js":86,"./Timer.bs.js":87,"./TurnStateContext.bs.js":90,"react":24,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/belt_SetInt.js":29,"rescript/lib/es6/curry.js":42,"rescript/lib/es6/js_option.js":48,"rescript/lib/es6/jsxPPXReactSupport.js":50}],81:[function(require,module,exports){
+},{"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"./Button.bs.js":63,"./GameStateContext.bs.js":68,"./Spacer.bs.js":85,"./SquareButton.bs.js":86,"./Timer.bs.js":87,"./TurnStateContext.bs.js":90,"react":24,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/belt_SetInt.js":29,"rescript/lib/es6/curry.js":42,"rescript/lib/es6/js_option.js":48,"rescript/lib/es6/jsxPPXReactSupport.js":50}],81:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37518,7 +37519,7 @@ var make = QR;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../modules/Utils.bs.js":116,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_option.js":40}],82:[function(require,module,exports){
+},{"../modules/Utils.bs.js":117,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_option.js":40}],82:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37713,7 +37714,7 @@ var make = SeatingForm;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../modules/Translator.bs.js":114,"./GameStateContext.bs.js":68,"./SquareButton.bs.js":86,"react":24,"rescript/lib/es6/curry.js":42}],85:[function(require,module,exports){
+},{"../modules/Translator.bs.js":115,"./GameStateContext.bs.js":68,"./SquareButton.bs.js":86,"react":24,"rescript/lib/es6/curry.js":42}],85:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37854,7 +37855,7 @@ var make = Timer;
 /* containerWidth Not a pure module */
 exports.make = make;
 
-},{"../modules/Utils.bs.js":116,"react":24,"rescript/lib/es6/curry.js":42,"rescript/lib/es6/js_math.js":47}],88:[function(require,module,exports){
+},{"../modules/Utils.bs.js":117,"react":24,"rescript/lib/es6/curry.js":42,"rescript/lib/es6/js_math.js":47}],88:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38042,7 +38043,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 // Generated by ReScript, PLEASE EDIT WITH CARE
 
-var table = Js_dict.fromArray([["New Game", "새로운 게임"], ["Start Game", "게임을 시작하다"], ["Play Game", "게임하다"], ["Join Game", "게임에 참여하세요"], ["Play", "놀다"], ["Settings", "설정"], ["Exit", "출구"], ["Players", "플레이어"], ["Names", "이름"], ["Enter the names of the players in clockwise order, starting at the head of the table.", "테이블 상단부터 시계방향으로 선수들의 이름을 입력하세요."], ["During the night, player buttons will be shown in this order.", "밤에는 플레이어 버튼이 이 순서대로 표시됩니다."], ["(add one)", "(하나 추가)"], ["Ghost Players", "고스트 플레이어스"], ["In a two- or three-player game, nicknames for \"ghost\" players should be added to the list above up to a total of four players.", "2인 또는 3인 게임의 경우 '유령' 플레이어의 별명을 최대 4인까지 위 목록에 추가해야 합니다."], ["Also check the box below.", "아래 확인란도 선택하세요."], ["Please consult the ", "상담해주세요 "], ["rules for 2-3 players.", "2~3명의 플레이어를 위한 규칙입니다."], ["With Ghosts", "유령과 함께"], ["Sound effects", "음향 효과"], ["Speech", "담화"], ["Music", "음악"], ["Seating layout", "좌석 배치"], ["How are the players seated around the table?", "테이블 주위에 앉아 있는 선수들은 어떤가요?"], ["This affects the positioning of the player buttons at night.", "이것은 밤에 플레이어 버튼의 위치에 영향을 미칩니다."], ["Language", "언어"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Português", "Português"], ["Italiano", "Italiano"], ["Українська", "Українська"], ["日本語", "日本語"], ["한국어", "한국어"], ["Interface only, no dialogue yet", "인터페이스만 있고 아직 대화는 없습니다"], ["Back", "뒤쪽에"], ["Next", "다음"], ["Done", "완료"], ["OK", "좋아요"], ["Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played.", "밤에 대한 재생 목록을 구성하려면 확인란을 선택하세요. 매일 밤 재생 목록의 다음 트랙이 재생됩니다."], ["Multi-Telephone", "다중 전화"], ["Host Game", "호스트 게임"], ["Game Code", "게임코드"], ["Play as Host", "호스트로 플레이"], ["Play as Guest", "게스트로 플레이"], ["Start Hosting", "호스팅 시작"], ["Stop Hosting", "호스팅을 중단하세요"], ["Malformed code", "잘못된 코드"], ["Game not found", "게임을 찾을 수 없습니다"], ["Not connected", "연결되지 않은"], ["Connecting...", "연결 중..."], ["Connected.", "연결되었습니다."], ["Leave guest mode", "게스트 모드 나가기"], ["You can host a game so that players can join from another smartphone.", "플레이어가 다른 스마트폰에서 참여할 수 있도록 게임을 호스팅할 수 있습니다."], ["You can join a game running on another smartphone.", "다른 스마트폰에서 실행 중인 게임에 참여할 수 있습니다."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Host. Then enter the game code here.", "다른 스마트폰을 들고 다중 전화 → 호스트로 플레이 아래의 앱을 살펴보세요. 그런 다음 여기에 게임 코드를 입력하세요."], ["It is possible to join this game from another smartphone.", "다른 스마트폰에서도 이 게임에 참가할 수 있습니다."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. Then enter the following game code there.", "다른 스마트폰을 들고 앱의 다중 전화 → 게스트로 플레이를 살펴보세요. 그런 다음 거기에 다음 게임 코드를 입력하세요."], ["You are currently hosting a game.", "현재 게임을 호스팅하고 있습니다."], ["If you want to join a running game, you must stop hosting first.", "러닝 게임에 참여하려면 먼저 호스팅을 중단해야 합니다."], ["If you want to host a game so that others can join, you should leave guest mode first.", "다른 사람이 참여할 수 있도록 게임을 호스팅하려면 먼저 게스트 모드를 종료해야 합니다."], ["", ""], ["No authorization to use the camera", "카메라 사용 권한이 없습니다."], ["Please authorize the use of the camera to scan a QR code", "QR 코드 스캔을 위해 카메라 사용을 승인해 주세요"], ["Credits", "크레딧"], ["Game:", "게임:"], ["Rulebook", "규칙집"], ["website", "웹사이트"], ["version", "버전"], ["For use with the game: ", "게임에 사용하려면: "], ["App: ", "앱: "], ["Libraries: ", "라이브러리: "], ["Sound effects: ", "음향 효과: "], ["Voice actors: ", "성우: "], ["Images: ", "이미지: "], ["Music: ", "음악: "], ["Licensed under ", "아래 라이센스 "], ["A day in Salem", "세일럼에서의 하루"], ["Dawn,", "새벽,"], ["one witch", "한 마녀"], ["several witches", "여러 마녀들"], ["Night,", "밤,"], ["with constable", "경찰관과 함께"], ["without constable", "경찰 없이"], ["Dawn, one witch", "새벽, 마녀 하나"], ["Dawn, several witches", "새벽, 여러 마녀들"], ["Night with constable", "순경과의 밤"], ["Night without constable", "순경 없는 밤"], ["Waiting for the host to announce nighttime...", "진행자가 밤에 발표하기를 기다리는 중..."], ["Dawn", "새벽"], ["Night", "밤"], ["The witches", "마녀들"], ["The witch's turn", "마녀의 차례"], ["The witches' turn", "마녀의 차례"], ["Decide-SG who should get the black cat:", "마녀야, 누가 검은 고양이를 가져갈지 결정해라:"], ["Decide-PL who should get the black cat:", "마녀들이여, 누가 검은 고양이를 가져야 할지 결정하세요:"], ["Choose-SG a victim:", "마녀여, 희생자를 선택하라:"], ["Choose-PL a victim:", "마녀들이여, 희생자를 선택하라:"], ["The constable", "경찰관"], ["The constable's turn", "경찰의 차례"], ["Choose another player to protect:", "보호할 다른 플레이어를 선택하세요:"], ["Choose someone to protect:", "보호할 사람을 선택하세요:"], ["Abort", "중단"], ["Skip", "건너뛰다"], ["Everybody is sound asleep... what about you?", "다들 곤히 자고 있는데... 당신은요?"], ["Witch, are you sure?", "마녀님, 확실해요?"], ["Witches, are you sure?", "마녀들아, 확실해?"], ["Constable, are you sure?", "경관님, 확실해요?"], ["Confirm", "확인하다"], ["Yes", "예"], ["No", "아니요"], ["Error", "오류"], ["Unable to load audio", "오디오를 로드할 수 없습니다"], ["Index out of bounds", "인덱스가 범위를 벗어났습니다."], ["Confess", "불다"], ["Citizens of Salem,", "세일럼 시민 여러분"], ["those among you who wish to confess may now do so.", "너희 중에 고백하고 싶은 사람은 이제 그렇게 하여라."], ["The Reveal", "공개"], ["Find out what happened while you were sleeping.", "당신이 자고 있는 동안 무슨 일이 일어났는지 알아보세요."], ["Reveal witch's victim", "마녀의 희생자를 밝혀라"], ["Reveal witches' victim", "마녀의 피해자를 밝혀라"], ["The witch attacked-PRE", "마녀가 "], ["The witch attacked-POST", "를 공격했습니다."], ["The witches attacked-PRE", "마녀들이 "], ["The witches attacked-POST", "를 공격했어요"], [" got the black cat", "검은 고양이를 잡았어요"], ["Reveal constable's protégé", "경찰관의 제자를 밝혀라"], ["The constable protected-PRE", "경찰관은 "], ["The constable protected-POST", "를 보호했습니다."]]);
+var table = Js_dict.fromArray([["New Game", "New Game"], ["Start Game", "Start Game"], ["Play Game", "Play Game"], ["Join Game", "Join Game"], ["Play", "Play"], ["Settings", "Settings"], ["Exit", "Exit"], ["Players", "Players"], ["Names", "Names"], ["Enter the names of the players in clockwise order, starting at the head of the table.", "Please enter the names of the players in clockwise order, starting at the head of the table."], ["During the night, player buttons will be shown in this order.", "During the night, player buttons will be shown in this order."], ["(add one)", "(add one)"], ["Ghost Players", "Ghost Players"], ["In a two- or three-player game, nicknames for \"ghost\" players should be added to the list above up to a total of four players.", "In a two- or three-player game, nick­names for \"ghost\" players should be added to the list above up to a total of four players."], ["Also check the box below.", "Also check the box below."], ["Please consult the ", "Please consult the "], ["rules for 2-3 players.", "rules for 2-3 players."], ["With Ghosts", "With Ghosts"], ["Sound effects", "Sound FX"], ["Speech", "Discourse"], ["Music", "Music"], ["Seating layout", "Seating Layout"], ["How are the players seated around the table?", "How are the players seated around the table?"], ["This affects the positioning of the player buttons at night.", "This affects the positioning of the player buttons during the night."], ["Language", "Language"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Português", "Português"], ["Italiano", "Italiano"], ["Українська", "Українська"], ["日本語", "日本語"], ["한국어", "한국어"], ["Interface only, no dialogue yet", "Interface only, no dialogue yet"], ["Back", "Back"], ["Next", "Next"], ["Done", "Done"], ["OK", "OK"], ["Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played.", "Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played."], ["Multi-Telephone", "Multi-Telephone"], ["Host Game", "Host Game"], ["Game Code", "Game Code"], ["Play as Host", "Play as Host"], ["Play as Guest", "Play as Guest"], ["Start Hosting", "Start Hosting"], ["Stop Hosting", "Stop Hosting"], ["Malformed code", "Malformed code"], ["Game not found", "Game not found"], ["Not connected", "Not connected"], ["Connecting...", "Connecting..."], ["Connected.", "Connected."], ["Leave guest mode", "Leave Guest Mode"], ["You can host a game so that players can join from another smartphone.", "You can host a game so that players can join from another smartphone."], ["You can join a game running on another smartphone.", "You can join a game running on another smartphone."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Host. Then enter the game code here.", "Take the other smartphone and look in the app under Multi-Telephone → Play as Host. Then enter the game code here."], ["It is possible to join this game from another smartphone.", "It is possible to join this game from another smartphone."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. Then enter the following game code there.", "Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. Then enter the following game code there."], ["You are currently hosting a game.", "You are currently hosting a game."], ["If you want to join a running game, you must stop hosting first.", "If you want to join a running game, you must stop hosting first."], ["If you want to host a game so that others can join, you should leave guest mode first.", "If you want to host a game so that others can join, you should leave guest mode first."], ["", ""], ["No authorization to use the camera", "No authorization to use the camera"], ["Please authorize the use of the camera to scan a QR code", "Please authorize the use of the camera to scan a QR code"], ["Credits", "Credits"], ["Game:", "Game:"], ["Rulebook", "Rulebook"], ["website", "website"], ["version", "version"], ["For use with the game: ", "For use with the game: "], ["App: ", "App: "], ["Libraries: ", "Libraries: "], ["Sound effects: ", "Sound effects: "], ["Voice actors: ", "Voice actors: "], ["Images: ", "Images: "], ["Music: ", "Music: "], ["Licensed under ", "Licensed under "], ["A day in Salem", "A day in Salem"], ["Dawn,", "Dawn,"], ["one witch", "one witch"], ["several witches", "several witches"], ["Night,", "Night,"], ["with constable", "with constable"], ["without constable", "without constable"], ["Dawn, one witch", "Dawn, one witch"], ["Dawn, several witches", "Dawn, several witches"], ["Night with constable", "Night with constable"], ["Night without constable", "Night without constable"], ["Waiting for the host to announce nighttime...", "Waiting for the host to announce nighttime..."], ["Dawn", "Dawn"], ["Night", "Night"], ["The witches", "The witches"], ["The witch's turn", "The witch's turn"], ["The witches' turn", "The witches' turn"], ["Decide-SG who should get the black cat:", "Decide who should get the black cat:"], ["Decide-PL who should get the black cat:", "Decide who should get the black cat:"], ["Choose-SG a victim:", "Choose a victim:"], ["Choose-PL a victim:", "Choose a victim:"], ["The constable", "The constable"], ["The constable's turn", "The constable's turn"], ["Choose another player to protect:", "Choose any other player to protect:"], ["Choose someone to protect:", "Choose someone to protect:"], ["Abort", "Abort"], ["Skip", "Skip"], ["Everybody is sound asleep... what about you?", "Everybody is sound asleep... what about you?"], ["Witch, are you sure?", "Witch, are you sure?"], ["Witches, are you sure?", "Witches, are you sure?"], ["Constable, are you sure?", "Constable, are you sure?"], ["Confirm", "Confirm"], ["Yes", "Yes"], ["No", "No"], ["Error", "Error"], ["Unable to load audio", "Unable to load audio"], ["Index out of bounds", "Index out of bounds"], ["Confess", "Confess"], ["Citizens of Salem,", "Citizens of Salem,"], ["those among you who wish to confess may now do so.", "those among you who wish to confess may now do so."], ["The Reveal", "The Reveal"], ["Find out what happened while you were sleeping.", "Find out what happened while you were sleeping."], ["Reveal witch's victim", "Reveal the witch's victim"], ["Reveal witches' victim", "Reveal the witches' victim"], ["The witch attacked-PRE", "The witch attacked"], ["The witch attacked-POST", ""], ["The witches attacked-PRE", "The witches attacked"], ["The witches attacked-POST", ""], [" got the black cat", " got the black cat"], ["Reveal constable's protégé", "Reveal the constable's protégé"], ["The constable protected-PRE", "The constable protected"], ["The constable protected-POST", ""]]);
 
 /* table Not a pure module */
 exports.table = table;
@@ -38059,7 +38060,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 // Generated by ReScript, PLEASE EDIT WITH CARE
 
-var table = Js_dict.fromArray([["New Game", "Nieuw spel"], ["Start Game", "Spel starten"], ["Play Game", "Spelen"], ["Join Game", "Meespelen"], ["Play", "Spelen"], ["Settings", "Instel­lingen"], ["Exit", "Afsluiten"], ["Players", "Spelers"], ["Names", "Namen"], ["Enter the names of the players in clockwise order, starting at the head of the table.", "Voer de namen van de spelers in, vanaf het hoofd van de tafel en met de klok mee."], ["During the night, player buttons will be shown in this order.", "Tijdens de nacht worden de spelerknoppen in deze volgorde getoond."], ["(add one)", "(toevoegen)"], ["Ghost Players", "Spookspelers"], ["In a two- or three-player game, nicknames for \"ghost\" players should be added to the list above up to a total of four players.", "Wanneer slechts twee of drie spelers meedoen moeten er namen voor \"spookspelers\" worden toegevoegd aan de lijst hierboven, tot een totaal van vier spelers."], ["Also check the box below.", "Plaats ook een vinkje hieronder."], ["Please consult the ", "Zie de "], ["rules for 2-3 players.", "regels voor 2-3 spelers."], ["With Ghosts", "Met spoken"], ["Sound effects", "Geluidseffecten"], ["Speech", "Spraak"], ["Music", "Muziek"], ["Seating layout", "Indeling zitplaatsen"], ["How are the players seated around the table?", "Hoe zitten de spelers rond de tafel?"], ["This affects the positioning of the player buttons at night.", "Dit beïnvloedt het plaatsen van spelerknoppen tijdens de nacht."], ["Language", "Taal"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Português", "Português"], ["Italiano", "Italiano"], ["Українська", "Українська"], ["日本語", "日本語"], ["한국어", "한국어"], ["Interface only, no dialogue yet", "Alleen interface, nog geen dialoog"], ["Back", "Terug"], ["Next", "Volgende"], ["Done", "Klaar"], ["OK", "OK"], ["Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played.", "Plaats vinkjes om een playlist samen te stellen voor de nachten. Elke volgende nacht zal de volgende track van de playlist worden gespeeld."], ["Multi-Telephone", "Multi-telefoon"], ["Host Game", "Spel hosten"], ["Game Code", "Spelcode"], ["Play as Host", "Als gastheer spelen"], ["Play as Guest", "Als gast spelen"], ["Start Hosting", "Hosten starten"], ["Stop Hosting", "Hosten stoppen"], ["Malformed code", "Foutieve code"], ["Game not found", "Spel niet gevonden"], ["Not connected", "Niet verbonden"], ["Connecting...", "Verbinden..."], ["Connected.", "Verbonden."], ["Leave guest mode", "Gastmodus verlaten"], ["You can host a game so that players can join from another smartphone.", "Je kunt een spel hosten zodat spelers kunnen meespelen vanaf een andere smartphone."], ["You can join a game running on another smartphone.", "Je kunt meespelen met een spel dat op een andere smartphone draait."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Host. Then enter the game code here.", "Neem de andere smartphone en kijk in de app onder Multi-telefoon → Als gastheer spelen. Voer de spelcode dan hier in."], ["It is possible to join this game from another smartphone.", "Het is mogelijk om mee te spelen met dit spel vanaf een andere smartphone."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. Then enter the following game code there.", "Neem de andere smartphone en kijk in de app onder Multi-telefoon → Als gast spelen. Voer daar deze spelcode in."], ["You are currently hosting a game.", "Op dit moment host je een spel."], ["If you want to join a running game, you must stop hosting first.", "Als je met een draaiend spel wilt meedoen, moet je eerst stoppen met hosten."], ["If you want to host a game so that others can join, you should leave guest mode first.", "Als je een spel wilt hosten zodat anderen kunnen meespelen, moet je eerst de gastmodus verlaten."], ["", ""], ["No authorization to use the camera", "Geen toestemming om de camera te gebruiken"], ["Please authorize the use of the camera to scan a QR code", "Geef a.u.b. camera-toestemming om een QR-code te scannen"], ["Credits", "Credits"], ["Game:", "Spel:"], ["Rulebook", "Spelregels"], ["website", "website"], ["version", "versie"], ["For use with the game: ", "Voor gebruik bij het spel: "], ["App: ", "App: "], ["Libraries: ", "Library's: "], ["Sound effects: ", "Geluidseffecten: "], ["Voice actors: ", "Stemacteurs: "], ["Images: ", "Afbeeldingen: "], ["Music: ", "Muziek: "], ["Licensed under ", "Gelicentieerd onder "], ["A day in Salem", "Een dag in Salem"], ["Dawn,", "Dageraad,"], ["one witch", "één heks"], ["several witches", "meerdere heksen"], ["Night,", "Nacht,"], ["with constable", "met schout"], ["without constable", "zonder schout"], ["Dawn, one witch", "Dageraad, één heks"], ["Dawn, several witches", "Dageraad, meerdere heksen"], ["Night with constable", "Nacht met schout"], ["Night without constable", "Nacht zonder schout"], ["Waiting for the host to announce nighttime...", "Wachten tot de gastheer de nacht aankondigt..."], ["Dawn", "Dageraad"], ["Night", "De nacht"], ["The witches", "De heksen"], ["The witch's turn", "De heks aan de beurt"], ["The witches' turn", "De heksen aan de beurt"], ["Decide-SG who should get the black cat:", "Beslis wie de zwarte kat moet krijgen:"], ["Decide-PL who should get the black cat:", "Beslis wie de zwarte kat moet krijgen:"], ["Choose-SG a victim:", "Kies een slachtoffer:"], ["Choose-PL a victim:", "Kies een slachtoffer:"], ["The constable", "De schout"], ["The constable's turn", "De schout aan de beurt"], ["Choose another player to protect:", "Kies een andere speler die beschermd moet worden:"], ["Choose someone to protect:", "Kies wie beschermd moet worden:"], ["Abort", "Afbreken"], ["Skip", "Overslaan"], ["Everybody is sound asleep... what about you?", "Iedereen is in diepe slaap... en jij?"], ["Witch, are you sure?", "Heks, weet je het zeker?"], ["Witches, are you sure?", "Heksen, weten jullie het zeker?"], ["Constable, are you sure?", "Schout, weet je het zeker?"], ["Confirm", "Bevestigen"], ["Yes", "Ja"], ["No", "Nee"], ["Error", "Fout"], ["Unable to load audio", "Kan audio niet laden"], ["Index out of bounds", "Index buiten bereik"], ["Confess", "Opbiechten"], ["Citizens of Salem,", "Inwoners van Salem,"], ["those among you who wish to confess may now do so.", "degenen onder jullie die dat willen, mogen nu opbiechten."], ["The Reveal", "De onthulling"], ["Find out what happened while you were sleeping.", "Ontdek wat er is gebeurd terwijl jullie sliepen."], ["Reveal witch's victim", "Slachtoffer van de heks onthullen"], ["Reveal witches' victim", "Slachtoffer van de heksen onthullen"], ["The witch attacked-PRE", "De heks heeft"], ["The witch attacked-POST", " aangevallen"], ["The witches attacked-PRE", "De heksen hebben"], ["The witches attacked-POST", " aangevallen"], ["Reveal constable's protégé", "Beschermeling van de schout onthullen"], [" got the black cat", " heeft de zwarte kat gekregen"], ["The constable protected-PRE", "De schout heeft"], ["The constable protected-POST", " beschermd"]]);
+var table = Js_dict.fromArray([["New Game", "새로운 게임"], ["Start Game", "게임을 시작하다"], ["Play Game", "게임하다"], ["Join Game", "게임에 참여하세요"], ["Play", "놀다"], ["Settings", "설정"], ["Exit", "출구"], ["Players", "플레이어"], ["Names", "이름"], ["Enter the names of the players in clockwise order, starting at the head of the table.", "테이블 상단부터 시계방향으로 선수들의 이름을 입력하세요."], ["During the night, player buttons will be shown in this order.", "밤에는 플레이어 버튼이 이 순서대로 표시됩니다."], ["(add one)", "(하나 추가)"], ["Ghost Players", "고스트 플레이어스"], ["In a two- or three-player game, nicknames for \"ghost\" players should be added to the list above up to a total of four players.", "2인 또는 3인 게임의 경우 '유령' 플레이어의 별명을 최대 4인까지 위 목록에 추가해야 합니다."], ["Also check the box below.", "아래 확인란도 선택하세요."], ["Please consult the ", "상담해주세요 "], ["rules for 2-3 players.", "2~3명의 플레이어를 위한 규칙입니다."], ["With Ghosts", "유령과 함께"], ["Sound effects", "음향 효과"], ["Speech", "담화"], ["Music", "음악"], ["Seating layout", "좌석 배치"], ["How are the players seated around the table?", "테이블 주위에 앉아 있는 선수들은 어떤가요?"], ["This affects the positioning of the player buttons at night.", "이것은 밤에 플레이어 버튼의 위치에 영향을 미칩니다."], ["Language", "언어"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Português", "Português"], ["Italiano", "Italiano"], ["Українська", "Українська"], ["日本語", "日本語"], ["한국어", "한국어"], ["Interface only, no dialogue yet", "인터페이스만 있고 아직 대화는 없습니다"], ["Back", "뒤쪽에"], ["Next", "다음"], ["Done", "완료"], ["OK", "좋아요"], ["Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played.", "밤에 대한 재생 목록을 구성하려면 확인란을 선택하세요. 매일 밤 재생 목록의 다음 트랙이 재생됩니다."], ["Multi-Telephone", "다중 전화"], ["Host Game", "호스트 게임"], ["Game Code", "게임코드"], ["Play as Host", "호스트로 플레이"], ["Play as Guest", "게스트로 플레이"], ["Start Hosting", "호스팅 시작"], ["Stop Hosting", "호스팅을 중단하세요"], ["Malformed code", "잘못된 코드"], ["Game not found", "게임을 찾을 수 없습니다"], ["Not connected", "연결되지 않은"], ["Connecting...", "연결 중..."], ["Connected.", "연결되었습니다."], ["Leave guest mode", "게스트 모드 나가기"], ["You can host a game so that players can join from another smartphone.", "플레이어가 다른 스마트폰에서 참여할 수 있도록 게임을 호스팅할 수 있습니다."], ["You can join a game running on another smartphone.", "다른 스마트폰에서 실행 중인 게임에 참여할 수 있습니다."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Host. Then enter the game code here.", "다른 스마트폰을 들고 다중 전화 → 호스트로 플레이 아래의 앱을 살펴보세요. 그런 다음 여기에 게임 코드를 입력하세요."], ["It is possible to join this game from another smartphone.", "다른 스마트폰에서도 이 게임에 참가할 수 있습니다."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. Then enter the following game code there.", "다른 스마트폰을 들고 앱의 다중 전화 → 게스트로 플레이를 살펴보세요. 그런 다음 거기에 다음 게임 코드를 입력하세요."], ["You are currently hosting a game.", "현재 게임을 호스팅하고 있습니다."], ["If you want to join a running game, you must stop hosting first.", "러닝 게임에 참여하려면 먼저 호스팅을 중단해야 합니다."], ["If you want to host a game so that others can join, you should leave guest mode first.", "다른 사람이 참여할 수 있도록 게임을 호스팅하려면 먼저 게스트 모드를 종료해야 합니다."], ["", ""], ["No authorization to use the camera", "카메라 사용 권한이 없습니다."], ["Please authorize the use of the camera to scan a QR code", "QR 코드 스캔을 위해 카메라 사용을 승인해 주세요"], ["Credits", "크레딧"], ["Game:", "게임:"], ["Rulebook", "규칙집"], ["website", "웹사이트"], ["version", "버전"], ["For use with the game: ", "게임에 사용하려면: "], ["App: ", "앱: "], ["Libraries: ", "라이브러리: "], ["Sound effects: ", "음향 효과: "], ["Voice actors: ", "성우: "], ["Images: ", "이미지: "], ["Music: ", "음악: "], ["Licensed under ", "아래 라이센스 "], ["A day in Salem", "세일럼에서의 하루"], ["Dawn,", "새벽,"], ["one witch", "한 마녀"], ["several witches", "여러 마녀들"], ["Night,", "밤,"], ["with constable", "경찰관과 함께"], ["without constable", "경찰 없이"], ["Dawn, one witch", "새벽, 마녀 하나"], ["Dawn, several witches", "새벽, 여러 마녀들"], ["Night with constable", "순경과의 밤"], ["Night without constable", "순경 없는 밤"], ["Waiting for the host to announce nighttime...", "진행자가 밤에 발표하기를 기다리는 중..."], ["Dawn", "새벽"], ["Night", "밤"], ["The witches", "마녀들"], ["The witch's turn", "마녀의 차례"], ["The witches' turn", "마녀의 차례"], ["Decide-SG who should get the black cat:", "마녀야, 누가 검은 고양이를 가져갈지 결정해라:"], ["Decide-PL who should get the black cat:", "마녀들이여, 누가 검은 고양이를 가져야 할지 결정하세요:"], ["Choose-SG a victim:", "마녀여, 희생자를 선택하라:"], ["Choose-PL a victim:", "마녀들이여, 희생자를 선택하라:"], ["The constable", "경찰관"], ["The constable's turn", "경찰의 차례"], ["Choose another player to protect:", "보호할 다른 플레이어를 선택하세요:"], ["Choose someone to protect:", "보호할 사람을 선택하세요:"], ["Abort", "중단"], ["Skip", "건너뛰다"], ["Everybody is sound asleep... what about you?", "다들 곤히 자고 있는데... 당신은요?"], ["Witch, are you sure?", "마녀님, 확실해요?"], ["Witches, are you sure?", "마녀들아, 확실해?"], ["Constable, are you sure?", "경관님, 확실해요?"], ["Confirm", "확인하다"], ["Yes", "예"], ["No", "아니요"], ["Error", "오류"], ["Unable to load audio", "오디오를 로드할 수 없습니다"], ["Index out of bounds", "인덱스가 범위를 벗어났습니다."], ["Confess", "불다"], ["Citizens of Salem,", "세일럼 시민 여러분"], ["those among you who wish to confess may now do so.", "너희 중에 고백하고 싶은 사람은 이제 그렇게 하여라."], ["The Reveal", "공개"], ["Find out what happened while you were sleeping.", "당신이 자고 있는 동안 무슨 일이 일어났는지 알아보세요."], ["Reveal witch's victim", "마녀의 희생자를 밝혀라"], ["Reveal witches' victim", "마녀의 피해자를 밝혀라"], ["The witch attacked-PRE", "마녀가 "], ["The witch attacked-POST", "을 공격했습니다."], ["The witches attacked-PRE", "마녀들이 "], ["The witches attacked-POST", "을 공격했어요"], [" got the black cat", "검은 고양이를 잡았어요"], ["Reveal constable's protégé", "경찰관의 제자를 밝혀라"], ["The constable protected-PRE", "경찰관은 "], ["The constable protected-POST", "을 보호했습니다."]]);
 
 /* table Not a pure module */
 exports.table = table;
@@ -38076,7 +38077,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 // Generated by ReScript, PLEASE EDIT WITH CARE
 
-var table = Js_dict.fromArray([["New Game", "Novo jogo"], ["Start Game", "Começar jogo"], ["Play Game", "Jogar"], ["Join Game", "Entrar no jogo"], ["Play", "Jogar"], ["Settings", "Configu­rações"], ["Exit", "Sair"], ["Players", "Jogadores"], ["Names", "Nomes"], ["Enter the names of the players in clockwise order, starting at the head of the table.", "Insira os nomes dos jogadores em sentido horário, começando pela cabeça da mesa."], ["During the night, player buttons will be shown in this order.", "Durante a noite, os botões dos jogadores serão mostrados nesta ordem."], ["(add one)", "(mais um)"], ["Ghost Players", "Jogadores fantasmas"], ["In a two- or three-player game, nicknames for \"ghost\" players should be added to the list above up to a total of four players.", "Em um jogo para dois ou três jogadores, apelidos para jogadores “fantasmas” devem ser adicionados à lista acima, até um total de quatro jogadores."], ["Also check the box below.", "Marque também a caixa abaixo."], ["Please consult the ", "Consulte as "], ["rules for 2-3 players.", "regras para 2-3 jogadores."], ["With Ghosts", "Com fantasmas"], ["Sound effects", "Efeitos sonoros"], ["Speech", "Discurso"], ["Music", "Música"], ["Seating layout", "Disposição dos assentos"], ["How are the players seated around the table?", "Como os jogadores estão sentados em volta da mesa?"], ["This affects the positioning of the player buttons at night.", "Isto afeta o posiciona­mento dos botões dos jogadores durante a noite."], ["Language", "Linguagem"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Português", "Português"], ["Italiano", "Italiano"], ["Українська", "Українська"], ["日本語", "日本語"], ["한국어", "한국어"], ["Interface only, no dialogue yet", "Apenas interface, sem diálogo ainda"], ["Back", "Voltar"], ["Next", "Avançar"], ["Done", "Feito"], ["OK", "OK"], ["Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played.", "Marque as caixas para compor uma playlist para as noites. A cada noite sucessiva, a próxima faixa da lista de reprodução será reproduzida."], ["Multi-Telephone", "Multi-telefone"], ["Host Game", "Hospedar jogo"], ["Game Code", "Código de jogo"], ["Play as Host", "Jogar como anfitrião"], ["Play as Guest", "Jogar como visitante"], ["Start Hosting", "Começar a hospedar"], ["Stop Hosting", "Parar de hospedar"], ["Malformed code", "Código malformado"], ["Game not found", "Jogo não encontrado"], ["Not connected", "Não conectado"], ["Connecting...", "Conectando..."], ["Connected.", "Conectado."], ["Leave guest mode", "Sair do modo visitante"], ["You can host a game so that players can join from another smartphone.", "Você pode hospedar um jogo para que os jogadores possam participar usando outro smartphone"], ["You can join a game running on another smartphone.", "Você pode entrar em um jogo em execução em outro smartphone."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Host. Then enter the game code here.", "Pegue o outro smartphone e procure no aplicativo em Multi-telefone → Jogar como anfitrião. Em seguida, insira o código do jogo aqui."], ["It is possible to join this game from another smartphone.", "É possível entrar neste jogo a partir de outro smartphone."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. Then enter the following game code there.", "Pegue o outro smartphone e procure no aplicativo em Multi-telefone → Jogar como visitante. Em seguida, insira o seguinte código do jogo."], ["You are currently hosting a game.", "Você está hospedando um jogo no momento."], ["If you want to join a running game, you must stop hosting first.", "Se você deseja entrar em um jogo em execução, primeiro você deve parar de hospedar."], ["If you want to host a game so that others can join, you should leave guest mode first.", "Se você deseja hospedar um jogo para que outros possam participar, você deve primeiro sair do modo visitante."], ["", ""], ["No authorization to use the camera", "Não autorização para usar a câmera"], ["Please authorize the use of the camera to scan a QR code", "Autorize o uso da câmera para ler um código QR"], ["Credits", "Créditos"], ["Game:", "Jogo:"], ["Rulebook", "Livro de regras"], ["website", "website"], ["version", "versão"], ["For use with the game: ", "Para usar com o jogo: "], ["App: ", "Aplicativo: "], ["Libraries: ", "Bibliotecas: "], ["Sound effects: ", "Efeitos sonoros: "], ["Voice actors: ", "Dubladores: "], ["Images: ", "Imagens: "], ["Music: ", "Música: "], ["Licensed under ", "Licenciado sob "], ["A day in Salem", "Um dia em Salém"], ["Dawn,", "O amanhecer,"], ["one witch", "um feiticeiro"], ["several witches", "vários feiticeiros"], ["Night,", "A noite,"], ["with constable", "com xerife"], ["without constable", "sem xerife"], ["Dawn, one witch", "O amanhecer, um feiticeiro"], ["Dawn, several witches", "O amanhecer, vários feiticeiros"], ["Night with constable", "Noite com xerife"], ["Night without constable", "Noite sem xerife"], ["Waiting for the host to announce nighttime...", "Esperando o anfitrião anunciar a noite..."], ["Dawn", "O amanhecer"], ["Night", "A noite"], ["The witches", "Os feiticeiros"], ["The witch's turn", "A vez do feiticeiro"], ["The witches' turn", "A vez dos feiticeiros"], ["Decide-SG who should get the black cat:", "Decida quem deve ficar com o gato preto:"], ["Decide-PL who should get the black cat:", "Decidam quem deve ficar com o gato preto:"], ["Choose-SG a victim:", "Escolha uma vítima:"], ["Choose-PL a victim:", "Escolham uma vítima:"], ["The constable", "O xerife"], ["The constable's turn", "A vez do xerife"], ["Choose another player to protect:", "Escolha outro jogador para proteger:"], ["Choose someone to protect:", "Escolha alguém para proteger"], ["Abort", "Abortar"], ["Skip", "Pular"], ["Everybody is sound asleep... what about you?", "Todo mundo está dormindo... e você?"], ["Witch, are you sure?", "Feiticeiro, você tem certeza?"], ["Witches, are you sure?", "Feiticeiros, vocês têm certeza?"], ["Constable, are you sure?", "Xerife, você tem certeza?"], ["Confirm", "Confirmar"], ["Yes", "Sim"], ["No", "Não"], ["Error", "Erro"], ["Unable to load audio", "Não foi possível carregar o áudio"], ["Index out of bounds", "Índice fora dos limites"], ["Confess", "A confissão"], ["Citizens of Salem,", "Cidadãos de Salém,"], ["those among you who wish to confess may now do so.", "aqueles entre vocês que desejam, podem agora confessar."], ["The Reveal", "A revelação"], ["Find out what happened while you were sleeping.", "Descubram o que aconteceu enquanto vocês dormiam."], ["Reveal witch's victim", "Revelar a vítima do feiticeiro"], ["Reveal witches' victim", "Revelar a vítima dos feiticeiros"], ["The witch attacked-PRE", "O feiticeiro atacou"], ["The witch attacked-POST", ""], ["The witches attacked-PRE", "Os feiticeiros atacaram"], ["The witches attacked-POST", ""], [" got the black cat", " pegou o gato preto"], ["Reveal constable's protégé", "Revelar o protegido do xerife"], ["The constable protected-PRE", "O xerife protegeu"], ["The constable protected-POST", ""]]);
+var table = Js_dict.fromArray([["New Game", "Nieuw spel"], ["Start Game", "Spel starten"], ["Play Game", "Spelen"], ["Join Game", "Meespelen"], ["Play", "Spelen"], ["Settings", "Instel­lingen"], ["Exit", "Afsluiten"], ["Players", "Spelers"], ["Names", "Namen"], ["Enter the names of the players in clockwise order, starting at the head of the table.", "Voer de namen van de spelers in, vanaf het hoofd van de tafel en met de klok mee."], ["During the night, player buttons will be shown in this order.", "Tijdens de nacht worden de spelerknoppen in deze volgorde getoond."], ["(add one)", "(toevoegen)"], ["Ghost Players", "Spookspelers"], ["In a two- or three-player game, nicknames for \"ghost\" players should be added to the list above up to a total of four players.", "Wanneer slechts twee of drie spelers meedoen moeten er namen voor \"spookspelers\" worden toegevoegd aan de lijst hierboven, tot een totaal van vier spelers."], ["Also check the box below.", "Plaats ook een vinkje hieronder."], ["Please consult the ", "Zie de "], ["rules for 2-3 players.", "regels voor 2-3 spelers."], ["With Ghosts", "Met spoken"], ["Sound effects", "Geluidseffecten"], ["Speech", "Spraak"], ["Music", "Muziek"], ["Seating layout", "Indeling zitplaatsen"], ["How are the players seated around the table?", "Hoe zitten de spelers rond de tafel?"], ["This affects the positioning of the player buttons at night.", "Dit beïnvloedt het plaatsen van spelerknoppen tijdens de nacht."], ["Language", "Taal"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Português", "Português"], ["Italiano", "Italiano"], ["Українська", "Українська"], ["日本語", "日本語"], ["한국어", "한국어"], ["Interface only, no dialogue yet", "Alleen interface, nog geen dialoog"], ["Back", "Terug"], ["Next", "Volgende"], ["Done", "Klaar"], ["OK", "OK"], ["Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played.", "Plaats vinkjes om een playlist samen te stellen voor de nachten. Elke volgende nacht zal de volgende track van de playlist worden gespeeld."], ["Multi-Telephone", "Multi-telefoon"], ["Host Game", "Spel hosten"], ["Game Code", "Spelcode"], ["Play as Host", "Als gastheer spelen"], ["Play as Guest", "Als gast spelen"], ["Start Hosting", "Hosten starten"], ["Stop Hosting", "Hosten stoppen"], ["Malformed code", "Foutieve code"], ["Game not found", "Spel niet gevonden"], ["Not connected", "Niet verbonden"], ["Connecting...", "Verbinden..."], ["Connected.", "Verbonden."], ["Leave guest mode", "Gastmodus verlaten"], ["You can host a game so that players can join from another smartphone.", "Je kunt een spel hosten zodat spelers kunnen meespelen vanaf een andere smartphone."], ["You can join a game running on another smartphone.", "Je kunt meespelen met een spel dat op een andere smartphone draait."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Host. Then enter the game code here.", "Neem de andere smartphone en kijk in de app onder Multi-telefoon → Als gastheer spelen. Voer de spelcode dan hier in."], ["It is possible to join this game from another smartphone.", "Het is mogelijk om mee te spelen met dit spel vanaf een andere smartphone."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. Then enter the following game code there.", "Neem de andere smartphone en kijk in de app onder Multi-telefoon → Als gast spelen. Voer daar deze spelcode in."], ["You are currently hosting a game.", "Op dit moment host je een spel."], ["If you want to join a running game, you must stop hosting first.", "Als je met een draaiend spel wilt meedoen, moet je eerst stoppen met hosten."], ["If you want to host a game so that others can join, you should leave guest mode first.", "Als je een spel wilt hosten zodat anderen kunnen meespelen, moet je eerst de gastmodus verlaten."], ["", ""], ["No authorization to use the camera", "Geen toestemming om de camera te gebruiken"], ["Please authorize the use of the camera to scan a QR code", "Geef a.u.b. camera-toestemming om een QR-code te scannen"], ["Credits", "Credits"], ["Game:", "Spel:"], ["Rulebook", "Spelregels"], ["website", "website"], ["version", "versie"], ["For use with the game: ", "Voor gebruik bij het spel: "], ["App: ", "App: "], ["Libraries: ", "Library's: "], ["Sound effects: ", "Geluidseffecten: "], ["Voice actors: ", "Stemacteurs: "], ["Images: ", "Afbeeldingen: "], ["Music: ", "Muziek: "], ["Licensed under ", "Gelicentieerd onder "], ["A day in Salem", "Een dag in Salem"], ["Dawn,", "Dageraad,"], ["one witch", "één heks"], ["several witches", "meerdere heksen"], ["Night,", "Nacht,"], ["with constable", "met schout"], ["without constable", "zonder schout"], ["Dawn, one witch", "Dageraad, één heks"], ["Dawn, several witches", "Dageraad, meerdere heksen"], ["Night with constable", "Nacht met schout"], ["Night without constable", "Nacht zonder schout"], ["Waiting for the host to announce nighttime...", "Wachten tot de gastheer de nacht aankondigt..."], ["Dawn", "Dageraad"], ["Night", "De nacht"], ["The witches", "De heksen"], ["The witch's turn", "De heks aan de beurt"], ["The witches' turn", "De heksen aan de beurt"], ["Decide-SG who should get the black cat:", "Beslis wie de zwarte kat moet krijgen:"], ["Decide-PL who should get the black cat:", "Beslis wie de zwarte kat moet krijgen:"], ["Choose-SG a victim:", "Kies een slachtoffer:"], ["Choose-PL a victim:", "Kies een slachtoffer:"], ["The constable", "De schout"], ["The constable's turn", "De schout aan de beurt"], ["Choose another player to protect:", "Kies een andere speler die beschermd moet worden:"], ["Choose someone to protect:", "Kies wie beschermd moet worden:"], ["Abort", "Afbreken"], ["Skip", "Overslaan"], ["Everybody is sound asleep... what about you?", "Iedereen is in diepe slaap... en jij?"], ["Witch, are you sure?", "Heks, weet je het zeker?"], ["Witches, are you sure?", "Heksen, weten jullie het zeker?"], ["Constable, are you sure?", "Schout, weet je het zeker?"], ["Confirm", "Bevestigen"], ["Yes", "Ja"], ["No", "Nee"], ["Error", "Fout"], ["Unable to load audio", "Kan audio niet laden"], ["Index out of bounds", "Index buiten bereik"], ["Confess", "Opbiechten"], ["Citizens of Salem,", "Inwoners van Salem,"], ["those among you who wish to confess may now do so.", "degenen onder jullie die dat willen, mogen nu opbiechten."], ["The Reveal", "De onthulling"], ["Find out what happened while you were sleeping.", "Ontdek wat er is gebeurd terwijl jullie sliepen."], ["Reveal witch's victim", "Slachtoffer van de heks onthullen"], ["Reveal witches' victim", "Slachtoffer van de heksen onthullen"], ["The witch attacked-PRE", "De heks heeft"], ["The witch attacked-POST", " aangevallen"], ["The witches attacked-PRE", "De heksen hebben"], ["The witches attacked-POST", " aangevallen"], ["Reveal constable's protégé", "Beschermeling van de schout onthullen"], [" got the black cat", " heeft de zwarte kat gekregen"], ["The constable protected-PRE", "De schout heeft"], ["The constable protected-POST", " beschermd"]]);
 
 /* table Not a pure module */
 exports.table = table;
@@ -38093,12 +38094,29 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 // Generated by ReScript, PLEASE EDIT WITH CARE
 
-var table = Js_dict.fromArray([["New Game", "Нова гра"], ["Start Game", "Почни гру"], ["Play Game", "Грати"], ["Join Game", "Приєднуйся до гри"], ["Play", "Грати"], ["Settings", "Налашту­вання"], ["Exit", "Вихід"], ["Players", "Гравці"], ["Names", "Імена"], ["Enter the names of the players in clockwise order, starting at the head of the table.", "Будь ласка, введіть імена гравців за годинниковою стрілкою, починаючи з голови столу."], ["During the night, player buttons will be shown in this order.", "Протягом ночі кнопки гравців відображатимуться в такому порядку."], ["(add one)", "(додати один)"], ["Ghost Players", "Гравці-привиди"], ["In a two- or three-player game, nicknames for \"ghost\" players should be added to the list above up to a total of four players.", "У грі з двома або трьома гравцями псевдоніми гравців-«привидів» слід додати до списку вище, загалом до чотирьох гравців."], ["Also check the box below.", "Також поставте прапорець нижче."], ["Please consult the ", "Ознайомтеся з "], ["rules for 2-3 players.", "правилами для 2-3 гравців."], ["With Ghosts", "З привидами"], ["Sound effects", "Звукові ефекти"], ["Speech", "Діалог"], ["Music", "Музика"], ["Seating layout", "Схема сидіння"], ["How are the players seated around the table?", "Як розташовуються гравці за столом?"], ["This affects the positioning of the player buttons at night.", "Це впливає на розташу­вання кнопок плеєра вночі."], ["Language", "Мова"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Português", "Português"], ["Italiano", "Italiano"], ["Українська", "Українська"], ["日本語", "日本語"], ["한국어", "한국어"], ["Interface only, no dialogue yet", "Лише інтерфейс, поки що немає діалогу"], ["Back", "Назад"], ["Next", "Далі"], ["Done", "Готово"], ["OK", "В порядку"], ["Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played.", "Поставте прапорці, щоб скласти список відтворення на ніч. Кожного наступного вечора буде відтворю­ватися наступний трек зі списку відтворення."], ["Multi-Telephone", "Мульти-телефон"], ["Host Game", "Провести гру"], ["Game Code", "Код гри"], ["Play as Host", "Грати як господар"], ["Play as Guest", "Грати як гість"], ["Start Hosting", "Почати хостинг"], ["Stop Hosting", "Зупинити хостинг"], ["Malformed code", "Неправильний код"], ["Game not found", "Гра не знайдена"], ["Not connected", "Не підключений"], ["Connecting...", "Підключення…"], ["Connected.", "Підключено."], ["Leave guest mode", "Вийти з режиму гостя"], ["You can host a game so that players can join from another smartphone.", "Ви можете розмістити гру, щоб гравці могли приєднатися з іншого смартфона."], ["You can join a game running on another smartphone.", "Ви можете приєднатися до гри, яка працює на іншому смартфоні."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Host. Then enter the game code here.", "Візьміть інший смартфон і подивіться в додатку в розділі Мульти-телефон → Грати як господар. Потім введіть тут код гри."], ["It is possible to join this game from another smartphone.", "До цієї гри можна приєднатися з іншого смартфона."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. Then enter the following game code there.", "Візьміть інший смартфон і подивіться в програмі в розділі Мульти-телефон → Грати як гість. Потім введіть туди наступний код гри."], ["You are currently hosting a game.", "Ви зараз розміщуєте гру."], ["If you want to join a running game, you must stop hosting first.", "Якщо ви хочете приєднатися до запущеної гри, ви повинні спершу припинити розміщення."], ["If you want to host a game so that others can join, you should leave guest mode first.", "Якщо ви хочете провести гру, щоб інші могли приєднатися, вам слід спочатку вийти з режиму гостя."], ["", ""], ["No authorization to use the camera", "Немає дозволу на використання камери"], ["Please authorize the use of the camera to scan a QR code", "Будь ласка, авторизуйте використання камери для сканування QR-коду"], ["Credits", "Кредити"], ["Game:", "Гра:"], ["Rulebook", "Правильник"], ["website", "веб-сайт"], ["version", "версія"], ["For use with the game: ", "Для використання з грою: "], ["App: ", "Мобільний застосунок: "], ["Libraries: ", "Бібліотеки: "], ["Sound effects: ", "Звукові ефекти: "], ["Voice actors: ", "Актори озвучування: "], ["Images: ", "Зображення: "], ["Music: ", "Музика: "], ["Licensed under ", "Ліцензія згідно "], ["A day in Salem", "День в Салемі"], ["Dawn,", "Світанок,"], ["one witch", "одна відьма"], ["several witches", "кілька відьом"], ["Night,", "Ніч,"], ["with constable", "з констеблем"], ["without constable", "без констебля"], ["Dawn, one witch", "Світанок, одна відьма"], ["Dawn, several witches", "Світанок, кілька відьом"], ["Night with constable", "Ніч з констеблем"], ["Night without constable", "Ніч без констебля"], ["Waiting for the host to announce nighttime...", "Чекаємо, поки ведучий оголосить ніч..."], ["Dawn", "Світанок"], ["Night", "Ніч"], ["The witches", "Відьми"], ["The witch's turn", "Черга відьми"], ["The witches' turn", "Черга відьом"], ["Decide-SG who should get the black cat:", "Виріши, кому дістатися чорного кота:"], ["Decide-PL who should get the black cat:", "Вирішуйте, кому дістатися чорного кіта:"], ["Choose-SG a victim:", "Вибери жертву:"], ["Choose-PL a victim:", "Вибирайте жертву:"], ["The constable", "Констебль"], ["The constable's turn", "Черга констебля"], ["Choose another player to protect:", "Вибери будь-якого іншого гравця для захисту:"], ["Choose someone to protect:", "Вибери когось для захисту:"], ["Abort", "Перервати"], ["Skip", "Пропустити"], ["Everybody is sound asleep... what about you?", "Всі міцно сплять... а ти?"], ["Witch, are you sure?", "Відьма, ти впевнена?"], ["Witches, are you sure?", "Відьми, ви впевнені?"], ["Constable, are you sure?", "Констебль, ти впевнений?"], ["Confirm", "Підтвердити"], ["Yes", "Так"], ["No", "Немає"], ["Error", "Помилка"], ["Unable to load audio", "Неможливо завантажити аудіо"], ["Index out of bounds", "Індекс поза межами"], ["Confess", "Сповідатися"], ["Citizens of Salem,", "Громадяни Салема,"], ["those among you who wish to confess may now do so.", "ті з вас, хто хоче зізнатися, тепер можуть це зробити."], ["The Reveal", "Розкриття"], ["Find out what happened while you were sleeping.", "Дізнайтеся, що сталося, коли ви спали."], ["Reveal witch's victim", "Розкрийте жертву відьми"], ["Reveal witches' victim", "Розкрийте жертву відьом"], ["The witch attacked-PRE", "Відьма напала на"], ["The witch attacked-POST", ""], ["The witches attacked-PRE", "Відьми напали на"], ["The witches attacked-POST", ""], [" got the black cat", " отримав чорного кота"], ["Reveal constable's protégé", "Покажіть, кого захищав констебль"], ["The constable protected-PRE", "Констебль захистив"], ["The constable protected-POST", ""]]);
+var table = Js_dict.fromArray([["New Game", "Novo jogo"], ["Start Game", "Começar jogo"], ["Play Game", "Jogar"], ["Join Game", "Entrar no jogo"], ["Play", "Jogar"], ["Settings", "Configu­rações"], ["Exit", "Sair"], ["Players", "Jogadores"], ["Names", "Nomes"], ["Enter the names of the players in clockwise order, starting at the head of the table.", "Insira os nomes dos jogadores em sentido horário, começando pela cabeça da mesa."], ["During the night, player buttons will be shown in this order.", "Durante a noite, os botões dos jogadores serão mostrados nesta ordem."], ["(add one)", "(mais um)"], ["Ghost Players", "Jogadores fantasmas"], ["In a two- or three-player game, nicknames for \"ghost\" players should be added to the list above up to a total of four players.", "Em um jogo para dois ou três jogadores, apelidos para jogadores “fantasmas” devem ser adicionados à lista acima, até um total de quatro jogadores."], ["Also check the box below.", "Marque também a caixa abaixo."], ["Please consult the ", "Consulte as "], ["rules for 2-3 players.", "regras para 2-3 jogadores."], ["With Ghosts", "Com fantasmas"], ["Sound effects", "Efeitos sonoros"], ["Speech", "Discurso"], ["Music", "Música"], ["Seating layout", "Disposição dos assentos"], ["How are the players seated around the table?", "Como os jogadores estão sentados em volta da mesa?"], ["This affects the positioning of the player buttons at night.", "Isto afeta o posiciona­mento dos botões dos jogadores durante a noite."], ["Language", "Linguagem"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Português", "Português"], ["Italiano", "Italiano"], ["Українська", "Українська"], ["日本語", "日本語"], ["한국어", "한국어"], ["Interface only, no dialogue yet", "Apenas interface, sem diálogo ainda"], ["Back", "Voltar"], ["Next", "Avançar"], ["Done", "Feito"], ["OK", "OK"], ["Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played.", "Marque as caixas para compor uma playlist para as noites. A cada noite sucessiva, a próxima faixa da lista de reprodução será reproduzida."], ["Multi-Telephone", "Multi-telefone"], ["Host Game", "Hospedar jogo"], ["Game Code", "Código de jogo"], ["Play as Host", "Jogar como anfitrião"], ["Play as Guest", "Jogar como visitante"], ["Start Hosting", "Começar a hospedar"], ["Stop Hosting", "Parar de hospedar"], ["Malformed code", "Código malformado"], ["Game not found", "Jogo não encontrado"], ["Not connected", "Não conectado"], ["Connecting...", "Conectando..."], ["Connected.", "Conectado."], ["Leave guest mode", "Sair do modo visitante"], ["You can host a game so that players can join from another smartphone.", "Você pode hospedar um jogo para que os jogadores possam participar usando outro smartphone"], ["You can join a game running on another smartphone.", "Você pode entrar em um jogo em execução em outro smartphone."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Host. Then enter the game code here.", "Pegue o outro smartphone e procure no aplicativo em Multi-telefone → Jogar como anfitrião. Em seguida, insira o código do jogo aqui."], ["It is possible to join this game from another smartphone.", "É possível entrar neste jogo a partir de outro smartphone."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. Then enter the following game code there.", "Pegue o outro smartphone e procure no aplicativo em Multi-telefone → Jogar como visitante. Em seguida, insira o seguinte código do jogo."], ["You are currently hosting a game.", "Você está hospedando um jogo no momento."], ["If you want to join a running game, you must stop hosting first.", "Se você deseja entrar em um jogo em execução, primeiro você deve parar de hospedar."], ["If you want to host a game so that others can join, you should leave guest mode first.", "Se você deseja hospedar um jogo para que outros possam participar, você deve primeiro sair do modo visitante."], ["", ""], ["No authorization to use the camera", "Não autorização para usar a câmera"], ["Please authorize the use of the camera to scan a QR code", "Autorize o uso da câmera para ler um código QR"], ["Credits", "Créditos"], ["Game:", "Jogo:"], ["Rulebook", "Livro de regras"], ["website", "website"], ["version", "versão"], ["For use with the game: ", "Para usar com o jogo: "], ["App: ", "Aplicativo: "], ["Libraries: ", "Bibliotecas: "], ["Sound effects: ", "Efeitos sonoros: "], ["Voice actors: ", "Dubladores: "], ["Images: ", "Imagens: "], ["Music: ", "Música: "], ["Licensed under ", "Licenciado sob "], ["A day in Salem", "Um dia em Salém"], ["Dawn,", "O amanhecer,"], ["one witch", "um feiticeiro"], ["several witches", "vários feiticeiros"], ["Night,", "A noite,"], ["with constable", "com xerife"], ["without constable", "sem xerife"], ["Dawn, one witch", "O amanhecer, um feiticeiro"], ["Dawn, several witches", "O amanhecer, vários feiticeiros"], ["Night with constable", "Noite com xerife"], ["Night without constable", "Noite sem xerife"], ["Waiting for the host to announce nighttime...", "Esperando o anfitrião anunciar a noite..."], ["Dawn", "O amanhecer"], ["Night", "A noite"], ["The witches", "Os feiticeiros"], ["The witch's turn", "A vez do feiticeiro"], ["The witches' turn", "A vez dos feiticeiros"], ["Decide-SG who should get the black cat:", "Decida quem deve ficar com o gato preto:"], ["Decide-PL who should get the black cat:", "Decidam quem deve ficar com o gato preto:"], ["Choose-SG a victim:", "Escolha uma vítima:"], ["Choose-PL a victim:", "Escolham uma vítima:"], ["The constable", "O xerife"], ["The constable's turn", "A vez do xerife"], ["Choose another player to protect:", "Escolha outro jogador para proteger:"], ["Choose someone to protect:", "Escolha alguém para proteger"], ["Abort", "Abortar"], ["Skip", "Pular"], ["Everybody is sound asleep... what about you?", "Todo mundo está dormindo... e você?"], ["Witch, are you sure?", "Feiticeiro, você tem certeza?"], ["Witches, are you sure?", "Feiticeiros, vocês têm certeza?"], ["Constable, are you sure?", "Xerife, você tem certeza?"], ["Confirm", "Confirmar"], ["Yes", "Sim"], ["No", "Não"], ["Error", "Erro"], ["Unable to load audio", "Não foi possível carregar o áudio"], ["Index out of bounds", "Índice fora dos limites"], ["Confess", "A confissão"], ["Citizens of Salem,", "Cidadãos de Salém,"], ["those among you who wish to confess may now do so.", "aqueles entre vocês que desejam, podem agora confessar."], ["The Reveal", "A revelação"], ["Find out what happened while you were sleeping.", "Descubram o que aconteceu enquanto vocês dormiam."], ["Reveal witch's victim", "Revelar a vítima do feiticeiro"], ["Reveal witches' victim", "Revelar a vítima dos feiticeiros"], ["The witch attacked-PRE", "O feiticeiro atacou"], ["The witch attacked-POST", ""], ["The witches attacked-PRE", "Os feiticeiros atacaram"], ["The witches attacked-POST", ""], [" got the black cat", " pegou o gato preto"], ["Reveal constable's protégé", "Revelar o protegido do xerife"], ["The constable protected-PRE", "O xerife protegeu"], ["The constable protected-POST", ""]]);
 
 /* table Not a pure module */
 exports.table = table;
 
 },{"rescript/lib/es6/js_dict.js":44}],100:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.table = void 0;
+var Js_dict = _interopRequireWildcard(require("rescript/lib/es6/js_dict.js"));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+// Generated by ReScript, PLEASE EDIT WITH CARE
+
+var table = Js_dict.fromArray([["New Game", "Нова гра"], ["Start Game", "Почни гру"], ["Play Game", "Грати"], ["Join Game", "Приєднуйся до гри"], ["Play", "Грати"], ["Settings", "Налашту­вання"], ["Exit", "Вихід"], ["Players", "Гравці"], ["Names", "Імена"], ["Enter the names of the players in clockwise order, starting at the head of the table.", "Будь ласка, введіть імена гравців за годинниковою стрілкою, починаючи з голови столу."], ["During the night, player buttons will be shown in this order.", "Протягом ночі кнопки гравців відображатимуться в такому порядку."], ["(add one)", "(додати один)"], ["Ghost Players", "Гравці-привиди"], ["In a two- or three-player game, nicknames for \"ghost\" players should be added to the list above up to a total of four players.", "У грі з двома або трьома гравцями псевдоніми гравців-«привидів» слід додати до списку вище, загалом до чотирьох гравців."], ["Also check the box below.", "Також поставте прапорець нижче."], ["Please consult the ", "Ознайомтеся з "], ["rules for 2-3 players.", "правилами для 2-3 гравців."], ["With Ghosts", "З привидами"], ["Sound effects", "Звукові ефекти"], ["Speech", "Діалог"], ["Music", "Музика"], ["Seating layout", "Схема сидіння"], ["How are the players seated around the table?", "Як розташовуються гравці за столом?"], ["This affects the positioning of the player buttons at night.", "Це впливає на розташу­вання кнопок плеєра вночі."], ["Language", "Мова"], ["English", "English"], ["Nederlands", "Nederlands"], ["Deutsch", "Deutsch"], ["Français", "Français"], ["Español", "Español"], ["Português", "Português"], ["Italiano", "Italiano"], ["Українська", "Українська"], ["日本語", "日本語"], ["한국어", "한국어"], ["Interface only, no dialogue yet", "Лише інтерфейс, поки що немає діалогу"], ["Back", "Назад"], ["Next", "Далі"], ["Done", "Готово"], ["OK", "В порядку"], ["Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played.", "Поставте прапорці, щоб скласти список відтворення на ніч. Кожного наступного вечора буде відтворю­ватися наступний трек зі списку відтворення."], ["Multi-Telephone", "Мульти-телефон"], ["Host Game", "Провести гру"], ["Game Code", "Код гри"], ["Play as Host", "Грати як господар"], ["Play as Guest", "Грати як гість"], ["Start Hosting", "Почати хостинг"], ["Stop Hosting", "Зупинити хостинг"], ["Malformed code", "Неправильний код"], ["Game not found", "Гра не знайдена"], ["Not connected", "Не підключений"], ["Connecting...", "Підключення…"], ["Connected.", "Підключено."], ["Leave guest mode", "Вийти з режиму гостя"], ["You can host a game so that players can join from another smartphone.", "Ви можете розмістити гру, щоб гравці могли приєднатися з іншого смартфона."], ["You can join a game running on another smartphone.", "Ви можете приєднатися до гри, яка працює на іншому смартфоні."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Host. Then enter the game code here.", "Візьміть інший смартфон і подивіться в додатку в розділі Мульти-телефон → Грати як господар. Потім введіть тут код гри."], ["It is possible to join this game from another smartphone.", "До цієї гри можна приєднатися з іншого смартфона."], ["Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. Then enter the following game code there.", "Візьміть інший смартфон і подивіться в програмі в розділі Мульти-телефон → Грати як гість. Потім введіть туди наступний код гри."], ["You are currently hosting a game.", "Ви зараз розміщуєте гру."], ["If you want to join a running game, you must stop hosting first.", "Якщо ви хочете приєднатися до запущеної гри, ви повинні спершу припинити розміщення."], ["If you want to host a game so that others can join, you should leave guest mode first.", "Якщо ви хочете провести гру, щоб інші могли приєднатися, вам слід спочатку вийти з режиму гостя."], ["", ""], ["No authorization to use the camera", "Немає дозволу на використання камери"], ["Please authorize the use of the camera to scan a QR code", "Будь ласка, авторизуйте використання камери для сканування QR-коду"], ["Credits", "Кредити"], ["Game:", "Гра:"], ["Rulebook", "Правильник"], ["website", "веб-сайт"], ["version", "версія"], ["For use with the game: ", "Для використання з грою: "], ["App: ", "Мобільний застосунок: "], ["Libraries: ", "Бібліотеки: "], ["Sound effects: ", "Звукові ефекти: "], ["Voice actors: ", "Актори озвучування: "], ["Images: ", "Зображення: "], ["Music: ", "Музика: "], ["Licensed under ", "Ліцензія згідно "], ["A day in Salem", "День в Салемі"], ["Dawn,", "Світанок,"], ["one witch", "одна відьма"], ["several witches", "кілька відьом"], ["Night,", "Ніч,"], ["with constable", "з констеблем"], ["without constable", "без констебля"], ["Dawn, one witch", "Світанок, одна відьма"], ["Dawn, several witches", "Світанок, кілька відьом"], ["Night with constable", "Ніч з констеблем"], ["Night without constable", "Ніч без констебля"], ["Waiting for the host to announce nighttime...", "Чекаємо, поки ведучий оголосить ніч..."], ["Dawn", "Світанок"], ["Night", "Ніч"], ["The witches", "Відьми"], ["The witch's turn", "Черга відьми"], ["The witches' turn", "Черга відьом"], ["Decide-SG who should get the black cat:", "Виріши, кому дістатися чорного кота:"], ["Decide-PL who should get the black cat:", "Вирішуйте, кому дістатися чорного кіта:"], ["Choose-SG a victim:", "Вибери жертву:"], ["Choose-PL a victim:", "Вибирайте жертву:"], ["The constable", "Констебль"], ["The constable's turn", "Черга констебля"], ["Choose another player to protect:", "Вибери будь-якого іншого гравця для захисту:"], ["Choose someone to protect:", "Вибери когось для захисту:"], ["Abort", "Перервати"], ["Skip", "Пропустити"], ["Everybody is sound asleep... what about you?", "Всі міцно сплять... а ти?"], ["Witch, are you sure?", "Відьма, ти впевнена?"], ["Witches, are you sure?", "Відьми, ви впевнені?"], ["Constable, are you sure?", "Констебль, ти впевнений?"], ["Confirm", "Підтвердити"], ["Yes", "Так"], ["No", "Немає"], ["Error", "Помилка"], ["Unable to load audio", "Неможливо завантажити аудіо"], ["Index out of bounds", "Індекс поза межами"], ["Confess", "Сповідатися"], ["Citizens of Salem,", "Громадяни Салема,"], ["those among you who wish to confess may now do so.", "ті з вас, хто хоче зізнатися, тепер можуть це зробити."], ["The Reveal", "Розкриття"], ["Find out what happened while you were sleeping.", "Дізнайтеся, що сталося, коли ви спали."], ["Reveal witch's victim", "Розкрийте жертву відьми"], ["Reveal witches' victim", "Розкрийте жертву відьом"], ["The witch attacked-PRE", "Відьма напала на"], ["The witch attacked-POST", ""], ["The witches attacked-PRE", "Відьми напали на"], ["The witches attacked-POST", ""], [" got the black cat", " отримав чорного кота"], ["Reveal constable's protégé", "Покажіть, кого захищав констебль"], ["The constable protected-PRE", "Констебль захистив"], ["The constable protected-POST", ""]]);
+
+/* table Not a pure module */
+exports.table = table;
+
+},{"rescript/lib/es6/js_dict.js":44}],101:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38151,7 +38169,7 @@ var t_decode = decoder;
 /* No side effect */
 exports.t_decode = t_decode;
 
-},{"decco/src/Decco.bs.js":10}],101:[function(require,module,exports){
+},{"decco/src/Decco.bs.js":10}],102:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38352,7 +38370,7 @@ function stopListening(dbConnection, gameId, subject) {
 
 /* firebase/app Not a pure module */
 
-},{"../Constants.bs.js":56,"./Types.bs.js":115,"./Utils.bs.js":116,"@ryyppy/rescript-promise/src/Promise.bs.js":8,"firebase/analytics":12,"firebase/app":13,"firebase/database":14,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_js_exceptions.js":38,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],102:[function(require,module,exports){
+},{"../Constants.bs.js":56,"./Types.bs.js":116,"./Utils.bs.js":117,"@ryyppy/rescript-promise/src/Promise.bs.js":8,"firebase/analytics":12,"firebase/app":13,"firebase/database":14,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_js_exceptions.js":38,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],103:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38513,7 +38531,7 @@ var gamesKeyPrefix = "/games/";
 /* Utils-Salem1692 Not a pure module */
 exports.gamesKeyPrefix = gamesKeyPrefix;
 
-},{"./DecisionCodec.bs.js":100,"./FirebaseAdapter.bs.js":101,"./NightTypeCodec.bs.js":108,"./PhaseCodec.bs.js":110,"./Utils.bs.js":116,"rescript/lib/es6/belt_Option.js":27}],103:[function(require,module,exports){
+},{"./DecisionCodec.bs.js":101,"./FirebaseAdapter.bs.js":102,"./NightTypeCodec.bs.js":109,"./PhaseCodec.bs.js":111,"./Utils.bs.js":117,"rescript/lib/es6/belt_Option.js":27}],104:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38552,7 +38570,7 @@ var lowercaseZ = 122;
 /* No side effect */
 exports.lowercaseZ = lowercaseZ;
 
-},{"rescript/lib/es6/js_math.js":47}],104:[function(require,module,exports){
+},{"rescript/lib/es6/js_math.js":47}],105:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38634,7 +38652,7 @@ var t_decode = decoder;
 /* No side effect */
 exports.t_decode = t_decode;
 
-},{"decco/src/Decco.bs.js":10,"rescript/lib/es6/belt_Array.js":26}],105:[function(require,module,exports){
+},{"decco/src/Decco.bs.js":10,"rescript/lib/es6/belt_Array.js":26}],106:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38698,7 +38716,7 @@ function getHtmlLanguage(language) {
 
 /* No side effect */
 
-},{"decco/src/Decco.bs.js":10}],106:[function(require,module,exports){
+},{"decco/src/Decco.bs.js":10}],107:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38745,7 +38763,7 @@ function saveGameState(gameState) {
 
 /* Utils-Salem1692 Not a pure module */
 
-},{"../Constants.bs.js":56,"./Types.bs.js":115,"./Utils.bs.js":116,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/belt_Result.js":28,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/js_option.js":48}],107:[function(require,module,exports){
+},{"../Constants.bs.js":56,"./Types.bs.js":116,"./Utils.bs.js":117,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/belt_Result.js":28,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/js_option.js":48}],108:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38982,7 +39000,7 @@ function getScenarioStep(subPage, scenarioIndex, gameState) {
 
 /* Utils-Salem1692 Not a pure module */
 
-},{"./Utils.bs.js":116,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/curry.js":42}],108:[function(require,module,exports){
+},{"./Utils.bs.js":117,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/curry.js":42}],109:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39043,7 +39061,7 @@ var t_decode = decoder;
 /* No side effect */
 exports.t_decode = t_decode;
 
-},{"decco/src/Decco.bs.js":10}],109:[function(require,module,exports){
+},{"decco/src/Decco.bs.js":10}],110:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39155,7 +39173,7 @@ var t_decode = decoder;
 /* No side effect */
 exports.t_decode = t_decode;
 
-},{"decco/src/Decco.bs.js":10,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/js_array.js":43,"rescript/lib/es6/js_json.js":46}],110:[function(require,module,exports){
+},{"decco/src/Decco.bs.js":10,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/js_array.js":43,"rescript/lib/es6/js_json.js":46}],111:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39306,7 +39324,7 @@ var t_decode = decoder;
 /* No side effect */
 exports.t_decode = t_decode;
 
-},{"decco/src/Decco.bs.js":10,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/js_array.js":43,"rescript/lib/es6/js_json.js":46}],111:[function(require,module,exports){
+},{"decco/src/Decco.bs.js":10,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/js_array.js":43,"rescript/lib/es6/js_json.js":46}],112:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39337,7 +39355,7 @@ function getQueryParam(paramName) {
 
 /* queryString Not a pure module */
 
-},{"rescript/lib/es6/caml_array.js":35,"rescript/lib/es6/js_dict.js":44,"rescript/lib/es6/js_string.js":49}],112:[function(require,module,exports){
+},{"rescript/lib/es6/caml_array.js":35,"rescript/lib/es6/js_dict.js":44,"rescript/lib/es6/js_string.js":49}],113:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39389,7 +39407,7 @@ var t_decode = decoder;
 /* No side effect */
 exports.t_decode = t_decode;
 
-},{"decco/src/Decco.bs.js":10}],113:[function(require,module,exports){
+},{"decco/src/Decco.bs.js":10}],114:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39429,7 +39447,7 @@ Belt_Option.forEach(maybeNavServiceWorker, function (navServiceWorker) {
 
 /* maybeNavServiceWorker Not a pure module */
 
-},{"../Constants.bs.js":56,"@ryyppy/rescript-promise/src/Promise.bs.js":8,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_option.js":40}],114:[function(require,module,exports){
+},{"../Constants.bs.js":56,"@ryyppy/rescript-promise/src/Promise.bs.js":8,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_option.js":40}],115:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39444,6 +39462,7 @@ var EN_US$Salem1692 = _interopRequireWildcard(require("../locale/EN_US.bs.js"));
 var ES_ES$Salem1692 = _interopRequireWildcard(require("../locale/ES_ES.bs.js"));
 var FR_FR$Salem1692 = _interopRequireWildcard(require("../locale/FR_FR.bs.js"));
 var IT_IT$Salem1692 = _interopRequireWildcard(require("../locale/IT_IT.bs.js"));
+var JA_JP$Salem1692 = _interopRequireWildcard(require("../locale/JA_JP.bs.js"));
 var KO_KR$Salem1692 = _interopRequireWildcard(require("../locale/KO_KR.bs.js"));
 var NL_NL$Salem1692 = _interopRequireWildcard(require("../locale/NL_NL.bs.js"));
 var PT_BR$Salem1692 = _interopRequireWildcard(require("../locale/PT_BR.bs.js"));
@@ -39464,43 +39483,32 @@ function lookup(table, message, languageName) {
   }
 }
 function getTranslator(language, message) {
-  if (language === "it_IT") {
+  if (language === "ja_JP") {
+    return lookup(JA_JP$Salem1692.table, message, "Japanese");
+  } else if (language === "pt_BR") {
+    return lookup(PT_BR$Salem1692.table, message, "Portuguese");
+  } else if (language === "de_DE") {
+    return lookup(DE_DE$Salem1692.table, message, "German");
+  } else if (language === "ko_KR") {
+    return lookup(KO_KR$Salem1692.table, message, "Korean");
+  } else if (language === "en_US") {
+    return lookup(EN_US$Salem1692.table, message, "English");
+  } else if (language === "es_ES") {
+    return lookup(ES_ES$Salem1692.table, message, "Spanish");
+  } else if (language === "fr_FR") {
+    return lookup(FR_FR$Salem1692.table, message, "French");
+  } else if (language === "nl_NL") {
+    return lookup(NL_NL$Salem1692.table, message, "Dutch");
+  } else if (language === "uk_UA") {
+    return lookup(UK_UA$Salem1692.table, message, "Ukrainian");
+  } else {
     return lookup(IT_IT$Salem1692.table, message, "Italian");
   }
-  if (language === "pt_BR") {
-    return lookup(PT_BR$Salem1692.table, message, "Portuguese");
-  }
-  if (language === "de_DE") {
-    return lookup(DE_DE$Salem1692.table, message, "German");
-  }
-  if (language === "ko_KR") {
-    return lookup(KO_KR$Salem1692.table, message, "Korean");
-  }
-  if (language === "en_US") {
-    return lookup(EN_US$Salem1692.table, message, "English");
-  }
-  if (language === "es_ES") {
-    return lookup(ES_ES$Salem1692.table, message, "Spanish");
-  }
-  if (language === "fr_FR") {
-    return lookup(FR_FR$Salem1692.table, message, "French");
-  }
-  if (language === "nl_NL") {
-    return lookup(NL_NL$Salem1692.table, message, "Dutch");
-  }
-  if (language === "uk_UA") {
-    return lookup(UK_UA$Salem1692.table, message, "Ukrainian");
-  }
-  throw {
-    RE_EXN_ID: "Match_failure",
-    _1: ["Translator.res", 22, 2],
-    Error: new Error()
-  };
 }
 
 /* DE_DE-Salem1692 Not a pure module */
 
-},{"../locale/DE_DE.bs.js":91,"../locale/EN_US.bs.js":92,"../locale/ES_ES.bs.js":93,"../locale/FR_FR.bs.js":94,"../locale/IT_IT.bs.js":95,"../locale/KO_KR.bs.js":96,"../locale/NL_NL.bs.js":97,"../locale/PT_BR.bs.js":98,"../locale/UK_UA.bs.js":99,"rescript/lib/es6/js_dict.js":44}],115:[function(require,module,exports){
+},{"../locale/DE_DE.bs.js":91,"../locale/EN_US.bs.js":92,"../locale/ES_ES.bs.js":93,"../locale/FR_FR.bs.js":94,"../locale/IT_IT.bs.js":95,"../locale/JA_JP.bs.js":96,"../locale/KO_KR.bs.js":97,"../locale/NL_NL.bs.js":98,"../locale/PT_BR.bs.js":99,"../locale/UK_UA.bs.js":100,"rescript/lib/es6/js_dict.js":44}],116:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39872,7 +39880,7 @@ function dbRecord_decode(v) {
 
 /* No side effect */
 
-},{"./DecisionCodec.bs.js":100,"./GameTypeCodec.bs.js":104,"./LanguageCodec.bs.js":105,"./NightTypeCodec.bs.js":108,"./NumerusCodec.bs.js":109,"./PhaseCodec.bs.js":110,"./SeatingCodec.bs.js":112,"decco/src/Decco.bs.js":10,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/js_dict.js":44,"rescript/lib/es6/js_json.js":46}],116:[function(require,module,exports){
+},{"./DecisionCodec.bs.js":101,"./GameTypeCodec.bs.js":105,"./LanguageCodec.bs.js":106,"./NightTypeCodec.bs.js":109,"./NumerusCodec.bs.js":110,"./PhaseCodec.bs.js":111,"./SeatingCodec.bs.js":113,"decco/src/Decco.bs.js":10,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/js_dict.js":44,"rescript/lib/es6/js_json.js":46}],117:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40068,7 +40076,7 @@ function ifSlaveAndConnected(dbConnectionStatus, gameType, func) {
 
 /* Constants-Salem1692 Not a pure module */
 
-},{"../Constants.bs.js":56,"@ryyppy/rescript-promise/src/Promise.bs.js":8,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_js_exceptions.js":38,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42,"rescript/lib/es6/js_math.js":47}],117:[function(require,module,exports){
+},{"../Constants.bs.js":56,"@ryyppy/rescript-promise/src/Promise.bs.js":8,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_js_exceptions.js":38,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42,"rescript/lib/es6/js_math.js":47}],118:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40088,7 +40096,7 @@ var make = ClosePage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"react":24}],118:[function(require,module,exports){
+},{"react":24}],119:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40261,7 +40269,7 @@ var make = CreditsPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../Constants.bs.js":56,"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/GameStateContext.bs.js":68,"../components/Link.bs.js":75,"../components/QrIcon.bs.js":82,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../components/TrackList.bs.js":89,"../modules/Translator.bs.js":114,"react":24,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],119:[function(require,module,exports){
+},{"../Constants.bs.js":56,"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/GameStateContext.bs.js":68,"../components/Link.bs.js":75,"../components/QrIcon.bs.js":82,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../components/TrackList.bs.js":89,"../modules/Translator.bs.js":115,"react":24,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],120:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40347,7 +40355,7 @@ var make = DaytimeConfessPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../Constants.bs.js":56,"../components/Button.bs.js":63,"../components/DbConnectionContext.bs.js":66,"../components/GameStateContext.bs.js":68,"../components/GearFloatingButton.bs.js":69,"../components/LargeRevealButton.bs.js":74,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../components/TurnStateContext.bs.js":90,"../modules/FirebaseClient.bs.js":102,"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"react":24,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],120:[function(require,module,exports){
+},{"../Constants.bs.js":56,"../components/Button.bs.js":63,"../components/DbConnectionContext.bs.js":66,"../components/GameStateContext.bs.js":68,"../components/GearFloatingButton.bs.js":69,"../components/LargeRevealButton.bs.js":74,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../components/TurnStateContext.bs.js":90,"../modules/FirebaseClient.bs.js":103,"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"react":24,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],121:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40467,7 +40475,7 @@ var make = DaytimePage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/BackFloatingButton.bs.js":62,"../components/GameStateContext.bs.js":68,"../components/GearFloatingButton.bs.js":69,"../components/HostingIcon.bs.js":71,"../components/LargeButton.bs.js":73,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../components/TurnStateContext.bs.js":90,"../modules/Translator.bs.js":114,"react":24,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],121:[function(require,module,exports){
+},{"../components/BackFloatingButton.bs.js":62,"../components/GameStateContext.bs.js":68,"../components/GearFloatingButton.bs.js":69,"../components/HostingIcon.bs.js":71,"../components/LargeButton.bs.js":73,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../components/TurnStateContext.bs.js":90,"../modules/Translator.bs.js":115,"react":24,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],122:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40591,7 +40599,7 @@ var make = DaytimeRevealPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/ButtonPair.bs.js":64,"../components/GameStateContext.bs.js":68,"../components/GearFloatingButton.bs.js":69,"../components/LargeRevealButton.bs.js":74,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../components/TurnStateContext.bs.js":90,"../modules/Translator.bs.js":114,"react":24,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],122:[function(require,module,exports){
+},{"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/ButtonPair.bs.js":64,"../components/GameStateContext.bs.js":68,"../components/GearFloatingButton.bs.js":69,"../components/LargeRevealButton.bs.js":74,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../components/TurnStateContext.bs.js":90,"../modules/Translator.bs.js":115,"react":24,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],123:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40635,7 +40643,7 @@ var make = DaytimeWaitingPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/Button.bs.js":63,"../components/GameStateContext.bs.js":68,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../modules/Translator.bs.js":114,"react":24,"rescript/lib/es6/curry.js":42}],123:[function(require,module,exports){
+},{"../components/Button.bs.js":63,"../components/GameStateContext.bs.js":68,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../modules/Translator.bs.js":115,"react":24,"rescript/lib/es6/curry.js":42}],124:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40693,7 +40701,7 @@ function NightAudioPage(props) {
   });
   var skipButton = React.createElement(Button$Salem1692.make, {
     label: Curry._1(t, "Skip"),
-    className: "icon-right icon-forw condensed-nl condensed-de ultra-condensed-ua",
+    className: "icon-right icon-forw condensed-nl condensed-de ultra-condensed-ua condensed-ko",
     onClick: function (_event) {
       Belt_Option.forEach(timerId, function (timerId) {
         clearTimeout(timerId);
@@ -40713,7 +40721,7 @@ var make = NightAudioPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/Button.bs.js":63,"../components/ButtonPair.bs.js":64,"../components/Eyes.bs.js":67,"../components/GameStateContext.bs.js":68,"../components/Spacer.bs.js":85,"../components/TurnStateContext.bs.js":90,"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],124:[function(require,module,exports){
+},{"../components/Button.bs.js":63,"../components/ButtonPair.bs.js":64,"../components/Eyes.bs.js":67,"../components/GameStateContext.bs.js":68,"../components/Spacer.bs.js":85,"../components/TurnStateContext.bs.js":90,"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],125:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40794,7 +40802,7 @@ var make = NightChoicePage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/DbConnectionContext.bs.js":66,"../components/Eyes.bs.js":67,"../components/GameStateContext.bs.js":68,"../components/PlayerList.bs.js":80,"../components/TurnStateContext.bs.js":90,"../modules/FirebaseClient.bs.js":102,"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"react":24,"rescript/lib/es6/curry.js":42}],125:[function(require,module,exports){
+},{"../components/DbConnectionContext.bs.js":66,"../components/Eyes.bs.js":67,"../components/GameStateContext.bs.js":68,"../components/PlayerList.bs.js":80,"../components/TurnStateContext.bs.js":90,"../modules/FirebaseClient.bs.js":103,"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"react":24,"rescript/lib/es6/curry.js":42}],126:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40904,7 +40912,7 @@ var make = NightConfirmPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/DbConnectionContext.bs.js":66,"../components/Eyes.bs.js":67,"../components/GameStateContext.bs.js":68,"../components/LargeButton.bs.js":73,"../components/Spacer.bs.js":85,"../components/TurnStateContext.bs.js":90,"../modules/FirebaseClient.bs.js":102,"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/curry.js":42}],126:[function(require,module,exports){
+},{"../components/DbConnectionContext.bs.js":66,"../components/Eyes.bs.js":67,"../components/GameStateContext.bs.js":68,"../components/LargeButton.bs.js":73,"../components/Spacer.bs.js":85,"../components/TurnStateContext.bs.js":90,"../modules/FirebaseClient.bs.js":103,"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/curry.js":42}],127:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40930,7 +40938,7 @@ var make = NightErrorPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/AudioError.bs.js":61,"./NightAudioPage.bs.js":123,"react":24}],127:[function(require,module,exports){
+},{"../components/AudioError.bs.js":61,"./NightAudioPage.bs.js":124,"react":24}],128:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41250,7 +41258,7 @@ var make = NightScenarioPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/Audio.bs.js":59,"../components/AudioBackground.bs.js":60,"../components/DbConnectionContext.bs.js":66,"../components/GameStateContext.bs.js":68,"../components/TurnStateContext.bs.js":90,"../modules/FirebaseClient.bs.js":102,"../modules/NightScenarios.bs.js":107,"../modules/NightTypeCodec.bs.js":108,"../modules/NumerusCodec.bs.js":109,"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"./NightAudioPage.bs.js":123,"./NightChoicePage.bs.js":124,"./NightConfirmPage.bs.js":125,"./NightErrorPage.bs.js":126,"react":24,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],128:[function(require,module,exports){
+},{"../components/Audio.bs.js":59,"../components/AudioBackground.bs.js":60,"../components/DbConnectionContext.bs.js":66,"../components/GameStateContext.bs.js":68,"../components/TurnStateContext.bs.js":90,"../modules/FirebaseClient.bs.js":103,"../modules/NightScenarios.bs.js":108,"../modules/NightTypeCodec.bs.js":109,"../modules/NumerusCodec.bs.js":110,"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"./NightAudioPage.bs.js":124,"./NightChoicePage.bs.js":125,"./NightConfirmPage.bs.js":126,"./NightErrorPage.bs.js":127,"react":24,"rescript/lib/es6/belt_Array.js":26,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],129:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41299,7 +41307,7 @@ var make = NightWaitingPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/Button.bs.js":63,"../components/Eyes.bs.js":67,"../components/GameStateContext.bs.js":68,"../components/Spacer.bs.js":85,"../components/TurnStateContext.bs.js":90,"../modules/Translator.bs.js":114,"react":24,"rescript/lib/es6/curry.js":42}],129:[function(require,module,exports){
+},{"../components/Button.bs.js":63,"../components/Eyes.bs.js":67,"../components/GameStateContext.bs.js":68,"../components/Spacer.bs.js":85,"../components/TurnStateContext.bs.js":90,"../modules/Translator.bs.js":115,"react":24,"rescript/lib/es6/curry.js":42}],130:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41517,7 +41525,7 @@ var make = RootPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../Constants.bs.js":56,"../components/DbConnectionContext.bs.js":66,"../components/GameStateContext.bs.js":68,"../components/NavigationContext.bs.js":77,"../components/TurnStateContext.bs.js":90,"../modules/FirebaseClient.bs.js":102,"../modules/LanguageCodec.bs.js":105,"../modules/LocalStorage.bs.js":106,"../modules/QueryString.bs.js":111,"../modules/Utils.bs.js":116,"./ClosePage.bs.js":117,"./CreditsPage.bs.js":118,"./DaytimeConfessPage.bs.js":119,"./DaytimePage.bs.js":120,"./DaytimeRevealPage.bs.js":121,"./NightScenarioPage.bs.js":127,"./SetupLanguagePage.bs.js":130,"./SetupMusicPage.bs.js":131,"./SetupNetworkPage.bs.js":132,"./SetupPage.bs.js":133,"./SetupPlayersPage.bs.js":134,"./SlavePage.bs.js":135,"./TitlePage.bs.js":136,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/curry.js":42}],130:[function(require,module,exports){
+},{"../Constants.bs.js":56,"../components/DbConnectionContext.bs.js":66,"../components/GameStateContext.bs.js":68,"../components/NavigationContext.bs.js":77,"../components/TurnStateContext.bs.js":90,"../modules/FirebaseClient.bs.js":103,"../modules/LanguageCodec.bs.js":106,"../modules/LocalStorage.bs.js":107,"../modules/QueryString.bs.js":112,"../modules/Utils.bs.js":117,"./ClosePage.bs.js":118,"./CreditsPage.bs.js":119,"./DaytimeConfessPage.bs.js":120,"./DaytimePage.bs.js":121,"./DaytimeRevealPage.bs.js":122,"./NightScenarioPage.bs.js":128,"./SetupLanguagePage.bs.js":131,"./SetupMusicPage.bs.js":132,"./SetupNetworkPage.bs.js":133,"./SetupPage.bs.js":134,"./SetupPlayersPage.bs.js":135,"./SlavePage.bs.js":136,"./TitlePage.bs.js":137,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/curry.js":42}],131:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41573,7 +41581,7 @@ var make = SetupLanguagePage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/GameStateContext.bs.js":68,"../components/LanguageList.bs.js":72,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../modules/Translator.bs.js":114,"react":24,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],131:[function(require,module,exports){
+},{"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/GameStateContext.bs.js":68,"../components/LanguageList.bs.js":72,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../modules/Translator.bs.js":115,"react":24,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],132:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41688,7 +41696,7 @@ var make = SetupMusicPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../Constants.bs.js":56,"../components/Audio.bs.js":59,"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/GameStateContext.bs.js":68,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../modules/Translator.bs.js":114,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_obj.js":39,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42,"rescript/lib/es6/jsxPPXReactSupport.js":50}],132:[function(require,module,exports){
+},{"../Constants.bs.js":56,"../components/Audio.bs.js":59,"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/GameStateContext.bs.js":68,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../modules/Translator.bs.js":115,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_obj.js":39,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42,"rescript/lib/es6/jsxPPXReactSupport.js":50}],133:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42083,7 +42091,7 @@ var make = SetupNetworkPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/DbConnectionContext.bs.js":66,"../components/GameStateContext.bs.js":68,"../components/GearFloatingButton.bs.js":69,"../components/HostingIcon.bs.js":71,"../components/QrIcon.bs.js":82,"../components/Rule.bs.js":83,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../modules/FirebaseClient.bs.js":102,"../modules/GameId.bs.js":103,"../modules/Translator.bs.js":114,"../modules/Utils.bs.js":116,"@ryyppy/rescript-promise/src/Promise.bs.js":8,"react":24,"rescript/lib/es6/belt_Result.js":28,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],133:[function(require,module,exports){
+},{"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/DbConnectionContext.bs.js":66,"../components/GameStateContext.bs.js":68,"../components/GearFloatingButton.bs.js":69,"../components/HostingIcon.bs.js":71,"../components/QrIcon.bs.js":82,"../components/Rule.bs.js":83,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../modules/FirebaseClient.bs.js":103,"../modules/GameId.bs.js":104,"../modules/Translator.bs.js":115,"../modules/Utils.bs.js":117,"@ryyppy/rescript-promise/src/Promise.bs.js":8,"react":24,"rescript/lib/es6/belt_Result.js":28,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],134:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42242,7 +42250,7 @@ var make = SetupPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/GameStateContext.bs.js":68,"../components/NavigationContext.bs.js":77,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../modules/Translator.bs.js":114,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],134:[function(require,module,exports){
+},{"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/GameStateContext.bs.js":68,"../components/NavigationContext.bs.js":77,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../modules/Translator.bs.js":115,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],135:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42298,7 +42306,7 @@ var make = SetupPlayersPage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/GameStateContext.bs.js":68,"../components/GhostForm.bs.js":70,"../components/PlayerForm.bs.js":78,"../components/SeatingForm.bs.js":84,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../modules/Translator.bs.js":114,"react":24,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],135:[function(require,module,exports){
+},{"../components/BackFloatingButton.bs.js":62,"../components/Button.bs.js":63,"../components/GameStateContext.bs.js":68,"../components/GhostForm.bs.js":70,"../components/PlayerForm.bs.js":78,"../components/SeatingForm.bs.js":84,"../components/Spacer.bs.js":85,"../components/TopBar.bs.js":88,"../modules/Translator.bs.js":115,"react":24,"rescript/lib/es6/caml_option.js":40,"rescript/lib/es6/curry.js":42}],136:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42507,7 +42515,7 @@ var make = SlavePage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/DbConnectionContext.bs.js":66,"../components/GameStateContext.bs.js":68,"../components/TurnStateContext.bs.js":90,"../modules/FirebaseClient.bs.js":102,"../modules/NightTypeCodec.bs.js":108,"../modules/NumerusCodec.bs.js":109,"../modules/Types.bs.js":115,"../modules/Utils.bs.js":116,"./DaytimeWaitingPage.bs.js":122,"./NightChoicePage.bs.js":124,"./NightConfirmPage.bs.js":125,"./NightWaitingPage.bs.js":128,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/curry.js":42,"rescript/lib/es6/js_json.js":46}],136:[function(require,module,exports){
+},{"../components/DbConnectionContext.bs.js":66,"../components/GameStateContext.bs.js":68,"../components/TurnStateContext.bs.js":90,"../modules/FirebaseClient.bs.js":103,"../modules/NightTypeCodec.bs.js":109,"../modules/NumerusCodec.bs.js":110,"../modules/Types.bs.js":116,"../modules/Utils.bs.js":117,"./DaytimeWaitingPage.bs.js":123,"./NightChoicePage.bs.js":125,"./NightConfirmPage.bs.js":126,"./NightWaitingPage.bs.js":129,"react":24,"rescript/lib/es6/belt_Option.js":27,"rescript/lib/es6/curry.js":42,"rescript/lib/es6/js_json.js":46}],137:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42566,4 +42574,4 @@ var make = TitlePage;
 /* react Not a pure module */
 exports.make = make;
 
-},{"../components/Button.bs.js":63,"../components/GameStateContext.bs.js":68,"../components/GearFloatingButton.bs.js":69,"../modules/Translator.bs.js":114,"react":24,"rescript/lib/es6/curry.js":42}]},{},[95,99,94,96,93,97,98,92,91,56,87,82,75,84,77,72,80,65,69,85,60,78,73,63,79,71,66,62,59,70,68,64,74,83,61,89,81,90,67,76,88,86,57,110,114,101,104,100,109,112,105,108,115,113,116,111,103,107,102,106,126,123,125,124,119,118,128,121,133,127,136,134,131,117,130,135,120,132,129,122,58]);
+},{"../components/Button.bs.js":63,"../components/GameStateContext.bs.js":68,"../components/GearFloatingButton.bs.js":69,"../modules/Translator.bs.js":115,"react":24,"rescript/lib/es6/curry.js":42}]},{},[95,100,96,94,97,93,98,99,92,91,56,87,82,75,84,77,72,80,65,69,85,60,78,73,63,79,71,66,62,59,70,68,64,74,83,61,89,81,90,67,76,88,86,57,111,115,102,105,101,110,113,106,109,116,114,117,112,104,108,103,107,127,124,126,125,120,119,129,122,134,128,137,135,132,118,131,136,121,133,130,123,58]);

@@ -15,7 +15,7 @@ let make = (
   ~revealed: bool,
   ~onClick: clickHandler,
 ): React.element => {
-  <LargeButton label="" onClick>
+  <LargeButton label="" className="condensed-ko" onClick>
     {if revealed {
       <>
         <div className="condensed-fr"> {React.string(revelationPromptPre)} </div>
