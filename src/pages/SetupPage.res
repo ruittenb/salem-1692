@@ -45,6 +45,8 @@ let make = (~goToPage): React.element => {
 
   <div id="setup-page" className="page justify-start">
     <TopBar
+      goToPage
+      returnPage=None
       onBack={Some(
         _event => {
           setNavigation(_prev => None)

@@ -34,7 +34,7 @@ let make = (~goToPage): React.element => {
     }
 
   <div id="credits-page" className="page justify-start">
-    <TopBar onBack={Some(_event => goToPage(_prev => Setup))} />
+    <TopBar goToPage returnPage=None onBack={Some(_event => goToPage(_prev => Setup))} />
     <h1> {React.string(t("Credits"))} </h1>
     <Spacer />
     <p className="noblur">

@@ -10,7 +10,7 @@ let make = (~goToPage): React.element => {
   let t = Translator.getTranslator(gameState.language)
 
   <div id="setup-players-page" className="page justify-start">
-    <TopBar onBack={Some(_event => goToPage(_prev => Setup))} />
+    <TopBar goToPage returnPage=None onBack={Some(_event => goToPage(_prev => Setup))} />
     <h1> {React.string(t("Players"))} </h1>
     <PlayerForm />
     <Spacer />
