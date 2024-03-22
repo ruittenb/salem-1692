@@ -37115,7 +37115,7 @@ function NetworkIcon(props) {
     });
   } else {
     return React.createElement("div", {
-      className: "topbar-button icon-guest"
+      className: "topbar-button-40 icon-guest"
     });
   }
 }

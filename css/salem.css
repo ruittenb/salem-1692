@@ -498,11 +498,17 @@ video + .bubble {
     margin-bottom: 0;
 }
 
-.page div.topbar-button {
+.page div.topbar-button,
+.page div.topbar-button-40 {
     background-position: center center;
     background-repeat: no-repeat;
-    width: 32px;
     height: 32px;
+}
+.page div.topbar-button {
+    width: 32px;
+}
+.page div.topbar-button-40 {
+    width: 40px;
 }
 
 .page button.flag           { background-size: 28px; }
