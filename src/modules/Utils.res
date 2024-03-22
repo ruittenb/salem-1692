@@ -172,6 +172,18 @@ let ifConnected = (dbConnectionStatus: dbConnectionStatus, func: dbConnection =>
 }
 
 /**
+ * Return true if connection state reflects that we're connected to firebase
+ */
+let isConnected = (dbConnectionStatus: dbConnectionStatus) => {
+  switch dbConnectionStatus {
+  | NotConnected
+  | ConnectingAsMaster
+  | ConnectingAsSlave => false
+  | Connected(_) => true
+  }
+}
+
+/**
  * Call function if game state reflects that we're Master
  */
 let ifMaster = (gameType: GameTypeCodec.t, func: GameTypeCodec.gameId => unit) => {

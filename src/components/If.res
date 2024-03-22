@@ -9,4 +9,4 @@
 
 @react.component
 let make = (~condition: bool, ~children: React.element): React.element =>
-  condition ? children : <> </>
+  condition ? children : React.null

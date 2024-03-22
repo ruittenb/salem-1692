@@ -8,7 +8,7 @@ let p = "[SlavePage] "
 
 @react.component
 let make = (~goToPage, ~subPage: page): React.element => {
-  let (dbConnectionStatus, _setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
+  let (dbConnectionStatus, setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
   let (gameState, setGameState) = React.useContext(GameStateContext.context)
   // turn state
   let (turnState, setTurnState) = React.useContext(TurnStateContext.context)
@@ -25,6 +25,7 @@ let make = (~goToPage, ~subPage: page): React.element => {
           switch maybeDbRecordStr {
           | None => {
               Utils.logDebug(p ++ "Received null on listener")
+              setDbConnectionStatus(_prev => NotConnected)
               goToPage(_prev => SetupNetworkNoGame)
             }
           | Some(dbRecordStr) =>
@@ -77,7 +78,7 @@ let make = (~goToPage, ~subPage: page): React.element => {
           dbConnection,
           gameId,
         ) => {
-          Utils.logDebug(p ++ "About to remove remove game listener")
+          Utils.logDebug(p ++ "About to remove game listener")
           FirebaseClient.stopListening(dbConnection, gameId, GameSubject)
         })
         Utils.logDebugBlue(p ++ "Unmounted")
