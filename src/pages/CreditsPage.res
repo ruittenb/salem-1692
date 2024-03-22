@@ -24,8 +24,8 @@ let make = (~goToPage): React.element => {
     | #es_ES => `Salem 1692 - Rulebook Spanish (2nd Edition).pdf`
     | #fr_FR => `Salem 1692 - Rulebook French.pdf`
     | #de_DE => "Salem 1692 - Rulebook German.pdf"
+    | #pt_BR => "Salem 1692 - Rulebook Portuguese.pdf"
     | #nl_NL
-    | #pt_BR
     | #it_IT
     | #uk_UA
     | #ja_JP
