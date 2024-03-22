@@ -17,19 +17,16 @@ let make = (~goToPage): React.element => {
     choiceConstable: None,
   }
 
-  let (masterMode, returnPage) = switch gameState.gameType {
-  | Master(_) => (true, SetupNetwork)
-  | Slave(_)
-  | StandAlone => (false, Title)
+  let returnPage = switch gameState.gameType {
+  | Master(_) => SetupNetwork
+  | _ => Title
   }
 
   // Page element
   <div id="daytime-page" className="page justify-start">
-    <TopBar>
-      <BackFloatingButton onClick={_event => goToPage(_prev => returnPage)} />
-      <HostingIcon masterMode />
-      <GearFloatingButton goToPage returnPage=Daytime />
-    </TopBar>
+    <TopBar
+      goToPage returnPage=Some(Daytime) onBack={Some(_event => goToPage(_prev => returnPage))}
+    />
     <h1> {React.string(t("A day in Salem"))} </h1>
     <Spacer />
     <LargeButton

@@ -45,9 +45,7 @@ let make = (~goToPage): React.element => {
   })
 
   <div id="daytime-confess-page" className="page justify-spread">
-    <TopBar>
-      <GearFloatingButton goToPage returnPage=DaytimeConfess />
-    </TopBar>
+    <TopBar goToPage returnPage=Some(DaytimeConfess) onBack={None} />
     <h1> {React.string(t("Confess"))} </h1>
     <h2> {React.string(t("Citizens of Salem,"))} </h2>
     <p className="text-centered">
