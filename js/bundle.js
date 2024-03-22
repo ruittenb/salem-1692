@@ -40224,7 +40224,7 @@ function CreditsPage(props) {
     return Translator$Salem1692.getTranslator(partial_arg, param);
   };
   var match$1 = gameState.language;
-  var rulebookUrl = "doc/" + (match$1 === "de_DE" ? "Salem 1692 - Rulebook German.pdf" : match$1 === "es_ES" ? "Salem 1692 - Rulebook Spanish (2nd Edition).pdf" : match$1 === "fr_FR" ? "Salem 1692 - Rulebook French.pdf" : "Salem 1692 - Rulebook English (6th Edition).pdf");
+  var rulebookUrl = "doc/" + (match$1 === "pt_BR" ? "Salem 1692 - Rulebook Portuguese.pdf" : match$1 === "de_DE" ? "Salem 1692 - Rulebook German.pdf" : match$1 === "es_ES" ? "Salem 1692 - Rulebook Spanish (2nd Edition).pdf" : match$1 === "fr_FR" ? "Salem 1692 - Rulebook French.pdf" : "Salem 1692 - Rulebook English (6th Edition).pdf");
   return React.createElement("div", {
     className: "page justify-start",
     id: "credits-page"
