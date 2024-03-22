@@ -8,7 +8,7 @@ let make = (): React.element => {
 
   switch gameState.gameType {
   | Master(_) => <div className="topbar-button icon-host" />
-  | Slave(_) => <div className="topbar-button icon-guest" />
+  | Slave(_) => <div className="topbar-button-40 icon-guest" />
   | StandAlone => React.null
   }
 }
