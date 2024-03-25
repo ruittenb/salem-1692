@@ -32,27 +32,36 @@ let make = (~allowBackToConfess: bool=true): React.element => {
     )
   }
 
+  let targetName = (target: player) =>
+    switch target {
+    | Undecided => ""
+    | Nobody => t("nobody-OBJ")
+    | Player(playerName) => playerName
+    }
+
   let witchesRevealButton = switch turnState.choiceWitches {
-  | None => React.null
-  | Some(witchTargetName) =>
+  | None
+  | Some(Undecided) => React.null
+  | Some(witchTarget) =>
     <LargeRevealButton
       revealPrompt=witchesRevealPrompt
       revelationPromptPre=witchesRevelationPromptPre
       revelationPromptPost=witchesRevelationPromptPost
-      secret=witchTargetName
+      secret={targetName(witchTarget)}
       revealed=witchTargetRevealed
       onClick={_event => setWitchTargetRevealed(prev => !prev)}
     />
   }
 
   let constableRevealButton = switch turnState.choiceConstable {
-  | None => React.null
-  | Some(constableTargetName) =>
+  | None
+  | Some(Undecided) => React.null
+  | Some(constableTarget) =>
     <LargeRevealButton
       revealPrompt={t(`Reveal constable's protégé`)}
       revelationPromptPre={t("The constable protected-PRE")}
       revelationPromptPost={t("The constable protected-POST")}
-      secret=constableTargetName
+      secret={targetName(constableTarget)}
       revealed=constableTargetRevealed
       onClick={_event => setConstableTargetRevealed(prev => !prev)}
     />

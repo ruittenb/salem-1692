@@ -38,7 +38,7 @@ type slaveCodeValidity =
   | SlaveInputShownAndInvalid
   | SlaveInputShownAndAbsent
 
-@decco type player = string
+@decco type player = PlayerCodec.t
 @decco type players = array<player>
 
 let playersFromJson = (playerArrayJson: Js.Json.t): option<array<string>> => {

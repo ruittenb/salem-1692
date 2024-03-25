@@ -96,7 +96,7 @@ let make = (): React.element => {
   }
   // add a new player
   let addHandler: blurHandler = event => {
-    let newPlayer: player = ReactEvent.Focus.target(event)["value"]
+    let newPlayer: player = ReactEvent.Focus.target(event)["value"]->Player
     let newPlayers = if newPlayer->Js.String.length > 0 {
       [newPlayer]
     } else {

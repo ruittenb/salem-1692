@@ -61,7 +61,12 @@ let musicTracks =
   ]->Js.Array2.sortInPlace
 
 let defaultSelectedMusicTracks = ["Myst on the Moor", "Some Amount of Evil"]
-let defaultPlayers = ["Ambrosia", "Bellatrix", "Cassandra", "Drizella"]
+let defaultPlayers: players = [
+  Player("Ambrosia"),
+  Player("Bellatrix"),
+  Player("Cassandra"),
+  Player("Drizella"),
+]
 
 // Initialization values
 

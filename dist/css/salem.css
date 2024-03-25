@@ -412,6 +412,24 @@ video + .bubble {
     overflow-y: auto;
 }
 
+/**
+ * Button Types:
+ *
+ * button             : TitlePage (a.o.)  : most buttons           :   50% ×  40px
+ * .widebutton        : SetupMusicPage    : track buttons          :   80% ×  40px
+ *
+ * .smallsquarebutton : SetupPlayersPage  : icon-only (swap,delete):  42px ×  40px
+ * .bigsquarebutton   : NightChoicePage   : rotate button          : 125px × 125px
+ *
+ * .largebutton       : DaytimePage       : scenario buttons       :   80% × 100px
+ * .largebutton       : DaytimeRevealPage : revelation buttons     :   80% × 100px
+ *
+ * .bulkybutton       : SetupPlayersPage  : seating layout         :   72% ×  90px
+ * .bulkybutton       : NightChoicePage   : player buttons         :   72% ×  90px
+ *
+ * .oblongbutton      : SetupLanguagePage : language buttons       :   72% ×  66px
+ */
+
 .page button {
     width: 50%;
     height: 40px;
