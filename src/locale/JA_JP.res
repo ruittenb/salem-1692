@@ -1,5 +1,5 @@
 /**
- * Locale: ja_JP (WIP)
+ * Locale: ja_JP (placeholder file)
  */
 let table = Js.Dict.fromArray([
   // TitlePage

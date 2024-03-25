@@ -37,13 +37,13 @@ let make = (
   let abortButton =
     <Button
       label={t("Abort")}
-      className="icon-left icon-abort condensed-it condensed-nl condensed-de ultra-condensed-ua last"
+      className="icon-left icon-abort condensed-it condensed-nl condensed-de ultra-condensed-uk last"
       onClick={_event => goToPage(_prev => Daytime)}
     />
   let skipButton =
     <Button
       label={t("Skip")}
-      className="icon-right icon-forw condensed-nl condensed-de ultra-condensed-ua condensed-ko"
+      className="icon-right icon-forw condensed-nl condensed-de ultra-condensed-uk condensed-ko"
       onClick={_event => {
         timerId->Belt.Option.forEach(timerId => {
           Js.Global.clearTimeout(timerId)

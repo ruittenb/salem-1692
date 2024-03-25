@@ -6,7 +6,6 @@ SEVERE:
 
 IMPORTANT:
  - the "choose no one" option for the constable (and witches?) in ghost mode
- - top bar contains buttons
 
 NICE TO HAVE:
  - Safari: backgroundmusic sometimes(?) as loud as speech
@@ -16,7 +15,7 @@ NICE TO HAVE:
  - reflect state in URL https://betterprogramming.pub/how-and-why-you-should-store-react-ui-state-in-the-url-f2013a204cb2
  - swipe: https://www.npmjs.com/package/react-swipeable
  - get rid of passing goToPage as prop? use Context?
- - use isConnected to display hands
+ - ko, uk, ja
 
 Korean:
  - https://brand.naver.com/asmodeekorea/products/6826839515

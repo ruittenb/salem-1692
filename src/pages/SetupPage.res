@@ -68,7 +68,7 @@ let make = (~goToPage): React.element => {
     />
     <Button
       label={t("Sound effects")}
-      className={"condensed-nl condensed-pt ultra-condensed-ua icon-left " ++ if (
+      className={"condensed-nl condensed-pt ultra-condensed-uk icon-left " ++ if (
         gameState.doPlayEffects
       ) {
         "icon-checked"
