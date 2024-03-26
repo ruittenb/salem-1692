@@ -48,6 +48,7 @@ function getFilesToCache(debug) {
         'images/flag-gb.png',
         'images/flag-it.png',
         'images/flag-jp.png',
+        'images/flag-kr.png',
         'images/flag-nl.png',
         'images/flag-ua.png',
         'images/flag-us-gb.png',
