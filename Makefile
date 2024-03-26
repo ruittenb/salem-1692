@@ -73,6 +73,7 @@ build: build-css build-res ## Compile the res and css files; bundle the js files
 .PHONY: build-minify
 build-minify: build-css build-res ## Compile the res and css files; bundle and minify the js files
 	$(MAKE) bundle-minify
+	@ls -l $(BUNDLE)
 
 ##@ Building during development:
 
