@@ -360,6 +360,12 @@ video + .bubble {
 .uk_UA .page button.ultra-condensed-uk {
     font-size: 22px;
 }
+.ko_KR .page button {
+    line-height: 42px;
+}
+.ko_KR .page button.oblongbutton {
+    line-height: 32px;
+}
 .ko_KR .page button.condensed-ko {
     font-size: 23px;
 }
@@ -394,15 +400,18 @@ video + .bubble {
     box-shadow: 0 10px 20px #00000030, 0 6px 6px #0000003b;
     -webkit-tap-highlight-color: transparent; /* suppress background color when active (Chrome on Android) */
 }
-.page button.compact {
-    margin-bottom: 30px;
-}
 .page button:focus {
     outline: revert;
 }
 .page button:active {
     margin: 2px -2px 30px 2px;
     box-shadow: none;
+}
+.page button.compact {
+    margin-bottom: 30px;
+}
+.page button.compact:active {
+    margin-bottom: 28px;
 }
 .page button[disabled] {
     filter: grayscale(1);
@@ -455,6 +464,18 @@ video + .bubble {
     padding: 0 8px;
 }
 
+.page button.oblongbutton {
+    /* position and size in grid */
+    justify-self: center;
+    width: 72%;
+    height: 66px;
+    /* for flex-box content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
 .page button.squarebutton {
     justify-self: center;
     font-size: 32px;
@@ -481,6 +502,9 @@ video + .bubble {
     background-repeat: no-repeat;
 }
 
+.page button.icon-top {
+    background-position: center 5px;
+}
 .page button.icon-left {
     padding-left: 22px;
     background-position: 14px center;
@@ -585,6 +609,18 @@ video + .bubble {
 
 #setup-language-page {
     background: url(../images/overlay-language.webp) -130px 176px no-repeat;
+}
+
+#setup-language-page #language-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#setup-language-page #language-list .grid-wide {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: 40%;
 }
 
 #setup-music-page {
