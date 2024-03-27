@@ -59,12 +59,12 @@ build-res: node_modules ## Compile the res files to js
 
 .PHONY: bundle
 bundle: node_modules ## Bundle the js files
-	browserify $(JS_FILES) -p esmify -o $(BUNDLE)
+	browserify src/app.js -p esmify -o $(BUNDLE)
 
 .PHONY: bundle-minify
 bundle-minify: node_modules ## Bundle and minify the js files
 	@# --mangle seems to be safe, but --compress breaks the bundle
-	browserify -g uglifyify $(JS_FILES) -p esmify | uglifyjs - $(UGLYOPTS) > $(BUNDLE)
+	browserify src/app.js -p esmify -p tinyify -o $(BUNDLE)
 
 .PHONY: build
 build: build-css build-res ## Compile the res and css files; bundle the js files
