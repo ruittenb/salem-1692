@@ -6,26 +6,26 @@ B. A noite está chegando ao fim. A cidade ainda está dormindo. Todos, fechem o
 
 C. Assim que todos os olhos estiverem fechados, a bruxa acorda.
 
-E. A bruxa abre os olhos. Sem fazer barulho, ele decide quem ficará com o gato preto.
-   Se ele quiser, ele pode escolher a si mesmo.
+E. A bruxa abre os olhos. Sem fazer barulho, ela decide quem ficará com o gato preto.
+   Se ela quiser, ela pode escolher a si mesma.
 
-H. A bruxa fez a sua escolha. Ele agora fecha os olhos.
+H. A bruxa fez a sua escolha. Ela agora fecha os olhos.
 
 
 D. Assim que todos os olhos estiverem fechados, as bruxas acordam.
-   As bruxas abrem os olhos. Eles fazem contato visual para se reconhecerem.
+   As bruxas abrem os olhos. Elas fazem contato visual para se reconhecerem.
 
-F. Apenas com gestos, eles decidem silenciosamente quem ficará com o gato preto.
-   Eles podem escolher um deles.
+F. Apenas com gestos, elas decidem silenciosamente quem ficará com o gato preto.
+   Elas podem escolher um deles.
 
-G. Apenas com gestos, eles decidem silenciosamente quem querem matar.
-   Eles podem escolher um deles.
+G. Apenas com gestos, elas decidem silenciosamente quem querem matar.
+   Elas podem escolher um deles.
 
-J. As bruxas fizeram a sua escolha. Eles agora fecham os olhos.
+J. As bruxas fizeram a sua escolha. Elas agora fecham os olhos.
 
 
 M. Assim que as bruxas fecham os olhos, o vigilante acorda.
-   O vigilante decide quem será protegido está noite.
+   O vigilante decide quem será protegido esta noite.
 
 P. Ele pode não escolher a si mesmo.
 
@@ -34,4 +34,4 @@ Q. Ele também pode escolher a si mesmo.
 N. O vigilante fez a sua escolha. Ele agora fecha os olhos.
 
 
-Z. O amanhecer está a surgir. A cidade acorda. Todos, abram os olhos.
+Z. O amanhecer está surgindo. A cidade acorda. Todos, abram os olhos.
