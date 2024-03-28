@@ -23,6 +23,7 @@ let make = (): React.element => {
     //#uk_UA,
     //#ja_JP,
     //#ko_KR,
+    #th_TH,
   ]
 
   let languageToButton = (buttonLanguage, index) => {
@@ -45,6 +46,7 @@ let make = (): React.element => {
     | #uk_UA => ("icon-top oblongbutton compact flag flag-ua uk_UA", t(`Українська`))
     | #ja_JP => ("icon-top oblongbutton compact flag flag-jp ja_JP", t(`日本語`))
     | #ko_KR => ("icon-top oblongbutton compact flag flag-kr ko_KR", t(`한국어`))
+    | #th_TH => ("icon-top oblongbutton compact flag flag-th th_TH", t(`ภาษาไทย`))
     }
     let widthClass = index == 0 ? "grid-wide" : ""
     <Button key={label} label className={classNames ++ " " ++ widthClass} onClick />
