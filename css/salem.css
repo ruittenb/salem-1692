@@ -39,9 +39,11 @@ body {
 /* for the entire page */
 body div.ja_JP,
 body div.ko_KR,
+body div.th_TH,
 /* for the language buttons */
 body button.ja_JP,
-body button.ko_KR {
+body button.ko_KR,
+body button.th_TH {
     /**
      * Both Caslon Antique and Alfios don't support Korean characters, but
      * leaving Caslon Antique triggers rendering a sans-serif font (?)
@@ -544,8 +546,9 @@ video + .bubble {
 .page button.flag-de        { background-image: url(../images/flag-de.png); }
 .page button.flag-nl        { background-image: url(../images/flag-nl.png); }
 .page button.flag-ua        { background-image: url(../images/flag-ua.png); }
-.page button.flag-kr        { background-image: url(../images/flag-kr.png); }
 .page button.flag-jp        { background-image: url(../images/flag-jp.png); }
+.page button.flag-kr        { background-image: url(../images/flag-kr.png); }
+.page button.flag-th        { background-image: url(../images/flag-th.png); }
 
 .page button.icon-back      { background-image: url(../images/icon-back.png); }
 .page button.icon-pawn      { background-image: url(../images/icon-pawn.png); }
