@@ -14,7 +14,7 @@ NICE TO HAVE:
  - fade music out
  - reflect state in URL https://betterprogramming.pub/how-and-why-you-should-store-react-ui-state-in-the-url-f2013a204cb2
  - swipe: https://www.npmjs.com/package/react-swipeable
- - get rid of passing goToPage as prop? use Context?
+ - router: https://dusty.phillips.codes/2021/02/03/rescript-with-react-routing-and-navigation/
  - ko, uk, ja
 
 Korean:
