@@ -8,7 +8,8 @@ let intro =
   "Check the boxes to compose a playlist for the nights. " ++ "Each successive night, the next track from the playlist will be played."
 
 @react.component
-let make = (~goToPage): React.element => {
+let make = (): React.element => {
+  let (_currentPage, goToPage) = React.useContext(RouterContext.context)
   let (gameState, setGameState) = React.useContext(GameStateContext.context)
   let t = Translator.getTranslator(gameState.language)
 
@@ -60,7 +61,7 @@ let make = (~goToPage): React.element => {
   )
 
   <div id="setup-music-page" className="page justify-start">
-    <TopBar goToPage returnPage=None onBack={Some(_event => goToPage(_prev => Setup))} />
+    <TopBar returnPage=None onBack={Some(_event => goToPage(_prev => Setup))} />
     <h1> {React.string(t("Music"))} </h1>
     {previewNode}
     <p> {React.string(t(intro))} </p>

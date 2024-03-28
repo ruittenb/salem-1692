@@ -7,7 +7,10 @@ open Types
 let p = "[NightScenarioPage] "
 
 @react.component
-let make = (~subPage: page, ~goToPage): React.element => {
+let make = (~subPage: page): React.element => {
+  // router context
+  let (_currentPage, goToPage) = React.useContext(RouterContext.context)
+
   // connection status
   let (dbConnectionStatus, _setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
   // turn state
@@ -176,7 +179,7 @@ let make = (~subPage: page, ~goToPage): React.element => {
 
   // Construct the page
   let pageElement = switch maybeScenarioStep {
-  | _ if hasError => <NightErrorPage message={t("Unable to load audio")} goToPage />
+  | _ if hasError => <NightErrorPage message={t("Unable to load audio")} />
   | None => React.null // apparently always happens right before changing page
 
   | Some(ConditionalStep(_)) => {
@@ -188,16 +191,14 @@ let make = (~subPage: page, ~goToPage): React.element => {
       React.null
     }
   | Some(Pause(duration)) =>
-    <NightAudioPage goToPage goToNextStep timerId={makeTimer(duration)}>
-      {soundImageGreyed}
-    </NightAudioPage>
+    <NightAudioPage goToNextStep timerId={makeTimer(duration)}> {soundImageGreyed} </NightAudioPage>
   | Some(PlayEffect(effect)) if gameState.doPlayEffects =>
-    <NightAudioPage goToPage goToNextStep>
+    <NightAudioPage goToNextStep>
       {soundImage}
       <Audio track=Effect(effect) onEnded onError />
     </NightAudioPage>
   | Some(PlaySpeech(speech)) if gameState.doPlaySpeech =>
-    <NightAudioPage goToPage goToNextStep>
+    <NightAudioPage goToNextStep>
       {soundImage}
       <Audio track=Speech(speech) onEnded onError />
     </NightAudioPage>

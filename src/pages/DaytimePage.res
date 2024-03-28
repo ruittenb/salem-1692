@@ -5,7 +5,8 @@
 open Types
 
 @react.component
-let make = (~goToPage): React.element => {
+let make = (): React.element => {
+  let (_currentPage, goToPage) = React.useContext(RouterContext.context)
   let (gameState, _setGameState) = React.useContext(GameStateContext.context)
   let t = Translator.getTranslator(gameState.language)
 
@@ -24,9 +25,7 @@ let make = (~goToPage): React.element => {
 
   // Page element
   <div id="daytime-page" className="page justify-start">
-    <TopBar
-      goToPage returnPage=Some(Daytime) onBack={Some(_event => goToPage(_prev => returnPage))}
-    />
+    <TopBar returnPage=Some(Daytime) onBack={Some(_event => goToPage(_prev => returnPage))} />
     <h1> {React.string(t("A day in Salem"))} </h1>
     <Spacer />
     <LargeButton

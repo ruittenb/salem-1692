@@ -14,10 +14,10 @@ let make = (
   ~error: bool=false,
   ~children: React.element,
   ~showNavButtons: bool=true,
-  ~goToPage,
   ~goToNextStep=() => (),
   ~timerId: option<Js.Global.timeoutId>=?,
 ): React.element => {
+  let (_currentPage, goToPage) = React.useContext(RouterContext.context)
   // Language and translator
   let (gameState, _setGameState) = React.useContext(GameStateContext.context)
   let t = Translator.getTranslator(gameState.language)
