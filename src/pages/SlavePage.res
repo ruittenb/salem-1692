@@ -7,7 +7,8 @@ open Types
 let p = "[SlavePage] "
 
 @react.component
-let make = (~goToPage, ~subPage: page): React.element => {
+let make = (~subPage: page): React.element => {
+  let (_currentPage, goToPage) = React.useContext(RouterContext.context)
   let (dbConnectionStatus, setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
   let (gameState, setGameState) = React.useContext(GameStateContext.context)
   // turn state
@@ -129,8 +130,8 @@ let make = (~goToPage, ~subPage: page): React.element => {
   }
 
   let pageElement = switch subPage {
-  | DaytimeWaiting => <DaytimeWaitingPage goToPage />
-  | NightWaiting => <NightWaitingPage goToPage />
+  | DaytimeWaiting => <DaytimeWaitingPage />
+  | NightWaiting => <NightWaitingPage />
   | NightChoiceWitches =>
     <NightChoicePage addressed=witchOrWitches choiceProcessor=choiceWitchProcessor />
   | NightChoiceConstable =>
@@ -168,7 +169,7 @@ let make = (~goToPage, ~subPage: page): React.element => {
       }}
       goToPrevStep={() => goToPage(_prev => NightChoiceConstable)}
     />
-  | _ => <DaytimeWaitingPage goToPage />
+  | _ => <DaytimeWaitingPage />
   }
 
   // component

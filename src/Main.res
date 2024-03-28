@@ -13,7 +13,7 @@ let run = (elementId: string) => {
   switch Utils.safeQuerySelector(elementId) {
   | Ok(rootElement) => {
       let root = ReactDOM.Client.createRoot(rootElement)
-      ReactDOM.Client.Root.render(root, <RootPage />)
+      ReactDOM.Client.Root.render(root, <Router />)
     }
   | Error(msg) => Utils.logError(msg)
   }

@@ -101,6 +101,8 @@ type page =
 
 type navigationSetter = (option<page> => option<page>) => unit
 
+type routerSetter = (page => page) => unit
+
 type audioSpeech =
   | TownGoToSleep
   | TownStillAsleep

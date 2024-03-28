@@ -5,7 +5,8 @@
 open Types
 
 @react.component
-let make = (~goToPage): React.element => {
+let make = (): React.element => {
+  let (_currentPage, goToPage) = React.useContext(RouterContext.context)
   let (dbConnectionStatus, _) = React.useContext(DbConnectionContext.context)
   let (turnState, _) = React.useContext(TurnStateContext.context)
   let (gameState, _) = React.useContext(GameStateContext.context)
@@ -45,7 +46,7 @@ let make = (~goToPage): React.element => {
   })
 
   <div id="daytime-confess-page" className="page justify-spread">
-    <TopBar goToPage returnPage=Some(DaytimeConfess) onBack={None} />
+    <TopBar returnPage=Some(DaytimeConfess) onBack={None} />
     <h1> {React.string(t("Confess"))} </h1>
     <h2> {React.string(t("Citizens of Salem,"))} </h2>
     <p className="text-centered">

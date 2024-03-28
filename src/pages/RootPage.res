@@ -6,7 +6,6 @@ open Types
 open Constants
 
 let initialDbConnectionStatus = NotConnected
-let initialPage: page = Title
 let initialNavigation: option<page> = None
 
 let setOverrideLanguage = (gameState): gameState => {
@@ -39,8 +38,9 @@ let cleanupGameStateMusic = (gameState): gameState => {
 
 @react.component
 let make = (): React.element => {
+  let (currentPage, _goToPage) = React.useContext(RouterContext.context)
+
   let (dbConnectionStatus, setDbConnectionStatus) = React.useState(_ => initialDbConnectionStatus)
-  let (currentPage, goToPage) = React.useState(_ => initialPage)
   let (gameState, setGameState) = React.useState(_ => initialGameState->setDefaultLanguage)
   let (navigation, setNavigation) = React.useState(_ => initialNavigation)
   let (turnState, setTurnState) = React.useState(_ => initialTurnState)
@@ -71,31 +71,31 @@ let make = (): React.element => {
   }, [gameState])
 
   let currentPageElement = switch currentPage {
-  | Title => <TitlePage goToPage />
-  | Setup => <SetupPage goToPage />
-  | SetupLanguage => <SetupLanguagePage goToPage />
-  | SetupMusic => <SetupMusicPage goToPage />
-  | SetupPlayers => <SetupPlayersPage goToPage />
-  | SetupNetwork => <SetupNetworkPage goToPage noGame=false />
-  | SetupNetworkNoGame => <SetupNetworkPage goToPage noGame=true />
-  | Credits => <CreditsPage goToPage />
-  | Daytime => <DaytimePage goToPage />
+  | Title => <TitlePage />
+  | Setup => <SetupPage />
+  | SetupLanguage => <SetupLanguagePage />
+  | SetupMusic => <SetupMusicPage />
+  | SetupPlayers => <SetupPlayersPage />
+  | SetupNetwork => <SetupNetworkPage noGame=false />
+  | SetupNetworkNoGame => <SetupNetworkPage noGame=true />
+  | Credits => <CreditsPage />
+  | Daytime => <DaytimePage />
   // Master
-  | NightDawnOneWitch => <NightScenarioPage goToPage subPage=currentPage />
-  | NightDawnMoreWitches => <NightScenarioPage goToPage subPage=currentPage />
-  | NightOtherNoConstable => <NightScenarioPage goToPage subPage=currentPage />
-  | NightOtherWithConstable => <NightScenarioPage goToPage subPage=currentPage />
+  | NightDawnOneWitch => <NightScenarioPage subPage=currentPage />
+  | NightDawnMoreWitches => <NightScenarioPage subPage=currentPage />
+  | NightOtherNoConstable => <NightScenarioPage subPage=currentPage />
+  | NightOtherWithConstable => <NightScenarioPage subPage=currentPage />
   // Slave
-  | DaytimeWaiting => <SlavePage goToPage subPage=currentPage />
-  | NightWaiting => <SlavePage goToPage subPage=currentPage />
-  | NightChoiceWitches => <SlavePage goToPage subPage=currentPage />
-  | NightConfirmWitches => <SlavePage goToPage subPage=currentPage />
-  | NightChoiceConstable => <SlavePage goToPage subPage=currentPage />
-  | NightConfirmConstable => <SlavePage goToPage subPage=currentPage />
+  | DaytimeWaiting => <SlavePage subPage=currentPage />
+  | NightWaiting => <SlavePage subPage=currentPage />
+  | NightChoiceWitches => <SlavePage subPage=currentPage />
+  | NightConfirmWitches => <SlavePage subPage=currentPage />
+  | NightChoiceConstable => <SlavePage subPage=currentPage />
+  | NightConfirmConstable => <SlavePage subPage=currentPage />
   // Master
-  | DaytimeConfess => <DaytimeConfessPage goToPage />
-  | DaytimeReveal => <DaytimeRevealPage goToPage />
-  | DaytimeRevealNoConfess => <DaytimeRevealPage goToPage allowBackToConfess=false />
+  | DaytimeConfess => <DaytimeConfessPage />
+  | DaytimeReveal => <DaytimeRevealPage />
+  | DaytimeRevealNoConfess => <DaytimeRevealPage allowBackToConfess=false />
   | Close => <ClosePage />
   }
 

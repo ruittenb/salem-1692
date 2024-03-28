@@ -5,7 +5,8 @@
 open Types
 
 @react.component
-let make = (~goToPage): React.element => {
+let make = (): React.element => {
+  let (_currentPage, goToPage) = React.useContext(RouterContext.context)
   let (gameState, setGameState) = React.useContext(GameStateContext.context)
   let (navigation, setNavigation) = React.useContext(NavigationContext.context)
   let t = Translator.getTranslator(gameState.language)
@@ -45,7 +46,6 @@ let make = (~goToPage): React.element => {
 
   <div id="setup-page" className="page justify-start">
     <TopBar
-      goToPage
       returnPage=None
       onBack={Some(
         _event => {

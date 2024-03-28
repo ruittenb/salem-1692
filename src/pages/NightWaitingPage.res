@@ -5,7 +5,8 @@
 open Types
 
 @react.component
-let make = (~goToPage): React.element => {
+let make = (): React.element => {
+  let (_currentPage, goToPage) = React.useContext(RouterContext.context)
   let (gameState, _setGameState) = React.useContext(GameStateContext.context)
   let t = Translator.getTranslator(gameState.language)
   let (turnState, _setTurnState) = React.useContext(TurnStateContext.context)

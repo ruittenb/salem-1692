@@ -307,7 +307,8 @@ let getModusOperandi = (
  * React Component
  */
 @react.component
-let make = (~goToPage, ~noGame): React.element => {
+let make = (~noGame): React.element => {
+  let (_currentPage, goToPage) = React.useContext(RouterContext.context)
   let (dbConnectionStatus, setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
   let (gameState, setGameState) = React.useContext(GameStateContext.context)
   let t = Translator.getTranslator(gameState.language)
@@ -330,7 +331,6 @@ let make = (~goToPage, ~noGame): React.element => {
   // component
   <div id="setup-network-page" className="page justify-start">
     <TopBar
-      goToPage
       returnPage=Some(SetupNetwork)
       onBack={Some(
         _event => {

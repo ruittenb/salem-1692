@@ -5,13 +5,14 @@
 open Types
 
 @react.component
-let make = (~goToPage): React.element => {
+let make = (): React.element => {
+  let (_currentPage, goToPage) = React.useContext(RouterContext.context)
   let (gameState, _) = React.useContext(GameStateContext.context)
   let t = Translator.getTranslator(gameState.language)
 
   // component
   <>
-    <TopBar goToPage returnPage=None onBack={Some(_event => goToPage(_prev => SetupNetwork))} />
+    <TopBar returnPage=None onBack={Some(_event => goToPage(_prev => SetupNetwork))} />
     <h1> {React.string(t("A day in Salem"))} </h1>
     <Spacer />
     <Spacer />

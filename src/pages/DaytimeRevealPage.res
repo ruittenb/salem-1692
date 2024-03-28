@@ -5,7 +5,8 @@
 open Types
 
 @react.component
-let make = (~goToPage, ~allowBackToConfess: bool=true): React.element => {
+let make = (~allowBackToConfess: bool=true): React.element => {
+  let (_currentPage, goToPage) = React.useContext(RouterContext.context)
   let (gameState, _setGameState) = React.useContext(GameStateContext.context)
   let t = Translator.getTranslator(gameState.language)
   let (turnState, _) = React.useContext(TurnStateContext.context)
@@ -79,7 +80,6 @@ let make = (~goToPage, ~allowBackToConfess: bool=true): React.element => {
   // component
   <div id="daytime-reveal-page" className="page justify-spread">
     <TopBar
-      goToPage
       returnPage=Some(returnPage)
       onBack={allowBackToConfess ? Some(_event => goToPage(_prev => DaytimeConfess)) : None}
     />
