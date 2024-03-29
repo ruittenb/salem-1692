@@ -22,14 +22,14 @@ let make = (): React.element => {
   let rulebookUrl =
     "doc/" ++
     switch gameState.language {
-    | #es_ES => `Salem 1692 - Rulebook Spanish (2nd Edition).pdf`
+    | #es_ES => `Salem 1692 - Rulebook Spanish.pdf`
     | #fr_FR => `Salem 1692 - Rulebook French.pdf`
-    | #de_DE => "Salem 1692 - Rulebook German.pdf"
     | #pt_BR => "Salem 1692 - Rulebook Portuguese.pdf"
+    | #de_DE => "Salem 1692 - Rulebook German.pdf"
+    | #uk_UA => "Salem 1692 - Rulebook Ukrainian.pdf"
     | #ko_KR => "Salem 1692 - Rulebook Korean.pdf"
     | #nl_NL
     | #it_IT
-    | #uk_UA
     | #zh_CN
     | #ja_JP
     | #th_TH
