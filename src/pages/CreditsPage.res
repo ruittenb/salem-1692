@@ -30,6 +30,7 @@ let make = (): React.element => {
     | #nl_NL
     | #it_IT
     | #uk_UA
+    | #zh_CN
     | #ja_JP
     | #th_TH
     | #en_US => "Salem 1692 - Rulebook English (6th Edition).pdf"

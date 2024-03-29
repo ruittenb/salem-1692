@@ -20,6 +20,7 @@ let make = (): React.element => {
     #pt_BR,
     #de_DE,
     #nl_NL,
+    #zh_CN,
     #ja_JP,
     #ko_KR,
     #uk_UA,
@@ -36,17 +37,18 @@ let make = (): React.element => {
       goToPage(_prev => Setup)
     }
     let (classNames, label) = switch buttonLanguage {
-    | #en_US => ("icon-top oblongbutton compact flag flag-us-gb en_US", t("English"))
-    | #es_ES => ("icon-top oblongbutton compact flag flag-es es_ES", t(`Español`))
-    | #pt_BR => ("icon-top oblongbutton compact flag flag-br pt_BR", t(`Português`))
-    | #fr_FR => ("icon-top oblongbutton compact flag flag-fr fr_FR", t(`Français`))
-    | #it_IT => ("icon-top oblongbutton compact flag flag-it it_IT", t("Italiano"))
-    | #de_DE => ("icon-top oblongbutton compact flag flag-de de_DE", t("Deutsch"))
-    | #nl_NL => ("icon-top oblongbutton compact flag flag-nl nl_NL", t("Nederlands"))
-    | #uk_UA => ("icon-top oblongbutton compact flag flag-ua uk_UA", t(`Українська`))
-    | #ja_JP => ("icon-top oblongbutton compact flag flag-jp ja_JP", t(`日本語`))
-    | #ko_KR => ("icon-top oblongbutton compact flag flag-kr ko_KR", t(`한국어`))
-    | #th_TH => ("icon-top oblongbutton compact flag flag-th th_TH", t(`ภาษาไทย`))
+    | #en_US => ("icon-top oblongbutton compact flag flag-us-gb en_US", "English")
+    | #es_ES => ("icon-top oblongbutton compact flag flag-es es_ES", `Español`)
+    | #pt_BR => ("icon-top oblongbutton compact flag flag-br pt_BR", `Português`)
+    | #fr_FR => ("icon-top oblongbutton compact flag flag-fr fr_FR", `Français`)
+    | #it_IT => ("icon-top oblongbutton compact flag flag-it it_IT", "Italiano")
+    | #de_DE => ("icon-top oblongbutton compact flag flag-de de_DE", "Deutsch")
+    | #nl_NL => ("icon-top oblongbutton compact flag flag-nl nl_NL", "Nederlands")
+    | #uk_UA => ("icon-top oblongbutton compact flag flag-ua uk_UA", `Українська`)
+    | #zh_CN => ("icon-top oblongbutton compact flag flag-cn zh_CN", `中文`)
+    | #ja_JP => ("icon-top oblongbutton compact flag flag-jp ja_JP", `日本語`)
+    | #ko_KR => ("icon-top oblongbutton compact flag flag-kr ko_KR", `한국어`)
+    | #th_TH => ("icon-top oblongbutton compact flag flag-th th_TH", `ภาษาไทย`)
     }
     let widthClass = index == 0 ? "grid-wide" : ""
     <Button key={label} label className={classNames ++ " " ++ widthClass} onClick />
