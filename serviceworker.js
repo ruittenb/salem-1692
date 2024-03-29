@@ -50,6 +50,7 @@ function getFilesToCache(debug) {
         'images/flag-jp.png',
         'images/flag-kr.png',
         'images/flag-nl.png',
+        'images/flag-th.png',
         'images/flag-ua.png',
         'images/flag-us-gb.png',
         'images/gramophone.webp',
