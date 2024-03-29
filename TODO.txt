@@ -23,4 +23,5 @@ Korean:
 Thai:
  - ซาเลม 1692  #th_TH
 
-
+Chinese:
+ - #zh_CN
