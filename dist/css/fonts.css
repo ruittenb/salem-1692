@@ -56,3 +56,18 @@
     font-style: italic;
 }
 
+/** ****************************************************************************
+ */
+
+@font-face {
+    font-family: NotoSerifThai;
+    src: url(../fonts/NotoSerifThai-Regular.ttf);
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: NotoSerifThai;
+    src: url(../fonts/NotoSerifThai-Bold.ttf);
+    font-weight: 800;
+    font-style: normal;
+}

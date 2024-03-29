@@ -32,23 +32,29 @@ body {
      * Caslon Antique is very beautiful, but does not support Cyrillic characters.
      * For this latter script, we will fall back to Alfios, which is also quite nice.
      */
-    font-family: CaslonAntique, Alfios, 'Times New Roman', Times, serif;
+    font-family: CaslonAntique, 'Times New Roman', Times, serif;
     font-size: 26px;
 }
 
 /* for the entire page */
+body div.uk_UA,
 body div.ja_JP,
 body div.ko_KR,
-body div.th_TH,
 /* for the language buttons */
+body button.uk_UA,
 body button.ja_JP,
-body button.ko_KR,
-body button.th_TH {
+body button.ko_KR {
     /**
      * Both Caslon Antique and Alfios don't support Korean characters, but
      * leaving Caslon Antique triggers rendering a sans-serif font (?)
      */
-    font-family: Alfios, 'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body div.th_TH, /* for the entire page */
+body button.th_TH /* for the language buttons */ {
+    font-family: NotoSerifThai, 'Times New Roman', Times, serif;
+    font-size: 24px;
 }
 
 #topbar {

@@ -20,9 +20,9 @@ let make = (): React.element => {
     #pt_BR,
     #de_DE,
     #nl_NL,
-    //#uk_UA,
-    //#ja_JP,
-    //#ko_KR,
+    #ja_JP,
+    #ko_KR,
+    #uk_UA,
     #th_TH,
   ]
 

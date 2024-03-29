@@ -138,9 +138,9 @@ let table = Js.Dict.fromArray([
   ("Libraries: ", `ไลบรารี: `),
   ("Sound effects: ", `เอฟเฟกต์เสียง: `),
   ("Voice actors: ", `นักพากย์: `),
-  ("Images: ", `รูปภาพ:`),
-  ("Music: ", `เพลง:`),
-  ("Licensed under ", `ได้รับอนุญาตภายใต้`),
+  ("Images: ", `รูปภาพ: `),
+  ("Music: ", `เพลง: `),
+  ("Licensed under ", `ได้รับอนุญาตภายใต้ `),
   // Daytime
   ("A day in Salem", `หนึ่งวันในซาเลม`),
   ("Dawn,", `รุ่งอรุณ`),

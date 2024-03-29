@@ -26,11 +26,12 @@ let make = (): React.element => {
     | #fr_FR => `Salem 1692 - Rulebook French.pdf`
     | #de_DE => "Salem 1692 - Rulebook German.pdf"
     | #pt_BR => "Salem 1692 - Rulebook Portuguese.pdf"
+    | #ko_KR => "Salem 1692 - Rulebook Korean.pdf"
     | #nl_NL
     | #it_IT
     | #uk_UA
     | #ja_JP
-    | #ko_KR
+    | #th_TH
     | #en_US => "Salem 1692 - Rulebook English (6th Edition).pdf"
     }
 
