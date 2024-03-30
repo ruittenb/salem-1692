@@ -13,6 +13,7 @@ type language = [
   | #de_DE
   | #nl_NL
   | #uk_UA
+  | #hu_HU
   | #zh_CN
   | #ja_JP
   | #ko_KR
@@ -56,6 +57,7 @@ let getHtmlLanguage = (language: t): string => {
   | #de_DE
   | #nl_NL
   | #uk_UA
+  | #hu_HU
   | #zh_CN
   | #ja_JP
   | #ko_KR

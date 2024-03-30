@@ -25,3 +25,8 @@ Thai:
 
 Chinese:
  - #zh_CN
+
+ - Noto Serif Thai
+ - Noto Serif Japanese
+ - Noto Serif Korean
+ - Noto Serif Simplified Chinese

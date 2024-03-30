@@ -27,6 +27,7 @@ let make = (): React.element => {
     | #pt_BR => "Salem 1692 - Rulebook Portuguese.pdf"
     | #de_DE => "Salem 1692 - Rulebook German.pdf"
     | #uk_UA => "Salem 1692 - Rulebook Ukrainian.pdf"
+    | #hu_HU => "Salem 1692 - Rulebook Hungarian.pdf"
     | #ko_KR => "Salem 1692 - Rulebook Korean.pdf"
     | #nl_NL
     | #it_IT

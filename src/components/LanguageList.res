@@ -20,10 +20,11 @@ let make = (): React.element => {
     #pt_BR,
     #de_DE,
     #nl_NL,
+    #uk_UA,
+    #hu_HU,
     #zh_CN,
     #ja_JP,
     #ko_KR,
-    #uk_UA,
     #th_TH,
   ]
 
@@ -45,6 +46,7 @@ let make = (): React.element => {
     | #de_DE => ("icon-top oblongbutton compact flag flag-de de_DE", "Deutsch")
     | #nl_NL => ("icon-top oblongbutton compact flag flag-nl nl_NL", "Nederlands")
     | #uk_UA => ("icon-top oblongbutton compact flag flag-ua uk_UA", `Українська`)
+    | #hu_HU => ("icon-top oblongbutton compact flag flag-hu hu_HU", "Magyar")
     | #zh_CN => ("icon-top oblongbutton compact flag flag-cn zh_CN", `中文`)
     | #ja_JP => ("icon-top oblongbutton compact flag flag-jp ja_JP", `日本語`)
     | #ko_KR => ("icon-top oblongbutton compact flag flag-kr ko_KR", `한국어`)
