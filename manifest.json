@@ -127,7 +127,7 @@
       "label": "Night Screen"
     },
     {
-      "src": "screenshots/screenshot-A.png",
+      "src": "screenshots/A-night-audio-en.png",
       "sizes": "2048x1360",
       "type": "image/png",
       "platform": "wide",
@@ -135,7 +135,7 @@
       "label": "Night Screen"
     },
     {
-      "src": "screenshots/screenshot-B.png",
+      "src": "screenshots/B-daytime-en.png",
       "sizes": "2048x1360",
       "type": "image/png",
       "platform": "wide",
