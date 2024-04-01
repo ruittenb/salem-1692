@@ -41,12 +41,5 @@ let getTranslator = (language: LanguageCodec.t, message: string): string => {
   | #ja_JP => lookup(JA_JP.table, message, "Japanese")
   | #ko_KR => lookup(KO_KR.table, message, "Korean")
   | #th_TH => lookup(TH_TH.table, message, "Thai")
-  | _ =>
-    (
-      () => {
-        Js.log2("No language file configured for", language)
-        "?"
-      }
-    )()
   }
 }
