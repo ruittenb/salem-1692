@@ -38276,16 +38276,10 @@ function getLanguage(param) {
       return "fr_FR";
     case "it":
       return "it_IT";
-    case "ja":
-      return "ja_JP";
-    case "ko":
-      return "ko_KR";
     case "nl":
       return "nl_NL";
     case "pt":
       return "pt_BR";
-    case "uk":
-      return "uk_UA";
     default:
       return;
   }
@@ -39633,45 +39627,32 @@ function formatString(template, args) {
 function getTranslator(language, message) {
   if (language === "it_IT") {
     return lookup(IT_IT$Salem1692.table, message, "Italian");
-  }
-  if (language === "ja_JP") {
+  } else if (language === "ja_JP") {
     return lookup(JA_JP$Salem1692.table, message, "Japanese");
-  }
-  if (language === "pt_BR") {
+  } else if (language === "pt_BR") {
     return lookup(PT_BR$Salem1692.table, message, "Portuguese");
-  }
-  if (language === "de_DE") {
+  } else if (language === "de_DE") {
     return lookup(DE_DE$Salem1692.table, message, "German");
-  }
-  if (language === "ko_KR") {
+  } else if (language === "ko_KR") {
     return lookup(KO_KR$Salem1692.table, message, "Korean");
-  }
-  if (language === "en_US") {
+  } else if (language === "en_US") {
     return lookup(EN_US$Salem1692.table, message, "English");
-  }
-  if (language === "es_ES") {
+  } else if (language === "es_ES") {
     return lookup(ES_ES$Salem1692.table, message, "Spanish");
-  }
-  if (language === "zh_CN") {
+  } else if (language === "zh_CN") {
     return lookup(ZH_CN$Salem1692.table, message, "Chinese");
-  }
-  if (language === "fr_FR") {
+  } else if (language === "fr_FR") {
     return lookup(FR_FR$Salem1692.table, message, "French");
-  }
-  if (language === "th_TH") {
+  } else if (language === "th_TH") {
     return lookup(TH_TH$Salem1692.table, message, "Thai");
-  }
-  if (language === "nl_NL") {
+  } else if (language === "nl_NL") {
     return lookup(NL_NL$Salem1692.table, message, "Dutch");
-  }
-  if (language === "uk_UA") {
+  } else if (language === "uk_UA") {
     return lookup(UK_UA$Salem1692.table, message, "Ukrainian");
+  } else {
+    console.log("No language file configured for", language);
+    return "?";
   }
-  throw {
-    RE_EXN_ID: "Match_failure",
-    _1: ["Translator.res", 29, 2],
-    Error: new Error()
-  };
 }
 
 /* DE_DE-Salem1692 Not a pure module */
