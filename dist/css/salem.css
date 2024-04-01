@@ -37,9 +37,11 @@ body {
 }
 
 /* for the entire page */
+body div.uk_UA,
 body div.ja_JP,
 body div.ko_KR,
 /* for the language buttons */
+body button.uk_UA,
 body button.ja_JP,
 body button.ko_KR {
     /**
@@ -47,6 +49,12 @@ body button.ko_KR {
      * leaving Caslon Antique triggers rendering a sans-serif font (?)
      */
     font-family: Alfios, 'Times New Roman', Times, serif;
+}
+
+body div.th_TH, /* for the entire page */
+body button.th_TH /* for the language buttons */ {
+    font-family: CaslonAntique, NotoSerifThai, 'Times New Roman', Times, serif;
+    font-size: 24px;
 }
 
 #topbar {
@@ -544,8 +552,11 @@ video + .bubble {
 .page button.flag-de        { background-image: url(../images/flag-de.png); }
 .page button.flag-nl        { background-image: url(../images/flag-nl.png); }
 .page button.flag-ua        { background-image: url(../images/flag-ua.png); }
-.page button.flag-kr        { background-image: url(../images/flag-kr.png); }
+.page button.flag-hu        { background-image: url(../images/flag-hu.png); }
+.page button.flag-cn        { background-image: url(../images/flag-cn.png); }
 .page button.flag-jp        { background-image: url(../images/flag-jp.png); }
+.page button.flag-kr        { background-image: url(../images/flag-kr.png); }
+.page button.flag-th        { background-image: url(../images/flag-th.png); }
 
 .page button.icon-back      { background-image: url(../images/icon-back.png); }
 .page button.icon-pawn      { background-image: url(../images/icon-pawn.png); }

@@ -23,4 +23,10 @@ Korean:
 Thai:
  - ซาเลม 1692  #th_TH
 
+Chinese:
+ - #zh_CN
 
+ - Noto Serif Thai
+ - Noto Serif Japanese
+ - Noto Serif Korean
+ - Noto Serif Simplified Chinese
