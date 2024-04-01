@@ -20,12 +20,12 @@ let make = (): React.element => {
     #pt_BR,
     #de_DE,
     #nl_NL,
-    #uk_UA,
-    #hu_HU,
-    #zh_CN,
-    #ja_JP,
-    #ko_KR,
-    #th_TH,
+    //#uk_UA,
+    //#hu_HU,
+    //#zh_CN,
+    //#ja_JP,
+    //#ko_KR,
+    //#th_TH,
   ]
 
   let languageToButton = (buttonLanguage, index) => {
