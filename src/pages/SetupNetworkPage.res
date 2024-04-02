@@ -284,7 +284,7 @@ let getModusOperandi = (
       />
       <Button
         label={t("Leave guest mode")}
-        className="condensed-es condensed-fr ultra-condensed-pt ultra-condensed-it condensed-de ultra-condensed-uk ultra-condensed-ko"
+        className="condensed-es condensed-fr ultra-condensed-pt ultra-condensed-it condensed-de ultra-condensed-uk ultra-condensed-hu ultra-condensed-ko"
         onClick={_event => {
           leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
           setSlaveGameIdValidity(_prev => SlaveInputHidden)

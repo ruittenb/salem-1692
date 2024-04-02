@@ -368,6 +368,9 @@ video + .bubble {
 .uk_UA .page button.ultra-condensed-uk {
     font-size: 22px;
 }
+.hu_HU .page button.ultra-condensed-hu {
+    font-size: 23px;
+}
 .ko_KR .page button {
     line-height: 42px;
 }
@@ -455,6 +458,7 @@ video + .bubble {
     font-size: 22px;
 }
 .uk_UA .page button.ok-button,
+.hu_HU .page button.ok-button,
 .ko_KR .page button.ok-button {
     font-size: inherit;
 }

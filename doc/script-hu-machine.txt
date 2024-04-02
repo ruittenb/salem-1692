@@ -24,6 +24,10 @@ G. Csak gesztusokkal, csendben eldöntik, kit akarnak megölni.
 J. A boszorkányok választottak. Most becsukják a szemüket.
 
 
+
+// rendőr -> rendőrbíró
+
+
 M. Miután a boszorkányok becsukták a szemüket, a rendőr felébred.
    A rendőr dönti el, hogy kit védenek meg ezen az éjszakán.
 
