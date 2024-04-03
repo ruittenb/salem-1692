@@ -1,6 +1,6 @@
 
-# `npm bin` has been deprecated
-export PATH:=$(PATH):$(shell pwd)/node_modules/.bin
+#export PATH:=$(PATH):$(shell pwd)/node_modules/.bin
+export PATH:=$(PATH):$(shell pnpm bin)
 
 JS_COLOR=10 # bold green
 CSS_COLOR=15 # bold yellow
@@ -46,8 +46,8 @@ reformat: ## Reformat all source code files according to the rescript standard
 
 ##@ Build process:
 
-node_modules: package.json package-lock.json
-	npm install
+node_modules: package.json pnpm-lock.yaml
+	pnpm install
 	touch node_modules
 
 .PHONY: build-css
@@ -126,7 +126,7 @@ tag-%: ## Update the %:major:minor:patch:% version number, recompile, create git
 	which rpl 2>/dev/null
 	which jq
 	VERSION_FROM=$$(jq .version package.json) && \
-	npm version $*                            && \
+	pnpm version $*                           && \
 	VERSION_TO=$$(jq .version package.json)   && \
 	rpl $$VERSION_FROM $$VERSION_TO $(VERSION_FILES)
 	$(MAKE) -- -finish-tag
