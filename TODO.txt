@@ -19,13 +19,14 @@ NICE TO HAVE:
 
 Korean:
  - https://brand.naver.com/asmodeekorea/products/6826839515
-
+ 
 Thai:
  - ซาเลม 1692  #th_TH
 
 Chinese:
  - #zh_CN
 
+ - https://developers.googleblog.com/2017/04/noto-serif-cjk-is-here.html
  - Noto Serif Thai
  - Noto Serif Japanese
  - Noto Serif Korean
