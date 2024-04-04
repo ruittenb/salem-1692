@@ -1,0 +1,37 @@
+
+A. Leszállt az éj. A város elalszik. Emberek, csukjátok be a szemeteket!
+
+B. Az éjszaka a végéhez közeledik. A város még alszik. Mindenki csukja be a szemét.
+
+
+C. Miután mindenki lehunyta a szemét, a boszorkány felébred.
+
+E. A boszorkány kinyitja a szemét. Hang nélkül eldönti, kié lesz a fekete macska.
+   Ha akarja, saját magát is választhatja.
+
+H. A boszorkány meghozta a döntését. Most becsukja a szemét.
+
+
+D. Miután mindenki lehunyta a szemét, a boszorkányok felébrednek.
+   A boszorkányok kinyitják a szemüket. Szemkontaktust teremtenek, hogy elismerjék egymást.
+
+F. Csupán gesztusokkal, csendben eldöntik, ki kapja a fekete macskát.
+   Ha akarnak, saját maguk közül is választhatnak valakit.
+
+G. Csak gesztusokkal, csendben eldöntik, kit akarnak megölni.
+   Maguk közül is választhatnak egyet.
+
+J. A boszorkányok meghozták döntésüket. Most becsukják a szemüket.
+
+
+M. Miután a boszorkányok lehunyták a szemüket, a rendőrbíró felébred.
+   A rendőrbíró dönti el, hogy kit védenek meg ezen az éjszakán.
+
+P. Nem választhatja saját magát.
+
+Q. Választhatja saját magát is.
+
+N. A rendőrbíró meghozta a döntését. Most becsukja a szemét.
+
+
+Z. Hajnalodik. A város felébred. Emberek, nyissátok ki a szemeteket!

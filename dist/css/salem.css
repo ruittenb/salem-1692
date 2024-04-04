@@ -368,6 +368,12 @@ video + .bubble {
 .uk_UA .page button.ultra-condensed-uk {
     font-size: 22px;
 }
+.hu_HU .page button.condensed-hu {
+    font-size: 24px;
+}
+.hu_HU .page button.ultra-condensed-hu {
+    font-size: 22px;
+}
 .ko_KR .page button {
     line-height: 42px;
 }
@@ -411,14 +417,16 @@ video + .bubble {
 .page button:focus {
     outline: revert;
 }
-.page button:active {
-    margin: 2px -2px 30px 2px;
+.page button:active:not([disabled]) {
+    margin-top: 2px;
+    margin-right: -2px;
+    margin-left: 2px;
     box-shadow: none;
 }
 .page button.compact {
     margin-bottom: 30px;
 }
-.page button.compact:active {
+.page button.compact:active:not([disabled]) {
     margin-bottom: 28px;
 }
 .page button[disabled] {
@@ -450,11 +458,15 @@ video + .bubble {
 .page button.last {
     margin-bottom: 100px;
 }
+.page button.last:active:not([disabled]) {
+    margin-bottom: 98px;
+}
 
 .page button.ok-button {
     font-size: 22px;
 }
 .uk_UA .page button.ok-button,
+.hu_HU .page button.ok-button,
 .ko_KR .page button.ok-button {
     font-size: inherit;
 }
@@ -470,6 +482,9 @@ video + .bubble {
     min-height: 100px; /* needed for Safari */
     font-size: 28px;
     padding: 0 8px;
+}
+.page button.largebutton:active {
+  margin-bottom: 30px;
 }
 
 .page button.oblongbutton {

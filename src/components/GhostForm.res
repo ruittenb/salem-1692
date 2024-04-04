@@ -12,8 +12,9 @@ let make = (): React.element => {
   let t = Translator.getTranslator(gameState.language)
 
   let documentUrl = switch gameState.language {
-  | #fr_FR => `doc/Salem 1692 - Rules for 2-3 Players French.pdf`
   | #en_US => "doc/Salem 1692 - Rules for 2-3 Players English.pdf"
+  | #fr_FR => `doc/Salem 1692 - Rules for 2-3 Players French.pdf`
+  | #uk_UA => `doc/Salem 1692 - Rules for 2-3 Players Ukrainian.pdf`
   | _ => "doc/Salem 1692 - Rules for 2-3 Players English.pdf"
   }
 
