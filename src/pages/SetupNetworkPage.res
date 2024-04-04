@@ -162,7 +162,7 @@ let getModusOperandi = (
       <Spacer />
       <Button
         label={t("Join Game")}
-        className="condensed-it condensed-uk condensed-ko"
+        className="condensed-it condensed-uk ultra-condensed-hu condensed-ko"
         onClick={_event => setSlaveGameIdValidity(_prev => SlaveInputShown)}
       />
     </>
