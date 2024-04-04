@@ -614,8 +614,14 @@ video + .bubble {
 #title-page button {
     margin-bottom: 25px;
 }
+#title-page button:active {
+    margin-bottom: 23px;
+}
 #title-page button.last {
     margin-bottom: 100px;
+}
+#title-page button.last:active {
+    margin-bottom: 98px;
 }
 
 #title-page div.icon-gear {
