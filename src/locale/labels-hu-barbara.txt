@@ -1,8 +1,4 @@
-/**
- * Locale: hu_HU
- */
-let table = Js.Dict.fromArray([
-  // TitlePage
+
   ("New Game", `Új játék`),
   ("Start Game", `Játék indítása`),
   ("Play Game", `Játék lejátszása`),
@@ -10,7 +6,7 @@ let table = Js.Dict.fromArray([
   ("Play", `Játék`),
   ("Settings", `Beállítások`),
   ("Exit", `Kilépés`),
-  // Setup
+
   ("Players", `Játékosok`),
   ("Names", `Nevek`),
   (
@@ -53,7 +49,7 @@ let table = Js.Dict.fromArray([
     "Check the boxes to compose a playlist for the nights. Each successive night, the next track from the playlist will be played.",
     `Jelöld be a jelölőnégyzeteket az éjszakák lejátszási listájának összeállításához. Minden egyes egymást követő éjszakán a lejátszási lista következő zeneszáma kerül lejátszásra.`,
   ),
-  // Multi-Telephone
+
   ("Multi-Telephone", `Több telefon`),
   ("Host Game", `Házigazdajáték`),
   ("Game Code", `Játékkód`),
@@ -77,7 +73,7 @@ let table = Js.Dict.fromArray([
   ),
   (
     `Take the other smartphone and look in the app under Multi-Telephone → Play as Host. Then enter the game code here.`,
-    `Vedd elő a másik okostelefont, és keresd meg az alkalmazásban a "Több telefon → Játék házigazdaként" menüpontot. Ezután add meg itt a játék kódját.`,
+    `Vedd elő a másik okostelefont, és keresd meg az alkalmazásban a Több telefon → Játék házigazdaként menüpontot. Ezután add meg itt a játék kódját.`,
   ),
   (
     "It is possible to join this game from another smartphone.",
@@ -85,7 +81,7 @@ let table = Js.Dict.fromArray([
   ),
   (
     `Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. Then enter the following game code there.`,
-    `Vedd elő a másik okostelefont, és keresd meg az alkalmazásban a "Több telefon → Játék vendégként" menüpontot. Ezután add meg itt a következő játékkódot.`,
+    `Vedd elő a másik okostelefont, és keresd meg az alkalmazásban a Több telefon → Játék vendégként menüpontot. Ezután add meg itt a következő játékkódot.`,
   ),
   ("You are currently hosting a game.", `Jelenleg egy játék házigazdája vagy.`),
   (
@@ -96,13 +92,12 @@ let table = Js.Dict.fromArray([
     "If you want to host a game so that others can join, you should leave guest mode first.",
     `Ha házigazda akarsz lenni, hogy mások is csatlakozhassanak a játékhoz, először ki kell lépned a vendégmódból.`,
   ),
-  ("", ""),
-  ("No authorization to use the camera", `Nincs engedély a kamera használatára`),
+  ("No authorization to use the camera", `Nincs jogosultságod a kamera használatára`),
   (
     "Please authorize the use of the camera to scan a QR code",
     `Kérjük, engedélyezd a kamera használatát a QR-kód beolvasásához`,
   ),
-  // Credits
+
   ("Credits", `Kreditek`),
   ("Game:", `Játék:`),
   ("Rulebook", `Szabálykönyv`),
@@ -116,7 +111,7 @@ let table = Js.Dict.fromArray([
   ("Images: ", `Képek: `),
   ("Music: ", `Zene:`),
   ("Licensed under ", `Licencelve a következő alatt: `),
-  // Daytime
+
   ("A day in Salem", `Egy nap Salemben`),
   ("Dawn,", `Hajnal,`),
   ("one witch", `egy boszorkány`),
@@ -132,58 +127,57 @@ let table = Js.Dict.fromArray([
     "Waiting for the host to announce nighttime...",
     `Várjuk, hogy a házigazda bejelentse az éjszakát...`,
   ),
-  // Dawn / Night
+
   ("Dawn", `Hajnal`),
   ("Night", `Éjszaka`),
   ("The witches", `A boszorkányok`),
   ("The witch's turn", `A boszorkány sora`),
   ("The witches' turn", `A boszorkányok sora`),
   (
-    "Decide-SG who should get the black cat:",
+    "Witch, decide who should get the black cat:",
     `Boszorkány, döntsd el, ki kapja a fekete macskát:`,
   ),
   (
-    "Decide-PL who should get the black cat:",
+    "Witches, decide who should get the black cat:",
     `Boszorkányok, döntsétek el, ki kapja a fekete macskát:`,
   ),
-  ("Choose-SG a victim:", `Boszorkány, válassz áldozatot:`),
-  ("Choose-PL a victim:", `Boszorkányok, válasszatok áldozatot:`),
+  ("Witch, choose a victim:", `Boszorkány, válassz áldozatot:`),
+  ("Witches, choose a victim:", `Boszorkányok, válasszatok áldozatot:`),
   ("The constable", `A rendőrbíró`),
   ("The constable's turn", `A rendőrbíró sora`),
   ("Choose another player to protect:", `Válassz másik játékost, akit meg akarsz védeni:`),
   ("Choose someone to protect:", `Válassz valakit, akit meg akarsz védeni:`),
   ("Abort", `Megszakítás`),
   ("Skip", `Kihagyás`),
-  ("Everybody is sound asleep... what about you?", `Mindenki mélyen alszik... és te?`),
-  // Confirm
+  ("Everybody is sound asleep... what about you?", `Mindenki mélyen alszik... és te?`),
+
   ("Witch, are you sure?", `Boszorkány, biztos vagy benne?`),
   ("Witches, are you sure?", `Boszorkányok, biztosak vagytok benne?`),
   ("Constable, are you sure?", `Rendőrbíró, biztos vagy benne?`),
   ("Confirm", `Megerősít`),
   ("Yes", `Igen`),
   ("No", `Nem`),
-  // Error
+
   ("Error", `Hiba`),
   ("Unable to load audio", `Nem sikerült betölteni a hangot`),
   ("Index out of bounds", `Index a határokon kívül`),
-  // Confess
+
   ("Confess", `Vallomás`),
   ("Citizens of Salem,", `Salem polgárai,`),
   (
     "those among you who wish to confess may now do so.",
     `akik közületek vallomást kívánnak tenni, most megtehetik.`,
   ),
-  // Reveal
+
   ("The Reveal", `A feltárás`),
-  ("Find out what happened while you were sleeping.", `Derítsd ki, mi történt, amíg aludtál.`),
+  (
+    "Find out what happened while you were sleeping.",
+    `Derítsd ki, mi történt, amíg aludtál.`,
+  ),
   ("Reveal witch's victim", `Fedd fel a boszorkány áldozatát`),
   ("Reveal witches' victim", `Fedd fel a boszorkányok áldozatát`),
-  ("The witch attacked-PRE", `A boszorkány megtámadta `),
-  ("The witch attacked-POST", ""),
-  ("The witches attacked-PRE", `A boszorkányok megtámadták `),
-  ("The witches attacked-POST", ""),
-  (" got the black cat", ` megkapta a fekete macskát`),
+  ("The witch attacked ...", `A boszorkány megtámadta ...`),
+  ("The witches attacked ...", `A boszorkányok megtámadták ...`),
+  ("... got the black cat", `... megkapta a fekete macskát`),
   (`Reveal constable's protégé`, `Fedd fel a rendőrbíró pártfogoltját`),
-  ("The constable protected-PRE", `A rendőrbíró megvédte `),
-  ("The constable protected-POST", ""),
-])
+  ("The constable protected ...", `A rendőrbíró megvédte ...`),
