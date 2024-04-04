@@ -85,7 +85,7 @@ let table = Js.Dict.fromArray([
   ),
   (
     `Take the other smartphone and look in the app under Multi-Telephone → Play as Guest. Then enter the following game code there.`,
-    `Vedd elő a másik okostelefont, és keresd meg az alkalmazásban a "Több telefon → Játék vendégként" menüpontot. Ezután add meg itt a következő játékkódot.`,
+    `Vedd elő a másik okostelefont, és keresd meg az alkalmazásban a "Több telefon → Játék vendégként" menüpontot. Ezután add meg ott a következő játékkódot.`,
   ),
   ("You are currently hosting a game.", `Jelenleg egy játék házigazdája vagy.`),
   (
@@ -97,7 +97,7 @@ let table = Js.Dict.fromArray([
     `Ha házigazda akarsz lenni, hogy mások is csatlakozhassanak a játékhoz, először ki kell lépned a vendégmódból.`,
   ),
   ("", ""),
-  ("No authorization to use the camera", `Nincs engedély a kamera használatára`),
+  ("No authorization to use the camera", `Nem engedélyezted a kamera használatát`),
   (
     "Please authorize the use of the camera to scan a QR code",
     `Kérjük, engedélyezd a kamera használatát a QR-kód beolvasásához`,
