@@ -114,7 +114,7 @@ let table = Js.Dict.fromArray([
   ("Sound effects: ", `Hanghatások: `),
   ("Voice actors: ", `Hangalámondók: `),
   ("Images: ", `Képek: `),
-  ("Music: ", `Zene:`),
+  ("Music: ", `Zene: `),
   ("Licensed under ", `Licencelve a következő alatt: `),
   // Daytime
   ("A day in Salem", `Egy nap Salemben`),
