@@ -51,6 +51,10 @@ body button.ko_KR {
     font-family: Alfios, 'Times New Roman', Times, serif;
 }
 
+body div.uk_UA {
+    hyphenate-character: '-';
+}
+
 body div.th_TH, /* for the entire page */
 body button.th_TH /* for the language buttons */ {
     font-family: CaslonAntique, NotoSerifThai, 'Times New Roman', Times, serif;
