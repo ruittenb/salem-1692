@@ -446,7 +446,7 @@ video + .bubble {
     margin-bottom: 22px;
 }
 
-.page button.realsquarebutton {
+.page button.bigsquarebutton {
     background-position: center center;
     width: 125px;
     height: 125px;
@@ -503,7 +503,7 @@ video + .bubble {
     justify-content: flex-end;
 }
 
-.page button.squarebutton {
+.page button.bulkybutton {
     justify-self: center;
     word-break: break-all;
     font-size: 32px;
@@ -511,7 +511,7 @@ video + .bubble {
     width: 72%;
     height: 90px;
 }
-.page button.squarebutton:active {
+.page button.bulkybutton:active {
     margin: 26px calc(9% - 2px) 22px calc(9% + 2px);
 }
 
@@ -541,7 +541,7 @@ video + .bubble {
     padding-right: 22px;
     background-position: calc(100% - 14px) center;
 }
-.page button.icon-only,
+.page button.smallsquarebutton,
 .page div.button-sized {
     background-position: center center;
     width: 42px;
@@ -734,16 +734,16 @@ video + .bubble {
     grid-template-columns: 1fr 1fr;
 }
 
-#layout-list button.squarebutton {
+#layout-list button.bulkybutton {
     text-align: center;
     vertical-align: middle;
     line-height: 0;
 }
 
-#layout-list button.squarebutton.layout-1222::after { content: url(../images/tablelayout-1222.png); }
-#layout-list button.squarebutton.layout-2221::after { content: url(../images/tablelayout-2221.png); }
-#layout-list button.squarebutton.layout-1221::after { content: url(../images/tablelayout-1221.png); }
-#layout-list button.squarebutton.layout-2222::after { content: url(../images/tablelayout-2222.png); }
+#layout-list button.bulkybutton.layout-1222::after { content: url(../images/tablelayout-1222.png); }
+#layout-list button.bulkybutton.layout-2221::after { content: url(../images/tablelayout-2221.png); }
+#layout-list button.bulkybutton.layout-1221::after { content: url(../images/tablelayout-1221.png); }
+#layout-list button.bulkybutton.layout-2222::after { content: url(../images/tablelayout-2222.png); }
 
 /** ****************************************************************************
  * Credits Page
