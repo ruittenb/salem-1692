@@ -74,10 +74,10 @@ body button.th_TH /* for the language buttons */ {
     z-index: 50;
 }
 #topbar .kader {
-    height: calc(100% - 4px);
+    height: calc(100% - 2px);
     width: 100%;
-    margin: 2px 0;
-    border-top: 2px solid var(--misty-brown);
+    margin: 0 0 2px 0;
+    padding-top: 4px;
     border-bottom: 2px solid var(--misty-brown);
 }
 #topbar .topbar {
