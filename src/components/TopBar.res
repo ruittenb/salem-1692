@@ -17,10 +17,12 @@ let make = (~onBack, ~returnPage: option<page>): React.element => {
   }
 
   <div id="topbar">
-    <div className="topbar">
-      {backArrowIcon}
-      <NetworkIcon />
-      {configIcon}
+    <div className="kader">
+      <div className="topbar">
+        {backArrowIcon}
+        <NetworkIcon />
+        {configIcon}
+      </div>
     </div>
   </div>
 }
