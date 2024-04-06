@@ -127,7 +127,7 @@ let make = (
       } else {
         ""
       }
-      <SquareButton
+      <BulkyButton
         key={Belt.Int.toString(index) ++ "/" ++ player} // make key unique
         label=player
         className={rotatedClass ++ wideClass}
