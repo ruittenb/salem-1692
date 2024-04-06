@@ -505,6 +505,7 @@ video + .bubble {
 
 .page button.squarebutton {
     justify-self: center;
+    word-break: break-all;
     font-size: 32px;
     margin: 24px 9%;
     width: 72%;
