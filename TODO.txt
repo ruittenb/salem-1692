@@ -3,6 +3,7 @@ SEVERE:
  - town-still-asleep recordings
    - done: fr, pt, it, de
 	 - todo: nl, en, es
+ - es: brujas -> brujos
 
 IMPORTANT:
  - the "choose no one" option for the constable (and witches?) in ghost mode
