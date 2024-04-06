@@ -36,37 +36,37 @@ let make = (): React.element => {
       {switch (evenOdd, gameState.seating) {
       | (Odd, #OneAtTop) =>
         <>
-          <SquareButton
+          <BulkyButton
             className="layout-1222 icon-left icon-checked" onClick={onClick(#OneAtTop)}
           />
-          <SquareButton
+          <BulkyButton
             className="layout-2221 icon-left icon-unchecked" onClick={onClick(#TwoAtTop)}
           />
         </>
       | (Odd, #TwoAtTop) =>
         <>
-          <SquareButton
+          <BulkyButton
             className="layout-1222 icon-left icon-unchecked" onClick={onClick(#OneAtTop)}
           />
-          <SquareButton
+          <BulkyButton
             className="layout-2221 icon-left icon-checked" onClick={onClick(#TwoAtTop)}
           />
         </>
       | (Even, #OneAtTop) =>
         <>
-          <SquareButton
+          <BulkyButton
             className="layout-1221 icon-left icon-checked" onClick={onClick(#OneAtTop)}
           />
-          <SquareButton
+          <BulkyButton
             className="layout-2222 icon-left icon-unchecked" onClick={onClick(#TwoAtTop)}
           />
         </>
       | (Even, #TwoAtTop) =>
         <>
-          <SquareButton
+          <BulkyButton
             className="layout-1221 icon-left icon-unchecked" onClick={onClick(#OneAtTop)}
           />
-          <SquareButton
+          <BulkyButton
             className="layout-2222 icon-left icon-checked" onClick={onClick(#TwoAtTop)}
           />
         </>

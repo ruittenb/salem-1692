@@ -127,7 +127,7 @@ let make = (
       } else {
         ""
       }
-      <SquareButton
+      <BulkyButton
         key={Belt.Int.toString(index) ++ "/" ++ player} // make key unique
         label=player
         className={rotatedClass ++ wideClass}
@@ -163,7 +163,7 @@ let make = (
     <Spacer />
     {timer}
     <Button
-      className="icon-rot spacer-top realsquarebutton"
+      className="icon-rot spacer-top bigsquarebutton"
       onClick={_event => setRotation(prevRotation => rotateMore(prevRotation))}
     />
   </>

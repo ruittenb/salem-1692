@@ -20,13 +20,13 @@ let make = (
 
   <div className="player-entry-item">
     {if showSwapButton {
-      <Button className="icon-only icon-left icon-move staggered" onClick=onSwap />
+      <Button className="smallsquarebutton icon-left icon-move staggered" onClick=onSwap />
     } else {
       <div className="button-sized" />
     }}
     {inputField}
     {if showRemoveButton {
-      <Button className="icon-only icon-right icon-trash" onClick=onRemove />
+      <Button className="smallsquarebutton icon-right icon-trash" onClick=onRemove />
     } else {
       <div className="button-sized" />
     }}
