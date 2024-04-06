@@ -422,9 +422,7 @@ video + .bubble {
     outline: revert;
 }
 .page button:active:not([disabled]) {
-    margin-top: 2px;
-    margin-right: -2px;
-    margin-left: 2px;
+    margin: 2px -2px 30px 2px;
     box-shadow: none;
 }
 .page button.compact {
