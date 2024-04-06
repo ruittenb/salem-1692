@@ -163,7 +163,7 @@ let make = (
     <Spacer />
     {timer}
     <Button
-      className="icon-rot spacer-top realsquarebutton"
+      className="icon-rot spacer-top bigsquarebutton"
       onClick={_event => setRotation(prevRotation => rotateMore(prevRotation))}
     />
   </>
