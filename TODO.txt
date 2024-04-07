@@ -1,8 +1,8 @@
 
 SEVERE:
  - town-still-asleep recordings
-   - done: fr, pt, it, de
-	 - todo: nl, en, es
+   - done: en, fr, pt, it, de
+	 - todo: nl, es
  - es: brujas -> brujos
 
 IMPORTANT:
@@ -32,3 +32,4 @@ Chinese:
  - Noto Serif Japanese
  - Noto Serif Korean
  - Noto Serif Simplified Chinese
+
