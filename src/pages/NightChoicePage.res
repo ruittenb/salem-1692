@@ -3,13 +3,14 @@
  */
 
 open Types
+open PlayerCodec
 
 let p = "[NightChoicePage] "
 
 @react.component
 let make = (
   ~addressed: addressed,
-  ~choiceProcessor: (player, ~skipConfirmation: bool) => unit,
+  ~choiceProcessor: (PlayerCodec.t, ~skipConfirmation: bool) => unit,
 ): React.element => {
   // db connection status
   let (dbConnectionStatus, _setDbConnectionStatus) = React.useContext(DbConnectionContext.context)
@@ -32,7 +33,7 @@ let make = (
         Utils.logDebug(p ++ "Clearing witches' choice from turn state...")
         setTurnState(_prevTurnState => {
           ...turnState,
-          choiceWitches: None,
+          choiceWitches: Undecided,
         })
         ChoiceWitchesSubject
       }
@@ -40,7 +41,7 @@ let make = (
         Utils.logDebug(p ++ "Clearing constable's choice from turn state...")
         setTurnState(_prevTurnState => {
           ...turnState,
-          choiceConstable: None,
+          choiceConstable: Undecided,
         })
         ChoiceConstableSubject
       }
@@ -54,7 +55,11 @@ let make = (
         maybePlayer => {
           switch maybePlayer {
           | Some("") => ()
-          | Some(player) => choiceProcessor((player: player), ~skipConfirmation=false)
+          | Some(playerString) =>
+            choiceProcessor(
+              playerString->playerTypeFromString->Belt.Option.getWithDefault(Undecided),
+              ~skipConfirmation=false,
+            )
           | None => ()
           }
         },

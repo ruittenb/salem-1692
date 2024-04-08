@@ -57,12 +57,8 @@ let make = (~subPage: page): React.element => {
                     {
                       nrWitches: dbRecord.masterNumberWitches,
                       nightType: dbRecord.masterNightType,
-                      choiceWitches: dbRecord.slaveChoiceWitches === ""
-                        ? None
-                        : Some(dbRecord.slaveChoiceWitches),
-                      choiceConstable: dbRecord.slaveChoiceConstable === ""
-                        ? None
-                        : Some(dbRecord.slaveChoiceConstable),
+                      choiceWitches: dbRecord.slaveChoiceWitches,
+                      choiceConstable: dbRecord.slaveChoiceConstable,
                     }
                   },
                 )
@@ -95,10 +91,10 @@ let make = (~subPage: page): React.element => {
   | (_, Night) => "night-page"
   }
 
-  let choiceWitchProcessor = (player: player, ~skipConfirmation: bool) => {
+  let choiceWitchProcessor = (player: PlayerCodec.t, ~skipConfirmation: bool) => {
     let _dummy = skipConfirmation
     setTurnState(prevTurnState => {
-      {...prevTurnState, choiceWitches: Some(player)}
+      {...prevTurnState, choiceWitches: player}
     })
     Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
       FirebaseClient.saveGameTurnState(
@@ -106,16 +102,16 @@ let make = (~subPage: page): React.element => {
         gameId,
         turnState.nightType->NightTypeCodec.nightTypeToString,
         turnState.nrWitches->NumerusCodec.numerusToJs,
-        player,
-        turnState.choiceConstable->Belt.Option.getWithDefault(""),
+        player->PlayerCodec.playerTypeToString,
+        turnState.choiceConstable->PlayerCodec.playerTypeToString,
       )
     })
   }
 
-  let choiceConstableProcessor = (player: player, ~skipConfirmation: bool) => {
+  let choiceConstableProcessor = (player: PlayerCodec.t, ~skipConfirmation: bool) => {
     let _dummy = skipConfirmation
     setTurnState(prevTurnState => {
-      {...prevTurnState, choiceConstable: Some(player)}
+      {...prevTurnState, choiceConstable: player}
     })
     Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
       FirebaseClient.saveGameTurnState(
@@ -123,8 +119,8 @@ let make = (~subPage: page): React.element => {
         gameId,
         turnState.nightType->NightTypeCodec.nightTypeToString,
         turnState.nrWitches->NumerusCodec.numerusToJs,
-        turnState.choiceWitches->Belt.Option.getWithDefault(""),
-        player,
+        turnState.choiceWitches->PlayerCodec.playerTypeToString,
+        player->PlayerCodec.playerTypeToString,
       )
     })
   }

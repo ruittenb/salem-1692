@@ -17,13 +17,24 @@ let map = (player1: playerType, mapFn: playerName => playerName) => {
   }
 }
 
-let encoder: Decco.encoder<playerType> = (playerType: playerType): Js.Json.t => {
-  let playerTypeString = switch playerType {
+let playerTypeToLocalizedString = (playerType: playerType, translator): string => {
+  switch playerType {
+  | Player(playerName) => playerName
+  | Nobody => translator("nobody-SUBJ")
+  | Undecided => "Undecided"
+  }
+}
+
+let playerTypeToString = (playerType: playerType): string => {
+  switch playerType {
   | Player(playerName) => "Player:" ++ playerName
   | Nobody => "Nobody"
   | Undecided => "Undecided"
   }
-  playerTypeString->Decco.stringToJson
+}
+
+let encoder: Decco.encoder<playerType> = (playerType: playerType): Js.Json.t => {
+  playerType->playerTypeToString->Decco.stringToJson
 }
 
 let playerTypeFromString = (value: string): option<playerType> => {

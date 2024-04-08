@@ -7,6 +7,7 @@ SEVERE:
 
 IMPORTANT:
  - the "choose no one" option for the constable (and witches?) in ghost mode
+   - playerTypeToString redundant?
 
 NICE TO HAVE:
  - Safari: backgroundmusic sometimes(?) as loud as speech

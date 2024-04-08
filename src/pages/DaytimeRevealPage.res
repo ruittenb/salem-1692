@@ -3,6 +3,7 @@
  */
 
 open Types
+open PlayerCodec
 
 @react.component
 let make = (~allowBackToConfess: bool=true): React.element => {
@@ -31,8 +32,9 @@ let make = (~allowBackToConfess: bool=true): React.element => {
       t("The witches attacked-POST"),
     )
   }
+  let constableRevealPrompt = t(`Reveal constable's protégé`)
 
-  let targetName = (target: player) =>
+  let targetName = (target: PlayerCodec.t) =>
     switch target {
     | Undecided => ""
     | Nobody => t("nobody-OBJ")
@@ -40,9 +42,10 @@ let make = (~allowBackToConfess: bool=true): React.element => {
     }
 
   let witchesRevealButton = switch turnState.choiceWitches {
-  | None
-  | Some(Undecided) => React.null
-  | Some(witchTarget) =>
+  | Undecided => React.null
+  | witchTarget =>
+    // The "nobody" variant of this text is probably ungrammatical in
+    // many languages, but this scenario should not happen anyway.
     <LargeRevealButton
       revealPrompt=witchesRevealPrompt
       revelationPromptPre=witchesRevelationPromptPre
@@ -54,21 +57,29 @@ let make = (~allowBackToConfess: bool=true): React.element => {
   }
 
   let constableRevealButton = switch turnState.choiceConstable {
-  | None
-  | Some(Undecided) => React.null
-  | Some(constableTarget) =>
+  | Undecided => React.null
+  | Nobody =>
     <LargeRevealButton
-      revealPrompt={t(`Reveal constable's protégé`)}
+      revealPrompt={constableRevealPrompt}
+      revelationPromptPre={t("The constable did not protect anybody")}
+      revelationPromptPost={""}
+      secret={""}
+      revealed=constableTargetRevealed
+      onClick={_event => setConstableTargetRevealed(prev => !prev)}
+    />
+  | Player(constableTargetName) =>
+    <LargeRevealButton
+      revealPrompt={constableRevealPrompt}
       revelationPromptPre={t("The constable protected-PRE")}
       revelationPromptPost={t("The constable protected-POST")}
-      secret={targetName(constableTarget)}
+      secret={constableTargetName}
       revealed=constableTargetRevealed
       onClick={_event => setConstableTargetRevealed(prev => !prev)}
     />
   }
 
   let freeToProceed =
-    witchTargetRevealed && (constableTargetRevealed || turnState.choiceConstable === None)
+    witchTargetRevealed && (constableTargetRevealed || turnState.choiceConstable === Undecided)
 
   let backToConfessButton =
     <Button
