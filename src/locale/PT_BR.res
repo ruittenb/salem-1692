@@ -180,4 +180,7 @@ let table = Js.Dict.fromArray([
   (`Reveal constable's protégé`, `Revelar o protegido do vigilante`),
   ("The constable protected-PRE", "O vigilante protegeu "),
   ("The constable protected-POST", ""),
+  ("nobody-SUBJ", `ninguém`),
+  ("nobody-OBJ", `ninguém`),
+  ("The constable did not protect anybody", `O vigilante não protegeu ninguém`),
 ])

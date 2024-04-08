@@ -186,5 +186,7 @@ let table = Js.Dict.fromArray([
   (`Reveal constable's protégé`, `Fedd fel a rendőrbíró pártfogoltját`),
   ("The constable protected-PRE", `A rendőrbíró megvédte `),
   ("The constable protected-POST", ""),
+  ("nobody-SUBJ", "senki"),
   ("nobody-OBJ", "senkit"),
+  ("The constable did not protect anybody", `A rendőrbíró megvédte senkit`),
 ])
