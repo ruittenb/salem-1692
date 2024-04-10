@@ -7,7 +7,7 @@
 type decision = [
   | #Yes
   | #No
-  | #Undecided
+  | #Unconfirmed
 ]
 
 let encoder: Decco.encoder<decision> = (decision: decision): Js.Json.t => {

@@ -60,7 +60,7 @@ let make = (~addressed: addressed, ~confirmationProcessor, ~goToPrevStep): React
     }
     Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
       // clear any previous confirmation that was recorded
-      FirebaseClient.saveGameConfirmation(dbConnection, gameId, subject, #Undecided)
+      FirebaseClient.saveGameConfirmation(dbConnection, gameId, subject, #Unconfirmed)
 
       // install new listener
       Utils.logDebug(p ++ "About to install confirmation listener")

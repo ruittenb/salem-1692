@@ -61,8 +61,8 @@ let transformToDbRecord = (
     masterHasGhostPlayers: gameState.hasGhostPlayers,
     slaveChoiceWitches: turnState.choiceWitches,
     slaveChoiceConstable: turnState.choiceConstable,
-    slaveConfirmWitches: #Undecided,
-    slaveConfirmConstable: #Undecided,
+    slaveConfirmWitches: #Unconfirmed,
+    slaveConfirmConstable: #Unconfirmed,
     updatedAt: Js.Date.make()->Js.Date.toISOString,
   }
 }

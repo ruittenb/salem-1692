@@ -153,7 +153,7 @@ let make = (~subPage: page): React.element => {
     switch decision {
     | #Yes => goToNextStep()
     | #No => goToPrevStep()
-    | #Undecided => ()
+    | #Unconfirmed => ()
     }
   }
 
