@@ -52,15 +52,11 @@ let make = (
         dbConnection,
         gameId,
         subject,
-        maybePlayer => {
-          switch maybePlayer {
-          | Some("") => ()
-          | Some(playerString) =>
-            choiceProcessor(
-              playerString->playerTypeFromString->Belt.Option.getWithDefault(Undecided),
-              ~skipConfirmation=false,
-            )
+        player => {
+          switch player->Belt.Option.flatMap(playerTypeFromString) {
           | None => ()
+          | Some(Undecided) => ()
+          | Some(person) => choiceProcessor(person, ~skipConfirmation=false)
           }
         },
       )

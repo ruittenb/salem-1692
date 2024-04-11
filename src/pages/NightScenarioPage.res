@@ -192,11 +192,13 @@ let make = (~subPage: page): React.element => {
     }
   | Some(Pause(duration)) =>
     <NightAudioPage goToNextStep timerId={makeTimer(duration)}> {soundImageGreyed} </NightAudioPage>
+
   | Some(PlayEffect(effect)) if gameState.doPlayEffects =>
     <NightAudioPage goToNextStep>
       {soundImage}
       <Audio track=Effect(effect) onEnded onError />
     </NightAudioPage>
+
   | Some(PlaySpeech(speech)) if gameState.doPlaySpeech =>
     <NightAudioPage goToNextStep>
       {soundImage}
