@@ -48,7 +48,7 @@ let make = (): React.element => {
   <div id="daytime-confess-page" className="page justify-spread">
     <TopBar returnPage=Some(DaytimeConfess) onBack={None} />
     <h1> {React.string(t("Confess"))} </h1>
-    <h2> {React.string(t("Citizens of Salem,"))} </h2>
+    <h2> {React.string(t("Residents of Salem,"))} </h2>
     <p className="text-centered">
       {React.string(t("those among you who wish to confess may now do so."))}
     </p>

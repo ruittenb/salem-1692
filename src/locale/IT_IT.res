@@ -159,7 +159,7 @@ let table = Js.Dict.fromArray([
   ("Index out of bounds", "Indice fuori limite"),
   // Confess
   ("Confess", "La confessione"),
-  ("Citizens of Salem,", "Cittadini di Salem,"),
+  ("Residents of Salem,", "Cittadini di Salem,"),
   (
     "those among you who wish to confess may now do so.",
     "quelli tra voi che desiderano confessarsi possono ora farlo.",

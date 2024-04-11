@@ -173,7 +173,7 @@ let table = Js.Dict.fromArray([
   ("Index out of bounds", `인덱스가 범위를 벗어났습니다.`),
   // Confess
   ("Confess", `불다`),
-  ("Citizens of Salem,", `세일럼 시민 여러분`),
+  ("Residents of Salem,", `세일럼 시민 여러분`),
   (
     "those among you who wish to confess may now do so.",
     `너희 중에 고백하고 싶은 사람은 이제 그렇게 하여라.`,
