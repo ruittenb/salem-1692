@@ -18,6 +18,8 @@ NICE TO HAVE:
  - router: https://dusty.phillips.codes/2021/02/03/rescript-with-react-routing-and-navigation/
  - ko, uk, ja
 
+ - "player name buttons"?
+
 Korean:
  - https://brand.naver.com/asmodeekorea/products/6826839515
  
