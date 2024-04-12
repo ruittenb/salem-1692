@@ -20,7 +20,7 @@ let map = (player1: playerType, mapFn: playerName => playerName) => {
 let playerTypeToLocalizedString = (playerType: playerType, translator): string => {
   switch playerType {
   | Player(playerName) => playerName
-  | Nobody => translator("nobody-SUBJ")
+  | Nobody => translator("Nobody-SUBJ")
   | Undecided => "Undecided"
   }
 }

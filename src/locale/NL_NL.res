@@ -180,7 +180,7 @@ let table = Js.Dict.fromArray([
   (" got the black cat", ` heeft de zwarte kat gekregen`), // contains nbsp
   ("The constable protected-PRE", "De schout heeft "),
   ("The constable protected-POST", " beschermd"),
-  ("nobody-SUBJ", "niemand"),
+  ("Nobody-SUBJ", "Niemand"),
   ("nobody-OBJ", "niemand"),
   ("The constable did not protect anybody", "De schout heeft niemand beschermd"),
 ])

@@ -194,7 +194,7 @@ let table = Js.Dict.fromArray([
   (`Reveal constable's protégé`, `경찰관의 제자를 밝혀라`),
   ("The constable protected-PRE", `경찰관은 `),
   ("The constable protected-POST", `을 보호했습니다.`),
-  ("nobody-SUBJ", `아무도`),
+  ("Nobody-SUBJ", `아무도`),
   ("nobody-OBJ", `아무도`),
   ("The constable did not protect anybody", `경찰은 누구도 보호하지 않았습니다`),
 ])
