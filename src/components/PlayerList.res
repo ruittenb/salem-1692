@@ -144,6 +144,15 @@ let make = (
     0, // default sort order
   )
 
+  let nobodyButton =
+    <BulkyButton
+      key={"999/nobody"} // make key unique
+      label={t("nobody-SUBJ")}
+      className={rotatedClass ++ " grid-wide"}
+      style={ReactDOM.Style.make(~order=Belt.Int.toString(999), ())}
+      onClick={_event => choiceProcessor(PlayerCodec.Nobody, ~skipConfirmation=false)}
+    />
+
   let onAlarm = () => {
     // In Slave mode, we do display the timer, but when the alarm goes off
     // we don't take any action. That is a task for the Master instance.
@@ -169,7 +178,10 @@ let make = (
   <>
     <h2> {React.string(title)} </h2>
     <p className="text-centered"> {React.string(subtitle)} </p>
-    <div id="player-list"> {React.array(buttons)} </div>
+    <div id="player-list">
+      {React.array(buttons)}
+      <If condition={gameState.hasGhostPlayers && addressed == Constable}> {nobodyButton} </If>
+    </div>
     <Spacer />
     {timer}
     <Button
