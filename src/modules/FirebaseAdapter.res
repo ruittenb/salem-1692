@@ -190,7 +190,7 @@ let listen = (
   | Some(observableRef) => {
       logDebug(p ++ "Listening on " ++ observableKey)
       onValue(observableRef, snapshot => {
-        // We are going to get a snapshot immediately upon installing the listener.
+        // We will receive a snapshot immediately upon installing the listener.
         // NightScenarioPage takes care of this, so we can ignore it here.
         let result: Js.Nullable.t<string> = getValue(snapshot)
         if Constants.debug {

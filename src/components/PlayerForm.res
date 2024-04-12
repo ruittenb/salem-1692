@@ -141,7 +141,7 @@ let make = (): React.element => {
     <PlayerFormLine
       key={gameState.players->Belt.Array.length->Belt.Int.toString} // make key unique
       value=""
-      className="condensed-fr"
+      className="condensed-fr condensed-uk"
       placeholder={t("(add one)")}
       showSwapButton=false
       showRemoveButton=false
