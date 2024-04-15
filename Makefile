@@ -78,7 +78,7 @@ build-minify: build-css build-res ## Compile the res and css files; bundle and m
 ##@ Building during development:
 
 .PHONY: watch-css
-watch-css: ## Compile the css files; watch for changes
+watch-css: build-css ## Compile the css files; watch for changes
 	fswatch -o $(CSS_FILES) | while read f; do \
 		tput setaf $(CSS_COLOR);               \
 		echo '>>>> Minifying';                 \
@@ -87,7 +87,7 @@ watch-css: ## Compile the css files; watch for changes
 	done &
 
 .PHONY: watch-res
-watch-res: ## Compile the res files; bundle the js files; watch for changes
+watch-res: build-res ## Compile the res files; bundle the js files; watch for changes
 	fswatch -o $(JS_FILES) | while read f; do \
 		tput setaf $(JS_COLOR);               \
 		echo '>>>> Bundling';                 \
