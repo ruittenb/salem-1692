@@ -10,7 +10,6 @@ let p = "[Timer] "
 let containerFraction = 0.8 // fraction of window width
 let zeroTime = 2 // when to stop the timer, leaving some room for the barrel
 let deadSpace = 75. // width of the barrel and flame together
-let containerWidth = window->innerWidth *. containerFraction -. deadSpace
 
 /*
  * <--------------------- innerWidth ------------------------> *
@@ -34,6 +33,9 @@ let containerWidth = window->innerWidth *. containerFraction -. deadSpace
 @react.component
 let make = (~onAlarm: unit => unit=() => ()): React.element => {
   let (remainingPercent, setRemainingPercent) = React.useState(_ => 100) // percent
+
+  let containerWidth = window->innerWidth *. containerFraction -. deadSpace
+
   // total available time lies somewhere between 6 and 10 seconds
   let delay = Js.Math.random_int(60, 100)
 
