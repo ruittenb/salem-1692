@@ -38,8 +38,8 @@ type slaveCodeValidity =
   | SlaveInputShownAndInvalid
   | SlaveInputShownAndAbsent
 
-@decco type player = string
-@decco type players = array<player>
+// if array<PlayerCodec.t> cannot be handled by decco
+//@decco type playersType = array<PlayerCodec.t>
 
 let playersFromJson = (playerArrayJson: Js.Json.t): option<array<string>> => {
   playerArrayJson
@@ -53,7 +53,7 @@ let playersFromJson = (playerArrayJson: Js.Json.t): option<array<string>> => {
 type gameState = {
   gameType: GameTypeCodec.t,
   language: LanguageCodec.t,
-  players: players,
+  players: array<PlayerCodec.t>,
   seating: SeatingCodec.t,
   hasGhostPlayers: bool,
   doPlayEffects: bool,
@@ -66,8 +66,8 @@ type gameStateSetter = (gameState => gameState) => unit
 type turnState = {
   nrWitches: NumerusCodec.t,
   nightType: NightTypeCodec.t,
-  choiceWitches: option<player>,
-  choiceConstable: option<player>,
+  choiceWitches: PlayerCodec.t,
+  choiceConstable: PlayerCodec.t,
 }
 type turnStateSetter = (turnState => turnState) => unit
 
@@ -211,13 +211,13 @@ type dbRecord = {
   masterGameId: GameTypeCodec.gameId,
   masterLanguage: LanguageCodec.t,
   masterPhase: PhaseCodec.t,
-  masterPlayers: array<player>,
+  masterPlayers: array<PlayerCodec.t>,
   masterSeating: SeatingCodec.t,
   masterNumberWitches: NumerusCodec.t,
   masterNightType: NightTypeCodec.t,
   masterHasGhostPlayers: bool,
-  slaveChoiceWitches: player,
-  slaveChoiceConstable: player,
+  slaveChoiceWitches: PlayerCodec.t,
+  slaveChoiceConstable: PlayerCodec.t,
   slaveConfirmWitches: DecisionCodec.t,
   slaveConfirmConstable: DecisionCodec.t,
   updatedAt: string,

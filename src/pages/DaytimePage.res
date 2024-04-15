@@ -14,8 +14,8 @@ let make = (): React.element => {
   let defaultNextState = {
     nrWitches: More,
     nightType: Dawn,
-    choiceWitches: None,
-    choiceConstable: None,
+    choiceWitches: PlayerCodec.Undecided,
+    choiceConstable: PlayerCodec.Undecided,
   }
 
   let returnPage = switch gameState.gameType {

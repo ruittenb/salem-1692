@@ -8,8 +8,8 @@ let defaultSetter: turnStateSetter = (_: turnState => turnState) => ()
 let defaultValue: turnState = {
   nrWitches: One,
   nightType: Dawn,
-  choiceWitches: None,
-  choiceConstable: None,
+  choiceWitches: PlayerCodec.Undecided,
+  choiceConstable: PlayerCodec.Undecided,
 }
 let context = React.createContext((defaultValue, defaultSetter))
 

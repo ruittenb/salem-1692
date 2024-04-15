@@ -61,7 +61,12 @@ let musicTracks =
   ]->Js.Array2.sortInPlace
 
 let defaultSelectedMusicTracks = ["Myst on the Moor", "Some Amount of Evil"]
-let defaultPlayers = ["Ambrosia", "Bellatrix", "Cassandra", "Drizella"]
+let defaultPlayers: array<PlayerCodec.t> = [
+  Player("Ambrosia"),
+  Player("Bellatrix"),
+  Player("Cassandra"),
+  Player("Drizella"),
+]
 
 // Initialization values
 
@@ -80,6 +85,6 @@ let initialGameState = {
 let initialTurnState: turnState = {
   nrWitches: One,
   nightType: Dawn,
-  choiceWitches: None,
-  choiceConstable: None,
+  choiceWitches: PlayerCodec.Undecided,
+  choiceConstable: PlayerCodec.Undecided,
 }

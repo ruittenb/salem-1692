@@ -5,6 +5,7 @@
 // @@warning("-33") // Unused 'open Types'
 
 open Types
+open PlayerCodec
 
 let p = "[NightConfirmPage] "
 
@@ -26,8 +27,8 @@ let make = (~addressed: addressed, ~confirmationProcessor, ~goToPrevStep): React
   let choice = switch addressed {
   | Witch
   | Witches =>
-    turnState.choiceWitches->Belt.Option.getWithDefault("")
-  | Constable => turnState.choiceConstable->Belt.Option.getWithDefault("")
+    turnState.choiceWitches->playerTypeToLocalizedString(t)
+  | Constable => turnState.choiceConstable->playerTypeToLocalizedString(t)
   }
 
   // Runs only once right after mounting the component
@@ -35,16 +36,16 @@ let make = (~addressed: addressed, ~confirmationProcessor, ~goToPrevStep): React
     Utils.logDebugGreen(
       p ++
       "Mounted; choiceWitches:" ++
-      turnState.choiceWitches->Belt.Option.getWithDefault("") ++
+      turnState.choiceWitches->playerTypeToString ++
       " choiceConstable:" ++
-      turnState.choiceConstable->Belt.Option.getWithDefault(""),
+      turnState.choiceConstable->playerTypeToString,
     )
     // At this point we should have a choice to ask confirmation for.
     // Therefore, these situations should never happen.
     switch addressed {
-    | Witch if turnState.choiceWitches === None => goToPrevStep()
-    | Witches if turnState.choiceWitches === None => goToPrevStep()
-    | Constable if turnState.choiceConstable === None => goToPrevStep()
+    | Witch if turnState.choiceWitches === Undecided => goToPrevStep()
+    | Witches if turnState.choiceWitches === Undecided => goToPrevStep()
+    | Constable if turnState.choiceConstable === Undecided => goToPrevStep()
     | _ => ()
     }
     let subject = switch addressed {
@@ -59,7 +60,7 @@ let make = (~addressed: addressed, ~confirmationProcessor, ~goToPrevStep): React
     }
     Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
       // clear any previous confirmation that was recorded
-      FirebaseClient.saveGameConfirmation(dbConnection, gameId, subject, #Undecided)
+      FirebaseClient.saveGameConfirmation(dbConnection, gameId, subject, #Unconfirmed)
 
       // install new listener
       Utils.logDebug(p ++ "About to install confirmation listener")

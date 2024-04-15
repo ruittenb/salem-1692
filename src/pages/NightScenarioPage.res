@@ -74,8 +74,8 @@ let make = (~subPage: page): React.element => {
   React.useEffect1(() => {
     let nightType = turnState.nightType->NightTypeCodec.nightTypeToString
     let nrWitches = turnState.nrWitches->NumerusCodec.numerusToJs
-    let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
-    let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
+    let choiceWitches = turnState.choiceWitches->PlayerCodec.playerTypeToString
+    let choiceConstable = turnState.choiceConstable->PlayerCodec.playerTypeToString
     Utils.logDebugStyled(
       p ++
       `Detected turnState change; ◇ nightType:` ++
@@ -118,14 +118,14 @@ let make = (~subPage: page): React.element => {
   let onEnded = (_event): unit => goToNextStep()
 
   // Store chosen players (killed and saved) in context
-  let goFromWitchChoiceToNextStep = (player: player, ~skipConfirmation: bool): unit => {
+  let goFromWitchChoiceToNextStep = (player: PlayerCodec.t, ~skipConfirmation: bool): unit => {
     Utils.logDebug(
       p ++
       "Witch choice:" ++
-      player ++
+      player->PlayerCodec.playerTypeToLocalizedString(t) ++
       " skipConfirmation:" ++ (skipConfirmation ? "true" : "false"),
     )
-    setTurnState(prevTurnState => {...prevTurnState, choiceWitches: Some(player)})
+    setTurnState(prevTurnState => {...prevTurnState, choiceWitches: player})
     goToNextStep() // to confirmation page
 
     // in Master mode, the feedback from firebase will trigger skipping confirmation
@@ -133,14 +133,14 @@ let make = (~subPage: page): React.element => {
       goToNextStep()
     }
   }
-  let goFromConstableChoiceToNextStep = (player: player, ~skipConfirmation: bool): unit => {
+  let goFromConstableChoiceToNextStep = (player: PlayerCodec.t, ~skipConfirmation: bool): unit => {
     Utils.logDebug(
       p ++
       "Constable choice:" ++
-      player ++
+      player->PlayerCodec.playerTypeToLocalizedString(t) ++
       " skipConfirmation:" ++ (skipConfirmation ? "true" : "false"),
     )
-    setTurnState(prevTurnState => {...prevTurnState, choiceConstable: Some(player)})
+    setTurnState(prevTurnState => {...prevTurnState, choiceConstable: player})
     goToNextStep() // to confirmation page
 
     // in Master mode, the feedback from firebase will trigger skipping confirmation
@@ -153,7 +153,7 @@ let make = (~subPage: page): React.element => {
     switch decision {
     | #Yes => goToNextStep()
     | #No => goToPrevStep()
-    | #Undecided => ()
+    | #Unconfirmed => ()
     }
   }
 
@@ -192,11 +192,13 @@ let make = (~subPage: page): React.element => {
     }
   | Some(Pause(duration)) =>
     <NightAudioPage goToNextStep timerId={makeTimer(duration)}> {soundImageGreyed} </NightAudioPage>
+
   | Some(PlayEffect(effect)) if gameState.doPlayEffects =>
     <NightAudioPage goToNextStep>
       {soundImage}
       <Audio track=Effect(effect) onEnded onError />
     </NightAudioPage>
+
   | Some(PlaySpeech(speech)) if gameState.doPlaySpeech =>
     <NightAudioPage goToNextStep>
       {soundImage}

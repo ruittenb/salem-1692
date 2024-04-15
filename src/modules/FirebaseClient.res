@@ -59,10 +59,10 @@ let transformToDbRecord = (
     masterNumberWitches: turnState.nrWitches,
     masterNightType: turnState.nightType,
     masterHasGhostPlayers: gameState.hasGhostPlayers,
-    slaveChoiceWitches: turnState.choiceWitches->Belt.Option.getWithDefault(""),
-    slaveChoiceConstable: turnState.choiceConstable->Belt.Option.getWithDefault(""),
-    slaveConfirmWitches: #Undecided,
-    slaveConfirmConstable: #Undecided,
+    slaveChoiceWitches: turnState.choiceWitches,
+    slaveChoiceConstable: turnState.choiceConstable,
+    slaveConfirmWitches: #Unconfirmed,
+    slaveConfirmConstable: #Unconfirmed,
     updatedAt: Js.Date.make()->Js.Date.toISOString,
   }
 }
@@ -99,8 +99,8 @@ let createGame = (dbConnection: dbConnection, gameState: gameState): promise<uni
   let emptyTurnState: turnState = {
     nrWitches: One,
     nightType: Dawn,
-    choiceWitches: None,
-    choiceConstable: None,
+    choiceWitches: PlayerCodec.Undecided,
+    choiceConstable: PlayerCodec.Undecided,
   }
   let dbRecord = transformToDbRecord(gameState, Title, emptyTurnState, Pause(0.))
   FirebaseAdapter.writeGame(dbConnection, dbRecord, "Created")

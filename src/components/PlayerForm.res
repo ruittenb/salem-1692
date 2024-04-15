@@ -45,16 +45,16 @@ let make = (): React.element => {
 
   // change a player on leaving the field
   let blurHandler: int => blurHandler = (playerIndex, event) => {
-    let newValue: player = ReactEvent.Focus.target(event)["value"]
-    let oldValue: player = ReactEvent.Focus.target(event)["defaultValue"]
+    let newValue: string = ReactEvent.Focus.target(event)["value"]
+    let oldValue: string = ReactEvent.Focus.target(event)["defaultValue"]
     let isNewValueEmpty = newValue->Js.String2.length === 0
     let isLastPlayer = gameState.players->Js.Array2.length < 2
     let newPlayer = switch (isNewValueEmpty, isLastPlayer) {
-    | (false, _) => [newValue] // accept the new name if it is not empty
+    | (false, _) => [PlayerCodec.Player(newValue)] // accept the new name if it is not empty
     | (true, false) => [] // delete the name if it is empty
-    | (true, true) => [respace(oldValue)] // refuse to delete name if it is the last one
+    | (true, true) => [PlayerCodec.Player(respace(oldValue))] // refuse to delete name if it is the last one
     }
-    let players = arrayConcat3(
+    let players: array<PlayerCodec.t> = arrayConcat3(
       gameState.players->sliceFirst(playerIndex - 1),
       newPlayer,
       gameState.players->sliceLast(playerIndex + 1),
@@ -66,7 +66,7 @@ let make = (): React.element => {
   }
   // remove a player on button click
   let removeHandler: int => clickHandler = (playerIndex, _event) => {
-    let players = Js.Array2.concat(
+    let players: array<PlayerCodec.t> = Js.Array2.concat(
       gameState.players->sliceFirst(playerIndex - 1),
       gameState.players->sliceLast(playerIndex + 1),
     )
@@ -77,10 +77,10 @@ let make = (): React.element => {
   }
   // swap two players
   let swapHandler: int => clickHandler = (playerIndex, _event) => {
-    let firstSwapPlayer: option<player> = gameState.players->Belt.Array.get(playerIndex)
-    let secondSwapPlayer: option<player> = gameState.players->Belt.Array.get(playerIndex + 1)
+    let firstSwapPlayer: option<PlayerCodec.t> = gameState.players->Belt.Array.get(playerIndex)
+    let secondSwapPlayer: option<PlayerCodec.t> = gameState.players->Belt.Array.get(playerIndex + 1)
 
-    let players = switch (firstSwapPlayer, secondSwapPlayer) {
+    let players: array<PlayerCodec.t> = switch (firstSwapPlayer, secondSwapPlayer) {
     | (Some(first), Some(second)) =>
       arrayConcat3(
         gameState.players->sliceFirst(playerIndex - 1),
@@ -96,9 +96,9 @@ let make = (): React.element => {
   }
   // add a new player
   let addHandler: blurHandler = event => {
-    let newPlayer: player = ReactEvent.Focus.target(event)["value"]
+    let newPlayer: string = ReactEvent.Focus.target(event)["value"]
     let newPlayers = if newPlayer->Js.String.length > 0 {
-      [newPlayer]
+      [PlayerCodec.Player(newPlayer)]
     } else {
       []
     }
@@ -111,20 +111,24 @@ let make = (): React.element => {
 
   // create buttons for every player
   let numPlayers = gameState.players->Js.Array.length
-  let playerItems = gameState.players->Js.Array2.mapi((player, index) => {
+  let playerFormItems = gameState.players->Js.Array2.mapi((player, index) => {
     // hide the swap button on the last player
     let showSwapButton = numPlayers > index + 1
     // hide the remove button if there is only one player
     let showRemoveButton = numPlayers > 1
-    <PlayerFormLine
-      key={Belt.Int.toString(index) ++ "/" ++ player} // make key unique
-      value=player
-      showSwapButton
-      showRemoveButton
-      onSwap={swapHandler(index)}
-      onRemove={removeHandler(index)}
-      onBlur={blurHandler(index)}
-    />
+    switch player {
+    | Player(playerName) =>
+      <PlayerFormLine
+        key={Belt.Int.toString(index) ++ "/" ++ playerName} // make key unique
+        value=playerName
+        showSwapButton
+        showRemoveButton
+        onSwap={swapHandler(index)}
+        onRemove={removeHandler(index)}
+        onBlur={blurHandler(index)}
+      />
+    | _ => React.null
+    }
   })
 
   // component
@@ -137,7 +141,7 @@ let make = (): React.element => {
       {React.string(" ")}
       {React.string(t("During the night, player buttons will be shown in this order."))}
     </p>
-    {React.array(playerItems)}
+    {React.array(playerFormItems)}
     <PlayerFormLine
       key={gameState.players->Belt.Array.length->Belt.Int.toString} // make key unique
       value=""

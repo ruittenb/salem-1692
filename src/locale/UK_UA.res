@@ -183,13 +183,13 @@ let table = Js.Dict.fromArray([
   ("Residents of Salem,", `Мешканці Салема,`),
   (
     "those among you who wish to confess may now do so.",
-    `ті з вас, хто хоче сповідатися, тепер можуть це зробити.`,
+    `ті з вас, хто хоче сповідатися, тепер можуть це зробити.`,
   ),
   // Reveal
   ("The Reveal", `Розкриття`),
   (
     "Find out what happened while you were sleeping.",
-    `Дізнайтеся, що сталося, поки ви спали.`,
+    `Дізнайтеся, що сталося, поки ви спали.`,
   ),
   ("Reveal witch's victim", `Розкрийте жертву відьми`),
   ("Reveal witches' victim", `Розкрийте жертву відьом`),
@@ -201,4 +201,10 @@ let table = Js.Dict.fromArray([
   (`Reveal constable's protégé`, `Покажіть, кого захищав констебль`),
   ("The constable protected-PRE", `Констебль захистив `),
   ("The constable protected-POST", ""),
+  ("Nobody-SUBJ", `Ніхто` /* не */),
+  ("nobody-OBJ", `нікого` /* не */),
+  (
+    "The constable did not protect anybody",
+    `Констебль нікого не захистив`,
+  ),
 ])

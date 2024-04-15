@@ -3,6 +3,7 @@
  */
 
 open Types
+open PlayerCodec
 
 let p = "[PlayerList] "
 
@@ -78,7 +79,7 @@ let rotateMore = (rotation: rotation) => {
 @react.component
 let make = (
   ~addressed: addressed,
-  ~choiceProcessor: (player, ~skipConfirmation: bool) => unit,
+  ~choiceProcessor: (PlayerCodec.t, ~skipConfirmation: bool) => unit,
 ): React.element => {
   let (gameState, _setGameState) = React.useContext(GameStateContext.context)
   let t = Translator.getTranslator(gameState.language)
@@ -127,29 +128,47 @@ let make = (
       } else {
         ""
       }
-      <BulkyButton
-        key={Belt.Int.toString(index) ++ "/" ++ player} // make key unique
-        label=player
-        className={rotatedClass ++ wideClass}
-        style={ReactDOM.Style.make(~order=Belt.Int.toString(index), ())}
-        onClick={_event => choiceProcessor(player, ~skipConfirmation=false)}
-      />
+      switch player {
+      | Player(playerName) =>
+        <BulkyButton
+          key={Belt.Int.toString(index) ++ "/" ++ playerName} // make key unique
+          label=playerName
+          className={rotatedClass ++ wideClass}
+          style={ReactDOM.Style.make(~order=Belt.Int.toString(index), ())}
+          onClick={_event => choiceProcessor(player, ~skipConfirmation=false)}
+        />
+      | Nobody => React.null
+      | Undecided => React.null
+      }
     },
     0, // default sort order
   )
 
+  let nobodyButton =
+    <BulkyButton
+      key={"999/Nobody"} // make key unique
+      label={t("Nobody-SUBJ")}
+      className={rotatedClass ++ " grid-wide"}
+      style={ReactDOM.Style.make(~order=Belt.Int.toString(999), ())}
+      onClick={_event => choiceProcessor(PlayerCodec.Nobody, ~skipConfirmation=false)}
+    />
+
   let onAlarm = () => {
-    // In Slave mode, we do display the timer, but when the alarm times out,
-    // we don't select a random player or proceed to a next step.
-    // These are tasks for the Master instance.
+    // In Slave mode, we do display the timer, but when the alarm goes off
+    // we don't take any action. That is a task for the Master instance.
     switch gameState.gameType {
     | Slave(_) => ()
     | Master(_)
-    | StandAlone => {
-        let randomPlayer = gameState.players->Utils.pickRandomElement("")
-        Utils.logDebug(p ++ "Picked a random target: " ++ randomPlayer)
-        choiceProcessor(randomPlayer, ~skipConfirmation=true)
+    | StandAlone =>
+      let randomPlayer = if addressed === Constable {
+        PlayerCodec.Nobody
+      } else {
+        gameState.players->Utils.pickRandomElement(PlayerCodec.Undecided)
       }
+      Utils.logDebug(
+        p ++ "Picked a random target: " ++ randomPlayer->playerTypeToLocalizedString(t),
+      )
+      choiceProcessor(randomPlayer, ~skipConfirmation=true)
     }
   }
 
@@ -159,7 +178,10 @@ let make = (
   <>
     <h2> {React.string(title)} </h2>
     <p className="text-centered"> {React.string(subtitle)} </p>
-    <div id="player-list"> {React.array(buttons)} </div>
+    <div id="player-list">
+      {React.array(buttons)}
+      <If condition={gameState.hasGhostPlayers && addressed == Constable}> {nobodyButton} </If>
+    </div>
     <Spacer />
     {timer}
     <Button

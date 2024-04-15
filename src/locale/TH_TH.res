@@ -216,6 +216,12 @@ let table = Js.Dict.fromArray([
   ),
   (
     "The constable protected-POST",
-    `ตำรวจที่ได้รับการคุ้มครอง - POST`,
+    `ตำรวจที่ได้รับการคุ้มครอง-POST`,
+  ),
+  ("Nobody-SUBJ", `ใคร`),
+  ("nobody-OBJ", `ใคร`),
+  (
+    "The constable did not protect anybody",
+    `ตำรวจไม่ได้ปกป้องใครเลย`,
   ),
 ])

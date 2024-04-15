@@ -3,6 +3,7 @@
  */
 
 open Types
+open PlayerCodec
 
 @react.component
 let make = (): React.element => {
@@ -14,13 +15,24 @@ let make = (): React.element => {
 
   let (constableTargetRevealed, setConstableTargetRevealed) = React.useState(_ => false)
 
+  let constableRevealPrompt = t(`Reveal constable's protégé`)
+
   let constableRevealButton = switch turnState.choiceConstable {
-  | None => React.null
-  | Some(constableTargetName) =>
+  | Undecided => React.null
+  | Nobody =>
+    <LargeRevealButton
+      revealPrompt={constableRevealPrompt}
+      revelationPromptPre={t("The constable did not protect anybody")}
+      revelationPromptPost={""}
+      secret={""}
+      revealed=constableTargetRevealed
+      onClick={_event => setConstableTargetRevealed(prev => !prev)}
+    />
+  | Player(constableTargetName) =>
     <>
       <Spacer />
       <LargeRevealButton
-        revealPrompt={t(`Reveal constable's protégé`)}
+        revealPrompt={constableRevealPrompt}
         revelationPromptPre={t("The constable protected-PRE")}
         revelationPromptPost={t("The constable protected-POST")}
         secret=constableTargetName
