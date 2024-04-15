@@ -7,6 +7,7 @@
 /_fabriek/audio/speech-*
 /_correspondence/
 /lib/
+/database/stats
 node_modules/
 *.swp
 *.swo
