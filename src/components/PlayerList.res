@@ -148,7 +148,7 @@ let make = (
     <BulkyButton
       key={"999/Nobody"} // make key unique
       label={t("Nobody-SUBJ")}
-      className={rotatedClass ++ " grid-wide"}
+      className={rotatedClass ++ " grid-wide nobody"}
       style={ReactDOM.Style.make(~order=Belt.Int.toString(999), ())}
       onClick={_event => choiceProcessor(PlayerCodec.Nobody, ~skipConfirmation=false)}
     />
