@@ -197,7 +197,7 @@ let table = Js.Dict.fromArray([
   ("The witch attacked-POST", ""),
   ("The witches attacked-PRE", `Жертва відьом – `),
   ("The witches attacked-POST", ""),
-  (" got the black cat", ` отримав чорного кота`),
+  (" got the black cat", ` отримує чорного кота`),
   (`Reveal constable's protégé`, `Покажіть, кого захищав констебль`),
   ("The constable protected-PRE", `Констебль захистив `),
   ("The constable protected-POST", ""),
