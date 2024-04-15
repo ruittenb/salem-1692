@@ -1,0 +1,20 @@
+Salem 1692 Moderador
+
+--
+
+Moderador do jogo de cartas Salem 1692
+
+--
+
+Este aplicativo desempenha o papel de moderador no jogo de cartas Salem 1692 (publicado pela Façade Games).
+
+Nota: este não é um jogo independente! Você precisa do jogo Salem 1692 para usar este aplicativo.
+
+Salem 1692 é um jogo em que a maioria dos jogadores são aldeões inocentes, mas alguns deles são bruxas, planejando assassinar os outros aldeões.
+
+O jogo tem fases diurnas e noturnas. Durante a fase noturna, todos os jogadores precisam fechar os olhos para que as bruxas possam escolher uma vítima secretamente. Idealmente, a fase noturna usa um moderador. No entanto, este moderador também não pode ser jogador.
+
+Este aplicativo assume o papel de moderador, para que todos os participantes humanos possam ser jogadores. Também permite conectar-se ao jogo com vários smartphones, para que os jogadores não precisem se esticar na mesa para votar.
+
+Idiomas disponíveis: inglês, espanhol, francês, português, italiano, alemão, holandês, húngaro.
+

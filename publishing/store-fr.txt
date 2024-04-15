@@ -1,0 +1,20 @@
+Salem 1692 Modérateur
+
+--
+
+Modérateur du jeu de cartes Salem 1692
+
+--
+
+Cette application remplit le rôle de modérateur dans le jeu de cartes Salem 1692 (édité par Façade Games).
+
+Remarque: ceci n'est pas un jeu autonome ! Vous avez besoin du jeu Salem 1692 pour utiliser cette application.
+
+Salem 1692 est un jeu dans lequel la plupart des joueurs sont des villageois innocents, mais certains d'entre eux sont des sorcières, complotant pour assassiner les autres villageois.
+
+Le jeu comporte des phases de jour et de nuit. Pendant la phase de nuit, tous les joueurs doivent fermer les yeux pour que les sorcières puissent secrètement choisir une victime. Idéalement, la phase de nuit fait appel à un modérateur. Cependant, ce modérateur ne peut pas être également joueur.
+
+Cette application remplit le rôle de modérateur, afin que tous les participants humains puissent être des joueurs. Il permet également de se connecter au jeu avec plusieurs smartphones, afin que les joueurs n'aient pas à se pencher par-dessus la table pour voter.
+
+Langues prises en charge : anglais, espagnol, français, portugais, italien, allemand, néerlandais, hongrois.
+
