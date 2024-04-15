@@ -1,0 +1,20 @@
+Salem 1692 Moderator
+
+--
+
+Moderator für das Kartenspiel Salem 1692
+
+--
+
+Diese App erfüllt die Rolle des Moderators im Kartenspiel Salem 1692 (veröffentlicht von Façade Games).
+
+Hinweis: Dies ist kein eigenständiges Spiel! Du benötigst das Spiel Salem 1692, um diese App nutzen zu können.
+
+Salem 1692 ist ein Spiel, in dem die meisten Spieler unschuldige Dorfbewohner sind, aber einige von ihnen sind Hexen, die planen, die anderen Dorfbewohner zu ermorden.
+
+Das Spiel hat Tag- und Nachtphasen. Während der Nachtphase müssen alle Spieler die Augen schließen, damit die Hexen heimlich ein Opfer auswählen können. Idealerweise wird in der Nachtphase ein Moderator eingesetzt. Dieser Moderator kann jedoch nicht auch Spieler sein.
+
+Diese App übernimmt die Rolle des Moderators, sodass alle menschlichen Teilnehmer Spieler sein können. Es ermöglicht auch, sich mit mehreren Smartphones mit dem Spiel zu verbinden, sodass die Spieler nicht über den Tisch greifen müssen, um abzustimmen.
+
+Unterstützte Sprachen: Englisch, Spanisch, Französisch, Portugiesisch, Italienisch, Deutsch, Nederländisch, Ungarisch.
+
