@@ -8,7 +8,7 @@ open Constants
 
 let p = "[Timer] "
 let containerFraction = 0.8 // fraction of window width
-let zeroTime = 5 // when to stop the timer, leaving some room for the barrel
+let zeroTime = 2 // when to stop the timer, leaving some room for the barrel
 let deadSpace = 75. // width of the barrel and flame together
 let containerWidth = window->innerWidth *. containerFraction -. deadSpace
 
@@ -24,27 +24,29 @@ let containerWidth = window->innerWidth *. containerFraction -. deadSpace
  *         |  barrel        fuse         flame       |         *
  *         +-----------------------------------------+         *
  *                                                             *
+ *                  <-------------------->    <----->          *
+ *                                 containerWidth              *
  *                  <---- fuseLength ---->                     *
- *          <------>                     <--->                 *
+ *          <------>                      <-->                 *
  *          deadSpace                  deadSpace               *
  */
 
 @react.component
 let make = (~onAlarm: unit => unit=() => ()): React.element => {
-  let (remainingTime, setRemainingTime) = React.useState(_ => 100) // percent
+  let (remainingPercent, setRemainingPercent) = React.useState(_ => 100) // percent
   // total available time lies somewhere between 6 and 10 seconds
   let delay = Js.Math.random_int(60, 100)
 
   let tick = () => {
-    if remainingTime > zeroTime {
-      setRemainingTime(prevRemainingTime => prevRemainingTime - 1)
-    } else if remainingTime === zeroTime {
+    if remainingPercent > zeroTime {
+      setRemainingPercent(prevRemainingPercent => prevRemainingPercent - 1)
+    } else if remainingPercent === zeroTime {
       // let alarm go off only once
-      setRemainingTime(prevRemainingTime => prevRemainingTime - 1)
+      setRemainingPercent(prevRemainingPercent => prevRemainingPercent - 1)
       Utils.logDebug(p ++ "Alarm goes off")
       onAlarm()
     }
-    // as soon as remainingTime is negative, no timer will be installed any more
+    // as soon as remainingPercent is negative, no timer will be installed any more
   }
 
   // Runs only once right after mounting the component
@@ -62,9 +64,9 @@ let make = (~onAlarm: unit => unit=() => ()): React.element => {
         Js.Global.clearTimeout(timerId)
       },
     )
-  }, [remainingTime])
+  }, [remainingPercent])
 
-  let fuseLength = containerWidth *. Belt.Int.toFloat(remainingTime) /. 100.
+  let fuseLength = containerWidth *. Belt.Int.toFloat(remainingPercent) /. 100.
   let style = ReactDOM.Style.make(~width=Belt.Float.toString(fuseLength) ++ "px", ())
 
   // Component
