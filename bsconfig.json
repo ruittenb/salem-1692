@@ -16,9 +16,13 @@
   "bs-dependencies": [
     "@rescript/react",
     "@ryyppy/rescript-promise",
+    "@greenlabs/ppx-spice",
     "decco"
   ],
-  "ppx-flags": ["decco/ppx"],
+  "ppx-flags": [
+    "decco/ppx",
+    ["@greenlabs/ppx-spice/ppx", "-uncurried"]
+  ],
   "jsx": {
     "version": 4,
     "mode": "classic"

@@ -37,6 +37,9 @@ dependencies:
     version: 18.2.0(react@18.2.0)
 
 devDependencies:
+  '@greenlabs/ppx-spice':
+    specifier: ^0.2.0
+    version: 0.2.1
   browserify:
     specifier: ^17.0.0
     version: 17.0.0
@@ -835,6 +838,11 @@ packages:
       escope: 3.6.0
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@greenlabs/ppx-spice@0.2.1:
+    resolution: {integrity: sha512-MzNrrunwT5rtLudCuR+t1h90dwiMTgjlALULzaSs7YUIDdbVq8YdYwxxLIH8HgR17NmCaRLfYhZMDIky26lzVQ==}
+    requiresBuild: true
     dev: true
 
   /@grpc/grpc-js@1.7.3:
