@@ -218,7 +218,7 @@ type dbRecord = {
   masterHasGhostPlayers: bool,
   slaveChoiceWitches: PlayerCodec.t,
   slaveChoiceConstable: PlayerCodec.t,
-  slaveConfirmWitches: DecisionCodec.t,
-  slaveConfirmConstable: DecisionCodec.t,
+  slaveConfirmWitches: ConfirmationCodec.t,
+  slaveConfirmConstable: ConfirmationCodec.t,
   updatedAt: string,
 }

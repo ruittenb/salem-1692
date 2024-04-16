@@ -135,12 +135,17 @@ let make = (~subPage: page): React.element => {
   | NightConfirmWitches =>
     <NightConfirmPage
       addressed=witchOrWitches
-      confirmationProcessor={decision => {
+      confirmationProcessor={confirmation => {
         Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (
           dbConnection,
           gameId,
         ) => {
-          FirebaseClient.saveGameConfirmation(dbConnection, gameId, ConfirmWitchesSubject, decision)
+          FirebaseClient.saveGameConfirmation(
+            dbConnection,
+            gameId,
+            ConfirmWitchesSubject,
+            confirmation,
+          )
         })
         goToPage(_prev => NightWaiting)
       }}
@@ -149,7 +154,7 @@ let make = (~subPage: page): React.element => {
   | NightConfirmConstable =>
     <NightConfirmPage
       addressed=Constable
-      confirmationProcessor={decision => {
+      confirmationProcessor={confirmation => {
         Utils.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, (
           dbConnection,
           gameId,
@@ -158,7 +163,7 @@ let make = (~subPage: page): React.element => {
             dbConnection,
             gameId,
             ConfirmConstableSubject,
-            decision,
+            confirmation,
           )
         })
         goToPage(_prev => NightWaiting)

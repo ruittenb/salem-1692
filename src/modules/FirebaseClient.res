@@ -178,34 +178,34 @@ let saveGameConfirmation = (
   dbConnection: dbConnection,
   gameId: GameTypeCodec.gameId,
   subject: dbObservable,
-  confirmation: DecisionCodec.t,
+  confirmation: ConfirmationCodec.t,
 ) => {
   updateGameKey(
     dbConnection,
     gameId,
     subject,
-    confirmation->DecisionCodec.decisionToJs,
+    confirmation->ConfirmationCodec.confirmationToJs,
   )->Utils.catchLogAndIgnore()
 }
 
 let saveGameConfirmations = (
   dbConnection: dbConnection,
   gameId: GameTypeCodec.gameId,
-  confirmWitches: DecisionCodec.t,
-  confirmConstable: DecisionCodec.t,
+  confirmWitches: ConfirmationCodec.t,
+  confirmConstable: ConfirmationCodec.t,
 ): unit => {
   Promise.all([
     updateGameKey(
       dbConnection,
       gameId,
       ConfirmWitchesSubject,
-      confirmWitches->DecisionCodec.decisionToJs,
+      confirmWitches->ConfirmationCodec.confirmationToJs,
     ),
     updateGameKey(
       dbConnection,
       gameId,
       ConfirmConstableSubject,
-      confirmConstable->DecisionCodec.decisionToJs,
+      confirmConstable->ConfirmationCodec.confirmationToJs,
     ),
   ])->Utils.catchLogAndIgnore([])
 }
