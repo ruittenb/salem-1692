@@ -64,6 +64,7 @@ let make = (): React.element => {
     <p className="text-centered">
       {React.string(t("those among you who wish to confess may now do so."))}
     </p>
+    <Spacer />
     {constableRevealButton}
     <Spacer verticalFill=true />
     <Button
