@@ -151,9 +151,9 @@ let make = (~subPage: page): React.element => {
 
   let confirmationProcessor = (confirmation: ConfirmationCodec.t): unit => {
     switch confirmation {
-    | #Yes => goToNextStep()
-    | #No => goToPrevStep()
-    | #Unconfirmed => ()
+    | Yes => goToNextStep()
+    | No => goToPrevStep()
+    | Unconfirmed => ()
     }
   }
 
