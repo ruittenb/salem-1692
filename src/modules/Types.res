@@ -206,7 +206,7 @@ type dbObservable =
   | ConfirmWitchesSubject
   | ConfirmConstableSubject
 
-@decco
+@spice
 type dbRecord = {
   masterGameId: GameTypeCodec.gameId,
   masterLanguage: LanguageCodec.t,

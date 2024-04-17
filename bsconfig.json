@@ -20,7 +20,6 @@
     "decco"
   ],
   "ppx-flags": [
-    "decco/ppx",
     ["@greenlabs/ppx-spice/ppx", "-uncurried"]
   ],
   "jsx": {

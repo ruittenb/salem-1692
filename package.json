@@ -21,7 +21,7 @@
     "serve": "make serve"
   },
   "devDependencies": {
-    "@greenlabs/ppx-spice": "^0.2.0",
+    "@greenlabs/ppx-spice": "^0.1.15",
     "browserify": "^17.0.0",
     "clean-css": "^5.3.3",
     "clean-css-cli": "^5.6.3",
