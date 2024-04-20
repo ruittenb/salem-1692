@@ -1,20 +1,22 @@
-Salem 1692 Moderator
+
+Салем 1692. Ведучий
 
 --
 
-Moderator for the card game Salem 1692
+Ведучий для карткової гри «Салем 1692»
 
 --
 
-This app fulfills the role of moderator in the card game Salem 1692 (published by Façade Games).
+Цей застосунок виконує роль ведучого у грі  «Салем 1692» (видавництва «Façade Games»).
 
-Note: This is not a standalone game! You need the game Salem 1692 to make use of this app.
+Примітка: цей застосунок не є самостійною грою та потребує примірника настільної гри «Салем 1692».
 
-Salem 1692 is a game in which most players are innocent villagers, but some of them are witches, plotting to murder the other villagers.
+«Салем 1692» – це гра, в якій кожен отримує певну роль і стає або невинним мешканцем, або відьмою, що прагне позбутися містян.
 
-The game has day and night phases. During the night phase, all players need to close their eyes so that the witches can secretly choose a victim. Ideally, the night phase makes use of a moderator. However, this moderator cannot also be player.
+У грі є дві фази: День та Ніч. Уночі гравці заплющують очі, а поки вони сплять – відьми потай вибирають свою жертву. Без ведучого може бути складно робити це непомітно. Так само один із гравців не може одночасно і грати, і скеровувати інших.
 
-This app takes on the role of moderator, so that all human participants can be players. It also allows to connect to the game with multiple smartphones, so that players don't have to reach across the table to take a vote.
+Тому застосунок бере на себе роль ведучого, що дозволяє всім учасникам лишатися гравцями. Також є опція підключитися до гри з декількох смартфонів – відповідно, гравцям не потрібно тягнутися через стіл, щоб проголосувати.
 
-Supported languages: English, Spanish, French, Portuguese, Italian, German, Dutch, Hungarian.
+Підтримує англійську, іспанську, французьку, португальську, італійську, німецьку, голландську, угорську та українську мови.
+
 
