@@ -22,5 +22,9 @@
   "jsx": {
     "version": 4,
     "mode": "classic"
+  },
+  "warnings": {
+    "number": "-33",
+    "error": "+5"
   }
 }
