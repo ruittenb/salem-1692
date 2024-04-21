@@ -11,7 +11,7 @@ let defaultValue: gameState = {
   gameType: StandAlone,
   language: #en_US,
   players: [],
-  seating: #TwoAtTop,
+  seating: TwoAtTop,
   hasGhostPlayers: false,
   doPlayEffects: true,
   doPlaySpeech: true,

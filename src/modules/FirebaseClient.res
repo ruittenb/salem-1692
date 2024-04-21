@@ -12,35 +12,35 @@ let gamesKeyPrefix = "/games/"
 
 let getPhase = (page: page, step: scenarioStep): PhaseCodec.t => {
   switch (page, step) {
-  | (Title, _) => #DaytimeWaiting
-  | (Setup, _) => #DaytimeWaiting
-  | (SetupLanguage, _) => #DaytimeWaiting
-  | (SetupMusic, _) => #DaytimeWaiting
-  | (SetupPlayers, _) => #DaytimeWaiting
-  | (SetupNetwork, _) => #DaytimeWaiting
-  | (Credits, _) => #DaytimeWaiting
-  | (Daytime, _) => #DaytimeWaiting
-  | (DaytimeWaiting, _) => #DaytimeWaiting
-  | (DaytimeConfess, _) => #DaytimeWaiting
-  | (DaytimeReveal, _) => #DaytimeWaiting
-  | (DaytimeRevealNoConfess, _) => #DaytimeWaiting
-  | (Close, _) => #DaytimeWaiting
-  | (_, ChooseWitches) => #NightChoiceWitches
-  | (_, ConfirmWitches) => #NightConfirmWitches
-  | (_, ChooseConstable) => #NightChoiceConstable
-  | (_, ConfirmConstable) => #NightConfirmConstable
-  | (_, _) => #NightWaiting
+  | (Title, _) => DaytimeWaitingPhase
+  | (Setup, _) => DaytimeWaitingPhase
+  | (SetupLanguage, _) => DaytimeWaitingPhase
+  | (SetupMusic, _) => DaytimeWaitingPhase
+  | (SetupPlayers, _) => DaytimeWaitingPhase
+  | (SetupNetwork, _) => DaytimeWaitingPhase
+  | (Credits, _) => DaytimeWaitingPhase
+  | (Daytime, _) => DaytimeWaitingPhase
+  | (DaytimeWaiting, _) => DaytimeWaitingPhase
+  | (DaytimeConfess, _) => DaytimeWaitingPhase
+  | (DaytimeReveal, _) => DaytimeWaitingPhase
+  | (DaytimeRevealNoConfess, _) => DaytimeWaitingPhase
+  | (Close, _) => DaytimeWaitingPhase
+  | (_, ChooseWitches) => NightChoiceWitchesPhase
+  | (_, ConfirmWitches) => NightConfirmWitchesPhase
+  | (_, ChooseConstable) => NightChoiceConstablePhase
+  | (_, ConfirmConstable) => NightConfirmConstablePhase
+  | (_, _) => NightWaitingPhase
   }
 }
 
 let getPage = (phase: PhaseCodec.t): page => {
   switch phase {
-  | #DaytimeWaiting => DaytimeWaiting
-  | #NightWaiting => NightWaiting
-  | #NightChoiceWitches => NightChoiceWitches
-  | #NightConfirmWitches => NightConfirmWitches
-  | #NightChoiceConstable => NightChoiceConstable
-  | #NightConfirmConstable => NightConfirmConstable
+  | DaytimeWaitingPhase => DaytimeWaiting
+  | NightWaitingPhase => NightWaiting
+  | NightChoiceWitchesPhase => NightChoiceWitches
+  | NightConfirmWitchesPhase => NightConfirmWitches
+  | NightChoiceConstablePhase => NightChoiceConstable
+  | NightConfirmConstablePhase => NightConfirmConstable
   }
 }
 
@@ -61,8 +61,8 @@ let transformToDbRecord = (
     masterHasGhostPlayers: gameState.hasGhostPlayers,
     slaveChoiceWitches: turnState.choiceWitches,
     slaveChoiceConstable: turnState.choiceConstable,
-    slaveConfirmWitches: #Unconfirmed,
-    slaveConfirmConstable: #Unconfirmed,
+    slaveConfirmWitches: Unconfirmed,
+    slaveConfirmConstable: Unconfirmed,
     updatedAt: Js.Date.make()->Js.Date.toISOString,
   }
 }

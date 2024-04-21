@@ -3,7 +3,7 @@
   "version": "0.70.1",
   "namespace": true,
   "reason": {"react-jsx": 3},
-  "bsc-flags": ["-bs-super-errors"],
+  "bsc-flags": ["-bs-super-errors", "-open Types"],
   "sources": [{
     "dir": "src",
     "subdirs": true
