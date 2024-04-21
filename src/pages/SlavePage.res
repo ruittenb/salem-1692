@@ -31,13 +31,13 @@ let make = (~subPage: page): React.element => {
             }
           | Some(dbRecordStr) =>
             switch dbRecordStr->Js.Json.string->dbRecord_decode {
-            | Error(deccoError) =>
+            | Error(spiceError) =>
               Utils.logError(
-                deccoError.path ++
+                spiceError.path ++
                 ": " ++
-                deccoError.message ++
+                spiceError.message ++
                 ": " ++
-                deccoError.value->Js.Json.decodeString->Belt.Option.getWithDefault("<None>"),
+                spiceError.value->Js.Json.decodeString->Belt.Option.getWithDefault("<None>"),
               )
             | Ok(dbRecord) => {
                 Utils.logDebug(p ++ "Received dbRecord")

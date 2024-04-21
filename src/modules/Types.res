@@ -38,9 +38,6 @@ type slaveCodeValidity =
   | SlaveInputShownAndInvalid
   | SlaveInputShownAndAbsent
 
-// if array<PlayerCodec.t> cannot be handled by decco
-//@decco type playersType = array<PlayerCodec.t>
-
 let playersFromJson = (playerArrayJson: Js.Json.t): option<array<string>> => {
   playerArrayJson
   ->Js.Json.decodeArray
@@ -49,7 +46,7 @@ let playersFromJson = (playerArrayJson: Js.Json.t): option<array<string>> => {
   })
 }
 
-@decco
+@spice
 type gameState = {
   gameType: GameTypeCodec.t,
   language: LanguageCodec.t,

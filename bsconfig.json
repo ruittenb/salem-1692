@@ -3,7 +3,7 @@
   "version": "0.70.1",
   "namespace": true,
   "reason": {"react-jsx": 3},
-  "bsc-flags": ["-bs-super-errors", "-open Types"],
+  "bsc-flags": ["-bs-super-errors"],
   "sources": [{
     "dir": "src",
     "subdirs": true
@@ -16,8 +16,7 @@
   "bs-dependencies": [
     "@rescript/react",
     "@ryyppy/rescript-promise",
-    "@greenlabs/ppx-spice",
-    "decco"
+    "@greenlabs/ppx-spice"
   ],
   "ppx-flags": [
     ["@greenlabs/ppx-spice/ppx", "-uncurried"]
