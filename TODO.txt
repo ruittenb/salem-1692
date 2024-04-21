@@ -1,7 +1,7 @@
 
 SEVERE:
  - town-still-asleep recordings
-   - done: en, fr, pt, it, de
+   - done: en, fr, pt, it, de, hu, uk
 	 - todo: nl, es
  - es: brujas -> brujos
 
