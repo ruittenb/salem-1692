@@ -41,11 +41,9 @@ body {
 }
 
 /* for the entire page */
-body div.uk_UA,
 body div.ja_JP,
 body div.ko_KR,
 /* for the language buttons */
-body button.uk_UA,
 body button.ja_JP,
 body button.ko_KR {
     /**
