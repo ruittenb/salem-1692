@@ -1,6 +1,6 @@
 {
   "name": "salem-1692",
-  "version": "0.69.0",
+  "version": "0.70.1",
   "description": "Moderator PWA for the card game Salem 1692",
   "author": "René Uittenbogaard <ruittenb@gmail.com>",
   "homepage": "https://github.com/ruittenb/salem-1692",
@@ -12,7 +12,7 @@
   ],
   "license": "GNU GPLv2",
   "main": "dist/index.html",
-  "packageManager": "pnpm@^8.13.1",
+  "packageManager": "pnpm@9.0.4",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "all": "make all",

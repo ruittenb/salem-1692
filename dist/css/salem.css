@@ -41,11 +41,9 @@ body {
 }
 
 /* for the entire page */
-body div.uk_UA,
 body div.ja_JP,
 body div.ko_KR,
 /* for the language buttons */
-body button.uk_UA,
 body button.ja_JP,
 body button.ko_KR {
     /**
@@ -569,7 +567,7 @@ video + .bubble {
     background-position: center 5px;
 }
 .page button.icon-left {
-    padding-left: 22px;
+    padding-left: 26px;
     background-position: 14px center;
 }
 .page button.icon-right {
