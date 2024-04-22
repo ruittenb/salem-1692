@@ -2,8 +2,6 @@
  * FirebaseAdapter
  */
 
-@@warning("-33") // Unused 'open Types'
-
 open Types
 open Utils
 
