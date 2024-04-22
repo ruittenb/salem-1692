@@ -6,6 +6,7 @@ SEVERE:
  - es: brujas -> brujos
 
 IMPORTANT:
+ - wakelock
 
 NICE TO HAVE:
  - Safari: backgroundmusic sometimes(?) as loud as speech
