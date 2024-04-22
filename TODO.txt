@@ -6,6 +6,7 @@ SEVERE:
  - es: brujas -> brujos
 
 IMPORTANT:
+ - wakelock
 
 NICE TO HAVE:
  - Safari: backgroundmusic sometimes(?) as loud as speech
@@ -18,6 +19,8 @@ NICE TO HAVE:
  - ko, uk, ja
 
  - "player name buttons"?
+
+ - t -> tr
 
 Korean:
  - https://brand.naver.com/asmodeekorea/products/6826839515

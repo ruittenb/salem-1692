@@ -74,8 +74,8 @@ let make = (~subPage: page): React.element => {
   React.useEffect1(() => {
     let nightType = turnState.nightType->NightTypeCodec.nightTypeToString
     let nrWitches = turnState.nrWitches->NumerusCodec.numerusToJs
-    let choiceWitches = turnState.choiceWitches->PlayerCodec.playerTypeToString
-    let choiceConstable = turnState.choiceConstable->PlayerCodec.playerTypeToString
+    let choiceWitches = turnState.choiceWitches->PlayerCodec.t_encode
+    let choiceConstable = turnState.choiceConstable->PlayerCodec.t_encode
     Utils.logDebugStyled(
       p ++
       `Detected turnState change; ◇ nightType:` ++

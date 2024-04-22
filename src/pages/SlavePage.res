@@ -102,8 +102,8 @@ let make = (~subPage: page): React.element => {
         gameId,
         turnState.nightType->NightTypeCodec.nightTypeToString,
         turnState.nrWitches->NumerusCodec.numerusToJs,
-        player->PlayerCodec.playerTypeToString,
-        turnState.choiceConstable->PlayerCodec.playerTypeToString,
+        player->PlayerCodec.t_encode,
+        turnState.choiceConstable->PlayerCodec.t_encode,
       )
     })
   }
@@ -119,8 +119,8 @@ let make = (~subPage: page): React.element => {
         gameId,
         turnState.nightType->NightTypeCodec.nightTypeToString,
         turnState.nrWitches->NumerusCodec.numerusToJs,
-        turnState.choiceWitches->PlayerCodec.playerTypeToString,
-        player->PlayerCodec.playerTypeToString,
+        turnState.choiceWitches->PlayerCodec.t_encode,
+        player->PlayerCodec.t_encode,
       )
     })
   }

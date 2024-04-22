@@ -36,9 +36,9 @@ let make = (~addressed: addressed, ~confirmationProcessor, ~goToPrevStep): React
     Utils.logDebugGreen(
       p ++
       "Mounted; choiceWitches:" ++
-      turnState.choiceWitches->playerTypeToString ++
+      turnState.choiceWitches->PlayerCodec.t_encode ++
       " choiceConstable:" ++
-      turnState.choiceConstable->playerTypeToString,
+      turnState.choiceConstable->PlayerCodec.t_encode,
     )
     // At this point we should have a choice to ask confirmation for.
     // Therefore, these situations should never happen.

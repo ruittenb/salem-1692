@@ -13,8 +13,8 @@ type t =
   | Nobody
   | Undecided
 
-let map = (player1: t, mapFn: playerName => playerName) => {
-  switch player1 {
+let map = (player: t, mapFn: playerName => playerName) => {
+  switch player {
   | Player(playerName) => Player(mapFn(playerName))
   | Nobody => Nobody
   | Undecided => Undecided
@@ -25,14 +25,6 @@ let playerTypeToLocalizedString = (playerType: t, translator): string => {
   switch playerType {
   | Player(playerName) => playerName
   | Nobody => translator("Nobody-SUBJ")
-  | Undecided => "Undecided"
-  }
-}
-
-let playerTypeToString = (playerType: t): string => {
-  switch playerType {
-  | Player(playerName) => "Player:" ++ playerName
-  | Nobody => "Nobody"
   | Undecided => "Undecided"
   }
 }
