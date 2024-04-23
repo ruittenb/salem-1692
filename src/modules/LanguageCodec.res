@@ -20,6 +20,8 @@ type t = [
   | #th_TH
 ]
 
+let toString = (x: t) => (x :> string)
+
 let getHtmlLanguage = (language: t): string => {
   switch language {
   | #en_US
@@ -35,6 +37,6 @@ let getHtmlLanguage = (language: t): string => {
   | #ja_JP
   | #ko_KR
   | #th_TH =>
-    language->languageToJs->Js.String2.substring(~from=0, ~to_=2)
+    language->toString->Js.String2.substring(~from=0, ~to_=2)
   }
 }

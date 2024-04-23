@@ -44,7 +44,7 @@ let make = (
 
   let musicDirectory = "audio/music/"
   let effectDirectory = "audio/effects/"
-  let speechDirectory = "audio/" ++ LanguageCodec.languageToJs(gameState.language) ++ "/"
+  let speechDirectory = "audio/" ++ (gameState.language :> string) ++ "/"
 
   let src = switch track {
   | Speech(TownGoToSleep) => speechDirectory ++ "town-go-to-sleep.mp3"

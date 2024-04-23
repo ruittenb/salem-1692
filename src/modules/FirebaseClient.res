@@ -170,7 +170,7 @@ let saveGameNightType = (
     dbConnection,
     gameId,
     MasterNightTypeSubject,
-    nightType->NightTypeCodec.nightTypeToString,
+    nightType->NightTypeCodec.toString,
   )->Utils.catchLogAndIgnore()
 }
 
@@ -184,7 +184,7 @@ let saveGameConfirmation = (
     dbConnection,
     gameId,
     subject,
-    confirmation->ConfirmationCodec.confirmationToJs,
+    confirmation->ConfirmationCodec.toString,
   )->Utils.catchLogAndIgnore()
 }
 
@@ -199,13 +199,13 @@ let saveGameConfirmations = (
       dbConnection,
       gameId,
       ConfirmWitchesSubject,
-      confirmWitches->ConfirmationCodec.confirmationToJs,
+      confirmWitches->ConfirmationCodec.toString,
     ),
     updateGameKey(
       dbConnection,
       gameId,
       ConfirmConstableSubject,
-      confirmConstable->ConfirmationCodec.confirmationToJs,
+      confirmConstable->ConfirmationCodec.toString,
     ),
   ])->Utils.catchLogAndIgnore([])
 }
@@ -217,7 +217,7 @@ let saveGamePhase = (
   maybeScenarioStep: option<scenarioStep>,
 ): unit => {
   let scenarioStep = maybeScenarioStep->Belt.Option.getWithDefault(Pause(0.))
-  let phase = getPhase(page, scenarioStep)->PhaseCodec.phaseToJs
+  let phase = getPhase(page, scenarioStep)->PhaseCodec.toString
   updateGameKey(dbConnection, gameId, MasterPhaseSubject, phase)->Utils.catchLogAndIgnore()
 }
 

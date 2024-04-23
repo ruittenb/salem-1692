@@ -7,3 +7,5 @@
 type t =
   | Dawn
   | Night
+
+let toString = (x: t) => x->t_encode->Js.Json.decodeString->Belt.Option.getWithDefault("invalid")

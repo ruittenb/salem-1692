@@ -19,7 +19,7 @@
     "@greenlabs/ppx-spice"
   ],
   "ppx-flags": [
-    ["@greenlabs/ppx-spice/ppx", "-uncurried"]
+    ["@greenlabs/ppx-spice/ppx"]
   ],
   "jsx": {
     "version": 4,
