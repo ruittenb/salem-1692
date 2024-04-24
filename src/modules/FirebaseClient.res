@@ -126,7 +126,7 @@ let updateGameKey = (
   dbConnection: dbConnection,
   gameId: GameTypeCodec.gameId,
   subject: dbObservable,
-  value: string,
+  value: Js.Json.t,
 ): promise<unit> => {
   FirebaseAdapter.writeGameKey(dbConnection, gameId, subject, value)
 }
@@ -148,16 +148,26 @@ let saveGameState = (
 let saveGameTurnState = (
   dbConnection: dbConnection,
   gameId: GameTypeCodec.gameId,
-  nightType: string,
-  nrWitches: string,
-  choiceWitches: string,
-  choiceConstable: string,
+  nightType: NightTypeCodec.t,
+  nrWitches: NumerusCodec.t,
+  choiceWitches: PlayerCodec.t,
+  choiceConstable: PlayerCodec.t,
 ): unit => {
   Promise.all([
-    updateGameKey(dbConnection, gameId, MasterNightTypeSubject, nightType),
-    updateGameKey(dbConnection, gameId, MasterNumberWitchesSubject, nrWitches),
-    updateGameKey(dbConnection, gameId, ChoiceWitchesSubject, choiceWitches),
-    updateGameKey(dbConnection, gameId, ChoiceConstableSubject, choiceConstable),
+    updateGameKey(dbConnection, gameId, MasterNightTypeSubject, nightType->NightTypeCodec.t_encode),
+    updateGameKey(
+      dbConnection,
+      gameId,
+      MasterNumberWitchesSubject,
+      nrWitches->NumerusCodec.t_encode,
+    ),
+    updateGameKey(dbConnection, gameId, ChoiceWitchesSubject, choiceWitches->PlayerCodec.t_encode),
+    updateGameKey(
+      dbConnection,
+      gameId,
+      ChoiceConstableSubject,
+      choiceConstable->PlayerCodec.t_encode,
+    ),
   ])->Utils.catchLogAndIgnore([])
 }
 
@@ -170,7 +180,7 @@ let saveGameNightType = (
     dbConnection,
     gameId,
     MasterNightTypeSubject,
-    nightType->NightTypeCodec.toString,
+    nightType->NightTypeCodec.t_encode,
   )->Utils.catchLogAndIgnore()
 }
 
@@ -184,7 +194,7 @@ let saveGameConfirmation = (
     dbConnection,
     gameId,
     subject,
-    confirmation->ConfirmationCodec.toString,
+    confirmation->ConfirmationCodec.t_encode,
   )->Utils.catchLogAndIgnore()
 }
 
@@ -199,13 +209,13 @@ let saveGameConfirmations = (
       dbConnection,
       gameId,
       ConfirmWitchesSubject,
-      confirmWitches->ConfirmationCodec.toString,
+      confirmWitches->ConfirmationCodec.t_encode,
     ),
     updateGameKey(
       dbConnection,
       gameId,
       ConfirmConstableSubject,
-      confirmConstable->ConfirmationCodec.toString,
+      confirmConstable->ConfirmationCodec.t_encode,
     ),
   ])->Utils.catchLogAndIgnore([])
 }
@@ -217,8 +227,13 @@ let saveGamePhase = (
   maybeScenarioStep: option<scenarioStep>,
 ): unit => {
   let scenarioStep = maybeScenarioStep->Belt.Option.getWithDefault(Pause(0.))
-  let phase = getPhase(page, scenarioStep)->PhaseCodec.toString
-  updateGameKey(dbConnection, gameId, MasterPhaseSubject, phase)->Utils.catchLogAndIgnore()
+  let phase = getPhase(page, scenarioStep)
+  updateGameKey(
+    dbConnection,
+    gameId,
+    MasterPhaseSubject,
+    phase->PhaseCodec.t_encode,
+  )->Utils.catchLogAndIgnore()
 }
 
 /* ************************************************************************

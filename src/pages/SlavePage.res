@@ -100,10 +100,10 @@ let make = (~subPage: page): React.element => {
       FirebaseClient.saveGameTurnState(
         dbConnection,
         gameId,
-        turnState.nightType->NightTypeCodec.nightTypeToString,
-        turnState.nrWitches->NumerusCodec.numerusToJs,
-        player->PlayerCodec.t_encode,
-        turnState.choiceConstable->PlayerCodec.t_encode,
+        turnState.nightType,
+        turnState.nrWitches,
+        player,
+        turnState.choiceConstable,
       )
     })
   }
@@ -117,10 +117,10 @@ let make = (~subPage: page): React.element => {
       FirebaseClient.saveGameTurnState(
         dbConnection,
         gameId,
-        turnState.nightType->NightTypeCodec.nightTypeToString,
-        turnState.nrWitches->NumerusCodec.numerusToJs,
-        turnState.choiceWitches->PlayerCodec.t_encode,
-        player->PlayerCodec.t_encode,
+        turnState.nightType,
+        turnState.nrWitches,
+        turnState.choiceWitches,
+        player,
       )
     })
   }

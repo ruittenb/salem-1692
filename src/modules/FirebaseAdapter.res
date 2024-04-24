@@ -114,7 +114,7 @@ let writeGameKey = (
   dbConnection: dbConnection,
   gameId: GameTypeCodec.gameId,
   subject: dbObservable,
-  value: string,
+  value: Js.Json.t,
 ): promise<unit> => {
   let key = subjectKey(subject)
   Promise.make((resolve, reject) => {
@@ -122,7 +122,7 @@ let writeGameKey = (
       let myGameRef = getRef(dbConnection.db, gameKey(gameId) ++ "/" ++ key)
       set(myGameRef, value)
       ->Promise.then(() => {
-        logDebug(p ++ "Updated game key " ++ key ++ " with value " ++ value)
+        logDebug(p ++ "Updated game key " ++ key ++ " with value " ++ value->Js.Json.stringify)
         resolve(. ignore()) // workaround to pass a unit argument
         Promise.resolve()
       })
