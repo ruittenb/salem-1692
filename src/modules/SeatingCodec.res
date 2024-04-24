@@ -18,7 +18,7 @@
 // generates the functions t_encode() and t_decode()
 @spice
 type t =
-  | OneAtTop
-  | TwoAtTop
+  | @spice.as("OneAtTop") OneAtTop
+  | @spice.as("TwoAtTop") TwoAtTop
 
 let toString = (x: t) => x->t_encode->Js.Json.decodeString->Belt.Option.getWithDefault("invalid")

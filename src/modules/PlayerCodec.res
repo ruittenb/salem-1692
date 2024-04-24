@@ -9,9 +9,9 @@ type playerName = string
 // generates the functions t_encode() and t_decode()
 @spice
 type t =
-  | Player(playerName)
-  | Nobody
-  | Undecided
+  | @spice.as("Player") Player(playerName)
+  | @spice.as("Nobody") Nobody
+  | @spice.as("Undecided") Undecided
 
 let toString = (x: t): string => {
   switch x {

@@ -12,7 +12,7 @@ let setOverrideLanguage = (gameState): gameState => {
   let queryStringLanguage =
     QueryString.getQueryParam("lang")
     ->Belt.Option.map(Js.Json.string)
-    ->Belt.Option.flatMap(language => language->LanguageCodec.t_decode->Utils.resultToOption)
+    ->Belt.Option.flatMap(json => json->LanguageCodec.t_decode->Utils.resultToOption)
     ->Belt.Option.getWithDefault(gameState.language)
   {
     ...gameState,
