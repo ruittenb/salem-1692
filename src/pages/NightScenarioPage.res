@@ -226,6 +226,7 @@ let make = (~subPage: page): React.element => {
 
   // render the page
   <div id=pageId className="page">
+    <WakeNode />
     {backgroundMusicElement}
     {pageElement}
   </div>

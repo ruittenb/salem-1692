@@ -12,7 +12,6 @@ type wakeLockSentinel
 @send external apiRelease: wakeLockSentinel => unit = "release"
 
 let p = "[WakeLock] "
-let (sentinel, setSentinel) = React.useState((_): option<wakeLockSentinel> => None)
 
 let detectSupport = (): bool => {
   switch Js.Types.classify(navigator->wakeLock) {
@@ -23,25 +22,23 @@ let detectSupport = (): bool => {
 
 let isSupported = detectSupport()
 
-let request = async () => {
-  if sentinel == None {
-    try {
-      let newSentinel = await navigator->wakeLock->apiRequest("screen")
-      setSentinel(_ => Some(newSentinel))
-      Utils.logDebug(p ++ "Obtained WakeLock")
-    } catch {
-    | _ => {
-        setSentinel(_ => None)
-        Utils.logError(p ++ "Failed to obtain WakeLock")
-      }
-    }
-  }
+let request = (): promise<wakeLockSentinel> => {
+  navigator
+  ->wakeLock
+  ->apiRequest("screen")
+  ->Promise.then(newSentinel => {
+    Utils.logDebug(p ++ "Obtained WakeLock")
+    Promise.resolve(newSentinel)
+  })
+  ->Promise.catch(error => {
+    Utils.logError(p ++ "Failed to obtain WakeLock: " ++ error->Utils.getExceptionMessage)
+    Promise.reject(error)
+  })
 }
 
-let release = async () => {
+let release = (sentinel: option<wakeLockSentinel>) => {
   if sentinel != None {
     sentinel->Belt.Option.forEach(apiRelease)
-    setSentinel(_ => None)
     Utils.logDebug(p ++ "Released WakeLock")
   }
 }
