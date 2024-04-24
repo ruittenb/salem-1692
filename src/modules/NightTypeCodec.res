@@ -8,4 +8,8 @@ type t =
   | Dawn
   | Night
 
-let toString = (x: t) => x->t_encode->Js.Json.decodeString->Belt.Option.getWithDefault("invalid")
+let toString = (x: t): string =>
+  switch x {
+  | Dawn => "Dawn"
+  | Night => "Night"
+  }

@@ -13,6 +13,13 @@ type t =
   | Nobody
   | Undecided
 
+let toString = (x: t): string => {
+  switch x {
+  | Player(playerName) => `["Player", "` ++ playerName ++ `"]`
+  | Nobody => "Nobody"
+  | Undecided => "Undecided"
+  }
+}
 let map = (player: t, mapFn: playerName => playerName) => {
   switch player {
   | Player(playerName) => Player(mapFn(playerName))

@@ -5,7 +5,6 @@
 // @@warning("-33") // Unused 'open Types'
 
 open Types
-open PlayerCodec
 
 let p = "[NightConfirmPage] "
 
@@ -36,9 +35,9 @@ let make = (~addressed: addressed, ~confirmationProcessor, ~goToPrevStep): React
     Utils.logDebugGreen(
       p ++
       "Mounted; choiceWitches:" ++
-      turnState.choiceWitches->PlayerCodec.t_encode ++
+      turnState.choiceWitches->PlayerCodec.toString ++
       " choiceConstable:" ++
-      turnState.choiceConstable->PlayerCodec.t_encode,
+      turnState.choiceConstable->PlayerCodec.toString,
     )
     // At this point we should have a choice to ask confirmation for.
     // Therefore, these situations should never happen.
@@ -70,8 +69,8 @@ let make = (~addressed: addressed, ~confirmationProcessor, ~goToPrevStep): React
         subject,
         maybeDecision => {
           switch maybeDecision {
-          | Some("Yes") => confirmationProcessor(Yes)
-          | Some("No") => confirmationProcessor(No)
+          | Some("Yes") => confirmationProcessor(ConfirmationCodec.Yes)
+          | Some("No") => confirmationProcessor(ConfirmationCodec.No)
           | Some(_) => ()
           | None => ()
           }

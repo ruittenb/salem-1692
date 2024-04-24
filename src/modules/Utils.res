@@ -145,6 +145,13 @@ let resultForEach = (result: Belt.Result.t<'ok, 'err>, fn: 'ok => unit) => {
   }
 }
 
+let resultToOption = (result: Belt.Result.t<'a, 'b>) => {
+  switch result {
+  | Ok(value) => Some(value)
+  | Error(_) => None
+  }
+}
+
 /**
  * Reduce a tuple of maybes to a maybe of a tuple.
  *
@@ -158,6 +165,23 @@ let optionTupleAnd = (tupleOfMaybes: (option<'a>, option<'b>)): option<('a, 'b)>
   | _ => None
   }
 }
+
+/*
+ * Convert [ Some(3), Some(6), None, Some(-1), None ] into [ 3, 6, -1 ]:
+ * use Belt.Array.keepMap(identity)
+ *
+ *
+ * Js.Option.andThen(), but data-first:
+ * use Belt.Option.flatMap()
+ *
+ *
+ * Js.Option.map(), but data-first:
+ * use Belt.Option.map()
+ */
+
+/* ****************************************************************************
+ * Firebase
+ */
 
 /**
  * Call function if connection state reflects that we're connected to firebase
@@ -256,16 +280,3 @@ let ifSlaveAndConnected = (
     })
   })
 }
-
-/*
- * Convert [ Some(3), Some(6), None, Some(-1), None ] into [ 3, 6, -1 ]:
- * use Belt.Array.keepMap(identity)
- *
- *
- * Js.Option.andThen(), but data-first:
- * use Belt.Option.flatMap()
- *
- *
- * Js.Option.map(), but data-first:
- * use Belt.Option.map()
- */
