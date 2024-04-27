@@ -4,44 +4,38 @@
 
 open WakeLock
 
+let p = "[WakeNode] "
+
 @react.component
 let make = (): React.element => {
-  let (sentinel, setSentinel) = React.useState((_): option<wakeLockSentinel> => None)
+  let sentinel = ref(None)
 
-  // run once after mounting: obtain wake lock
+  // run once after mounting
   React.useEffect0(() => {
-    Utils.logError("WakeNode: mounted")
-    if sentinel == None {
-      Utils.logError("WakeNode: request")
+    // obtain wake lock
+    if sentinel.contents == None {
+      Utils.logDebugBlue(p ++ "request")
       WakeLock.request()
       ->Promise.then(newSentinel => {
-        setSentinel(_ => Some(newSentinel))
+        Js.log3("%c" ++ p ++ "obtained", "font-weight: bold; color: purple", newSentinel)
+        sentinel := Some(newSentinel)
         Promise.resolve()
       })
       ->Promise.catch(error => {
-        setSentinel(_ => None)
+        Js.log3("%c" ++ p ++ "obtained", "font-weight: bold; color: purple", error)
+        sentinel := None
         Promise.reject(error)
       })
       ->ignore
-      Js.log2("WakeNode: sentinel = ", sentinel)
     }
     // cleanup function
     Some(
       () => {
-        Js.log3(
-          "%c" ++ p ++ "cleanup/release: current sentinel",
-          "font-weight: bold; color: purple",
-          sentinel,
-        )
-        //Utils.logDebugPurple(
-        //  p ++ "cleanup/release: current smurf: " ++ smurf->Belt.Option.getWithDefault("smurfless"),
-        //)
-        WakeLock.release(sentinel)
-        setSentinel(_ => None)
+        WakeLock.release(sentinel.contents)
+        sentinel := None
       },
     )
   })
 
   React.null
-  //React.string(smurf->Belt.Option.getWithDefault("unable to smurf"))
 }
