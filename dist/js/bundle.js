@@ -37170,7 +37170,7 @@ function captureAndParseFrame(maybeVideoElement, maybeCanvasElement, callback) {
     var canvasElement = param[1];
     canvasElement.getContext("2d").drawImage(param[0], 0, 0, 640, 480);
     $$Promise.$$catch(window.parseQrCode(canvasElement.toDataURL("image/png")).then(function (res) {
-      Utils$Salem1692.logDebug(p + "parseQrCode returned: " + res);
+      Utils$Salem1692.logDebug(undefined, undefined, p + "parseQrCode returned: " + res);
       Curry._1(callback, res);
       return Promise.resolve(undefined);
     }), function (error) {
@@ -37206,7 +37206,7 @@ function Capture(props) {
     maybeGetUserMedia = undefined;
   }
   var permissionStateHandler = function (state) {
-    Utils$Salem1692.logDebug(p + "camera permissions: " + state);
+    Utils$Salem1692.logDebug(undefined, undefined, p + "camera permissions: " + state);
     switch (state) {
       case "denied":
         return Curry._1(setCameraAvailability, function (_prev) {
@@ -37251,7 +37251,7 @@ function Capture(props) {
       captureAndParseFrame(maybeVideoElement, maybeCanvasElement, callback);
     }, 500);
     var cameraPermissionsPromise = $$Promise.$$catch(getCameraPermissions(undefined).then(function (status) {
-      Utils$Salem1692.logDebug(p + "camera permissions: " + status.state);
+      Utils$Salem1692.logDebug(undefined, undefined, p + "camera permissions: " + status.state);
       permissionStateHandler(status.state);
       if (status.state === "unsupported") {
         Curry._1(setCameraAvailability, function (_prev) {
@@ -37262,7 +37262,7 @@ function Capture(props) {
       }
       return Promise.resolve(status);
     }), function (_error) {
-      Utils$Salem1692.logDebug(p + "camera permissions: dismissed");
+      Utils$Salem1692.logDebug(undefined, undefined, p + "camera permissions: dismissed");
       Curry._1(setCameraAvailability, function (_prev) {
         return /* Dismissed */3;
       });
@@ -37272,7 +37272,7 @@ function Capture(props) {
       clearInterval(snapTimerId);
       cameraPermissionsPromise.then(function (status) {
         if (status.state !== "unsupported") {
-          Utils$Salem1692.logDebug(p + "Clearing permission status change handler");
+          Utils$Salem1692.logDebug(undefined, undefined, p + "Clearing permission status change handler");
           status.removeEventListener("change", permissionStatusChangeHandler);
         }
         return Promise.resolve(undefined);
@@ -38123,7 +38123,7 @@ function PlayerList(props) {
       return;
     }
     var randomPlayer = addressed === /* Constable */2 ? /* Nobody */0 : Utils$Salem1692.pickRandomElement(gameState.players, /* Undecided */1);
-    Utils$Salem1692.logDebug(p + "Picked a random target: " + PlayerCodec$Salem1692.playerTypeToLocalizedString(randomPlayer, t));
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Picked a random target: " + PlayerCodec$Salem1692.playerTypeToLocalizedString(randomPlayer, t));
     Curry._2(choiceProcessor, randomPlayer, true);
   };
   var timer = gameState.hasGhostPlayers ? React.createElement(Timer$Salem1692.make, {
@@ -38166,7 +38166,7 @@ function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; 
 var p = exports.p = "[QR] ";
 var elementId = exports.elementId = "qr-code";
 function displayQrCode(qrElement, size, value) {
-  Utils$Salem1692.logDebug(p + "Creating QR code for " + value);
+  Utils$Salem1692.logDebug(undefined, undefined, p + "Creating QR code for " + value);
   var qrParams_correctLevel = QRCode.CorrectLevel.M;
   var qrParams = {
     text: value,
@@ -38500,7 +38500,7 @@ function Timer(props) {
       Curry._1(setRemainingPercent, function (prevRemainingPercent) {
         return prevRemainingPercent - 1 | 0;
       });
-      Utils$Salem1692.logDebug(p + "Alarm goes off");
+      Utils$Salem1692.logDebug(undefined, undefined, p + "Alarm goes off");
       return Curry._1(onAlarm$1, undefined);
     } else {
       return;
@@ -38508,7 +38508,7 @@ function Timer(props) {
   };
   React.useEffect(function () {
     var delayFloat = delay / 10;
-    Utils$Salem1692.logDebug(p + "Setting timeout to " + String(delayFloat) + "s");
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Setting timeout to " + String(delayFloat) + "s");
   }, []);
   React.useEffect(function () {
     var timerId = setTimeout(tick, delay);
@@ -38672,7 +38672,7 @@ function WakeNode(props) {
       console.log("WakeNode: sentinel = ", sentinel);
     }
     return function (param) {
-      console.log("WakeNode: cleanup/release");
+      console.log("%c" + WakeLock$Salem1692.p + "cleanup/release: current sentinel", "font-weight: bold; color: purple", sentinel);
       WakeLock$Salem1692.release(sentinel);
       Curry._1(setSentinel, function (param) {});
     };
@@ -38982,7 +38982,7 @@ var t_decode = exports.t_decode = decoder;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.siteUrl = exports.musicTracks = exports.localStoragePrefix = exports.localStorageGameStateKey = exports.initialTurnState = exports.initialGameState = exports.firebaseConfig = exports.defaultSelectedMusicTracks = exports.defaultPlayers = exports.debug = exports.consoleErrorFormatting = exports.codeUrl = exports.backgroundVolume = void 0;
+exports.siteUrl = exports.musicTracks = exports.localStoragePrefix = exports.localStorageGameStateKey = exports.initialTurnState = exports.initialGameState = exports.firebaseConfig = exports.defaultSelectedMusicTracks = exports.defaultPlayers = exports.debug = exports.codeUrl = exports.backgroundVolume = void 0;
 // Generated by ReScript, PLEASE EDIT WITH CARE
 
 var debug = exports.debug = navigator.userAgent.includes("Salem/1692");
@@ -39022,7 +39022,6 @@ var siteUrl = exports.siteUrl = "https://ruittenb.github.io/salem-1692/";
 var codeUrl = exports.codeUrl = "https://github.com/ruittenb/salem-1692/";
 var localStoragePrefix = exports.localStoragePrefix = "salem1692";
 var localStorageGameStateKey = exports.localStorageGameStateKey = ".gameState";
-var consoleErrorFormatting = exports.consoleErrorFormatting = "color: red; font-weight: bold";
 var backgroundVolume = exports.backgroundVolume = 0.1;
 var initialTurnState = exports.initialTurnState = {
   nrWitches: /* One */0,
@@ -39108,7 +39107,7 @@ function connect(param) {
       Database.onValue(connectionInfoRef, function (snapshot) {
         var connected = snapshot.val();
         if (connected) {
-          Utils$Salem1692.logDebug(p + "Connected");
+          Utils$Salem1692.logDebug(undefined, undefined, p + "Connected");
           return resolve({
             app: app,
             db: db
@@ -39125,7 +39124,7 @@ function connect(param) {
 function disconnect(dbConnection) {
   var connectionInfoRef = Database.ref(dbConnection.db, connectionInfoKey);
   Database.off(connectionInfoRef);
-  Utils$Salem1692.logDebug(p + "Disconnected");
+  Utils$Salem1692.logDebug(undefined, undefined, p + "Disconnected");
 }
 function writeGame(dbConnection, dbRecord, action) {
   return new Promise(function (resolve, reject) {
@@ -39133,7 +39132,7 @@ function writeGame(dbConnection, dbRecord, action) {
       var gameId = dbRecord.masterGameId;
       var myGameRef = Database.ref(dbConnection.db, "/games/" + gameId);
       $$Promise.$$catch(Database.set(myGameRef, Types$Salem1692.dbRecord_encode(dbRecord)).then(function (param) {
-        Utils$Salem1692.logDebug(p + action + " game " + gameId);
+        Utils$Salem1692.logDebug(undefined, undefined, p + action + " game " + gameId);
         resolve(undefined);
         return Promise.resolve(undefined);
       }), function (error) {
@@ -39154,7 +39153,7 @@ function writeGameKey(dbConnection, gameId, subject, value) {
     try {
       var myGameRef = Database.ref(dbConnection.db, "/games/" + gameId + "/" + key);
       $$Promise.$$catch(Database.set(myGameRef, value).then(function (param) {
-        Utils$Salem1692.logDebug(p + "Updated game key " + key + " with value " + value);
+        Utils$Salem1692.logDebug(undefined, undefined, p + "Updated game key " + key + " with value " + value);
         resolve(undefined);
         return Promise.resolve(undefined);
       }), function (error) {
@@ -39174,7 +39173,7 @@ function deleteGame(dbConnection, gameId) {
     return Database.ref(dbConnection.db, "/games/" + gameId);
   }), function (myGameRef) {
     Database.remove(myGameRef);
-    Utils$Salem1692.logDebug(p + "Deleted game " + gameId);
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Deleted game " + gameId);
   });
 }
 function joinGame(dbConnection, gameId) {
@@ -39182,14 +39181,14 @@ function joinGame(dbConnection, gameId) {
     return Database.ref(dbConnection.db, "/games/" + gameId);
   });
   if (maybeGameRef !== undefined) {
-    Utils$Salem1692.logDebug(p + "Joined game " + gameId);
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Joined game " + gameId);
     Database.onValue(Caml_option.valFromOption(maybeGameRef), function (snapshot) {
-      Utils$Salem1692.logDebug(p + "Received data");
+      Utils$Salem1692.logDebug(undefined, undefined, p + "Received data");
       snapshot.val();
     });
     return true;
   } else {
-    Utils$Salem1692.logDebug(p + "Unable to join game " + gameId);
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Unable to join game " + gameId);
     return false;
   }
 }
@@ -39198,7 +39197,7 @@ function leaveGame(dbConnection, gameId) {
     return Database.ref(dbConnection.db, "/games/" + gameId);
   }), function (myGameRef) {
     Database.off(myGameRef);
-    Utils$Salem1692.logDebug(p + "Left game " + gameId);
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Left game " + gameId);
   });
 }
 function listen(dbConnection, gameId, subject, callback) {
@@ -39207,7 +39206,7 @@ function listen(dbConnection, gameId, subject, callback) {
     return Database.ref(dbConnection.db, observableKey);
   });
   if (maybeGameRef !== undefined) {
-    Utils$Salem1692.logDebug(p + "Listening on " + observableKey);
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Listening on " + observableKey);
     Database.onValue(Caml_option.valFromOption(maybeGameRef), function (snapshot) {
       var result = snapshot.val();
       if (Constants$Salem1692.debug) {
@@ -39217,7 +39216,7 @@ function listen(dbConnection, gameId, subject, callback) {
     });
     return;
   } else {
-    Utils$Salem1692.logDebug(p + "Unable to listen on " + observableKey);
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Unable to listen on " + observableKey);
     return Curry._1(callback, undefined);
   }
 }
@@ -39226,7 +39225,7 @@ function stopListening(dbConnection, gameId, subject) {
   Belt_Option.forEach(Utils$Salem1692.safeExec(function (param) {
     return Database.ref(dbConnection.db, observableKey);
   }), function (observableRef) {
-    Utils$Salem1692.logDebug(p + "Stopping listening on " + observableKey);
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Stopping listening on " + observableKey);
     Database.off(observableRef);
   });
 }
@@ -40812,11 +40811,12 @@ exports.ifSlaveGetGameId = ifSlaveGetGameId;
 exports.ifTagName = ifTagName;
 exports.isConnected = isConnected;
 exports.logDebug = logDebug;
-exports.logDebugAny = logDebugAny;
 exports.logDebugBlue = logDebugBlue;
 exports.logDebugGreen = logDebugGreen;
-exports.logDebugStyled = logDebugStyled;
+exports.logDebugPipe = logDebugPipe;
+exports.logDebugPurple = logDebugPurple;
 exports.logError = logError;
+exports.logStyled = logStyled;
 exports.optionTupleAnd = optionTupleAnd;
 exports.pickRandomElement = pickRandomElement;
 exports.replaceWith = replaceWith;
@@ -40838,36 +40838,32 @@ function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; 
 function identity(arg) {
   return arg;
 }
-function logError(msg) {
-  console.log("%cError: " + msg, Constants$Salem1692.consoleErrorFormatting);
+function logStyled(bold, color, msg) {
+  var boldStyle = bold ? "font-weight: bold;" : "";
+  console.log("%c" + msg, boldStyle + "color: " + color);
 }
-function logDebug(msg) {
+function logDebug(boldOpt, colorOpt, msg) {
+  var bold = boldOpt !== undefined ? boldOpt : false;
+  var color = colorOpt !== undefined ? colorOpt : "black";
   if (Constants$Salem1692.debug) {
-    console.log(msg);
-    return;
+    return logStyled(bold, color, msg);
   }
 }
-function logDebugAny(x, msg) {
+function logDebugPipe(x, msg) {
   console.log(msg, x);
   return x;
 }
-function logDebugStyled(msg, style) {
-  if (Constants$Salem1692.debug) {
-    console.log("%c" + msg, style);
-    return;
-  }
+function logError(msg) {
+  logStyled(true, "red", "Error: " + msg);
 }
 function logDebugBlue(msg) {
-  if (Constants$Salem1692.debug) {
-    console.log("%c" + msg, "color: blue");
-    return;
-  }
+  logDebug(true, "blue", msg);
 }
 function logDebugGreen(msg) {
-  if (Constants$Salem1692.debug) {
-    console.log("%c" + msg, "font-weight: bold; color: green");
-    return;
-  }
+  logDebug(true, "green", msg);
+}
+function logDebugPurple(msg) {
+  logDebug(true, "purple", msg);
 }
 function getExceptionMessage(error) {
   return Belt_Option.getWithDefault(Belt_Option.flatMap(Caml_js_exceptions.as_js_exn(error), function (prim) {
@@ -41027,7 +41023,7 @@ function detectSupport(param) {
 var isSupported = exports.isSupported = detectSupport(undefined);
 function request(param) {
   return $$Promise.$$catch(navigator.wakeLock.request("screen").then(function (newSentinel) {
-    Utils$Salem1692.logDebug(p + "Obtained WakeLock");
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Obtained WakeLock");
     return Promise.resolve(newSentinel);
   }), function (error) {
     Utils$Salem1692.logError(p + "Failed to obtain WakeLock: " + Utils$Salem1692.getExceptionMessage(error));
@@ -41039,7 +41035,7 @@ function release(sentinel) {
     Belt_Option.forEach(sentinel, function (prim) {
       prim.release();
     });
-    return Utils$Salem1692.logDebug(p + "Released WakeLock");
+    return Utils$Salem1692.logDebug(undefined, undefined, p + "Released WakeLock");
   }
 }
 
@@ -41706,7 +41702,7 @@ function NightAudioPage(props) {
     onClick: function (_event) {
       Belt_Option.forEach(timerId, function (timerId) {
         clearTimeout(timerId);
-        Utils$Salem1692.logDebug(p + "Clearing timer");
+        Utils$Salem1692.logDebug(undefined, undefined, p + "Clearing timer");
       });
       Curry._1(goToNextStep$1, undefined);
     }
@@ -41761,14 +41757,14 @@ function NightChoicePage(props) {
   };
   React.useEffect(function () {
     Utils$Salem1692.logDebugGreen(p + "Mounted");
-    var subject = addressed >= 2 ? (Utils$Salem1692.logDebug(p + "Clearing constable's choice from turn state..."), Curry._1(setTurnState, function (_prevTurnState) {
+    var subject = addressed >= 2 ? (Utils$Salem1692.logDebug(undefined, undefined, p + "Clearing constable's choice from turn state..."), Curry._1(setTurnState, function (_prevTurnState) {
       return {
         nrWitches: turnState.nrWitches,
         nightType: turnState.nightType,
         choiceWitches: turnState.choiceWitches,
         choiceConstable: /* Undecided */1
       };
-    }), /* ChoiceConstableSubject */8) : (Utils$Salem1692.logDebug(p + "Clearing witches' choice from turn state..."), Curry._1(setTurnState, function (_prevTurnState) {
+    }), /* ChoiceConstableSubject */8) : (Utils$Salem1692.logDebug(undefined, undefined, p + "Clearing witches' choice from turn state..."), Curry._1(setTurnState, function (_prevTurnState) {
       return {
         nrWitches: turnState.nrWitches,
         nightType: turnState.nightType,
@@ -41777,7 +41773,7 @@ function NightChoicePage(props) {
       };
     }), /* ChoiceWitchesSubject */7);
     Utils$Salem1692.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
-      Utils$Salem1692.logDebug(p + "About to install choice listener");
+      Utils$Salem1692.logDebug(undefined, undefined, p + "About to install choice listener");
       FirebaseClient$Salem1692.listen(dbConnection, gameId, subject, function (player) {
         var person = Belt_Option.flatMap(player, PlayerCodec$Salem1692.playerTypeFromString);
         if (person !== undefined && !(typeof person === "number" && person !== 0)) {
@@ -41787,10 +41783,10 @@ function NightChoicePage(props) {
     });
     return function (param) {
       Utils$Salem1692.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
-        Utils$Salem1692.logDebug(p + "About to remove choice listener");
+        Utils$Salem1692.logDebug(undefined, undefined, p + "About to remove choice listener");
         FirebaseClient$Salem1692.stopListening(dbConnection, gameId, subject);
       });
-      Utils$Salem1692.logDebugBlue(p + "Unmounted");
+      Utils$Salem1692.logDebugGreen(p + "Unmounted");
     };
   }, []);
   var titleAndEyes = turnState.nightType === /* Dawn */0 ? React.createElement("h1", undefined, Curry._1(t, "Dawn")) : React.createElement(React.Fragment, undefined, React.createElement("h1", undefined, Curry._1(t, "Night")), React.createElement(Eyes$Salem1692.make, {}));
@@ -41863,10 +41859,10 @@ function NightConfirmPage(props) {
     } else if (turnState.choiceWitches === /* Undecided */1) {
       Curry._1(goToPrevStep, undefined);
     }
-    var subject = addressed >= 2 ? (Utils$Salem1692.logDebug(p + "Clearing constable's confirmation from turn state..."), /* ConfirmConstableSubject */10) : (Utils$Salem1692.logDebug(p + "Clearing witches' confirmation from turn state..."), /* ConfirmWitchesSubject */9);
+    var subject = addressed >= 2 ? (Utils$Salem1692.logDebug(undefined, undefined, p + "Clearing constable's confirmation from turn state..."), /* ConfirmConstableSubject */10) : (Utils$Salem1692.logDebug(undefined, undefined, p + "Clearing witches' confirmation from turn state..."), /* ConfirmWitchesSubject */9);
     Utils$Salem1692.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
       FirebaseClient$Salem1692.saveGameConfirmation(dbConnection, gameId, subject, "Unconfirmed");
-      Utils$Salem1692.logDebug(p + "About to install confirmation listener");
+      Utils$Salem1692.logDebug(undefined, undefined, p + "About to install confirmation listener");
       FirebaseClient$Salem1692.listen(dbConnection, gameId, subject, function (maybeDecision) {
         if (maybeDecision === undefined) {
           return;
@@ -41883,10 +41879,10 @@ function NightConfirmPage(props) {
     });
     return function (param) {
       Utils$Salem1692.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
-        Utils$Salem1692.logDebug(p + "About to remove confirmation listener");
+        Utils$Salem1692.logDebug(undefined, undefined, p + "About to remove confirmation listener");
         FirebaseClient$Salem1692.stopListening(dbConnection, gameId, subject);
       });
-      Utils$Salem1692.logDebugBlue(p + "Unmounted");
+      Utils$Salem1692.logDebugGreen(p + "Unmounted");
     };
   }, []);
   var eyesImage = turnState.nightType === /* Dawn */0 ? null : React.createElement(Eyes$Salem1692.make, {});
@@ -42048,13 +42044,13 @@ function NightScenarioPage(props) {
     var nrWitches = NumerusCodec$Salem1692.numerusToJs(turnState.nrWitches);
     var choiceWitches = PlayerCodec$Salem1692.playerTypeToString(turnState.choiceWitches);
     var choiceConstable = PlayerCodec$Salem1692.playerTypeToString(turnState.choiceConstable);
-    Utils$Salem1692.logDebugStyled(p + "Detected turnState change; ◇ nightType:" + nightType + " ◇ numerus:" + nrWitches + " ◇ witches:" + choiceWitches + " ◇ constable:" + choiceConstable, "font-weight: bold");
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Detected turnState change; ◇ nightType:" + nightType + " ◇ numerus:" + nrWitches + " ◇ witches:" + choiceWitches + " ◇ constable:" + choiceConstable);
     Utils$Salem1692.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
       FirebaseClient$Salem1692.saveGameTurnState(dbConnection, gameId, nightType, nrWitches, choiceWitches, choiceConstable);
     });
   }, [turnState]);
   React.useEffect(function () {
-    Utils$Salem1692.logDebug(p + "Detected scenarioStep change");
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Detected scenarioStep change");
     Utils$Salem1692.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
       FirebaseClient$Salem1692.saveGamePhase(dbConnection, gameId, subPage, maybeScenarioStep);
     });
@@ -42075,7 +42071,7 @@ function NightScenarioPage(props) {
     });
   };
   var goFromWitchChoiceToNextStep = function (player, skipConfirmation) {
-    Utils$Salem1692.logDebug(p + "Witch choice:" + PlayerCodec$Salem1692.playerTypeToLocalizedString(player, t) + " skipConfirmation:" + (skipConfirmation ? "true" : "false"));
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Witch choice:" + PlayerCodec$Salem1692.playerTypeToLocalizedString(player, t) + " skipConfirmation:" + (skipConfirmation ? "true" : "false"));
     Curry._1(setTurnState, function (prevTurnState) {
       return {
         nrWitches: prevTurnState.nrWitches,
@@ -42094,7 +42090,7 @@ function NightScenarioPage(props) {
     }
   };
   var goFromConstableChoiceToNextStep = function (player, skipConfirmation) {
-    Utils$Salem1692.logDebug(p + "Constable choice:" + PlayerCodec$Salem1692.playerTypeToLocalizedString(player, t) + " skipConfirmation:" + (skipConfirmation ? "true" : "false"));
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Constable choice:" + PlayerCodec$Salem1692.playerTypeToLocalizedString(player, t) + " skipConfirmation:" + (skipConfirmation ? "true" : "false"));
     Curry._1(setTurnState, function (prevTurnState) {
       return {
         nrWitches: prevTurnState.nrWitches,
@@ -42139,9 +42135,9 @@ function NightScenarioPage(props) {
     });
   }) : null;
   var makeTimer = function (duration) {
-    Utils$Salem1692.logDebug(p + "Setting timer");
+    Utils$Salem1692.logDebug(undefined, undefined, p + "Setting timer");
     return setTimeout(function (param) {
-      Utils$Salem1692.logDebug(p + "Timer went off");
+      Utils$Salem1692.logDebug(undefined, undefined, p + "Timer went off");
       Curry._1(goToScenarioIndex, function (scenarioIndex) {
         return scenarioIndex + 1 | 0;
       });
@@ -42713,7 +42709,7 @@ var pm = exports.pm = "[SetupNetworkPage:Master] ";
 var ps = exports.ps = "[SetupNetworkPage:Slave] ";
 var inputElementId = exports.inputElementId = "formGameId";
 function startHosting(setDbConnectionStatus, gameState, setGameState) {
-  Utils$Salem1692.logDebug(pm + "Starting hosting");
+  Utils$Salem1692.logDebug(undefined, undefined, pm + "Starting hosting");
   Curry._1(setDbConnectionStatus, function (_prev) {
     return /* ConnectingAsMaster */1;
   });
@@ -42766,7 +42762,7 @@ function startHosting(setDbConnectionStatus, gameState, setGameState) {
 }
 function stopHosting(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState) {
   Utils$Salem1692.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
-    Utils$Salem1692.logDebug(pm + "Stopping hosting");
+    Utils$Salem1692.logDebug(undefined, undefined, pm + "Stopping hosting");
     FirebaseClient$Salem1692.deleteGame(dbConnection, gameId);
     FirebaseClient$Salem1692.disconnect(dbConnection);
   });
@@ -42788,7 +42784,7 @@ function stopHosting(dbConnectionStatus, setDbConnectionStatus, gameState, setGa
   });
 }
 function joinGame(setDbConnectionStatus, setGameState, newGameId, callback) {
-  Utils$Salem1692.logDebug(ps + "Joining game " + newGameId);
+  Utils$Salem1692.logDebug(undefined, undefined, ps + "Joining game " + newGameId);
   Curry._1(setDbConnectionStatus, function (_prev) {
     return /* ConnectingAsSlave */2;
   });
@@ -42841,7 +42837,7 @@ function joinGame(setDbConnectionStatus, setGameState, newGameId, callback) {
 }
 function leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState) {
   Utils$Salem1692.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
-    Utils$Salem1692.logDebug(ps + "Leaving game " + gameId);
+    Utils$Salem1692.logDebug(undefined, undefined, ps + "Leaving game " + gameId);
     FirebaseClient$Salem1692.leaveGame(dbConnection, gameId);
     FirebaseClient$Salem1692.disconnect(dbConnection);
   });
@@ -42867,7 +42863,7 @@ function tryPlayAsSlave(goToPage, dbConnectionStatus, setDbConnectionStatus, gam
     return prim.value;
   });
   if (GameId$Salem1692.isValid(newGameId)) {
-    Utils$Salem1692.logDebug(ps + "Code " + newGameId + " is valid");
+    Utils$Salem1692.logDebug(undefined, undefined, ps + "Code " + newGameId + " is valid");
     Curry._1(setSlaveGameIdValidity, function (_prev) {
       return /* SlaveInputShown */1;
     });
@@ -42884,7 +42880,7 @@ function tryPlayAsSlave(goToPage, dbConnectionStatus, setDbConnectionStatus, gam
       }
     });
   } else {
-    Utils$Salem1692.logDebug(ps + "Code " + newGameId + " is not valid");
+    Utils$Salem1692.logDebug(undefined, undefined, ps + "Code " + newGameId + " is not valid");
     leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState);
     return Curry._1(setSlaveGameIdValidity, function (_prev) {
       return /* SlaveInputShownAndInvalid */2;
@@ -43313,13 +43309,13 @@ function SlavePage(props) {
   React.useEffect(function () {
     Utils$Salem1692.logDebugGreen(p + "Mounted");
     Utils$Salem1692.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
-      Utils$Salem1692.logDebug(p + "About to install game listener");
+      Utils$Salem1692.logDebug(undefined, undefined, p + "About to install game listener");
       FirebaseClient$Salem1692.listen(dbConnection, gameId, /* GameSubject */0, function (maybeDbRecordStr) {
         if (maybeDbRecordStr !== undefined) {
           var deccoError = Types$Salem1692.dbRecord_decode(maybeDbRecordStr);
           if (deccoError.TAG === /* Ok */0) {
             var dbRecord = deccoError._0;
-            Utils$Salem1692.logDebug(p + "Received dbRecord");
+            Utils$Salem1692.logDebug(undefined, undefined, p + "Received dbRecord");
             Curry._1(goToPage, function (_prev) {
               return FirebaseClient$Salem1692.getPage(dbRecord.masterPhase);
             });
@@ -43348,7 +43344,7 @@ function SlavePage(props) {
           var deccoError$1 = deccoError._0;
           return Utils$Salem1692.logError(deccoError$1.path + ": " + deccoError$1.message + ": " + Belt_Option.getWithDefault(Js_json.decodeString(deccoError$1.value), "<None>"));
         }
-        Utils$Salem1692.logDebug(p + "Received null on listener");
+        Utils$Salem1692.logDebug(undefined, undefined, p + "Received null on listener");
         Curry._1(setDbConnectionStatus, function (_prev) {
           return /* NotConnected */0;
         });
@@ -43359,10 +43355,10 @@ function SlavePage(props) {
     });
     return function (param) {
       Utils$Salem1692.ifSlaveAndConnected(dbConnectionStatus, gameState.gameType, function (dbConnection, gameId) {
-        Utils$Salem1692.logDebug(p + "About to remove game listener");
+        Utils$Salem1692.logDebug(undefined, undefined, p + "About to remove game listener");
         FirebaseClient$Salem1692.stopListening(dbConnection, gameId, /* GameSubject */0);
       });
-      Utils$Salem1692.logDebugBlue(p + "Unmounted");
+      Utils$Salem1692.logDebugGreen(p + "Unmounted");
     };
   }, []);
   var witchOrWitches = turnState.nrWitches === /* One */0 ? /* Witch */0 : /* Witches */1;

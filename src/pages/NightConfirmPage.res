@@ -86,7 +86,7 @@ let make = (~addressed: addressed, ~confirmationProcessor, ~goToPrevStep): React
           Utils.logDebug(p ++ "About to remove confirmation listener")
           FirebaseClient.stopListening(dbConnection, gameId, subject)
         })
-        Utils.logDebugBlue(p ++ "Unmounted")
+        Utils.logDebugGreen(p ++ "Unmounted")
       },
     )
   })

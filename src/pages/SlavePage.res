@@ -78,7 +78,7 @@ let make = (~subPage: page): React.element => {
           Utils.logDebug(p ++ "About to remove game listener")
           FirebaseClient.stopListening(dbConnection, gameId, GameSubject)
         })
-        Utils.logDebugBlue(p ++ "Unmounted")
+        Utils.logDebugGreen(p ++ "Unmounted")
       },
     )
   })

@@ -28,7 +28,14 @@ let make = (): React.element => {
     // cleanup function
     Some(
       () => {
-        Js.log("WakeNode: cleanup/release")
+        Js.log3(
+          "%c" ++ p ++ "cleanup/release: current sentinel",
+          "font-weight: bold; color: purple",
+          sentinel,
+        )
+        //Utils.logDebugPurple(
+        //  p ++ "cleanup/release: current smurf: " ++ smurf->Belt.Option.getWithDefault("smurfless"),
+        //)
         WakeLock.release(sentinel)
         setSentinel(_ => None)
       },
@@ -36,4 +43,5 @@ let make = (): React.element => {
   })
 
   React.null
+  //React.string(smurf->Belt.Option.getWithDefault("unable to smurf"))
 }

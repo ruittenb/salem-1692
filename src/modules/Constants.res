@@ -36,8 +36,6 @@ let localStorageGameStateKey = ".gameState"
 
 // game parameters
 
-let consoleErrorFormatting = "color: red; font-weight: bold"
-
 let backgroundVolume = 0.1
 
 // Stripped of .mp3 extension
