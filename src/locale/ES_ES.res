@@ -34,6 +34,7 @@ let table = Js.Dict.fromArray([
   ("Sound effects", "Sonidos"),
   ("Speech", `Diálogo`),
   ("Music", `Música`),
+  ("Stay active", `Mantén activo`),
   ("Seating layout", `Posición de los jugadores`),
   (
     "How are the players seated around the table?",

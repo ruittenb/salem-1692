@@ -7,6 +7,7 @@ SEVERE:
 
 IMPORTANT:
  - wakelock
+   - During the night phase, this keeps the screen active, thereby hiding whether you used your phone.
 
 NICE TO HAVE:
  - Safari: backgroundmusic sometimes(?) as loud as speech
