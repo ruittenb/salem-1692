@@ -12,7 +12,6 @@
   ],
   "license": "GNU GPLv2",
   "main": "dist/index.html",
-  "packageManager": "pnpm@9.0.6",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "all": "make all",
