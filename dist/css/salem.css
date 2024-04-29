@@ -381,6 +381,9 @@ video + .bubble {
 .uk_UA .page button.ultra-condensed-uk {
     font-size: 20px;
 }
+.uk_UA .page button.hyper-condensed-uk {
+    font-size: 17px;
+}
 .uk_UA .page .player-entry-item input[type="text"].condensed-uk::placeholder {
     font-size: 20px;
 }
