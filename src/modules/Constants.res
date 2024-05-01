@@ -12,6 +12,10 @@ type navigator
 @get external userAgent: navigator => string = "userAgent"
 @get external language: navigator => string = "language"
 
+@get external visibilityState: document => string = "visibilityState"
+@send external addEventListener: (document, string, unit => unit) => unit = "addEventListener"
+@send external removeEventListener: (document, string, unit => unit) => unit = "removeEventListener"
+
 // Enable debug mode when the User-Agent string contains the text "Salem/1692".
 let debug = navigator->userAgent->Js.String2.includes("Salem/1692")
 

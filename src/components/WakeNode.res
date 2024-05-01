@@ -3,6 +3,7 @@
  */
 
 open WakeLock
+open Constants
 
 let p = "[WakeNode] "
 
@@ -10,30 +11,43 @@ let p = "[WakeNode] "
 let make = (): React.element => {
   let sentinel = ref(None)
 
+  let obtainLock = () => {
+    WakeLock.request()
+    ->Promise.then(maybeNewSentinel => {
+      sentinel := maybeNewSentinel
+      Promise.resolve()
+    })
+    ->Promise.catch(error => {
+      sentinel := None
+      Promise.reject(error)
+    })
+    ->ignore
+  }
+
+  let handleVisibilityChange = () => {
+    switch sentinel.contents {
+    | None => ()
+    | Some(s) =>
+      if s->released && document->visibilityState === "visible" {
+        Utils.logDebugPurple(p ++ "WakeLock was released, re-obtaining")
+        obtainLock()
+      }
+    }
+  }
+
   // run once after mounting
   React.useEffect0(() => {
-    // obtain wake lock
     if sentinel.contents == None {
-      Utils.logDebugPurple(p ++ "requesting WakeLock")
-      WakeLock.request()
-      ->Promise.then(maybeNewSentinel => {
-        Utils.logDebugPurple(p ++ "obtained WakeLock")
-        sentinel := maybeNewSentinel
-        Promise.resolve()
-      })
-      ->Promise.catch(error => {
-        Utils.logError(p ++ "could not obtain WakeLock: " ++ error->Utils.getExceptionMessage)
-        sentinel := None
-        Promise.reject(error)
-      })
-      ->ignore
+      obtainLock()
+      document->addEventListener("visibilitychange", handleVisibilityChange)
     }
     // cleanup function
     Some(
       () => {
-        // TODO test if sentinel is really released
         WakeLock.release(sentinel.contents)
+        // TODO test if sentinel is really released?
         sentinel := None
+        document->removeEventListener("visibilitychange", handleVisibilityChange)
       },
     )
   })

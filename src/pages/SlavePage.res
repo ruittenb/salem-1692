@@ -174,5 +174,8 @@ let make = (~subPage: page): React.element => {
   }
 
   // component
-  <div id={pageWrapperId} className="page justify-start"> {pageElement} </div>
+  <>
+    <WakeNode />
+    <div id={pageWrapperId} className="page justify-start"> {pageElement} </div>
+  </>
 }

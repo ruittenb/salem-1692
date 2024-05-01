@@ -10,6 +10,7 @@ type wakeLockSentinel
 @get external wakeLock: navigator => wakeLockApi = "wakeLock"
 @send external apiRequest: (wakeLockApi, string) => promise<wakeLockSentinel> = "request"
 @send external apiRelease: wakeLockSentinel => unit = "release"
+@get external released: wakeLockSentinel => bool = "released"
 
 let p = "[WakeLock] "
 
