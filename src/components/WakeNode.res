@@ -14,15 +14,15 @@ let make = (): React.element => {
   React.useEffect0(() => {
     // obtain wake lock
     if sentinel.contents == None {
-      Utils.logDebugBlue(p ++ "request")
+      Utils.logDebugPurple(p ++ "requesting WakeLock")
       WakeLock.request()
-      ->Promise.then(newSentinel => {
-        Js.log3("%c" ++ p ++ "obtained", "font-weight: bold; color: purple", newSentinel)
-        sentinel := Some(newSentinel)
+      ->Promise.then(maybeNewSentinel => {
+        Utils.logDebugPurple(p ++ "obtained WakeLock")
+        sentinel := maybeNewSentinel
         Promise.resolve()
       })
       ->Promise.catch(error => {
-        Js.log3("%c" ++ p ++ "obtained", "font-weight: bold; color: purple", error)
+        Utils.logError(p ++ "could not obtain WakeLock: " ++ error->Utils.getExceptionMessage)
         sentinel := None
         Promise.reject(error)
       })
@@ -31,6 +31,7 @@ let make = (): React.element => {
     // cleanup function
     Some(
       () => {
+        // TODO test if sentinel is really released
         WakeLock.release(sentinel.contents)
         sentinel := None
       },
