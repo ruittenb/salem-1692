@@ -71,7 +71,7 @@ let make = (
           Utils.logDebug(p ++ "About to remove choice listener")
           FirebaseClient.stopListening(dbConnection, gameId, subject)
         })
-        Utils.logDebugBlue(p ++ "Unmounted")
+        Utils.logDebugGreen(p ++ "Unmounted")
       },
     )
   })

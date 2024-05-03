@@ -36,6 +36,7 @@ let table = Js.Dict.fromArray([
   ("Sound effects", `음향 효과`),
   ("Speech", `담화`),
   ("Music", `음악`),
+  ("Stay active", `활발하게 활동하세요`),
   ("Seating layout", `좌석 배치`),
   (
     "How are the players seated around the table?",

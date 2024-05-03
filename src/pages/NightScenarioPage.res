@@ -76,7 +76,7 @@ let make = (~subPage: page): React.element => {
     let nrWitches = turnState.nrWitches->NumerusCodec.numerusToJs
     let choiceWitches = turnState.choiceWitches->PlayerCodec.playerTypeToString
     let choiceConstable = turnState.choiceConstable->PlayerCodec.playerTypeToString
-    Utils.logDebugStyled(
+    Utils.logDebug(
       p ++
       `Detected turnState change; ◇ nightType:` ++
       nightType ++
@@ -86,7 +86,6 @@ let make = (~subPage: page): React.element => {
       choiceWitches ++
       ` ◇ constable:` ++
       choiceConstable,
-      "font-weight: bold",
     )
     Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
       FirebaseClient.saveGameTurnState(
@@ -226,6 +225,7 @@ let make = (~subPage: page): React.element => {
 
   // render the page
   <div id=pageId className="page">
+    <WakeNode />
     {backgroundMusicElement}
     {pageElement}
   </div>

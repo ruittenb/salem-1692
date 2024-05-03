@@ -9,54 +9,50 @@ open Types
 let identity = (arg: 'a): 'a => arg
 
 /**
- * Log a message to console with error formatting
+ * Log a message to console with highlighting
  */
-let logError = (msg: string): unit => {
-  Js.log2("%cError: " ++ msg, Constants.consoleErrorFormatting)
+let logStyled = (~bold, ~color, msg: string): unit => {
+  let boldStyle = bold ? "font-weight: bold;" : ""
+  Js.log2("%c" ++ msg, boldStyle ++ "color: " ++ color)
 }
 
 /**
  * Log a message to console only if debug flag is set
  */
-let logDebug = (msg: string): unit => {
+let logDebug = (~bold=false, ~color="black", msg: string): unit => {
   if Constants.debug {
-    Js.log(msg)
+    logStyled(msg, ~color, ~bold)
   }
 }
 
 /**
  * Log a value to console. Then return it. For incorporating into pipelines.
  */
-let logDebugAny = (x: 'a, msg: string): 'a => {
+let logDebugPipe = (x: 'a, msg: string): 'a => {
   Js.log2(msg, x)
   x
 }
 
 /**
- * Log a message to console with highlighting
+ * Log a message to console with error formatting
  */
-let logDebugStyled = (msg: string, style: string): unit => {
-  if Constants.debug {
-    Js.log2("%c" ++ msg, style)
-  }
+let logError = (msg: string): unit => {
+  logStyled("Error: " ++ msg, ~bold=true, ~color="red")
 }
 
 /**
  * Log a message to console with highlighting
  */
 let logDebugBlue = (msg: string): unit => {
-  if Constants.debug {
-    Js.log2("%c" ++ msg, "color: blue")
-  }
+  logDebug(msg, ~bold=true, ~color="blue")
 }
 
-/**
- * Log a message to console with highlighting
- */
 let logDebugGreen = (msg: string): unit => {
-  if Constants.debug {
-    Js.log2("%c" ++ msg, "font-weight: bold; color: green")
-  }
+  logDebug(msg, ~bold=true, ~color="green")
+}
+
+let logDebugPurple = (msg: string): unit => {
+  logDebug(msg, ~bold=true, ~color="purple")
 }
 
 /**
