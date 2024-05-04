@@ -9,6 +9,8 @@ let p = "[WakeNode] "
 
 @react.component
 let make = (): React.element => {
+  let (gameState, _setGameState) = React.useContext(GameStateContext.context)
+
   let sentinel = ref(None)
 
   let obtainLock = () => {
@@ -37,7 +39,9 @@ let make = (): React.element => {
 
   // run once after mounting
   React.useEffect0(() => {
-    if sentinel.contents == None {
+    if !gameState.doKeepActive {
+      Utils.logDebugPurple(p ++ "WakeLock not enabled")
+    } else if sentinel.contents == None {
       obtainLock()
       document->addEventListener("visibilitychange", handleVisibilityChange)
     }

@@ -32,6 +32,13 @@ let make = (): React.element => {
     })
   }
 
+  let toggleKeepActive = () => {
+    setGameState(prevGameState => {
+      ...prevGameState,
+      doKeepActive: !prevGameState.doKeepActive,
+    })
+  }
+
   React.useEffect0(() => {
     if gameState.backgroundMusic->Js.Array2.length === 0 {
       setGameState(prevGameState => {
@@ -99,6 +106,15 @@ let make = (): React.element => {
           goToPage(_prev => SetupMusic)
         }
       }}
+    />
+    <Button
+      label={t("Stay active")}
+      className={"condensed-uk icon-left " ++ if gameState.doKeepActive {
+        "icon-checked"
+      } else {
+        "icon-unchecked"
+      }}
+      onClick={_event => toggleKeepActive()}
     />
     <Button label={t("Credits")} onClick={_event => goToPage(_prev => Credits)} />
   </div>

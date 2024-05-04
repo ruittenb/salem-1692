@@ -59,6 +59,7 @@ type gameState = {
   doPlayEffects: bool,
   doPlaySpeech: bool,
   doPlayMusic: bool,
+  doKeepActive: bool,
   backgroundMusic: array<string>,
 }
 type gameStateSetter = (gameState => gameState) => unit

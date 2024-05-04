@@ -81,6 +81,7 @@ let initialGameState = {
   doPlayEffects: true,
   doPlaySpeech: true,
   doPlayMusic: true,
+  doKeepActive: true,
   backgroundMusic: defaultSelectedMusicTracks,
 }
 
