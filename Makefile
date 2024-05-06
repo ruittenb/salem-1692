@@ -15,7 +15,8 @@ JS_FILES=$(shell find $(SRC) -name *.js)
 CSS_FILES=$(DIST)/css/normalize.css $(DIST)/css/fonts.css $(DIST)/css/salem.css
 MIN_CSS_FILES=$(CSS_FILES:.css=.min.css)
 
-VERSION_FILES=bsconfig.json $(DIST)/serviceworker.js
+RESCRIPT_CONFIG=bsconfig.json
+VERSION_FILES=$(RESCRIPT_CONFIG) $(DIST)/serviceworker.js
 
 .DEFAULT_GOAL:=help
 
@@ -158,4 +159,3 @@ publish: ## Publish the master branch on Github Pages
 publish-force: ## Publish the master branch on Github Pages (force push)
 	git checkout master && \
 	git push --force origin `git subtree split --prefix dist master`:github-pages
-
