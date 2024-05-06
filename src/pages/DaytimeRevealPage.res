@@ -103,7 +103,7 @@ let make = (~allowBackToConfess: bool=true): React.element => {
       returnPage=Some(returnPage)
       onBack={allowBackToConfess ? Some(_event => goToPage(_prev => DaytimeConfess)) : None}
     />
-    <h1 className="condensed-de"> {React.string(t("The Reveal"))} </h1>
+    <h1> {React.string(t("The Reveal"))} </h1>
     <p className="text-centered">
       {React.string(t("Find out what happened while you were sleeping."))}
     </p>

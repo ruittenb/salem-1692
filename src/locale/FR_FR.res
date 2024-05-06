@@ -34,6 +34,11 @@ let table = Js.Dict.fromArray([
   ("Sound effects", "Effets sonores"),
   ("Speech", "Discours"),
   ("Music", "Musique"),
+  ("Stay active", `Rester actif`),
+  (
+    "This keeps the screen active during the night, so that other players cannot see whether you used your phone.",
+    `Ceci maintient l'écran actif pendant la nuit, afin que les autres joueurs ne puissent pas voir si vous avez utilisé votre téléphone.`,
+  ),
   ("Seating layout", `Disposition des sièges`),
   (
     "How are the players seated around the table?",

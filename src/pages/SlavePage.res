@@ -78,7 +78,7 @@ let make = (~subPage: page): React.element => {
           Utils.logDebug(p ++ "About to remove game listener")
           FirebaseClient.stopListening(dbConnection, gameId, GameSubject)
         })
-        Utils.logDebugBlue(p ++ "Unmounted")
+        Utils.logDebugGreen(p ++ "Unmounted")
       },
     )
   })
@@ -174,5 +174,8 @@ let make = (~subPage: page): React.element => {
   }
 
   // component
-  <div id={pageWrapperId} className="page justify-start"> {pageElement} </div>
+  <>
+    <WakeNode />
+    <div id={pageWrapperId} className="page justify-start"> {pageElement} </div>
+  </>
 }

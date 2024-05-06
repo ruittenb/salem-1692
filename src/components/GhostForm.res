@@ -2,8 +2,6 @@
  * GhostForm
  */
 
-@@warning("-33") // Unused 'open Types'
-
 open Types
 
 @react.component

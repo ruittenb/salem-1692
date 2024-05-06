@@ -9,6 +9,7 @@ let make = (): React.element => {
   let (_currentPage, goToPage) = React.useContext(RouterContext.context)
   let (gameState, setGameState) = React.useContext(GameStateContext.context)
   let (navigation, setNavigation) = React.useContext(NavigationContext.context)
+  let (isBubbleVisible, setIsBubbleVisible) = React.useState(() => false)
   let t = Translator.getTranslator(gameState.language)
 
   let togglePlayEffects = () => {
@@ -29,6 +30,18 @@ let make = (): React.element => {
     setGameState(prevGameState => {
       ...prevGameState,
       doPlayMusic: !prevGameState.doPlayMusic,
+    })
+  }
+
+  let hideBubble = () => {
+    setIsBubbleVisible(_ => false)
+  }
+
+  let toggleKeepActive = () => {
+    setIsBubbleVisible(_ => !gameState.doKeepActive)
+    setGameState(prevGameState => {
+      ...prevGameState,
+      doKeepActive: !prevGameState.doKeepActive,
     })
   }
 
@@ -99,6 +112,24 @@ let make = (): React.element => {
           goToPage(_prev => SetupMusic)
         }
       }}
+    />
+    <If condition={isBubbleVisible}>
+      <Bubble float=true dir=South clickHandler={_event => hideBubble()}>
+        {React.string(
+          t(
+            "This keeps the screen active during the night, so that other players cannot see whether you used your phone.",
+          ),
+        )}
+      </Bubble>
+    </If>
+    <Button
+      label={t("Stay active")}
+      className={"condensed-uk icon-left " ++ if gameState.doKeepActive {
+        "icon-checked"
+      } else {
+        "icon-unchecked"
+      }}
+      onClick={_event => toggleKeepActive()}
     />
     <Button label={t("Credits")} onClick={_event => goToPage(_prev => Credits)} />
   </div>

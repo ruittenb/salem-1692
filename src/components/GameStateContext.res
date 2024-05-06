@@ -16,6 +16,7 @@ let defaultValue: gameState = {
   doPlayEffects: true,
   doPlaySpeech: true,
   doPlayMusic: true,
+  doKeepActive: true,
   backgroundMusic: [],
 }
 let context = React.createContext((defaultValue, defaultSetter))

@@ -1,6 +1,6 @@
 {
   "name": "salem-1692",
-  "version": "0.70.1",
+  "version": "0.72.0",
   "description": "Moderator PWA for the card game Salem 1692",
   "author": "René Uittenbogaard <ruittenb@gmail.com>",
   "homepage": "https://github.com/ruittenb/salem-1692",
@@ -12,7 +12,6 @@
   ],
   "license": "GNU GPLv2",
   "main": "dist/index.html",
-  "packageManager": "pnpm@9.0.4",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "all": "make all",
@@ -21,7 +20,7 @@
     "serve": "make serve"
   },
   "devDependencies": {
-    "@greenlabs/ppx-spice": "^0.1.15",
+    "@greenlabs/ppx-spice": "^0.1.13",
     "browserify": "^17.0.0",
     "clean-css": "^5.3.3",
     "clean-css-cli": "^5.6.3",
@@ -39,7 +38,7 @@
     "@ryyppy/rescript-promise": "^2.1.0",
     "davidshimjs-qrcodejs": "^0.0.2",
     "firebase": "^9.0.1",
-    "pnpm": "^9.0.5",
+    "pnpm": "^9.0.6",
     "qrcode-parser": "^2.1.3",
     "react": "^18.2.0",
     "react-client": "^1.0.1",

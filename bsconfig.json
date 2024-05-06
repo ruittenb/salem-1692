@@ -1,6 +1,6 @@
 {
   "name": "salem-1692",
-  "version": "0.70.1",
+  "version": "0.72.0",
   "namespace": true,
   "reason": {"react-jsx": 3},
   "bsc-flags": ["-bs-super-errors"],
@@ -14,8 +14,8 @@
   }],
   "suffix": ".bs.js",
   "bs-dependencies": [
-    "@rescript/react",
     "@ryyppy/rescript-promise",
+    "@rescript/react",
     "@greenlabs/ppx-spice"
   ],
   "ppx-flags": [

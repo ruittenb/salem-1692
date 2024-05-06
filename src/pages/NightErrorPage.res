@@ -2,8 +2,6 @@
  * NightErrorPage
  */
 
-@@warning("-33") // Unused 'open Types'
-
 open Types
 
 // The message must have been translated already.

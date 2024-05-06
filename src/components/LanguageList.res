@@ -10,7 +10,6 @@ open Types
 let make = (): React.element => {
   let (_currentPage, goToPage) = React.useContext(RouterContext.context)
   let (gameState, setGameState) = React.useContext(GameStateContext.context)
-  //let t = Translator.getTranslator(gameState.language)
 
   let offeredLanguages: array<LanguageCodec.t> = [
     #en_US,
@@ -20,8 +19,8 @@ let make = (): React.element => {
     #pt_BR,
     #de_DE,
     #nl_NL,
-    //#uk_UA,
     #hu_HU,
+    #uk_UA,
     //#zh_CN,
     //#ja_JP,
     //#ko_KR,

@@ -79,6 +79,14 @@ let make = (): React.element => {
       spacedComma
       <Link href="https://www.fiverr.com/torokcsaba"> {React.string(`Csaba Török`)} </Link>
       spacedComma
+      <Link href="https://www.instagram.com/vlad_hryhorchuk/">
+        {React.string(
+          gameState.language == #uk_UA
+            ? `Владислав Григорчук`
+            : "Vladyslav Hryhorchuk",
+        )}
+      </Link>
+      spacedComma
       {React.string(t("Licensed under "))}
       <Link href="http://creativecommons.org/licenses/by-sa/4.0/" text="CC BY-SA 4.0" />
     </p>
