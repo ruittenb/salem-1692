@@ -116,6 +116,13 @@ let make = (): React.element => {
       }}
       onClick={_event => toggleKeepActive()}
     />
+    <Bubble float=true dir=North>
+      {React.string(
+        t(
+          "This keeps the screen active during the night, so that other players cannot see whether you used your phone.",
+        ),
+      )}
+    </Bubble>
     <Button label={t("Credits")} onClick={_event => goToPage(_prev => Credits)} />
   </div>
 }

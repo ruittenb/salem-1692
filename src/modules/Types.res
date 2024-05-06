@@ -26,6 +26,13 @@ type evenOdd =
   | Even
   | Odd
 
+type direction =
+  | North
+  | South
+  | West
+  | East
+  | Nowhere
+
 type rotation =
   | RotNone
   | RotOneQuarter
