@@ -113,6 +113,15 @@ let make = (): React.element => {
         }
       }}
     />
+    <If condition={isBubbleVisible}>
+      <Bubble float=true dir=South clickHandler={_event => hideBubble()}>
+        {React.string(
+          t(
+            "This keeps the screen active during the night, so that other players cannot see whether you used your phone.",
+          ),
+        )}
+      </Bubble>
+    </If>
     <Button
       label={t("Stay active")}
       className={"condensed-uk icon-left " ++ if gameState.doKeepActive {
@@ -122,15 +131,6 @@ let make = (): React.element => {
       }}
       onClick={_event => toggleKeepActive()}
     />
-    <If condition={isBubbleVisible}>
-      <Bubble float=true dir=North clickHandler={_event => hideBubble()}>
-        {React.string(
-          t(
-            "This keeps the screen active during the night, so that other players cannot see whether you used your phone.",
-          ),
-        )}
-      </Bubble>
-    </If>
     <Button label={t("Credits")} onClick={_event => goToPage(_prev => Credits)} />
   </div>
 }
