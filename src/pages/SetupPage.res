@@ -9,6 +9,7 @@ let make = (): React.element => {
   let (_currentPage, goToPage) = React.useContext(RouterContext.context)
   let (gameState, setGameState) = React.useContext(GameStateContext.context)
   let (navigation, setNavigation) = React.useContext(NavigationContext.context)
+  let (isBubbleVisible, setIsBubbleVisible) = React.useState(() => false)
   let t = Translator.getTranslator(gameState.language)
 
   let togglePlayEffects = () => {
@@ -32,7 +33,12 @@ let make = (): React.element => {
     })
   }
 
+  let hideBubble = () => {
+    setIsBubbleVisible(_ => false)
+  }
+
   let toggleKeepActive = () => {
+    setIsBubbleVisible(_ => !gameState.doKeepActive)
     setGameState(prevGameState => {
       ...prevGameState,
       doKeepActive: !prevGameState.doKeepActive,
@@ -116,13 +122,15 @@ let make = (): React.element => {
       }}
       onClick={_event => toggleKeepActive()}
     />
-    <Bubble float=true dir=North>
-      {React.string(
-        t(
-          "This keeps the screen active during the night, so that other players cannot see whether you used your phone.",
-        ),
-      )}
-    </Bubble>
+    <If condition={isBubbleVisible}>
+      <Bubble float=true dir=North clickHandler={_event => hideBubble()}>
+        {React.string(
+          t(
+            "This keeps the screen active during the night, so that other players cannot see whether you used your phone.",
+          ),
+        )}
+      </Bubble>
+    </If>
     <Button label={t("Credits")} onClick={_event => goToPage(_prev => Credits)} />
   </div>
 }

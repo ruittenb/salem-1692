@@ -9,6 +9,7 @@ let make = (
   ~float: bool=false,
   ~dir: direction=Nowhere,
   ~children: React.element,
+  ~clickHandler: ReactEvent.Mouse.t => unit=_ => (),
 ): React.element => {
   let directionClass = switch dir {
   | North => "north"
@@ -21,7 +22,7 @@ let make = (
   let wrapperClassNames = float ? "bubble-wrapper floating" : ""
   let bubbleClassNames = "bubble " ++ (float ? "floating " : "") ++ directionClass
 
-  <div className={wrapperClassNames}>
+  <div className={wrapperClassNames} onClick={clickHandler}>
     <div className={bubbleClassNames}> {children} </div>
   </div>
 }
