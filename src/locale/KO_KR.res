@@ -37,6 +37,10 @@ let table = Js.Dict.fromArray([
   ("Speech", `담화`),
   ("Music", `음악`),
   ("Stay active", `활발하게 활동하세요`),
+  (
+    "This keeps the screen active during the night, so that other players cannot see whether you used your phone.",
+    `이렇게 하면 밤에도 화면이 활성화되어 다른 플레이어가 귀하의 휴대폰 사용 여부를 알 수 없습니다.`,
+  ),
   ("Seating layout", `좌석 배치`),
   (
     "How are the players seated around the table?",

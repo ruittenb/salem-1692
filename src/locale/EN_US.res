@@ -35,6 +35,10 @@ let table = Js.Dict.fromArray([
   ("Speech", "Discourse"),
   ("Music", "Music"),
   ("Stay active", "Stay active"),
+  (
+    "This keeps the screen active during the night, so that other players cannot see whether you used your phone.",
+    "This keeps the screen active during the night, so that other players cannot see whether you used your phone.",
+  ),
   ("Seating layout", "Seating Layout"),
   ("How are the players seated around the table?", "How are the players seated around the table?"),
   (
