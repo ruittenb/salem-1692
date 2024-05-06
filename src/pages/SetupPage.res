@@ -57,6 +57,7 @@ let make = (): React.element => {
     None
   })
 
+  // React element
   <div id="setup-page" className="page justify-start">
     <TopBar
       returnPage=None
@@ -67,7 +68,7 @@ let make = (): React.element => {
         },
       )}
     />
-    <h1 className="condensed-fr condensed-es condensed-de"> {React.string(t("Settings"))} </h1>
+    <h1> {React.string(t("Settings"))} </h1>
     <Spacer />
     <Button
       label={t("Players")}

@@ -162,7 +162,7 @@ let getModusOperandi = (
       <Spacer />
       <Button
         label={t("Join Game")}
-        className="condensed-it condensed-uk ultra-condensed-hu condensed-ko"
+        className="condensed-it condensed-uk super-condensed-hu condensed-ko"
         onClick={_event => setSlaveGameIdValidity(_prev => SlaveInputShown)}
       />
     </>
@@ -207,12 +207,12 @@ let getModusOperandi = (
       </div>
       <Button
         label={t("Play Game")}
-        className="icon-right icon-forw condensed-nl"
+        className="icon-right icon-forw"
         onClick={_event => goToPage(_prev => Daytime)}
       />
       <Button
         label={t("Stop Hosting")}
-        className="condensed-nl condensed-uk ultra-condensed-ko"
+        className="condensed-nl condensed-uk super-condensed-ko"
         onClick={_event =>
           stopHosting(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)}
       />
@@ -275,7 +275,7 @@ let getModusOperandi = (
       // Back/Forward buttons
       <Button
         label={t("Play Game")}
-        className="icon-right icon-forw condensed-nl"
+        className="icon-right icon-forw"
         onClick={_event =>
           tryPlayAsSlave(
             goToPage,
@@ -288,7 +288,7 @@ let getModusOperandi = (
       />
       <Button
         label={t("Leave guest mode")}
-        className="condensed-es condensed-fr ultra-condensed-pt ultra-condensed-it condensed-de ultra-condensed-uk ultra-condensed-hu ultra-condensed-ko"
+        className="condensed-es condensed-fr super-condensed-pt super-condensed-it condensed-de super-condensed-uk super-condensed-hu super-condensed-ko"
         onClick={_event => {
           leaveGame(dbConnectionStatus, setDbConnectionStatus, gameState, setGameState)
           setSlaveGameIdValidity(_prev => SlaveInputHidden)

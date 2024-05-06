@@ -21,7 +21,7 @@ let table = Js.Dict.fromArray([
     "During the night, player buttons will be shown in this order.",
     `Pendant la Nuit, les boutons des joueurs s'afficheront dans l'ordre renseigné ci-dessous.`,
   ),
-  ("(add one)", "(Ajouter un joueur)"),
+  ("(add one)", "(ajouter)"),
   ("Ghost Players", `Joueurs fantômes`),
   (
     `In a two- or three-player game, nicknames for "ghost" players should be added to the list above up to a total of four players.`,
