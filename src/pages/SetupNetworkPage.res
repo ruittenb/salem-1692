@@ -179,8 +179,12 @@ let getModusOperandi = (
   | (Master(_), ConnectingAsSlave, _) // should not happen
   | (_, ConnectingAsMaster, _) =>
     <>
+      // TODO fix crude spacing
       <Spacer />
-      <div className="bubble"> {React.string(t("Connecting..."))} </div>
+      <Spacer />
+      <Spacer />
+      <Spacer />
+      <Bubble> {React.string(t("Connecting..."))} </Bubble>
       // TODO add abort connecting button
     </>
   | (Master(gameId), Connected(_), _) =>
@@ -199,7 +203,7 @@ let getModusOperandi = (
       <div className="input-and-icon">
         <div className="id-input"> {React.string(gameId)} </div>
         <QrIcon mode={QrIcon.Scannable(gameId)} />
-        <div className="bubble north"> {React.string(t("Connected."))} </div>
+        <Bubble dir=North> {React.string(t("Connected."))} </Bubble>
       </div>
       <Button
         label={t("Play Game")}
@@ -266,7 +270,7 @@ let getModusOperandi = (
         | (Connected(_), SlaveInputShownAndAbsent) => "Game not found"
         | (Connected(_), _) => "Connected."
         }
-        <div className="bubble north"> {React.string(t(slaveConnectionStatus))} </div>
+        <Bubble dir=North> {React.string(t(slaveConnectionStatus))} </Bubble>
       }
       // Back/Forward buttons
       <Button

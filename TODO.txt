@@ -6,8 +6,10 @@ SEVERE:
  - es: brujas -> brujos
 
 IMPORTANT:
+ - @media query for condensed text
  - wakelock
-   - During the night phase, this keeps the screen active, hiding whether you used your phone.
+
+
 
 NICE TO HAVE:
  - Safari: backgroundmusic sometimes(?) as loud as speech
@@ -17,13 +19,13 @@ NICE TO HAVE:
  - reflect state in URL https://betterprogramming.pub/how-and-why-you-should-store-react-ui-state-in-the-url-f2013a204cb2
  - swipe: https://www.npmjs.com/package/react-swipeable
  - router: https://dusty.phillips.codes/2021/02/03/rescript-with-react-routing-and-navigation/
- - ko, uk, ja
+ - ko, ja
 
  - "player name buttons"?
 
 Korean:
  - https://brand.naver.com/asmodeekorea/products/6826839515
- 
+
 Thai:
  - ซาเลม 1692  #th_TH
 

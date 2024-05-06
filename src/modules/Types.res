@@ -26,6 +26,13 @@ type evenOdd =
   | Even
   | Odd
 
+type direction =
+  | North
+  | South
+  | West
+  | East
+  | Nowhere
+
 type rotation =
   | RotNone
   | RotOneQuarter
@@ -59,6 +66,7 @@ type gameState = {
   doPlayEffects: bool,
   doPlaySpeech: bool,
   doPlayMusic: bool,
+  doKeepActive: bool,
   backgroundMusic: array<string>,
 }
 type gameStateSetter = (gameState => gameState) => unit
