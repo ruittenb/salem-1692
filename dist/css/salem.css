@@ -366,35 +366,24 @@ video + .bubble {
 
 @media screen and (width < 500px) {
   .de_DE .page button.super-condensed-de { font-size: 24px; }
+  .it_IT .page button.super-condensed-it { font-size: 24px; }
+  .pt_BR .page button.super-condensed-pt { font-size: 24px; }
+  .uk_UA .page button.super-condensed-uk { font-size: 21px; }
+  .uk_UA .page button.hyper-condensed-uk { font-size: 19px; }
 }
 @media screen and (width < 440px) {
   .de_DE .page button.condensed-de       { font-size: 24px; }
   .de_DE .page button.super-condensed-de { font-size: 20px; }
   .es_ES .page button.condensed-es       { font-size: 24px; }
   .fr_FR .page button.condensed-fr       { font-size: 23px; }
+  .it_IT .page button.condensed-it       { font-size: 24px; }
+  .it_IT .page button.super-condensed-it { font-size: 21px; }
   .nl_NL .page button.condensed-nl       { font-size: 24px; }
-}
-.it_IT .page button.condensed-it {
-    font-size: 24px;
-    line-height: 36px;
-}
-.it_IT .page button.super-condensed-it {
-    font-size: 21px;
-}
-.pt_BR .page button.condensed-pt {
-    font-size: 24px;
-}
-.pt_BR .page button.super-condensed-pt {
-    font-size: 22px;
-}
-.uk_UA .page button.condensed-uk {
-    font-size: 22px;
-}
-.uk_UA .page button.super-condensed-uk {
-    font-size: 20px;
-}
-.uk_UA .page button.hyper-condensed-uk {
-    font-size: 17px;
+  .pt_BR .page button.condensed-pt       { font-size: 24px; }
+  .pt_BR .page button.super-condensed-pt { font-size: 22px; }
+  .uk_UA .page button.condensed-uk       { font-size: 21px; }
+  .uk_UA .page button.super-condensed-uk { font-size: 19px; }
+  .uk_UA .page button.hyper-condensed-uk { font-size: 17px; }
 }
 .hu_HU .page button.condensed-hu {
     font-size: 24px;
