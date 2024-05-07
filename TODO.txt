@@ -6,10 +6,6 @@ SEVERE:
  - es: brujas -> brujos
 
 IMPORTANT:
- - @media query for condensed text
- - wakelock
-
-
 
 NICE TO HAVE:
  - Safari: backgroundmusic sometimes(?) as loud as speech
