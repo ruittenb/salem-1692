@@ -288,7 +288,7 @@ input[type=text].id-input {
     display: block;
     width: 270px;
     margin: 10px auto 20px auto;
-    padding: 6px 4px;
+    padding: 8px;
     border-radius: 10px;
     background-color: var(--dark-gray);
     color: white;
@@ -370,7 +370,11 @@ video + .bubble {
   .pt_BR .page button.super-condensed-pt { font-size: 24px; }
   .uk_UA .page button.super-condensed-uk { font-size: 21px; }
   .uk_UA .page button.hyper-condensed-uk { font-size: 19px; }
+  .hu_HU .page button.super-condensed-hu { font-size: 24px; }
+  .ko_KR .page button.super-condensed-ko { font-size: 23px; }
+  .ko_KR .page button.hyper-condensed-ko { font-size: 20px; }
 }
+
 @media screen and (width < 440px) {
   .de_DE .page button.condensed-de       { font-size: 24px; }
   .de_DE .page button.super-condensed-de { font-size: 20px; }
@@ -384,24 +388,18 @@ video + .bubble {
   .uk_UA .page button.condensed-uk       { font-size: 21px; }
   .uk_UA .page button.super-condensed-uk { font-size: 19px; }
   .uk_UA .page button.hyper-condensed-uk { font-size: 17px; }
+  .hu_HU .page button.condensed-hu       { font-size: 24px; }
+  .hu_HU .page button.super-condensed-hu { font-size: 22px; }
+  .ko_KR .page button.condensed-ko       { font-size: 23px; }
+  .ko_KR .page button.super-condensed-ko { font-size: 20px; }
+  .ko_KR .page button.hyper-condensed-ko { font-size: 17px; }
 }
-.hu_HU .page button.condensed-hu {
-    font-size: 24px;
-}
-.hu_HU .page button.super-condensed-hu {
-    font-size: 22px;
-}
+
 .ko_KR .page button {
     line-height: 42px;
 }
 .ko_KR .page button.oblongbutton {
     line-height: 32px;
-}
-.ko_KR .page button.condensed-ko {
-    font-size: 23px;
-}
-.ko_KR .page button.super-condensed-ko {
-    font-size: 21px;
 }
 
 /** ****************************************************************************
@@ -444,7 +442,7 @@ video + .bubble {
     margin-bottom: 32px;
     font-family: inherit;
     font-size: 26px;
-    line-height: 40px;
+    line-height: 38px;
     background-color: var(--mid-gold);
     background-repeat: no-repeat;
     border-width: 2px;

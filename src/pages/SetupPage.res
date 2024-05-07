@@ -125,7 +125,7 @@ let make = (): React.element => {
     </If>
     <Button
       label={t("Stay active")}
-      className={"condensed-uk icon-left " ++ if gameState.doKeepActive {
+      className={"condensed-uk hyper-condensed-ko icon-left " ++ if gameState.doKeepActive {
         "icon-checked"
       } else {
         "icon-unchecked"
