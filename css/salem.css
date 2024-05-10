@@ -361,57 +361,34 @@ video + .bubble {
 }
 
 /** ****************************************************************************
- * Page elements
+ * Font adjustments
  */
 
-.de_DE .page button.condensed-de {
-    font-size: 20px;
+@media screen and (width < 500px) {
+  .de_DE .page button.super-condensed-de { font-size: 24px; }
+  .it_IT .page button.super-condensed-it { font-size: 24px; }
+  .pt_BR .page button.super-condensed-pt { font-size: 24px; }
+  .uk_UA .page button.super-condensed-uk { font-size: 21px; }
+  .uk_UA .page button.hyper-condensed-uk { font-size: 19px; }
 }
-.de_DE #setup-network-page button.condensed-de {
-    font-size: 24px;
-}
-.es_ES .page button.condensed-es {
-    font-size: 24px;
-}
-.fr_FR .page button.condensed-fr,
-.fr_FR .page button .condensed-fr {
-    font-size: 23px;
-}
-.fr_FR .page .player-entry-item input[type="text"].condensed-fr::placeholder {
-    font-size: 21px;
-}
-.it_IT .page button.condensed-it {
-    font-size: 24px;
-    line-height: 36px;
-}
-.it_IT .page button.ultra-condensed-it {
-    font-size: 21px;
-}
-.nl_NL .page button.condensed-nl {
-    font-size: 24px;
-}
-.pt_BR .page button.condensed-pt {
-    font-size: 24px;
-}
-.pt_BR .page button.ultra-condensed-pt {
-    font-size: 22px;
-}
-.uk_UA .page button.condensed-uk {
-    font-size: 22px;
-}
-.uk_UA .page button.ultra-condensed-uk {
-    font-size: 20px;
-}
-.uk_UA .page button.hyper-condensed-uk {
-    font-size: 17px;
-}
-.uk_UA .page .player-entry-item input[type="text"].condensed-uk::placeholder {
-    font-size: 20px;
+@media screen and (width < 440px) {
+  .de_DE .page button.condensed-de       { font-size: 24px; }
+  .de_DE .page button.super-condensed-de { font-size: 20px; }
+  .es_ES .page button.condensed-es       { font-size: 24px; }
+  .fr_FR .page button.condensed-fr       { font-size: 23px; }
+  .it_IT .page button.condensed-it       { font-size: 24px; }
+  .it_IT .page button.super-condensed-it { font-size: 21px; }
+  .nl_NL .page button.condensed-nl       { font-size: 24px; }
+  .pt_BR .page button.condensed-pt       { font-size: 24px; }
+  .pt_BR .page button.super-condensed-pt { font-size: 22px; }
+  .uk_UA .page button.condensed-uk       { font-size: 21px; }
+  .uk_UA .page button.super-condensed-uk { font-size: 19px; }
+  .uk_UA .page button.hyper-condensed-uk { font-size: 17px; }
 }
 .hu_HU .page button.condensed-hu {
     font-size: 24px;
 }
-.hu_HU .page button.ultra-condensed-hu {
+.hu_HU .page button.super-condensed-hu {
     font-size: 22px;
 }
 .ko_KR .page button {
@@ -423,9 +400,13 @@ video + .bubble {
 .ko_KR .page button.condensed-ko {
     font-size: 23px;
 }
-.ko_KR .page button.ultra-condensed-ko {
+.ko_KR .page button.super-condensed-ko {
     font-size: 21px;
 }
+
+/** ****************************************************************************
+ * Page elements
+ */
 
 .page {
     display: flex;
@@ -652,10 +633,10 @@ video + .bubble {
 .page button.icon-checked   { background-image: url(../images/icon-checked.png); }
 .page button.icon-unchecked { background-image: url(../images/icon-unchecked.png); }
 
-.page    div.icon-back      { background-image: url(../images/icon-back-32.png); grid-area: back; }
+.page    div.icon-back      { background-image: url(../images/icon-back-32.png);  grid-area: back; }
 .page    div.icon-host      { background-image: url(../images/icon-host-32.webp); grid-area: network; }
 .page    div.icon-guest     { background-image: url(../images/icon-hands-32.png); grid-area: network; }
-.page    div.icon-gear      { background-image: url(../images/icon-gear-32.png); grid-area: setup; }
+.page    div.icon-gear      { background-image: url(../images/icon-gear-32.png);  grid-area: setup; }
 
 .buttonpair {
     width: 80%;
