@@ -161,4 +161,3 @@ publish: ## Publish the master branch on Github Pages
 publish-force: ## Publish the master branch on Github Pages (force push)
 	git checkout master && \
 	git push --force origin `git subtree split --prefix dist master`:github-pages
-
