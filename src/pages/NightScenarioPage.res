@@ -72,7 +72,9 @@ let make = (~subPage: page): React.element => {
 
   // if we're hosting, save turn state to firebase after every change
   React.useEffect1(() => {
-    Utils.logDebugStyled(
+    Utils.logStyled(
+      ~bold=true,
+      ~color="black",
       p ++
       `Detected turnState change; ◇ nightType:` ++
       turnState.nightType->NightTypeCodec.toString ++
@@ -82,7 +84,6 @@ let make = (~subPage: page): React.element => {
       turnState.choiceWitches->PlayerCodec.toString ++
       ` ◇ constable:` ++
       turnState.choiceConstable->PlayerCodec.toString,
-      "font-weight: bold",
     )
     Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
       FirebaseClient.saveGameTurnState(
