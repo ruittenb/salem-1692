@@ -6,7 +6,6 @@ SEVERE:
  - es: brujas -> brujos
 
 IMPORTANT:
- - @media query for condensed text
 
 NICE TO HAVE:
  - Safari: backgroundmusic sometimes(?) as loud as speech
@@ -34,4 +33,5 @@ Chinese:
  - Noto Serif Japanese
  - Noto Serif Korean
  - Noto Serif Simplified Chinese
+
 
