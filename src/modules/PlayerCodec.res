@@ -13,8 +13,8 @@ type t =
   | Nobody
   | Undecided
 
-let toString = (x: t): string => {
-  switch x {
+let toString = (player: t): string => {
+  switch player {
   | Player(playerName) => "Player:" ++ playerName
   | Nobody => "Nobody"
   | Undecided => "Undecided"
@@ -37,19 +37,19 @@ let playerTypeToLocalizedString = (playerType: t, translator): string => {
   }
 }
 
-let t_encode = (x: t) => {
-  x->toString->Js.Json.string
+let t_encode = (player: t) => {
+  player->toString->Js.Json.string
 }
 
-let t_decode = (x: Js.Json.t): Belt.Result.t<t, Spice.decodeError> => {
-  switch x->Js.Json.decodeString->Belt.Option.getWithDefault("") {
+let t_decode = (playerJson: Js.Json.t): Belt.Result.t<t, Spice.decodeError> => {
+  switch playerJson->Js.Json.decodeString->Belt.Option.getWithDefault("") {
   | "Nobody" => Belt.Result.Ok(Nobody)
   | "Undecided" => Belt.Result.Ok(Undecided)
-  | value =>
-    if value->Js.String2.startsWith("Player:") {
-      Belt.Result.Ok(Player(value->Js.String2.substringToEnd(~from=7)))
+  | playerStr =>
+    if playerStr->Js.String2.startsWith("Player:") {
+      Belt.Result.Ok(Player(playerStr->Js.String2.substringToEnd(~from=7)))
     } else {
-      Spice.error("Spice Decoding Error", x)
+      Spice.error("Spice Decoding Error", playerJson)
     }
   }
 }
