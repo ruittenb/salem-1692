@@ -119,7 +119,7 @@ serve: ## Serve the page over http
 
 .PHONY: serve-stop
 serve-stop: ## Stop serving the page
-	ps -fu `whoami` | awk '/[s]erve -l [0-9]* $(DIST)/ { print $$2 }' | tee /dev/tty | xargs kill
+	ps -fu `whoami` | awk '/[s]erve.build.main.js -l [0-9]* $(DIST)/ { print $$2 }' | tee /dev/tty | xargs kill
 
 ##@ Source code control:
 
