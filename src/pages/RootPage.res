@@ -11,7 +11,8 @@ let initialNavigation: option<page> = None
 let setOverrideLanguage = (gameState): gameState => {
   let queryStringLanguage =
     QueryString.getQueryParam("lang")
-    ->Belt.Option.flatMap(LanguageCodec.languageFromJs)
+    ->Belt.Option.map(Js.Json.string)
+    ->Belt.Option.flatMap(json => json->LanguageCodec.t_decode->Utils.resultToOption)
     ->Belt.Option.getWithDefault(gameState.language)
   {
     ...gameState,
@@ -103,7 +104,7 @@ let make = (): React.element => {
     <GameStateContext.Provider value=(gameState, setGameState)>
       <div
         lang={LanguageCodec.getHtmlLanguage(gameState.language)}
-        className={LanguageCodec.languageToJs(gameState.language)}>
+        className={gameState.language->LanguageCodec.toString}>
         <NavigationContext.Provider value=(navigation, setNavigation)>
           <TurnStateContext.Provider value=(turnState, setTurnState)>
             {currentPageElement}

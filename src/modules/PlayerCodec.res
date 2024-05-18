@@ -2,22 +2,34 @@
  * PlayerCodec
  */
 
-@decco type playerName = string
+// generates the functions playerName_encode() and playerName_decode()
+@spice
+type playerName = string
 
-type playerType =
+// spice cannot generate the functions t_encode() and t_decode() for variants with arguments.
+// we will define these functions below.
+type t =
   | Player(playerName)
   | Nobody
   | Undecided
 
-let map = (player1: playerType, mapFn: playerName => playerName) => {
-  switch player1 {
+let toString = (player: t): string => {
+  switch player {
+  | Player(playerName) => "Player:" ++ playerName
+  | Nobody => "Nobody"
+  | Undecided => "Undecided"
+  }
+}
+
+let map = (player: t, mapFn: playerName => playerName) => {
+  switch player {
   | Player(playerName) => Player(mapFn(playerName))
   | Nobody => Nobody
   | Undecided => Undecided
   }
 }
 
-let playerTypeToLocalizedString = (playerType: playerType, translator): string => {
+let playerTypeToLocalizedString = (playerType: t, translator): string => {
   switch playerType {
   | Player(playerName) => playerName
   | Nobody => translator("Nobody-SUBJ")
@@ -25,48 +37,19 @@ let playerTypeToLocalizedString = (playerType: playerType, translator): string =
   }
 }
 
-let playerTypeToString = (playerType: playerType): string => {
-  switch playerType {
-  | Player(playerName) => "Player:" ++ playerName
-  | Nobody => "Nobody"
-  | Undecided => "Undecided"
-  }
+let t_encode = (player: t) => {
+  player->toString->Js.Json.string
 }
 
-let encoder: Decco.encoder<playerType> = (playerType: playerType): Js.Json.t => {
-  playerType->playerTypeToString->Decco.stringToJson
-}
-
-let playerTypeFromString = (value: string): option<playerType> => {
-  let segments: array<string> = value->Js.String2.split(":") // returns at least one segment
-  let mainType: option<string> = segments->Belt.Array.get(0)
-  let playerName: option<playerName> = segments->Belt.Array.get(1)
-
-  switch (mainType, playerName) {
-  | (Some("Undecided"), _) => Some(Undecided)
-  | (Some("Nobody"), _) => Some(Nobody)
-  | (Some("Player"), Some(name)) => Some(Player(name))
-  | (Some("Player"), None)
-  | (Some(_), _)
-  | (None, _) =>
-    None
-  }
-}
-
-let decoder: Decco.decoder<playerType> = (json: Js.Json.t): Belt.Result.t<
-  playerType,
-  Decco.decodeError,
-> => {
-  switch json->Decco.stringFromJson {
-  | Belt.Result.Ok(v) =>
-    switch v->playerTypeFromString {
-    | None => Decco.error(~path="", "Invalid enum " ++ v, json)
-    | Some(v) => v->Ok
+let t_decode = (playerJson: Js.Json.t): Belt.Result.t<t, Spice.decodeError> => {
+  switch playerJson->Js.Json.decodeString->Belt.Option.getWithDefault("") {
+  | "Nobody" => Belt.Result.Ok(Nobody)
+  | "Undecided" => Belt.Result.Ok(Undecided)
+  | playerStr =>
+    if playerStr->Js.String2.startsWith("Player:") {
+      Belt.Result.Ok(Player(playerStr->Js.String2.substringToEnd(~from=7)))
+    } else {
+      Spice.error("Spice Decoding Error", playerJson)
     }
-  | Belt.Result.Error(_) as err => err
   }
 }
-
-let codec: Decco.codec<playerType> = (encoder, decoder)
-
-@decco type t = @decco.codec(codec) playerType

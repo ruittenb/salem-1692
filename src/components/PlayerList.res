@@ -44,22 +44,22 @@ let assemble = (
  */
 let getSortIndexes = (seating: SeatingCodec.t, numPlayers: int, evenOdd: evenOdd): array<int> => {
   switch (evenOdd, seating) {
-  | (Even, #TwoAtTop) =>
+  | (Even, TwoAtTop) =>
     Belt.Array.concat(
       Belt.Array.rangeBy(1, numPlayers, ~step=2),
       Belt.Array.rangeBy(0, numPlayers - 1, ~step=2)->Belt.Array.reverse,
     )
-  | (Even, #OneAtTop) =>
+  | (Even, OneAtTop) =>
     Belt.Array.concat(
       Belt.Array.rangeBy(1, numPlayers, ~step=2),
       Belt.Array.rangeBy(2, numPlayers, ~step=2)->Belt.Array.reverse,
     )
-  | (Odd, #OneAtTop) =>
+  | (Odd, OneAtTop) =>
     Belt.Array.concat(
       Belt.Array.rangeBy(1, numPlayers, ~step=2),
       Belt.Array.rangeBy(2, numPlayers, ~step=2)->Belt.Array.reverse,
     )
-  | (Odd, #TwoAtTop) =>
+  | (Odd, TwoAtTop) =>
     Belt.Array.concat(
       Belt.Array.rangeBy(0, numPlayers, ~step=2)->Belt.Array.reverse,
       Belt.Array.rangeBy(1, numPlayers - 1, ~step=2),
@@ -113,10 +113,10 @@ let make = (
 
   let sortIndexes = getSortIndexes(gameState.seating, numPlayers, evenOdd)
   let headPositions = switch (evenOdd, gameState.seating) {
-  | (Even, #TwoAtTop) => Belt.Set.Int.fromArray([])
-  | (Even, #OneAtTop) => Belt.Set.Int.fromArray([1, numPlayers])
-  | (Odd, #OneAtTop) => Belt.Set.Int.fromArray([1])
-  | (Odd, #TwoAtTop) => Belt.Set.Int.fromArray([numPlayers - 1])
+  | (Even, TwoAtTop) => Belt.Set.Int.fromArray([])
+  | (Even, OneAtTop) => Belt.Set.Int.fromArray([1, numPlayers])
+  | (Odd, OneAtTop) => Belt.Set.Int.fromArray([1])
+  | (Odd, TwoAtTop) => Belt.Set.Int.fromArray([numPlayers - 1])
   }
 
   let buttons = assemble(

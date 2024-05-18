@@ -76,7 +76,7 @@ let initialGameState = {
   gameType: StandAlone,
   language: #en_US,
   players: defaultPlayers,
-  seating: #OneAtTop,
+  seating: OneAtTop,
   hasGhostPlayers: false,
   doPlayEffects: true,
   doPlaySpeech: true,
@@ -88,6 +88,6 @@ let initialGameState = {
 let initialTurnState: turnState = {
   nrWitches: One,
   nightType: Dawn,
-  choiceWitches: PlayerCodec.Undecided,
-  choiceConstable: PlayerCodec.Undecided,
+  choiceWitches: Undecided,
+  choiceConstable: Undecided,
 }

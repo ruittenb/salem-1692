@@ -53,7 +53,9 @@ let make = (
         gameId,
         subject,
         player => {
-          switch player->Belt.Option.flatMap(playerTypeFromString) {
+          switch player->Belt.Option.flatMap(
+            p => p->Js.Json.string->PlayerCodec.t_decode->Utils.resultToOption,
+          ) {
           | None => ()
           | Some(Undecided) => ()
           | Some(person) => choiceProcessor(person, ~skipConfirmation=false)

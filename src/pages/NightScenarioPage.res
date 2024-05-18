@@ -72,29 +72,27 @@ let make = (~subPage: page): React.element => {
 
   // if we're hosting, save turn state to firebase after every change
   React.useEffect1(() => {
-    let nightType = turnState.nightType->NightTypeCodec.nightTypeToString
-    let nrWitches = turnState.nrWitches->NumerusCodec.numerusToJs
-    let choiceWitches = turnState.choiceWitches->PlayerCodec.playerTypeToString
-    let choiceConstable = turnState.choiceConstable->PlayerCodec.playerTypeToString
-    Utils.logDebug(
+    Utils.logStyled(
+      ~bold=true,
+      ~color="black",
       p ++
       `Detected turnState change; ◇ nightType:` ++
-      nightType ++
+      turnState.nightType->NightTypeCodec.toString ++
       ` ◇ numerus:` ++
-      nrWitches ++
+      turnState.nrWitches->NumerusCodec.toString ++
       ` ◇ witches:` ++
-      choiceWitches ++
+      turnState.choiceWitches->PlayerCodec.toString ++
       ` ◇ constable:` ++
-      choiceConstable,
+      turnState.choiceConstable->PlayerCodec.toString,
     )
     Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
       FirebaseClient.saveGameTurnState(
         dbConnection,
         gameId,
-        nightType,
-        nrWitches,
-        choiceWitches,
-        choiceConstable,
+        turnState.nightType,
+        turnState.nrWitches,
+        turnState.choiceWitches,
+        turnState.choiceConstable,
       )
     })
     None // cleanup function
@@ -150,9 +148,9 @@ let make = (~subPage: page): React.element => {
 
   let confirmationProcessor = (confirmation: ConfirmationCodec.t): unit => {
     switch confirmation {
-    | #Yes => goToNextStep()
-    | #No => goToPrevStep()
-    | #Unconfirmed => ()
+    | Yes => goToNextStep()
+    | No => goToPrevStep()
+    | Unconfirmed => ()
     }
   }
 

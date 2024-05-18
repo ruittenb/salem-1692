@@ -14,11 +14,13 @@
   }],
   "suffix": ".bs.js",
   "bs-dependencies": [
-    "@rescript/react",
     "@ryyppy/rescript-promise",
-    "decco"
+    "@rescript/react",
+    "@greenlabs/ppx-spice"
   ],
-  "ppx-flags": ["decco/ppx"],
+  "ppx-flags": [
+    ["@greenlabs/ppx-spice/ppx"]
+  ],
   "jsx": {
     "version": 4,
     "mode": "classic"

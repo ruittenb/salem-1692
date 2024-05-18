@@ -31,13 +31,13 @@ let make = (~subPage: page): React.element => {
             }
           | Some(dbRecordStr) =>
             switch dbRecordStr->Js.Json.string->dbRecord_decode {
-            | Error(deccoError) =>
+            | Error(spiceError) =>
               Utils.logError(
-                deccoError.path ++
+                spiceError.path ++
                 ": " ++
-                deccoError.message ++
+                spiceError.message ++
                 ": " ++
-                deccoError.value->Js.Json.decodeString->Belt.Option.getWithDefault("<None>"),
+                spiceError.value->Js.Json.decodeString->Belt.Option.getWithDefault("<None>"),
               )
             | Ok(dbRecord) => {
                 Utils.logDebug(p ++ "Received dbRecord")
@@ -100,10 +100,10 @@ let make = (~subPage: page): React.element => {
       FirebaseClient.saveGameTurnState(
         dbConnection,
         gameId,
-        turnState.nightType->NightTypeCodec.nightTypeToString,
-        turnState.nrWitches->NumerusCodec.numerusToJs,
-        player->PlayerCodec.playerTypeToString,
-        turnState.choiceConstable->PlayerCodec.playerTypeToString,
+        turnState.nightType,
+        turnState.nrWitches,
+        player,
+        turnState.choiceConstable,
       )
     })
   }
@@ -117,10 +117,10 @@ let make = (~subPage: page): React.element => {
       FirebaseClient.saveGameTurnState(
         dbConnection,
         gameId,
-        turnState.nightType->NightTypeCodec.nightTypeToString,
-        turnState.nrWitches->NumerusCodec.numerusToJs,
-        turnState.choiceWitches->PlayerCodec.playerTypeToString,
-        player->PlayerCodec.playerTypeToString,
+        turnState.nightType,
+        turnState.nrWitches,
+        turnState.choiceWitches,
+        player,
       )
     })
   }

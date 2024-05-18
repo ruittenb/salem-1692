@@ -32,41 +32,33 @@ let make = (): React.element => {
     </p>
     <div id="layout-list">
       {switch (evenOdd, gameState.seating) {
-      | (Odd, #OneAtTop) =>
+      | (Odd, OneAtTop) =>
         <>
+          <BulkyButton className="layout-1222 icon-left icon-checked" onClick={onClick(OneAtTop)} />
           <BulkyButton
-            className="layout-1222 icon-left icon-checked" onClick={onClick(#OneAtTop)}
-          />
-          <BulkyButton
-            className="layout-2221 icon-left icon-unchecked" onClick={onClick(#TwoAtTop)}
+            className="layout-2221 icon-left icon-unchecked" onClick={onClick(TwoAtTop)}
           />
         </>
-      | (Odd, #TwoAtTop) =>
+      | (Odd, TwoAtTop) =>
         <>
           <BulkyButton
-            className="layout-1222 icon-left icon-unchecked" onClick={onClick(#OneAtTop)}
+            className="layout-1222 icon-left icon-unchecked" onClick={onClick(OneAtTop)}
           />
+          <BulkyButton className="layout-2221 icon-left icon-checked" onClick={onClick(TwoAtTop)} />
+        </>
+      | (Even, OneAtTop) =>
+        <>
+          <BulkyButton className="layout-1221 icon-left icon-checked" onClick={onClick(OneAtTop)} />
           <BulkyButton
-            className="layout-2221 icon-left icon-checked" onClick={onClick(#TwoAtTop)}
+            className="layout-2222 icon-left icon-unchecked" onClick={onClick(TwoAtTop)}
           />
         </>
-      | (Even, #OneAtTop) =>
+      | (Even, TwoAtTop) =>
         <>
           <BulkyButton
-            className="layout-1221 icon-left icon-checked" onClick={onClick(#OneAtTop)}
+            className="layout-1221 icon-left icon-unchecked" onClick={onClick(OneAtTop)}
           />
-          <BulkyButton
-            className="layout-2222 icon-left icon-unchecked" onClick={onClick(#TwoAtTop)}
-          />
-        </>
-      | (Even, #TwoAtTop) =>
-        <>
-          <BulkyButton
-            className="layout-1221 icon-left icon-unchecked" onClick={onClick(#OneAtTop)}
-          />
-          <BulkyButton
-            className="layout-2222 icon-left icon-checked" onClick={onClick(#TwoAtTop)}
-          />
+          <BulkyButton className="layout-2222 icon-left icon-checked" onClick={onClick(TwoAtTop)} />
         </>
       }}
     </div>

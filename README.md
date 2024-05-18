@@ -33,8 +33,7 @@ take a vote.
 
 - [ReScript](https://rescript-lang.org/docs/manual/latest/overview)
   - [ReScript Forum](https://www.reddit.com/r/rescript/)
-- [Decco](https://github.com/reasonml-labs/decco)
-  - [How To Encode/Decode with Decco](doc/Decoder%20une%20enumeration%20depuis%20une%20API%20en%20ReScript%20avec%20decco.pdf)
+- [Spice](https://github.com/green-labs/ppx_spice) (replaces [~~Decco~~](https://github.com/reasonml-labs/decco))
 - [React](https://reactjs.org/docs/getting-started.html)
   - [ReScript-React](https://rescript-lang.org/docs/react/latest/introduction)
 - [Firebase Realtime Database](https://firebase.google.com/docs/database)
@@ -73,7 +72,8 @@ make serve
 ## Features
 
 It is possible to add the desired language setting in the query string
-using any of the language codes from [LanguageCodec](src/modules/LanguageCodec.res):
+using any of the language codes from [LanguageCodec](src/modules/LanguageCodec.res),
+for example:
 
 - http://localhost:3001/?lang=pt_BR
 

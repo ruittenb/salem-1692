@@ -34,9 +34,9 @@ let make = (~addressed: addressed, ~confirmationProcessor, ~goToPrevStep): React
     Utils.logDebugGreen(
       p ++
       "Mounted; choiceWitches:" ++
-      turnState.choiceWitches->playerTypeToString ++
+      turnState.choiceWitches->PlayerCodec.toString ++
       " choiceConstable:" ++
-      turnState.choiceConstable->playerTypeToString,
+      turnState.choiceConstable->PlayerCodec.toString,
     )
     // At this point we should have a choice to ask confirmation for.
     // Therefore, these situations should never happen.
@@ -58,7 +58,7 @@ let make = (~addressed: addressed, ~confirmationProcessor, ~goToPrevStep): React
     }
     Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
       // clear any previous confirmation that was recorded
-      FirebaseClient.saveGameConfirmation(dbConnection, gameId, subject, #Unconfirmed)
+      FirebaseClient.saveGameConfirmation(dbConnection, gameId, subject, Unconfirmed)
 
       // install new listener
       Utils.logDebug(p ++ "About to install confirmation listener")
@@ -68,8 +68,8 @@ let make = (~addressed: addressed, ~confirmationProcessor, ~goToPrevStep): React
         subject,
         maybeDecision => {
           switch maybeDecision {
-          | Some("Yes") => confirmationProcessor(#Yes)
-          | Some("No") => confirmationProcessor(#No)
+          | Some("Yes") => confirmationProcessor(ConfirmationCodec.Yes)
+          | Some("No") => confirmationProcessor(ConfirmationCodec.No)
           | Some(_) => ()
           | None => ()
           }
@@ -103,11 +103,11 @@ let make = (~addressed: addressed, ~confirmationProcessor, ~goToPrevStep): React
     <Spacer />
     <Spacer />
     <LargeButton
-      className="confirm-yes" title={t("Yes")} onClick={_event => confirmationProcessor(#Yes)}
+      className="confirm-yes" title={t("Yes")} onClick={_event => confirmationProcessor(Yes)}
     />
     <Spacer />
     <LargeButton
-      className="confirm-no" title={t("No")} onClick={_event => confirmationProcessor(#No)}
+      className="confirm-no" title={t("No")} onClick={_event => confirmationProcessor(No)}
     />
     <Spacer />
   </div>

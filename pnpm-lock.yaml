@@ -17,9 +17,6 @@ importers:
       davidshimjs-qrcodejs:
         specifier: ^0.0.2
         version: 0.0.2
-      decco:
-        specifier: ^1.6.0
-        version: 1.6.0(bs-platform@9.0.2)
       firebase:
         specifier: ^9.0.1
         version: 9.23.0
@@ -39,6 +36,9 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
     devDependencies:
+      '@greenlabs/ppx-spice':
+        specifier: ^0.1.13
+        version: 0.1.13
       browserify:
         specifier: ^17.0.0
         version: 17.0.0
@@ -397,6 +397,9 @@ packages:
   '@goto-bus-stop/common-shake@2.4.1':
     resolution: {integrity: sha512-U77x9X3VXHQfuo8ncsQShFGnQ+DLSiHjaAKWyqyfIzcoddnOromP2SE615r1UmZdZTyc9DAZ4BYEBs2QQ1JwMQ==}
 
+  '@greenlabs/ppx-spice@0.1.13':
+    resolution: {integrity: sha512-po8Qql0sTrLjjpJK5Z2h/Gnw2bEp/nviDsdpBkwxBGYPGG+sxWxoKvB8Bg/5TVopdbeosWy42r1OFJfN87V22w==}
+
   '@grpc/grpc-js@1.7.3':
     resolution: {integrity: sha512-H9l79u4kJ2PVSxUNA08HMYAnUBLj9v6KjYQ7SQ71hOZcEXhShE/y5iQCesP8+6/Ik/7i2O0a10bPquIcYfufog==}
     engines: {node: ^8.13.0 || >=10.10.0}
@@ -738,10 +741,6 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
-  bs-platform@9.0.2:
-    resolution: {integrity: sha512-Ye9JqJ4Oa7mcjjoOVRYI8Uc2Cf8N7jQLWDcdUplY7996d/YErSR7WitmV7XnSwr4EvdrbwjEsg1NxNjUQv3ChA==}
-    hasBin: true
-
   buffer-from@1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
 
@@ -974,11 +973,6 @@ packages:
     peerDependenciesMeta:
       supports-color:
         optional: true
-
-  decco@1.6.0:
-    resolution: {integrity: sha512-gdeDDPOh45Hz8YGvTkDP7ySo3Ll3ty+KfuFj21+jRbiCoE8HTCNB++pozCiMljxJx39CfvrHRYBY5FO5PMyXzw==}
-    peerDependencies:
-      bs-platform: 6 || 7 || 8 || 9
 
   dedent@0.7.0:
     resolution: {integrity: sha512-Q6fKUPqnAHAyhiUgFU7BUzLiv0kd8saH9al7tnu5Q/okj6dnupxyTgFIBjVzJATdfIAm9NAsvXNzjaKa+bxVyA==}
@@ -3012,6 +3006,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@greenlabs/ppx-spice@0.1.13': {}
+
   '@grpc/grpc-js@1.7.3':
     dependencies:
       '@grpc/proto-loader': 0.7.13
@@ -3506,8 +3502,6 @@ snapshots:
       node-releases: 2.0.14
       update-browserslist-db: 1.0.15(browserslist@4.23.0)
 
-  bs-platform@9.0.2: {}
-
   buffer-from@1.1.2: {}
 
   buffer-xor@1.0.3: {}
@@ -3786,10 +3780,6 @@ snapshots:
   debug@4.3.4:
     dependencies:
       ms: 2.1.2
-
-  decco@1.6.0(bs-platform@9.0.2):
-    dependencies:
-      bs-platform: 9.0.2
 
   dedent@0.7.0: {}
 

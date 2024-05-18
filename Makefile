@@ -56,6 +56,7 @@ build-css: $(MIN_CSS_FILES) ## Compile the css files
 
 .PHONY: build-res
 build-res: node_modules ## Compile the res files to js
+	touch $(RESCRIPT_CONFIG)
 	rescript
 
 .PHONY: bundle
@@ -89,6 +90,7 @@ watch-css: build-css ## Compile the css files; watch for changes
 
 .PHONY: watch-res
 watch-res: build-res ## Compile the res files; bundle the js files; watch for changes
+	touch $(RESCRIPT_CONFIG)
 	rescript build -w                         \
 	| sed -u '/Finish compiling/p;d'          \
 	| while read f; do                        \
