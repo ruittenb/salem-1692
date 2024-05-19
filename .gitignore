@@ -12,6 +12,7 @@ node_modules/
 *.swp
 *.swo
 *.bs.js
+*.res.js
 bundle.js.tmp-browserify-*
 
 # Android SDK
