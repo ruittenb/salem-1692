@@ -44,7 +44,7 @@ external unsafeAsHtmlCanvasElement: Dom.element => Dom.htmlCanvasElement = "%ide
 @send external parseQrCode: (Dom.window, string) => promise<string> = "parseQrCode"
 
 // document
-@send external createElement: (document, string) => Dom.htmlUnknownElement = "createElement"
+@send external createElement: (Dom.document, string) => Dom.htmlUnknownElement = "createElement"
 
 // navigator
 @get external mediaDevices: navigator => mediaDevices = "mediaDevices"
@@ -146,8 +146,8 @@ let captureAndParseFrame = (maybeVideoElement, maybeCanvasElement, callback): un
       Promise.resolve()
     })
     ->Promise.catch(error => {
-      switch error {
-      | Promise.JsError(errorObj) => Js.log2(p ++ "parseQrCode error:", errorObj->Js.Exn.message)
+      switch error->Js.Exn.asJsExn {
+      | Some(exnValue) => Js.log2(p ++ "parseQrCode error:", exnValue->Js.Exn.message)
       | _ => Js.log2(p ++ "Unknown error:", error)
       }
       Promise.resolve()
@@ -166,7 +166,7 @@ let make = (~size: int, ~callback: string => unit): React.element => {
 
   // See if getUserMedia is available
   let maybeGetUserMedia = try {
-    Some(navigator->mediaDevices->getUserMedia)
+    Some(mediaConstraints => navigator->mediaDevices->getUserMedia(mediaConstraints))
   } catch {
   | _error =>
     logError(p ++ "Cannot access camera")

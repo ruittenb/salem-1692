@@ -15,12 +15,12 @@ let make = (): React.element => {
     Odd
   }
 
-  let onClick: SeatingCodec.t => clickHandler = (seating, _event) => {
+  let onClick: SeatingCodec.t => clickHandler = seating => {
     let newGameState = {
       ...gameState,
       seating,
     }
-    setGameState(_prevGameState => newGameState)
+    _event => setGameState(_prevGameState => newGameState)
   }
 
   <>

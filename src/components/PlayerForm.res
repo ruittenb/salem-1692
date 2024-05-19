@@ -44,55 +44,62 @@ let make = (): React.element => {
   let t = Translator.getTranslator(gameState.language)
 
   // change a player on leaving the field
-  let blurHandler: int => blurHandler = (playerIndex, event) => {
-    let newValue: string = ReactEvent.Focus.target(event)["value"]
-    let oldValue: string = ReactEvent.Focus.target(event)["defaultValue"]
-    let isNewValueEmpty = newValue->Js.String2.length === 0
-    let isLastPlayer = gameState.players->Js.Array2.length < 2
-    let newPlayer = switch (isNewValueEmpty, isLastPlayer) {
-    | (false, _) => [PlayerCodec.Player(newValue)] // accept the new name if it is not empty
-    | (true, false) => [] // delete the name if it is empty
-    | (true, true) => [PlayerCodec.Player(respace(oldValue))] // refuse to delete name if it is the last one
+  let blurHandler: int => blurHandler = playerIndex => {
+    event => {
+      let newValue: string = ReactEvent.Focus.target(event)["value"]
+      let oldValue: string = ReactEvent.Focus.target(event)["defaultValue"]
+      let isNewValueEmpty = newValue->Js.String2.length === 0
+      let isLastPlayer = gameState.players->Js.Array2.length < 2
+      let newPlayer = switch (isNewValueEmpty, isLastPlayer) {
+      | (false, _) => [PlayerCodec.Player(newValue)] // accept the new name if it is not empty
+      | (true, false) => [] // delete the name if it is empty
+      | (true, true) => [PlayerCodec.Player(respace(oldValue))] // refuse to delete name if it is the last one
+      }
+      let players: array<PlayerCodec.t> = arrayConcat3(
+        gameState.players->sliceFirst(playerIndex - 1),
+        newPlayer,
+        gameState.players->sliceLast(playerIndex + 1),
+      )
+      setGameState(prevGameState => {
+        ...prevGameState,
+        players,
+      })
     }
-    let players: array<PlayerCodec.t> = arrayConcat3(
-      gameState.players->sliceFirst(playerIndex - 1),
-      newPlayer,
-      gameState.players->sliceLast(playerIndex + 1),
-    )
-    setGameState(prevGameState => {
-      ...prevGameState,
-      players,
-    })
   }
   // remove a player on button click
-  let removeHandler: int => clickHandler = (playerIndex, _event) => {
-    let players: array<PlayerCodec.t> = Js.Array2.concat(
-      gameState.players->sliceFirst(playerIndex - 1),
-      gameState.players->sliceLast(playerIndex + 1),
-    )
-    setGameState(prevGameState => {
-      ...prevGameState,
-      players,
-    })
+  let removeHandler: int => clickHandler = playerIndex => {
+    _event => {
+      let players: array<PlayerCodec.t> = Js.Array2.concat(
+        gameState.players->sliceFirst(playerIndex - 1),
+        gameState.players->sliceLast(playerIndex + 1),
+      )
+      setGameState(prevGameState => {
+        ...prevGameState,
+        players,
+      })
+    }
   }
   // swap two players
-  let swapHandler: int => clickHandler = (playerIndex, _event) => {
-    let firstSwapPlayer: option<PlayerCodec.t> = gameState.players->Belt.Array.get(playerIndex)
-    let secondSwapPlayer: option<PlayerCodec.t> = gameState.players->Belt.Array.get(playerIndex + 1)
+  let swapHandler: int => clickHandler = playerIndex => {
+    _event => {
+      let firstSwapPlayer: option<PlayerCodec.t> = gameState.players->Belt.Array.get(playerIndex)
+      let secondSwapPlayer: option<PlayerCodec.t> =
+        gameState.players->Belt.Array.get(playerIndex + 1)
 
-    let players: array<PlayerCodec.t> = switch (firstSwapPlayer, secondSwapPlayer) {
-    | (Some(first), Some(second)) =>
-      arrayConcat3(
-        gameState.players->sliceFirst(playerIndex - 1),
-        [second, first],
-        gameState.players->sliceLast(playerIndex + 2),
-      )
-    | (_, _) => gameState.players // no change
+      let players: array<PlayerCodec.t> = switch (firstSwapPlayer, secondSwapPlayer) {
+      | (Some(first), Some(second)) =>
+        arrayConcat3(
+          gameState.players->sliceFirst(playerIndex - 1),
+          [second, first],
+          gameState.players->sliceLast(playerIndex + 2),
+        )
+      | (_, _) => gameState.players // no change
+      }
+      setGameState(prevGameState => {
+        ...prevGameState,
+        players,
+      })
     }
-    setGameState(prevGameState => {
-      ...prevGameState,
-      players,
-    })
   }
   // add a new player
   let addHandler: blurHandler = event => {

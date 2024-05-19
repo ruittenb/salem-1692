@@ -39,7 +39,7 @@ let make = (~subPage: page): React.element => {
   )
 
   // After every render: check if there is still a next scenario step
-  React.useEffect(() => {
+  React.useEffectOnEveryRender(() => {
     switch (maybeScenarioStep, turnState.nightType) {
     // There are still steps in the scenario
     | (Some(_), _) => ()

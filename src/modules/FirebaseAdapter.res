@@ -57,11 +57,11 @@ let connect = (): promise<dbConnection> => {
         let connected: bool = getValue(snapshot)
         if connected {
           logDebug(p ++ "Connected")
-          resolve(. {app, db})
+          resolve({app, db})
         }
       })
     } catch {
-    | error => reject(. error)
+    | error => reject(error)
     }
   })
 }
@@ -93,17 +93,17 @@ promise<unit> => {
       set(myGameRef, dbRecord->dbRecord_encode)
       ->Promise.then(() => {
         logDebug(p ++ action ++ " game " ++ gameId)
-        resolve(. ignore()) // workaround to pass a unit argument
+        resolve(ignore()) // workaround to pass a unit argument
         Promise.resolve()
       })
       ->Promise.catch(error => {
         error->getExceptionMessage->logError
-        reject(. error)
+        reject(error)
         Promise.reject(error)
       })
       ->ignore
     } catch {
-    | error => reject(. error)
+    | error => reject(error)
     }
   })
 }
@@ -121,17 +121,17 @@ let writeGameKey = (
       set(myGameRef, value)
       ->Promise.then(() => {
         logDebug(p ++ "Updated game key " ++ key ++ " with value " ++ value->Js.Json.stringify)
-        resolve(. ignore()) // workaround to pass a unit argument
+        resolve(ignore()) // workaround to pass a unit argument
         Promise.resolve()
       })
       ->Promise.catch(error => {
         error->getExceptionMessage->logError
-        reject(. error)
+        reject(error)
         Promise.reject(error)
       })
       ->ignore
     } catch {
-    | error => reject(. error)
+    | error => reject(error)
     }
   })
 }

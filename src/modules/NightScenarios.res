@@ -111,7 +111,7 @@ let getScenarioStep = (subPage: page, scenarioIndex: int, gameState: gameState):
   let scenario: scenario = getScenario(subPage)
   // Order of conversions is important here
   Belt.Array.get(scenario, scenarioIndex)
-  ->Belt.Option.map(convertConditionals(gameState))
+  ->Belt.Option.map(convertConditionals(gameState, _))
   ->Belt.Option.map(convertEffectSet)
   ->Belt.Option.map(convertSilences)
 }

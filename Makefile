@@ -15,7 +15,7 @@ JS_FILES=$(shell find $(SRC) -name *.js)
 CSS_FILES=$(DIST)/css/normalize.css $(DIST)/css/fonts.css $(DIST)/css/salem.css
 MIN_CSS_FILES=$(CSS_FILES:.css=.min.css)
 
-RESCRIPT_CONFIG=bsconfig.json
+RESCRIPT_CONFIG=rescript.json
 VERSION_FILES=$(RESCRIPT_CONFIG) $(DIST)/serviceworker.js
 
 .DEFAULT_GOAL:=help

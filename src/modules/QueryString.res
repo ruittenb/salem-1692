@@ -2,8 +2,6 @@
  * QueryString
  */
 
-open Constants
-
 @get external location: Dom.window => Dom.location = "location"
 @get external search: Dom.location => string = "search"
 
@@ -11,8 +9,9 @@ let queryString = window->location->search->Js.String.sliceToEnd(~from=1) // rem
 
 let queryParams = queryString->Js.String2.split("&")->Js.Array2.reduce((acc, item) => {
     let pair = item->Js.String2.split("=")
-    if pair->Js.Array.length > 1 {
-      acc->Js.Dict.set(pair[0], pair[1])
+    switch (pair[0], pair[1]) {
+    | (Some(key), Some(value)) => acc->Js.Dict.set(key, value)
+    | (_, _) => ()
     }
     acc
   }, Js.Dict.empty())
