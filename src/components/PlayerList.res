@@ -23,9 +23,9 @@ let assemble = (
   defaultRight: 'b,
 ): array<'c> => {
   leftElements->Js.Array2.reducei((acc: array<'c>, leftElement: 'a, index: int) => {
-    let maybeRightElement = rightElements->Belt.Array.get(index)
+    let maybeRightElement = rightElements->Array.get(index)
     let rightElement = Js.Option.getWithDefault(defaultRight, maybeRightElement)
-    Belt.Array.concat(acc, [assemblyFn(leftElement, rightElement)])
+    Array.concat(acc, [assemblyFn(leftElement, rightElement)])
   }, [])
 }
 
@@ -43,25 +43,26 @@ let assemble = (
  *    1,3,5,7,6,4,2,0     1,3,5,7,8,6,4,2     1,3,5,7,6,4,2     6,4,2,0,1,3,5
  */
 let getSortIndexes = (seating: SeatingCodec.t, numPlayers: int, evenOdd: evenOdd): array<int> => {
+  let numbers = Array.fromInitializer(~length=numPlayers + 1, identity)
   switch (evenOdd, seating) {
   | (Even, TwoAtTop) =>
-    Belt.Array.concat(
+    Array.concat(
       Belt.Array.rangeBy(1, numPlayers, ~step=2),
-      Belt.Array.rangeBy(0, numPlayers - 1, ~step=2)->Belt.Array.reverse,
+      Belt.Array.rangeBy(0, numPlayers - 1, ~step=2)->Array.toReversed,
     )
   | (Even, OneAtTop) =>
-    Belt.Array.concat(
+    Array.concat(
       Belt.Array.rangeBy(1, numPlayers, ~step=2),
-      Belt.Array.rangeBy(2, numPlayers, ~step=2)->Belt.Array.reverse,
+      Belt.Array.rangeBy(2, numPlayers, ~step=2)->Array.toReversed,
     )
   | (Odd, OneAtTop) =>
-    Belt.Array.concat(
+    Array.concat(
       Belt.Array.rangeBy(1, numPlayers, ~step=2),
-      Belt.Array.rangeBy(2, numPlayers, ~step=2)->Belt.Array.reverse,
+      Belt.Array.rangeBy(2, numPlayers, ~step=2)->Array.toReversed,
     )
   | (Odd, TwoAtTop) =>
-    Belt.Array.concat(
-      Belt.Array.rangeBy(0, numPlayers, ~step=2)->Belt.Array.reverse,
+    Array.concat(
+      Belt.Array.rangeBy(0, numPlayers, ~step=2)->Array.toReversed,
       Belt.Array.rangeBy(1, numPlayers - 1, ~step=2),
     )
   }
@@ -104,7 +105,7 @@ let make = (
   }
 
   // determine order in which players must be traversed
-  let numPlayers = gameState.players->Belt.Array.length
+  let numPlayers = gameState.players->Array.length
   let evenOdd = if mod(numPlayers, 2) === 0 {
     Even
   } else {
@@ -113,17 +114,17 @@ let make = (
 
   let sortIndexes = getSortIndexes(gameState.seating, numPlayers, evenOdd)
   let headPositions = switch (evenOdd, gameState.seating) {
-  | (Even, TwoAtTop) => Belt.Set.Int.fromArray([])
-  | (Even, OneAtTop) => Belt.Set.Int.fromArray([1, numPlayers])
-  | (Odd, OneAtTop) => Belt.Set.Int.fromArray([1])
-  | (Odd, TwoAtTop) => Belt.Set.Int.fromArray([numPlayers - 1])
+  | (Even, TwoAtTop) => Set.fromArray([])
+  | (Even, OneAtTop) => Set.fromArray([1, numPlayers])
+  | (Odd, OneAtTop) => Set.fromArray([1])
+  | (Odd, TwoAtTop) => Set.fromArray([numPlayers - 1])
   }
 
   let buttons = assemble(
     gameState.players,
     sortIndexes,
     (player, index) => {
-      let wideClass = if headPositions->Belt.Set.Int.has(index) {
+      let wideClass = if headPositions->Set.has(index) {
         " grid-wide"
       } else {
         ""
@@ -131,10 +132,10 @@ let make = (
       switch player {
       | Player(playerName) =>
         <BulkyButton
-          key={Belt.Int.toString(index) ++ "/" ++ playerName} // make key unique
+          key={Int.toString(index) ++ "/" ++ playerName} // make key unique
           label=playerName
           className={rotatedClass ++ wideClass}
-          style={ReactDOM.Style.make(~order=Belt.Int.toString(index), ())}
+          style={ReactDOM.Style.make(~order=Int.toString(index), ())}
           onClick={_event => choiceProcessor(player, ~skipConfirmation=false)}
         />
       | Nobody => React.null
@@ -149,7 +150,7 @@ let make = (
       key={"999/Nobody"} // make key unique
       label={t("Nobody-SUBJ")}
       className={rotatedClass ++ " grid-wide nobody"}
-      style={ReactDOM.Style.make(~order=Belt.Int.toString(999), ())}
+      style={ReactDOM.Style.make(~order=Int.toString(999), ())}
       onClick={_event => choiceProcessor(PlayerCodec.Nobody, ~skipConfirmation=false)}
     />
 

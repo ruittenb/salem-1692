@@ -48,8 +48,8 @@ type slaveCodeValidity =
 let playersFromJson = (playerArrayJson: Js.Json.t): option<array<string>> => {
   playerArrayJson
   ->Js.Json.decodeArray
-  ->Belt.Option.map(playerJsonArray => {
-    playerJsonArray->Js.Array2.map(Js.Json.decodeString)->Belt.Array.keepMap(x => x)
+  ->Option.map(playerJsonArray => {
+    playerJsonArray->Array.map(JSON.Decode.string)->Array.keepSome
   })
 }
 

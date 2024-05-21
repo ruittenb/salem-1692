@@ -137,7 +137,7 @@ let writeGameKey = (
 }
 
 let deleteGame = (dbConnection: dbConnection, gameId: GameTypeCodec.gameId): unit => {
-  safeExec(() => getRef(dbConnection.db, gameKey(gameId)))->Belt.Option.forEach(myGameRef => {
+  safeExec(() => getRef(dbConnection.db, gameKey(gameId)))->Option.forEach(myGameRef => {
     remove(myGameRef)
     logDebug(p ++ "Deleted game " ++ gameId)
   })
@@ -166,7 +166,7 @@ let joinGame = (dbConnection: dbConnection, gameId: GameTypeCodec.gameId): bool 
 }
 
 let leaveGame = (dbConnection: dbConnection, gameId: GameTypeCodec.gameId): unit => {
-  safeExec(() => getRef(dbConnection.db, gameKey(gameId)))->Belt.Option.forEach(myGameRef => {
+  safeExec(() => getRef(dbConnection.db, gameKey(gameId)))->Option.forEach(myGameRef => {
     off(myGameRef)
     logDebug(p ++ "Left game " ++ gameId)
   })
@@ -211,7 +211,7 @@ let stopListening = (
 ): unit => {
   let observableKey = gameKey(gameId) ++ "/" ++ subjectKey(subject)
   safeExec(// TODO What to do if this fails?
-  () => getRef(dbConnection.db, observableKey))->Belt.Option.forEach(observableRef => {
+  () => getRef(dbConnection.db, observableKey))->Option.forEach(observableRef => {
     logDebug(p ++ "Stopping listening on " ++ observableKey)
     off(observableRef)
   })

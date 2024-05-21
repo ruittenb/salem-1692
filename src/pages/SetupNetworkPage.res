@@ -107,7 +107,7 @@ let tryPlayAsSlave = (
   setGameState,
   setSlaveGameIdValidity,
 ) => {
-  let newGameId = Utils.safeQuerySelector(inputElementId)->Belt.Result.mapWithDefault("", getValue)
+  let newGameId = Utils.safeQuerySelector(inputElementId)->Result.mapOr("", getValue)
   if !GameId.isValid(newGameId) {
     // Code is not valid
     logDebug(ps ++ "Code " ++ newGameId ++ " is not valid")

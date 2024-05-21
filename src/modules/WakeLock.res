@@ -43,7 +43,7 @@ let request = (): promise<option<wakeLockSentinel>> => {
 
 let release = (sentinel: option<wakeLockSentinel>) => {
   if sentinel != None {
-    sentinel->Belt.Option.forEach(apiRelease)
+    sentinel->Option.forEach(apiRelease)
     Utils.logDebugPurple(p ++ "Released WakeLock")
   }
 }

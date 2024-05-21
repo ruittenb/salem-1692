@@ -21,4 +21,4 @@ type t =
   | @spice.as("OneAtTop") OneAtTop
   | @spice.as("TwoAtTop") TwoAtTop
 
-let toString = (x: t) => x->t_encode->Js.Json.decodeString->Belt.Option.getWithDefault("invalid")
+let toString = (x: t) => x->t_encode->JSON.Decode.string->Option.getOr("invalid")

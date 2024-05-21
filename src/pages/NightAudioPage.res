@@ -45,7 +45,7 @@ let make = (
       label={t("Skip")}
       className="icon-right icon-forw condensed-nl super-condensed-de hyper-condensed-uk condensed-ko"
       onClick={_event => {
-        timerId->Belt.Option.forEach(timerId => {
+        timerId->Option.forEach(timerId => {
           Js.Global.clearTimeout(timerId)
           Utils.logDebug(p ++ "Clearing timer")
         })

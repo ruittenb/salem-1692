@@ -18,15 +18,13 @@ let gameStateKey = Constants.localStoragePrefix ++ Constants.localStorageGameSta
 let loadGameState = (): option<gameState> => {
   Dom.Storage2.localStorage
   ->Dom.Storage2.getItem(gameStateKey) // this yields an option<string>
-  ->Belt.Option.flatMap(jsonString => safeExec(() => jsonString->Js.Json.parseExn)) // this yields an option<Js.Json.t>
-  ->Belt.Option.flatMap(str =>
-    str->gameState_decode->Belt.Result.mapWithDefault(None, Js.Option.some)
-  ) // this mapper yields a Result<gameState, Decco.decodeError>
+  ->Option.flatMap(jsonString => safeExec(() => jsonString->Js.Json.parseExn)) // this yields an option<Js.Json.t>
+  ->Option.flatMap(str => str->gameState_decode->Result.mapOr(None, x => Some(x)))
 }
 
 let saveGameState = (gameState: gameState): unit => {
   gameState
   ->gameState_encode
   ->Js.Json.stringifyAny
-  ->Belt.Option.forEach(jsonGameState => setItem(gameStateKey, jsonGameState))
+  ->Option.forEach(jsonGameState => setItem(gameStateKey, jsonGameState))
 }

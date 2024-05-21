@@ -82,9 +82,9 @@ let make = (): React.element => {
   // swap two players
   let swapHandler: int => clickHandler = playerIndex => {
     _event => {
-      let firstSwapPlayer: option<PlayerCodec.t> = gameState.players->Belt.Array.get(playerIndex)
+      let firstSwapPlayer: option<PlayerCodec.t> = gameState.players->Array.get(playerIndex)
       let secondSwapPlayer: option<PlayerCodec.t> =
-        gameState.players->Belt.Array.get(playerIndex + 1)
+        gameState.players->Array.get(playerIndex + 1)
 
       let players: array<PlayerCodec.t> = switch (firstSwapPlayer, secondSwapPlayer) {
       | (Some(first), Some(second)) =>
@@ -126,7 +126,7 @@ let make = (): React.element => {
     switch player {
     | Player(playerName) =>
       <PlayerFormLine
-        key={Belt.Int.toString(index) ++ "/" ++ playerName} // make key unique
+        key={Int.toString(index) ++ "/" ++ playerName} // make key unique
         value=playerName
         showSwapButton
         showRemoveButton
@@ -150,7 +150,7 @@ let make = (): React.element => {
     </p>
     {React.array(playerFormItems)}
     <PlayerFormLine
-      key={gameState.players->Belt.Array.length->Belt.Int.toString} // make key unique
+      key={gameState.players->Array.length->Int.toString} // make key unique
       value=""
       className="condensed-fr condensed-uk"
       placeholder={t("(add one)")}

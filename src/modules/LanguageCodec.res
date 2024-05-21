@@ -24,9 +24,9 @@ let toString = (x: t) => (x :> string)
 
 //let fromString = (x: string) =>
 //  x
-//  ->Belt.Option.map(Js.Json.string)
-//  ->Belt.Option.flatMap(language => language->LanguageCodec.t_decode->Utils.resultToOption) // option<LanguageCodec.t>
-//  ->Belt.Option.getWithDefault(gameState.language)
+//  ->Option.map(Js.Json.string)
+//  ->Option.flatMap(language => language->LanguageCodec.t_decode->Utils.resultToOption) // option<LanguageCodec.t>
+//  ->Option.getOr(gameState.language)
 
 let getHtmlLanguage = (language: t): string => {
   switch language {

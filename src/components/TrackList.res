@@ -10,7 +10,7 @@ let make = (): React.element => {
   // Component
   React.array(
     Constants.musicTracks->Js.Array2.mapi((track, index) => {
-      <span key={Belt.Int.toString(index) ++ "/" ++ track}>
+      <span key={Int.toString(index) ++ "/" ++ track}>
         <Link
           href={"https://incompetech.com/music/royalty-free/mp3-royaltyfree/" ++ track ++ ".mp3"}
           text={note ++ nnbsp ++ track}

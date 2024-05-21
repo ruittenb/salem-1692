@@ -42,12 +42,12 @@ let t_encode = (player: t) => {
 }
 
 let t_decode = (playerJson: Js.Json.t): Belt.Result.t<t, Spice.decodeError> => {
-  switch playerJson->Js.Json.decodeString->Belt.Option.getWithDefault("") {
+  switch playerJson->JSON.Decode.string->Option.getOr("") {
   | "Nobody" => Belt.Result.Ok(Nobody)
   | "Undecided" => Belt.Result.Ok(Undecided)
   | playerStr =>
     if playerStr->Js.String2.startsWith("Player:") {
-      Belt.Result.Ok(Player(playerStr->Js.String2.substringToEnd(~from=7)))
+      Belt.Result.Ok(Player(playerStr->String.substringToEnd(~start=7)))
     } else {
       Spice.error("Spice Decoding Error", playerJson)
     }

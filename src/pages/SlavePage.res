@@ -37,7 +37,7 @@ let make = (~subPage: page): React.element => {
                 ": " ++
                 spiceError.message ++
                 ": " ++
-                spiceError.value->Js.Json.decodeString->Belt.Option.getWithDefault("<None>"),
+                spiceError.value->JSON.Decode.string->Option.getOr("<None>"),
               )
             | Ok(dbRecord) => {
                 Utils.logDebug(p ++ "Received dbRecord")

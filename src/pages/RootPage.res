@@ -11,9 +11,9 @@ let initialNavigation: option<page> = None
 let setOverrideLanguage = (gameState): gameState => {
   let queryStringLanguage =
     QueryString.getQueryParam("lang")
-    ->Belt.Option.map(Js.Json.string)
-    ->Belt.Option.flatMap(json => json->LanguageCodec.t_decode->Utils.resultToOption)
-    ->Belt.Option.getWithDefault(gameState.language)
+    ->Option.map(x => JSON.String(x))
+    ->Option.flatMap(json => json->LanguageCodec.t_decode->Utils.resultToOption)
+    ->Option.getOr(gameState.language)
   {
     ...gameState,
     language: queryStringLanguage,
@@ -22,7 +22,7 @@ let setOverrideLanguage = (gameState): gameState => {
 
 let setDefaultLanguage = (gameState): gameState => {
   let browserLanguage =
-    BrowserLanguage.getLanguage()->Belt.Option.getWithDefault(gameState.language)
+    BrowserLanguage.getLanguage()->Option.getOr(gameState.language)
   {
     ...gameState,
     language: browserLanguage,
@@ -50,9 +50,9 @@ let make = (): React.element => {
   // if we're master, then connect to firebase.
   React.useEffect0(() => {
     LocalStorage.loadGameState()
-    ->Belt.Option.map(cleanupGameStateMusic)
-    ->Belt.Option.map(setOverrideLanguage)
-    ->Belt.Option.forEach(gameState => {
+    ->Option.map(cleanupGameStateMusic)
+    ->Option.map(setOverrideLanguage)
+    ->Option.forEach(gameState => {
       setGameState(_prev => gameState)
       Utils.ifMaster(
         gameState.gameType,

@@ -16,7 +16,7 @@ let make = (): React.element => {
   let (preview, setPreview) = React.useState(_ => None)
 
   let previewNode =
-    preview->Belt.Option.mapWithDefault(React.null, track =>
+    preview->Option.mapOr(React.null, track =>
       <Audio
         track=Music(track ++ ".mp3") volume=1.0 onEnded={_event => setPreview(_prev => None)}
       />
@@ -52,7 +52,7 @@ let make = (): React.element => {
       }
 
       <Button
-        key={Belt.Int.toString(index) ++ "/" ++ availableTrack}
+        key={Int.toString(index) ++ "/" ++ availableTrack}
         label=availableTrack
         className={"widebutton icon-left " ++ checkedClass ++ " " ++ previewClass}
         onClick={_event => toggleMusicTrack()}

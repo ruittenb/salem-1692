@@ -117,7 +117,7 @@ let updateGame = (
     gameState,
     currentPage,
     turnState,
-    maybeScenarioStep->Belt.Option.getWithDefault(Pause(0.)),
+    maybeScenarioStep->Option.getOr(Pause(0.)),
   )
   FirebaseAdapter.writeGame(dbConnection, dbRecord, "Updated")
 }
@@ -226,7 +226,7 @@ let saveGamePhase = (
   page: page,
   maybeScenarioStep: option<scenarioStep>,
 ): unit => {
-  let scenarioStep = maybeScenarioStep->Belt.Option.getWithDefault(Pause(0.))
+  let scenarioStep = maybeScenarioStep->Option.getOr(Pause(0.))
   let phase = getPhase(page, scenarioStep)
   updateGameKey(
     dbConnection,

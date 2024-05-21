@@ -22,7 +22,7 @@ let maybeNavServiceWorker: option<navServiceWorker> = try {
 | _ => None
 }
 
-maybeNavServiceWorker->Belt.Option.forEach(navServiceWorker => {
+maybeNavServiceWorker->Option.forEach(navServiceWorker => {
   window->addEventListener("load", () => {
     navServiceWorker
     ->register("serviceworker.js" ++ queryString)

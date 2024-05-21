@@ -64,7 +64,7 @@ let make = (): React.element => {
       onBack={Some(
         _event => {
           setNavigation(_prev => None)
-          goToPage(_prev => navigation->Belt.Option.getWithDefault(Title))
+          goToPage(_prev => navigation->Option.getOr(Title))
         },
       )}
     />

@@ -100,8 +100,8 @@ let getCameraPermissions = (): promise<permissionStatus> => {
 }
 
 let startRecording = (maybeVideoElement: option<Dom.htmlVideoElement>, maybeGetUserMedia): bool => {
-  maybeVideoElement->Belt.Option.mapWithDefault(false, videoElement => {
-    maybeGetUserMedia->Belt.Option.mapWithDefault(false, getUserMedia => {
+  maybeVideoElement->Option.mapOr(false, videoElement => {
+    maybeGetUserMedia->Option.mapOr(false, getUserMedia => {
       getUserMedia(mediaConstraints)
       ->Promise.then(
         (stream: stream) => {
@@ -123,12 +123,12 @@ let startRecording = (maybeVideoElement: option<Dom.htmlVideoElement>, maybeGetU
 
 // Perform document.getElementById('qr-video').srcObject.getTracks().forEach(track => track.stop())
 let stopRecording = (maybeVideoElement: option<Dom.htmlVideoElement>): unit => {
-  maybeVideoElement->Belt.Option.mapWithDefault((), videoElement => {
+  maybeVideoElement->Option.mapOr((), videoElement => {
     videoElement
     ->getSrcObject
     ->Js.Nullable.toOption
-    ->Belt.Option.forEach(srcObject => {
-      srcObject->getTracks->Belt.Array.forEach(stop)
+    ->Option.forEach(srcObject => {
+      srcObject->getTracks->Array.forEach(stop)
     })
   })
 }
@@ -136,7 +136,7 @@ let stopRecording = (maybeVideoElement: option<Dom.htmlVideoElement>): unit => {
 let captureAndParseFrame = (maybeVideoElement, maybeCanvasElement, callback): unit => {
   (maybeVideoElement, maybeCanvasElement)
   ->Utils.optionTupleAnd
-  ->Belt.Option.forEach(((videoElement, canvasElement)) => {
+  ->Option.forEach(((videoElement, canvasElement)) => {
     canvasElement->getContext("2d")->drawImage(videoElement, 0, 0, canvasWidth, canvasHeight)
     window
     ->parseQrCode(canvasElement->toDataURL("image/png"))
@@ -198,17 +198,17 @@ let make = (~size: int, ~callback: string => unit): React.element => {
     // this is a Some() when the element node is found in the DOM and the tagName is CANVAS
     let maybeCanvasElement: option<Dom.htmlCanvasElement> =
       safeQuerySelector(canvasElementId)
-      ->Belt.Result.mapWithDefault(None, x => Some(x))
-      ->Belt.Option.flatMap(domNode =>
-        domNode->Utils.ifTagName("CANVAS")->Belt.Option.map(unsafeAsHtmlCanvasElement)
+      ->Result.mapOr(None, x => Some(x))
+      ->Option.flatMap(domNode =>
+        domNode->Utils.ifTagName("CANVAS")->Option.map(unsafeAsHtmlCanvasElement)
       )
 
     // this is a Some() when the element node is found in the DOM and the tagName is VIDEO
     let maybeVideoElement: option<Dom.htmlVideoElement> =
       safeQuerySelector(videoElementId)
-      ->Belt.Result.mapWithDefault(None, x => Some(x))
-      ->Belt.Option.flatMap(domNode =>
-        domNode->Utils.ifTagName("VIDEO")->Belt.Option.map(unsafeAsHtmlVideoElement)
+      ->Result.mapOr(None, x => Some(x))
+      ->Option.flatMap(domNode =>
+        domNode->Utils.ifTagName("VIDEO")->Option.map(unsafeAsHtmlVideoElement)
       )
 
     let _isRecording: bool = startRecording(maybeVideoElement, maybeGetUserMedia)
@@ -271,13 +271,13 @@ let make = (~size: int, ~callback: string => unit): React.element => {
 
   // component
   <>
-    <video id={videoElementId} width={Belt.Int.toString(size)} height="auto" autoPlay=true />
+    <video id={videoElementId} width={Int.toString(size)} height="auto" autoPlay=true />
     {statusElement}
     <div id="canvas-hider">
       <canvas
         id={canvasElementId}
-        width={Belt.Int.toString(canvasWidth)}
-        height={Belt.Int.toString(canvasHeight)}
+        width={Int.toString(canvasWidth)}
+        height={Int.toString(canvasHeight)}
       />
     </div>
   </>

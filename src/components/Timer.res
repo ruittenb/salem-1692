@@ -53,8 +53,8 @@ let make = (~onAlarm: unit => unit=() => ()): React.element => {
 
   // Runs only once right after mounting the component
   React.useEffect0(() => {
-    let delayFloat = Belt.Int.toFloat(delay) /. 10.
-    Utils.logDebug(p ++ "Setting timeout to " ++ Belt.Float.toString(delayFloat) ++ "s")
+    let delayFloat = Int.toFloat(delay) /. 10.
+    Utils.logDebug(p ++ "Setting timeout to " ++ Float.toString(delayFloat) ++ "s")
     None // Cleanup
   })
   // Run every tick
@@ -68,8 +68,8 @@ let make = (~onAlarm: unit => unit=() => ()): React.element => {
     )
   }, [remainingPercent])
 
-  let fuseLength = containerWidth *. Belt.Int.toFloat(remainingPercent) /. 100.
-  let style = ReactDOM.Style.make(~width=Belt.Float.toString(fuseLength) ++ "px", ())
+  let fuseLength = containerWidth *. Int.toFloat(remainingPercent) /. 100.
+  let style = ReactDOM.Style.make(~width=Float.toString(fuseLength) ++ "px", ())
 
   // Component
   <div className="timer-container">

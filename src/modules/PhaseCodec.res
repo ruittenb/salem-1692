@@ -12,4 +12,4 @@ type t =
   | @spice.as("NightChoiceConstable") NightChoiceConstablePhase
   | @spice.as("NightConfirmConstable") NightConfirmConstablePhase
 
-let toString = (x: t) => x->t_encode->Js.Json.decodeString->Belt.Option.getWithDefault("invalid")
+let toString = (x: t) => x->t_encode->JSON.Decode.string->Option.getOr("invalid")

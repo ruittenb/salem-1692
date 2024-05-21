@@ -61,8 +61,8 @@ let logDebugPurple = (msg: string): unit => {
 let getExceptionMessage = (error: exn): string => {
   error
   ->Js.Exn.asJsExn
-  ->Belt.Option.flatMap(Js.Exn.message)
-  ->Belt.Option.getWithDefault("An unknown error occurred")
+  ->Option.flatMap(x => Js.Exn.message(x))
+  ->Option.getOr("An unknown error occurred")
 }
 
 /**
@@ -79,8 +79,8 @@ let catchLogAndIgnore = (p, resolutionValue): unit => {
  * Pick a random element from a set.
  */
 let pickRandomElement = (set: array<'a>, default: 'a): 'a => {
-  let index = Js.Math.random_int(0, set->Belt.Array.length)
-  set->Belt.Array.get(index)->Belt.Option.getWithDefault(default)
+  let index = Js.Math.random_int(0, set->Array.length)
+  set->Array.get(index)->Option.getOr(default)
 }
 
 /**
@@ -164,15 +164,15 @@ let optionTupleAnd = (tupleOfMaybes: (option<'a>, option<'b>)): option<('a, 'b)>
 
 /*
  * Convert [ Some(3), Some(6), None, Some(-1), None ] into [ 3, 6, -1 ]:
- * use Belt.Array.keepMap(identity)
+ * use Array.keepSome
  *
  *
  * Js.Option.andThen(), but data-first:
- * use Belt.Option.flatMap()
+ * use Option.flatMap()
  *
  *
  * Js.Option.map(), but data-first:
- * use Belt.Option.map()
+ * use Option.map()
  */
 
 /* ****************************************************************************

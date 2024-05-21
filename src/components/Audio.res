@@ -34,10 +34,10 @@ let make = (
   React.useEffect0(() => {
     audioRef.current
     ->Js.Nullable.toOption
-    ->Belt.Option.forEach(domNode =>
+    ->Option.forEach(domNode =>
       domNode
       ->Utils.ifTagName("AUDIO")
-      ->Belt.Option.forEach(domNode => domNode->unsafeAsHtmlAudioElement->setVolume(volume))
+      ->Option.forEach(domNode => domNode->unsafeAsHtmlAudioElement->setVolume(volume))
     )
     None // cleanup function
   })
