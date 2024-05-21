@@ -20,7 +20,6 @@
   "suffix": ".res.js",
   "bs-dependencies": [
     "@rescript/core",
-    "@ryyppy/rescript-promise",
     "@rescript/react",
     "@greenlabs/ppx-spice"
   ],

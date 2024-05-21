@@ -11,9 +11,6 @@ dependencies:
   '@rescript/react':
     specifier: ^0.12.1
     version: 0.12.1(react-dom@18.3.1)(react@18.3.1)
-  '@ryyppy/rescript-promise':
-    specifier: ^2.1.0
-    version: 2.1.0
   davidshimjs-qrcodejs:
     specifier: ^0.0.2
     version: 0.0.2
@@ -1012,10 +1009,6 @@ packages:
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-    dev: false
-
-  /@ryyppy/rescript-promise@2.1.0:
-    resolution: {integrity: sha512-+dW6msBrj2Lr2hbEMX+HoWCvN89qVjl94RwbYWJgHQuj8jm/izdPC0YzxgpGoEFdeAEW2sOozoLcYHxT6o5WXQ==}
     dev: false
 
   /@types/long@4.0.2:
