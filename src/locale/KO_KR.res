@@ -3,7 +3,7 @@
  *
  * Note: this is a machine translation that needs to be reviewed
  */
-let table = Js.Dict.fromArray([
+let table = Dict.fromArray([
   // TitlePage
   ("New Game", `새로운 게임`),
   ("Start Game", `게임을 시작하다`),

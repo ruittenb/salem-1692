@@ -16,22 +16,22 @@ let make = (): React.element => {
   let (preview, setPreview) = React.useState(_ => None)
 
   let previewNode =
-    preview->Belt.Option.mapWithDefault(React.null, track =>
+    preview->Option.mapOr(React.null, track =>
       <Audio
         track=Music(track ++ ".mp3") volume=1.0 onEnded={_event => setPreview(_prev => None)}
       />
     )
 
   let trackButtons = React.array(
-    Constants.musicTracks->Js.Array2.mapi((availableTrack, index) => {
-      let isIncluded = gameState.backgroundMusic->Js.Array2.includes(availableTrack)
+    Constants.musicTracks->Array.mapWithIndex((availableTrack, index) => {
+      let isIncluded = gameState.backgroundMusic->Array.includes(availableTrack)
       let toggleMusicTrack = () => {
         let newBackgroundMusic = if isIncluded {
           setPreview(_prev => None)
-          gameState.backgroundMusic->Js.Array2.filter(stateTrack => stateTrack !== availableTrack)
+          gameState.backgroundMusic->Array.filter(stateTrack => stateTrack !== availableTrack)
         } else {
           setPreview(_prev => Some(availableTrack))
-          gameState.backgroundMusic->Js.Array2.concat([availableTrack])
+          gameState.backgroundMusic->Array.concat([availableTrack])
         }
         let newGameState = {
           ...gameState,
@@ -52,7 +52,7 @@ let make = (): React.element => {
       }
 
       <Button
-        key={Belt.Int.toString(index) ++ "/" ++ availableTrack}
+        key={Int.toString(index) ++ "/" ++ availableTrack}
         label=availableTrack
         className={"widebutton icon-left " ++ checkedClass ++ " " ++ previewClass}
         onClick={_event => toggleMusicTrack()}

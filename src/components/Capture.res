@@ -44,12 +44,12 @@ external unsafeAsHtmlCanvasElement: Dom.element => Dom.htmlCanvasElement = "%ide
 @send external parseQrCode: (Dom.window, string) => promise<string> = "parseQrCode"
 
 // document
-@send external createElement: (document, string) => Dom.htmlUnknownElement = "createElement"
+@send external createElement: (Dom.document, string) => Dom.htmlUnknownElement = "createElement"
 
 // navigator
 @get external mediaDevices: navigator => mediaDevices = "mediaDevices"
 @send external getUserMedia: (mediaDevices, mediaConstraints) => promise<stream> = "getUserMedia"
-@get external permissions: navigator => Js.Nullable.t<permissions> = "permissions"
+@get external permissions: navigator => Nullable.t<permissions> = "permissions"
 @send
 external permissionsQuery: (permissions, permissionDescriptor) => promise<permissionStatus> =
   "query"
@@ -64,7 +64,7 @@ external removeEventListener: (permissionStatus, string, changeEvent => unit) =>
 // video
 @send external play: Dom.htmlVideoElement => unit = "play"
 @set external setSrcObject: (Dom.htmlVideoElement, stream) => unit = "srcObject"
-@get external getSrcObject: Dom.htmlVideoElement => Js.Nullable.t<srcObject> = "srcObject"
+@get external getSrcObject: Dom.htmlVideoElement => Nullable.t<srcObject> = "srcObject"
 @send external getTracks: srcObject => array<track> = "getTracks"
 @send external stop: track => unit = "stop"
 
@@ -93,15 +93,15 @@ let mediaConstraints: mediaConstraints = {video: {facingMode: "environment"}}
 let unsupportedStatus: permissionStatus = {name: "camera", state: "unsupported"}
 
 let getCameraPermissions = (): promise<permissionStatus> => {
-  switch navigator->permissions->Js.Nullable.toOption {
-  | None => Js.Promise.resolve(unsupportedStatus)
+  switch navigator->permissions->Nullable.toOption {
+  | None => Promise.resolve(unsupportedStatus)
   | Some(perm) => perm->permissionsQuery({name: "camera"})
   }
 }
 
 let startRecording = (maybeVideoElement: option<Dom.htmlVideoElement>, maybeGetUserMedia): bool => {
-  maybeVideoElement->Belt.Option.mapWithDefault(false, videoElement => {
-    maybeGetUserMedia->Belt.Option.mapWithDefault(false, getUserMedia => {
+  maybeVideoElement->Option.mapOr(false, videoElement => {
+    maybeGetUserMedia->Option.mapOr(false, getUserMedia => {
       getUserMedia(mediaConstraints)
       ->Promise.then(
         (stream: stream) => {
@@ -123,12 +123,12 @@ let startRecording = (maybeVideoElement: option<Dom.htmlVideoElement>, maybeGetU
 
 // Perform document.getElementById('qr-video').srcObject.getTracks().forEach(track => track.stop())
 let stopRecording = (maybeVideoElement: option<Dom.htmlVideoElement>): unit => {
-  maybeVideoElement->Belt.Option.mapWithDefault((), videoElement => {
+  maybeVideoElement->Option.mapOr((), videoElement => {
     videoElement
     ->getSrcObject
-    ->Js.Nullable.toOption
-    ->Belt.Option.forEach(srcObject => {
-      srcObject->getTracks->Belt.Array.forEach(stop)
+    ->Nullable.toOption
+    ->Option.forEach(srcObject => {
+      srcObject->getTracks->Array.forEach(stop)
     })
   })
 }
@@ -136,7 +136,7 @@ let stopRecording = (maybeVideoElement: option<Dom.htmlVideoElement>): unit => {
 let captureAndParseFrame = (maybeVideoElement, maybeCanvasElement, callback): unit => {
   (maybeVideoElement, maybeCanvasElement)
   ->Utils.optionTupleAnd
-  ->Belt.Option.forEach(((videoElement, canvasElement)) => {
+  ->Option.forEach(((videoElement, canvasElement)) => {
     canvasElement->getContext("2d")->drawImage(videoElement, 0, 0, canvasWidth, canvasHeight)
     window
     ->parseQrCode(canvasElement->toDataURL("image/png"))
@@ -146,8 +146,8 @@ let captureAndParseFrame = (maybeVideoElement, maybeCanvasElement, callback): un
       Promise.resolve()
     })
     ->Promise.catch(error => {
-      switch error {
-      | Promise.JsError(errorObj) => Js.log2(p ++ "parseQrCode error:", errorObj->Js.Exn.message)
+      switch error->Js.Exn.asJsExn {
+      | Some(exnValue) => Js.log2(p ++ "parseQrCode error:", exnValue->Js.Exn.message)
       | _ => Js.log2(p ++ "Unknown error:", error)
       }
       Promise.resolve()
@@ -166,7 +166,7 @@ let make = (~size: int, ~callback: string => unit): React.element => {
 
   // See if getUserMedia is available
   let maybeGetUserMedia = try {
-    Some(navigator->mediaDevices->getUserMedia)
+    Some(mediaConstraints => navigator->mediaDevices->getUserMedia(mediaConstraints))
   } catch {
   | _error =>
     logError(p ++ "Cannot access camera")
@@ -198,17 +198,17 @@ let make = (~size: int, ~callback: string => unit): React.element => {
     // this is a Some() when the element node is found in the DOM and the tagName is CANVAS
     let maybeCanvasElement: option<Dom.htmlCanvasElement> =
       safeQuerySelector(canvasElementId)
-      ->Belt.Result.mapWithDefault(None, x => Some(x))
-      ->Belt.Option.flatMap(domNode =>
-        domNode->Utils.ifTagName("CANVAS")->Belt.Option.map(unsafeAsHtmlCanvasElement)
+      ->Result.mapOr(None, x => Some(x))
+      ->Option.flatMap(domNode =>
+        domNode->Utils.ifTagName("CANVAS")->Option.map(unsafeAsHtmlCanvasElement)
       )
 
     // this is a Some() when the element node is found in the DOM and the tagName is VIDEO
     let maybeVideoElement: option<Dom.htmlVideoElement> =
       safeQuerySelector(videoElementId)
-      ->Belt.Result.mapWithDefault(None, x => Some(x))
-      ->Belt.Option.flatMap(domNode =>
-        domNode->Utils.ifTagName("VIDEO")->Belt.Option.map(unsafeAsHtmlVideoElement)
+      ->Result.mapOr(None, x => Some(x))
+      ->Option.flatMap(domNode =>
+        domNode->Utils.ifTagName("VIDEO")->Option.map(unsafeAsHtmlVideoElement)
       )
 
     let _isRecording: bool = startRecording(maybeVideoElement, maybeGetUserMedia)
@@ -271,13 +271,11 @@ let make = (~size: int, ~callback: string => unit): React.element => {
 
   // component
   <>
-    <video id={videoElementId} width={Belt.Int.toString(size)} height="auto" autoPlay=true />
+    <video id={videoElementId} width={Int.toString(size)} height="auto" autoPlay=true />
     {statusElement}
     <div id="canvas-hider">
       <canvas
-        id={canvasElementId}
-        width={Belt.Int.toString(canvasWidth)}
-        height={Belt.Int.toString(canvasHeight)}
+        id={canvasElementId} width={Int.toString(canvasWidth)} height={Int.toString(canvasHeight)}
       />
     </div>
   </>

@@ -39,7 +39,7 @@ let make = (~subPage: page): React.element => {
   )
 
   // After every render: check if there is still a next scenario step
-  React.useEffect(() => {
+  React.useEffectOnEveryRender(() => {
     switch (maybeScenarioStep, turnState.nightType) {
     // There are still steps in the scenario
     | (Some(_), _) => ()
@@ -56,10 +56,10 @@ let make = (~subPage: page): React.element => {
       () => {
         // Cleanup: cycle through background music tracks
         gameState.backgroundMusic
-        ->Belt.Array.get(0)
-        ->Belt.Option.forEach(firstTrack => {
+        ->Array.get(0)
+        ->Option.forEach(firstTrack => {
           let newBackgroundMusic =
-            gameState.backgroundMusic->Js.Array2.sliceFrom(1)->Js.Array2.concat([firstTrack])
+            gameState.backgroundMusic->Array.sliceToEnd(~start=1)->Array.concat([firstTrack])
           let newGameState = {
             ...gameState,
             backgroundMusic: newBackgroundMusic,
@@ -100,8 +100,8 @@ let make = (~subPage: page): React.element => {
 
   // if we're hosting, save game page+step (= phase) to firebase after every change
   React.useEffect1(() => {
-    //let choiceWitches = turnState.choiceWitches->Belt.Option.getWithDefault("")
-    //let choiceConstable = turnState.choiceConstable->Belt.Option.getWithDefault("")
+    //let choiceWitches = turnState.choiceWitches->Option.getOr("")
+    //let choiceConstable = turnState.choiceConstable->Option.getOr("")
     Utils.logDebug(p ++ "Detected scenarioStep change")
     Utils.ifMasterAndConnected(dbConnectionStatus, gameState.gameType, (dbConnection, gameId) => {
       FirebaseClient.saveGamePhase(dbConnection, gameId, subPage, maybeScenarioStep)
@@ -160,8 +160,8 @@ let make = (~subPage: page): React.element => {
 
   let backgroundMusicElement = if gameState.doPlayMusic {
     gameState.backgroundMusic
-    ->Belt.Array.get(0)
-    ->Belt.Option.mapWithDefault(React.null, track => <AudioBackground track />)
+    ->Array.get(0)
+    ->Option.mapOr(React.null, track => <AudioBackground track />)
   } else {
     React.null
   }
@@ -171,7 +171,7 @@ let make = (~subPage: page): React.element => {
     Js.Global.setTimeout(() => {
       Utils.logDebug(p ++ "Timer went off")
       goToNextStep()
-    }, Belt.Float.toInt(1000. *. duration))
+    }, Float.toInt(1000. *. duration))
   }
 
   // Construct the page

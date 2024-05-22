@@ -9,18 +9,18 @@ let make = (): React.element => {
   let (gameState, setGameState) = React.useContext(GameStateContext.context)
   let t = Translator.getTranslator(gameState.language)
 
-  let evenOdd = if gameState.players->Js.Array2.length->mod(2) === 0 {
+  let evenOdd = if gameState.players->Array.length->mod(2) === 0 {
     Even
   } else {
     Odd
   }
 
-  let onClick: SeatingCodec.t => clickHandler = (seating, _event) => {
+  let onClick: SeatingCodec.t => clickHandler = seating => {
     let newGameState = {
       ...gameState,
       seating,
     }
-    setGameState(_prevGameState => newGameState)
+    _event => setGameState(_prevGameState => newGameState)
   }
 
   <>

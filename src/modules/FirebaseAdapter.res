@@ -57,11 +57,11 @@ let connect = (): promise<dbConnection> => {
         let connected: bool = getValue(snapshot)
         if connected {
           logDebug(p ++ "Connected")
-          resolve(. {app, db})
+          resolve({app, db})
         }
       })
     } catch {
-    | error => reject(. error)
+    | error => reject(error)
     }
   })
 }
@@ -89,21 +89,21 @@ promise<unit> => {
     try {
       let gameId = dbRecord.masterGameId
       let myGameRef = getRef(dbConnection.db, gameKey(gameId))
-      // Utils.logDebug(p ++ "Saving: " ++ dbRecord->dbRecord_encode->Js.Json.stringify)
+      // Utils.logDebug(p ++ "Saving: " ++ dbRecord->dbRecord_encode->JSON.stringify)
       set(myGameRef, dbRecord->dbRecord_encode)
       ->Promise.then(() => {
         logDebug(p ++ action ++ " game " ++ gameId)
-        resolve(. ignore()) // workaround to pass a unit argument
+        resolve(ignore()) // workaround to pass a unit argument
         Promise.resolve()
       })
       ->Promise.catch(error => {
         error->getExceptionMessage->logError
-        reject(. error)
+        reject(error)
         Promise.reject(error)
       })
       ->ignore
     } catch {
-    | error => reject(. error)
+    | error => reject(error)
     }
   })
 }
@@ -112,7 +112,7 @@ let writeGameKey = (
   dbConnection: dbConnection,
   gameId: GameTypeCodec.gameId,
   subject: dbObservable,
-  value: Js.Json.t,
+  value: JSON.t,
 ): promise<unit> => {
   let key = subjectKey(subject)
   Promise.make((resolve, reject) => {
@@ -120,24 +120,24 @@ let writeGameKey = (
       let myGameRef = getRef(dbConnection.db, gameKey(gameId) ++ "/" ++ key)
       set(myGameRef, value)
       ->Promise.then(() => {
-        logDebug(p ++ "Updated game key " ++ key ++ " with value " ++ value->Js.Json.stringify)
-        resolve(. ignore()) // workaround to pass a unit argument
+        logDebug(p ++ "Updated game key " ++ key ++ " with value " ++ value->JSON.stringify)
+        resolve(ignore()) // workaround to pass a unit argument
         Promise.resolve()
       })
       ->Promise.catch(error => {
         error->getExceptionMessage->logError
-        reject(. error)
+        reject(error)
         Promise.reject(error)
       })
       ->ignore
     } catch {
-    | error => reject(. error)
+    | error => reject(error)
     }
   })
 }
 
 let deleteGame = (dbConnection: dbConnection, gameId: GameTypeCodec.gameId): unit => {
-  safeExec(() => getRef(dbConnection.db, gameKey(gameId)))->Belt.Option.forEach(myGameRef => {
+  safeExec(() => getRef(dbConnection.db, gameKey(gameId)))->Option.forEach(myGameRef => {
     remove(myGameRef)
     logDebug(p ++ "Deleted game " ++ gameId)
   })
@@ -166,7 +166,7 @@ let joinGame = (dbConnection: dbConnection, gameId: GameTypeCodec.gameId): bool 
 }
 
 let leaveGame = (dbConnection: dbConnection, gameId: GameTypeCodec.gameId): unit => {
-  safeExec(() => getRef(dbConnection.db, gameKey(gameId)))->Belt.Option.forEach(myGameRef => {
+  safeExec(() => getRef(dbConnection.db, gameKey(gameId)))->Option.forEach(myGameRef => {
     off(myGameRef)
     logDebug(p ++ "Left game " ++ gameId)
   })
@@ -190,11 +190,11 @@ let listen = (
       onValue(observableRef, snapshot => {
         // We will receive a snapshot immediately upon installing the listener.
         // NightScenarioPage takes care of this, so we can ignore it here.
-        let result: Js.Nullable.t<string> = getValue(snapshot)
+        let result: Nullable.t<string> = getValue(snapshot)
         if Constants.debug {
           Js.log2(p ++ "Received data from " ++ observableKey ++ ":", result)
         }
-        callback(result->Js.Nullable.toOption)
+        callback(result->Nullable.toOption)
       })
     }
   | None => {
@@ -211,7 +211,7 @@ let stopListening = (
 ): unit => {
   let observableKey = gameKey(gameId) ++ "/" ++ subjectKey(subject)
   safeExec(// TODO What to do if this fails?
-  () => getRef(dbConnection.db, observableKey))->Belt.Option.forEach(observableRef => {
+  () => getRef(dbConnection.db, observableKey))->Option.forEach(observableRef => {
     logDebug(p ++ "Stopping listening on " ++ observableKey)
     off(observableRef)
   })

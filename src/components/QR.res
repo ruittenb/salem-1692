@@ -44,11 +44,11 @@ let make = (~value: string, ~size: int=175): React.element => {
   React.useEffect0(() => {
     // this is a Some() when the element node is found in the DOM
     let maybeQrCode: option<qrCode> = switch safeQuerySelector(elementId) {
-    | Ok(qrElement) => displayQrCode(qrElement, Belt.Int.toString(size), value)->Some
+    | Ok(qrElement) => displayQrCode(qrElement, Int.toString(size), value)->Some
     | Error(msg) => logError(msg)->replaceWith(None)
     }
     // cleanup: if we have the DOM node, clear it
-    Some(() => maybeQrCode->Belt.Option.forEach(qrCode => qrCode->clear))
+    Some(() => maybeQrCode->Option.forEach(qrCode => qrCode->clear))
   })
 
   // component

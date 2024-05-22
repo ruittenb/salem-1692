@@ -30,14 +30,14 @@ let make = (~subPage: page): React.element => {
               goToPage(_prev => SetupNetworkNoGame)
             }
           | Some(dbRecordStr) =>
-            switch dbRecordStr->Js.Json.string->dbRecord_decode {
+            switch dbRecordStr->JSON.String->dbRecord_decode {
             | Error(spiceError) =>
               Utils.logError(
                 spiceError.path ++
                 ": " ++
                 spiceError.message ++
                 ": " ++
-                spiceError.value->Js.Json.decodeString->Belt.Option.getWithDefault("<None>"),
+                spiceError.value->JSON.Decode.string->Option.getOr("<None>"),
               )
             | Ok(dbRecord) => {
                 Utils.logDebug(p ++ "Received dbRecord")

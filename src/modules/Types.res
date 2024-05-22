@@ -45,11 +45,11 @@ type slaveCodeValidity =
   | SlaveInputShownAndInvalid
   | SlaveInputShownAndAbsent
 
-let playersFromJson = (playerArrayJson: Js.Json.t): option<array<string>> => {
+let playersFromJson = (playerArrayJson: JSON.t): option<array<string>> => {
   playerArrayJson
-  ->Js.Json.decodeArray
-  ->Belt.Option.map(playerJsonArray => {
-    playerJsonArray->Js.Array2.map(Js.Json.decodeString)->Belt.Array.keepMap(x => x)
+  ->JSON.Decode.array
+  ->Option.map(playerJsonArray => {
+    playerJsonArray->Array.map(JSON.Decode.string)->Array.keepSome
   })
 }
 

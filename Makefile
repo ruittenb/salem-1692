@@ -15,7 +15,7 @@ JS_FILES=$(shell find $(SRC) -name *.js)
 CSS_FILES=$(DIST)/css/normalize.css $(DIST)/css/fonts.css $(DIST)/css/salem.css
 MIN_CSS_FILES=$(CSS_FILES:.css=.min.css)
 
-RESCRIPT_CONFIG=bsconfig.json
+RESCRIPT_CONFIG=rescript.json
 VERSION_FILES=$(RESCRIPT_CONFIG) $(DIST)/serviceworker.js
 
 .DEFAULT_GOAL:=help
@@ -73,7 +73,7 @@ build: build-css build-res ## Compile the res and css files; bundle the js files
 	$(MAKE) bundle
 
 .PHONY: build-minify
-build-minify: build-css build-res ## Compile the res and css files; bundle and minify the js files
+build-minify: node_modules build-css build-res ## Compile the res and css files; bundle and minify the js files
 	$(MAKE) bundle-minify
 	@ls -l $(BUNDLE)
 

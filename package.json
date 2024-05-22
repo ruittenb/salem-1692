@@ -20,8 +20,8 @@
     "serve": "make serve"
   },
   "dependencies": {
-    "@rescript/react": "^0.11.0",
-    "@ryyppy/rescript-promise": "^2.1.0",
+    "@rescript/core": "^1.2.0",
+    "@rescript/react": "^0.12.1",
     "davidshimjs-qrcodejs": "^0.0.2",
     "firebase": "^9.0.1",
     "pnpm": "^9.0.6",
@@ -31,7 +31,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@greenlabs/ppx-spice": "^0.1.13",
+    "@greenlabs/ppx-spice": "^0.2.1",
     "browserify": "^17.0.0",
     "clean-css": "^5.3.3",
     "clean-css-cli": "^5.6.3",
@@ -40,7 +40,8 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "esmify": "^2.1.1",
     "fswatch": "^0.1.4",
-    "rescript": "10.1",
+    "only-allow": "^1.2.1",
+    "rescript": "^11.1.0",
     "serve": "^14.2.1",
     "tinyify": "^4.0.0"
   }

@@ -1,7 +1,7 @@
 /**
  * Locale: it_IT
  */
-let table = Js.Dict.fromArray([
+let table = Dict.fromArray([
   // TitlePage
   ("New Game", "Nuova partita"),
   ("Start Game", "Inizia partita"),

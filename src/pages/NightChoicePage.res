@@ -53,8 +53,8 @@ let make = (
         gameId,
         subject,
         player => {
-          switch player->Belt.Option.flatMap(
-            p => p->Js.Json.string->PlayerCodec.t_decode->Utils.resultToOption,
+          switch player->Option.flatMap(
+            p => p->JSON.String->PlayerCodec.t_decode->Utils.resultToOption,
           ) {
           | None => ()
           | Some(Undecided) => ()

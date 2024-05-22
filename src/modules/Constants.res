@@ -4,20 +4,18 @@
 
 open Types
 
-type document
 type navigator
-@val external window: Dom.window = "window"
-@val external document: document = "document"
 @val external navigator: navigator = "navigator"
 @get external userAgent: navigator => string = "userAgent"
 @get external language: navigator => string = "language"
 
-@get external visibilityState: document => string = "visibilityState"
-@send external addEventListener: (document, string, unit => unit) => unit = "addEventListener"
-@send external removeEventListener: (document, string, unit => unit) => unit = "removeEventListener"
+@get external visibilityState: Dom.document => string = "visibilityState"
+@send external addEventListener: (Dom.document, string, unit => unit) => unit = "addEventListener"
+@send
+external removeEventListener: (Dom.document, string, unit => unit) => unit = "removeEventListener"
 
 // Enable debug mode when the User-Agent string contains the text "Salem/1692".
-let debug = navigator->userAgent->Js.String2.includes("Salem/1692")
+let debug = navigator->userAgent->String.includes("Salem/1692")
 
 // firebase, url, localstorage
 
@@ -60,7 +58,7 @@ let musicTracks =
     "Serpentine Trek",
     "Sneaky Snitch",
     "Some Amount of Evil",
-  ]->Js.Array2.sortInPlace
+  ]->Array.toSorted((a: string, b: string) => a > b ? 1. : -1.)
 
 let defaultSelectedMusicTracks = ["Myst on the Moor", "Some Amount of Evil"]
 let defaultPlayers: array<PlayerCodec.t> = [

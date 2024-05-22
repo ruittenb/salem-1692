@@ -38,16 +38,16 @@ let playerTypeToLocalizedString = (playerType: t, translator): string => {
 }
 
 let t_encode = (player: t) => {
-  player->toString->Js.Json.string
+  player->toString->JSON.String
 }
 
-let t_decode = (playerJson: Js.Json.t): Belt.Result.t<t, Spice.decodeError> => {
-  switch playerJson->Js.Json.decodeString->Belt.Option.getWithDefault("") {
+let t_decode = (playerJson: JSON.t): Belt.Result.t<t, Spice.decodeError> => {
+  switch playerJson->JSON.Decode.string->Option.getOr("") {
   | "Nobody" => Belt.Result.Ok(Nobody)
   | "Undecided" => Belt.Result.Ok(Undecided)
   | playerStr =>
-    if playerStr->Js.String2.startsWith("Player:") {
-      Belt.Result.Ok(Player(playerStr->Js.String2.substringToEnd(~from=7)))
+    if playerStr->String.startsWith("Player:") {
+      Belt.Result.Ok(Player(playerStr->String.substringToEnd(~start=7)))
     } else {
       Spice.error("Spice Decoding Error", playerJson)
     }

@@ -28,16 +28,16 @@ let make = (
 ): React.element => {
   let (gameState, _setGameState) = React.useContext(GameStateContext.context)
 
-  let audioRef = React.useRef(Js.Nullable.null)
+  let audioRef = React.useRef(Nullable.null)
 
   // run after mounting
   React.useEffect0(() => {
     audioRef.current
-    ->Js.Nullable.toOption
-    ->Belt.Option.forEach(domNode =>
+    ->Nullable.toOption
+    ->Option.forEach(domNode =>
       domNode
       ->Utils.ifTagName("AUDIO")
-      ->Belt.Option.forEach(domNode => domNode->unsafeAsHtmlAudioElement->setVolume(volume))
+      ->Option.forEach(domNode => domNode->unsafeAsHtmlAudioElement->setVolume(volume))
     )
     None // cleanup function
   })

@@ -46,7 +46,7 @@ let make = (): React.element => {
   }
 
   React.useEffect0(() => {
-    if gameState.backgroundMusic->Js.Array2.length === 0 {
+    if gameState.backgroundMusic->Array.length === 0 {
       setGameState(prevGameState => {
         ...prevGameState,
         doPlayMusic: false,
@@ -64,7 +64,7 @@ let make = (): React.element => {
       onBack={Some(
         _event => {
           setNavigation(_prev => None)
-          goToPage(_prev => navigation->Belt.Option.getWithDefault(Title))
+          goToPage(_prev => navigation->Option.getOr(Title))
         },
       )}
     />

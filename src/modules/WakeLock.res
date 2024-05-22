@@ -14,14 +14,7 @@ type wakeLockSentinel
 
 let p = "[WakeLock] "
 
-let detectSupport = (): bool => {
-  switch Js.Types.classify(navigator->wakeLock) {
-  | JSObject(_) => true
-  | _ => false
-  }
-}
-
-let isSupported = detectSupport()
+let isSupported = Type.typeof(navigator->wakeLock) === #object
 
 let request = (): promise<option<wakeLockSentinel>> => {
   switch isSupported {
@@ -43,7 +36,7 @@ let request = (): promise<option<wakeLockSentinel>> => {
 
 let release = (sentinel: option<wakeLockSentinel>) => {
   if sentinel != None {
-    sentinel->Belt.Option.forEach(apiRelease)
+    sentinel->Option.forEach(apiRelease)
     Utils.logDebugPurple(p ++ "Released WakeLock")
   }
 }

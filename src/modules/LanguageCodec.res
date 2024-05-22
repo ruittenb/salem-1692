@@ -24,9 +24,9 @@ let toString = (x: t) => (x :> string)
 
 //let fromString = (x: string) =>
 //  x
-//  ->Belt.Option.map(Js.Json.string)
-//  ->Belt.Option.flatMap(language => language->LanguageCodec.t_decode->Utils.resultToOption) // option<LanguageCodec.t>
-//  ->Belt.Option.getWithDefault(gameState.language)
+//  ->Option.map(JSON.String)
+//  ->Option.flatMap(language => language->LanguageCodec.t_decode->Utils.resultToOption) // option<LanguageCodec.t>
+//  ->Option.getOr(gameState.language)
 
 let getHtmlLanguage = (language: t): string => {
   switch language {
@@ -43,6 +43,6 @@ let getHtmlLanguage = (language: t): string => {
   | #ja_JP
   | #ko_KR
   | #th_TH =>
-    language->toString->Js.String2.substring(~from=0, ~to_=2)
+    language->toString->String.substring(~start=0, ~end=2)
   }
 }
