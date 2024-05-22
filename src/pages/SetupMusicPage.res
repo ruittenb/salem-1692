@@ -23,15 +23,15 @@ let make = (): React.element => {
     )
 
   let trackButtons = React.array(
-    Constants.musicTracks->Js.Array2.mapi((availableTrack, index) => {
-      let isIncluded = gameState.backgroundMusic->Js.Array2.includes(availableTrack)
+    Constants.musicTracks->Array.mapWithIndex((availableTrack, index) => {
+      let isIncluded = gameState.backgroundMusic->Array.includes(availableTrack)
       let toggleMusicTrack = () => {
         let newBackgroundMusic = if isIncluded {
           setPreview(_prev => None)
-          gameState.backgroundMusic->Js.Array2.filter(stateTrack => stateTrack !== availableTrack)
+          gameState.backgroundMusic->Array.filter(stateTrack => stateTrack !== availableTrack)
         } else {
           setPreview(_prev => Some(availableTrack))
-          gameState.backgroundMusic->Js.Array2.concat([availableTrack])
+          gameState.backgroundMusic->Array.concat([availableTrack])
         }
         let newGameState = {
           ...gameState,

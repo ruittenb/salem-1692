@@ -47,7 +47,7 @@ type slaveCodeValidity =
 
 let playersFromJson = (playerArrayJson: JSON.t): option<array<string>> => {
   playerArrayJson
-  ->Js.Json.decodeArray
+  ->JSON.Decode.array
   ->Option.map(playerJsonArray => {
     playerJsonArray->Array.map(JSON.Decode.string)->Array.keepSome
   })

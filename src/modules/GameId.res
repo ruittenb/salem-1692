@@ -18,7 +18,7 @@ let getGameIdUnit = (): string => {
 }
 
 let generateGameId = (): string => {
-  [getGameIdUnit(), getGameIdUnit(), getGameIdUnit(), getGameIdUnit()]->Js.Array2.joinWith("-")
+  [getGameIdUnit(), getGameIdUnit(), getGameIdUnit(), getGameIdUnit()]->Array.join("-")
 }
 
 let isValid = (id: string): bool => {

@@ -9,7 +9,7 @@ let make = (): React.element => {
   let (gameState, setGameState) = React.useContext(GameStateContext.context)
   let t = Translator.getTranslator(gameState.language)
 
-  let evenOdd = if gameState.players->Js.Array2.length->mod(2) === 0 {
+  let evenOdd = if gameState.players->Array.length->mod(2) === 0 {
     Even
   } else {
     Odd

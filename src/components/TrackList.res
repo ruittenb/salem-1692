@@ -9,7 +9,7 @@ let note = `♪` // U+266A Eighth Note (quaver)
 let make = (): React.element => {
   // Component
   React.array(
-    Constants.musicTracks->Js.Array2.mapi((track, index) => {
+    Constants.musicTracks->Array.mapWithIndex((track, index) => {
       <span key={Int.toString(index) ++ "/" ++ track}>
         <Link
           href={"https://incompetech.com/music/royalty-free/mp3-royaltyfree/" ++ track ++ ".mp3"}

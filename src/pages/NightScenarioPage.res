@@ -59,7 +59,7 @@ let make = (~subPage: page): React.element => {
         ->Array.get(0)
         ->Option.forEach(firstTrack => {
           let newBackgroundMusic =
-            gameState.backgroundMusic->Js.Array2.sliceFrom(1)->Js.Array2.concat([firstTrack])
+            gameState.backgroundMusic->Array.sliceToEnd(~start=1)->Array.concat([firstTrack])
           let newGameState = {
             ...gameState,
             backgroundMusic: newBackgroundMusic,

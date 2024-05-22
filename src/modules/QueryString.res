@@ -7,14 +7,17 @@
 
 let queryString = window->location->search->Js.String.sliceToEnd(~from=1) // remove '?'
 
-let queryParams = queryString->Js.String2.split("&")->Js.Array2.reduce((acc, item) => {
-    let pair = item->Js.String2.split("=")
+let queryParams =
+  queryString
+  ->String.split("&")
+  ->Array.reduce(Js.Dict.empty(), (acc, item) => {
+    let pair = item->String.split("=")
     switch (pair[0], pair[1]) {
     | (Some(key), Some(value)) => acc->Js.Dict.set(key, value)
     | (_, _) => ()
     }
     acc
-  }, Js.Dict.empty())
+  })
 
 let getQueryParam = (paramName: string) => {
   queryParams->Js.Dict.get(paramName)

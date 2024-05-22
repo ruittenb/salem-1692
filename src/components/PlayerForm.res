@@ -9,21 +9,21 @@ open Types
  */
 let sliceFirst = (items, index) => {
   // note that slice() does not include the end_ position
-  items->Js.Array2.slice(~start=0, ~end_=index + 1)
+  items->Array.slice(~start=0, ~end=index + 1)
 }
 
 /**
  * get the array slice with items index..$#
  */
 let sliceLast = (items, index) => {
-  items->Js.Array2.sliceFrom(index)
+  items->Array.sliceToEnd(~start=index)
 }
 
 /**
  * concatenate three arrays
  */
 let arrayConcat3 = (items1, items2, items3) => {
-  items1->Js.Array2.concatMany([items2, items3])
+  items1->Array.concatMany([items2, items3])
 }
 
 /**
@@ -49,7 +49,7 @@ let make = (): React.element => {
       let newValue: string = ReactEvent.Focus.target(event)["value"]
       let oldValue: string = ReactEvent.Focus.target(event)["defaultValue"]
       let isNewValueEmpty = newValue->Js.String2.length === 0
-      let isLastPlayer = gameState.players->Js.Array2.length < 2
+      let isLastPlayer = gameState.players->Array.length < 2
       let newPlayer = switch (isNewValueEmpty, isLastPlayer) {
       | (false, _) => [PlayerCodec.Player(newValue)] // accept the new name if it is not empty
       | (true, false) => [] // delete the name if it is empty
@@ -69,7 +69,7 @@ let make = (): React.element => {
   // remove a player on button click
   let removeHandler: int => clickHandler = playerIndex => {
     _event => {
-      let players: array<PlayerCodec.t> = Js.Array2.concat(
+      let players: array<PlayerCodec.t> = Array.concat(
         gameState.players->sliceFirst(playerIndex - 1),
         gameState.players->sliceLast(playerIndex + 1),
       )
@@ -108,7 +108,7 @@ let make = (): React.element => {
     } else {
       []
     }
-    let players = Js.Array2.concat(gameState.players, newPlayers)
+    let players = Array.concat(gameState.players, newPlayers)
     setGameState(prevGameState => {
       ...prevGameState,
       players,
@@ -116,8 +116,8 @@ let make = (): React.element => {
   }
 
   // create buttons for every player
-  let numPlayers = gameState.players->Js.Array.length
-  let playerFormItems = gameState.players->Js.Array2.mapi((player, index) => {
+  let numPlayers = gameState.players->Array.length
+  let playerFormItems = gameState.players->Array.mapWithIndex((player, index) => {
     // hide the swap button on the last player
     let showSwapButton = numPlayers > index + 1
     // hide the remove button if there is only one player

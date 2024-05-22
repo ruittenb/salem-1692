@@ -58,7 +58,7 @@ let musicTracks =
     "Serpentine Trek",
     "Sneaky Snitch",
     "Some Amount of Evil",
-  ]->Js.Array2.sortInPlace
+  ]->Array.toSorted((a: string, b: string) => a > b ? 1. : -1.)
 
 let defaultSelectedMusicTracks = ["Myst on the Moor", "Some Amount of Evil"]
 let defaultPlayers: array<PlayerCodec.t> = [

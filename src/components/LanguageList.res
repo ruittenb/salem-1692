@@ -55,7 +55,7 @@ let make = (): React.element => {
     <Button key={label} label className={classNames ++ " " ++ widthClass} onClick />
   }
 
-  let buttons: array<React.element> = offeredLanguages->Js.Array2.mapi(languageToButton)
+  let buttons: array<React.element> = offeredLanguages->Array.mapWithIndex(languageToButton)
 
   // React component
   <div id="language-list">

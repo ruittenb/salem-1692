@@ -23,11 +23,11 @@ let assemble = (
   assemblyFn: ('a, 'b) => 'c,
   defaultRight: 'b,
 ): array<'c> => {
-  leftElements->Js.Array2.reducei((acc: array<'c>, leftElement: 'a, index: int) => {
+  leftElements->Array.reduceWithIndex([], (acc: array<'c>, leftElement: 'a, index: int) => {
     let maybeRightElement = rightElements->Array.get(index)
     let rightElement = Js.Option.getWithDefault(defaultRight, maybeRightElement)
     Array.concat(acc, [assemblyFn(leftElement, rightElement)])
-  }, [])
+  })
 }
 
 /**
