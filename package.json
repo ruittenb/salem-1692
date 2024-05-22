@@ -41,7 +41,7 @@
     "esmify": "^2.1.1",
     "fswatch": "^0.1.4",
     "only-allow": "^1.2.1",
-    "rescript": "^11.0.1",
+    "rescript": "^11.1.0",
     "serve": "^14.2.1",
     "tinyify": "^4.0.0"
   }
