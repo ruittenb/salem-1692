@@ -43,6 +43,6 @@ let getHtmlLanguage = (language: t): string => {
   | #ja_JP
   | #ko_KR
   | #th_TH =>
-    language->toString->Js.String2.substring(~from=0, ~to_=2)
+    language->toString->String.substring(~start=0, ~end=2)
   }
 }

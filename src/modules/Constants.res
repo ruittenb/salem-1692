@@ -15,7 +15,7 @@ type navigator
 external removeEventListener: (Dom.document, string, unit => unit) => unit = "removeEventListener"
 
 // Enable debug mode when the User-Agent string contains the text "Salem/1692".
-let debug = navigator->userAgent->Js.String2.includes("Salem/1692")
+let debug = navigator->userAgent->String.includes("Salem/1692")
 
 // firebase, url, localstorage
 
