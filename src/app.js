@@ -17,6 +17,7 @@ import * as Main from './Main.res.js';
  * Make some variables available for Rescript
  */
 
+// Salem app version
 window.salemAppVersion = version;
 
 // QR code generator

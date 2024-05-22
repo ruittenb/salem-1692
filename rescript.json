@@ -2,8 +2,8 @@
   "name": "salem-1692",
   "version": "0.72.2",
   "namespace": true,
-  "reason": {
-    "react-jsx": 3
+  "jsx": {
+    "version": 4
   },
   "bsc-flags": [
     "-bs-super-errors",
@@ -26,10 +26,6 @@
   "ppx-flags": [
     ["@greenlabs/ppx-spice/ppx", "-uncurried"]
   ],
-  "jsx": {
-    "version": 4,
-    "mode": "classic"
-  },
   "warnings": {
     "number": "-33",
     "error": "+5"

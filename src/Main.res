@@ -9,8 +9,6 @@
  * RescriptReactRouter : A simple, yet fully featured router
  */
 
-//external createRoot: Dom.element => ReactDOM.Client.Root.t = "createRoot"
-
 @module("react-dom/client")
 let run = (elementId: string) => {
   switch Utils.safeQuerySelector(elementId) {
