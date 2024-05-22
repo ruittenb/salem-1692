@@ -83,8 +83,7 @@ let make = (): React.element => {
   let swapHandler: int => clickHandler = playerIndex => {
     _event => {
       let firstSwapPlayer: option<PlayerCodec.t> = gameState.players->Array.get(playerIndex)
-      let secondSwapPlayer: option<PlayerCodec.t> =
-        gameState.players->Array.get(playerIndex + 1)
+      let secondSwapPlayer: option<PlayerCodec.t> = gameState.players->Array.get(playerIndex + 1)
 
       let players: array<PlayerCodec.t> = switch (firstSwapPlayer, secondSwapPlayer) {
       | (Some(first), Some(second)) =>

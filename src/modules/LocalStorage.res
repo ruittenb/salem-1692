@@ -18,13 +18,13 @@ let gameStateKey = Constants.localStoragePrefix ++ Constants.localStorageGameSta
 let loadGameState = (): option<gameState> => {
   Dom.Storage2.localStorage
   ->Dom.Storage2.getItem(gameStateKey) // this yields an option<string>
-  ->Option.flatMap(jsonString => safeExec(() => jsonString->Js.Json.parseExn)) // this yields an option<Js.Json.t>
+  ->Option.flatMap(jsonString => safeExec(() => jsonString->Js.Json.parseExn)) // this yields an option<JSON.t>
   ->Option.flatMap(str => str->gameState_decode->Result.mapOr(None, x => Some(x)))
 }
 
 let saveGameState = (gameState: gameState): unit => {
   gameState
   ->gameState_encode
-  ->Js.Json.stringifyAny
+  ->JSON.stringifyAny
   ->Option.forEach(jsonGameState => setItem(gameStateKey, jsonGameState))
 }

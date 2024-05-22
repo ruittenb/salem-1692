@@ -126,7 +126,7 @@ let updateGameKey = (
   dbConnection: dbConnection,
   gameId: GameTypeCodec.gameId,
   subject: dbObservable,
-  value: Js.Json.t,
+  value: JSON.t,
 ): promise<unit> => {
   FirebaseAdapter.writeGameKey(dbConnection, gameId, subject, value)
 }

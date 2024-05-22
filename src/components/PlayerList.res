@@ -4,6 +4,7 @@
 
 open Types
 open PlayerCodec
+open Utils
 
 let p = "[PlayerList] "
 
@@ -43,7 +44,7 @@ let assemble = (
  *    1,3,5,7,6,4,2,0     1,3,5,7,8,6,4,2     1,3,5,7,6,4,2     6,4,2,0,1,3,5
  */
 let getSortIndexes = (seating: SeatingCodec.t, numPlayers: int, evenOdd: evenOdd): array<int> => {
-  let numbers = Array.fromInitializer(~length=numPlayers + 1, identity)
+  //let numbers = Array.fromInitializer(~length=numPlayers + 1, identity)
   switch (evenOdd, seating) {
   | (Even, TwoAtTop) =>
     Array.concat(

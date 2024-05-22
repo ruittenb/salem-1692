@@ -275,9 +275,7 @@ let make = (~size: int, ~callback: string => unit): React.element => {
     {statusElement}
     <div id="canvas-hider">
       <canvas
-        id={canvasElementId}
-        width={Int.toString(canvasWidth)}
-        height={Int.toString(canvasHeight)}
+        id={canvasElementId} width={Int.toString(canvasWidth)} height={Int.toString(canvasHeight)}
       />
     </div>
   </>

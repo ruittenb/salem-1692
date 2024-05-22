@@ -54,7 +54,7 @@ let make = (
         subject,
         player => {
           switch player->Option.flatMap(
-            p => p->Js.Json.string->PlayerCodec.t_decode->Utils.resultToOption,
+            p => p->JSON.String->PlayerCodec.t_decode->Utils.resultToOption,
           ) {
           | None => ()
           | Some(Undecided) => ()

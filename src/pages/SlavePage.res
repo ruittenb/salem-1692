@@ -30,7 +30,7 @@ let make = (~subPage: page): React.element => {
               goToPage(_prev => SetupNetworkNoGame)
             }
           | Some(dbRecordStr) =>
-            switch dbRecordStr->Js.Json.string->dbRecord_decode {
+            switch dbRecordStr->JSON.String->dbRecord_decode {
             | Error(spiceError) =>
               Utils.logError(
                 spiceError.path ++

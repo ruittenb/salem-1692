@@ -24,7 +24,7 @@ let toString = (x: t) => (x :> string)
 
 //let fromString = (x: string) =>
 //  x
-//  ->Option.map(Js.Json.string)
+//  ->Option.map(JSON.String)
 //  ->Option.flatMap(language => language->LanguageCodec.t_decode->Utils.resultToOption) // option<LanguageCodec.t>
 //  ->Option.getOr(gameState.language)
 

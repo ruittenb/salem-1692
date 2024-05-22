@@ -21,8 +21,7 @@ let setOverrideLanguage = (gameState): gameState => {
 }
 
 let setDefaultLanguage = (gameState): gameState => {
-  let browserLanguage =
-    BrowserLanguage.getLanguage()->Option.getOr(gameState.language)
+  let browserLanguage = BrowserLanguage.getLanguage()->Option.getOr(gameState.language)
   {
     ...gameState,
     language: browserLanguage,

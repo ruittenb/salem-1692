@@ -89,7 +89,7 @@ promise<unit> => {
     try {
       let gameId = dbRecord.masterGameId
       let myGameRef = getRef(dbConnection.db, gameKey(gameId))
-      // Utils.logDebug(p ++ "Saving: " ++ dbRecord->dbRecord_encode->Js.Json.stringify)
+      // Utils.logDebug(p ++ "Saving: " ++ dbRecord->dbRecord_encode->JSON.stringify)
       set(myGameRef, dbRecord->dbRecord_encode)
       ->Promise.then(() => {
         logDebug(p ++ action ++ " game " ++ gameId)
@@ -112,7 +112,7 @@ let writeGameKey = (
   dbConnection: dbConnection,
   gameId: GameTypeCodec.gameId,
   subject: dbObservable,
-  value: Js.Json.t,
+  value: JSON.t,
 ): promise<unit> => {
   let key = subjectKey(subject)
   Promise.make((resolve, reject) => {
@@ -120,7 +120,7 @@ let writeGameKey = (
       let myGameRef = getRef(dbConnection.db, gameKey(gameId) ++ "/" ++ key)
       set(myGameRef, value)
       ->Promise.then(() => {
-        logDebug(p ++ "Updated game key " ++ key ++ " with value " ++ value->Js.Json.stringify)
+        logDebug(p ++ "Updated game key " ++ key ++ " with value " ++ value->JSON.stringify)
         resolve(ignore()) // workaround to pass a unit argument
         Promise.resolve()
       })

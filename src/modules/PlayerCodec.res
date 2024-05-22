@@ -38,10 +38,10 @@ let playerTypeToLocalizedString = (playerType: t, translator): string => {
 }
 
 let t_encode = (player: t) => {
-  player->toString->Js.Json.string
+  player->toString->JSON.String
 }
 
-let t_decode = (playerJson: Js.Json.t): Belt.Result.t<t, Spice.decodeError> => {
+let t_decode = (playerJson: JSON.t): Belt.Result.t<t, Spice.decodeError> => {
   switch playerJson->JSON.Decode.string->Option.getOr("") {
   | "Nobody" => Belt.Result.Ok(Nobody)
   | "Undecided" => Belt.Result.Ok(Undecided)
