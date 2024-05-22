@@ -46,7 +46,7 @@ let t_decode = (playerJson: JSON.t): Belt.Result.t<t, Spice.decodeError> => {
   | "Nobody" => Belt.Result.Ok(Nobody)
   | "Undecided" => Belt.Result.Ok(Undecided)
   | playerStr =>
-    if playerStr->Js.String2.startsWith("Player:") {
+    if playerStr->String.startsWith("Player:") {
       Belt.Result.Ok(Player(playerStr->String.substringToEnd(~start=7)))
     } else {
       Spice.error("Spice Decoding Error", playerJson)

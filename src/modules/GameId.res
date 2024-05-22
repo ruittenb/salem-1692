@@ -6,7 +6,7 @@ let lowercaseA = 97
 let lowercaseZ = 122
 
 let getChar = (): string => {
-  Js.Math.random_int(lowercaseA, lowercaseZ + 1)->Js.String2.fromCharCode
+  Js.Math.random_int(lowercaseA, lowercaseZ + 1)->String.fromCharCode
 }
 
 let getDigit = (): string => {

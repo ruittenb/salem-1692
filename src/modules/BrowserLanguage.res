@@ -8,7 +8,7 @@ open Constants
 let secondHalfRe = %re("/[-_].*/")
 
 let getLanguage = (): option<LanguageCodec.t> => {
-  switch navigator->language->Js.String2.replaceByRe(secondHalfRe, "") {
+  switch navigator->language->String.replaceRegExp(secondHalfRe, "") {
   | "en" => Some(#en_US)
   | "es" => Some(#es_ES)
   | "fr" => Some(#fr_FR)

@@ -32,7 +32,7 @@ let arrayConcat3 = (items1, items2, items3) => {
 let respace = (str: string): string => {
   let finalSpace = Js.Re.fromString(" $")
   if finalSpace->Js.Re.test_(str) {
-    str->Js.String2.replaceByRe(finalSpace, "")
+    str->String.replaceRegExp(finalSpace, "")
   } else {
     str ++ " "
   }
@@ -48,7 +48,7 @@ let make = (): React.element => {
     event => {
       let newValue: string = ReactEvent.Focus.target(event)["value"]
       let oldValue: string = ReactEvent.Focus.target(event)["defaultValue"]
-      let isNewValueEmpty = newValue->Js.String2.length === 0
+      let isNewValueEmpty = newValue->String.length === 0
       let isLastPlayer = gameState.players->Array.length < 2
       let newPlayer = switch (isNewValueEmpty, isLastPlayer) {
       | (false, _) => [PlayerCodec.Player(newValue)] // accept the new name if it is not empty

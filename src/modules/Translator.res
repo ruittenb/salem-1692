@@ -19,7 +19,7 @@ let lookup = (table: Js.Dict.t<string>, message: string, languageName: string) =
 // formatString('Hello {0}, your order {1} has been shipped.', ['John', '1022'])
 let formatString = (template: string, args: array<string>): string => {
   args->Array.reduceWithIndex(template, (acc: string, item: string, index: int) => {
-    acc->Js.String2.replace("{" ++ index->Int.toString ++ "}", item)
+    acc->String.replace("{" ++ index->Int.toString ++ "}", item)
   })
 }
 
