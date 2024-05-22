@@ -25,7 +25,7 @@ let assemble = (
 ): array<'c> => {
   leftElements->Array.reduceWithIndex([], (acc: array<'c>, leftElement: 'a, index: int) => {
     let maybeRightElement = rightElements->Array.get(index)
-    let rightElement = Js.Option.getWithDefault(defaultRight, maybeRightElement)
+    let rightElement = maybeRightElement->Option.getOr(defaultRight)
     Array.concat(acc, [assemblyFn(leftElement, rightElement)])
   })
 }

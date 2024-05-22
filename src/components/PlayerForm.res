@@ -30,8 +30,8 @@ let arrayConcat3 = (items1, items2, items3) => {
  * "respace" a string: if it doesn't end in a space, add one; else remove it
  */
 let respace = (str: string): string => {
-  let finalSpace = Js.Re.fromString(" $")
-  if finalSpace->Js.Re.test_(str) {
+  let finalSpace = RegExp.fromString(" $")
+  if finalSpace->RegExp.test(str) {
     str->String.replaceRegExp(finalSpace, "")
   } else {
     str ++ " "

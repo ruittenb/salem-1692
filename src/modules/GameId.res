@@ -6,11 +6,11 @@ let lowercaseA = 97
 let lowercaseZ = 122
 
 let getChar = (): string => {
-  Js.Math.random_int(lowercaseA, lowercaseZ + 1)->String.fromCharCode
+  Math.Int.random(lowercaseA, lowercaseZ + 1)->String.fromCharCode
 }
 
 let getDigit = (): string => {
-  Js.Math.random_int(0, 10)->Js.Int.toString
+  Math.Int.random(0, 10)->Int.toString
 }
 
 let getGameIdUnit = (): string => {
@@ -22,5 +22,5 @@ let generateGameId = (): string => {
 }
 
 let isValid = (id: string): bool => {
-  Js.Re.fromString("^([a-z][0-9][0-9]-){3}[a-z][0-9][0-9]$")->Js.Re.test_(id)
+  RegExp.fromString("^([a-z][0-9][0-9]-){3}[a-z][0-9][0-9]$")->RegExp.test(id)
 }

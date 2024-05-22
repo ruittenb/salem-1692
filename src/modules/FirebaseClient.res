@@ -63,7 +63,7 @@ let transformToDbRecord = (
     slaveChoiceConstable: turnState.choiceConstable,
     slaveConfirmWitches: Unconfirmed,
     slaveConfirmConstable: Unconfirmed,
-    updatedAt: Js.Date.make()->Js.Date.toISOString,
+    updatedAt: Date.make()->Date.toISOString,
   }
 }
 

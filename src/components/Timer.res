@@ -37,7 +37,7 @@ let make = (~onAlarm: unit => unit=() => ()): React.element => {
   let containerWidth = window->innerWidth *. containerFraction -. deadSpace
 
   // total available time lies somewhere between 6 and 10 seconds
-  let delay = Js.Math.random_int(60, 100)
+  let delay = Math.Int.random(60, 100)
 
   let tick = () => {
     if remainingPercent > zeroTime {

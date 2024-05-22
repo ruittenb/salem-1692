@@ -28,12 +28,12 @@ let make = (
 ): React.element => {
   let (gameState, _setGameState) = React.useContext(GameStateContext.context)
 
-  let audioRef = React.useRef(Js.Nullable.null)
+  let audioRef = React.useRef(Nullable.null)
 
   // run after mounting
   React.useEffect0(() => {
     audioRef.current
-    ->Js.Nullable.toOption
+    ->Nullable.toOption
     ->Option.forEach(domNode =>
       domNode
       ->Utils.ifTagName("AUDIO")

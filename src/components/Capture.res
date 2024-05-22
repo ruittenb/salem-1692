@@ -49,7 +49,7 @@ external unsafeAsHtmlCanvasElement: Dom.element => Dom.htmlCanvasElement = "%ide
 // navigator
 @get external mediaDevices: navigator => mediaDevices = "mediaDevices"
 @send external getUserMedia: (mediaDevices, mediaConstraints) => promise<stream> = "getUserMedia"
-@get external permissions: navigator => Js.Nullable.t<permissions> = "permissions"
+@get external permissions: navigator => Nullable.t<permissions> = "permissions"
 @send
 external permissionsQuery: (permissions, permissionDescriptor) => promise<permissionStatus> =
   "query"
@@ -64,7 +64,7 @@ external removeEventListener: (permissionStatus, string, changeEvent => unit) =>
 // video
 @send external play: Dom.htmlVideoElement => unit = "play"
 @set external setSrcObject: (Dom.htmlVideoElement, stream) => unit = "srcObject"
-@get external getSrcObject: Dom.htmlVideoElement => Js.Nullable.t<srcObject> = "srcObject"
+@get external getSrcObject: Dom.htmlVideoElement => Nullable.t<srcObject> = "srcObject"
 @send external getTracks: srcObject => array<track> = "getTracks"
 @send external stop: track => unit = "stop"
 
@@ -93,8 +93,8 @@ let mediaConstraints: mediaConstraints = {video: {facingMode: "environment"}}
 let unsupportedStatus: permissionStatus = {name: "camera", state: "unsupported"}
 
 let getCameraPermissions = (): promise<permissionStatus> => {
-  switch navigator->permissions->Js.Nullable.toOption {
-  | None => Js.Promise.resolve(unsupportedStatus)
+  switch navigator->permissions->Nullable.toOption {
+  | None => Promise.resolve(unsupportedStatus)
   | Some(perm) => perm->permissionsQuery({name: "camera"})
   }
 }
@@ -126,7 +126,7 @@ let stopRecording = (maybeVideoElement: option<Dom.htmlVideoElement>): unit => {
   maybeVideoElement->Option.mapOr((), videoElement => {
     videoElement
     ->getSrcObject
-    ->Js.Nullable.toOption
+    ->Nullable.toOption
     ->Option.forEach(srcObject => {
       srcObject->getTracks->Array.forEach(stop)
     })

@@ -190,11 +190,11 @@ let listen = (
       onValue(observableRef, snapshot => {
         // We will receive a snapshot immediately upon installing the listener.
         // NightScenarioPage takes care of this, so we can ignore it here.
-        let result: Js.Nullable.t<string> = getValue(snapshot)
+        let result: Nullable.t<string> = getValue(snapshot)
         if Constants.debug {
           Js.log2(p ++ "Received data from " ++ observableKey ++ ":", result)
         }
-        callback(result->Js.Nullable.toOption)
+        callback(result->Nullable.toOption)
       })
     }
   | None => {

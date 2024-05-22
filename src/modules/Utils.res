@@ -79,7 +79,7 @@ let catchLogAndIgnore = (p, resolutionValue): unit => {
  * Pick a random element from a set.
  */
 let pickRandomElement = (set: array<'a>, default: 'a): 'a => {
-  let index = Js.Math.random_int(0, set->Array.length)
+  let index = Math.Int.random(0, set->Array.length)
   set->Array.get(index)->Option.getOr(default)
 }
 
@@ -165,14 +165,6 @@ let optionTupleAnd = (tupleOfMaybes: (option<'a>, option<'b>)): option<('a, 'b)>
 /*
  * Convert [ Some(3), Some(6), None, Some(-1), None ] into [ 3, 6, -1 ]:
  * use Array.keepSome
- *
- *
- * Js.Option.andThen(), but data-first:
- * use Option.flatMap()
- *
- *
- * Js.Option.map(), but data-first:
- * use Option.map()
  */
 
 /* ****************************************************************************
