@@ -157,7 +157,7 @@ let table = Dict.fromArray([
   ("Choose-PL a victim:", `마녀들이여, 희생자를 선택하라:`),
   ("The constable", `경찰관`),
   ("The constable's turn", `경찰의 차례`),
-  ("Choose another player to protect:", `보호할 다른 플레이어를 선택하세요:`),
+  ("Choose any other player to protect:", `보호할 다른 플레이어를 선택하세요:`),
   ("Choose someone to protect:", `보호할 사람을 선택하세요:`),
   ("Abort", `중단`),
   ("Skip", `건너뛰다`),

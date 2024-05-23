@@ -155,7 +155,7 @@ let table = Dict.fromArray([
   ("Choose-PL a victim:", `Boszorkányok, válasszatok áldozatot:`),
   ("The constable", `A rendőrbíró`),
   ("The constable's turn", `A rendőrbíró sora`),
-  ("Choose another player to protect:", `Válassz másik játékost, akit meg akarsz védeni:`),
+  ("Choose any other player to protect:", `Válassz másik játékost, akit meg akarsz védeni:`),
   ("Choose someone to protect:", `Válassz valakit, akit meg akarsz védeni:`),
   ("Abort", `Megszakítás`),
   ("Skip", `Kihagyás`),

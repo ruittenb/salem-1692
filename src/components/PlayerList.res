@@ -44,27 +44,26 @@ let assemble = (
  *    1,3,5,7,6,4,2,0     1,3,5,7,8,6,4,2     1,3,5,7,6,4,2     6,4,2,0,1,3,5
  */
 let getSortIndexes = (seating: SeatingCodec.t, numPlayers: int, evenOdd: evenOdd): array<int> => {
-  //let numbers = Array.fromInitializer(~length=numPlayers + 1, identity)
   switch (evenOdd, seating) {
   | (Even, TwoAtTop) =>
     Array.concat(
-      Belt.Array.rangeBy(1, numPlayers, ~step=2),
-      Belt.Array.rangeBy(0, numPlayers - 1, ~step=2)->Array.toReversed,
+      Utils.alternatingRange(1, numPlayers),
+      Utils.alternatingRange(0, numPlayers - 1)->Array.toReversed,
     )
   | (Even, OneAtTop) =>
     Array.concat(
-      Belt.Array.rangeBy(1, numPlayers, ~step=2),
-      Belt.Array.rangeBy(2, numPlayers, ~step=2)->Array.toReversed,
+      Utils.alternatingRange(1, numPlayers),
+      Utils.alternatingRange(2, numPlayers)->Array.toReversed,
     )
   | (Odd, OneAtTop) =>
     Array.concat(
-      Belt.Array.rangeBy(1, numPlayers, ~step=2),
-      Belt.Array.rangeBy(2, numPlayers, ~step=2)->Array.toReversed,
+      Utils.alternatingRange(1, numPlayers),
+      Utils.alternatingRange(2, numPlayers)->Array.toReversed,
     )
   | (Odd, TwoAtTop) =>
     Array.concat(
-      Belt.Array.rangeBy(0, numPlayers, ~step=2)->Array.toReversed,
-      Belt.Array.rangeBy(1, numPlayers - 1, ~step=2),
+      Utils.alternatingRange(0, numPlayers)->Array.toReversed,
+      Utils.alternatingRange(1, numPlayers - 1),
     )
   }
 }
@@ -101,17 +100,13 @@ let make = (
   | (Witch, Night, _) => (t("The witch's turn"), t("Choose-SG a victim:"))
   | (Witches, Dawn, _) => (t("The witches' turn"), t("Decide-PL who should get the black cat:"))
   | (Witches, Night, _) => (t("The witches' turn"), t("Choose-PL a victim:"))
-  | (Constable, _, false) => (t("The constable's turn"), t("Choose another player to protect:"))
+  | (Constable, _, false) => (t("The constable's turn"), t("Choose any other player to protect:"))
   | (Constable, _, true) => (t("The constable's turn"), t("Choose someone to protect:"))
   }
 
   // determine order in which players must be traversed
   let numPlayers = gameState.players->Array.length
-  let evenOdd = if mod(numPlayers, 2) === 0 {
-    Even
-  } else {
-    Odd
-  }
+  let evenOdd = mod(numPlayers, 2) === 0 ? Even : Odd
 
   let sortIndexes = getSortIndexes(gameState.seating, numPlayers, evenOdd)
   let headPositions = switch (evenOdd, gameState.seating) {
@@ -125,11 +120,7 @@ let make = (
     gameState.players,
     sortIndexes,
     (player, index) => {
-      let wideClass = if headPositions->Set.has(index) {
-        " grid-wide"
-      } else {
-        ""
-      }
+      let wideClass = headPositions->Set.has(index) ? " grid-wide" : ""
       switch player {
       | Player(playerName) =>
         <BulkyButton

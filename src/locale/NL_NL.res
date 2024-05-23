@@ -146,7 +146,7 @@ let table = Dict.fromArray([
   ("Choose-PL a victim:", "Kies een slachtoffer:"),
   ("The constable", "De schout"),
   ("The constable's turn", "De schout aan de beurt"),
-  ("Choose another player to protect:", "Kies een andere speler die beschermd moet worden:"),
+  ("Choose any other player to protect:", "Kies een andere speler die beschermd moet worden:"),
   ("Choose someone to protect:", "Kies wie beschermd moet worden:"),
   ("Abort", "Afbreken"),
   ("Skip", "Overslaan"),

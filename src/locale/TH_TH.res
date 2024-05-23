@@ -170,7 +170,7 @@ let table = Dict.fromArray([
   ("The constable", `ตำรวจ`),
   ("The constable's turn", `ตาของตำรวจ`),
   (
-    "Choose another player to protect:",
+    "Choose any other player to protect:",
     `เลือกผู้เล่นอื่นที่จะปกป้อง:`,
   ),
   ("Choose someone to protect:", `เลือกคนที่จะปกป้อง:`),

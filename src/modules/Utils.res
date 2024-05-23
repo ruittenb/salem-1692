@@ -124,8 +124,17 @@ let ifTagName = (element: Dom.element, tagName: string): option<Dom.element> => 
  * Example:
  * fn1()->replaceWith(React.null)
  */
-let replaceWith = (_first: 'a, second: 'b): 'b => {
-  second
+let replaceWith = (_first: 'a, second: 'b): 'b => second
+
+/**
+ * Produce a range of alternating integers between bounds
+ */
+let alternatingRange = (first: int, last: int) => {
+  // e.g. first = 2, last = 7
+  let numbers = Array.fromInitializer(~length=1 + last - first, x => x + first)
+  // e.g. 2,3,4,5,6
+  numbers->Array.filterWithIndex((_value, index) => Int.mod(index, 2) === 0)
+  // e.g. 2,4,6
 }
 
 /**
