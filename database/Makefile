@@ -11,9 +11,18 @@ help: ## Print help for each target
 cleanup: ## Decide whether the json file can be cleaned up.
 	node cleanup.js $(FILENAME)
 
-.PHONY: list
-list: ## List all users in the datafile
+.PHONY: users
+users: ## List all users in the datafile
 	cat $(FILENAME) | \
 		jq -r '.games | del(._keep) | .[] | .masterPlayers | sort | tostring' | \
-		sort -u
+		sort -u | \
+		sed -e s/Player://g
+
+.PHONY: languages
+languages: ## List all lanugages in the datafile
+	awk '/masterLanguage/ { print $$2 }' $(FILENAME) | sort | uniq -c
+
+.PHONY: datetimes
+datetimes: ## List all timestamps in the datafile
+	awk '/updatedAt/ { print $$2 }' $(FILENAME) | sort
 
