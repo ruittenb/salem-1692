@@ -124,9 +124,7 @@ let make = (~subPage: page): React.element => {
     )
     setTurnState(prevTurnState => {...prevTurnState, choiceWitches: player})
     goToNextStep() // to confirmation page
-
-    // in Master mode, the feedback from firebase will trigger skipping confirmation
-    if gameState.gameType === StandAlone && skipConfirmation {
+    if skipConfirmation {
       goToNextStep()
     }
   }
@@ -139,9 +137,7 @@ let make = (~subPage: page): React.element => {
     )
     setTurnState(prevTurnState => {...prevTurnState, choiceConstable: player})
     goToNextStep() // to confirmation page
-
-    // in Master mode, the feedback from firebase will trigger skipping confirmation
-    if gameState.gameType === StandAlone && skipConfirmation {
+    if skipConfirmation {
       goToNextStep()
     }
   }
