@@ -21,7 +21,7 @@
     "client_mode": ["focus-existing", "auto"]
   },
   "android": {
-    "target_sdk_version": "33"
+    "target_sdk_version": "34"
   },
   "display": "standalone",
   "orientation": "portrait",
