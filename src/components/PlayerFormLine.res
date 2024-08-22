@@ -8,6 +8,7 @@ open Types
 let make = (
   ~value: string,
   ~placeholder: string="",
+  ~role: string="",
   ~className: string="",
   ~showSwapButton: bool,
   ~showRemoveButton: bool,
@@ -18,11 +19,11 @@ let make = (
 ): React.element => {
   let inputField = <input type_="text" defaultValue=value placeholder className onBlur onChange />
 
-  <div className="player-entry-item">
+  <div className="player-entry-item" role>
     {if showSwapButton {
       <Button className="smallsquarebutton icon-left icon-move staggered" onClick=onSwap />
     } else {
-      <div className="button-sized" />
+      <div className="button-sized staggered" />
     }}
     {inputField}
     {if showRemoveButton {
