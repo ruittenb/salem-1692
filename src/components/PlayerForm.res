@@ -153,6 +153,17 @@ let make = (): React.element => {
       value=""
       className="condensed-fr condensed-uk"
       placeholder={t("(add one)")}
+      role="entrypoint"
+      showSwapButton=false
+      showRemoveButton=false
+      onBlur=addHandler
+    />
+    <PlayerFormLine
+      key={(gameState.players->Array.length + 1)->Int.toString} // make key unique
+      value=""
+      className="condensed-fr condensed-uk"
+      placeholder={t("(add one)")}
+      role="disabled"
       showSwapButton=false
       showRemoveButton=false
       onBlur=addHandler

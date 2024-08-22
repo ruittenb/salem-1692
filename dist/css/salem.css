@@ -764,6 +764,17 @@ video + .bubble {
     top: 31px;
 }
 
+#setup-players-page .player-entry-item[role=disabled] {
+  display: none;
+}
+
+#setup-players-page
+  .player-entry-item[role=entrypoint]:has(input:not(:placeholder-shown)) +
+  .player-entry-item[role=disabled]
+{
+  display: flex;
+}
+
 #setup-network-page {
     background: url(../images/overlay-old-phone.webp) -220px 176px no-repeat;
 }
