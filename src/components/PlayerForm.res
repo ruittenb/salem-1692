@@ -149,7 +149,7 @@ let make = (): React.element => {
     </p>
     {React.array(playerFormItems)}
     <PlayerFormLine
-      key={gameState.players->Array.length->Int.toString} // make key unique
+      key={Int.toString(numPlayers + 1)} // make key unique
       value=""
       className="condensed-fr condensed-uk"
       placeholder={t("(add one)")}
@@ -159,7 +159,7 @@ let make = (): React.element => {
       onBlur=addHandler
     />
     <PlayerFormLine
-      key={(gameState.players->Array.length + 1)->Int.toString} // make key unique
+      key={Int.toString(numPlayers + 2)} // make key unique
       value=""
       className="condensed-fr condensed-uk"
       placeholder={t("(add one)")}
