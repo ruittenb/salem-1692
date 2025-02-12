@@ -115,6 +115,10 @@ let table = Dict.fromArray([
     `Будь ласка, надайте дозвіл на використання камери для сканування QR-коду`,
   ),
   // Credits
+  (
+    "Please note! As of March 2025, this app will no longer be downloadable from the Google Play Store. Please use the link or QR code above.",
+    `Зверніть увагу! З березня 2025 року цей додаток більше не можна буде завантажити з магазину Google Play. Будь ласка, скористайтеся посиланням або QR-кодом вище.`,
+  ),
   ("Credits", `Кредити`),
   ("Game:", `Гра:`),
   ("Rulebook", `Правила`),
