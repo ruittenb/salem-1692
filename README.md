@@ -27,6 +27,7 @@ take a vote.
 
 - [Project on GitHub](https://github.com/ruittenb/salem-1692)
 - [See this web app in action](https://ruittenb.github.io/salem-1692/)
+- [This app on the Play Store](https://play.google.com/store/apps/details?id=io.github.ruittenb.salem_1692_moderator)
 - [Firebase Console](https://console.firebase.google.com/u/0/project/salem-1692-moderator-new/overview)
 
 ## Technologies Used

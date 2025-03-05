@@ -1,5 +1,5 @@
 
-FILENAME := salem-1692-moderator-new-default-rtdb-export.json
+FILENAME := salem-1692-moderator-new-export.json
 
 .DEFAULT_GOAL := help
 
